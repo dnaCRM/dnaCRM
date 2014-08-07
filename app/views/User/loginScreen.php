@@ -51,6 +51,11 @@
 
                     <div class="col-lg-10">
                         <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="lembrar" id="lembrar"> Lembrar
+                            </label>
+                        </div>
                     </div>
                 </div>
 
@@ -68,10 +73,10 @@
     </div>
 
     <div class="col-lg-6">
-<!--        --><?php
-/*        Echo '$_SESSION';
+<?php
+        /**echo '$_SESSION';
         var_dump($_SESSION);
-        Echo '$_POST';
+        echo '$_POST';
         var_dump($_POST);
         */?>
     </div>

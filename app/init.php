@@ -30,7 +30,7 @@ $GLOBALS['config'] = [
     ],
     'lembrar' => [
         'cookie_name' => 'hash',
-        'cookie_expiry' => 8600
+        'cookie_expiry' => 604800
     ],
     'session' => [
         'session_name' => 'user',
@@ -45,7 +45,7 @@ define('CSS_DANGER', 'danger');
 
 #### Funções para personalização de mensagens de erro do Php
 
-function CodeError($mensagem, $numero, $die = null)
+function CodeError($mensagem, $numero)
 {
     switch ($numero) {
         case E_USER_NOTICE:

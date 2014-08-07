@@ -20,7 +20,9 @@ class User extends Controller
 
                 if ($this->validation->passed()) {
 
-                    $login = $this->model->login(Input::get('usuario'), Input::get('senha'));
+                    $lembrar = (Input::get('lembrar') === 'on') ? true : false;
+
+                    $login = $this->model->login(Input::get('usuario'), Input::get('senha'), $lembrar);
                     //$this->model->logout();
                     if ($login) {
                         Session::flash('msg', 'Logado!');

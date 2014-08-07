@@ -99,25 +99,25 @@ class UserModel
 
     /**
      *
-     * @param type $username
-     * @param type $password
-     * @param type $remember
+     * @param type $usuario
+     * @param type $senha
+     * @param type $lembrar
      * @return boolean
      */
-    public function login($username = null, $password = null, $remember = false)
+    public function login($usuario = null, $senha = null, $lembrar = false)
     {
 
-        if (!$username && !$password && $this->exists()) {
+        if (!$usuario && !$senha && $this->exists()) {
             Session::put($this->sessionName, $this->data()['id_usuario']);
             Session::put('nome_usuario', $this->data()['nome_usuario']);
         } else {
-            $user = $this->find($username);
+            $user = $this->find($usuario);
             if ($user) {
-                if ($this->data()['senha'] === Hash::make($password, $this->data()['salt'])) {
+                if ($this->data()['senha'] === Hash::make($senha, $this->data()['salt'])) {
                     Session::put($this->sessionName, $this->data()['id_usuario']);
                     Session::put('nome_usuario', $this->data()['nome_usuario']);
 
-                    if ($remember) {
+                    if ($lembrar) {
                         $hash = Hash::unique();
                         $hashCheck = $this->db->get('users_session', "user_id = {$this->data()['id_usuario']}");
 
