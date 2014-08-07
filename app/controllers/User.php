@@ -44,7 +44,8 @@ class User extends Controller
 
 
     /**
-     * 
+     * Registra um usuário com dados recebidos do formulário
+     *
      */
     public function processRegister()
     {
@@ -84,6 +85,9 @@ class User extends Controller
         }
     }
 
+    /**
+     * Valida formulário de login
+     */
     private function validateLoginInput()
     {
         $validate = new Validate;
@@ -100,6 +104,9 @@ class User extends Controller
         ));
     }
 
+    /**
+     * Valida dados para registro de usuário
+     */
     private function validateRegisterInput()
     {
         $validate = new Validate;
@@ -126,6 +133,9 @@ class User extends Controller
         ));
     }
 
+    /**
+     * View padrão para o model User
+     */
     public function start()
     {
         $userlist = $this->model->fullList();
@@ -140,6 +150,9 @@ class User extends Controller
         $this->view->output($dados);
     }
 
+    /**
+     * View para formulário de registro de usuário
+     */
     public function registerUser()
     {
         $dados = [
@@ -151,6 +164,9 @@ class User extends Controller
         $this->view->output($dados);
     }
 
+    /**
+     * View para tela de login
+     */
     public function loginScreen()
     {
         $dados = [
@@ -162,6 +178,11 @@ class User extends Controller
         $this->view->output($dados, 'login');
     }
 
+    /**
+     * Método que faz logoff de usuário
+     * Redireciona para a tela de entrada
+     * como não há usuário logado a tela exibida é a de login
+     */
     public function logoff()
     {
         $this->model->logout();
