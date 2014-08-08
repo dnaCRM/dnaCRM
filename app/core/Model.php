@@ -6,6 +6,8 @@
  * Time: 17:58
  */
 
-class Model {
-
+abstract class Model {
+    protected $tabela;
+    protected $dados;
+    protected $db;
 } 

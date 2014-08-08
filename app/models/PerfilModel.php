@@ -6,28 +6,32 @@
  * Date: 02/08/14
  * Time: 19:14
  */
-class PerfilModel
+class PerfilModel extends Model
 {
-    private $db;
 
     public function __construct($user = null)
     {
         $this->db = DB::getInstance();
+        $this->tabela = 'pessoa';
     }
 
-    public function create($fields = array())
+    public function create($campos = array())
     {
+        $this->filtrarDados($campos);
+        if (!$this->db->insert($this->tabela, $this->dados)) {
+            throw new Exception('Não foi possível realizar o cadastro.');
+        }
+    }
 
-        /*        $fields = [
-                    'nome' => Input::get('nome'),
-                    'email' => Input::get('email'),
-                    'tel_fixo' => Input::get('tel_fixo'),
-                    'tel_cel' => Input::get('tel_cel'),
-                    'obs' => Input::get('obs'),
-                    'data_atualizado' => (new DateTime())->format('Y-m-d H:i:s')
-                ];*/
+    public function updatePerfil($id, $campos)
+    {
+        $this->filtrarDados($campos);
+        $this->db->update($this->tabela, $id, $this->dados);
+    }
 
-        $filters = [
+    private function filtrarDados($dados)
+    {
+        $filtros = [
             'foto' => FILTER_DEFAULT,
             'nome' => FILTER_SANITIZE_STRING,
             'email' => FILTER_SANITIZE_EMAIL,
@@ -37,10 +41,7 @@ class PerfilModel
             'data_atualizado' => FILTER_DEFAULT
         ];
 
-        $fields = filter_var_array($fields, $filters);
-        if (!$this->db->insert('pessoa', $fields)) {
-            throw new Exception('Não foi possível realizar o cadastro.');
-        }
+        $this->dados = filter_var_array($dados, $filtros);
     }
 
     public function fullList()
@@ -55,8 +56,8 @@ class PerfilModel
         if ($this->db->getNumRegistros() > 0) {
             return $this->db->first();
         }
-        Session::flash('fail','Pefil não encontrado');
-        Redirect::to(SITE_URL.'Perfil');
+        Session::flash('fail', 'Pefil não encontrado');
+        Redirect::to(SITE_URL . 'Perfil');
     }
 
 }

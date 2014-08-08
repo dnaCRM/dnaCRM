@@ -6,7 +6,7 @@
  * Time: 21:16
  */
 
-class Controller
+abstract class Controller
 {
     protected $model;
     protected $method;

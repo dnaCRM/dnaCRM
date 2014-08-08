@@ -1,10 +1,7 @@
 <?php
 
-class UserModel
+class UserModel extends Model
 {
-
-    private $db;
-    private $data;
     private $sessionName;
     private $cookieName;
     private $isLoggedIn;
@@ -15,6 +12,7 @@ class UserModel
      */
     public function __construct($user = null)
     {
+        $this->tabela = 'usuarios';
         $this->db = DB::getInstance();
 
         $this->sessionName = Config::get('session/session_name');
@@ -38,29 +36,40 @@ class UserModel
     /**
      *
      * @param array $fields
-     * @param string $id
      * @throws Exception
      */
-    public function update($fields = [], $id = null)
+    public function create($campos = array())
     {
+        $this->filtrarDados($campos);
 
-        if (!$id && $this->isLoggedIn()) {
-            $id = $this->data()['id_usuario'];
-        }
-
-        if (!$this->db->update('usuarios', $id, $fields)) {
-            throw new Exception('Não foi possível atualizar.');
+        if (!$this->db->insert('usuarios', $this->dados)) {
+            throw new Exception('There was a problem creating an account.');
         }
     }
 
     /**
      *
      * @param array $fields
+     * @param string $id
      * @throws Exception
      */
-    public function create($fields = array())
+    public function updateUser($id = null, $campos = [])
     {
-        $filters = [
+
+        if (!$id && $this->isLoggedIn()) {
+            $id = $this->dados['id_usuario'];
+        }
+
+        $this->filtrarDados($campos);
+
+        if (!$this->db->update($this->tabela, $id, $this->dados)) {
+            throw new Exception('Não foi possível atualizar.');
+        }
+    }
+
+    private function filtrarDados($dados)
+    {
+        $filtros = [
             'usuario' => FILTER_SANITIZE_STRING,
             'senha' => null,
             'salt' => null,
@@ -70,11 +79,7 @@ class UserModel
             'grupo' => FILTER_DEFAULT
         ];
 
-        $fields = filter_var_array($fields, $filters);
-
-        if (!$this->db->insert('usuarios', $fields)) {
-            throw new Exception('There was a problem creating an account.');
-        }
+        $this->dados = filter_var_array($dados, $filtros);
     }
 
     /**
@@ -89,7 +94,7 @@ class UserModel
             $data = $this->db->get('usuarios', "{$field} = '{$user}'");
 
             if ($data->getNumRegistros()) {
-                $this->data = $data->first();
+                $this->dados = $data->first();
                 return true;
             }
 
@@ -108,25 +113,25 @@ class UserModel
     {
 
         if (!$usuario && !$senha && $this->exists()) {
-            Session::put($this->sessionName, $this->data()['id_usuario']);
-            Session::put('nome_usuario', $this->data()['nome_usuario']);
+            Session::put($this->sessionName, $this->dados['id_usuario']);
+            Session::put('nome_usuario', $this->dados['nome_usuario']);
         } else {
             $user = $this->find($usuario);
             if ($user) {
-                if ($this->data()['senha'] === Hash::make($senha, $this->data()['salt'])) {
-                    Session::put($this->sessionName, $this->data()['id_usuario']);
-                    Session::put('nome_usuario', $this->data()['nome_usuario']);
+                if ($this->dados['senha'] === Hash::make($senha, $this->dados['salt'])) {
+                    Session::put($this->sessionName, $this->dados['id_usuario']);
+                    Session::put('nome_usuario', $this->dados['nome_usuario']);
 
                     if ($lembrar) {
                         $hash = Hash::unique();
-                        $hashCheck = $this->db->get('users_session', "user_id = {$this->data()['id_usuario']}");
+                        $hashCheck = $this->db->get('users_session', "user_id = {$this->dados['id_usuario']}");
 
                         if (!$hashCheck->getNumRegistros()) {
                             $this->db->insert(
                                 'users_session', [
-                                    'user_id' => $this->data()['id_usuario'],
-                                    'hash' => $hash
-                                ]);
+                                'user_id' => $this->dados['id_usuario'],
+                                'hash' => $hash
+                            ]);
                         } else {
                             $hash = $hashCheck->first()['hash'];
                         }
@@ -147,7 +152,7 @@ class UserModel
      */
     public function hasPermission($key)
     {
-        $group = $this->db->get('grupos', 'id' . '=' . $this->data()['grupo']);
+        $group = $this->db->get('grupos', 'id' . '=' . $this->dados['grupo']);
 
         if ($group->getNumRegistros()) {
             $permissions = json_decode($group->first()['permissions'], true);
@@ -165,7 +170,7 @@ class UserModel
      */
     public function exists()
     {
-        return (!empty($this->data)) ? true : false;
+        return (!empty($this->dados)) ? true : false;
     }
 
     /**
@@ -174,19 +179,10 @@ class UserModel
     public function logout()
     {
 
-        $this->db->delete('users_session', "user_id = {$this->data()['id_usuario']}");
+        $this->db->delete('users_session', "user_id = {$this->dados['id_usuario']}");
 
         Session::delete($this->sessionName);
         Cookie::delete($this->cookieName);
-    }
-
-    /**
-     *
-     * @return type
-     */
-    public function data()
-    {
-        return $this->data;
     }
 
     /**
