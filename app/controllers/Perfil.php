@@ -172,7 +172,7 @@ class Perfil extends Controller
                 $fileExtension = strrchr($fotoperfil['name'], ".");
                 // testa se extensão é permitida
                 if (in_array($fileExtension, $validExtensions)) {
-                    $newname = 'perfil_' . $fotoperfil['name'];
+                    $newname = 'perfil-' . Input::limpar($fotoperfil['name']);
                     $manipulator = new ImageManipulator($fotoperfil['tmp_name']);
                     $width = $manipulator->getWidth();
                     $height = $manipulator->getHeight();
