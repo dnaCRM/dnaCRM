@@ -57,12 +57,6 @@
                     echo '</tr>';
 
                 }
-                $json = json_encode($data['list'][0]);
-                echo $json;
-                echo'<hr>';
-                $json = json_decode($json, true);
-                var_dump($json);
-                echo '<hr>';
                 var_dump($data['list'][0]);
                 ?>
                 </tbody>
