@@ -166,11 +166,11 @@ class Perfil extends Controller
                 echo "Error: " . $fotoperfil['error'] . "<br />";
                 $this->fotoperfil = ($fotoperfil['error'] === 4 ? $this->fotoperfil : false);
             } else {
-                // array of valid extensions
+                // array com extensões válidas
                 $validExtensions = array('.jpg', '.jpeg', '.gif', '.png');
-                // get extension of the uploaded file
+                // pega a extensão do arquivo enviado
                 $fileExtension = strrchr($fotoperfil['name'], ".");
-                // check if file Extension is on the list of allowed ones
+                // testa se extensão é permitida
                 if (in_array($fileExtension, $validExtensions)) {
                     $newname = 'perfil_' . $fotoperfil['name'];
                     $manipulator = new ImageManipulator($fotoperfil['tmp_name']);
@@ -178,16 +178,16 @@ class Perfil extends Controller
                     $height = $manipulator->getHeight();
                     $centreX = round($width / 2);
                     $centreY = round($height / 2);
-                    // our dimensions will be 200x200
+                    // o tamanho da imagem poderia ser 200x200
                     $x1 = $centreX - $centreY; // 200 / 2
                     $y1 = 0; // 200 / 2
 
                     $x2 = $centreX + $centreY; // 200 / 2
                     $y2 = $centreY * 2; // 200 / 2
 
-                    // center cropping to 200x200
+                    // corta no centro  200x200
                     $newImage = $manipulator->crop($x1, $y1, $x2, $y2);
-                    // saving file to uploads folder
+                    // salva o arquivo na pasta de uploads
                     $manipulator->save('img/uploads/' . $newname);
                     $this->fotoperfil = $newname;
                 } else {

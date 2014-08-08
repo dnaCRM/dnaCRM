@@ -37,8 +37,8 @@ class UserModel
 
     /**
      *
-     * @param type $fields
-     * @param type $id
+     * @param array $fields
+     * @param string $id
      * @throws Exception
      */
     public function update($fields = [], $id = null)
@@ -55,7 +55,7 @@ class UserModel
 
     /**
      *
-     * @param type $fields
+     * @param array $fields
      * @throws Exception
      */
     public function create($fields = array())
