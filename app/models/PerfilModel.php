@@ -52,7 +52,7 @@ class PerfilModel extends Model
 
     public function getPerfil($id = '')
     {
-        $this->db->get('pessoa', "id = {$id}");
+        $this->db->get($this->tabela, "id = {$id}");
         if ($this->db->getNumRegistros() > 0) {
             return $this->db->first();
         }

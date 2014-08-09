@@ -60,11 +60,23 @@ class UserModel extends Model
             $id = $this->dados['id_usuario'];
         }
 
-        $this->filtrarDados($campos);
+        $this->filtrarUpdateDados($campos);
 
-        if (!$this->db->update($this->tabela, $id, $this->dados)) {
+        if (!$this->db->update($this->tabela, "id_usuario = {$id}", $this->dados)) {
             throw new Exception('Não foi possível atualizar.');
         }
+    }
+
+    private function filtrarUpdateDados($dados)
+    {
+        $filtros = [
+            'senha' => null,
+            'salt' => null,
+            'nome_usuario' => FILTER_SANITIZE_STRING,
+            'data_atualizado' => FILTER_DEFAULT,
+        ];
+
+        $this->dados = filter_var_array($dados, $filtros);
     }
 
     private function filtrarDados($dados)
@@ -100,6 +112,16 @@ class UserModel extends Model
 
         }
         return false;
+    }
+
+    public function getUser($id = '')
+    {
+        $this->db->get($this->tabela, "id_usuario = {$id}");
+        if ($this->db->getNumRegistros() > 0) {
+            return $this->db->first();
+        }
+        Session::flash('fail', 'Usuário não encontrado');
+        Redirect::to(SITE_URL . 'User');
     }
 
     /**

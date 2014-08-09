@@ -72,9 +72,7 @@ class Perfil extends Controller
         if (Input::exists()) {
             if (Token::check(Input::get('token'))) {
 
-
                 $this->validatePerfilInfo();
-
 
                 if ($this->validation->passed()) {
 
@@ -98,7 +96,6 @@ class Perfil extends Controller
                         CodeError($erro, E_USER_WARNING);
                     }
                 }
-
             }
         }
     }

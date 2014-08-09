@@ -71,18 +71,18 @@ class DB
 
     /**
      * @param string $tabela = entidade do banco de dados
-     * @param $id
+     * @param $where
      * @param array $dados
      * @return bool
      */
-    public function update($tabela, $id, $dados = [])
+    public function update($tabela, $where, $dados = [])
     {
         foreach ($dados as $parametro => $valor) {
             $parametros[] = $parametro . ' = :' . $parametro;
         }
 
         $parametros = implode(', ', $parametros);
-        $sql = "UPDATE {$tabela} SET {$parametros} WHERE id = {$id}";
+        $sql = "UPDATE {$tabela} SET {$parametros} WHERE {$where}";
 
         if ($this->query($sql, $dados)->success()) {
             return true;

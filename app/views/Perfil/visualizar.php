@@ -24,9 +24,6 @@
         <img class="img-circle profilefoto" src="img/uploads/<?php echo $data['perfil']['foto']; ?>">
         <?php
 
-        $perfil = new Perfil;
-        $perfil->newPerfil();
-
         $perfil = $data['perfil'] ;
 
         echo '<table class="table table-striped table-hover ">';
