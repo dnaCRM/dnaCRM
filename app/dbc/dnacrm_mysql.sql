@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 04-Ago-2014 às 15:46
+-- Generation Time: 11-Ago-2014 às 11:57
 -- Versão do servidor: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `grupos` (
 
 INSERT INTO `grupos` (`id`, `nome`, `permissoes`) VALUES
 (1, 'usuario', ''),
-(2, 'Administrador', '{"admin! :1}');
+(2, 'Administrador', '{"admin" : "1"}');
 
 -- --------------------------------------------------------
 
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `pessoa` (
   `data_atualizado` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `nome` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf32 AUTO_INCREMENT=58 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf32 AUTO_INCREMENT=69 ;
 
 --
 -- Extraindo dados da tabela `pessoa`
@@ -88,8 +88,8 @@ INSERT INTO `pessoa` (`id`, `foto`, `email`, `tel_fixo`, `tel_cel`, `data_cadast
 (44, 'perfil_profissional.jpg', 'mamao@com.uk', '33333333', '3333333322', '2014-08-04 10:59:08', 'Ã‰ muito fÃ¡cil!!!!', '2014-08-04 10:59:08', 'MamÃ£o'),
 (45, 'perfil_user.jpg', 'batm@n.com', '66666666', '6666666699', '2014-08-04 11:03:16', 'Gotham City Vigilante!', '2014-08-04 11:03:16', 'Bruce Wayne'),
 (53, 'perfil_superman-injustice.jpg', 'kal-el@krypton.com', '87878787', '8787878733', '2014-08-04 11:34:06', 'Forever Kryptonian!!', '2014-08-04 11:34:06', 'Clark Kent'),
-(54, 'user.jpg', 'kal-el@krypton.com', '87878787', '87878787334', '2014-08-04 11:34:32', 'Forever Kryptonian!!', '2014-08-04 11:34:32', 'Clark Kent'),
-(57, 'perfil_470626_10151197671048986_1545804432_o.jpg', 'morgana@goth.com', '66679999', '966679999', '2014-08-04 14:50:55', 'The Dark Escence of a Day Nightmare...\r\n', '2014-08-04 14:50:55', 'Morgana');
+(67, 'perfil-scorpion-mortal.jpg', 'scorpion@mortalkombat.com', '19961996', '919961996', '2014-08-08 16:23:34', 'Get over here!', '2014-08-08 16:23:34', 'Scorpion'),
+(68, 'perfil-1492567-562078353873946-1784011702-o.png', 'akuma@gouki.com', '21211212', '921211212', '2014-08-09 01:39:43', 'Messatsu!', '2014-08-09 01:39:43', 'Akuma');
 
 -- --------------------------------------------------------
 
@@ -102,7 +102,14 @@ CREATE TABLE IF NOT EXISTS `users_session` (
   `user_id` int(11) NOT NULL,
   `hash` varchar(50) NOT NULL,
   PRIMARY KEY (`session_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf32 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf32 AUTO_INCREMENT=6 ;
+
+--
+-- Extraindo dados da tabela `users_session`
+--
+
+INSERT INTO `users_session` (`session_id`, `user_id`, `hash`) VALUES
+(5, 12, '97b442c665bc1338b90644b8ef8c5483e470ef4a8c4fb16c07');
 
 -- --------------------------------------------------------
 
@@ -120,7 +127,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `data_atualizado` datetime NOT NULL,
   `grupo` int(11) NOT NULL,
   PRIMARY KEY (`id_usuario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf32 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf32 AUTO_INCREMENT=13 ;
 
 --
 -- Extraindo dados da tabela `usuarios`
@@ -132,7 +139,9 @@ INSERT INTO `usuarios` (`id_usuario`, `usuario`, `senha`, `salt`, `nome_usuario`
 (3, 'admin', '767f79abd8058fb5c4c58ba0918146dd40fa0e84bbd9df87c7044ab985e3df89', '3.5^·þÆ2$T¡ù?;&Ovè€ê	côò»)', 'Administrator', '2014-08-01 15:23:17', '0000-00-00 00:00:00', 1),
 (4, 'zelda', '2effe55c7642bb8b7dfe82d5a066550b18c4dc29d9a75a058b348d82a673b45f', 'Ùh(¤zñ<"tÌ\\5Õ	ì×ùZ·!À™—ÓýuqF''ï', 'Zelda', '2014-08-02 19:00:02', '0000-00-00 00:00:00', 1),
 (5, 'alex', 'c9cd9d0f5207cdd043260f54b7e9a113c16964feefc935519df7ebe326b21e11', '^’S-¤–ÅØ~6R\nŠIðÒ¼€¤´g"’xÌU6‡', 'Alex Garrett', '2014-08-02 19:01:53', '0000-00-00 00:00:00', 1),
-(10, 'inshideru', 'ff8396f42feb4daa1084143d17f737c553caa126b53bef61e5c8199a6cabb728', 'Xú|áñÝøƒçX-OåæQJ`SxEz)d¯àìø”', 'Ninja Spider', '2014-08-04 15:27:21', '2014-08-04 15:27:21', 1);
+(10, 'inshideru', 'ff8396f42feb4daa1084143d17f737c553caa126b53bef61e5c8199a6cabb728', 'Xú|áñÝøƒçX-OåæQJ`SxEz)d¯àìø”', 'Ninja Spider', '2014-08-04 15:27:21', '2014-08-04 15:27:21', 1),
+(11, 'hacker', '7d3869c33f5da13c0c891780f7279604ca6f8bcb121303d1ad03ef92b7f3cde9', '‚PžîæA‹8·Õ]ïP‚ûOˆ@Šs¡vâG‚6_?', 'iHackYou', '2014-08-04 15:27:21', '2014-08-09 01:37:50', 1),
+(12, 'killer', 'fea968e92b2872f80a1f773354d4113e9de2a2ad27198d75ee8845663c19a33a', ',—DÇADœËô¾C«|uÑÙð>!Ç¥s™LÐV', 'Killer Caco', '2014-08-09 01:40:17', '2014-08-10 22:06:07', 1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
