@@ -30,6 +30,7 @@
                         try {
                             $pdo = new PDO('pgsql:host=localhost;dbname=siscon','postgres','159753');
                             echo 'Sucesso';
+                            var_dump($pdo);
                         } catch (PDOException $e) {
                             CodeFail((int)$e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
                             die;
