@@ -147,7 +147,6 @@ class DB
 
     /**
      * Retorna primeiro objeto resultante da consulta ao banco de dados
-     * '$this->_query->fetchAll(PDO::FETCH_ASSOC)'
      * @return PDO::FETCH_ASSOC
      */
     public function first() {

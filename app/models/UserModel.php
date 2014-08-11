@@ -49,7 +49,7 @@ class UserModel extends Model
 
     /**
      *
-     * @param array $fields
+     * @param array $campos
      * @param string $id
      * @throws Exception
      */
@@ -103,7 +103,7 @@ class UserModel extends Model
     {
         if ($user) {
             $field = (is_numeric($user)) ? 'id_usuario' : 'usuario';
-            $data = $this->db->get('usuarios', "{$field} = '{$user}'");
+            $data = $this->db->get($this->tabela, "{$field} = '{$user}'");
 
             if ($data->getNumRegistros()) {
                 $this->dados = $data->first();
@@ -114,6 +114,10 @@ class UserModel extends Model
         return false;
     }
 
+    /**
+     * @param string $id = id do usuário
+     * @return array = primeiro registro encontrado usando o id informado
+     */
     public function getUser($id = '')
     {
         $this->db->get($this->tabela, "id_usuario = {$id}");
@@ -126,9 +130,9 @@ class UserModel extends Model
 
     /**
      *
-     * @param type $usuario
-     * @param type $senha
-     * @param type $lembrar
+     * @param string $usuario
+     * @param string $senha
+     * @param boolean $lembrar
      * @return boolean
      */
     public function login($usuario = null, $senha = null, $lembrar = false)
