@@ -8,6 +8,7 @@
 <div class="col-lg-6" style="padding: 15px 15px 0 15px;">
     <div class="well">
 
+        Well, well...
 
     </div>
 </div>
@@ -27,15 +28,10 @@
                 <div id="collapseOne" class="panel-collapse collapse in">
                     <div class="panel-body">
                         <?php
-                        try {
-                            $pdo = new PDO('pgsql:host=localhost;dbname=siscon','postgres','159753');
-                            echo 'Sucesso';
-                            var_dump($pdo);
-                        } catch (PDOException $e) {
-                            CodeFail((int)$e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
-                            die;
-                        }
-                        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                            $test = new ImageTest;
+                            $test->lob();
+
                         ?>
                     </div>
                 </div>
@@ -93,7 +89,29 @@
                 <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
             </div>
             <div class="tab-pane fade active in" id="profile">
-                <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
+                <p>
+
+                    <form class="form-horizontal" enctype="multipart/form-data" method="post" action="">
+
+                    <fieldset>
+
+                        <legend>Upload de Imagem PostgreSQL</legend>
+                        <div class="form-group">
+
+                            <label for="img_file" class="col-lg-3 control-label">Foto</label>
+                            <div class="col-lg-6">
+                                <input type="file" class="form-control" id="img_file" name="img_file">
+                            </div>
+                        </div>
+                        <input type="submit" value="Enviar" class="btn btn-primary">
+                    </fieldset>
+                    </form>
+
+                <?php
+                var_dump($_FILES);
+                ?>
+
+                </p>
             </div>
             <div class="tab-pane fade" id="dropdown1">
                 <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork.</p>

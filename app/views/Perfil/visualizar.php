@@ -30,7 +30,7 @@
         foreach ($perfil as $campo => $dado) {
 
             echo '<tr>';
-            echo '<td> [ ' . $campo . ' ] ' . $dado . '</td>';
+            echo '<td><strong> [ ' . $campo . ' ] </strong>' . $dado . '</td>';
             echo '</tr>';
 
         }
