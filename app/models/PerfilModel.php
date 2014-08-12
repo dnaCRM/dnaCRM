@@ -18,6 +18,7 @@ class PerfilModel extends Model
     public function create($campos = array())
     {
         $this->filtrarDados($campos);
+
         if (!$this->db->insert($this->tabela, $this->dados)) {
             throw new Exception('Não foi possível realizar o cadastro.');
         }
@@ -32,16 +33,16 @@ class PerfilModel extends Model
     private function filtrarDados($dados)
     {
         $filtros = [
-            'cd_cgc' => FILTER_SANITIZE_STRING,
-            'cd_profissao' => FILTER_SANITIZE_STRING,
+            'cd_cgc' => FILTER_SANITIZE_NUMBER_INT,
+            'cd_profissao' => FILTER_SANITIZE_NUMBER_INT,
             'nm_pessoa_fisica' => FILTER_SANITIZE_STRING,
             'email' => FILTER_SANITIZE_EMAIL,
-            'cpf' => FILTER_SANITIZE_STRING,
+            'cpf' => FILTER_DEFAULT,
             'rg' => FILTER_SANITIZE_STRING,
             'org_rg' => FILTER_SANITIZE_STRING,
-            'fone' => FILTER_SANITIZE_STRING,
-            'celular' => FILTER_SANITIZE_STRING,
-            'dt_nascimento' => FILTER_SANITIZE_STRING,
+            'fone' => FILTER_DEFAULT,
+            'celular' => FILTER_DEFAULT,
+            'dt_nascimento' => FILTER_DEFAULT,
             'ie_sexo' => FILTER_DEFAULT
         ];
 

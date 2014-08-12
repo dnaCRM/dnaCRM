@@ -63,6 +63,7 @@ class DB
         $aliases = ':' . implode(', :', array_keys($dados));
 
         $sql = "INSERT INTO {$tabela} ($colunas) VALUES ({$aliases})";
+
         if ($this->query($sql, $dados)->success()) {
             return true;
         }

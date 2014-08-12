@@ -52,9 +52,9 @@ class Perfil extends Controller
 
         $dados = [
             //o campo 'obs' vai ser o subtítulo
-            'pagesubtitle' => $perfilarr['obs'],
+            'pagesubtitle' => $perfilarr['email'],
             //o campo 'nome' vai ser o título da página
-            'pagetitle' => $perfilarr['nome'],
+            'pagetitle' => $perfilarr['nm_pessoa_fisica'],
             //todos os atributos do perfil
             'perfil' => $perfilarr
         ];
@@ -77,17 +77,17 @@ class Perfil extends Controller
                 if ($this->validation->passed()) {
 
                     $this->dados = [
-                        'cd_cgc' => (int)Input::get('empresa'),
-                        'cd_profissao' => (int)Input::get('profissao'),
+                        'cd_cgc' => (int)Input::get('cd_cgc'),
+                        'cd_profissao' => (int)Input::get('cd_profissao'),
                         'nm_pessoa_fisica' => Input::get('nm_pessoa_fisica'),
                         'email' => Input::get('email'),
                         'cpf' => (int)Input::get('cpf'),
                         'rg' => Input::get('rg'),
                         'org_rg' => Input::get('org_rg'),
-                        'fone' => (int)Input::get('profissao'),
-                        'celular' => (int)Input::get('fone'),
+                        'fone' => (int)Input::get('fone'),
+                        'celular' => (int)Input::get('celular'),
                         'dt_nascimento' => Input::get('dt_nascimento'),
-                        'ie_sexo' => Input::get('iesexo')
+                        'ie_sexo' => Input::get('ie_sexo')
                     ];
                     try {
                         $this->model->create($this->dados);
@@ -120,11 +120,11 @@ class Perfil extends Controller
 
         $this->validation = $validate->check($_POST, array(
             'cd_cgc' => array(
-                'min' => 3,
+                'min' => 1,
                 'max' => 100
             ),
             'cd_profissao' => array(
-                'min' => 3,
+                'min' => 1,
                 'max' => 100
             ),
             'nm_pessoa_fisica' => array(

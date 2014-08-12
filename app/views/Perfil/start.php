@@ -40,7 +40,6 @@
                     <th>Foto</th>
                     <th>Nome</th>
                     <th>e-mail</th>
-                    <th>Data de cadastro</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -50,10 +49,9 @@
                 foreach ($data['list'] as $perfil) {
 
                     echo '<tr>';
-                    echo '<td><img src="img/uploads/' . $perfil['foto'] . '" class="img-circle" title="' . $perfil['id'] . '"></td>';
-                    echo '<td><a href="Perfil/visualizar/' . $perfil['id'] . '">' . $perfil['nome'] . '</a></td>';
+                    echo '<td><img src="img/uploads/' . $perfil['im_foto'] . '" class="img-circle" title="' . $perfil['cd_pessoa_fisica'] . '"></td>';
+                    echo '<td><a href="Perfil/visualizar/' . $perfil['cd_pessoa_fisica'] . '">' . $perfil['nm_pessoa_fisica'] . '</a></td>';
                     echo '<td>' . $perfil['email'] . '</td>';
-                    echo '<td>' . (new DateTime($perfil['data_cadastro']))->format('d/m/Y') . '</td>';
                     echo '</tr>';
 
                 }

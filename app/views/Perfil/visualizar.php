@@ -21,16 +21,16 @@
 <div class="row">
     <div class="col-lg-6">
 
-        <img class="img-circle profilefoto" src="img/uploads/<?php echo $data['perfil']['foto']; ?>">
+        <img class="img-circle profilefoto" src="img/uploads/<?php echo $data['perfil']['im_foto']; ?>">
         <?php
 
         $perfil = $data['perfil'] ;
 
         echo '<table class="table table-striped table-hover ">';
-        foreach ($perfil as $dado) {
+        foreach ($perfil as $campo => $dado) {
 
             echo '<tr>';
-            echo '<td>' . $dado . '</td>';
+            echo '<td> [ ' . $campo . ' ] ' . $dado . '</td>';
             echo '</tr>';
 
         }
