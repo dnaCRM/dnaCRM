@@ -165,7 +165,7 @@
                     </a>
                     <ul class="treeview-menu" style="display: none;">
                         <li><a href="User"><i class="fa fa-angle-double-right"></i> Usuários</a></li>
-                        <li><a href="User/updateUser/<?php echo Session::get('user'); ?>"><i class="fa fa-angle-double-right"></i> Atualzar dados</a></li>
+                        <!--<li><a href="User/updateUser/<?php /*echo Session::get('user'); */?>"><i class="fa fa-angle-double-right"></i> Atualzar dados</a></li>-->
                         <li><a href="User/registerUser"><i class="fa fa-angle-double-right"></i> Novo usuário</a></li>
                         <li><a href="User/logoff"><i class="fa fa-angle-double-right"></i> Logoff</a></li>
                     </ul>

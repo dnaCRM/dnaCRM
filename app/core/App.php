@@ -36,7 +36,7 @@ class App
         $this->params = $url ? array_values($url) : [];
 
         //Verifica se existe uma sessão de login ativo
-        if (!Session::exists('user')) {
+/*        if (1Session::exists('user')) {
             //caso o usuário não esteja logado
             //executa o método loginScreen da Classe User
             require_once 'app/controllers/User.php';
@@ -46,7 +46,8 @@ class App
             // caso a sessão 'user' exista, quer dizer que tem um usuário logado
             // sendo assim, executa o Controller e o método originalmente chamado
             call_user_func_array(array($this->controller, $this->method), $this->params);
-        }
+        }*/
+        call_user_func_array(array($this->controller, $this->method), $this->params);
     }
 
     public function parseUrl()

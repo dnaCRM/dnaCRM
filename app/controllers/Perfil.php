@@ -13,12 +13,12 @@ class Perfil extends Controller
     private $fotoperfil = 'user.jpg'; //nome padrão para imagem de usuário
 
     public function __construct()
-    {   //o atributo de classe é herdado da classe pai 'Controller'
+    { //o atributo de classe é herdado da classe pai 'Controller'
         $this->model = new PerfilModel;
     }
 
     public function start()
-    {   //Pega a lista completa de perfis
+    { //Pega a lista completa de perfis
         $perfil_list = $this->model->fullList();
 
         $dados = [
@@ -77,13 +77,17 @@ class Perfil extends Controller
                 if ($this->validation->passed()) {
 
                     $this->dados = [
-                        'foto' => $this->fotoperfil,
-                        'nome' => Input::get('nome'),
+                        'cd_cgc' => (int)Input::get('empresa'),
+                        'cd_profissao' => (int)Input::get('profissao'),
+                        'nm_pessoa_fisica' => Input::get('nm_pessoa_fisica'),
                         'email' => Input::get('email'),
-                        'tel_fixo' => Input::get('tel_fixo'),
-                        'tel_cel' => Input::get('tel_cel'),
-                        'obs' => Input::get('obs'),
-                        'data_atualizado' => (new DateTime())->format('Y-m-d H:i:s')
+                        'cpf' => (int)Input::get('cpf'),
+                        'rg' => Input::get('rg'),
+                        'org_rg' => Input::get('org_rg'),
+                        'fone' => (int)Input::get('profissao'),
+                        'celular' => (int)Input::get('fone'),
+                        'dt_nascimento' => Input::get('dt_nascimento'),
+                        'ie_sexo' => Input::get('iesexo')
                     ];
                     try {
                         $this->model->create($this->dados);
@@ -115,7 +119,15 @@ class Perfil extends Controller
         }
 
         $this->validation = $validate->check($_POST, array(
-            'nome' => array(
+            'cd_cgc' => array(
+                'min' => 3,
+                'max' => 100
+            ),
+            'cd_profissao' => array(
+                'min' => 3,
+                'max' => 100
+            ),
+            'nm_pessoa_fisica' => array(
                 'required' => true,
                 'min' => 3,
                 'max' => 100
@@ -124,27 +136,40 @@ class Perfil extends Controller
                 'required' => true,
                 'email' => true
             ),
-            'tel_fixo' => array(
+            'cpf' => array(
+                'required' => true,
+                'min' => 11,
+                'max' => 11,
+                'unique' => 'pessoa_fisica_tb'
+            ),
+            'rg' => array(
+                'required' => true,
+                'min' => 6,
+                'max' => 11,
+                'unique' => 'pessoa_fisica_tb'
+            ),
+            'org_rg' => array(
+                'required' => true,
+                'min' => 2,
+                'max' => 8
+            ),
+            'fone' => array(
                 'required' => true,
                 'min' => 8,
                 'max' => 20
             ),
-            'tel_cel' => array(
+            'celular' => array(
                 'required' => true,
                 'min' => 8,
                 'max' => 20,
-                'unique' => 'pessoa'
+                'unique' => 'pessoa_fisica_tb'
             ),
-            'cel_confirm' => array(
+            'dt_nascimento' => array(
                 'required' => true,
-                'min' => 8,
-                'max' => 20,
-                'matches' => 'tel_cel'
+                'data' => true
             ),
-            'obs' => array(
-                'required' => true,
-                'min' => 3,
-                'max' => 255
+            'ie_sexo' => array(
+                'required' => true
             )
         ));
     }

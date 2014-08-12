@@ -37,7 +37,7 @@ class DB
             CodeFail((int)$e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
             die;
         }
-        //$this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
     /**

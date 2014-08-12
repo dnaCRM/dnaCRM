@@ -12,7 +12,7 @@ class PerfilModel extends Model
     public function __construct($user = null)
     {
         $this->db = DB::getInstance();
-        $this->tabela = 'pessoa';
+        $this->tabela = 'pessoa_fisica_tb';
     }
 
     public function create($campos = array())
@@ -32,13 +32,17 @@ class PerfilModel extends Model
     private function filtrarDados($dados)
     {
         $filtros = [
-            'foto' => FILTER_DEFAULT,
-            'nome' => FILTER_SANITIZE_STRING,
+            'cd_cgc' => FILTER_SANITIZE_STRING,
+            'cd_profissao' => FILTER_SANITIZE_STRING,
+            'nm_pessoa_fisica' => FILTER_SANITIZE_STRING,
             'email' => FILTER_SANITIZE_EMAIL,
-            'tel_fixo' => FILTER_SANITIZE_STRING,
-            'tel_cel' => FILTER_SANITIZE_STRING,
-            'obs' => FILTER_SANITIZE_STRING,
-            'data_atualizado' => FILTER_DEFAULT
+            'cpf' => FILTER_SANITIZE_STRING,
+            'rg' => FILTER_SANITIZE_STRING,
+            'org_rg' => FILTER_SANITIZE_STRING,
+            'fone' => FILTER_SANITIZE_STRING,
+            'celular' => FILTER_SANITIZE_STRING,
+            'dt_nascimento' => FILTER_SANITIZE_STRING,
+            'ie_sexo' => FILTER_DEFAULT
         ];
 
         $this->dados = filter_var_array($dados, $filtros);
@@ -46,13 +50,13 @@ class PerfilModel extends Model
 
     public function fullList()
     {
-        $this->db->select('pessoa', null, null, null, 'data_cadastro DESC');
+        $this->db->select($this->tabela, null, null, null, null);
         return $this->db->getResultado();
     }
 
     public function getPerfil($id = '')
     {
-        $this->db->get($this->tabela, "id = {$id}");
+        $this->db->get($this->tabela, "cd_pessoa_fisica = {$id}");
         if ($this->db->getNumRegistros() > 0) {
             return $this->db->first();
         }

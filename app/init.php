@@ -22,11 +22,11 @@ define('SITE_URL', 'http://localhost/dnacrm/');
 
 $GLOBALS['config'] = [
     'database' => [
-        'sgbd' => 'mysql',
+        'sgbd' => 'pgsql',
         'host' =>'127.0.0.1',
-        'user' => 'root',
-        'pass' => '',
-        'dbname' => 'dnacrm'
+        'user' => 'postgres',
+        'pass' => '159753',
+        'dbname' => 'siscon'
     ],
     'lembrar' => [
         'cookie_name' => 'hash',

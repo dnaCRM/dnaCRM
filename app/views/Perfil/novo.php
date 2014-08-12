@@ -52,11 +52,29 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="nome" class="col-lg-2 control-label">Nome</label>
+                        <label for="cd_cgc" class="col-lg-2 control-label">Empresa</label>
 
                         <div class="col-lg-10">
-                            <input type="text" class="form-control" id="nome" name="nome"
-                                   value="<?php echo escape(Input::get('nome')); ?>" placeholder="Nome">
+                            <input type="text" class="form-control" id="cd_cgc" name="cd_cgc"
+                                   value="<?php echo escape(Input::get('cd_cgc')); ?>" placeholder="Empresa">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cd_profissao" class="col-lg-2 control-label">Profissão</label>
+
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" id="cd_profissao" name="cd_profissao"
+                                   value="<?php echo escape(Input::get('cd_profissao')); ?>" placeholder="Profissão">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nm_pessoa_fisica" class="col-lg-2 control-label">Nome</label>
+
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" id="nm_pessoa_fisica" name="nm_pessoa_fisica"
+                                   value="<?php echo escape(Input::get('nm_pessoa_fisica')); ?>" placeholder="Nome">
                         </div>
                     </div>
                     <div class="form-group">
@@ -67,38 +85,56 @@
                                    value="<?php echo escape(Input::get('email')); ?>" placeholder="Email">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="tel_fixo" class="col-lg-2 control-label">Telefone Fixo</label>
 
-                        <div class="col-lg-10">
-                            <input type="tel" class="form-control" id="email" name="tel_fixo"
-                                   value="<?php echo escape(Input::get('tel_fixo')); ?>" placeholder="00 0000-0000">
+                    <div class="form-group">
+                        <label for="cpf" class="col-lg-2 control-label">CPF</label>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" id="cpf" name="cpf"
+                                   value="<?php echo escape(Input::get('cpf')); ?>" placeholder="000.000.000-00">
+                        </div>
+                        <label for="rg" class="col-lg-1 control-label">RG</label>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" id="rg" name="rg"
+                                   value="<?php echo escape(Input::get('rg')); ?>" placeholder="000.000.000-00">
+                        </div>
+                        <label for="org_rg" class="col-lg-1 control-label">Org.</label>
+                        <div class="col-lg-2">
+                            <input type="text" class="form-control" id="org_rg" name="org_rg"
+                                   value="<?php echo escape(Input::get('org_rg')); ?>" placeholder="XXX-XX">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="tel_cel" class="col-lg-2 control-label">Celular</label>
 
-                        <div class="col-lg-10">
-                            <input type="tel" class="form-control" id="tel_cel" name="tel_cel"
-                                   value="<?php echo escape(Input::get('tel_cel')); ?>" placeholder="00 00000-0000">
+
+
+                    <div class="form-group">
+                        <label for="fone" class="col-lg-2 control-label">Telefone</label>
+                        <div class="col-lg-4">
+                           <input type="tel" class="form-control" id="fone" name="fone"
+                                   value="<?php echo escape(Input::get('fone')); ?>" placeholder="00 0000-0000">
+                        </div>
+
+                        <label for="celular" class="col-lg-2 control-label">Celular</label>
+                        <div class="col-lg-4">
+                            <input type="tel" class="form-control" id="celular" name="celular"
+                                   value="<?php echo escape(Input::get('celular')); ?>" placeholder="00 00000-0000">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="cel_confirm" class="col-lg-2 control-label">Confirme o Celular</label>
 
-                        <div class="col-lg-10">
-                            <input type="tel" class="form-control" id="cel_confirm" name="cel_confirm"
-                                   placeholder="00 00000-0000">
-                        </div>
-                    </div>
                     <div class="form-group">
-                        <label for="obs" class="col-lg-2 control-label">Textarea</label>
-
-                        <div class="col-lg-10">
-                            <textarea class="form-control" rows="3" name="obs"
-                                      id="obs"><?php echo escape(Input::get('obs')); ?></textarea>
-                            <span class="help-block"></span>
+                        <label for="dt_nascimento" class="col-lg-2 control-label">Nascimento</label>
+                        <div class="col-lg-4">
+                            <input type="date" class="form-control" value="<?php echo escape(Input::get('dt_nascimento')); ?>" id="dt_nascimento" name="dt_nascimento">
                         </div>
+
+                            <label class="col-lg-1 control-label">Sexo</label>
+                            <label class="col-lg-2 control-label">
+                                <input type="radio" name="ie_sexo" id="masculino" value="m" checked="">
+                                Masc.
+                            </label>
+                            <label class="col-lg-2 control-label">
+                                <input type="radio" name="ie_sexo" id="feminino" value="f" checked="">
+                                Femin.
+                            </label>
                     </div>
 
                     <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
