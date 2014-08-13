@@ -31,6 +31,7 @@
 
                             $test = new ImageTest;
                             $test->lob();
+                            //$test->show();
 
                         ?>
                     </div>

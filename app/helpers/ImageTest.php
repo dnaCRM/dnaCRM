@@ -26,7 +26,7 @@ class ImageTest {
 
         if (Input::exists('files')) {
 
-            $stmt = $db->prepare("insert into images (img_file) values (?)");
+            $stmt = $db->prepare("insert into img_b (img_file) values (?)");
 
             //$fp = fopen($_FILES['img_file']['tmp_name'], 'rb');
             //$stmt->bindParam(1, $fp, PDO::PARAM_LOB);
@@ -49,7 +49,7 @@ class ImageTest {
         var_dump($lob);
         echo $lob;
         //header("Content-Type: image/jpeg");
-        //fpassthru($lob);
+        fpassthru($lob);
     }
 
 
@@ -66,9 +66,12 @@ class ImageTest {
         if (Input::exists('files')) {
             $file = $_FILES['img_file']['tmp_name'];
             $stmt = $db->prepare("insert into images (img_file) values (lo_import('{$file}'))");
-            $stmt->execute();
-            echo $db->lastInsertId();
 
+            $db->beginTransaction();
+            $stmt->execute();
+            $db->commit();
+
+            echo $db->lastInsertId();
         }
         /**
          * --Inserir imagens no banco
@@ -88,11 +91,13 @@ class ImageTest {
         lo_export("nome do campo", "caminho onde a imagem vai ser
          */
 
-        $id = 1;
-        $state = $db->prepare("select lo_export(img/uploads/teste.jpg) from imagens where id_image = {$id}");
+        $id = 11;
 
-        var_dump($state);
-        echo '<img src="img/uploads/teste.jpg">';
+        $state = $db->prepare("select lo_export(img_file, 'C:\htdocs\dnacrm\img\uploads\\teste.jpg') from images where id_image = {$id}");
+        $state->execute();
+
+        var_dump($state, $db);
+        echo '<img class="img-circle profilefoto" src="img/uploads/teste.jpg">';
     }
 
 } 
