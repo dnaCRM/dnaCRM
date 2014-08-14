@@ -44,10 +44,10 @@
                 <fieldset>
                     <legend>Cadastro</legend>
                     <div class="form-group">
-                        <label for="fotoperfil" class="col-lg-2 control-label">Foto</label>
+                        <label for="im_foto" class="col-lg-2 control-label">Foto</label>
 
                         <div class="col-lg-10">
-                            <input type="file" class="form-control" id="fotoperfil" name="fotoperfil">
+                            <input type="file" class="form-control" id="im_foto" name="im_foto">
                         </div>
                     </div>
 

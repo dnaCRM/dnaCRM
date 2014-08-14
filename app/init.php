@@ -19,7 +19,7 @@ spl_autoload_register('autoload');
 ### DEFINIÇÃO DE CONSTANTES GLOBAIS #######
 //define a url do site para ser usada em endereços relativos
 define('SITE_URL', 'http://localhost/dnacrm/');
-
+define('SITE_ROOT', 'C:\htdocs\dnacrm\\');
 $GLOBALS['config'] = [
     'database' => [
         'sgbd' => 'pgsql',

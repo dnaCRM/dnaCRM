@@ -73,31 +73,26 @@ class ImageTest {
 
             echo $db->lastInsertId();
         }
-        /**
-         * --Inserir imagens no banco
 
-        INSERT INTO IMAGENS(NOME,IMG) VALUES('GABRIEL',lo_import('C:\teste.jpg'))
+        $id = 45;
 
-
-        --Extrair imagens no banco
-
-        SELECT NOME, lo_export(IMG,'C:\temp\teste.jpg') FROM IMAGENS WHERE NOME = 'GABRIEL'
-
-
-
-        lo_import("caminho da imagem as ser amarzenada no banco")
-
-
-        lo_export("nome do campo", "caminho onde a imagem vai ser
-         */
-
-        $id = 11;
-
-        $state = $db->prepare("select lo_export(img_file, 'C:\htdocs\dnacrm\img\uploads\\teste.jpg') from images where id_image = {$id}");
+        $state = $db->prepare("select lo_export(im_foto, 'C:\htdocs\dnacrm\img\uploads\\teste.jpg') from pessoa_fisica_tb where cd_pessoa_fisica = {$id}");
         $state->execute();
 
         var_dump($state, $db);
         echo '<img class="img-circle profilefoto" src="img/uploads/teste.jpg">';
     }
+
+    /**
+     * --Inserir imagens no banco
+    INSERT INTO IMAGENS(NOME,IMG) VALUES('GABRIEL',lo_import('C:\teste.jpg'))
+
+    --Extrair imagens no banco
+    SELECT NOME, lo_export(IMG,'C:\temp\teste.jpg') FROM IMAGENS WHERE NOME = 'GABRIEL'
+
+    lo_import("caminho da imagem as ser amarzenada no banco")
+
+    lo_export("nome do campo", "caminho onde a imagem vai ser
+     */
 
 } 

@@ -21,6 +21,10 @@ class Perfil extends Controller
     { //Pega a lista completa de perfis
         $perfil_list = $this->model->fullList();
 
+        foreach ($perfil_list as $perfil) {
+            $this->model->getPerfilFoto($perfil['cd_pessoa_fisica']);
+        }
+
         $dados = [
             'pagesubtitle' => 'Olá mundo',
             'pagetitle' => 'Perfil',
@@ -49,6 +53,7 @@ class Perfil extends Controller
     public function visualizar($id = '')
     {
         $perfilarr = $this->model->getPerfil($id);
+        $this->model->getPerfilFoto($id);
 
         $dados = [
             //o campo 'obs' vai ser o subtítulo
@@ -89,6 +94,7 @@ class Perfil extends Controller
                         'dt_nascimento' => Input::get('dt_nascimento'),
                         'ie_sexo' => Input::get('ie_sexo')
                     ];
+                    var_dump($this->dados);
                     try {
                         $this->model->create($this->dados);
                         Session::flash('sucesso', 'Perfil cadastrado com sucesso.');
@@ -182,7 +188,7 @@ class Perfil extends Controller
     public function fotoPerfil()
     {
         if (Input::exists('files')) {
-            $fotoperfil = isset($_FILES['fotoperfil']) ? $_FILES['fotoperfil'] : null;
+            $fotoperfil = isset($_FILES['im_foto']) ? $_FILES['im_foto'] : null;
 
             if ($fotoperfil['error'] > 0) {
                 echo "Error: " . $fotoperfil['error'] . "<br />";
@@ -194,7 +200,7 @@ class Perfil extends Controller
                 $fileExtension = strrchr($fotoperfil['name'], ".");
                 // testa se extensão é permitida
                 if (in_array($fileExtension, $validExtensions)) {
-                    $newname = 'perfil-' . Input::limpar($fotoperfil['name']);
+                    $newname = 'imagem.tmp';
                     $manipulator = new ImageManipulator($fotoperfil['tmp_name']);
                     $width = $manipulator->getWidth();
                     $height = $manipulator->getHeight();
@@ -208,10 +214,13 @@ class Perfil extends Controller
                     $y2 = $centreY * 2; // 200 / 2
 
                     // corta no centro  200x200
-                    $newImage = $manipulator->crop($x1, $y1, $x2, $y2);
-                    // salva o arquivo na pasta de uploads
+
+                    $manipulator->crop($x1, $y1, $x2, $y2);
+
                     $manipulator->save('img/uploads/' . $newname);
-                    $this->fotoperfil = $newname;
+
+                    $this->model->setFotoPerfil($newname);
+
                 } else {
                     $this->fotoperfil = false;
                 }

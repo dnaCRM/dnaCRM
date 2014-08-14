@@ -62,7 +62,7 @@ class DB
         $colunas = implode(', ', array_keys($dados));
         $aliases = ':' . implode(', :', array_keys($dados));
 
-        $sql = "INSERT INTO {$tabela} ($colunas) VALUES ({$aliases})";
+        $sql = "INSERT INTO {$tabela} ($colunas) VALUES ({$aliases}) returning *";
 
         if ($this->query($sql, $dados)->success()) {
             return true;
@@ -184,6 +184,7 @@ class DB
             $this->success = false;
             CodeFail((int)$e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
         }
+
         return $this;
     }
 
@@ -193,6 +194,11 @@ class DB
     private function success()
     {
         return $this->success;
+    }
+
+    public function getPDO()
+    {
+        return $this->pdo;
     }
 }
 
