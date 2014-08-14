@@ -9,6 +9,14 @@
     <div class="well">
 
         Well, well...
+        <?php
+        $cpf = '073.596.567-61';
+        $cpf = str_replace(array('.','-'), '', $cpf);
+
+        echo '<br>'. $cpf . '<br>';
+        $cpf = 0 + $cpf;
+        echo  $cpf;
+        ?>
 
     </div>
 </div>

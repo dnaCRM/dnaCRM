@@ -21,12 +21,12 @@
 // * Add .active class to <li> elements if you want the menu to be open automatically
 // * on page load. See above for an example.
 // */
-(function($) {
+(function ($) {
     "use strict";
 
-    $.fn.tree = function() {
+    $.fn.tree = function () {
 
-        return this.each(function() {
+        return this.each(function () {
             var btn = $(this).children("a").first();
             var menu = $(this).children(".treeview-menu").first();
             var isActive = $(this).hasClass('active');
@@ -37,7 +37,7 @@
                 btn.children(".fa-angle-left").first().removeClass("fa-angle-left").addClass("fa-angle-down");
             }
             //Slide open or close the menu on link click
-            btn.click(function(e) {
+            btn.click(function (e) {
                 e.preventDefault();
                 if (isActive) {
                     //Slide up to close menu
@@ -55,7 +55,7 @@
             });
 
             /* Add margins to submenu elements to give it a tree look */
-            menu.find("li > a").each(function() {
+            menu.find("li > a").each(function () {
                 var pad = parseInt($(this).css("margin-left")) + 10;
 
                 $(this).css({"margin-left": pad + "px"});
@@ -70,29 +70,36 @@
 
 $(".sidebar-menu .treeview").tree();
 
-(function() {
+(function () {
     var body = $('body');
-    $('.slide-bar-toggle').bind('click', function() {
+    $('.slide-bar-toggle').bind('click', function () {
         body.toggleClass('menu-open');
         return false;
     });
 })();
 
+$(document).ready(function () {
+
+    //Check to see if the window is top if not then display button
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 100) {
+            $('#toTop').fadeIn();
+        } else {
+            $('#toTop').fadeOut();
+        }
+    });
+
+    //Click event to scroll to top
+    $('#toTop').click(function () {
+        $('html, body').animate({scrollTop: 0}, 400);
+        return false;
+    });
+
+});
+
 $(document).ready(function(){
-	
-	//Check to see if the window is top if not then display button
-	$(window).scroll(function(){
-		if ($(this).scrollTop() > 100) {
-			$('#toTop').fadeIn();
-		} else {
-			$('#toTop').fadeOut();
-		}
-	});
-	
-	//Click event to scroll to top
-	$('#toTop').click(function(){
-		$('html, body').animate({scrollTop : 0},400);
-		return false;
-	});
-	
+    $('#cpf').inputmask("999.999.999-99");
+    $('#celular').inputmask("(99) [9]9999-9999");  //[] Opcional
+    $('#dt_nascimento').inputmask("99/99/9999");
+    $('#fone').inputmask("(99) 9999-9999");
 });

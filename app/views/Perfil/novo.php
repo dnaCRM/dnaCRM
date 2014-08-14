@@ -90,21 +90,19 @@
                         <label for="cpf" class="col-lg-2 control-label">CPF</label>
                         <div class="col-lg-3">
                             <input type="text" class="form-control" id="cpf" name="cpf"
-                                   value="<?php echo escape(Input::get('cpf')); ?>" placeholder="000.000.000-00">
+                                   value="<?php echo escape(Input::get('cpf')); ?>" placeholder="000.000.000-00" maxlength="14">
                         </div>
                         <label for="rg" class="col-lg-1 control-label">RG</label>
                         <div class="col-lg-3">
                             <input type="text" class="form-control" id="rg" name="rg"
-                                   value="<?php echo escape(Input::get('rg')); ?>" placeholder="000.000.000-00">
+                                   value="<?php echo escape(Input::get('rg')); ?>" placeholder="000.000.000-00" maxlength="12">
                         </div>
-                        <label for="org_rg" class="col-lg-1 control-label">Org.</label>
+                        <label for="org_rg" class="col-lg-1 control-label">UF</label>
                         <div class="col-lg-2">
                             <input type="text" class="form-control" id="org_rg" name="org_rg"
-                                   value="<?php echo escape(Input::get('org_rg')); ?>" placeholder="XXX-XX">
+                                   value="<?php echo escape(Input::get('org_rg')); ?>" placeholder="XX" maxlength="2">
                         </div>
                     </div>
-
-
 
                     <div class="form-group">
                         <label for="fone" class="col-lg-2 control-label">Telefone</label>
@@ -123,7 +121,7 @@
                     <div class="form-group">
                         <label for="dt_nascimento" class="col-lg-2 control-label">Nascimento</label>
                         <div class="col-lg-4">
-                            <input type="date" class="form-control" value="<?php echo escape(Input::get('dt_nascimento')); ?>" id="dt_nascimento" name="dt_nascimento">
+                            <input type="text" class="form-control" value="<?php echo escape(Input::get('dt_nascimento')); ?>" id="dt_nascimento" name="dt_nascimento">
                         </div>
 
                             <label class="col-lg-1 control-label">Sexo</label>

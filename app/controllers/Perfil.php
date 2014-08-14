@@ -81,11 +81,11 @@ class Perfil extends Controller
                         'cd_profissao' => (int)Input::get('cd_profissao'),
                         'nm_pessoa_fisica' => Input::get('nm_pessoa_fisica'),
                         'email' => Input::get('email'),
-                        'cpf' => (int)Input::get('cpf'),
-                        'rg' => Input::get('rg'),
+                        'cpf' => (string)Input::get('cpf'),
+                        'rg' => (string)Input::get('rg'),
                         'org_rg' => Input::get('org_rg'),
-                        'fone' => (int)Input::get('fone'),
-                        'celular' => (int)Input::get('celular'),
+                        'fone' => (string)Input::get('fone'),
+                        'celular' => (string)Input::get('celular'),
                         'dt_nascimento' => Input::get('dt_nascimento'),
                         'ie_sexo' => Input::get('ie_sexo')
                     ];
@@ -138,14 +138,14 @@ class Perfil extends Controller
             ),
             'cpf' => array(
                 'required' => true,
-                'min' => 11,
-                'max' => 11,
+                'min' => 14,
+                'max' => 14,
                 'unique' => 'pessoa_fisica_tb'
             ),
             'rg' => array(
                 'required' => true,
                 'min' => 6,
-                'max' => 11,
+                'max' => 12,
                 'unique' => 'pessoa_fisica_tb'
             ),
             'org_rg' => array(
