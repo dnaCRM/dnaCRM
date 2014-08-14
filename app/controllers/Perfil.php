@@ -11,6 +11,7 @@ class Perfil extends Controller
     private $dados;
     private $validation;
     private $fotoperfil = 'user.jpg'; //nome padrão para imagem de usuário
+    private $erros_arr = array();
 
     public function __construct()
     { //o atributo de classe é herdado da classe pai 'Controller'
@@ -22,7 +23,13 @@ class Perfil extends Controller
         $perfil_list = $this->model->fullList();
 
         foreach ($perfil_list as $perfil) {
-            $this->model->getPerfilFoto($perfil['cd_pessoa_fisica']);
+            if (!file_exists('img/uploads/' . $perfil['cd_pessoa_fisica'] . '.jpg')) {
+                $this->model->getPerfilFoto($perfil['cd_pessoa_fisica']);
+                Session::put('fail', 'Pegou foto!');
+            } else {
+                Session::put('fail', 'Foto já existia!');
+            }
+
         }
 
         $dados = [
@@ -39,7 +46,8 @@ class Perfil extends Controller
     {
         $dados = [
             'pagesubtitle' => 'Cadastro de Perfil',
-            'pagetitle' => 'Muita calma nessa hora.'
+            'pagetitle' => 'Muita calma nessa hora.',
+            'erros' => $this->erros_arr
         ];
 
         $this->view = new View('Perfil', 'novo');
@@ -53,7 +61,13 @@ class Perfil extends Controller
     public function visualizar($id = '')
     {
         $perfilarr = $this->model->getPerfil($id);
-        $this->model->getPerfilFoto($id);
+
+        if (!file_exists('img/uploads/' . $id . '.jpg')) {
+            $this->model->getPerfilFoto($id);
+            Session::put('fail', 'Pegou foto!');
+        } else {
+            Session::put('fail', 'Foto já existia!');
+        }
 
         $dados = [
             //o campo 'obs' vai ser o subtítulo
@@ -102,14 +116,20 @@ class Perfil extends Controller
                         CodeFail($e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
                     }
                 } else {
-                    foreach ($this->validation->erros() as $erro) {
-                        CodeError($erro, E_USER_WARNING);
+                    foreach ($this->validation->erros() as $item =>$erro) {
+                        CodeError($item . " => " . $erro, E_USER_WARNING);
+
                     }
+                    $this->erros_arr = $this->validation->erros();
                 }
             }
         }
     }
 
+    public function getErroArr()
+    {
+        return $this->erros_arr;
+    }
     /**
      * Instancia um objeto da classe Validate que
      * valida as informações recebidas pelo formulário

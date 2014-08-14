@@ -26,6 +26,9 @@
         $perfil = new Perfil;
         $perfil->newPerfil();
 
+        $erros = array_keys($perfil->getErroArr());
+        var_dump($erros);
+
         if (Session::exists('sucesso')) {
         ?>
 
@@ -69,7 +72,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group <?php echo (in_array('nm_pessoa_fisica', $erros) ? 'has-error': 'has-success'); ?>">
                         <label for="nm_pessoa_fisica" class="col-lg-2 control-label">Nome</label>
 
                         <div class="col-lg-10">

@@ -27,64 +27,72 @@ class Validate
                 $item = escape($item);
 
                 if ($rule === 'required' && empty($value)) {
-                    $this->addErro("{$item} é obrigatório");
+                    $this->addErro($item ,'é obrigatório');
                 } elseif (!empty($value)) {
                     switch ($rule) {
                         case 'min':
                             if (strlen($value) < $rule_value) {
-                                $this->addErro("{$item} deve ter no mínimo {$rule_value} caracteres!");
+                                $this->addErro($item, $rule_value);
                             }
                             break;
                         case 'max':
                             if (strlen($value) > $rule_value) {
-                                $this->addErro("{$item} deve ter no máximo {$rule_value} caracteres!");
+                                $this->addErro($item, $rule_value);
                             }
                             break;
                         case 'matches':
                             if ($value != $source[$rule_value]) {
-                                $this->addErro("{$item} deve ser igual a {$rule_value}!");
+                                $this->addErro($item, $rule_value);
                             }
                             break;
                         case 'email':
                             if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
-                                $this->addErro("e-mail inválido!");
+                                $this->addErro($item, $rule_value);
                             }
                             break;
                         case 'unique':
                             $check = $this->db->get($rule_value, "{$item} = '{$value}'");
                             if ($check->getNumRegistros()) {
-                                $this->addErro("{$item} já existe!");
+                                $this->addErro($item, $rule_value);
                             }
                             break;
 
                     }
                 }
 
-                }
             }
-
-            if (empty($this->erros)) {
-                $this->passed = true;
-            }
-
-            return $this;
         }
 
-        public
-        function addErro($erro)
-        {
-            $this->erros[] = $erro;
+        if (empty($this->erros)) {
+            $this->passed = true;
         }
 
-        public
-        function erros()
-        {
-            return $this->erros;
-        }
-
-        public
-        function passed()
-        {
-            return $this->passed;
-        }
+        return $this;
     }
+
+    public
+    function addErro($item, $rule)
+    {
+        $this->erros[$item] = $rule;
+    }
+
+    public
+    function erros()
+    {
+        return $this->erros;
+    }
+
+    public
+    function passed()
+    {
+        return $this->passed;
+    }
+
+    public static function cssClass()
+    {
+        if (Input::exists()) {
+            return $classe;
+        }
+        return '';
+    }
+}
