@@ -42,8 +42,10 @@ class ImageTest {
         }
 
         $stmt = $db->prepare("select img_file from images where id_image=?");
-        $stmt->execute(array(1));
+
         $stmt->bindColumn(1, $lob, PDO::PARAM_LOB);
+        $stmt->execute(array(1));
+
         $stmt->fetch(PDO::FETCH_BOUND);
 
         var_dump($lob);

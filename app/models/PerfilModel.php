@@ -70,7 +70,7 @@ class PerfilModel extends Model
 
 
         $this->dados = filter_var_array($dados, $filtros);
-        var_dump($this->dados);
+
     }
 
     public function fullList()

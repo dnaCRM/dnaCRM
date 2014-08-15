@@ -88,10 +88,14 @@ class Validate
         return $this->passed;
     }
 
-    public static function cssClass()
+    public static function cssClass($field, array $erros)
     {
         if (Input::exists()) {
-            return $classe;
+            if (in_array($field, $erros)) {
+                return 'has-error';
+            } else {
+                return 'has-success';
+            }
         }
         return '';
     }

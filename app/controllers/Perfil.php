@@ -117,7 +117,7 @@ class Perfil extends Controller
                     }
                 } else {
                     foreach ($this->validation->erros() as $item =>$erro) {
-                        CodeError($item . " => " . $erro, E_USER_WARNING);
+                        //CodeError($item . " => " . $erro, E_USER_WARNING);
 
                     }
                     $this->erros_arr = $this->validation->erros();
@@ -141,7 +141,7 @@ class Perfil extends Controller
         $validate = new Validate;
 
         if (!$this->fotoperfil) {
-            $validate->addErro("Arquivo inválido");
+            $validate->addErro('im_foto','Arquivo inválido');
         }
 
         $this->validation = $validate->check($_POST, array(
@@ -215,7 +215,7 @@ class Perfil extends Controller
                 $this->fotoperfil = ($fotoperfil['error'] === 4 ? $this->fotoperfil : false);
             } else {
                 // array com extensões válidas
-                $validExtensions = array('.jpg', '.jpeg', '.gif', '.png');
+                $validExtensions = array('.jpg', '.jpeg');
                 // pega a extensão do arquivo enviado
                 $fileExtension = strrchr($fotoperfil['name'], ".");
                 // testa se extensão é permitida

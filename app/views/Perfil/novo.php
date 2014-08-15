@@ -27,7 +27,7 @@
         $perfil->newPerfil();
 
         $erros = array_keys($perfil->getErroArr());
-        var_dump($erros);
+        //var_dump($erros);
 
         if (Session::exists('sucesso')) {
         ?>
@@ -72,7 +72,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group <?php echo (in_array('nm_pessoa_fisica', $erros) ? 'has-error': 'has-success'); ?>">
+                    <div class="form-group <?php echo Validate::cssClass('nm_pessoa_fisica', $erros); ?>">
                         <label for="nm_pessoa_fisica" class="col-lg-2 control-label">Nome</label>
 
                         <div class="col-lg-10">
@@ -80,7 +80,7 @@
                                    value="<?php echo escape(Input::get('nm_pessoa_fisica')); ?>" placeholder="Nome">
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group <?php echo Validate::cssClass('email', $erros); ?>">
                         <label for="email" class="col-lg-2 control-label">Email</label>
 
                         <div class="col-lg-10">
@@ -91,17 +91,22 @@
 
                     <div class="form-group">
                         <label for="cpf" class="col-lg-2 control-label">CPF</label>
-                        <div class="col-lg-3">
+
+                        <div class="col-lg-3 <?php echo Validate::cssClass('cpf', $erros); ?>">
                             <input type="text" class="form-control" id="cpf" name="cpf"
-                                   value="<?php echo escape(Input::get('cpf')); ?>" placeholder="000.000.000-00" maxlength="14">
+                                   value="<?php echo escape(Input::get('cpf')); ?>" placeholder="000.000.000-00"
+                                   maxlength="14">
                         </div>
                         <label for="rg" class="col-lg-1 control-label">RG</label>
-                        <div class="col-lg-3">
+
+                        <div class="col-lg-3 <?php echo Validate::cssClass('rg', $erros); ?>">
                             <input type="text" class="form-control" id="rg" name="rg"
-                                   value="<?php echo escape(Input::get('rg')); ?>" placeholder="000.000.000-00" maxlength="12">
+                                   value="<?php echo escape(Input::get('rg')); ?>" placeholder="000.000.000-00"
+                                   maxlength="12">
                         </div>
                         <label for="org_rg" class="col-lg-1 control-label">UF</label>
-                        <div class="col-lg-2">
+
+                        <div class="col-lg-2 <?php echo Validate::cssClass('org_rg', $erros); ?>">
                             <input type="text" class="form-control" id="org_rg" name="org_rg"
                                    value="<?php echo escape(Input::get('org_rg')); ?>" placeholder="XX" maxlength="2">
                         </div>
@@ -109,13 +114,15 @@
 
                     <div class="form-group">
                         <label for="fone" class="col-lg-2 control-label">Telefone</label>
-                        <div class="col-lg-4">
-                           <input type="tel" class="form-control" id="fone" name="fone"
+
+                        <div class="col-lg-4 <?php echo Validate::cssClass('fone', $erros); ?>">
+                            <input type="tel" class="form-control" id="fone" name="fone"
                                    value="<?php echo escape(Input::get('fone')); ?>" placeholder="00 0000-0000">
                         </div>
 
                         <label for="celular" class="col-lg-2 control-label">Celular</label>
-                        <div class="col-lg-4">
+
+                        <div class="col-lg-4 <?php echo Validate::cssClass('celular', $erros); ?>">
                             <input type="tel" class="form-control" id="celular" name="celular"
                                    value="<?php echo escape(Input::get('celular')); ?>" placeholder="00 00000-0000">
                         </div>
@@ -123,24 +130,27 @@
 
                     <div class="form-group">
                         <label for="dt_nascimento" class="col-lg-2 control-label">Nascimento</label>
-                        <div class="col-lg-4">
-                            <input type="text" class="form-control" value="<?php echo escape(Input::get('dt_nascimento')); ?>" id="dt_nascimento" name="dt_nascimento">
+
+                        <div class="col-lg-4 <?php echo Validate::cssClass('dt_nascimento', $erros); ?>">
+                            <input type="text" class="form-control"
+                                   value="<?php echo escape(Input::get('dt_nascimento')); ?>" id="dt_nascimento"
+                                   name="dt_nascimento">
                         </div>
 
-                            <label class="col-lg-1 control-label">Sexo</label>
-                            <label class="col-lg-2 control-label">
-                                <input type="radio" name="ie_sexo" id="masculino" value="m" checked="">
-                                Masc.
-                            </label>
-                            <label class="col-lg-2 control-label">
-                                <input type="radio" name="ie_sexo" id="feminino" value="f" checked="">
-                                Femin.
-                            </label>
+                        <label class="col-lg-1 control-label">Sexo</label>
+                        <label class="col-lg-2 control-label <?php echo Validate::cssClass('ie_sexo', $erros); ?>">
+                            <input type="radio" name="ie_sexo" id="masculino" value="m" checked="">
+                            Masc.
+                        </label>
+                        <label class="col-lg-2 control-label">
+                            <input type="radio" name="ie_sexo" id="feminino" value="f" checked="">
+                            Femin.
+                        </label>
                     </div>
 
                     <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
 
-                    <div class="form-group">
+                    <div class="form-group ">
                         <div class="col-lg-10 col-lg-offset-2">
                             <button name="limpar" class="btn btn-default">Limpar</button>
                             <button type="submit" name="cadastrar" class="btn btn-primary">Cadastrar</button>

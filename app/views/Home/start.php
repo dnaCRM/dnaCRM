@@ -38,8 +38,8 @@
                         <?php
 
                             $test = new ImageTest;
-                            $test->lob();
-                            //$test->show();
+                            //$test->lob();
+                            $test->show();
 
                         ?>
                     </div>
