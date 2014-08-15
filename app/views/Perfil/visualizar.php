@@ -21,35 +21,35 @@
 <div class="row">
     <div class="col-lg-6">
 
-        <img class="img-circle profilefoto" src="img/uploads/<?php echo $data['perfil']['cd_pessoa_fisica'] . '.jpg'; ?>">
+        <img class="img-circle profilefoto"
+             src="<?php echo $data['img_folder'] . $data['perfil']['cd_pessoa_fisica'] . '.jpg'; ?>">
         <?php
 
-        $perfil = $data['perfil'] ;
+        $perfil = $data['perfil'];
 
         echo '<table class="table table-striped table-hover ">';
+        
         foreach ($perfil as $campo => $dado) {
 
             echo '<tr>';
-            echo '<td><strong> [ ' . $campo . ' ] </strong>' . $dado . '</td>';
+            echo strtr("<td><strong>{$campo}</strong>: {$dado}</td>", Config::get('dicionario'));
             echo '</tr>';
 
         }
         echo '</table>';
-            ?>
+        ?>
 
-
-
-        </div>
-
-        <div class="col-lg-6">
-            <?php
-            echo '$_POST';
-            var_dump($_POST);
-            echo '$_SESSION';
-            var_dump($_SESSION);
-            echo '$_data';
-            var_dump($data);
-
-            ?>
-        </div>
     </div>
+
+    <div class="col-lg-6">
+        <?php
+        echo '$_POST';
+        var_dump($_POST);
+        echo '$_SESSION';
+        var_dump($_SESSION);
+        echo '$_data';
+        var_dump($data);
+
+        ?>
+    </div>
+</div>

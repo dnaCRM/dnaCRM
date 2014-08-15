@@ -7,7 +7,17 @@
  */
 
 abstract class Model {
+    protected $id;
     protected $tabela;
     protected $dados;
     protected $db;
-} 
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+}

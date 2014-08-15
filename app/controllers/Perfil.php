@@ -10,12 +10,14 @@ class Perfil extends Controller
 {
     private $dados;
     private $validation;
-    private $fotoperfil = 'user.jpg'; //nome padrão para imagem de usuário
+    private $fotoperfil = false;
+    private $img_folder;
     private $erros_arr = array();
 
     public function __construct()
     { //o atributo de classe é herdado da classe pai 'Controller'
         $this->model = new PerfilModel;
+        $this->img_folder = $this->model->getImgFolder();
     }
 
     public function start()
@@ -23,7 +25,7 @@ class Perfil extends Controller
         $perfil_list = $this->model->fullList();
 
         foreach ($perfil_list as $perfil) {
-            if (!file_exists('img/uploads/' . $perfil['cd_pessoa_fisica'] . '.jpg')) {
+            if (!file_exists($this->img_folder . $perfil['cd_pessoa_fisica'] . '.jpg')) {
                 $this->model->getPerfilFoto($perfil['cd_pessoa_fisica']);
                 Session::put('fail', 'Pegou foto!');
             } else {
@@ -35,6 +37,8 @@ class Perfil extends Controller
         $dados = [
             'pagesubtitle' => 'Olá mundo',
             'pagetitle' => 'Perfil',
+            //pasta de imagens de perfil
+            'img_folder' => $this->img_folder,
             'list' => $perfil_list
         ];
 
@@ -62,21 +66,23 @@ class Perfil extends Controller
     {
         $perfilarr = $this->model->getPerfil($id);
 
-        if (!file_exists('img/uploads/' . $id . '.jpg')) {
+        if (!file_exists($this->img_folder . $id . '.jpg')) {
             $this->model->getPerfilFoto($id);
             Session::put('fail', 'Pegou foto!');
         } else {
             Session::put('fail', 'Foto já existia!');
         }
 
-        $dados = [
+        $dados = array(
             //o campo 'obs' vai ser o subtítulo
             'pagesubtitle' => $perfilarr['email'],
             //o campo 'nome' vai ser o título da página
             'pagetitle' => $perfilarr['nm_pessoa_fisica'],
+            //pasta de imagens de perfil
+            'img_folder' => $this->img_folder,
             //todos os atributos do perfil
             'perfil' => $perfilarr
-        ];
+        );
 
         $this->view = new View('Perfil', 'visualizar');
         $this->view->output($dados);
@@ -237,7 +243,7 @@ class Perfil extends Controller
 
                     $manipulator->crop($x1, $y1, $x2, $y2);
 
-                    $manipulator->save('img/uploads/' . $newname);
+                    $manipulator->save(IMG_UPLOADS_FOLDER . $newname);
 
                     $this->model->setFotoPerfil($newname);
 

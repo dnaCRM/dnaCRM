@@ -51,7 +51,7 @@
 
                     $nasc = new DateTime($perfil['dt_nascimento']);
                     echo '<tr>';
-                    echo '<td><img src="img/uploads/' . $perfil['cd_pessoa_fisica'] . '.jpg" class="img-circle" title="' . $perfil['cd_pessoa_fisica'] . '"></td>';
+                    echo '<td><img src="' . $data['img_folder'] . $perfil['cd_pessoa_fisica'] . '.jpg" class="img-circle" title="' . $perfil['cd_pessoa_fisica'] . '"></td>';
                     echo '<td><a href="Perfil/visualizar/' . $perfil['cd_pessoa_fisica'] . '">' . $perfil['nm_pessoa_fisica'] . '</a></td>';
                     echo '<td>' . $perfil['email'] . '</td>';
                     echo '<td>' . $nasc->format('d/m/Y') . '</td>';
