@@ -57,7 +57,7 @@ class DB
      * @param array $dados = dados para serem inseridos
      * @return bool
      */
-    public function insert($tabela, $dados = [])
+    public function insert($tabela, $dados = array())
     {
         $colunas = implode(', ', array_keys($dados));
         $aliases = ':' . implode(', :', array_keys($dados));
@@ -76,7 +76,7 @@ class DB
      * @param array $dados
      * @return bool
      */
-    public function update($tabela, $where, $dados = [])
+    public function update($tabela, $where, $dados = array())
     {
         foreach ($dados as $parametro => $valor) {
             $parametros[] = $parametro . ' = :' . $parametro;
@@ -108,7 +108,7 @@ class DB
 
         $sql = "SELECT * FROM {$tabela}{$where}{$limit}{$offset}{$orderby}";
 
-        if ($this->query($sql, [])->success()) {
+        if ($this->query($sql, array())->success()) {
             return $this;
         }
         return false;
@@ -132,7 +132,7 @@ class DB
     {
         $where = ($where != null ? " WHERE {$where}" : "");
         $sql = "DELETE FROM {$tabela}{$where}";
-        if ($this->query($sql, [])->success()) {
+        if ($this->query($sql, array())->success()) {
             return $this;
         }
         return false;

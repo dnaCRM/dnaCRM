@@ -7,7 +7,7 @@
  */
 
 abstract class Model {
-    protected $id;
+    protected $pk;
     protected $tabela;
     protected $dados;
     protected $db;
@@ -15,9 +15,9 @@ abstract class Model {
     /**
      * @return mixed
      */
-    public function getId()
+    public function getPk()
     {
-        return $this->id;
+        return $this->pk;
     }
 
 }

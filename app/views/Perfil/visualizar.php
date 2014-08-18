@@ -26,9 +26,11 @@
         <?php
 
         $perfil = $data['perfil'];
+        $nasc = new DateTime($perfil['dt_nascimento']);
+        $perfil['dt_nascimento'] = $nasc->format('d/m/Y');
 
         echo '<table class="table table-striped table-hover ">';
-        
+
         foreach ($perfil as $campo => $dado) {
 
             echo '<tr>';

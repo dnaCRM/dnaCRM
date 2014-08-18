@@ -6,6 +6,7 @@
         <meta charset="utf-8">
         <title>dnaCRM - <?php echo (isset($data['pagetitle']) ? $data['pagetitle'] : ''); ?></title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/png" href="favicon.ico" />
         <link rel="stylesheet" href="css/bootstrap.css" media="screen">
         
 <!--        Pendente remover necessidade deste arquivo-->
@@ -195,8 +196,10 @@
                                 <li><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=F22JEM3Q78JC2">Donate</a></li>
                             </ul>
                         </div>
-                        <p>Made by <a href="http://thomaspark.me" rel="nofollow">Thomas Park</a>. Contact him at <a href="mailto:thomas@bootswatch.com">thomas@bootswatch.com</a>.</p>
-                        <p>Code released under the <a href="https://github.com/thomaspark/bootswatch/blob/gh-pages/LICENSE">MIT License</a>.</p>
+                        <p>Feito por <a href="https://github.com/inshideru" rel="nofollow">Vinicius Sorrentino</a>. Contato <a href="mailto:inshideru@gmail.com">inshideru@gmail.com</a>,
+                        <a href="https://github.com/inshideru" rel="nofollow">Gabriel Borges</a>. Contato <a href="mailto:gabrielborc@gmail.com">gabrielborc@gmail.com</a>,
+                        <a href="https://github.com/inshideru" rel="nofollow">Raul Martinez</a>. Contato <a href="mailto:demartinez.raul@gmail.com">demartinez.raul@gmail.com</a>.</p>
+                        <p>Code released under the <a href="">MIT License</a>.</p>
                         <p>Based on <a href="http://getbootstrap.com" rel="nofollow">Bootstrap</a>. Icons from <a href="http://fortawesome.github.io/Font-Awesome/" rel="nofollow">Font Awesome</a>. Web fonts from <a href="http://www.google.com/webfonts" rel="nofollow">Google</a>.</p>
 
                     </div>

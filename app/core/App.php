@@ -10,7 +10,7 @@ class App
 {
     protected $controller = 'Home';
     protected $method = 'start';
-    protected $params = [];
+    protected $params = array();
 
     public function __construct()
     {
@@ -33,7 +33,7 @@ class App
 
         //reseta o array para iniciar no zero
         //se params estiver vazio, recebe um array vazio
-        $this->params = $url ? array_values($url) : [];
+        $this->params = $url ? array_values($url) : array();
 
         //Verifica se existe uma sessão de login ativo
 /*        if (1Session::exists('user')) {

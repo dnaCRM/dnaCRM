@@ -25,9 +25,11 @@ class Perfil extends Controller
         $perfil_list = $this->model->fullList();
 
         foreach ($perfil_list as $perfil) {
+
             if (!file_exists($this->img_folder . $perfil['cd_pessoa_fisica'] . '.jpg')) {
                 $this->model->getPerfilFoto($perfil['cd_pessoa_fisica']);
                 Session::put('fail', 'Pegou foto!');
+
             } else {
                 Session::put('fail', 'Foto já existia!');
             }

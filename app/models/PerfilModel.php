@@ -13,11 +13,11 @@ class PerfilModel extends Model
     private $imgFolder;
 
 
-    public function __construct($user = null)
+    public function __construct()
     {
         $this->db = DB::getInstance();
         $this->tabela = 'pessoa_fisica_tb';
-        $this->id = 'cd_pessoa_fisica';
+        $this->pk = 'cd_pessoa_fisica';
         $this->imgFolder = IMG_UPLOADS_FOLDER."{$this->tabela}\\";
     }
 
@@ -42,12 +42,17 @@ class PerfilModel extends Model
             throw new Exception('Não foi possível realizar o cadastro.');
         }
 
+        /**
+         * Testa se uma foto foi enviada
+         * caso positivo, a foto será gravada no banco
+         * @todo verificar necessidade de fazer a gravação dos dados dentro de uma transaction
+         */
         if ($this->fotoPerfil) {
-            $id = $this->db->first()[$this->id];
+            $id = $this->db->first()[$this->pk];
             $file = SITE_ROOT . IMG_UPLOADS_FOLDER . $this->fotoPerfil;
             $pdo = $this->db->getPDO();
 
-            $stmt = $pdo->prepare("UPDATE {$this->tabela} SET im_foto = lo_import('{$file}') WHERE {$this->id} = {$id}");
+            $stmt = $pdo->prepare("UPDATE {$this->tabela} SET im_foto = lo_import('{$file}') WHERE {$this->pk} = {$id}");
 
             $pdo->beginTransaction();
             $stmt->execute();
@@ -87,13 +92,13 @@ class PerfilModel extends Model
 
     public function fullList()
     {
-        $this->db->select($this->tabela, null, null, null, "{$this->id} DESC");
+        $this->db->select($this->tabela, null, null, null, "{$this->pk} DESC");
         return $this->db->getResultado();
     }
 
     public function getPerfil($id = '')
     {
-        $this->db->get($this->tabela, "{$this->id} = {$id}");
+        $this->db->get($this->tabela, "{$this->pk} = {$id}");
         if ($this->db->getNumRegistros() > 0) {
             return $this->db->first();
         }
@@ -101,6 +106,14 @@ class PerfilModel extends Model
         Redirect::to(SITE_URL . 'Perfil');
     }
 
+    /**
+     * Recebe a chave primária do perfil,
+     * Resgata a imagem da tabela no BD
+     * Testa se uma pasta com o nome da tabela existe
+     * Casa não exista, a pasta é criada para receber a imagem exportada
+     *
+     * @param $id = id do perfil
+     */
     public function getPerfilFoto($id)
     {
 
@@ -111,7 +124,7 @@ class PerfilModel extends Model
         $foto = SITE_ROOT . $this->imgFolder . $id . '.jpg';
 
         $pdo = $this->db->getPDO();
-        $state = $pdo->prepare("select lo_export(im_foto, '{$foto}') from {$this->tabela} where {$this->id} = {$id}");
+        $state = $pdo->prepare("select lo_export(im_foto, '{$foto}') from {$this->tabela} where {$this->pk} = {$id}");
 
         $pdo->beginTransaction();
         $state->execute();
