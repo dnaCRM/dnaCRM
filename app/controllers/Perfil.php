@@ -82,6 +82,7 @@ class Perfil extends Controller
             'pagetitle' => $perfilarr['nm_pessoa_fisica'],
             //pasta de imagens de perfil
             'img_folder' => $this->img_folder,
+            'erros' => $this->erros_arr,
             //todos os atributos do perfil
             'perfil' => $perfilarr
         );
@@ -91,10 +92,40 @@ class Perfil extends Controller
     }
 
     /**
+     * @param string $id = id(chave primária da tabela de perfis)
+     * O método recebe o id e monta respecttiva a tela de perfil
+     */
+    public function update($id = '')
+    {
+        $perfilarr = $this->model->getPerfil($id);
+
+        if (!file_exists($this->img_folder . $id . '.jpg')) {
+            $this->model->getPerfilFoto($id);
+            Session::put('fail', 'Pegou foto!');
+        } else {
+            Session::put('fail', 'Foto já existia!');
+        }
+
+        $dados = array(
+            //o campo 'obs' vai ser o subtítulo
+            'pagesubtitle' => $perfilarr['email'],
+            //o campo 'nome' vai ser o título da página
+            'pagetitle' => $perfilarr['nm_pessoa_fisica'],
+            //pasta de imagens de perfil
+            'img_folder' => $this->img_folder,
+            //todos os atributos do perfil
+            'perfil' => $perfilarr
+        );
+
+        $this->view = new View('Perfil', 'update');
+        $this->view->output($dados);
+    }
+
+    /**
      * Método que recebe os dados do formulário
      * faz a validação e grava no banco de dados usando o método create do model
      */
-    public function newPerfil()
+    public function newPerfil($id = null)
     {
         if (Input::exists()) {
             if (Token::check(Input::get('token'))) {
@@ -103,22 +134,15 @@ class Perfil extends Controller
 
                 if ($this->validation->passed()) {
 
-                    $this->dados = [
-                        'cd_cgc' => (int)Input::get('cd_cgc'),
-                        'cd_profissao' => (int)Input::get('cd_profissao'),
-                        'nm_pessoa_fisica' => Input::get('nm_pessoa_fisica'),
-                        'email' => Input::get('email'),
-                        'cpf' => (string)Input::get('cpf'),
-                        'rg' => (string)Input::get('rg'),
-                        'org_rg' => Input::get('org_rg'),
-                        'fone' => (string)Input::get('fone'),
-                        'celular' => (string)Input::get('celular'),
-                        'dt_nascimento' => Input::get('dt_nascimento'),
-                        'ie_sexo' => Input::get('ie_sexo')
-                    ];
+                   $this->setDados();
+
                     var_dump($this->dados);
                     try {
-                        $this->model->create($this->dados);
+                        if (!$id) {
+                            $this->model->create($this->dados);
+                        } else {
+                            $this->model->updatePerfil($id, $this->dados);
+                        }
                         Session::flash('sucesso', 'Perfil cadastrado com sucesso.');
                     } catch (Exception $e) {
                         CodeFail($e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
@@ -126,7 +150,6 @@ class Perfil extends Controller
                 } else {
                     foreach ($this->validation->erros() as $item =>$erro) {
                         //CodeError($item . " => " . $erro, E_USER_WARNING);
-
                     }
                     $this->erros_arr = $this->validation->erros();
                 }
@@ -137,6 +160,23 @@ class Perfil extends Controller
     public function getErroArr()
     {
         return $this->erros_arr;
+    }
+
+    private function setDados()
+    {
+        $this->dados = [
+            'cd_cgc' => (int)Input::get('cd_cgc'),
+            'cd_profissao' => (int)Input::get('cd_profissao'),
+            'nm_pessoa_fisica' => Input::get('nm_pessoa_fisica'),
+            'email' => Input::get('email'),
+            'cpf' => (string)Input::get('cpf'),
+            'rg' => (string)Input::get('rg'),
+            'org_rg' => strtoupper(Input::get('org_rg')),
+            'fone' => (string)Input::get('fone'),
+            'celular' => (string)Input::get('celular'),
+            'dt_nascimento' => Input::get('dt_nascimento'),
+            'ie_sexo' => Input::get('ie_sexo')
+        ];
     }
     /**
      * Instancia um objeto da classe Validate que
@@ -219,8 +259,8 @@ class Perfil extends Controller
             $fotoperfil = isset($_FILES['im_foto']) ? $_FILES['im_foto'] : null;
 
             if ($fotoperfil['error'] > 0) {
-                echo "Error: " . $fotoperfil['error'] . "<br />";
-                $this->fotoperfil = ($fotoperfil['error'] === 4 ? $this->fotoperfil : false);
+                echo "Error: " . $fotoperfil['error'] . ". Nenhum arquivo enviado.<br />";
+                $this->fotoperfil =  false;
             } else {
                 // array com extensões válidas
                 $validExtensions = array('.jpg', '.jpeg');
@@ -244,10 +284,12 @@ class Perfil extends Controller
                     // corta no centro  200x200
 
                     $manipulator->crop($x1, $y1, $x2, $y2);
+                    $manipulator->resample(400, 400, true);
 
                     $manipulator->save(IMG_UPLOADS_FOLDER . $newname);
 
                     $this->model->setFotoPerfil($newname);
+                    $this->fotoperfil = true;
 
                 } else {
                     $this->fotoperfil = false;

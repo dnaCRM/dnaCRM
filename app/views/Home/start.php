@@ -16,6 +16,15 @@
         echo '<br>'. $cpf . '<br>';
         $cpf = 0 + $cpf;
         echo  $cpf;
+
+        echo '<br>';
+        $d = null;
+        $d = '1';
+        if (!$d) {
+            echo 'Uma coisa';
+        } else {
+            echo 'Outra coisa ' . $d;
+        }
         ?>
 
     </div>

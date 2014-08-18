@@ -76,7 +76,7 @@ class DB
      * @param array $dados
      * @return bool
      */
-    public function update($tabela, $where, $dados = array())
+    public function update($tabela, $dados = array(), $where)
     {
         foreach ($dados as $parametro => $valor) {
             $parametros[] = $parametro . ' = :' . $parametro;

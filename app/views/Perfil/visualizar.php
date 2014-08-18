@@ -1,12 +1,12 @@
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-md-6">
         <h1><?php echo $data['pagetitle']; ?></h1>
 
         <p class="lead">
             <?php echo (isset($data['pagesubtitle'])) ? $data['pagesubtitle'] : ""; ?>
         </p>
     </div>
-    <div class="col-lg-6" style="padding: 15px 15px 0 15px;">
+    <div class="col-md-6" style="padding: 15px 15px 0 15px;">
         <div class="well">
 
             <p>
@@ -19,7 +19,7 @@
 
 <!--Teste de Perfil-->
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-md-6">
 
         <img class="img-circle profilefoto"
              src="<?php echo $data['img_folder'] . $data['perfil']['cd_pessoa_fisica'] . '.jpg'; ?>">
@@ -43,7 +43,7 @@
 
     </div>
 
-    <div class="col-lg-6">
+    <div class="col-md-6">
         <?php
         echo '$_POST';
         var_dump($_POST);

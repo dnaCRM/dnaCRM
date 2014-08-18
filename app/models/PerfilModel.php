@@ -18,7 +18,7 @@ class PerfilModel extends Model
         $this->db = DB::getInstance();
         $this->tabela = 'pessoa_fisica_tb';
         $this->pk = 'cd_pessoa_fisica';
-        $this->imgFolder = IMG_UPLOADS_FOLDER."{$this->tabela}\\";
+        $this->imgFolder = IMG_UPLOADS_FOLDER . "{$this->tabela}\\";
     }
 
     public function setFotoPerfil($foto)
@@ -42,30 +42,20 @@ class PerfilModel extends Model
             throw new Exception('Não foi possível realizar o cadastro.');
         }
 
-        /**
-         * Testa se uma foto foi enviada
-         * caso positivo, a foto será gravada no banco
-         * @todo verificar necessidade de fazer a gravação dos dados dentro de uma transaction
-         */
-        if ($this->fotoPerfil) {
-            $id = $this->db->first()[$this->pk];
-            $file = SITE_ROOT . IMG_UPLOADS_FOLDER . $this->fotoPerfil;
-            $pdo = $this->db->getPDO();
-
-            $stmt = $pdo->prepare("UPDATE {$this->tabela} SET im_foto = lo_import('{$file}') WHERE {$this->pk} = {$id}");
-
-            $pdo->beginTransaction();
-            $stmt->execute();
-            $pdo->commit();
-
-        }
+        $this->gravarFoto($this->db->first()[$this->pk]);
 
     }
 
-    public function updatePerfil($id, $campos)
+    public function updatePerfil($id, array $campos)
     {
         $this->filtrarDados($campos);
-        $this->db->update($this->tabela, $id, $this->dados);
+
+        if (!$this->db->update($this->tabela, $this->dados, "{$this->pk} = {$id}")) {
+            throw new Exception('Não foi possível atualizar o cadastro.');
+        }
+
+        $this->gravarFoto($id);
+        $this->getPerfilFoto($id);
     }
 
     private function filtrarDados($dados)
@@ -83,7 +73,6 @@ class PerfilModel extends Model
             'dt_nascimento' => FILTER_DEFAULT,
             'ie_sexo' => FILTER_DEFAULT,
         );
-
 
 
         $this->dados = filter_var_array($dados, $filtros);
@@ -104,6 +93,28 @@ class PerfilModel extends Model
         }
         Session::flash('fail', 'Pefil não encontrado');
         Redirect::to(SITE_URL . 'Perfil');
+    }
+
+    /**
+     * Testa se uma foto foi enviada
+     * caso positivo, a foto será gravada no banco
+     * @todo verificar necessidade de fazer a gravação dos dados dentro de uma transaction
+     */
+    private function gravarFoto($id)
+    {
+        if ($this->fotoPerfil) {
+
+            $file = SITE_ROOT . IMG_UPLOADS_FOLDER . $this->fotoPerfil;
+            $pdo = $this->db->getPDO();
+
+            $stmt = $pdo->prepare("UPDATE {$this->tabela} SET im_foto = lo_import('{$file}') WHERE {$this->pk} = {$id}");
+
+            $pdo->beginTransaction();
+            $stmt->execute();
+            $pdo->commit();
+
+        }
+
     }
 
     /**
