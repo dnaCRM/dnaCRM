@@ -56,6 +56,14 @@ class PerfilModel extends Model
 
         $this->gravarFoto($id);
         $this->getPerfilFoto($id);
+
+    }
+
+    public function deletePerfil($id)
+    {
+        if (!$this->db->delete($this->tabela, "{$this->pk} = {$id}")) {
+            throw new Exception('Não foi possível deletar o cadastro.');
+        }
     }
 
     private function filtrarDados($dados)

@@ -10,7 +10,7 @@ class Perfil extends Controller
 {
     private $dados;
     private $validation;
-    private $fotoperfil = false;
+    private $fotoperfil = true;
     private $img_folder;
     private $erros_arr = array();
 
@@ -28,10 +28,10 @@ class Perfil extends Controller
 
             if (!file_exists($this->img_folder . $perfil['cd_pessoa_fisica'] . '.jpg')) {
                 $this->model->getPerfilFoto($perfil['cd_pessoa_fisica']);
-                Session::put('fail', 'Pegou foto!');
+                //Session::put('fail', 'Pegou foto!');
 
             } else {
-                Session::put('fail', 'Foto já existia!');
+                //Session::put('fail', 'Foto já existia!');
             }
 
         }
@@ -70,9 +70,9 @@ class Perfil extends Controller
 
         if (!file_exists($this->img_folder . $id . '.jpg')) {
             $this->model->getPerfilFoto($id);
-            Session::put('fail', 'Pegou foto!');
+            //Session::put('fail', 'Pegou foto!');
         } else {
-            Session::put('fail', 'Foto já existia!');
+            //Session::put('fail', 'Foto já existia!');
         }
 
         $dados = array(
@@ -121,6 +121,40 @@ class Perfil extends Controller
         $this->view->output($dados);
     }
 
+    public function confirmDelete($id)
+    {
+        $perfilarr = $this->model->getPerfil($id);
+
+        if (!file_exists($this->img_folder . $id . '.jpg')) {
+            $this->model->getPerfilFoto($id);
+            //Session::put('fail', 'Pegou foto!');
+        } else {
+            //Session::put('fail', 'Foto já existia!');
+        }
+
+        $dados = array(
+            //o campo 'obs' vai ser o subtítulo
+            'pagesubtitle' => $perfilarr['email'],
+            //o campo 'nome' vai ser o título da página
+            'pagetitle' => $perfilarr['nm_pessoa_fisica'],
+            //pasta de imagens de perfil
+            'img_folder' => $this->img_folder,
+            'perfil' => $perfilarr
+        );
+
+        $this->view = new View('Perfil', 'confirmDelete');
+        $this->view->output($dados);
+    }
+
+    public function removerPerfil($id)
+    {
+        if (Input::exists()) {
+            if (Token::check(Input::get('token'))) {
+                $this->model->deletePerfil($id);
+            }
+        }
+    }
+
     /**
      * Método que recebe os dados do formulário
      * faz a validação e grava no banco de dados usando o método create do model
@@ -134,9 +168,8 @@ class Perfil extends Controller
 
                 if ($this->validation->passed()) {
 
-                   $this->setDados();
+                    $this->setDados();
 
-                    var_dump($this->dados);
                     try {
                         if (!$id) {
                             $this->model->create($this->dados);
@@ -148,7 +181,7 @@ class Perfil extends Controller
                         CodeFail($e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
                     }
                 } else {
-                    foreach ($this->validation->erros() as $item =>$erro) {
+                    foreach ($this->validation->erros() as $item => $erro) {
                         //CodeError($item . " => " . $erro, E_USER_WARNING);
                     }
                     $this->erros_arr = $this->validation->erros();
@@ -178,9 +211,11 @@ class Perfil extends Controller
             'ie_sexo' => Input::get('ie_sexo')
         ];
     }
+
     /**
      * Instancia um objeto da classe Validate que
      * valida as informações recebidas pelo formulário
+     * @todo Removido a validação unique, pois está impossibilitando a atualização de perfil
      */
     public function validatePerfilInfo()
     {
@@ -189,7 +224,7 @@ class Perfil extends Controller
         $validate = new Validate;
 
         if (!$this->fotoperfil) {
-            $validate->addErro('im_foto','Arquivo inválido');
+            $validate->addErro('im_foto', 'Arquivo inválido');
         }
 
         $this->validation = $validate->check($_POST, array(
@@ -214,13 +249,13 @@ class Perfil extends Controller
                 'required' => true,
                 'min' => 14,
                 'max' => 14,
-                'unique' => 'pessoa_fisica_tb'
+                //'unique' => 'pessoa_fisica_tb'
             ),
             'rg' => array(
                 'required' => true,
                 'min' => 6,
                 'max' => 12,
-                'unique' => 'pessoa_fisica_tb'
+                //'unique' => 'pessoa_fisica_tb'
             ),
             'org_rg' => array(
                 'required' => true,
@@ -236,7 +271,7 @@ class Perfil extends Controller
                 'required' => true,
                 'min' => 8,
                 'max' => 20,
-                'unique' => 'pessoa_fisica_tb'
+                //'unique' => 'pessoa_fisica_tb'
             ),
             'dt_nascimento' => array(
                 'required' => true,
@@ -259,8 +294,7 @@ class Perfil extends Controller
             $fotoperfil = isset($_FILES['im_foto']) ? $_FILES['im_foto'] : null;
 
             if ($fotoperfil['error'] > 0) {
-                echo "Error: " . $fotoperfil['error'] . ". Nenhum arquivo enviado.<br />";
-                $this->fotoperfil =  false;
+                echo "Nenhuma imagem enviada.<br />";
             } else {
                 // array com extensões válidas
                 $validExtensions = array('.jpg', '.jpeg');
@@ -289,7 +323,6 @@ class Perfil extends Controller
                     $manipulator->save(IMG_UPLOADS_FOLDER . $newname);
 
                     $this->model->setFotoPerfil($newname);
-                    $this->fotoperfil = true;
 
                 } else {
                     $this->fotoperfil = false;

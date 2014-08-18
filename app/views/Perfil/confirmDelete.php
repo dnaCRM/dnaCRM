@@ -9,11 +9,7 @@
     <div class="col-md-6" style="padding: 15px 15px 0 15px;">
         <div class="well">
 
-            <a href="Perfil/update/<?php echo $data['perfil']['cd_pessoa_fisica']; ?>">
-                <span class="fa fa-edit"></span> Editar</a>
-            <br>
-            <a href="Perfil/confirmDelete/<?php echo $data['perfil']['cd_pessoa_fisica']; ?>">
-                <span class="fa fa-trash-o"></span> Deletar</a>
+            Well...
 
         </div>
     </div>
@@ -21,31 +17,66 @@
 
 <!--Teste de Perfil-->
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
+        <div class="jumbotron">
+            <?php
+            $perfil = $data['perfil'];
 
-        <img class="img-circle profilefoto"
-             src="<?php echo $data['img_folder'] . $data['perfil']['cd_pessoa_fisica'] . '.jpg'; ?>">
-        <?php
+            $action = new Perfil;
+            $action->removerPerfil($perfil['cd_pessoa_fisica']);
 
-        $perfil = $data['perfil'];
-        $nasc = new DateTime($perfil['dt_nascimento']);
-        $perfil['dt_nascimento'] = $nasc->format('d/m/Y');
+            ?>
 
-        echo '<table class="table table-striped table-hover ">';
+            <div class="container">
+                <?php
+                if (!Input::exists()) {
+                ?>
+                <div class="col-md-4">
+                    <img class="img-circle profilefoto left"
+                         src="<?php echo $data['img_folder'] . $perfil['cd_pessoa_fisica'] . '.jpg'; ?>">
+                </div>
+                <div class="col-md-8">
+                    <h1><span class="glyphicon glyphicon-arrow-right"></span> Atenção!</h1>
 
-        foreach ($perfil as $campo => $dado) {
+                    <p>Deseja deletar o perfil <strong><?php echo $perfil['nm_pessoa_fisica']; ?></strong>?</p>
 
-            echo '<tr>';
-            echo strtr("<td><strong>{$campo}</strong>: {$dado}</td>", Config::get('dicionario'));
-            echo '</tr>';
+                    <!-- form -->
+                    <form action="" method="post">
 
-        }
-        echo '</table>';
-        ?>
+                    <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
 
-    </div>
+                    <div class="form-group ">
+                        <div class="col-lg-10 col-lg-offset-2">
+                            <a href="Perfil/visualizar/<?php echo $perfil['cd_pessoa_fisica']; ?>"
+                               class="btn btn-success" role="button">
+                                <span class="glyphicon glyphicon-circle-arrow-left"></span> Cancelar</a>
+                            <button type="submit" name="deletar" class="btn btn-danger"><span
+                                    class="glyphicon glyphicon-trash"></span> Deletar
+                            </button>
+                        </div>
+                    </div>
 
-    <div class="col-md-6">
+                    </form>
+                    <!-- end form -->
+
+                </div>
+                <?php
+                } else {
+                ?>
+                    <div class="col-md-8">
+                        <h3>Perfil Deletado!</h3>
+                        <a href="Perfil"
+                           class="btn btn-success" role="button">
+                            <span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar</a>
+                    </div>
+
+                <?php
+                }
+                ?>
+            </div>
+
+        </div>
+
         <div class="panel-group" id="accordion">
             <div class="panel panel-default">
                 <div class="panel-heading">

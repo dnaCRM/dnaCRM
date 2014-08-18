@@ -58,7 +58,7 @@
                     echo '</tr>';
 
                 }
-                var_dump($data['list'][0]);
+                //var_dump($data['list'][0]);
                 ?>
                 </tbody>
             </table>
