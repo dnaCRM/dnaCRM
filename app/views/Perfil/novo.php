@@ -58,8 +58,14 @@
                         <label for="cd_cgc" class="col-lg-2 control-label">Empresa</label>
 
                         <div class="col-lg-10">
-                            <input type="text" class="form-control" id="cd_cgc" name="cd_cgc"
-                                   value="<?php echo escape(Input::get('cd_cgc')); ?>" placeholder="Empresa">
+                            <select class="form-control" id="cd_cgc" name="cd_cgc">
+                                <option value="">Selecione uma empresa</option>
+                                <?php //echo escape(Input::get('cd_cgc'));
+                                foreach((new PJModel())->fullList() as $empresa) {
+                                    echo '<option value="' . $empresa['cd_cgc'] . '">' . $empresa['nm_fantasia'] . '</option>';
+                                }
+                                ?>
+                            </select>
                         </div>
                     </div>
 
@@ -67,8 +73,14 @@
                         <label for="cd_profissao" class="col-lg-2 control-label">Profissão</label>
 
                         <div class="col-lg-10">
-                            <input type="text" class="form-control" id="cd_profissao" name="cd_profissao"
-                                   value="<?php echo escape(Input::get('cd_profissao')); ?>" placeholder="Profissão">
+                            <select class="form-control" id="cd_profissao" name="cd_profissao">
+                                <option value="">Selecione uma profissão</option>
+                                   <?php //echo escape(Input::get('cd_profissao'));
+                                   foreach((new ProfissoesModel())->fullList() as $profissao) {
+                                       echo '<option value="' . $profissao['cd_profissao'] . '">' . $profissao['nm_profissao'] . '</option>';
+                                   }
+                                   ?>
+                            </select>
                         </div>
                     </div>
 
