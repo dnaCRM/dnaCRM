@@ -313,12 +313,14 @@ class Perfil extends Controller
 
                     // Define canto esquerdo de cima
                     if ($width > $height) {
+                        // Parâmetros caso a imagem fornecida seja no formato paisagem
                         $x1 = $centreX - $centreY; // 400 - 300 = 100 "Topo esquerdo X"
                         $y1 = 0; // "Topo esquerdo Y"
                         // Define canto direito de baixo
                         $x2 = $centreX + $centreY; // 400 + 300 = 700 / 2 "Base X"
                         $y2 = $centreY * 2; // 300 * 2 = 600 "Base Y"
                     } else {
+                        // Parâmetros caso a imagem não seja no formato paisagem
                         $y1 = $centreY - $centreX; // 400 - 300 = 100 "Topo esquerdo X"
                         $x1 = 0; // "Topo esquerdo Y"
                         // Define canto direito de baixo
@@ -328,6 +330,7 @@ class Perfil extends Controller
 
                     // corta no centro  200x200
                     $manipulator->crop($x1, $y1, $x2, $y2);
+                    // redimensiona a imagem para 400x400
                     $manipulator->resample(400, 400, true);
 
                     $manipulator->save(IMG_UPLOADS_FOLDER . $newname);

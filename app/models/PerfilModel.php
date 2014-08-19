@@ -15,7 +15,7 @@ class PerfilModel extends Model
 
     public function __construct()
     {
-        $this->db = DB::getInstance();
+        parent::__construct();
         $this->tabela = 'pessoa_fisica_tb';
         $this->pk = 'cd_pessoa_fisica';
         $this->imgFolder = IMG_UPLOADS_FOLDER . "{$this->tabela}\\";
@@ -85,12 +85,6 @@ class PerfilModel extends Model
 
         $this->dados = filter_var_array($dados, $filtros);
 
-    }
-
-    public function fullList()
-    {
-        $this->db->select($this->tabela, null, null, null, "{$this->pk} DESC");
-        return $this->db->getResultado();
     }
 
     public function getPerfil($id = '')

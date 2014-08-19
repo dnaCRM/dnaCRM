@@ -12,6 +12,10 @@ abstract class Model {
     protected $dados;
     protected $db;
 
+    public function __construct()
+    {
+        $this->db = DB::getInstance();
+    }
     /**
      * @return mixed
      */
@@ -20,4 +24,9 @@ abstract class Model {
         return $this->pk;
     }
 
+    public function fullList()
+    {
+        $this->db->select($this->tabela, null, null, null, "{$this->pk} DESC");
+        return $this->db->getResultado();
+    }
 }

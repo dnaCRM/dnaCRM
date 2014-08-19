@@ -96,8 +96,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="../widgets.html">
-                        <i class="fa fa-th"></i> <span>Widgets</span> <small class="badge pull-right bg-green">new</small>
+                    <a href="Relatorios">
+                        <i class="fa fa-file-text-o"></i> <span>Relatorios</span> <small class="badge pull-right bg-green">new</small>
                     </a>
                 </li>
                 <li class="treeview">
@@ -107,34 +107,33 @@
                         <i class="fa pull-right fa-angle-left"></i>
                     </a>
                     <ul class="treeview-menu" style="display: none;">
-                        <li><a href="Perfil/"><i class="fa fa-angle-double-right"></i>Perfis</a></li>
-                        <li><a href="Perfil/novo"><i class="fa fa-angle-double-right"></i> Cadastrar perfil</a></li>
-
+                        <li><a href="Perfil/"><i class="fa fa-angle-double-right"></i>Pessoa Física</a></li>
+                        <li><a href="PerfilPJ/"><i class="fa fa-angle-double-right"></i> Pessoa Jurídica</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-laptop"></i>
-                        <span>UI Elements</span>
+                        <i class="fa fa-database"></i>
+                        <span>Cadastros</span>
                         <i class="fa pull-right fa-angle-left"></i>
                     </a>
                     <ul class="treeview-menu" style="display: none;">
-                        <li><a href="general.html"><i class="fa fa-angle-double-right"></i> General</a></li>
-                        <li class="active"><a href="icons.html"><i class="fa fa-angle-double-right"></i> Icons</a></li>
-                        <li><a href="buttons.html"><i class="fa fa-angle-double-right"></i> Buttons</a></li>
-                        <li><a href="sliders.html"><i class="fa fa-angle-double-right"></i> Sliders</a></li>
-                        <li><a href="timeline.html"><i class="fa fa-angle-double-right"></i> Timeline</a></li>
+                        <li><a href="Perfil/novo"><i class="fa fa-angle-double-right"></i> Pessoa Física</a></li>
+                        <li><a href="PerfilPJ/novo"><i class="fa fa-angle-double-right"></i> Pessoa Jurídica</a></li>
+                        <li><a href="Setor/novo"><i class="fa fa-angle-double-right"></i> Setores</a></li>
+                        <li><a href="Condominio/novo"><i class="fa fa-angle-double-right"></i> Condomínio</a></li>
+                        <li><a href="Imovel/novo"><i class="fa fa-angle-double-right"></i> Imóveis</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-edit"></i> <span>Forms</span>
+                        <i class="fa fa-edit"></i> <span>Registrar</span>
                         <i class="fa pull-right fa-angle-left"></i>
                     </a>
                     <ul class="treeview-menu" style="display: none;">
-                        <li><a href="../forms/general.html"><i class="fa fa-angle-double-right"></i> General Elements</a></li>
-                        <li><a href="../forms/advanced.html"><i class="fa fa-angle-double-right"></i> Advanced Elements</a></li>
-                        <li><a href="../forms/editors.html"><i class="fa fa-angle-double-right"></i> Editors</a></li>
+                        <li><a href="Ocorrencia/novo"><i class="fa fa-angle-double-right"></i> Ocorrência</a></li>
+                        <li><a href="OS/novo"><i class="fa fa-angle-double-right"></i> Ordem de Serviço</a></li>
+                        <li><a href="Orcamento/novo"><i class="fa fa-angle-double-right"></i> Orçamento</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -148,20 +147,20 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="../calendar.html">
-                        <i class="fa fa-calendar"></i> <span>Calendar</span>
+                    <a href="Agenda">
+                        <i class="fa fa-calendar"></i> <span>Agenda</span>
                         <small class="badge pull-right bg-red">3</small>
                     </a>
                 </li>
                 <li>
-                    <a href="../mailbox.html">
+                    <a href="Mensagens">
                         <i class="fa fa-envelope"></i> <span>Mailbox</span>
                         <small class="badge pull-right bg-yellow">12</small>
                     </a>
                 </li>
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-edit"></i> <span>Admin</span>
+                        <i class="fa fa-eye"></i> <span>Admin</span>
                         <i class="fa pull-right fa-angle-left"></i>
                     </a>
                     <ul class="treeview-menu" style="display: none;">

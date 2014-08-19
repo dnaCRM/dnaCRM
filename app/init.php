@@ -18,7 +18,8 @@ spl_autoload_register('autoload');
 
 ### DEFINIÇÃO DE CONSTANTES GLOBAIS #######
 //define a url do site para ser usada em endereços relativos
-define('SITE_URL', 'http://localhost/dnacrm/');
+$base_url = str_replace('index.php', '', $_SERVER['PHP_SELF']);
+define('SITE_URL', $base_url); //'http://localhost/dnacrm/'
 define('SITE_ROOT', 'C:\htdocs\dnacrm\\');
 define('IMG_UPLOADS_FOLDER', 'img\uploads\\');
 
@@ -50,7 +51,7 @@ $GLOBALS['config'] = array(
         'host' =>'127.0.0.1',
         'user' => 'postgres',
         'pass' => '159753',
-        'dbname' => 'siscon'
+        'dbname' => 'dnacrm'
     ),
     'lembrar' => array(
         'cookie_name' => 'hash',
