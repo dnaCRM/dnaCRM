@@ -304,19 +304,29 @@ class Perfil extends Controller
                 if (in_array($fileExtension, $validExtensions)) {
                     $newname = 'imagem.tmp';
                     $manipulator = new ImageManipulator($fotoperfil['tmp_name']);
+                    // o tamanho da imagem poderia ser 800x600
                     $width = $manipulator->getWidth();
                     $height = $manipulator->getHeight();
-                    $centreX = round($width / 2);
-                    $centreY = round($height / 2);
-                    // o tamanho da imagem poderia ser 200x200
-                    $x1 = $centreX - $centreY; // 200 / 2
-                    $y1 = 0; // 200 / 2
+                    // Encontrando o centro da imagem
+                    $centreX = round($width / 2); // 400
+                    $centreY = round($height / 2); //300
 
-                    $x2 = $centreX + $centreY; // 200 / 2
-                    $y2 = $centreY * 2; // 200 / 2
+                    // Define canto esquerdo de cima
+                    if ($width > $height) {
+                        $x1 = $centreX - $centreY; // 400 - 300 = 100 "Topo esquerdo X"
+                        $y1 = 0; // "Topo esquerdo Y"
+                        // Define canto direito de baixo
+                        $x2 = $centreX + $centreY; // 400 + 300 = 700 / 2 "Base X"
+                        $y2 = $centreY * 2; // 300 * 2 = 600 "Base Y"
+                    } else {
+                        $y1 = $centreY - $centreX; // 400 - 300 = 100 "Topo esquerdo X"
+                        $x1 = 0; // "Topo esquerdo Y"
+                        // Define canto direito de baixo
+                        $y2 = $centreX + $centreY; // 400 + 300 = 700 / 2 "Base X"
+                        $x2 = $centreX * 2; // 300 * 2 = 600 "Base Y"
+                    }
 
                     // corta no centro  200x200
-
                     $manipulator->crop($x1, $y1, $x2, $y2);
                     $manipulator->resample(400, 400, true);
 
