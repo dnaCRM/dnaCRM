@@ -63,9 +63,9 @@ if (Session::exists('sucesso')) {
 
                 <div class="col-lg-10">
                     <select class="form-control" id="cd_cgc" name="cd_cgc">
-                        <option value="">Selecione uma empresa</option>
+                        <option value="">-- Selecione uma empresa</option>
                         <?php //echo escape(Input::get('cd_cgc'));
-                        foreach ((new PJModel())->fullList() as $empresa) {
+                        foreach ((new PessoaJuridicaModel())->fullList() as $empresa) {
 
                             if ($empresa['cd_cgc'] == $perfil['cd_cgc']) {
                                 echo '<option value="' . $empresa['cd_cgc'] . '" selected>' . $empresa['nm_fantasia'] . '</option>';
@@ -83,7 +83,7 @@ if (Session::exists('sucesso')) {
 
                 <div class="col-lg-10">
                     <select class="form-control" id="cd_profissao" name="cd_profissao">
-                        <option value="">Selecione uma profissão</option>
+                        <option value="">-- Selecione uma profissão</option>
                         <?php //echo escape(Input::get('cd_profissao'));
                         foreach ((new ProfissoesModel())->fullList() as $profissao) {
                             if ($profissao['cd_profissao'] == $perfil['cd_profissao']) {

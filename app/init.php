@@ -50,7 +50,7 @@ $GLOBALS['config'] = array(
         'sgbd' => 'pgsql',
         'host' =>'127.0.0.1',
         'user' => 'postgres',
-        'pass' => '159753',
+        'pass' => '123456',
         'dbname' => 'dnacrm'
     ),
     'lembrar' => array(

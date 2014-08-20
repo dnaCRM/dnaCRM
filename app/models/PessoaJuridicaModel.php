@@ -6,7 +6,7 @@
  * Time: 16:31
  */
 
-class PJModel extends Model
+class PessoaJuridicaModel extends Model
 {
     public function __construct()
     {

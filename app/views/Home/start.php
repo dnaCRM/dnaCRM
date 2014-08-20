@@ -39,7 +39,7 @@
                 <div class="panel-heading">
                     <h4 class="panel-title">
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                            PostgreSQL Connection Test
+                            <i class="fa fa-user"></i> Último Perfil Cadastrado
                         </a>
                     </h4>
                 </div>
@@ -50,7 +50,11 @@
                         $perfil = new PerfilModel();
                         $ultimo_perfil = $perfil->fullList()[0];
                         echo '<img src="' . $perfil->getImgFolder() . $ultimo_perfil[$perfil->getPk()] . '.jpg" class="img-circle profilefoto">';
-                        var_dump($ultimo_perfil);
+                        echo '<div class="well">';
+                        echo '<strong>Nome:</strong> ' . $ultimo_perfil['nm_pessoa_fisica'] . '<br>';
+                        echo '<strong>E-mail:</strong> ' . $ultimo_perfil['email'] . '<br>';
+                        echo '</div>';
+                        //var_dump($ultimo_perfil);
                         ?>
                     </div>
                 </div>
@@ -59,7 +63,7 @@
                 <div class="panel-heading">
                     <h4 class="panel-title">
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                            Collapsible Group Item #2
+                            <i class="fa fa-android"></i> Collapsible Item
                         </a>
                     </h4>
                 </div>

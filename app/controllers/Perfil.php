@@ -101,9 +101,9 @@ class Perfil extends Controller
 
         if (!file_exists($this->img_folder . $id . '.jpg')) {
             $this->model->getPerfilFoto($id);
-            Session::put('fail', 'Pegou foto!');
+            //Session::put('fail', 'Pegou foto!');
         } else {
-            Session::put('fail', 'Foto já existia!');
+            //Session::put('fail', 'Foto já existia!');
         }
 
         $dados = array(
