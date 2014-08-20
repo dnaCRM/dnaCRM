@@ -39,7 +39,7 @@
                 <div class="panel-heading">
                     <h4 class="panel-title">
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                            <i class="fa fa-user"></i> Último Perfil Cadastrado
+                            <i class="fa fa-spinner fa-spin"></i> Último Perfil Cadastrado
                         </a>
                     </h4>
                 </div>

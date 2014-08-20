@@ -37,8 +37,8 @@ class Perfil extends Controller
         }
 
         $dados = [
-            'pagesubtitle' => 'Olá mundo',
-            'pagetitle' => 'Perfil',
+            'pagesubtitle' => '',
+            'pagetitle' => 'Perfis',
             //pasta de imagens de perfil
             'img_folder' => $this->img_folder,
             'list' => $perfil_list
@@ -51,8 +51,8 @@ class Perfil extends Controller
     public function novo()
     {
         $dados = [
-            'pagesubtitle' => 'Cadastro de Perfil',
-            'pagetitle' => 'Muita calma nessa hora.',
+            'pagetitle' => 'Cadastro de Perfil',
+            'pagesubtitle' => 'Muita calma nessa hora.',
             'erros' => $this->erros_arr
         ];
 

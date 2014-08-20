@@ -179,7 +179,7 @@ if (Session::exists('sucesso')) {
 
             <div class="form-group ">
                 <div class="col-lg-10 col-lg-offset-2">
-                    <a href="#" id="limpar" class="btn btn-default">Cancelar</a>
+                    <a href="Perfil/visualizar/<?php echo $perfil['cd_pessoa_fisica']; ?>" id="limpar" class="btn btn-default">Cancelar</a>
                     <button type="submit" name="cadastrar" class="btn btn-primary">Cadastrar</button>
                 </div>
             </div>
