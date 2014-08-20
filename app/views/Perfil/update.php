@@ -179,7 +179,7 @@ if (Session::exists('sucesso')) {
 
             <div class="form-group ">
                 <div class="col-lg-10 col-lg-offset-2">
-                    <button name="limpar" class="btn btn-default">Limpar</button>
+                    <a href="#" id="limpar" class="btn btn-default">Cancelar</a>
                     <button type="submit" name="cadastrar" class="btn btn-primary">Cadastrar</button>
                 </div>
             </div>

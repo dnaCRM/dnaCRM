@@ -6,12 +6,14 @@
  * Date: 02/08/14
  * Time: 19:14
  */
-class PerfilModel extends Model implements ModelComFoto
+class PerfilModel extends Model implements IModelComFoto
 {
 
     private $fotoPerfil = false;
     protected $coluna_imagem;// coluna que guarda imagens
     private $image_folder;
+    /** @var  ImageModel */
+    private $image_manager;
 
 
     public function __construct()
@@ -21,6 +23,8 @@ class PerfilModel extends Model implements ModelComFoto
         $this->coluna_imagem = 'im_foto';
         $this->primary_key = 'cd_pessoa_fisica';
         $this->image_folder = IMG_UPLOADS_FOLDER . "{$this->tabela}\\";
+
+        $this->setImageManager();
     }
 
     public function setFotoPerfil($foto)
@@ -91,7 +95,7 @@ class PerfilModel extends Model implements ModelComFoto
         Redirect::to(SITE_URL . 'Perfil');
     }
 
-
+    // Métodos obrigatórios para interface IModelComFoto
     public function getImageFolder()
     {
         return $this->image_folder;
@@ -107,18 +111,23 @@ class PerfilModel extends Model implements ModelComFoto
         return $this->coluna_imagem;
     }
 
+    public function setImageManager()
+    {
+        $this->image_manager = new ImageModel($this);
+    }
+
     public function getFoto($id)
     {
-        (new ImageModel($this))->exportaFoto($id);
+        $this->image_manager->exportaFoto($id);
     }
 
     public function setFoto($id)
     {
-        (new ImageModel($this))->importaFoto($id);
+        $this->image_manager->importaFoto($id);
     }
 
     public function recebefoto()
     {
-        (new ImageModel($this))->uploadFoto();
+        $this->image_manager->uploadFoto();
     }
 }

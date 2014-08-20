@@ -6,7 +6,7 @@
  * Time: 00:43
  */
 
-interface ModelComFoto {
+interface IModelComFoto {
 
     public function getImageFolder();
 
@@ -22,4 +22,5 @@ interface ModelComFoto {
 
     public function recebefoto();
 
+    public function setImageManager();
 } 

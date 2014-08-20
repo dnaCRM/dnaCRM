@@ -17,9 +17,8 @@ class ImageModel
 
     /**
      * @param ModelComFoto $model = model que implementa a interface ModelComFoto
-     * @param $id = id usado para identificar o registro aonde a foto será gravada
      */
-    public function __construct(ModelComFoto $model)
+    public function __construct(IModelComFoto $model)
     {
         $this->db = DB::getInstance();
         $this->arquivo_temp = 'imagem.tmp';
