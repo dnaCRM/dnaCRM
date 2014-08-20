@@ -12,6 +12,6 @@ class ProfissoesModel extends Model
     {
         parent::__construct();
         $this->tabela = 'profissao_tb';
-        $this->pk = 'cd_profissao';
+        $this->primary_key = 'cd_profissao';
     }
 } 

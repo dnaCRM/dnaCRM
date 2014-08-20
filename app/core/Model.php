@@ -7,10 +7,10 @@
  */
 
 abstract class Model {
-    protected $pk;
-    protected $tabela;
-    protected $dados;
     protected $db;
+    protected $dados;
+    protected $tabela;// tabela referente ao model
+    protected $primary_key; // chave primária da tabela
 
     public function __construct()
     {
@@ -19,14 +19,14 @@ abstract class Model {
     /**
      * @return mixed
      */
-    public function getPk()
+    public function getPrimaryKey()
     {
-        return $this->pk;
+        return $this->primary_key;
     }
 
     public function fullList()
     {
-        $this->db->select($this->tabela, null, null, null, "{$this->pk} DESC");
+        $this->db->select($this->tabela, null, null, null, "{$this->primary_key} DESC");
         return $this->db->getResultado();
     }
 }

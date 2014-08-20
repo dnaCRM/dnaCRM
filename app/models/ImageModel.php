@@ -9,7 +9,6 @@
 class ImageModel
 {
     private $db;
-    private $id;
     private $tabela;
     private $coluna;
     private $arquivo_temp;
@@ -17,20 +16,17 @@ class ImageModel
     private $pasta_imagem;
 
     /**
-     * @param $tabela = Tabela onde a imagem será gravada
-     * @param $primary_key = Chave primária da tabela
-     * @param $id = id informado para saber em qual registro a imagem será armazenada
-     * @param $coluna = nome da coluna que armazena imagens
+     * @param ModelComFoto $model = model que implementa a interface ModelComFoto
+     * @param $id = id usado para identificar o registro aonde a foto será gravada
      */
-    public function __construct($tabela, $primary_key, $id, $coluna)
+    public function __construct(ModelComFoto $model)
     {
         $this->db = DB::getInstance();
-        $this->tabela = $tabela;
-        $this->primary_key = $primary_key;
-        $this->id = $id;
-        $this->coluna = $coluna;
         $this->arquivo_temp = 'imagem.tmp';
-        $this->pasta_imagem = IMG_UPLOADS_FOLDER . "{$this->tabela}\\";
+        $this->tabela = $model->getTabela();
+        $this->primary_key = $model->getPrimaryKey();
+        $this->coluna = $model->getColunaImagem();
+        $this->pasta_imagem = $model->getImageFolder();//IMG_UPLOADS_FOLDER . "{$this->tabela}\\";
 
     }
 
@@ -39,14 +35,14 @@ class ImageModel
      * caso positivo, a foto será gravada no banco
      * @todo verificar necessidade de fazer a gravação dos dados dentro de uma transaction
      */
-    public function gravarFoto()
+    public function importaFoto($id)
     {
         if ($this->uploadFoto()) {
 
             $file = SITE_ROOT . IMG_UPLOADS_FOLDER . $this->arquivo_temp;
             $pdo = $this->db->getPDO();
 
-            $stmt = $pdo->prepare("UPDATE {$this->tabela} SET im_foto = lo_import('{$file}') WHERE {$this->primary_key} = {$this->id}");
+            $stmt = $pdo->prepare("UPDATE {$this->tabela} SET {$this->coluna} = lo_import('{$file}') WHERE {$this->primary_key} = {$id}");
 
             $pdo->beginTransaction();
             $stmt->execute();
@@ -61,17 +57,17 @@ class ImageModel
      * Testa se uma pasta com o nome da tabela existe
      * Casa não exista, a pasta é criada para receber a imagem exportada
      */
-    public function getPerfilFoto()
+    public function exportaFoto($id)
     {
 
-        if (!file_exists($this->tabela)) {
-            mkdir($this->tabela);
+        if (!file_exists($this->pasta_imagem)) {
+            mkdir($this->pasta_imagem);
         }
 
-        $foto = SITE_ROOT . $this->tabela . $this->id . '.jpg';
+        $foto = SITE_ROOT . $this->pasta_imagem . $id . '.jpg';
 
         $pdo = $this->db->getPDO();
-        $state = $pdo->prepare("select lo_export({$this->coluna}, '{$foto}') from {$this->tabela} where {$this->pk} = {$this->id}");
+        $state = $pdo->prepare("select lo_export({$this->coluna}, '{$foto}') from {$this->tabela} where {$this->primary_key} = $id");
 
         $pdo->beginTransaction();
         $state->execute();

@@ -49,7 +49,7 @@
 
                         $perfil = new PerfilModel();
                         $ultimo_perfil = $perfil->fullList()[0];
-                        echo '<img src="' . $perfil->getImgFolder() . $ultimo_perfil[$perfil->getPk()] . '.jpg" class="img-circle profilefoto">';
+                        echo '<img src="' . $perfil->getImageFolder() . $ultimo_perfil[$perfil->getPrimaryKey()] . '.jpg" class="img-circle profilefoto">';
                         echo '<div class="well">';
                         echo '<strong>Nome:</strong> ' . $ultimo_perfil['nm_pessoa_fisica'] . '<br>';
                         echo '<strong>E-mail:</strong> ' . $ultimo_perfil['email'] . '<br>';

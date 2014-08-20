@@ -6,32 +6,26 @@
  * Date: 02/08/14
  * Time: 19:14
  */
-class PerfilModel extends Model
+class PerfilModel extends Model implements ModelComFoto
 {
 
     private $fotoPerfil = false;
-    private $imgFolder;
+    protected $coluna_imagem;// coluna que guarda imagens
+    private $image_folder;
 
 
     public function __construct()
     {
         parent::__construct();
         $this->tabela = 'pessoa_fisica_tb';
-        $this->pk = 'cd_pessoa_fisica';
-        $this->imgFolder = IMG_UPLOADS_FOLDER . "{$this->tabela}\\";
+        $this->coluna_imagem = 'im_foto';
+        $this->primary_key = 'cd_pessoa_fisica';
+        $this->image_folder = IMG_UPLOADS_FOLDER . "{$this->tabela}\\";
     }
 
     public function setFotoPerfil($foto)
     {
         $this->fotoPerfil = $foto;
-    }
-
-    /**
-     * @return string
-     */
-    public function getImgFolder()
-    {
-        return $this->imgFolder;
     }
 
     public function create($campos = array())
@@ -42,7 +36,7 @@ class PerfilModel extends Model
             throw new Exception('Não foi possível realizar o cadastro.');
         }
 
-        $this->gravarFoto($this->db->first()[$this->pk]);
+        $this->setFoto($this->db->first()[$this->primary_key]);
 
     }
 
@@ -50,18 +44,18 @@ class PerfilModel extends Model
     {
         $this->filtrarDados($campos);
 
-        if (!$this->db->update($this->tabela, $this->dados, "{$this->pk} = {$id}")) {
+        if (!$this->db->update($this->tabela, $this->dados, "{$this->primary_key} = {$id}")) {
             throw new Exception('Não foi possível atualizar o cadastro.');
         }
 
-        $this->gravarFoto($id);
-        $this->getPerfilFoto($id);
+        $this->setFoto($id);
+        $this->getFoto($id);
 
     }
 
     public function deletePerfil($id)
     {
-        if (!$this->db->delete($this->tabela, "{$this->pk} = {$id}")) {
+        if (!$this->db->delete($this->tabela, "{$this->primary} = {$id}")) {
             throw new Exception('Não foi possível deletar o cadastro.');
         }
     }
@@ -89,7 +83,7 @@ class PerfilModel extends Model
 
     public function getPerfil($id = '')
     {
-        $this->db->get($this->tabela, "{$this->pk} = {$id}");
+        $this->db->get($this->tabela, "{$this->primary_key} = {$id}");
         if ($this->db->getNumRegistros() > 0) {
             return $this->db->first();
         }
@@ -97,51 +91,34 @@ class PerfilModel extends Model
         Redirect::to(SITE_URL . 'Perfil');
     }
 
-    /**
-     * Testa se uma foto foi enviada
-     * caso positivo, a foto será gravada no banco
-     * @todo verificar necessidade de fazer a gravação dos dados dentro de uma transaction
-     */
-    private function gravarFoto($id)
+
+    public function getImageFolder()
     {
-        if ($this->fotoPerfil) {
-
-            $file = SITE_ROOT . IMG_UPLOADS_FOLDER . $this->fotoPerfil;
-            $pdo = $this->db->getPDO();
-
-            $stmt = $pdo->prepare("UPDATE {$this->tabela} SET im_foto = lo_import('{$file}') WHERE {$this->pk} = {$id}");
-
-            $pdo->beginTransaction();
-            $stmt->execute();
-            $pdo->commit();
-
-        }
-
+        return $this->image_folder;
     }
 
-    /**
-     * Recebe a chave primária do perfil,
-     * Resgata a imagem da tabela no BD
-     * Testa se uma pasta com o nome da tabela existe
-     * Casa não exista, a pasta é criada para receber a imagem exportada
-     *
-     * @param $id = id do perfil
-     */
-    public function getPerfilFoto($id)
+    public function getTabela()
     {
-
-        if (!file_exists($this->imgFolder)) {
-            mkdir($this->imgFolder);
-        }
-
-        $foto = SITE_ROOT . $this->imgFolder . $id . '.jpg';
-
-        $pdo = $this->db->getPDO();
-        $state = $pdo->prepare("select lo_export(im_foto, '{$foto}') from {$this->tabela} where {$this->pk} = {$id}");
-
-        $pdo->beginTransaction();
-        $state->execute();
-        $pdo->commit();
+        return $this->tabela;
     }
 
+    public function getColunaImagem()
+    {
+        return $this->coluna_imagem;
+    }
+
+    public function getFoto($id)
+    {
+        (new ImageModel($this))->exportaFoto($id);
+    }
+
+    public function setFoto($id)
+    {
+        (new ImageModel($this))->importaFoto($id);
+    }
+
+    public function recebefoto()
+    {
+        (new ImageModel($this))->uploadFoto();
+    }
 }

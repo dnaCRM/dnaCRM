@@ -17,7 +17,7 @@ class Perfil extends Controller
     public function __construct()
     { //o atributo de classe é herdado da classe pai 'Controller'
         $this->model = new PerfilModel;
-        $this->img_folder = $this->model->getImgFolder();
+        $this->img_folder = $this->model->getImageFolder();
     }
 
     public function start()
@@ -27,7 +27,7 @@ class Perfil extends Controller
         foreach ($perfil_list as $perfil) {
 
             if (!file_exists($this->img_folder . $perfil['cd_pessoa_fisica'] . '.jpg')) {
-                $this->model->getPerfilFoto($perfil['cd_pessoa_fisica']);
+                $this->model->getFoto($perfil['cd_pessoa_fisica']);
                 //Session::put('fail', 'Pegou foto!');
 
             } else {
@@ -69,7 +69,7 @@ class Perfil extends Controller
         $perfilarr = $this->model->getPerfil($id);
 
         if (!file_exists($this->img_folder . $id . '.jpg')) {
-            $this->model->getPerfilFoto($id);
+            $this->model->getFoto($id);
             //Session::put('fail', 'Pegou foto!');
         } else {
             //Session::put('fail', 'Foto já existia!');
@@ -100,7 +100,7 @@ class Perfil extends Controller
         $perfilarr = $this->model->getPerfil($id);
 
         if (!file_exists($this->img_folder . $id . '.jpg')) {
-            $this->model->getPerfilFoto($id);
+            $this->model->getFoto($id);
             //Session::put('fail', 'Pegou foto!');
         } else {
             //Session::put('fail', 'Foto já existia!');
@@ -126,7 +126,7 @@ class Perfil extends Controller
         $perfilarr = $this->model->getPerfil($id);
 
         if (!file_exists($this->img_folder . $id . '.jpg')) {
-            $this->model->getPerfilFoto($id);
+            $this->model->getFoto($id);
             //Session::put('fail', 'Pegou foto!');
         } else {
             //Session::put('fail', 'Foto já existia!');
@@ -283,64 +283,13 @@ class Perfil extends Controller
         ));
     }
 
-    /**
-     * Método para manipulação da foto do perfil
-     * Este método utiliza uma classe externa que não foi criada por mim
-     * @var ImageManipulator $manipulator
-     */
+
     public function fotoPerfil()
     {
-        if (Input::exists('files')) {
-            $fotoperfil = isset($_FILES['im_foto']) ? $_FILES['im_foto'] : null;
+       if ($this->model->recebefoto()) {
+           return true;
+       }
 
-            if ($fotoperfil['error'] > 0) {
-                echo "Nenhuma imagem enviada.<br />";
-            } else {
-                // array com extensões válidas
-                $validExtensions = array('.jpg', '.jpeg');
-                // pega a extensão do arquivo enviado
-                $fileExtension = strrchr($fotoperfil['name'], ".");
-                // testa se extensão é permitida
-                if (in_array($fileExtension, $validExtensions)) {
-                    $newname = 'imagem.tmp';
-                    $manipulator = new ImageManipulator($fotoperfil['tmp_name']);
-                    // o tamanho da imagem poderia ser 800x600
-                    $width = $manipulator->getWidth();
-                    $height = $manipulator->getHeight();
-                    // Encontrando o centro da imagem
-                    $centreX = round($width / 2); // 400
-                    $centreY = round($height / 2); //300
-
-                    // Define canto esquerdo de cima
-                    if ($width > $height) {
-                        // Parâmetros caso a imagem fornecida seja no formato paisagem
-                        $x1 = $centreX - $centreY; // 400 - 300 = 100 "Topo esquerdo X"
-                        $y1 = 0; // "Topo esquerdo Y"
-                        // Define canto direito de baixo
-                        $x2 = $centreX + $centreY; // 400 + 300 = 700 / 2 "Base X"
-                        $y2 = $centreY * 2; // 300 * 2 = 600 "Base Y"
-                    } else {
-                        // Parâmetros caso a imagem não seja no formato paisagem
-                        $y1 = $centreY - $centreX; // 400 - 300 = 100 "Topo esquerdo X"
-                        $x1 = 0; // "Topo esquerdo Y"
-                        // Define canto direito de baixo
-                        $y2 = $centreX + $centreY; // 400 + 300 = 700 / 2 "Base X"
-                        $x2 = $centreX * 2; // 300 * 2 = 600 "Base Y"
-                    }
-
-                    // corta no centro  200x200
-                    $manipulator->crop($x1, $y1, $x2, $y2);
-                    // redimensiona a imagem para 400x400
-                    $manipulator->resample(400, 400, true);
-
-                    $manipulator->save(IMG_UPLOADS_FOLDER . $newname);
-
-                    $this->model->setFotoPerfil($newname);
-
-                } else {
-                    $this->fotoperfil = false;
-                }
-            }
-        }
+       return false;
     }
 }

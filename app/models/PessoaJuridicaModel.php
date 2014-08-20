@@ -12,6 +12,6 @@ class PessoaJuridicaModel extends Model
     {
         parent::__construct();
         $this->tabela = 'pessoa_juridica_tb';
-        $this->pk = 'cd_cgc';
+        $this->primary_key = 'cd_cgc';
     }
 } 
