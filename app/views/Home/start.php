@@ -11,7 +11,7 @@
 
             Well, well...
             <?php
-            $cpf = '073.596.567-61';
+/*            $cpf = '073.596.567-61';
             $cpf = str_replace(array('.', '-'), '', $cpf);
 
             echo '<br>' . $cpf . '<br>';
@@ -26,7 +26,7 @@
             } else {
                 echo 'Outra coisa ' . $d;
             }
-            ?>
+            */?>
 
         </div>
     </div>

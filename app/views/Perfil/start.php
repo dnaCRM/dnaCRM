@@ -40,6 +40,7 @@
                     <th>Foto</th>
                     <th>Nome</th>
                     <th>e-mail</th>
+                    <th>Celular</th>
                     <th>Nascimento</th>
                 </tr>
                 </thead>
@@ -54,6 +55,7 @@
                     echo '<td><img src="' . $data['img_folder'] . $perfil['cd_pessoa_fisica'] . '.jpg" class="img-circle" title="' . $perfil['cd_pessoa_fisica'] . '"></td>';
                     echo '<td><a href="Perfil/visualizar/' . $perfil['cd_pessoa_fisica'] . '">' . $perfil['nm_pessoa_fisica'] . '</a></td>';
                     echo '<td>' . $perfil['email'] . '</td>';
+                    echo '<td>' . $perfil['celular'] . '</td>';
                     echo '<td>' . $nasc->format('d/m/Y') . '</td>';
                     echo '</tr>';
 

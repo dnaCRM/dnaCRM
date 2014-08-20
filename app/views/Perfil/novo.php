@@ -27,7 +27,7 @@
         $perfil->newPerfil();
 
         $erros = array_keys($perfil->getErroArr());
-        //var_dump($erros);
+        //var_dump($perfil->getErroArr());
 
         if (Session::exists('sucesso')) {
         ?>

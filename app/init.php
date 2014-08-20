@@ -19,8 +19,10 @@ spl_autoload_register('autoload');
 ### DEFINIÇÃO DE CONSTANTES GLOBAIS #######
 //define a url do site para ser usada em endereços relativos
 $base_url = str_replace('index.php', '', $_SERVER['PHP_SELF']);
+$root_url = str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']);
+
 define('SITE_URL', $base_url); //'http://localhost/dnacrm/'
-define('SITE_ROOT', 'C:\htdocs\dnacrm\\');
+define('SITE_ROOT', $root_url); //'C:\htdocs\dnacrm\\'
 define('IMG_UPLOADS_FOLDER', 'img\uploads\\');
 
 /**

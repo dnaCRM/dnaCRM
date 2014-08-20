@@ -40,7 +40,8 @@ class PerfilModel extends Model implements IModelComFoto
             throw new Exception('Não foi possível realizar o cadastro.');
         }
 
-        $this->setFoto($this->db->first()[$this->primary_key]);
+        $id = $this->db->first()[$this->primary_key];
+        $this->setFoto($id);
 
     }
 

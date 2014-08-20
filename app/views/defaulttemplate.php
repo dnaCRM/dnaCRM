@@ -114,7 +114,7 @@
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-database"></i>
-                        <span>Cadastros</span>
+                        <span>Cadastrar</span>
                         <i class="fa pull-right fa-angle-left"></i>
                     </a>
                     <ul class="treeview-menu" style="display: none;">

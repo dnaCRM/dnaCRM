@@ -14,9 +14,10 @@ class ImageModel
     private $arquivo_temp;
     private $primary_key;
     private $pasta_imagem;
+    private $foto_enviada = false;
 
     /**
-     * @param ModelComFoto $model = model que implementa a interface ModelComFoto
+     * @param IModelComFoto $model
      */
     public function __construct(IModelComFoto $model)
     {
@@ -36,7 +37,7 @@ class ImageModel
      */
     public function importaFoto($id)
     {
-        if ($this->uploadFoto()) {
+        if ($this->foto_enviada) {
 
             $file = SITE_ROOT . IMG_UPLOADS_FOLDER . $this->arquivo_temp;
             $pdo = $this->db->getPDO();
@@ -123,10 +124,10 @@ class ImageModel
 
                     $manipulator->save(IMG_UPLOADS_FOLDER . $this->arquivo_temp);
 
-                    return true;
+                    $this->foto_enviada = true;
 
                 } else {
-                    return false;
+                    $this->foto_enviada = false;
                 }
             }
         }
