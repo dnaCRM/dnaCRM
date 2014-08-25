@@ -4,7 +4,7 @@
         <!--        Guarda endereço padrão dos arquivos para ser usado com URLs relativas-->
         <base href="<?php echo SITE_URL; ?>" target="_self"/>
         <meta charset="utf-8">
-        <title>dnaCRM - <?php echo (isset($data['pagetitle']) ? $data['pagetitle'] : ''); ?></title>
+        <title><?php echo APP_NAME . ' - '.  (isset($data['pagetitle']) ? $data['pagetitle'] : ''); ?></title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" type="image/png" href="favicon.ico" />
         <link rel="stylesheet" href="css/bootstrap.css" media="screen">
@@ -32,7 +32,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a href="Home" class="navbar-brand">dnaCRM</a>
+                    <a href="Home" class="navbar-brand"><?php echo APP_NAME; ?></a>
                     <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
                         <i class="fa  fa-angle-double-down"></i>
 

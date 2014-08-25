@@ -21,6 +21,7 @@ spl_autoload_register('autoload');
 $base_url = str_replace('index.php', '', $_SERVER['PHP_SELF']);
 $root_url = str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']);
 
+define('APP_NAME', 'dnaCRM');
 define('SITE_URL', $base_url); //'http://localhost/dnacrm/'
 define('SITE_ROOT', $root_url); //'C:\htdocs\dnacrm\\'
 define('IMG_UPLOADS_FOLDER', 'img\uploads\\');
