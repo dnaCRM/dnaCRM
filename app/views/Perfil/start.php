@@ -50,9 +50,14 @@
 
                 foreach ($data['list'] as $perfil) {
 
+                    $foto = $perfil['im_foto'] != null ?
+                        $data['img_folder'] . $perfil['cd_pessoa_fisica'] . '.jpg" class="img-circle" title="' . $perfil['cd_pessoa_fisica']
+                        :
+                        IMG_UPLOADS_FOLDER .'icon-user.jpg" class="img-circle" title="Foto padrão"' ;
+
                     $nasc = new DateTime($perfil['dt_nascimento']);
                     echo '<tr>';
-                    echo '<td><img src="' . $data['img_folder'] . $perfil['cd_pessoa_fisica'] . '.jpg" class="img-circle" title="' . $perfil['cd_pessoa_fisica'] . '"></td>';
+                    echo '<td><img src="' . $foto . '"></td>';
                     echo '<td><a href="Perfil/visualizar/' . $perfil['cd_pessoa_fisica'] . '">' . $perfil['nm_pessoa_fisica'] . '</a></td>';
                     echo '<td>' . $perfil['email'] . '</td>';
                     echo '<td>' . $perfil['celular'] . '</td>';

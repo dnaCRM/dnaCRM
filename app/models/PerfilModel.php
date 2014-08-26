@@ -22,7 +22,7 @@ class PerfilModel extends Model implements IModelComFoto
         $this->tabela = 'pessoa_fisica_tb';
         $this->coluna_imagem = 'im_foto';
         $this->primary_key = 'cd_pessoa_fisica';
-        $this->image_folder = IMG_UPLOADS_FOLDER . "{$this->tabela}\\";
+        $this->image_folder = IMG_UPLOADS_FOLDER . "{$this->tabela}/";
 
         $this->setImageManager();
     }

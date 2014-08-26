@@ -172,7 +172,6 @@
                 </li>
             </ul>
 
-
         </nav><!-- side-bar end -->
 
         <div class="container"><!-- container start -->

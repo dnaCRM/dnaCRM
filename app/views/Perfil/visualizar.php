@@ -87,7 +87,7 @@
                 <div class="panel-heading">
                     <h4 class="panel-title">
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                            <i class="glyphicon glyphicon-leaf"></i> $_FILES
+                            <i class="glyphicon glyphicon-leaf"></i> $data
                         </a>
                     </h4>
                 </div>
@@ -95,8 +95,7 @@
                     <div class="panel-body">
                         <?php
 
-                        var_dump($_FILES);
-
+                        var_dump($data);
                         ?>
                     </div>
                 </div>
