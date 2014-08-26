@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
+        <noscript>
+            <meta http-equiv="Refresh" content="1; url=noscript.php">
+        </noscript>
         <!--        Guarda endereço padrão dos arquivos para ser usado com URLs relativas-->
         <base href="<?php echo SITE_URL; ?>" target="_self"/>
         <meta charset="utf-8">

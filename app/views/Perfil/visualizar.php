@@ -9,10 +9,10 @@
     <div class="col-md-6" style="padding: 15px 15px 0 15px;">
         <div class="well">
 
-            <a href="Perfil/update/<?php echo $data['perfil']['cd_pessoa_fisica']; ?>">
+            <a class="btn btn-primary btn-sm" href="Perfil/update/<?php echo $data['perfil']['cd_pessoa_fisica']; ?>">
                 <span class="fa fa-edit"></span> Editar</a>
-            <br>
-            <a href="Perfil/confirmDelete/<?php echo $data['perfil']['cd_pessoa_fisica']; ?>">
+
+            <a class="btn btn-warning btn-sm" href="Perfil/confirmDelete/<?php echo $data['perfil']['cd_pessoa_fisica']; ?>">
                 <span class="fa fa-trash-o"></span> Deletar</a>
 
         </div>
