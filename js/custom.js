@@ -97,9 +97,128 @@ $(document).ready(function () {
 
 });
 
-$(document).ready(function(){
-    $('#cpf').inputmask("999.999.999-99");
-    $('#celular').inputmask("(99) [9]9999-9999");  //[] Opcional
-    $('#dt_nascimento').inputmask("99/99/9999");
-    $('#fone').inputmask("(99) 9999-9999");
+$(document).ready(function () {
+    $('#cpf').mask("999.999.999-99");
+    $('#celular').mask("(99) Z9999-9999", {translation: {'Z': {pattern: /[0-9]/, optional: true}}});  //[] Opcional
+    $('#dt_nascimento').mask("99/99/9999");
+    $('#fone').mask("(99) 9999-9999");
+});
+
+$(document).ready(function () {
+    $('#datetimepicker').datetimepicker({
+        language: 'pt-br',
+        pickTime: false
+    });
+});
+
+/**
+ */
+
+$(document).ready(function () {
+    $('#pessoafisicaform').bootstrapValidator({
+        excluded: ':disabled',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            ie_sexo: {
+                validators: {
+                    notEmpty: {
+                        message: 'Gênero é obrigatório'
+                    }
+                }
+            },
+            cd_cgc: {
+                validators: {
+                    notEmpty: {
+                        message: 'Campo obrigatório'
+                    }
+                }
+            },
+            cd_profissao: {
+                validators: {
+                    notEmpty: {
+                        message: 'Campo obrigatório'
+                    }
+                }
+            },
+            nm_pessoa_fisica: {
+                validators: {
+                    notEmpty: {
+                        message: 'Campo obrigatório'
+                    }
+                }
+            },
+            email: {
+                validators: {
+                    notEmpty: {
+                        message: 'Campo obrigatório'
+                    },
+                    emailAddress: {
+                        message: 'E-mail inválido'
+                    }
+                }
+            },
+            cpf: {
+                group: '.col-lg-4',
+                validators: {
+                    notEmpty: {
+                        message: 'Campo obrigatório'
+                    }
+                }
+            },
+            rg: {
+                group: '.col-lg-4',
+                validators: {
+                    notEmpty: {
+                        message: 'Campo obrigatório'
+                    }
+                }
+            },
+            org_rg: {
+                group: '.col-lg-4',
+                validators: {
+                    notEmpty: {
+                        message: 'Campo obrigatório'
+                    }
+                }
+            },
+            fone: {
+                group: '.col-lg-4',
+                validators: {
+                    notEmpty: {
+                        message: 'Campo obrigatório'
+                    }
+                }
+            },
+            celular: {
+                group: '.col-lg-4',
+                validators: {
+                    notEmpty: {
+                        message: 'Campo obrigatório'
+                    }
+                }
+            },
+            dt_nascimento: {
+                group: '.col-lg-4',
+                validators: {
+                    notEmpty: {
+                        message: 'Campo obrigatório'
+                    }
+                }
+            },
+            im_foto: {
+                validators: {
+                    file: {
+                        extension: 'jpg',
+                        type: 'image/jpeg',
+                        /*maxSize: 2048 * 1024,   // 2 MB*/
+                        message: 'O arquivo selecionado não é válido. Apenas aquivos .jpg são permitidos.'
+                    }
+                }
+            }
+        }
+    });
 });

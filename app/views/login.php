@@ -7,6 +7,8 @@
         <title>dnaCRM - <?php echo (isset($data['pagetitle']) ? $data['pagetitle'] : ''); ?></title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="css/bootstrap.css" media="screen">
+
+        <link rel="stylesheet" href="css/bootstrapValidator.min.css"/>
         
 <!--        Pendente remover necessidade deste arquivo-->
         <link rel="stylesheet" href="css/bootswatch.css">
@@ -29,5 +31,14 @@
 
 
     </div> <!-- /container -->
+
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/bootstrapValidator.min.js"></script>
+    <script src="js/language/pt_BR.js"></script>
+    <script src="js/jquery.inputmask.bundle.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootswatch.js"></script>
+    <script src="js/custom.js"></script>
+
     </body>
 </html>

@@ -136,3 +136,14 @@ td > .img-circle {
 .profilefoto {
     max-width: 250px;
 }
+/*Controle de formulários
+#pessoafisicaform .selectContainer .form-control-feedback,
+#pessoafisicaform .inputGroupContainer .form-control-feedback{
+    top: 0;
+    right: -15px;
+}
+*/
+#pessoafisicaform .btn-group .form-control-feedback {
+    top: 0;
+    right: -30px;
+}

@@ -11,22 +11,23 @@
 
             Well, well...
             <?php
-/*            $cpf = '073.596.567-61';
-            $cpf = str_replace(array('.', '-'), '', $cpf);
+            /*            $cpf = '073.596.567-61';
+                        $cpf = str_replace(array('.', '-'), '', $cpf);
 
-            echo '<br>' . $cpf . '<br>';
-            $cpf = 0 + $cpf;
-            echo $cpf;
+                        echo '<br>' . $cpf . '<br>';
+                        $cpf = 0 + $cpf;
+                        echo $cpf;
 
-            echo '<br>';
-            $d = null;
-            $d = '1';
-            if (!$d) {
-                echo 'Uma coisa';
-            } else {
-                echo 'Outra coisa ' . $d;
-            }
-            */?>
+                        echo '<br>';
+                        $d = null;
+                        $d = '1';
+                        if (!$d) {
+                            echo 'Uma coisa';
+                        } else {
+                            echo 'Outra coisa ' . $d;
+                        }
+                        */
+            ?>
 
         </div>
     </div>
@@ -109,8 +110,8 @@
 
 
         <ul class="nav nav-tabs" style="margin-bottom: 15px;">
-            <li class=""><a href="#home" data-toggle="tab"><i class="fa fa-home"></i> Home</a></li>
-            <li class="active"><a href="#profile" data-toggle="tab">Profile</a></li>
+            <li class="active"><a href="#home" data-toggle="tab"><i class="fa fa-home"></i> Home</a></li>
+            <li class=""><a href="#profile" data-toggle="tab">Profile</a></li>
             <li class="disabled"><a>Disabled</a></li>
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -124,29 +125,47 @@
             </li>
         </ul>
         <div id="myTabContent" class="tab-content">
-            <div class="tab-pane fade" id="home">
+            <div class="tab-pane fade active in" id="home">
                 <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua,
                     retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica.
                     Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry
                     richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american
                     apparel, butcher voluptate nisi qui.</p>
+
+
+                <form id="form1" class="form-horizontal">
+                    <div class="form-group">
+                        <label for="field1" id="info1">
+                            <span>Put anything in the field below.</span>
+                        </label>
+
+                        <div class="input-group">
+                            <input type="text" name="field1" class="form-control" id="field1">
+                            <span class="input-group-btn">
+                                <input type="submit" name="send" class="btn btn-primary" id="send" value="Ok!">
+                            </span>
+                        </div>
+                    </div>
+                </form>
+
+
             </div>
-            <div class="tab-pane fade active in" id="profile">
+            <div class="tab-pane fade" id="profile">
                 <p>
 
                     Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda
                     shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente
                     ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw
                     denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-
                 </p>
             </div>
-            <div class="tab-pane fade" id="dropdown1">
-                <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro
-                    fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer,
-                    iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony.
-                    Leggings gentrify squid 8-bit cred pitchfork.</p>
-            </div>
+        </div>
+        <div class="tab-pane fade" id="dropdown1">
+            <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro
+                fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer,
+                iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony.
+                Leggings gentrify squid 8-bit cred pitchfork.</p>
+
             <div class="tab-pane fade" id="dropdown2">
                 <p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master
                     cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party

@@ -22,7 +22,7 @@ class ImageModel
     public function __construct(IModelComFoto $model)
     {
         $this->db = DB::getInstance();
-        $this->arquivo_temp = 'imagem.tmp';
+        $this->arquivo_temp = session_id() . '.tmp';
         $this->tabela = $model->getTabela();
         $this->primary_key = $model->getPrimaryKey();
         $this->coluna = $model->getColunaImagem();
