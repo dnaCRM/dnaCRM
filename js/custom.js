@@ -109,12 +109,7 @@ $(document).ready(function () {
         language: 'pt-br',
         pickTime: false
     });
-});
 
-/**
- */
-
-$(document).ready(function () {
     $('#pessoafisicaform').bootstrapValidator({
         excluded: ':disabled',
         feedbackIcons: {
@@ -221,4 +216,10 @@ $(document).ready(function () {
             }
         }
     });
+
+    $('#datetimepicker')
+        .on('dp.change dp.show', function(e) {
+            // Valida a data quando o usuário inserir
+            $('#pessoafisicaform').bootstrapValidator('revalidateField', 'dt_nascimento');
+        });
 });

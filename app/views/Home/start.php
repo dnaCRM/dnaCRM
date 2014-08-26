@@ -131,24 +131,6 @@
                     Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry
                     richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american
                     apparel, butcher voluptate nisi qui.</p>
-
-
-                <form id="form1" class="form-horizontal">
-                    <div class="form-group">
-                        <label for="field1" id="info1">
-                            <span>Put anything in the field below.</span>
-                        </label>
-
-                        <div class="input-group">
-                            <input type="text" name="field1" class="form-control" id="field1">
-                            <span class="input-group-btn">
-                                <input type="submit" name="send" class="btn btn-primary" id="send" value="Ok!">
-                            </span>
-                        </div>
-                    </div>
-                </form>
-
-
             </div>
             <div class="tab-pane fade" id="profile">
                 <p>
