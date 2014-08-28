@@ -51,7 +51,7 @@
                             <ul class="dropdown-menu" aria-labelledby="themes">
                                 <li><a href="Perfil">Lista</a></li>
                                 <li class="divider"></li>
-                                <li><a href="Perfil/novo">Novo Perfil</a></li>
+                                <li><a href="Perfil/formperfil">Novo Perfil</a></li>
                                 <li><a href="Perfil">Item</a></li>
                             </ul>
                         </li>
@@ -124,11 +124,11 @@
                         <i class="fa pull-right fa-angle-left"></i>
                     </a>
                     <ul class="treeview-menu" style="display: none;">
-                        <li><a href="Perfil/novo"><i class="fa fa-angle-double-right"></i> Pessoa Física</a></li>
-                        <li><a href="PerfilPJ/novo"><i class="fa fa-angle-double-right"></i> Pessoa Jurídica</a></li>
-                        <li><a href="Setor/novo"><i class="fa fa-angle-double-right"></i> Setores</a></li>
-                        <li><a href="Condominio/novo"><i class="fa fa-angle-double-right"></i> Condomínio</a></li>
-                        <li><a href="Imovel/novo"><i class="fa fa-angle-double-right"></i> Imóveis</a></li>
+                        <li><a href="Perfil/formperfil"><i class="fa fa-angle-double-right"></i> Pessoa Física</a></li>
+                        <li><a href="PerfilPJ/formpj"><i class="fa fa-angle-double-right"></i> Pessoa Jurídica</a></li>
+                        <li><a href="Setor/formsetor"><i class="fa fa-angle-double-right"></i> Setores</a></li>
+                        <li><a href="Condominio/formcondo"><i class="fa fa-angle-double-right"></i> Condomínio</a></li>
+                        <li><a href="Imovel/formimovel"><i class="fa fa-angle-double-right"></i> Imóveis</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -137,9 +137,9 @@
                         <i class="fa pull-right fa-angle-left"></i>
                     </a>
                     <ul class="treeview-menu" style="display: none;">
-                        <li><a href="Ocorrencia/novo"><i class="fa fa-angle-double-right"></i> Ocorrência</a></li>
-                        <li><a href="OS/novo"><i class="fa fa-angle-double-right"></i> Ordem de Serviço</a></li>
-                        <li><a href="Orcamento/novo"><i class="fa fa-angle-double-right"></i> Orçamento</a></li>
+                        <li><a href="Ocorrencia/formocorrencia"><i class="fa fa-angle-double-right"></i> Ocorrência</a></li>
+                        <li><a href="OS/formos"><i class="fa fa-angle-double-right"></i> Ordem de Serviço</a></li>
+                        <li><a href="Orcamento/formorcamento"><i class="fa fa-angle-double-right"></i> Orçamento</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
