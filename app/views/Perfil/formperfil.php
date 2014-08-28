@@ -22,14 +22,10 @@
 <div class="col-lg-6">
 
 <?php
-
 $perfil = $data['perfil'];
-$nasc = new DateTime($perfil['dt_nascimento']);
-$perfil['dt_nascimento'] = $nasc->format('d/m/Y');
+$perfil_form = new Perfil;
+$perfil_form->newPerfil($data['id']);
 
-$atualiza_perfil = new Perfil;
-$atualiza_perfil->newPerfil($perfil['cd_pessoa_fisica']);
-$erros = array_keys($atualiza_perfil->getErroArr());
 
 if (Session::exists('sucesso')) {
 ?>
@@ -45,23 +41,25 @@ if (Session::exists('sucesso')) {
 
     ?>
     <img class="img-circle profilefoto"
-         src="<?php echo $data['img_folder'] . $perfil['cd_pessoa_fisica'] . '.jpg'; ?>">
+         src="<?php echo $perfil['im_foto']; ?>">
 
-    <form class="form-horizontal" method="post" action="" enctype="multipart/form-data">
+    <form id="pessoafisicaform" class="form-horizontal" method="post" action="" enctype="multipart/form-data">
         <fieldset>
             <legend>Cadastro</legend>
             <div class="form-group">
-                <label for="im_foto" class="col-lg-2 control-label">Foto</label>
+                <div class="col-lg-12">
+                    <label for="im_foto" class="control-label">Foto</label>
 
-                <div class="col-lg-10">
+
                     <input type="file" class="form-control" id="im_foto" name="im_foto">
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="cd_cgc" class="col-lg-2 control-label">Empresa</label>
+                <div class="col-lg-12 selectContainer">
+                    <label for="cd_cgc" class="control-label">Empresa</label>
 
-                <div class="col-lg-10">
+
                     <select class="form-control" id="cd_cgc" name="cd_cgc">
                         <option value="">-- Selecione uma empresa</option>
                         <?php //echo escape(Input::get('cd_cgc'));
@@ -79,9 +77,10 @@ if (Session::exists('sucesso')) {
             </div>
 
             <div class="form-group">
-                <label for="cd_profissao" class="col-lg-2 control-label">Profissão</label>
+                <div class="col-lg-12 selectContainer">
+                    <label for="cd_profissao" class="control-label">Profissão</label>
 
-                <div class="col-lg-10">
+
                     <select class="form-control" id="cd_profissao" name="cd_profissao">
                         <option value="">-- Selecione uma profissão</option>
                         <?php //echo escape(Input::get('cd_profissao'));
@@ -97,90 +96,104 @@ if (Session::exists('sucesso')) {
                 </div>
             </div>
 
-            <div class="form-group <?php echo Validate::cssClass('nm_pessoa_fisica', $erros); ?>">
-                <label for="nm_pessoa_fisica" class="col-lg-2 control-label">Nome</label>
+            <div class="form-group">
+                <div class="col-lg-12 inputGroupContainer">
+                    <label for="nm_pessoa_fisica" class="control-label">Nome</label>
 
-                <div class="col-lg-10">
+
                     <input type="text" class="form-control" id="nm_pessoa_fisica" name="nm_pessoa_fisica"
                            value="<?php echo $perfil['nm_pessoa_fisica']; ?>" placeholder="Nome">
                 </div>
             </div>
-            <div class="form-group <?php echo Validate::cssClass('email', $erros); ?>">
-                <label for="email" class="col-lg-2 control-label">Email</label>
+            <div class="form-group">
+                <div class="col-lg-12 inputGroupContainer">
+                    <label for="email" class="control-label">Email</label>
 
-                <div class="col-lg-10">
+
                     <input type="text" class="form-control" id="email" name="email"
                            value="<?php echo $perfil['email']; ?>" placeholder="Email">
                 </div>
             </div>
 
-            <div class="form-group">
-                <label for="cpf" class="col-lg-2 control-label">CPF</label>
 
-                <div class="col-lg-3 <?php echo Validate::cssClass('cpf', $erros); ?>">
+            <div class="form-group">
+                <div class="col-lg-4 inputGroupContainer">
+                    <label for="fone" class="control-label">Telefone</label>
+
+
+                    <input type="tel" class="form-control" id="fone" name="fone"
+                           value="<?php echo $perfil['fone']; ?>" placeholder="00 0000-0000">
+                </div>
+
+                <div class="col-lg-4 inputGroupContainer">
+                    <label for="celular" class="control-label">Celular</label>
+
+
+                    <input type="tel" class="form-control" id="celular" name="celular"
+                           value="<?php echo $perfil['celular']; ?>" placeholder="00 00000-0000">
+                </div>
+
+                <div class="col-lg-4 inputGroupContainer" id="datetimepicker">
+                    <label for="dt_nascimento" class="control-label">Nascimento</label>
+
+
+                    <input type="text" class="form-control"
+                           value="<?php echo $perfil['dt_nascimento']; ?>" id="dt_nascimento"
+                           name="dt_nascimento" placeholder="___/___/____">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-lg-4 inputGroupContainer">
+                    <label for="cpf" class="control-label">CPF</label>
+
+
                     <input type="text" class="form-control" id="cpf" name="cpf"
                            value="<?php echo $perfil['cpf']; ?>" placeholder="000.000.000-00"
                            maxlength="14">
                 </div>
-                <label for="rg" class="col-lg-1 control-label">RG</label>
+                <div class="col-lg-4 inputGroupContainer">
+                    <label for="rg" class="control-label">RG</label>
 
-                <div class="col-lg-3 <?php echo Validate::cssClass('rg', $erros); ?>">
+
                     <input type="text" class="form-control" id="rg" name="rg"
-                           value="<?php echo $perfil['rg']; ?>" placeholder="000.000.000-00"
+                           value="<?php echo $perfil['rg']; ?>" placeholder="00000000"
                            maxlength="12">
                 </div>
-                <label for="org_rg" class="col-lg-1 control-label">UF</label>
+                <div class="col-lg-4 inputGroupContainer">
+                    <label for="org_rg" class="control-label">UF</label>
 
-                <div class="col-lg-2 <?php echo Validate::cssClass('org_rg', $erros); ?>">
+
                     <input type="text" class="form-control" id="org_rg" name="org_rg"
                            value="<?php echo $perfil['org_rg']; ?>" placeholder="XX" maxlength="2">
                 </div>
             </div>
 
-            <div class="form-group">
-                <label for="fone" class="col-lg-2 control-label">Telefone</label>
+            <div class="form-group pull-right">
+                <label class="control-label col-lg-1">Sexo</label>
 
-                <div class="col-lg-4 <?php echo Validate::cssClass('fone', $erros); ?>">
-                    <input type="tel" class="form-control" id="fone" name="fone"
-                           value="<?php echo $perfil['fone']; ?>" placeholder="00 0000-0000">
+                <div class="col-lg-12">
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-default control-label">
+                            <input type="radio" name="ie_sexo"
+                                   value="m" <?php echo (($perfil['ie_sexo']) == 'm') ? 'checked' : ''; ?>/> Masculino
+                        </label>
+                        <label class="btn btn-default control-label">
+                            <input type="radio" name="ie_sexo"
+                                   value="f" <?php echo (($perfil['ie_sexo']) == 'f') ? 'checked' : ''; ?>/> Feminino
+                        </label>
+                    </div>
                 </div>
 
-                <label for="celular" class="col-lg-2 control-label">Celular</label>
-
-                <div class="col-lg-4 <?php echo Validate::cssClass('celular', $erros); ?>">
-                    <input type="tel" class="form-control" id="celular" name="celular"
-                           value="<?php echo $perfil['celular']; ?>" placeholder="00 00000-0000">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="dt_nascimento" class="col-lg-2 control-label">Nascimento</label>
-
-                <div class="col-lg-4 <?php echo Validate::cssClass('dt_nascimento', $erros); ?>">
-                    <input type="text" class="form-control"
-                           value="<?php echo $perfil['dt_nascimento']; ?>" id="dt_nascimento"
-                           name="dt_nascimento">
-                </div>
-
-                <label class="col-lg-1 control-label">Sexo</label>
-                <label class="col-lg-2 control-label <?php echo Validate::cssClass('ie_sexo', $erros); ?>">
-                    <input type="radio" name="ie_sexo" id="masculino"
-                           value="m" <?php echo (($perfil['ie_sexo']) == 'm') ? 'checked' : ''; ?>>
-                    Masc.
-                </label>
-                <label class="col-lg-2 control-label">
-                    <input type="radio" name="ie_sexo" id="feminino"
-                           value="f" <?php echo (($perfil['ie_sexo']) == 'f') ? 'checked' : ''; ?>>
-                    Femin.
-                </label>
             </div>
 
             <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
 
             <div class="form-group ">
-                <div class="col-lg-10 col-lg-offset-2">
-                    <a href="Perfil/visualizar/<?php echo $perfil['cd_pessoa_fisica']; ?>" id="limpar" class="btn btn-default">Cancelar</a>
-                    <button type="submit" name="cadastrar" class="btn btn-primary">Cadastrar</button>
+                <div class="col-lg-12">
+                    <a href="#" id="limpar" class="btn btn-default">Cancelar</a>
+                    <button type="reset" name="cancelar" class="btn btn-info">Limpar</button>
+                    <button type="submit" name="cadastrar" class="btn btn-primary">Salvar</button>
                 </div>
             </div>
         </fieldset>
@@ -189,6 +202,7 @@ if (Session::exists('sucesso')) {
 </div>
 
 <div class="col-lg-6">
+
     <div class="panel-group" id="accordion">
         <div class="panel panel-default">
             <div class="panel-heading">

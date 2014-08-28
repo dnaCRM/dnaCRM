@@ -51,8 +51,9 @@
 
                     <div class="col-lg-10">
                         <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha">
-                        <div class="checkbox">
-                            <label>
+                        <br>
+                        <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-xs btn-default">
                                 <input type="checkbox" name="lembrar" id="lembrar"> Lembrar
                             </label>
                         </div>
@@ -63,8 +64,8 @@
 
                 <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
-                        <button name="limpar" class="btn btn-default">Limpar</button>
-                        <input type="submit" name="submit" class="btn btn-primary" id="submit" value="Submit">
+                        <button type="reset" class="btn btn-default">Limpar</button>
+                        <button type="submit" class="btn btn-primary" id="login">Login</button>
                     </div>
                 </div>
             </fieldset>
@@ -74,10 +75,10 @@
 
     <div class="col-lg-6">
 <?php
-        /**echo '$_SESSION';
+        echo '$_SESSION';
         var_dump($_SESSION);
         echo '$_POST';
         var_dump($_POST);
-        */?>
+        ?>
     </div>
 </div>

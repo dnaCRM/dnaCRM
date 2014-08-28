@@ -48,15 +48,65 @@ class Perfil extends Controller
         $this->view->output($dados);
     }
 
-    public function novo()
-    {
-        $dados = [
-            'pagetitle' => 'Cadastro de Perfil',
-            'pagesubtitle' => 'Muita calma nessa hora.',
-            'erros' => $this->erros_arr
-        ];
 
-        $this->view = new View('Perfil', 'novo');
+    public function formperfil($id = null)
+    {
+        if ($id) {
+            $perfilarr = $this->model->getPerfil($id);
+
+            if (!file_exists($this->img_folder . $id . '.jpg')) {
+                $this->model->getFoto($id);
+                //Session::put('fail', 'Pegou foto!');
+            } else {
+                //Session::put('fail', 'Foto já existia!');
+            }
+
+            $nasc = new DateTime($perfilarr['dt_nascimento']);
+            $perfilarr['dt_nascimento'] = $nasc->format('d/m/Y');
+
+            $dados = array(
+
+                'pagetitle' => 'Cadastro de Perfil',
+                'pagesubtitle' => 'Muita calma nessa hora.',
+                'id' => $id,
+                'perfil' => array(
+                    'cd_cgc' => $perfilarr['cd_cgc'],
+                    'cd_profissao' => $perfilarr['cd_profissao'],
+                    'nm_pessoa_fisica' => $perfilarr['nm_pessoa_fisica'],
+                    'email' => $perfilarr['email'],
+                    'cpf' => $perfilarr['cpf'],
+                    'rg' => $perfilarr['rg'],
+                    'org_rg' => $perfilarr['org_rg'],
+                    'fone' => $perfilarr['fone'],
+                    'celular' => $perfilarr['celular'],
+                    'dt_nascimento' => $perfilarr['dt_nascimento'],
+                    'ie_sexo' => $perfilarr['ie_sexo'],
+                    'im_foto' => $this->img_folder . $id . '.jpg',
+                )
+            );
+        } else {
+            $dados = array(
+                'pagetitle' => 'Cadastro de Perfil',
+                'pagesubtitle' => 'Muita calma nessa hora.',
+                'id' => null,
+                'perfil' => array(
+                    'cd_cgc' => '',
+                    'cd_profissao' => '',
+                    'nm_pessoa_fisica' => '',
+                    'email' => '',
+                    'cpf' => '',
+                    'rg' => '',
+                    'org_rg' => '',
+                    'fone' => '',
+                    'celular' => '',
+                    'dt_nascimento' => '',
+                    'ie_sexo' => '',
+                    'im_foto' => 'img/uploads/icon-user.jpg'
+                )
+            );
+        }
+
+        $this->view = new View('Perfil', 'formperfil');
         $this->view->output($dados);
     }
 
@@ -91,35 +141,6 @@ class Perfil extends Controller
         $this->view->output($dados);
     }
 
-    /**
-     * @param string $id = id(chave primária da tabela de perfis)
-     * O método recebe o id e monta respecttiva a tela de perfil
-     */
-    public function update($id = '')
-    {
-        $perfilarr = $this->model->getPerfil($id);
-
-        if (!file_exists($this->img_folder . $id . '.jpg')) {
-            $this->model->getFoto($id);
-            //Session::put('fail', 'Pegou foto!');
-        } else {
-            //Session::put('fail', 'Foto já existia!');
-        }
-
-        $dados = array(
-            //o campo 'obs' vai ser o subtítulo
-            'pagesubtitle' => $perfilarr['email'],
-            //o campo 'nome' vai ser o título da página
-            'pagetitle' => $perfilarr['nm_pessoa_fisica'],
-            //pasta de imagens de perfil
-            'img_folder' => $this->img_folder,
-            //todos os atributos do perfil
-            'perfil' => $perfilarr
-        );
-
-        $this->view = new View('Perfil', 'update');
-        $this->view->output($dados);
-    }
 
     public function confirmDelete($id)
     {
@@ -286,10 +307,10 @@ class Perfil extends Controller
 
     public function fotoPerfil()
     {
-       if ($this->model->recebefoto()) {
-           return true;
-       }
+        if ($this->model->recebefoto()) {
+            return true;
+        }
 
-       return false;
+        return false;
     }
 }
