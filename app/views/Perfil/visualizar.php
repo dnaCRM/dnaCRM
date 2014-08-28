@@ -24,7 +24,7 @@
     <div class="col-md-6">
 
         <img class="img-circle profilefoto"
-             src="<?php echo $data['img_folder'] . $data['perfil']['cd_pessoa_fisica'] . '.jpg'; ?>">
+             src="<?php echo $data['foto']; ?>">
         <?php
 
         $perfil = $data['perfil'];

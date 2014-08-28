@@ -33,7 +33,7 @@
                 ?>
                 <div class="col-md-4">
                     <img class="img-circle profilefoto left"
-                         src="<?php echo $data['img_folder'] . $perfil['cd_pessoa_fisica'] . '.jpg'; ?>">
+                         src="<?php echo $data['foto']; ?>">
                 </div>
                 <div class="col-md-8">
                     <h1><span class="glyphicon glyphicon-arrow-right"></span> Atenção!</h1>

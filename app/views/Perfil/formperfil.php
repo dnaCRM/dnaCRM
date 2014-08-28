@@ -191,9 +191,10 @@ if (Session::exists('sucesso')) {
 
             <div class="form-group ">
                 <div class="col-lg-12">
-                    <a href="#" id="limpar" class="btn btn-default">Cancelar</a>
-                    <button type="reset" name="cancelar" class="btn btn-info">Limpar</button>
-                    <button type="submit" name="cadastrar" class="btn btn-primary">Salvar</button>
+                    <a href="#" id="limpar" class="btn btn-default"><span class="fa fa-undo"></span> Cancelar</a>
+                    <button type="reset" name="cancelar" class="btn btn-info"><span class="fa fa-recycle"></span> Limpar</button>
+                    <a href="Perfil/formperfil" id="novo" class="btn btn-success"><span class="fa fa-file"></span> Novo</a>
+                    <button type="submit" name="cadastrar" class="btn btn-primary"><span class="fa fa-check"></span> Salvar</button>
                 </div>
             </div>
         </fieldset>

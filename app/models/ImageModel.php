@@ -72,6 +72,8 @@ class ImageModel
         $pdo->beginTransaction();
         $state->execute();
         $pdo->commit();
+
+        
     }
 
     /**

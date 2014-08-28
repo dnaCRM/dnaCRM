@@ -12,12 +12,14 @@ class Perfil extends Controller
     private $validation;
     private $fotoperfil = true;
     private $img_folder;
+    private $fotodefault;
     private $erros_arr = array();
 
     public function __construct()
     { //o atributo de classe é herdado da classe pai 'Controller'
         $this->model = new PerfilModel;
         $this->img_folder = $this->model->getImageFolder();
+        $this->fotodefault = IMG_UPLOADS_FOLDER . 'icon-user.jpg';
     }
 
     public function start()
@@ -29,7 +31,6 @@ class Perfil extends Controller
             if (!file_exists($this->img_folder . $perfil['cd_pessoa_fisica'] . '.jpg')) {
                 $this->model->getFoto($perfil['cd_pessoa_fisica']);
                 //Session::put('fail', 'Pegou foto!');
-
             } else {
                 //Session::put('fail', 'Foto já existia!');
             }
@@ -41,6 +42,7 @@ class Perfil extends Controller
             'pagetitle' => 'Perfis',
             //pasta de imagens de perfil
             'img_folder' => $this->img_folder,
+            'foto_default' => $this->fotodefault,
             'list' => $perfil_list
         ];
 
@@ -66,8 +68,8 @@ class Perfil extends Controller
 
             $dados = array(
 
-                'pagetitle' => 'Cadastro de Perfil',
-                'pagesubtitle' => 'Muita calma nessa hora.',
+                'pagetitle' => $perfilarr['nm_pessoa_fisica'],
+                'pagesubtitle' => 'Atualizar Perfil.',
                 'id' => $id,
                 'perfil' => array(
                     'cd_cgc' => $perfilarr['cd_cgc'],
@@ -81,13 +83,13 @@ class Perfil extends Controller
                     'celular' => $perfilarr['celular'],
                     'dt_nascimento' => $perfilarr['dt_nascimento'],
                     'ie_sexo' => $perfilarr['ie_sexo'],
-                    'im_foto' => $this->img_folder . $id . '.jpg',
+                    'im_foto' => $this->imFoto($perfilarr),
                 )
             );
         } else {
             $dados = array(
                 'pagetitle' => 'Cadastro de Perfil',
-                'pagesubtitle' => 'Muita calma nessa hora.',
+                'pagesubtitle' => 'Pessoa Física.',
                 'id' => null,
                 'perfil' => array(
                     'cd_cgc' => '',
@@ -101,7 +103,7 @@ class Perfil extends Controller
                     'celular' => '',
                     'dt_nascimento' => '',
                     'ie_sexo' => '',
-                    'im_foto' => 'img/uploads/icon-user.jpg'
+                    'im_foto' => $this->fotodefault
                 )
             );
         }
@@ -125,6 +127,8 @@ class Perfil extends Controller
             //Session::put('fail', 'Foto já existia!');
         }
 
+        $foto = $this->imFoto($perfilarr);
+
         $dados = array(
             //o campo 'obs' vai ser o subtítulo
             'pagesubtitle' => $perfilarr['email'],
@@ -132,6 +136,7 @@ class Perfil extends Controller
             'pagetitle' => $perfilarr['nm_pessoa_fisica'],
             //pasta de imagens de perfil
             'img_folder' => $this->img_folder,
+            'foto' => $foto,
             'erros' => $this->erros_arr,
             //todos os atributos do perfil
             'perfil' => $perfilarr
@@ -153,13 +158,15 @@ class Perfil extends Controller
             //Session::put('fail', 'Foto já existia!');
         }
 
+        $foto = $this->imFoto($perfilarr);
+
         $dados = array(
             //o campo 'obs' vai ser o subtítulo
             'pagesubtitle' => $perfilarr['email'],
             //o campo 'nome' vai ser o título da página
             'pagetitle' => $perfilarr['nm_pessoa_fisica'],
             //pasta de imagens de perfil
-            'img_folder' => $this->img_folder,
+            'foto' => $foto,
             'perfil' => $perfilarr
         );
 
@@ -312,5 +319,18 @@ class Perfil extends Controller
         }
 
         return false;
+    }
+
+    /**
+     * Recebe um array com os dados do perfil e retorna o endereço da imagem do perfil
+     * caso o perfil não tenha imagem, retorna endereço de uma imagem padrão
+     * @param array $perfiarr = Array com o resgistro completo do usuário
+     * @return string = endereço da foto que será mostrada
+     */
+    private function imFoto(array $perfiarr)
+    {
+        return $perfiarr['im_foto'] ?
+            $this->img_folder . $perfiarr['cd_pessoa_fisica'] .
+            '.jpg' : $this->fotodefault;
     }
 }
