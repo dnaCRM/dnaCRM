@@ -25,13 +25,13 @@ class User extends Controller
                     $login = $this->model->login(Input::get('usuario'), Input::get('senha'), $lembrar);
                     //$this->model->logout();
                     if ($login) {
-                        Session::flash('msg', 'Logado!');
+                        Session::flash('msg', 'Logado!', 'success');
                         Redirect::to(SITE_URL);
                     } else {
-                        Session::flash('msg', 'Falha no login!');
+                        Session::flash('msg', 'Falha no login!', 'danger');
                     }
 
-                    Session::flash('sucesso', 'Você está logado.');
+                    Session::flash('sucesso', 'Você está logado.', 'success');
 
                 } else {
                     // errors
@@ -71,7 +71,7 @@ class User extends Controller
                             'grupo' => 1
                         ]);
 
-                        Session::flash('msg', 'Você está registrado.');
+                        Session::flash('msg', 'Você está registrado.', 'success');
 
                     } catch (Exception $e) {
                         CodeFail($e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());

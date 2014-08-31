@@ -92,7 +92,7 @@ class PerfilModel extends Model implements IModelComFoto
         if ($this->db->getNumRegistros() > 0) {
             return $this->db->first();
         }
-        Session::flash('fail', 'Pefil não encontrado');
+        Session::flash('fail', 'Pefil não encontrado','info');
         Redirect::to(SITE_URL . 'Perfil');
     }
 

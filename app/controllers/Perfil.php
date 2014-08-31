@@ -204,7 +204,7 @@ class Perfil extends Controller
                         } else {
                             $this->model->updatePerfil($id, $this->dados);
                         }
-                        Session::flash('sucesso', 'Perfil cadastrado com sucesso.');
+                        Session::flash('sucesso', 'Perfil cadastrado com sucesso.', 'success');
                     } catch (Exception $e) {
                         CodeFail($e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
                     }

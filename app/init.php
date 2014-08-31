@@ -67,7 +67,8 @@ $GLOBALS['config'] = array(
     'dicionario' => $dic // ver declaração acima
 );
 
-//Classes CSS para personalização de mensagem de erro
+//Classes CSS para personalização de mensagens
+define('CSS_PRIMARY', 'primary');
 define('CSS_WARNING', 'warning');
 define('CSS_INFO', 'info');
 define('CSS_SUCCESS', 'success');
