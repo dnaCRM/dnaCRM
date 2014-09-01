@@ -86,7 +86,7 @@ class ImageModel
             $fotoperfil = isset($_FILES[$this->coluna]) ? $_FILES[$this->coluna] : null;
 
             if ($fotoperfil['error'] > 0) {
-                echo "Nenhuma imagem enviada.<br />";
+                echo 'Nenhuma imagem enviada.<br>';
             } else {
                 // array com extensões válidas
                 $validExtensions = array('.jpg', '.jpeg');

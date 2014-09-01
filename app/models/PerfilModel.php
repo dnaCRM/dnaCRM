@@ -60,7 +60,7 @@ class PerfilModel extends Model implements IModelComFoto
 
     public function deletePerfil($id)
     {
-        if (!$this->db->delete($this->tabela, "{$this->primary} = {$id}")) {
+        if (!$this->db->delete($this->tabela, "{$this->primary_key} = {$id}")) {
             throw new Exception('Não foi possível deletar o cadastro.');
         }
     }
@@ -81,8 +81,9 @@ class PerfilModel extends Model implements IModelComFoto
             'ie_sexo' => FILTER_DEFAULT,
         );
 
-
         $this->dados = filter_var_array($dados, $filtros);
+
+        $this->emptyToNull();
 
     }
 

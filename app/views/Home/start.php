@@ -11,22 +11,15 @@
 
             Well, well...
             <?php
-            /*            $cpf = '073.596.567-61';
-                        $cpf = str_replace(array('.', '-'), '', $cpf);
+            //'073.596.567-61'
+            $cpf = '073.596.567-61';
+            echo Input::clean($cpf);
 
-                        echo '<br>' . $cpf . '<br>';
-                        $cpf = 0 + $cpf;
-                        echo $cpf;
-
-                        echo '<br>';
-                        $d = null;
-                        $d = '1';
-                        if (!$d) {
-                            echo 'Uma coisa';
-                        } else {
-                            echo 'Outra coisa ' . $d;
-                        }
-                        */
+            echo '<br>';
+            $telefone = "1134587988";
+            $pattern = '/(\d{2})(\d*)(\d{4})/';
+            $telefoneN = preg_replace($pattern, '($1) $2-$3', $telefone);
+            echo $telefoneN;
             ?>
 
         </div>

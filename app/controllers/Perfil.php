@@ -9,11 +9,8 @@
 class Perfil extends Controller
 {
     private $dados;
-    private $validation;
-    private $fotoperfil = true;
     private $img_folder;
     private $fotodefault;
-    private $erros_arr = array();
 
     public function __construct()
     { //o atributo de classe é herdado da classe pai 'Controller'
@@ -65,26 +62,14 @@ class Perfil extends Controller
 
             $nasc = new DateTime($perfilarr['dt_nascimento']);
             $perfilarr['dt_nascimento'] = $nasc->format('d/m/Y');
+            $perfilarr['im_foto'] = $this->imFoto($perfilarr);
 
             $dados = array(
 
                 'pagetitle' => $perfilarr['nm_pessoa_fisica'],
                 'pagesubtitle' => 'Atualizar Perfil.',
                 'id' => $id,
-                'perfil' => array(
-                    'cd_cgc' => $perfilarr['cd_cgc'],
-                    'cd_profissao' => $perfilarr['cd_profissao'],
-                    'nm_pessoa_fisica' => $perfilarr['nm_pessoa_fisica'],
-                    'email' => $perfilarr['email'],
-                    'cpf' => $perfilarr['cpf'],
-                    'rg' => $perfilarr['rg'],
-                    'org_rg' => $perfilarr['org_rg'],
-                    'fone' => $perfilarr['fone'],
-                    'celular' => $perfilarr['celular'],
-                    'dt_nascimento' => $perfilarr['dt_nascimento'],
-                    'ie_sexo' => $perfilarr['ie_sexo'],
-                    'im_foto' => $this->imFoto($perfilarr),
-                )
+                'perfil' => $perfilarr
             );
         } else {
             $dados = array(
@@ -137,7 +122,6 @@ class Perfil extends Controller
             //pasta de imagens de perfil
             'img_folder' => $this->img_folder,
             'foto' => $foto,
-            'erros' => $this->erros_arr,
             //todos os atributos do perfil
             'perfil' => $perfilarr
         );
@@ -189,43 +173,31 @@ class Perfil extends Controller
      */
     public function newPerfil($id = null)
     {
+
         if (Input::exists()) {
+
             if (Token::check(Input::get('token'))) {
 
-                $this->validatePerfilInfo();
-
-                if ($this->validation->passed()) {
-
-                    $this->setDados();
-
-                    try {
-                        if (!$id) {
-                            $this->model->create($this->dados);
-                        } else {
-                            $this->model->updatePerfil($id, $this->dados);
-                        }
-                        Session::flash('sucesso', 'Perfil cadastrado com sucesso.', 'success');
-                    } catch (Exception $e) {
-                        CodeFail($e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
+                $this->setDados();
+                try {
+                    if (!$id) {
+                        $this->model->create($this->dados);
+                    } else {
+                        $this->model->updatePerfil($id, $this->dados);
                     }
-                } else {
-                    foreach ($this->validation->erros() as $item => $erro) {
-                        //CodeError($item . " => " . $erro, E_USER_WARNING);
-                    }
-                    $this->erros_arr = $this->validation->erros();
+                    Session::flash('sucesso', 'Perfil cadastrado com sucesso.', 'success');
+                } catch (Exception $e) {
+                    CodeFail($e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
                 }
+            } else {
+
             }
         }
     }
 
-    public function getErroArr()
-    {
-        return $this->erros_arr;
-    }
-
     private function setDados()
     {
-        $this->dados = [
+        $this->dados = array(
             'cd_cgc' => (int)Input::get('cd_cgc'),
             'cd_profissao' => (int)Input::get('cd_profissao'),
             'nm_pessoa_fisica' => Input::get('nm_pessoa_fisica'),
@@ -237,7 +209,9 @@ class Perfil extends Controller
             'celular' => (string)Input::get('celular'),
             'dt_nascimento' => Input::get('dt_nascimento'),
             'ie_sexo' => Input::get('ie_sexo')
-        ];
+        );
+
+        $this->fotoPerfil();
     }
 
     /**
@@ -248,69 +222,8 @@ class Perfil extends Controller
     public function validatePerfilInfo()
     {
         $this->fotoPerfil();
-
-        $validate = new Validate;
-
-        if (!$this->fotoperfil) {
-            $validate->addErro('im_foto', 'Arquivo inválido');
-        }
-
-        $this->validation = $validate->check($_POST, array(
-            'cd_cgc' => array(
-                'min' => 1,
-                'max' => 100
-            ),
-            'cd_profissao' => array(
-                'min' => 1,
-                'max' => 100
-            ),
-            'nm_pessoa_fisica' => array(
-                'required' => true,
-                'min' => 3,
-                'max' => 100
-            ),
-            'email' => array(
-                'required' => true,
-                'email' => true
-            ),
-            'cpf' => array(
-                'required' => true,
-                'min' => 14,
-                'max' => 14,
-                //'unique' => 'pessoa_fisica_tb'
-            ),
-            'rg' => array(
-                'required' => true,
-                'min' => 6,
-                'max' => 12,
-                //'unique' => 'pessoa_fisica_tb'
-            ),
-            'org_rg' => array(
-                'required' => true,
-                'min' => 2,
-                'max' => 8
-            ),
-            'fone' => array(
-                'required' => true,
-                'min' => 8,
-                'max' => 20
-            ),
-            'celular' => array(
-                'required' => true,
-                'min' => 8,
-                'max' => 20,
-                //'unique' => 'pessoa_fisica_tb'
-            ),
-            'dt_nascimento' => array(
-                'required' => true,
-                'data' => true
-            ),
-            'ie_sexo' => array(
-                'required' => true
-            )
-        ));
+        return true;
     }
-
 
     public function fotoPerfil()
     {

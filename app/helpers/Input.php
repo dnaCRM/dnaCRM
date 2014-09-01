@@ -67,4 +67,16 @@ class Input
 
     }
 
+    /**
+     * Recebe um string e retorna a mesma após remover os caracteres
+     * '.', '-', '(', ')', ' '
+     * Propósito: Receber um núemro de telefone ou CPF e remover os caracteres não numéricos
+     * @param $string
+     * @return mixed
+     */
+    public static function clean($string)
+    {
+        return str_replace(array('.', '-', '(', ')', ' '), '', $string);
+    }
+
 }

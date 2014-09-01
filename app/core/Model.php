@@ -29,4 +29,11 @@ abstract class Model {
         $this->db->select($this->tabela, null, null, null, "{$this->primary_key} DESC");
         return $this->db->getResultado();
     }
+
+    protected function emptyToNull()
+    {
+        foreach ($this->dados as $campo => $conteudo) {
+            $this->dados[$campo] = (!empty($conteudo) ? $conteudo : null);
+        }
+    }
 }

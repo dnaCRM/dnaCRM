@@ -28,18 +28,10 @@ $perfil_form->newPerfil($data['id']);
 
 
 if (Session::exists('sucesso')) {
+    Session::flash('sucesso');
+}
+
 ?>
-
-<div class="alert alert-dismissable alert-success">
-    <button type="button" class="close" data-dismiss="alert">×</button>
-    <strong>Notificação!</strong>
-
-    <?php
-    echo Session::flash('sucesso');
-    echo "</div>";
-    }
-
-    ?>
     <img class="img-circle profilefoto"
          src="<?php echo $perfil['im_foto']; ?>">
 
