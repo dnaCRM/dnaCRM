@@ -11,6 +11,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="favicon.ico"/>
     <link rel="stylesheet" href="css/bootstrap.css" media="screen">
+    <link rel="stylesheet" href="js/datatables/css/jquery.dataTables.min.css" media="screen">
+    <link rel="stylesheet" href="js/datatables/css/dataTables.bootstrap.css" media="screen">
 
     <link rel="stylesheet" href="css/bootstrapValidator.min.css"/>
     <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css"/>
@@ -218,6 +220,8 @@
 <script src="js/jquery.mask.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/bootstrap-datetimepicker.min.js"></script>
+<script src="js/datatables/js/jquery.dataTables.js"></script>
+<script src="js/datatables/js/dataTables.bootstrap.js"></script>
 <script src="js/custom.js"></script>
 
 <a id="toTop" href="#"><span id="toTopHover"></span><img width="45" height="45" alt="" src="img/to-top.png"></a>

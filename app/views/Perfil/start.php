@@ -26,7 +26,7 @@
         }
         ?>
 
-        <table class="table table-striped table-hover ">
+        <table id="perfillist" class="table table-striped table-hover ">
             <thead>
             <tr>
                 <th>Foto</th>

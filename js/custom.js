@@ -223,3 +223,9 @@ $(document).ready(function () {
             $('#pessoafisicaform').bootstrapValidator('revalidateField', 'dt_nascimento');
         });
 });
+
+$('#perfillist').dataTable({
+    "language": {
+        "url": "js/datatables/js/dataTables.pt-br.lang"
+    }
+});
