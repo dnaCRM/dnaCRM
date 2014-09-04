@@ -227,5 +227,6 @@ $(document).ready(function () {
 $('#perfillist').dataTable({
     "language": {
         "url": "js/datatables/js/dataTables.pt-br.lang"
-    }
+    },
+    responsive: true
 });
