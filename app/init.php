@@ -56,10 +56,6 @@ $GLOBALS['config'] = array(
         'pass' => '123456',
         'dbname' => 'dnacrm'
     ),
-    'lembrar' => array(
-        'cookie_name' => 'hash',
-        'cookie_expiry' => 604800
-    ),
     'session' => array(
         'session_name' => 'user',
         'token_name' => 'token'

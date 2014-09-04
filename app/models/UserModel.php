@@ -148,22 +148,6 @@ class UserModel extends Model
                     Session::put($this->sessionName, $this->dados['id_usuario']);
                     Session::put('nome_usuario', $this->dados['nome_usuario']);
 
-                    if ($lembrar) {
-                        $hash = Hash::unique();
-                        $hashCheck = $this->db->get('users_session', "user_id = {$this->dados['id_usuario']}");
-
-                        if (!$hashCheck->getNumRegistros()) {
-                            $this->db->insert(
-                                'users_session', [
-                                'user_id' => $this->dados['id_usuario'],
-                                'hash' => $hash
-                            ]);
-                        } else {
-                            $hash = $hashCheck->first()['hash'];
-                        }
-
-                        Cookie::put($this->cookieName, $hash, Config::get('lembrar/cookie_expiry'));
-                    }
                     return true;
                 }
             }
