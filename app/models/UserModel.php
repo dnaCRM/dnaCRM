@@ -12,7 +12,8 @@ class UserModel extends Model
      */
     public function __construct($user = null)
     {
-        $this->tabela = 'usuarios';
+        $this->tabela = 'usuario_tb';
+        $this->primary_key = 'cd_usuario';
         $this->db = DB::getInstance();
 
         $this->sessionName = Config::get('session/session_name');
@@ -35,15 +36,15 @@ class UserModel extends Model
 
     /**
      *
-     * @param array $fields
+     * @param array $campos
      * @throws Exception
      */
     public function create($campos = array())
     {
         $this->filtrarDados($campos);
 
-        if (!$this->db->insert('usuarios', $this->dados)) {
-            throw new Exception('There was a problem creating an account.');
+        if (!$this->db->insert($this->tabela, $this->dados)) {
+            throw new Exception('Não foi possível cadastrar usuário.');
         }
     }
 
@@ -62,7 +63,7 @@ class UserModel extends Model
 
         $this->filtrarUpdateDados($campos);
 
-        if (!$this->db->update($this->tabela, "id_usuario = {$id}", $this->dados)) {
+        if (!$this->db->update($this->tabela, $this->dados, "{$this->primary_key} = {$id}")) {
             throw new Exception('Não foi possível atualizar.');
         }
     }
@@ -72,8 +73,8 @@ class UserModel extends Model
         $filtros = [
             'senha' => null,
             'salt' => null,
-            'nome_usuario' => FILTER_SANITIZE_STRING,
-            'data_atualizado' => FILTER_DEFAULT,
+            'cd_usuario_atualiza' => FILTER_SANITIZE_NUMBER_INT,
+            'dt_usuario_atualiza' => FILTER_DEFAULT
         ];
 
         $this->dados = filter_var_array($dados, $filtros);
@@ -82,13 +83,16 @@ class UserModel extends Model
     private function filtrarDados($dados)
     {
         $filtros = [
-            'usuario' => FILTER_SANITIZE_STRING,
+            'cd_pessoa_fisica' => FILTER_SANITIZE_NUMBER_INT,
+            'login' => FILTER_SANITIZE_STRING,
             'senha' => null,
             'salt' => null,
-            'nome_usuario' => FILTER_SANITIZE_STRING,
-            'data_cadastro' => FILTER_DEFAULT,
-            'data_atualizado' => FILTER_DEFAULT,
-            'grupo' => FILTER_DEFAULT
+            'nivel' => FILTER_DEFAULT,
+            'ie_status' => FILTER_DEFAULT,
+            'cd_usuario_criacao' => FILTER_SANITIZE_NUMBER_INT,
+            'dt_usuario_criacao' => FILTER_DEFAULT,
+            'cd_usuario_atualiza' => FILTER_SANITIZE_NUMBER_INT,
+            'dt_usuario_atualiza' => FILTER_DEFAULT
         ];
 
         $this->dados = filter_var_array($dados, $filtros);
@@ -102,7 +106,7 @@ class UserModel extends Model
     public function find($user = null)
     {
         if ($user) {
-            $field = (is_numeric($user)) ? 'id_usuario' : 'usuario';
+            $field = (is_numeric($user)) ? $this->primary_key : 'login';
             $data = $this->db->get($this->tabela, "{$field} = '{$user}'");
 
             if ($data->getNumRegistros()) {
@@ -120,11 +124,11 @@ class UserModel extends Model
      */
     public function getUser($id = '')
     {
-        $this->db->get($this->tabela, "id_usuario = {$id}");
+        $this->db->get($this->tabela, "{$this->primary_key} = {$id}");
         if ($this->db->getNumRegistros() > 0) {
             return $this->db->first();
         }
-        Session::flash('fail', 'Usuário não encontrado');
+        Session::flash('fail', 'Usuário não encontrado', 'danger');
         Redirect::to(SITE_URL . 'User');
     }
 
@@ -139,14 +143,14 @@ class UserModel extends Model
     {
 
         if (!$usuario && !$senha && $this->exists()) {
-            Session::put($this->sessionName, $this->dados['id_usuario']);
-            Session::put('nome_usuario', $this->dados['nome_usuario']);
+            Session::put($this->sessionName, $this->dados[$this->primary_key]);
+            Session::put('login', $this->dados['login']);
         } else {
             $user = $this->find($usuario);
             if ($user) {
                 if ($this->dados['senha'] === Hash::make($senha, $this->dados['salt'])) {
-                    Session::put($this->sessionName, $this->dados['id_usuario']);
-                    Session::put('nome_usuario', $this->dados['nome_usuario']);
+                    Session::put($this->sessionName, $this->dados[$this->primary_key]);
+                    Session::put('login', $this->dados['login']);
 
                     return true;
                 }
@@ -162,7 +166,7 @@ class UserModel extends Model
      */
     public function hasPermission($key)
     {
-        $group = $this->db->get('grupos', 'id' . '=' . $this->dados['grupo']);
+        $group = $this->db->get('nivel', 'id' . '=' . $this->dados['nivel']);
 
         if ($group->getNumRegistros()) {
             $permissions = json_decode($group->first()['permissions'], true);
@@ -189,8 +193,6 @@ class UserModel extends Model
     public function logout()
     {
 
-        $this->db->delete('users_session', "user_id = {$this->dados['id_usuario']}");
-
         Session::delete($this->sessionName);
         Cookie::delete($this->cookieName);
     }
@@ -206,7 +208,7 @@ class UserModel extends Model
 
     public function fullList()
     {
-        $this->db->select('usuarios', null, null, null, 'data_atualizado DESC');
+        $this->db->select($this->tabela, null, null, null, 'dt_usuario_atualiza DESC');
         return $this->db->getResultado();
     }
 
