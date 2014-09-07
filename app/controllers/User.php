@@ -2,7 +2,6 @@
 
 class User extends Controller
 {
-    private $validation;
 
     public function __construct()
     {
@@ -16,30 +15,18 @@ class User extends Controller
         if (Input::exists()) {
             if (Token::check(Input::get('token'))) {
 
-                $this->validateLoginInput();
-
-                if ($this->validation->passed()) {
-
-                    $lembrar = (Input::get('lembrar') === 'on') ? true : false;
-
-                    $login = $this->model->login(Input::get('usuario'), Input::get('senha'), $lembrar);
-                    //$this->model->logout();
-                    if ($login) {
-                        Session::flash('msg', 'Logado!', 'success');
-                        Redirect::to(SITE_URL);
-                    } else {
-                        Session::flash('msg', 'Falha no login!', 'danger');
-                    }
-
-                    Session::flash('sucesso', 'Você está logado.', 'success');
-
+                $login = $this->model->login(Input::get('login'), Input::get('senha'));
+                //$this->model->logout();
+                if ($login) {
+                    Session::flash('msg', 'Logado!', 'success');
+                    Redirect::to(SITE_URL);
                 } else {
-                    // errors
-                    foreach ($this->validation->erros() as $erro) {
-                        CodeError($erro, E_USER_WARNING);
-                    }
-
+                    Session::flash('msg', 'Falha no login!', 'danger');
                 }
+
+                Session::flash('sucesso', 'Você está logado.', 'success');
+
+
             }
         }
     }
@@ -54,34 +41,15 @@ class User extends Controller
         if (Input::exists()) {
             if (Token::check(Input::get('token'))) {
 
-                $this->validateRegisterInput();
+                $this->setDados();
 
-                if ($this->validation->passed()) {
+                try {
+                    $this->model->create($this->dados);
 
-                    $salt = Hash::salt(32);
+                    Session::flash('msg', 'Você está registrado.', 'success');
 
-                    try {
-                        $this->model->create([
-                            'usuario' => Input::get('usuario'),
-                            'senha' => Hash::make(Input::get('senha'), $salt),
-                            'salt' => $salt,
-                            'nome_usuario' => Input::get('nome_usuario'),
-                            'data_cadastro' => (new DateTime())->format('Y-m-d H:i:s'),
-                            'data_atualizado' => (new DateTime())->format('Y-m-d H:i:s'),
-                            'grupo' => 1
-                        ]);
-
-                        Session::flash('msg', 'Você está registrado.', 'success');
-
-                    } catch (Exception $e) {
-                        CodeFail($e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
-                    }
-
-                } else {
-                    // errors
-                    foreach ($this->validation->erros() as $erro) {
-                        CodeError($erro, E_USER_WARNING);
-                    }
+                } catch (Exception $e) {
+                    CodeFail($e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
                 }
             }
         }
@@ -92,181 +60,126 @@ class User extends Controller
         if (Input::exists()) {
             if (Token::check(Input::get('token'))) {
 
-                $this->validateUpdateInput();
+                $this->setUpdateDados();
+                try {
+                    $this->model->updateUser($this->dados);
 
+                    Session::put('msg', 'Carregou ');
 
-                if ($this->validation->passed()) {
-
-                    $salt = Hash::salt(32);
-
-                    try {
-                        $this->model->updateUser($this->data['id_usuario'], [
-                            'senha' => Hash::make(Input::get('senha'), $salt),
-                            'salt' => $salt,
-                            'nome_usuario' => Input::get('nome_usuario'),
-                            'data_atualizado' => (new DateTime())->format('Y-m-d H:i:s'),
-                        ]);
-
-                        Session::put('msg', 'Carregou ');
-
-                    } catch (Exception $e) {
-                        CodeFail($e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
-                    }
-                } else {
-                    // errors
-                    foreach ($this->validation->erros() as $erro) {
-                        CodeError($erro, E_USER_WARNING);
-                    }
+                } catch (Exception $e) {
+                    CodeFail($e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
                 }
             }
         }
     }
 
-        /**
-         * Valida formulário de login
-         */
-        private
-        function validateLoginInput()
-        {
-            $validate = new Validate;
-            $this->validation = $validate->check($_POST, array(
-                'usuario' => array(
-                    'required' => true,
-                    'min' => 3,
-                    'max' => 10
-                ),
-                'senha' => array(
-                    'required' => true,
-                    'min' => 6,
-                )
-            ));
-        }
+    private function setDados()
+    {
+        $salt = Hash::salt(32);
 
-        /**
-         * Valida dados para registro de usuário
-         */
-        private
-        function validateRegisterInput()
-        {
-            $validate = new Validate;
-            $this->validation = $validate->check($_POST, array(
-                'usuario' => array(
-                    'required' => true,
-                    'min' => 3,
-                    'max' => 10,
-                    'unique' => 'usuarios'
-                ),
-                'senha' => array(
-                    'required' => true,
-                    'min' => 6,
-                ),
-                'confirmar_senha' => array(
-                    'required' => true,
-                    'matches' => 'senha'
-                ),
-                'nome_usuario' => array(
-                    'required' => true,
-                    'min' => 3,
-                    'max' => 255
-                )
-            ));
-        }
-        /**
-         * Valida dados para registro de usuário
-         */
-        private
-        function validateUpdateInput()
-        {
-            $validate = new Validate;
-            $this->validation = $validate->check($_POST, array(
-                'senha' => array(
-                    'required' => true,
-                    'min' => 6,
-                ),
-                'confirmar_senha' => array(
-                    'required' => true,
-                    'matches' => 'senha'
-                ),
-                'nome_usuario' => array(
-                    'required' => true,
-                    'min' => 3,
-                    'max' => 255
-                )
-            ));
-        }
-
-        /**
-         * View padrão para o model User
-         */
-        public
-        function start()
-        {
-            $userlist = $this->model->fullList();
-
-            $dados = [
-                'pagesubtitle' => 'Lista',
-                'pagetitle' => 'Usuários',
-                'list' => $userlist
-            ];
-
-            $this->view = new View('User', 'start');
-            $this->view->output($dados);
-        }
-
-        /**
-         * View para formulário de registro de usuário
-         */
-        public
-        function registerUser()
-        {
-            $dados = [
-                'pagesubtitle' => 'Register Screen - Testes com Banco de dados',
-                'pagetitle' => 'Testando'
-            ];
-
-            $this->view = new View('User', 'registerUser');
-            $this->view->output($dados);
-        }
-
-        /**
-         * View para tela de login
-         */
-        public
-        function loginScreen()
-        {
-            $dados = [
-                'pagesubtitle' => 'Login Screen - Acesso ao Sistema',
-                'pagetitle' => 'dnaCRM'
-            ];
-
-            $this->view = new View('User', 'loginScreen');
-            $this->view->output($dados, 'login');
-        }
-
-        public
-        function updateUser($id = '')
-        {
-            $userarr = $this->model->getUser($id);
-
-            $dados = [
-                'pagetitle' => $userarr['nome_usuario'],
-                'pagesubtitle' => $userarr['usuario'],
-                'user' => $userarr
-            ];
-
-            $this->view = new View('User', 'updateUser');
-            $this->view->output($dados);
-        }
-
-        /**
-         * Método que faz logoff de usuário
-         * Redireciona para a tela de entrada
-         * como não há usuário logado a tela exibida é a de login
-         */
-        public
-        function logoff()
-        {
-            $this->model->logout();
-            Redirect::to(SITE_URL);
-        }
+        $this->dados = array(
+            'cd_pessoa_fisica' => Input::get('cd_pessoa_fisica'),
+            'login' => Input::get('login'),
+            'senha' => Hash::make(Input::get('senha'), $salt),
+            'salt' => $salt,
+            'nivel' => Input::get('nivel'),
+            'cd_usuario_criacao' => Input::get('cd_usuario_criacao'),
+            'dt_usuario_criacao' => (new DateTime())->format('Y-m-d H:i:s'),
+            'cd_usuario_atualiza' => Input::get('cd_usuario_atualiza'),
+            'dt_usuario_atializa' => (new DateTime())->format('Y-m-d H:i:s'),
+        );
     }
+
+    private function setUpdateDados()
+    {
+        $salt = Hash::salt(32);
+
+        $this->dados = array(
+            'cd_pessoa_fisica' => Input::get('cd_pessoa_fisica'),
+            'login' => Input::get('login'),
+            'senha' => Hash::make(Input::get('senha'), $salt),
+            'salt' => $salt,
+            'nivel' => Input::get('nivel'),
+            'cd_usuario_criacao' => Input::get('cd_usuario_criacao'),
+            'dt_usuario_criacao' => (new DateTime())->format('Y-m-d H:i:s'),
+            'cd_usuario_atualiza' => Input::get('cd_usuario_atualiza'),
+            'dt_usuario_atializa' => (new DateTime())->format('Y-m-d H:i:s'),
+        );
+    }
+
+    /**
+     * View padrão para o model User
+     */
+    public
+    function start()
+    {
+        $userlist = $this->model->fullList();
+
+        $dados = [
+            'pagesubtitle' => 'Lista',
+            'pagetitle' => 'Usuários',
+            'list' => $userlist
+        ];
+
+        $this->view = new View('User', 'start');
+        $this->view->output($dados);
+    }
+
+    /**
+     * View para formulário de registro de usuário
+     */
+    public
+    function formuser($id = null)
+    {
+        $dados = array(
+            'pagesubtitle' => 'Cadastro de usuário ',
+            'pagetitle' => 'Usuário',
+            'perfil' => $id
+        );
+
+        $this->view = new View('User', 'formuser');
+        $this->view->output($dados);
+    }
+
+    /**
+     * View para tela de login
+     */
+    public
+    function loginScreen()
+    {
+        $dados = array(
+            'pagesubtitle' => 'Login Screen - Acesso ao Sistema',
+            'pagetitle' => 'dnaCRM'
+        );
+
+        $this->view = new View('User', 'loginScreen');
+        $this->view->output($dados, 'login');
+    }
+
+    public
+    function updateUser($id = '')
+    {
+        $userarr = $this->model->getUser($id);
+
+        $dados = array(
+            'pagetitle' => $userarr['nome_usuario'],
+            'pagesubtitle' => $userarr['usuario'],
+            'user' => $userarr
+        );
+
+        $this->view = new View('User', 'updateUser');
+        $this->view->output($dados);
+    }
+
+    /**
+     * Método que faz logoff de usuário
+     * Redireciona para a tela de entrada
+     * como não há usuário logado a tela exibida é a de login
+     */
+    public
+    function logoff()
+    {
+        $this->model->logout();
+        Redirect::to(SITE_URL);
+    }
+}

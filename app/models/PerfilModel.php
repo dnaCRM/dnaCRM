@@ -10,8 +10,9 @@ class PerfilModel extends Model implements IModelComFoto
 {
 
     private $fotoPerfil = false;
-    protected $coluna_imagem;// coluna que guarda imagens
-    private $image_folder;
+    private $coluna_imagem; // coluna que guarda imagens
+    private $img_folder;
+    private $foto_default;
     /** @var  ImageModel */
     private $image_manager;
 
@@ -22,7 +23,8 @@ class PerfilModel extends Model implements IModelComFoto
         $this->tabela = 'pessoa_fisica_tb';
         $this->coluna_imagem = 'im_foto';
         $this->primary_key = 'cd_pessoa_fisica';
-        $this->image_folder = IMG_UPLOADS_FOLDER . "{$this->tabela}/";
+        $this->img_folder = IMG_UPLOADS_FOLDER . "{$this->tabela}/";
+        $this->foto_default = IMG_UPLOADS_FOLDER . 'icon-user.jpg';
 
         $this->setImageManager();
     }
@@ -90,17 +92,59 @@ class PerfilModel extends Model implements IModelComFoto
     public function getPerfil($id = '')
     {
         $this->db->get($this->tabela, "{$this->primary_key} = {$id}");
+
         if ($this->db->getNumRegistros() > 0) {
-            return $this->db->first();
+
+            $perfil_dados = (array)$this->db->first();
+
+            $perfil_dados[$this->coluna_imagem] = $this->getImgUrl($perfil_dados);
+
+            return $perfil_dados;
+
+        } else {
+            Session::flash('fail', 'Pefil não encontrado', 'info');
+            Redirect::to(SITE_URL . 'Perfil');
         }
-        Session::flash('fail', 'Pefil não encontrado','info');
-        Redirect::to(SITE_URL . 'Perfil');
+    }
+
+    public function getPerfilList()
+    {
+        $list = (array)$this->fullList();
+
+        // Para cada perfil retornado, executa getImgUrl('perfil')
+        foreach($list as $item => $perfil) {
+            $list[$item][$this->coluna_imagem] = $this->getImgUrl($list[$item]);
+        }
+        return $list;
+    }
+
+    /**
+     * Recebe um array com dados do Perfil e testa se ele tem uma imagem gravada
+     * @param array $perfil
+     * @return string = endereço da imagem do Perfil ou imagem padrão
+     */
+    private function getImgUrl(array $perfil)
+    {
+        if (!file_exists($this->img_folder . $perfil[$this->primary_key] . '.jpg')) {
+            $this->getFoto($perfil[$this->primary_key] );
+        }
+
+        return $perfil[$this->coluna_imagem] ?
+            $this->img_folder . $perfil[$this->primary_key] . '.jpg' : $this->foto_default;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFotoDefault()
+    {
+        return $this->foto_default;
     }
 
     // Métodos obrigatórios para interface IModelComFoto
     public function getImageFolder()
     {
-        return $this->image_folder;
+        return $this->img_folder;
     }
 
     public function getTabela()

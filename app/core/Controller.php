@@ -11,7 +11,7 @@ abstract class Controller
     protected $model;
     protected $method;
     protected $view;
-    protected $data;
+    protected $dados;
 
     public function model($model)
     {

@@ -172,3 +172,7 @@ table.dataTable.no-footer {
 #report_length label, #report_info {
     width: 300px;
 }
+
+table, button {
+    font-family: 'Source Sans Pro', sans-serif;
+}

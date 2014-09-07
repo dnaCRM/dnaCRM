@@ -5,6 +5,7 @@ class UserModel extends Model
     private $sessionName;
     private $cookieName;
     private $isLoggedIn;
+    private $perfil;
 
     /**
      *
@@ -54,7 +55,7 @@ class UserModel extends Model
      * @param string $id
      * @throws Exception
      */
-    public function updateUser($id = null, $campos = [])
+    public function updateUser($id = null, $campos = array())
     {
 
         if (!$id && $this->isLoggedIn()) {
@@ -70,19 +71,21 @@ class UserModel extends Model
 
     private function filtrarUpdateDados($dados)
     {
-        $filtros = [
+        $filtros = array(
+            'login' => FILTER_SANITIZE_STRING,
             'senha' => null,
             'salt' => null,
+            'nivel' => FILTER_DEFAULT,
             'cd_usuario_atualiza' => FILTER_SANITIZE_NUMBER_INT,
             'dt_usuario_atualiza' => FILTER_DEFAULT
-        ];
+        );
 
         $this->dados = filter_var_array($dados, $filtros);
     }
 
     private function filtrarDados($dados)
     {
-        $filtros = [
+        $filtros = array(
             'cd_pessoa_fisica' => FILTER_SANITIZE_NUMBER_INT,
             'login' => FILTER_SANITIZE_STRING,
             'senha' => null,
@@ -93,7 +96,7 @@ class UserModel extends Model
             'dt_usuario_criacao' => FILTER_DEFAULT,
             'cd_usuario_atualiza' => FILTER_SANITIZE_NUMBER_INT,
             'dt_usuario_atualiza' => FILTER_DEFAULT
-        ];
+        );
 
         $this->dados = filter_var_array($dados, $filtros);
     }
@@ -113,7 +116,6 @@ class UserModel extends Model
                 $this->dados = $data->first();
                 return true;
             }
-
         }
         return false;
     }
@@ -136,10 +138,9 @@ class UserModel extends Model
      *
      * @param string $usuario
      * @param string $senha
-     * @param boolean $lembrar
      * @return boolean
      */
-    public function login($usuario = null, $senha = null, $lembrar = false)
+    public function login($usuario = null, $senha = null)
     {
 
         if (!$usuario && !$senha && $this->exists()) {
@@ -192,7 +193,6 @@ class UserModel extends Model
      */
     public function logout()
     {
-
         Session::delete($this->sessionName);
         Cookie::delete($this->cookieName);
     }
@@ -211,5 +211,22 @@ class UserModel extends Model
         $this->db->select($this->tabela, null, null, null, 'dt_usuario_atualiza DESC');
         return $this->db->getResultado();
     }
+
+    /**
+     * @param mixed $perfil
+     */
+    public function setPerfil(PerfilModel $perfil)
+    {
+        $this->perfil = $perfil;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPerfil()
+    {
+        return $this->perfil;
+    }
+
 
 }
