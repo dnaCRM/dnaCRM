@@ -36,7 +36,6 @@ class Perfil extends Controller
 
             $nasc = new DateTime($perfilarr['dt_nascimento']);
             $perfilarr['dt_nascimento'] = $nasc->format('d/m/Y');
-            $perfilarr['im_foto'] = $this->imFoto($perfilarr);
 
             $dados = array(
 
