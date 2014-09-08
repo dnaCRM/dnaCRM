@@ -96,6 +96,7 @@ function CodeError($mensagem, $numero)
 
 function CodeFail($numero, $mensagem, $arquivo, $linha)
 {
+    $mensagem = strpos($mensagem, 'uq_pessoa_fisica_cpf') ? 'O CPF informado já existe em outro perfil!' : $mensagem;
     switch ($numero) {
         case E_USER_NOTICE:
             $classecss = CSS_INFO;
@@ -110,12 +111,18 @@ function CodeFail($numero, $mensagem, $arquivo, $linha)
             $classecss = CSS_WARNING;
             break;
     }
-
+/*
     echo "<div class=\"alert alert-{$classecss}\">";
     echo "<strong>Erro na Linha: #{$linha} :: </strong> {$mensagem}<br>";
     echo "<small>{$arquivo}</small><br>";
     echo "<small>Erro número {$numero}</small>";
     echo '</div>';
+*/
+    echo "<div class=\"alert alert-dismissable alert-{$classecss}\">";
+    echo '<button type="button" class="close" data-dismiss="alert">×</button>';
+    echo '<strong>ALERTA! </strong><br>';
+    echo $mensagem;
+    echo "</div>";
 }
 // Define manipulador de erro padrão
 set_error_handler('CodeFail');
