@@ -21,17 +21,7 @@
             $telefoneN = preg_replace($pattern, '($1) $2-$3', $telefone);
             echo $telefoneN . '<br><br>';
 
-            function envelhecer(&$idade) {
-
-                $idade++;
-
-            }
-
-            $minha_idade = 20;
-
-            envelhecer($minha_idade);
-
-            echo $minha_idade; // imprime 20 pois minha idade foi incrementada somente dentro da função;
+            echo var_dump(Hash::make('123456', 'postgres'));
             ?>
 
         </div>

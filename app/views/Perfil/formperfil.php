@@ -94,7 +94,7 @@ if (Session::exists('sucesso')) {
 
 
                     <input type="text" class="form-control" id="nm_pessoa_fisica" name="nm_pessoa_fisica"
-                           value="<?php echo $perfil['nm_pessoa_fisica']; ?>" placeholder="Nome">
+                           value="<?php echo $perfil['nm_pessoa_fisica'] == '' ? Input::get('nm_pessoa_fisica') : $perfil['nm_pessoa_fisica']; ?>" placeholder="Nome">
                 </div>
             </div>
             <div class="form-group">
@@ -246,6 +246,24 @@ if (Session::exists('sucesso')) {
                     <?php
 
                     var_dump($_FILES);
+
+                    ?>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+                        <i class="glyphicon glyphicon-user"></i> $perfil
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseFour" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <?php
+
+                    var_dump($perfil);
 
                     ?>
                 </div>

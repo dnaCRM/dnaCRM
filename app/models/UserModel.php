@@ -74,13 +74,13 @@ class UserModel extends Model
         $filtros = array(
             'login' => FILTER_SANITIZE_STRING,
             'senha' => null,
-            'salt' => null,
             'nivel' => FILTER_DEFAULT,
             'cd_usuario_atualiza' => FILTER_SANITIZE_NUMBER_INT,
             'dt_usuario_atualiza' => FILTER_DEFAULT
         );
 
         $this->dados = filter_var_array($dados, $filtros);
+        $this->emptyToNull();
     }
 
     private function filtrarDados($dados)
@@ -89,7 +89,6 @@ class UserModel extends Model
             'cd_pessoa_fisica' => FILTER_SANITIZE_NUMBER_INT,
             'login' => FILTER_SANITIZE_STRING,
             'senha' => null,
-            'salt' => null,
             'nivel' => FILTER_DEFAULT,
             'ie_status' => FILTER_DEFAULT,
             'cd_usuario_criacao' => FILTER_SANITIZE_NUMBER_INT,
@@ -99,6 +98,7 @@ class UserModel extends Model
         );
 
         $this->dados = filter_var_array($dados, $filtros);
+        $this->emptyToNull();
     }
 
     /**
@@ -124,11 +124,14 @@ class UserModel extends Model
      * @param string $id = id do usuário
      * @return array = primeiro registro encontrado usando o id informado
      */
-    public function getUser($id = '')
+    public function getUsuario($id = '')
     {
         $this->db->get($this->tabela, "{$this->primary_key} = {$id}");
+
         if ($this->db->getNumRegistros() > 0) {
-            return $this->db->first();
+            $usuario_dados = (array)$this->db->first();
+            $usuario_dados['perfil'] = (new PerfilModel())->getPerfil($usuario_dados['cd_pessoa_fisica']);
+            return $usuario_dados;
         }
         Session::flash('fail', 'Usuário não encontrado', 'danger');
         Redirect::to(SITE_URL . 'User');
@@ -149,7 +152,7 @@ class UserModel extends Model
         } else {
             $user = $this->find($usuario);
             if ($user) {
-                if ($this->dados['senha'] === Hash::make($senha, $this->dados['salt'])) {
+                if ($this->dados['senha'] === Hash::verify($senha, $this->dados['senha'])) {
                     Session::put($this->sessionName, $this->dados[$this->primary_key]);
                     Session::put('login', $this->dados['login']);
 

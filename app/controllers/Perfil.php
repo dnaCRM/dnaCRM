@@ -74,8 +74,9 @@ class Perfil extends Controller
      * @param string $id = id(chave primária da tabela de perfis)
      * O método recebe o id e monta respecttiva a tela de perfil
      */
-    public function visualizar($id = '')
+    public function visualizar($id = null)
     {
+        $id = (int)$id;
         $perfilarr = $this->model->getPerfil($id);
 
         $dados = array(
@@ -94,6 +95,7 @@ class Perfil extends Controller
 
     public function confirmDelete($id)
     {
+        $id = (int)$id;
         $perfilarr = $this->model->getPerfil($id);
 
         $dados = array(
@@ -110,6 +112,7 @@ class Perfil extends Controller
 
     public function removerPerfil($id)
     {
+        $id = (int)$id;
         if (Input::exists()) {
             if (Token::check(Input::get('token'))) {
                 $this->model->deletePerfil($id);
@@ -162,17 +165,6 @@ class Perfil extends Controller
         );
 
         $this->fotoPerfil();
-    }
-
-    /**
-     * Instancia um objeto da classe Validate que
-     * valida as informações recebidas pelo formulário
-     * @todo Removido a validação unique, pois está impossibilitando a atualização de perfil
-     */
-    public function validatePerfilInfo()
-    {
-        $this->fotoPerfil();
-        return true;
     }
 
     public function fotoPerfil()

@@ -217,11 +217,59 @@ $(document).ready(function () {
         }
     });
 
+    $('#cadastro_usuario').bootstrapValidator({
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            usuario: {
+                validators: {
+                    notEmpty: {
+                        message: 'Nome de usuário é obrigatório.'
+                    },
+                    different: {
+                        field: 'senha',
+                        message: 'Nome de usuário deve ser diferente da senha'
+                    }
+                }
+            },
+            senha: {
+                validators: {
+                    notEmpty: {
+                        message: 'Senha é obrigatória'
+                    },
+                    different: {
+                        field: 'usuario',
+                        message: 'Senha deve ser diferente do nome de usuário'
+                    }
+                }
+            },
+            confirmar_senha: {
+                validators: {
+                    notEmpty: {
+                        message: 'Confirmação de senha obrigatória.'
+                    },
+                    identical: {
+                        field: 'senha',
+                        message: 'O valor informado deve ser igual a senha informada.'
+                    }
+                }
+            }
+        }
+    });
+
     $('#datetimepicker')
         .on('dp.change dp.show', function(e) {
             // Valida a data quando o usuário inserir
             $('#pessoafisicaform').bootstrapValidator('revalidateField', 'dt_nascimento');
         });
+});
+
+$(document).ready(function() {
+
 });
 
 $('#perfillist').dataTable({

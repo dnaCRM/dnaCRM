@@ -2,25 +2,12 @@
 
 class Hash {
 
-    /**
-     * Recebe uma string e combina com outra string ($salt)
-     * para formar um hashcode através da função hash() usando
-     * o algorítmo 'sha256
-     * @param string $string
-     * @param string $salt
-     * @return hash code
-     */
-    public static function make($string, $salt = '') {
-        return hash('sha256', $string . $salt);
+    public static function make($senha, $usuario) {
+        return 'md5'. md5($senha . $usuario);
     }
 
-    /**
-     * Gera um valor encriptado
-     * @param int $length
-     * @return valor encriptado
-     */
-    public static function salt($length) {
-        return mcrypt_create_iv($length);
+    public static function verify($senha, $usuario, $hash) {
+        return self::make($senha, $usuario) == $hash ? true : false;
     }
 
     /**
@@ -28,7 +15,7 @@ class Hash {
      * @return hashcode
      */
     public static function unique() {
-        return self::make(uniqid());
+        return uniqid();
     }
 
 }

@@ -9,11 +9,17 @@
     <div class="col-md-6" style="padding: 15px 15px 0 15px;">
         <div class="well">
 
-            <a class="btn btn-primary btn-sm" href="Perfil/formperfil/<?php echo $data['perfil']['cd_pessoa_fisica']; ?>">
+            <a class="btn btn-primary btn-sm"
+               href="Perfil/formperfil/<?php echo $data['perfil']['cd_pessoa_fisica']; ?>">
                 <span class="fa fa-edit"></span> Editar</a>
 
-            <a class="btn btn-warning btn-sm" href="Perfil/confirmDelete/<?php echo $data['perfil']['cd_pessoa_fisica']; ?>">
+            <a class="btn btn-warning btn-sm"
+               href="Perfil/confirmDelete/<?php echo $data['perfil']['cd_pessoa_fisica']; ?>">
                 <span class="fa fa-trash-o"></span> Deletar</a>
+            <a class="btn btn-info btn-sm"
+               href="User/formuser/<?php echo $data['perfil']['cd_pessoa_fisica']; ?>">
+                <span class="fa fa-trash-o"></span> Cadastrar Usuário</a>
+
 
         </div>
     </div>

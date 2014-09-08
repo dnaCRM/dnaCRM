@@ -113,7 +113,8 @@ function CodeFail($numero, $mensagem, $arquivo, $linha)
 
     echo "<div class=\"alert alert-{$classecss}\">";
     echo "<strong>Erro na Linha: #{$linha} :: </strong> {$mensagem}<br>";
-    echo "<small>{$arquivo}</small>";
+    echo "<small>{$arquivo}</small><br>";
+    echo "<small>Erro número {$numero}</small>";
     echo '</div>';
 }
 // Define manipulador de erro padrão

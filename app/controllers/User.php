@@ -26,7 +26,6 @@ class User extends Controller
 
                 Session::flash('sucesso', 'Você está logado.', 'success');
 
-
             }
         }
     }
@@ -36,18 +35,20 @@ class User extends Controller
      * Registra um usuário com dados recebidos do formulário
      *
      */
-    public function processRegister()
+    public function newUser($id = null)
     {
         if (Input::exists()) {
             if (Token::check(Input::get('token'))) {
 
-                $this->setDados();
-
                 try {
-                    $this->model->create($this->dados);
-
+                    if (!$id) {
+                        $this->setDados();
+                        $this->model->create($this->dados);
+                    } else {
+                        $this->setUpdateDados();
+                        $this->model->updateUser($id, $this->dados);
+                    }
                     Session::flash('msg', 'Você está registrado.', 'success');
-
                 } catch (Exception $e) {
                     CodeFail($e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
                 }
@@ -55,53 +56,30 @@ class User extends Controller
         }
     }
 
-    public function processUpdate()
-    {
-        if (Input::exists()) {
-            if (Token::check(Input::get('token'))) {
-
-                $this->setUpdateDados();
-                try {
-                    $this->model->updateUser($this->dados);
-
-                    Session::put('msg', 'Carregou ');
-
-                } catch (Exception $e) {
-                    CodeFail($e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
-                }
-            }
-        }
-    }
 
     private function setDados()
     {
-        $salt = Hash::salt(32);
 
         $this->dados = array(
-            'cd_pessoa_fisica' => Input::get('cd_pessoa_fisica'),
-            'login' => Input::get('login'),
-            'senha' => Hash::make(Input::get('senha'), $salt),
-            'salt' => $salt,
+            'cd_pessoa_fisica' => (int)Input::get('id_perfil'),
+            'login' => (string)Input::get('usuario'),
+            'senha' => Hash::make(Input::get('senha')),
             'nivel' => Input::get('nivel'),
-            'cd_usuario_criacao' => Input::get('cd_usuario_criacao'),
+            'ie_status' => Input::get('ie_status'),
+            'cd_usuario_criacao' => (int)Input::get('id_perfil'),
             'dt_usuario_criacao' => (new DateTime())->format('Y-m-d H:i:s'),
-            'cd_usuario_atualiza' => Input::get('cd_usuario_atualiza'),
+            'cd_usuario_atualiza' => (int)Input::get('cd_usuario_atualiza'),
             'dt_usuario_atializa' => (new DateTime())->format('Y-m-d H:i:s'),
         );
     }
 
     private function setUpdateDados()
     {
-        $salt = Hash::salt(32);
 
         $this->dados = array(
-            'cd_pessoa_fisica' => Input::get('cd_pessoa_fisica'),
-            'login' => Input::get('login'),
-            'senha' => Hash::make(Input::get('senha'), $salt),
-            'salt' => $salt,
+            'senha' => Hash::make(Input::get('senha')),
             'nivel' => Input::get('nivel'),
-            'cd_usuario_criacao' => Input::get('cd_usuario_criacao'),
-            'dt_usuario_criacao' => (new DateTime())->format('Y-m-d H:i:s'),
+            'ie_status' => Input::get('ie_status'),
             'cd_usuario_atualiza' => Input::get('cd_usuario_atualiza'),
             'dt_usuario_atializa' => (new DateTime())->format('Y-m-d H:i:s'),
         );
@@ -129,13 +107,25 @@ class User extends Controller
      * View para formulário de registro de usuário
      */
     public
-    function formuser($id = null)
+    function formuser($id, $update = false)
     {
-        $dados = array(
-            'pagesubtitle' => 'Cadastro de usuário ',
-            'pagetitle' => 'Usuário',
-            'perfil' => $id
-        );
+        if ($update) {
+            $usuarioarr = $this->model->getUsuario($id);
+            $dados = array(
+                'pagesubtitle' => $usuarioarr['nm_usuario'],
+                'pagetitle' => 'Cadastro de Usuário',
+                'perfil' => $usuarioarr
+            );
+
+        } else {
+            $perfil = new PerfilModel();
+            $perfilarr = $perfil->getPerfil($id);
+            $dados = array(
+                'pagesubtitle' => $perfilarr['nm_pessoa_fisica'],
+                'pagetitle' => 'Cadastro de Usuário',
+                'perfil' => $perfilarr
+            );
+        }
 
         $this->view = new View('User', 'formuser');
         $this->view->output($dados);
