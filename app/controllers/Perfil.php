@@ -50,18 +50,18 @@ class Perfil extends Controller
                 'pagesubtitle' => 'Pessoa Física.',
                 'id' => null,
                 'perfil' => array(
-                    'cd_cgc' => '',
+                    'cd_pessoa_juridica' => '',
                     'cd_profissao' => '',
                     'nm_pessoa_fisica' => '',
                     'email' => '',
                     'cpf' => '',
                     'rg' => '',
-                    'org_rg' => '',
+                    'cd_catg_org_rg' => '',
                     'fone' => '',
                     'celular' => '',
                     'dt_nascimento' => '',
                     'ie_sexo' => '',
-                    'im_foto' => $this->model->getFotoDefault()
+                    'im_perfil' => $this->model->getFotoDefault()
                 )
             );
         }
@@ -151,13 +151,13 @@ class Perfil extends Controller
     private function setDados()
     {
         $this->dados = array(
-            'cd_cgc' => (int)Input::get('cd_cgc'),
+            'cd_pessoa_juridica' => (int)Input::get('cd_cgc'),
             'cd_profissao' => (int)Input::get('cd_profissao'),
             'nm_pessoa_fisica' => Input::get('nm_pessoa_fisica'),
             'email' => Input::get('email'),
             'cpf' => (string)Input::get('cpf'),
             'rg' => (string)Input::get('rg'),
-            'org_rg' => strtoupper(Input::get('org_rg')),
+            'cd_catg_org_rg' => (int)Input::get('cd_catg_org_rg'),
             'fone' => (string)Input::get('fone'),
             'celular' => (string)Input::get('celular'),
             'dt_nascimento' => Input::get('dt_nascimento'),

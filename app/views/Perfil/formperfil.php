@@ -33,7 +33,7 @@ if (Session::exists('sucesso')) {
 
 ?>
     <img class="img-circle profilefoto"
-         src="<?php echo $perfil['im_foto']; ?>">
+         src="<?php echo $perfil['im_perfil']; ?>">
 
     <form id="pessoafisicaform" class="form-horizontal" method="post" action="" enctype="multipart/form-data">
         <fieldset>
@@ -58,10 +58,10 @@ if (Session::exists('sucesso')) {
                         $perfil['cd_cgc'] = $perfil['cd_cgc'] == '' ? Input::get('cd_cgc') : $perfil['cd_cgc'];
                         foreach ((new PessoaJuridicaModel())->fullList() as $empresa) {
 
-                            if ($empresa['cd_cgc'] == $perfil['cd_cgc']) {
-                                echo '<option value="' . $empresa['cd_cgc'] . '" selected>' . $empresa['nm_fantasia'] . '</option>';
+                            if ($empresa['cd_pessoa_juridica'] == $perfil['cd_pessoa_juridica']) {
+                                echo '<option value="' . $empresa['cd_pessoa_juridica'] . '" selected>' . $empresa['nm_fantasia'] . '</option>';
                             } else {
-                                echo '<option value="' . $empresa['cd_cgc'] . ' ">' . $empresa['nm_fantasia'] . '</option>';
+                                echo '<option value="' . $empresa['cd_pessoa_juridica'] . ' ">' . $empresa['nm_fantasia'] . '</option>';
                             }
                         }
                         ?>
@@ -158,7 +158,7 @@ if (Session::exists('sucesso')) {
 
 
                     <input type="text" class="form-control" id="org_rg" name="org_rg"
-                           value="<?php echo $perfil['org_rg'] == '' ? Input::get('org_rg') : $perfil['org_rg']; ?>" placeholder="XX" maxlength="2">
+                           value="" placeholder="XX" maxlength="2">
                 </div>
             </div>
 

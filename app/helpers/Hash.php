@@ -2,6 +2,7 @@
 
 class Hash {
 
+
     public static function make($senha, $usuario) {
         return 'md5'. md5($senha . $usuario);
     }

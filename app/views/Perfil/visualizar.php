@@ -30,7 +30,7 @@
     <div class="col-md-6">
 
         <img class="img-circle profilefoto"
-             src="<?php echo $data['perfil']['im_foto']; ?>">
+             src="<?php echo $data['perfil']['im_perfil']; ?>">
         <?php
 
         $perfil = $data['perfil'];

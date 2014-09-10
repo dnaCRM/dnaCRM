@@ -22,6 +22,7 @@
             echo $telefoneN . '<br><br>';
 
             echo var_dump(Hash::make('123456', 'postgres'));
+
             ?>
 
         </div>
@@ -46,7 +47,7 @@
                         $perfil = new PerfilModel();
                         $ultimo_perfil = $perfil->getPerfilList()[0];
 
-                        echo '<img src="' . $ultimo_perfil['im_foto'] . '" class="img-circle profilefoto">';
+                        echo '<img src="' . $ultimo_perfil['im_perfil'] . '" class="img-circle profilefoto">';
                         echo '<div class="well">';
                         echo '<strong>Nome:</strong> ' . $ultimo_perfil['nm_pessoa_fisica'] . '<br>';
                         echo '<strong>E-mail:</strong> ' . $ultimo_perfil['email'] . '<br>';

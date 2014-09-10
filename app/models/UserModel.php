@@ -152,7 +152,7 @@ class UserModel extends Model
         } else {
             $user = $this->find($usuario);
             if ($user) {
-                if ($this->dados['senha'] === Hash::verify($senha, $this->dados['senha'])) {
+                if (Hash::verify($senha, $this->dados['usuario'],$this->dados['senha'])) {
                     Session::put($this->sessionName, $this->dados[$this->primary_key]);
                     Session::put('login', $this->dados['login']);
 

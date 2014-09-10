@@ -44,7 +44,7 @@
 
                 $nasc = new DateTime($perfil['dt_nascimento']);
                 echo '<tr>';
-                echo '<td><img src="' . $perfil['im_foto'] . '" class="img-circle" title="' . $perfil['cd_pessoa_fisica'] . '"></td>';
+                echo '<td><img src="' . $perfil['im_perfil'] . '" class="img-circle" title="' . $perfil['cd_pessoa_fisica'] . '"></td>';
                 echo '<td><a href="Perfil/visualizar/' . $perfil['cd_pessoa_fisica'] . '">' . $perfil['nm_pessoa_fisica'] . '</a></td>';
                 echo '<td>' . $perfil['email'] . '</td>';
                 echo '<td>' . $perfil['celular'] . '</td>';

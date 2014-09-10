@@ -20,8 +20,8 @@ class PerfilModel extends Model implements IModelComFoto
     public function __construct()
     {
         parent::__construct();
-        $this->tabela = 'pessoa_fisica_tb';
-        $this->coluna_imagem = 'im_foto';
+        $this->tabela = 'tb_pessoa_fisica';
+        $this->coluna_imagem = 'im_perfil';
         $this->primary_key = 'cd_pessoa_fisica';
         $this->img_folder = IMG_UPLOADS_FOLDER . "{$this->tabela}/";
         $this->foto_default = IMG_UPLOADS_FOLDER . 'icon-user.jpg';
@@ -70,13 +70,13 @@ class PerfilModel extends Model implements IModelComFoto
     private function filtrarDados($dados)
     {
         $filtros = array(
-            'cd_cgc' => FILTER_SANITIZE_NUMBER_INT,
+            'cd_pessoa_juridica' => FILTER_SANITIZE_NUMBER_INT,
             'cd_profissao' => FILTER_SANITIZE_NUMBER_INT,
             'nm_pessoa_fisica' => FILTER_SANITIZE_STRING,
             'email' => FILTER_SANITIZE_EMAIL,
             'cpf' => FILTER_DEFAULT,
             'rg' => FILTER_SANITIZE_STRING,
-            'org_rg' => FILTER_SANITIZE_STRING,
+            'cd_catg_org_rg' => FILTER_SANITIZE_STRING,
             'fone' => FILTER_DEFAULT,
             'celular' => FILTER_DEFAULT,
             'dt_nascimento' => FILTER_DEFAULT,

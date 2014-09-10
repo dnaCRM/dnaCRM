@@ -69,10 +69,7 @@ class Session {
         } else {
             self::put($name, $string, $css);
         }
-
-
-
-            //echo Session::flash('fail');
+        //echo Session::flash('fail');
     }
 
 }

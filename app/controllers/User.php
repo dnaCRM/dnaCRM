@@ -63,7 +63,7 @@ class User extends Controller
         $this->dados = array(
             'cd_pessoa_fisica' => (int)Input::get('id_perfil'),
             'login' => (string)Input::get('usuario'),
-            'senha' => Hash::make(Input::get('senha')),
+            'senha' => Hash::make(Input::get('senha'), Input::get('usuario')),
             'nivel' => Input::get('nivel'),
             'ie_status' => Input::get('ie_status'),
             'cd_usuario_criacao' => (int)Input::get('id_perfil'),
@@ -77,7 +77,7 @@ class User extends Controller
     {
 
         $this->dados = array(
-            'senha' => Hash::make(Input::get('senha')),
+            'senha' => Hash::make(Input::get('senha'), Input::get('usuario')),
             'nivel' => Input::get('nivel'),
             'ie_status' => Input::get('ie_status'),
             'cd_usuario_atualiza' => Input::get('cd_usuario_atualiza'),

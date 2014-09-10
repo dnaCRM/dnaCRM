@@ -11,7 +11,7 @@ class ProfissoesModel extends Model
     public function __construct()
     {
         parent::__construct();
-        $this->tabela = 'profissao_tb';
+        $this->tabela = 'tb_profissao';
         $this->primary_key = 'cd_profissao';
     }
 } 
