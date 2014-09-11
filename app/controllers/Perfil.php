@@ -28,7 +28,13 @@ class Perfil extends Controller
         $this->view->output($dados);
     }
 
-
+    /**
+     * @param int $id = Caso receba um id retorna um array
+     * para a view com os dados do perfil. Este array irá popular o formulário
+     * permitindo editar dados do perfil e gravar no banco
+     * Se não receber um id o formulário estará vazio e permitirá registrar
+     * um novo perfil
+     */
     public function formperfil($id = null)
     {
         if ($id) {
@@ -92,7 +98,11 @@ class Perfil extends Controller
         $this->view->output($dados);
     }
 
-
+    /**
+     * Este método monta a tela de confirmação antes de apagar
+     * o Perfil
+     * @param $id = id do Perfil a ser deletado
+     */
     public function confirmDelete($id)
     {
         $id = (int)$id;
@@ -110,6 +120,10 @@ class Perfil extends Controller
         $this->view->output($dados);
     }
 
+    /**
+     * Médodo acionado pelo botão deletar da view confirmDelete
+     * @param $id = id do Perfil a ser deletado
+     */
     public function removerPerfil($id)
     {
         $id = (int)$id;
@@ -121,8 +135,11 @@ class Perfil extends Controller
     }
 
     /**
-     * Método que recebe os dados do formulário
-     * faz a validação e grava no banco de dados usando o método create do model
+     * Método acionado pela view formperfil
+     * Se um id for informado, o respectivo Perfil será atualizado
+     * Caso um id não seja informado os dados serão usados para
+     * criar um novo registro
+     * @param int $id
      */
     public function newPerfil($id = null)
     {
@@ -148,6 +165,10 @@ class Perfil extends Controller
         }
     }
 
+    /**
+     * Pega os dados do $_POST através da classe Helper Input
+     * Faz o casting para os tipos e atribui ao array de dados
+     */
     private function setDados()
     {
         $this->dados = array(
@@ -167,6 +188,11 @@ class Perfil extends Controller
         $this->fotoPerfil();
     }
 
+    /**
+     * Executa o método recebefoto() da classe model
+     * Retorna true se recebeu uma foto ou false se não recebeu
+     * @return bool
+     */
     public function fotoPerfil()
     {
         if ($this->model->recebefoto()) {

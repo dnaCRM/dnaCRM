@@ -16,6 +16,29 @@ abstract class Model {
     {
         $this->db = DB::getInstance();
     }
+
+    public function fullList()
+    {
+        $this->db->select($this->tabela, null, null, null, "{$this->primary_key} DESC");
+        return $this->db->getResultado();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDados()
+    {
+        return $this->dados;
+    }
+
+    /**
+     * @param mixed $primary_key
+     */
+    public function setPrimaryKey($primary_key)
+    {
+        $this->primary_key = $primary_key;
+    }
+
     /**
      * @return mixed
      */
@@ -24,16 +47,20 @@ abstract class Model {
         return $this->primary_key;
     }
 
-    public function fullList()
+    /**
+     * @param mixed $tabela
+     */
+    public function setTabela($tabela)
     {
-        $this->db->select($this->tabela, null, null, null, "{$this->primary_key} DESC");
-        return $this->db->getResultado();
+        $this->tabela = $tabela;
     }
 
-    protected function emptyToNull()
+    /**
+     * @return mixed
+     */
+    public function getTabela()
     {
-        foreach ($this->dados as $campo => $conteudo) {
-            $this->dados[$campo] = (!empty($conteudo) ? $conteudo : null);
-        }
+        return $this->tabela;
     }
+
 }

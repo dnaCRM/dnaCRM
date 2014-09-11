@@ -22,5 +22,5 @@ interface IModelComFoto {
 
     public function recebefoto();
 
-    public function setImageManager();
+    public function setImageManager(ImageModel $image_manager);
 } 

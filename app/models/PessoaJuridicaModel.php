@@ -11,7 +11,7 @@ class PessoaJuridicaModel extends Model
     public function __construct()
     {
         parent::__construct();
-        $this->tabela = 'tb_pessoa_juridica';
-        $this->primary_key = 'cd_pessoa_juridica';
+        $this->setTabela('tb_pessoa_juridica');
+        $this->setPrimaryKey('cd_pessoa_juridica');
     }
 } 

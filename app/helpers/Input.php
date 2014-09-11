@@ -40,7 +40,7 @@ class Input
             return trim($_POST[$item]);
         } else if (isset($_GET[$item])) {
             return $_GET[$item];
-        }else if (isset($_FILES[$item])) {
+        } else if (isset($_FILES[$item])) {
             return $_FILES[$item];
         }
         return '';
@@ -79,4 +79,24 @@ class Input
         return str_replace(array('.', '-', '(', ')', ' '), '', $string);
     }
 
+    /**
+     * Recebe uma string ou array
+     * Caso seja informado um array,
+     * verifica se há alguma string vazia ('') e transforma em tipo de dado 'null'
+     * Se $dados for somente uma string, verifica se a string é vazia e transforma e null
+     * @param mixed $dados
+     * @return mixed
+     */
+    public static function emptyToNull($dados)
+    {
+        if (is_array($dados)) {
+            foreach ($dados as $campo => $conteudo) {
+                $dados[$campo] = (!empty($conteudo) ? $conteudo : null);
+            }
+        } else {
+            $dados = (!empty($dados) ? $dados : null);
+        }
+
+        return $dados;
+    }
 }

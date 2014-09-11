@@ -13,9 +13,9 @@ class UserModel extends Model
      */
     public function __construct($user = null)
     {
-        $this->tabela = 'usuario_tb';
-        $this->primary_key = 'cd_usuario';
-        $this->db = DB::getInstance();
+        parent::__construct();
+        $this->setTabela('usuario_tb');
+        $this->setPrimaryKey('cd_usuario');
 
         $this->sessionName = Config::get('session/session_name');
         $this->cookieName = Config::get('lembrar/cookie_name');
