@@ -18,7 +18,7 @@ class Home extends Controller
     public
     function __construct()
     {
-        $this->model = new HomeModel;
+        $this->setModel(new HomeModel);
     }
 
     /**

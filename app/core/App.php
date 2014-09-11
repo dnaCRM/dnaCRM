@@ -8,9 +8,9 @@
 
 class App
 {
-    protected $controller = 'Home';
-    protected $method = 'start';
-    protected $params = array();
+    private $controller = 'Home';
+    private $method = 'start';
+    private $params = array();
 
     public function __construct()
     {

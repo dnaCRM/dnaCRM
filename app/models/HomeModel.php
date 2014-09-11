@@ -6,7 +6,7 @@
  * Time: 22:48
  */
 
-class HomeModel
+class HomeModel extends Model
 {
     public $name;
 }

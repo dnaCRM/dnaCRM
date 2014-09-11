@@ -6,17 +6,17 @@
  * Date: 02/08/14
  * Time: 19:14
  */
-class Perfil extends Controller
+class Perfil extends PerfilController
 {
 
     public function __construct()
-    { //o atributo de classe é herdado da classe pai 'Controller'
-        $this->model = new PerfilModel;
+    { //o método é herdado da classe pai 'Controller'
+        $this->setModel(new PerfilModel);
     }
 
     public function start()
     { //Pega a lista completa de perfis
-        $perfil_list = $this->model->getPerfilList();
+        $perfil_list = $this->getModel()->getPerfilList();
 
         $dados = array(
             'pagesubtitle' => '',
@@ -38,7 +38,7 @@ class Perfil extends Controller
     public function formperfil($id = null)
     {
         if ($id) {
-            $perfilarr = $this->model->getPerfil($id);
+            $perfilarr = $this->getModel()->getPerfil($id);
 
             $nasc = new DateTime($perfilarr['dt_nascimento']);
             $perfilarr['dt_nascimento'] = $nasc->format('d/m/Y');
@@ -67,7 +67,7 @@ class Perfil extends Controller
                     'celular' => '',
                     'dt_nascimento' => '',
                     'ie_sexo' => '',
-                    'im_perfil' => $this->model->getFotoDefault()
+                    'im_perfil' => $this->getModel()->getFotoDefault()
                 )
             );
         }
@@ -83,7 +83,7 @@ class Perfil extends Controller
     public function visualizar($id = null)
     {
         $id = (int)$id;
-        $perfilarr = $this->model->getPerfil($id);
+        $perfilarr = $this->getModel()->getPerfil($id);
 
         $dados = array(
             //o campo 'obs' vai ser o subtítulo
@@ -106,7 +106,7 @@ class Perfil extends Controller
     public function confirmDelete($id)
     {
         $id = (int)$id;
-        $perfilarr = $this->model->getPerfil($id);
+        $perfilarr = $this->getModel()->getPerfil($id);
 
         $dados = array(
             //o campo 'obs' vai ser o subtítulo
@@ -118,20 +118,6 @@ class Perfil extends Controller
 
         $this->view = new View('Perfil', 'confirmDelete');
         $this->view->output($dados);
-    }
-
-    /**
-     * Médodo acionado pelo botão deletar da view confirmDelete
-     * @param $id = id do Perfil a ser deletado
-     */
-    public function removerPerfil($id)
-    {
-        $id = (int)$id;
-        if (Input::exists()) {
-            if (Token::check(Input::get('token'))) {
-                $this->model->deletePerfil($id);
-            }
-        }
     }
 
     /**
@@ -151,9 +137,9 @@ class Perfil extends Controller
                 $this->setDados();
                 try {
                     if (!$id) {
-                        $this->model->create($this->dados);
+                        $this->getModel()->create($this->dados);
                     } else {
-                        $this->model->updatePerfil($id, $this->dados);
+                        $this->getModel()->updatePerfil($id, $this->dados);
                     }
                     Session::flash('sucesso', 'Perfil cadastrado com sucesso.', 'success');
                 } catch (Exception $e) {
@@ -185,20 +171,7 @@ class Perfil extends Controller
             'ie_sexo' => Input::get('ie_sexo')
         );
 
-        $this->fotoPerfil();
-    }
-
-    /**
-     * Executa o método recebefoto() da classe model
-     * Retorna true se recebeu uma foto ou false se não recebeu
-     * @return bool
-     */
-    public function fotoPerfil()
-    {
-        if ($this->model->recebefoto()) {
-            return true;
-        }
-        return false;
+        $this->enviaFotoPerfil();
     }
 
 }

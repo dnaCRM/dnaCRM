@@ -5,7 +5,7 @@ class User extends Controller
 
     public function __construct()
     {
-        $this->model = new UserModel;
+        $this->setModel(new UserModel);
     }
 
     public function processLogin()
@@ -30,7 +30,6 @@ class User extends Controller
         }
     }
 
-
     /**
      * Registra um usuário com dados recebidos do formulário
      *
@@ -43,10 +42,10 @@ class User extends Controller
                 try {
                     if (!$id) {
                         $this->setDados();
-                        $this->model->create($this->dados);
+                        $this->getModel()->create($this->dados);
                     } else {
                         $this->setUpdateDados();
-                        $this->model->updateUser($id, $this->dados);
+                        $this->getModel()->updateUser($id, $this->dados);
                     }
                     Session::flash('msg', 'Você está registrado.', 'success');
                 } catch (Exception $e) {
@@ -91,7 +90,7 @@ class User extends Controller
     public
     function start()
     {
-        $userlist = $this->model->fullList();
+        $userlist = $this->getModel()->fullList();
 
         $dados = [
             'pagesubtitle' => 'Lista',
@@ -110,7 +109,7 @@ class User extends Controller
     function formuser($id, $update = false)
     {
         if ($update) {
-            $usuarioarr = $this->model->getUsuario($id);
+            $usuarioarr = $this->getModel()->getUsuario($id);
             $dados = array(
                 'pagesubtitle' => $usuarioarr['nm_usuario'],
                 'pagetitle' => 'Cadastro de Usuário',
@@ -149,7 +148,7 @@ class User extends Controller
     public
     function updateUser($id = '')
     {
-        $userarr = $this->model->getUser($id);
+        $userarr = $this->getModel()->getUser($id);
 
         $dados = array(
             'pagetitle' => $userarr['nome_usuario'],
@@ -169,7 +168,7 @@ class User extends Controller
     public
     function logoff()
     {
-        $this->model->logout();
+        $this->getModel()->logout();
         Redirect::to(SITE_URL);
     }
 }

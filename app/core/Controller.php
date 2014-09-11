@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: Vinicius
@@ -9,13 +10,17 @@
 abstract class Controller
 {
     protected $model;
-    protected $method;
     protected $view;
     protected $dados;
 
-    public function model($model)
+    protected  function setModel(Model $model)
     {
-        require_once 'app/models/' . $model . '.php';
-        return new $model();
+        $this->model = $model;
     }
+
+    protected function getModel()
+    {
+        return $this->model;
+    }
+
 }
