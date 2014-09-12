@@ -218,18 +218,31 @@ class UserModel extends Model
     /**
      * @param mixed $perfil
      */
-    public function setPerfil(PerfilModel $perfil)
+    public function setPerfil($perfil_id)
     {
-        $this->perfil = $perfil;
+        $this->perfil = (new PerfilModel())->getPerfil($perfil_id);
     }
 
     /**
      * @return mixed
      */
-    public function getPerfil()
+    public function getPerfil($perfil_id)
     {
-        return $this->perfil;
+        return (new PerfilModel())->getPerfil($perfil_id);
     }
 
+    /**
+     * @return array = Array com todos os registros da tabela
+     */
+    public function getUserList()
+    {
+        $list = (array)$this->fullList();
+
+        // Para cada perfil retornado, executa getPerfil('id')
+        foreach($list as $item => $user) {
+            $list[$item]['cd_pessoa_fisica'] = $this->getPerfil($list[$item]['cd_pessoa_fisica'] );
+        }
+        return $list;
+    }
 
 }

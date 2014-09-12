@@ -6,7 +6,7 @@
  * Time: 19:23
  */
 
-class PerfilController extends Controller{
+abstract class PerfilController extends Controller{
     /**
      * Médodo acionado pelo botão deletar da view confirmDelete
      * @param $id = id do Perfil a ser deletado

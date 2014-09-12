@@ -90,7 +90,7 @@ class User extends Controller
     public
     function start()
     {
-        $userlist = $this->getModel()->fullList();
+        $userlist = $this->getModel()->getUserList();
 
         $dados = [
             'pagesubtitle' => 'Lista',
