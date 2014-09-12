@@ -14,7 +14,7 @@ class UserModel extends Model
     public function __construct($user = null)
     {
         parent::__construct();
-        $this->setTabela('usuario_tb');
+        $this->setTabela('tb_usuario');
         $this->setPrimaryKey('cd_usuario');
 
         $this->sessionName = Config::get('session/session_name');
@@ -44,7 +44,7 @@ class UserModel extends Model
     {
         $this->filtrarDados($campos);
 
-        if (!$this->db->insert($this->tabela, $this->dados)) {
+        if (!$this->db->insert($this->getTabela(), $this->getDados())) {
             throw new Exception('Não foi possível cadastrar usuário.');
         }
     }
@@ -59,12 +59,12 @@ class UserModel extends Model
     {
 
         if (!$id && $this->isLoggedIn()) {
-            $id = $this->dados['id_usuario'];
+            $id = $this->dados[$this->getPrimaryKey()];
         }
 
         $this->filtrarUpdateDados($campos);
 
-        if (!$this->db->update($this->tabela, $this->dados, "{$this->primary_key} = {$id}")) {
+        if (!$this->db->update($this->getTabela(), $this->getDados(), "{$this->getPrimaryKey()} = {$id}")) {
             throw new Exception('Não foi possível atualizar.');
         }
     }
@@ -80,7 +80,7 @@ class UserModel extends Model
         );
 
         $this->dados = filter_var_array($dados, $filtros);
-        $this->emptyToNull();
+        $this->dados = Input::emptyToNull($this->getDados());
     }
 
     private function filtrarDados($dados)
@@ -98,7 +98,7 @@ class UserModel extends Model
         );
 
         $this->dados = filter_var_array($dados, $filtros);
-        $this->emptyToNull();
+        $this->dados = Input::emptyToNull($this->getDados());
     }
 
     /**
@@ -109,11 +109,11 @@ class UserModel extends Model
     public function find($user = null)
     {
         if ($user) {
-            $field = (is_numeric($user)) ? $this->primary_key : 'login';
-            $data = $this->db->get($this->tabela, "{$field} = '{$user}'");
+            $field = (is_numeric($user)) ? $this->getPrimaryKey() : 'login';
+            $data = $this->db->get($this->getTabela(), "{$field} = '{$user}'");
 
             if ($data->getNumRegistros()) {
-                $this->dados = $data->first();
+                $this->setDados($data->first());
                 return true;
             }
         }
@@ -126,7 +126,7 @@ class UserModel extends Model
      */
     public function getUsuario($id = '')
     {
-        $this->db->get($this->tabela, "{$this->primary_key} = {$id}");
+        $this->db->get($this->getTabela(), "{$this->getPrimaryKey()} = {$id}");
 
         if ($this->db->getNumRegistros() > 0) {
             $usuario_dados = (array)$this->db->first();
@@ -152,9 +152,9 @@ class UserModel extends Model
         } else {
             $user = $this->find($usuario);
             if ($user) {
-                if (Hash::verify($senha, $this->dados['usuario'],$this->dados['senha'])) {
-                    Session::put($this->sessionName, $this->dados[$this->primary_key]);
-                    Session::put('login', $this->dados['login']);
+                if (Hash::verify($senha, $this->getDados()['usuario'],$this->getDados()['senha'])) {
+                    Session::put($this->sessionName, $this->getDados()[$this->primary_key]);
+                    Session::put('login', $this->getDados()['login']);
 
                     return true;
                 }
@@ -170,7 +170,7 @@ class UserModel extends Model
      */
     public function hasPermission($key)
     {
-        $group = $this->db->get('nivel', 'id' . '=' . $this->dados['nivel']);
+        $group = $this->db->get('nivel', 'id' . '=' . $this->getDados()['nivel']);
 
         if ($group->getNumRegistros()) {
             $permissions = json_decode($group->first()['permissions'], true);

@@ -24,6 +24,15 @@ abstract class Model {
     }
 
     /**
+     * @param mixed $dados
+     */
+    public function setDados($dados)
+    {
+        $this->dados = $dados;
+    }
+
+
+    /**
      * @return mixed
      */
     public function getDados()

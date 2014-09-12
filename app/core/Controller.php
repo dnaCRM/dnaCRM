@@ -18,7 +18,7 @@ abstract class Controller
         $this->model = $model;
     }
 /*
- * 
+ *
  */
     protected function getModel()
     {

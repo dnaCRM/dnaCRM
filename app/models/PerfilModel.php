@@ -32,7 +32,7 @@ class PerfilModel extends Model implements IModelComFoto
      * malicioso e caracteres inválidos
      * @param $dados = Dados que serão gravados no banco
      */
-    private function setDados($dados)
+    public function setDados($dados)
     {
         $filtros = array(
             'cd_pessoa_juridica' => FILTER_SANITIZE_NUMBER_INT,
