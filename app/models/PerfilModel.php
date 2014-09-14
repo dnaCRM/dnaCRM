@@ -9,11 +9,11 @@
 class PerfilModel extends Model implements IModelComFoto
 {
 
-    private $coluna_imagem; // coluna que guarda imagens
-    private $img_folder;
-    private $foto_default;
+    private $colunaImagem; // coluna que guarda imagens
+    private $imgFolder;
+    private $fotoDefault;
     /** @var  ImageModel */
-    private $image_manager;
+    private $imageManager;
 
     public function __construct()
     {
@@ -160,7 +160,7 @@ class PerfilModel extends Model implements IModelComFoto
      */
     public function setImageFolder($img_folder)
     {
-        $this->img_folder = $img_folder;
+        $this->imgFolder = $img_folder;
     }
 
     /**
@@ -168,7 +168,7 @@ class PerfilModel extends Model implements IModelComFoto
      */
     public function setColunaImagem($coluna_imagem)
     {
-        $this->coluna_imagem = $coluna_imagem;
+        $this->colunaImagem = $coluna_imagem;
     }
 
     /**
@@ -176,7 +176,7 @@ class PerfilModel extends Model implements IModelComFoto
      */
     public function setFotoDefault($foto_default)
     {
-        $this->foto_default = $foto_default;
+        $this->fotoDefault = $foto_default;
     }
 
     /**
@@ -184,37 +184,37 @@ class PerfilModel extends Model implements IModelComFoto
      */
     public function getFotoDefault()
     {
-        return $this->foto_default;
+        return $this->fotoDefault;
     }
 
     // Métodos obrigatórios para interface IModelComFoto
     public function getImageFolder()
     {
-        return $this->img_folder;
+        return $this->imgFolder;
     }
 
     public function getColunaImagem()
     {
-        return $this->coluna_imagem;
+        return $this->colunaImagem;
     }
 
     public function setImageManager(ImageModel $image_manager)
     {
-        $this->image_manager = $image_manager;
+        $this->imageManager = $image_manager;
     }
 
     public function getFoto($id)
     {
-        $this->image_manager->exportaFoto($id);
+        $this->imageManager->exportaFoto($id);
     }
 
     public function setFoto($id)
     {
-        $this->image_manager->importaFoto($id);
+        $this->imageManager->importaFoto($id);
     }
 
     public function recebefoto()
     {
-        $this->image_manager->uploadFoto();
+        $this->imageManager->uploadFoto();
     }
 }

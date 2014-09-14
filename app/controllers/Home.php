@@ -55,5 +55,16 @@ class Home extends Controller
         $this->view = new View('Home', 'test');
         $this->view->output($dados);
     }
+    public
+    function help()
+    {
+        $dados = [
+            'pagesubtitle' => 'Testes com Banco de dados',
+            'pagetitle' => 'Testando'
+        ];
+
+        $this->view = new View('Home', 'help');
+        $this->view->output($dados);
+    }
 
 }

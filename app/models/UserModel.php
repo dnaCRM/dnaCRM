@@ -147,13 +147,13 @@ class UserModel extends Model
     {
 
         if (!$usuario && !$senha && $this->exists()) {
-            Session::put($this->sessionName, $this->dados[$this->primary_key]);
+            Session::put($this->sessionName, $this->dados[$this->primaryKey]);
             Session::put('login', $this->dados['login']);
         } else {
             $user = $this->find($usuario);
             if ($user) {
                 if (Hash::verify($senha, $this->getDados()['usuario'],$this->getDados()['senha'])) {
-                    Session::put($this->sessionName, $this->getDados()[$this->primary_key]);
+                    Session::put($this->sessionName, $this->getDados()[$this->primaryKey]);
                     Session::put('login', $this->getDados()['login']);
 
                     return true;

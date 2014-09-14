@@ -10,7 +10,7 @@ class DB
 {
     private $success = false;
     private $resultado;
-    private $numregistros;
+    private $numRegistros;
 
     /** @var PDOStatement */
     private $statement;
@@ -159,7 +159,7 @@ class DB
      */
     public function getNumRegistros()
     {
-        return $this->numregistros;
+        return $this->numRegistros;
     }
 
 
@@ -178,7 +178,7 @@ class DB
                 $this->statement->execute();
             }
             $this->resultado = $this->statement->fetchAll(PDO::FETCH_ASSOC);
-            $this->numregistros = $this->statement->rowCount();
+            $this->numRegistros = $this->statement->rowCount();
             $this->success = true;
         } catch (PDOException $e) {
             $this->success = false;

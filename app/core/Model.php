@@ -10,7 +10,7 @@ abstract class Model {
     protected $db;
     protected $dados;
     protected $tabela;// tabela referente ao model
-    protected $primary_key; // chave primária da tabela
+    protected $primaryKey; // chave primária da tabela
 
     public function __construct()
     {
@@ -19,7 +19,7 @@ abstract class Model {
 
     public function fullList()
     {
-        $this->db->select($this->tabela, null, null, null, "{$this->primary_key} DESC");
+        $this->db->select($this->tabela, null, null, null, "{$this->primaryKey} DESC");
         return $this->db->getResultado();
     }
 
@@ -45,7 +45,7 @@ abstract class Model {
      */
     public function setPrimaryKey($primary_key)
     {
-        $this->primary_key = $primary_key;
+        $this->primaryKey = $primary_key;
     }
 
     /**
@@ -53,7 +53,7 @@ abstract class Model {
      */
     public function getPrimaryKey()
     {
-        return $this->primary_key;
+        return $this->primaryKey;
     }
 
     /**
