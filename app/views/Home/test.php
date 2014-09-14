@@ -11,7 +11,12 @@ $con = DataBase::getConnection();
 $query = $con->query("select * from tb_pessoa_fisica");
 $query->setFetchMode(PDO::FETCH_CLASS, 'PessoaFisica');
 
-while($r = $query->fetch()) {
-    var_dump($r);
-}
+$r = $query->fetch();
 
+$arrObj = new ArrayObject();
+$arrObj[] = $r;
+var_dump($arrObj);
+
+foreach($arrObj as $obj) {
+    echo $obj->getNmPessoaFisica();
+}

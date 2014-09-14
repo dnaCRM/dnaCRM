@@ -16,6 +16,7 @@ class PessoaFisicaDAO extends DataAccessObject implements IModelComFoto
     protected $primaryKey; // chave primária da tabela
     /** @var  ImageModel */
     private $imageManager;
+    /** @var  PDO */
     private $con;
 
     public function __construct()
@@ -31,25 +32,28 @@ class PessoaFisicaDAO extends DataAccessObject implements IModelComFoto
     }
 
 
-    protected function save(PessoaFisica $pessoaFisica = null)
+    protected function save(PessoaFisica $pessoaFisica)
     {
-        $sql ='';
-        if (!$pessoaFisica) {
-            $sql = "INSERT INTO {$this->tabela}
+        if ($pessoaFisica->getCdPessoaFisica() == '') {
+            $sql = "
+            INSERT INTO {$this->tabela}
                 (cd_pessoa_juridica, cd_profissao, nm_pessoa_fisica, cpf, rg, cd_catg_org_rg,
                 cd_vl_catg_org_rg, email, dt_nascimento, fone, celular, ie_sexo, im_perfil, cd_usuario_criacao,
                 dt_usuario_criacao, cd_usuario_atualiza, dt_usuario_atualiza, ie_estuda, cd_instituicao)
-             VALUES
+            VALUES
                 (:cd_pessoa_juridica, :cd_profissao, :nm_pessoa_fisica, :cpf, :rg, :cd_catg_org_rg,
                 :cd_vl_catg_org_rg, :email, :dt_nascimento, :fone, :celular, :ie_sexo, :im_perfil, :cd_usuario_criacao,
                 :dt_usuario_criacao, :cd_usuario_atualiza, :dt_usuario_atualiza, :ie_estuda, :cd_instituicao) returning *";
         } else {
-            $sql = "UPDATE {$this->tabela} SET cd_pessoa_juridica = :cd_pessoa_juridica, cd_profissao = :cd_profissao,
+            $sql = "
+            UPDATE {$this->getTabela()}
+            SET cd_pessoa_juridica = :cd_pessoa_juridica, cd_profissao = :cd_profissao,
                 nm_pessoa_fisica = :nm_pessoa_fisica, cpf = :cpf, rg = :rg, cd_catg_org_rg = :cd_catg_org_rg,
                 cd_vl_catg_org_rg = :cd_vl_catg_org_rg, email = :email, dt_nascimento = :dt_nascimento, fone = :fone,
                 celular = :celular, ie_sexo = :ie_sexo, im_perfil = :im_perfil, cd_usuario_criacao = :cd_usuario_criacao,
                 dt_usuario_criacao = :dt_usuario_criacao, cd_usuario_atualiza = :cd_usuario_atualiza,
-                dt_usuario_atualiza = :dt_usuario_atualiza, ie_estuda = :ie_estuda, cd_instituicao = :cd_instituicao returning *";
+                dt_usuario_atualiza = :dt_usuario_atualiza, ie_estuda = :ie_estuda, cd_instituicao = :cd_instituicao
+            WHERE {$this->getPrimaryKey()} = {$pessoaFisica->getCdPessoaFisica()}";
         }
 
         $stmt = $this->con->prepare($sql);
