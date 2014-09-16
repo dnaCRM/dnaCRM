@@ -30,27 +30,11 @@ class PessoaFisica extends ValueObject
     protected $cd_instituicao;
 
     /**
-     * @param mixed $cd_catg_org_rg
-     */
-    public function setCdCatgOrgRg($cd_catg_org_rg)
-    {
-        $this->cd_catg_org_rg = $cd_catg_org_rg;
-    }
-
-    /**
      * @return mixed
      */
     public function getCdCatgOrgRg()
     {
         return $this->cd_catg_org_rg;
-    }
-
-    /**
-     * @param mixed $cd_instituicao
-     */
-    public function setCdInstituicao($cd_instituicao)
-    {
-        $this->cd_instituicao = $cd_instituicao;
     }
 
     /**
@@ -62,27 +46,11 @@ class PessoaFisica extends ValueObject
     }
 
     /**
-     * @param mixed $cd_pessoa_fisica
-     */
-    public function setCdPessoaFisica($cd_pessoa_fisica)
-    {
-        $this->cd_pessoa_fisica = $cd_pessoa_fisica;
-    }
-
-    /**
      * @return mixed
      */
     public function getCdPessoaFisica()
     {
         return $this->cd_pessoa_fisica;
-    }
-
-    /**
-     * @param mixed $cd_pessoa_juridica
-     */
-    public function setCdPessoaJuridica($cd_pessoa_juridica)
-    {
-        $this->cd_pessoa_juridica = $cd_pessoa_juridica;
     }
 
     /**
@@ -94,27 +62,11 @@ class PessoaFisica extends ValueObject
     }
 
     /**
-     * @param mixed $cd_profissao
-     */
-    public function setCdProfissao($cd_profissao)
-    {
-        $this->cd_profissao = $cd_profissao;
-    }
-
-    /**
      * @return mixed
      */
     public function getCdProfissao()
     {
         return $this->cd_profissao;
-    }
-
-    /**
-     * @param mixed $cd_usuario_atualiza
-     */
-    public function setCdUsuarioAtualiza($cd_usuario_atualiza)
-    {
-        $this->cd_usuario_atualiza = $cd_usuario_atualiza;
     }
 
     /**
@@ -126,27 +78,11 @@ class PessoaFisica extends ValueObject
     }
 
     /**
-     * @param mixed $cd_usuario_criacao
-     */
-    public function setCdUsuarioCriacao($cd_usuario_criacao)
-    {
-        $this->cd_usuario_criacao = $cd_usuario_criacao;
-    }
-
-    /**
      * @return mixed
      */
     public function getCdUsuarioCriacao()
     {
         return $this->cd_usuario_criacao;
-    }
-
-    /**
-     * @param mixed $cd_vl_catg_org_rg
-     */
-    public function setCdVlCatgOrgRg($cd_vl_catg_org_rg)
-    {
-        $this->cd_vl_catg_org_rg = $cd_vl_catg_org_rg;
     }
 
     /**
@@ -158,27 +94,11 @@ class PessoaFisica extends ValueObject
     }
 
     /**
-     * @param mixed $celular
-     */
-    public function setCelular($celular)
-    {
-        $this->celular = $celular;
-    }
-
-    /**
      * @return mixed
      */
     public function getCelular()
     {
         return $this->celular;
-    }
-
-    /**
-     * @param mixed $cpf
-     */
-    public function setCpf($cpf)
-    {
-        $this->cpf = $cpf;
     }
 
     /**
@@ -190,27 +110,11 @@ class PessoaFisica extends ValueObject
     }
 
     /**
-     * @param mixed $dt_nascimento
-     */
-    public function setDtNascimento($dt_nascimento)
-    {
-        $this->dt_nascimento = $dt_nascimento;
-    }
-
-    /**
      * @return mixed
      */
     public function getDtNascimento()
     {
         return $this->dt_nascimento;
-    }
-
-    /**
-     * @param mixed $dt_usuario_atualiza
-     */
-    public function setDtUsuarioAtualiza($dt_usuario_atualiza)
-    {
-        $this->dt_usuario_atualiza = $dt_usuario_atualiza;
     }
 
     /**
@@ -222,27 +126,11 @@ class PessoaFisica extends ValueObject
     }
 
     /**
-     * @param mixed $dt_usuario_criacao
-     */
-    public function setDtUsuarioCriacao($dt_usuario_criacao)
-    {
-        $this->dt_usuario_criacao = $dt_usuario_criacao;
-    }
-
-    /**
      * @return mixed
      */
     public function getDtUsuarioCriacao()
     {
         return $this->dt_usuario_criacao;
-    }
-
-    /**
-     * @param mixed $email
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
     }
 
     /**
@@ -254,27 +142,11 @@ class PessoaFisica extends ValueObject
     }
 
     /**
-     * @param mixed $fone
-     */
-    public function setFone($fone)
-    {
-        $this->fone = $fone;
-    }
-
-    /**
      * @return mixed
      */
     public function getFone()
     {
         return $this->fone;
-    }
-
-    /**
-     * @param mixed $ie_estuda
-     */
-    public function setIeEstuda($ie_estuda)
-    {
-        $this->ie_estuda = $ie_estuda;
     }
 
     /**
@@ -286,27 +158,11 @@ class PessoaFisica extends ValueObject
     }
 
     /**
-     * @param mixed $ie_sexo
-     */
-    public function setIeSexo($ie_sexo)
-    {
-        $this->ie_sexo = $ie_sexo;
-    }
-
-    /**
      * @return mixed
      */
     public function getIeSexo()
     {
         return $this->ie_sexo;
-    }
-
-    /**
-     * @param mixed $im_perfil
-     */
-    public function setImPerfil($im_perfil)
-    {
-        $this->im_perfil = $im_perfil;
     }
 
     /**
@@ -318,27 +174,11 @@ class PessoaFisica extends ValueObject
     }
 
     /**
-     * @param mixed $nm_pessoa_fisica
-     */
-    public function setNmPessoaFisica($nm_pessoa_fisica)
-    {
-        $this->nm_pessoa_fisica = $nm_pessoa_fisica;
-    }
-
-    /**
      * @return mixed
      */
     public function getNmPessoaFisica()
     {
-        return strtoupper($this->nm_pessoa_fisica);
-    }
-
-    /**
-     * @param mixed $rg
-     */
-    public function setRg($rg)
-    {
-        $this->rg = $rg;
+        return $this->nm_pessoa_fisica;
     }
 
     /**
@@ -349,5 +189,165 @@ class PessoaFisica extends ValueObject
         return $this->rg;
     }
 
+    /**
+     * @param mixed $cd_catg_org_rg
+     */
+    public function setCdCatgOrgRg($cd_catg_org_rg)
+    {
+        $this->cd_catg_org_rg = $cd_catg_org_rg;
+    }
 
-} 
+    /**
+     * @param mixed $cd_instituicao
+     */
+    public function setCdInstituicao($cd_instituicao)
+    {
+        $this->cd_instituicao = $cd_instituicao;
+    }
+
+    /**
+     * @param mixed $cd_pessoa_fisica
+     */
+    public function setCdPessoaFisica($cd_pessoa_fisica)
+    {
+        $this->cd_pessoa_fisica = $cd_pessoa_fisica;
+    }
+
+    /**
+     * @param mixed $cd_pessoa_juridica
+     */
+    public function setCdPessoaJuridica($cd_pessoa_juridica)
+    {
+        $this->cd_pessoa_juridica = $cd_pessoa_juridica;
+    }
+
+    /**
+     * @param mixed $cd_profissao
+     */
+    public function setCdProfissao($cd_profissao)
+    {
+        $this->cd_profissao = $cd_profissao;
+    }
+
+    /**
+     * @param mixed $cd_usuario_atualiza
+     */
+    public function setCdUsuarioAtualiza($cd_usuario_atualiza)
+    {
+        $this->cd_usuario_atualiza = $cd_usuario_atualiza;
+    }
+
+    /**
+     * @param mixed $cd_usuario_criacao
+     */
+    public function setCdUsuarioCriacao($cd_usuario_criacao)
+    {
+        $this->cd_usuario_criacao = $cd_usuario_criacao;
+    }
+
+    /**
+     * @param mixed $cd_vl_catg_org_rg
+     */
+    public function setCdVlCatgOrgRg($cd_vl_catg_org_rg)
+    {
+        $this->cd_vl_catg_org_rg = $cd_vl_catg_org_rg;
+    }
+
+    /**
+     * @param mixed $celular
+     */
+    public function setCelular($celular)
+    {
+        $this->celular = $celular;
+    }
+
+    /**
+     * @param mixed $cpf
+     */
+    public function setCpf($cpf)
+    {
+        $this->cpf = $cpf;
+    }
+
+    /**
+     * @param mixed $dt_nascimento
+     */
+    public function setDtNascimento($dt_nascimento)
+    {
+        $this->dt_nascimento = $dt_nascimento;
+    }
+
+    /**
+     * @param mixed $dt_usuario_atualiza
+     */
+    public function setDtUsuarioAtualiza($dt_usuario_atualiza)
+    {
+        $this->dt_usuario_atualiza = $dt_usuario_atualiza;
+    }
+
+    /**
+     * @param mixed $dt_usuario_criacao
+     */
+    public function setDtUsuarioCriacao($dt_usuario_criacao)
+    {
+        $this->dt_usuario_criacao = $dt_usuario_criacao;
+    }
+
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @param mixed $fone
+     */
+    public function setFone($fone)
+    {
+        $this->fone = $fone;
+    }
+
+    /**
+     * @param mixed $ie_estuda
+     */
+    public function setIeEstuda($ie_estuda)
+    {
+        $this->ie_estuda = $ie_estuda;
+    }
+
+    /**
+     * @param mixed $ie_sexo
+     */
+    public function setIeSexo($ie_sexo)
+    {
+        $this->ie_sexo = $ie_sexo;
+    }
+
+    /**
+     * @param mixed $im_perfil
+     */
+    public function setImPerfil($im_perfil)
+    {
+        $this->im_perfil = $im_perfil;
+    }
+
+    /**
+     * @param mixed $nm_pessoa_fisica
+     */
+    public function setNmPessoaFisica($nm_pessoa_fisica)
+    {
+        $this->nm_pessoa_fisica = $nm_pessoa_fisica;
+    }
+
+    /**
+     * @param mixed $rg
+     */
+    public function setRg($rg)
+    {
+        $this->rg = $rg;
+    }
+
+
+}

@@ -32,17 +32,17 @@ class PessoaFisicaDAO extends DataAccessObject implements IModelComFoto
     }
 
 
-    protected function save(PessoaFisica $pessoaFisica)
+    public function save(PessoaFisica $pessoaFisica)
     {
         if ($pessoaFisica->getCdPessoaFisica() == '') {
             $sql = "
             INSERT INTO {$this->tabela}
                 (cd_pessoa_juridica, cd_profissao, nm_pessoa_fisica, cpf, rg, cd_catg_org_rg,
-                cd_vl_catg_org_rg, email, dt_nascimento, fone, celular, ie_sexo, im_perfil, cd_usuario_criacao,
+                cd_vl_catg_org_rg, email, dt_nascimento, fone, celular, ie_sexo, cd_usuario_criacao,
                 dt_usuario_criacao, cd_usuario_atualiza, dt_usuario_atualiza, ie_estuda, cd_instituicao)
             VALUES
                 (:cd_pessoa_juridica, :cd_profissao, :nm_pessoa_fisica, :cpf, :rg, :cd_catg_org_rg,
-                :cd_vl_catg_org_rg, :email, :dt_nascimento, :fone, :celular, :ie_sexo, :im_perfil, :cd_usuario_criacao,
+                :cd_vl_catg_org_rg, :email, :dt_nascimento, :fone, :celular, :ie_sexo, :cd_usuario_criacao,
                 :dt_usuario_criacao, :cd_usuario_atualiza, :dt_usuario_atualiza, :ie_estuda, :cd_instituicao) returning *";
         } else {
             $sql = "
@@ -50,7 +50,7 @@ class PessoaFisicaDAO extends DataAccessObject implements IModelComFoto
             SET cd_pessoa_juridica = :cd_pessoa_juridica, cd_profissao = :cd_profissao,
                 nm_pessoa_fisica = :nm_pessoa_fisica, cpf = :cpf, rg = :rg, cd_catg_org_rg = :cd_catg_org_rg,
                 cd_vl_catg_org_rg = :cd_vl_catg_org_rg, email = :email, dt_nascimento = :dt_nascimento, fone = :fone,
-                celular = :celular, ie_sexo = :ie_sexo, im_perfil = :im_perfil, cd_usuario_criacao = :cd_usuario_criacao,
+                celular = :celular, ie_sexo = :ie_sexo, cd_usuario_criacao = :cd_usuario_criacao,
                 dt_usuario_criacao = :dt_usuario_criacao, cd_usuario_atualiza = :cd_usuario_atualiza,
                 dt_usuario_atualiza = :dt_usuario_atualiza, ie_estuda = :ie_estuda, cd_instituicao = :cd_instituicao
             WHERE {$this->getPrimaryKey()} = {$pessoaFisica->getCdPessoaFisica()}";
@@ -70,7 +70,7 @@ class PessoaFisicaDAO extends DataAccessObject implements IModelComFoto
         $stmt->bindValue(':fone', $pessoaFisica->getFone(), PDO::PARAM_STR);
         $stmt->bindValue(':celular', $pessoaFisica->getCelular(), PDO::PARAM_STR);
         $stmt->bindValue(':ie_sexo', $pessoaFisica->getIeSexo(), PDO::PARAM_STR);
-        $stmt->bindValue(':im_perfil', $pessoaFisica->getImPerfil(), PDO::PARAM_LOB);
+//        $stmt->bindValue(':im_perfil', $pessoaFisica->getImPerfil(), PDO::PARAM_LOB);
         $stmt->bindValue(':cd_usuario_criacao', $pessoaFisica->getCdUsuarioCriacao(), PDO::PARAM_INT);
         $stmt->bindValue(':dt_usuario_criacao', $pessoaFisica->getDtUsuarioCriacao(), PDO::PARAM_STR);
         $stmt->bindValue(':cd_usuario_atualiza', $pessoaFisica->getCdUsuarioAtualiza(), PDO::PARAM_INT);
