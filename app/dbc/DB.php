@@ -26,18 +26,7 @@ class DB
      */
     private function __construct()
     {
-        try {
-            $this->pdo = new PDO(
-                Config::get('database/sgbd') . ':host=' .
-                Config::get('database/host') . ';dbname=' .
-                Config::get('database/dbname'),
-                Config::get('database/user'),
-                Config::get('database/pass'));
-        } catch (PDOException $e) {
-            CodeFail((int)$e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
-            die;
-        }
-        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->pdo = DataBase::getConnection();
     }
 
     /**

@@ -6,7 +6,7 @@
  * Time: 22:40
  */
 
-abstract class ValueObject {
+abstract class DataTransferObject {
     /**
      * @return array = Todos os nomes de atributos da classe
      */
@@ -30,4 +30,9 @@ abstract class ValueObject {
 
         return $methods;
     }
+
+    /**
+     * @return array
+     */
+    public abstract function getReflex();
 } 

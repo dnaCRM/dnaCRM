@@ -6,7 +6,7 @@
  * Date: 13/09/14
  * Time: 22:43
  */
-class PessoaFisica extends ValueObject
+class PessoaFisicaDTO extends DataTransferObject
 {
     protected $cd_pessoa_fisica;
     protected $cd_pessoa_juridica;
@@ -28,6 +28,47 @@ class PessoaFisica extends ValueObject
     protected $dt_usuario_atualiza;
     protected $ie_estuda;
     protected $cd_instituicao;
+    /** @var  array */
+    protected $reflex;
+
+    public function __construct()
+    {
+        $this->reflex = array(
+            'cd_pessoa_fisica' => 'getCdPessoaFisica',
+            'cd_pessoa_juridica' => 'getCdPessoaJuridica',
+            'cd_profissao' => 'getCdProfissao',
+            'nm_pessoa_fisica' => 'getNmPessoaFisica',
+            'cpf' => 'getCpf',
+            'rg' => 'getRg',
+            'cd_catg_org_rg' => 'getCdCatgOrgRg',
+            'cd_vl_catg_org_rg' => 'getCdVlCatgOrgRg',
+            'email' => 'getEmail',
+            'dt_nascimento' => 'getDtNascimento',
+            'fone' => 'getFone',
+            'celular' => 'getCelular',
+            'ie_sexo' => 'getIeSexo',
+            'cd_usuario_criacao' => 'getCdUsuarioCriacao',
+            'dt_usuario_criacao' => 'getDtUsuarioCriacao',
+            'cd_usuario_atualiza' => 'getCdUsuarioAtualiza',
+            'dt_usuario_atualiza' => 'getDtUsuarioAtualiza',
+            'ie_estuda' => 'getIeEstuda',
+            'cd_instituicao' => 'getCdInstituicao'
+        );
+        $this->setImPerfil('minha foto');
+    }
+
+    /**
+     * Retorna um array com todos os campos da classe e seus métodos 'Getters'
+     * Objetivo: fornecer um meio para que o seu respectivo DAO possa saber
+     * dinamicamente quais os campos da tabela e quais métodos executar para
+     * resgatar os dados
+     * @return array
+     */
+    public function getReflex()
+    {
+        return $this->reflex;
+    }
+
 
     /**
      * @return mixed

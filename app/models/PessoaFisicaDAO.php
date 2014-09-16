@@ -12,27 +12,38 @@ class PessoaFisicaDAO extends DataAccessObject implements IModelComFoto
     private $colunaImagem; // coluna que guarda imagens
     private $imgFolder;
     private $fotoDefault;
-    protected $tabela;// tabela referente ao model
-    protected $primaryKey; // chave primária da tabela
     /** @var  ImageModel */
     private $imageManager;
-    /** @var  PDO */
-    private $con;
 
     public function __construct()
     {
-        $this->con = DataBase::getConnection();
+        parent::__construct();
         $this->setTabela('tb_pessoa_fisica');
-        $this->setColunaImagem('im_perfil');
         $this->setPrimaryKey('cd_pessoa_fisica');
-        $this->setImageFolder(IMG_UPLOADS_FOLDER . "{$this->getTabela()}/");
-        $this->setFotoDefault(IMG_UPLOADS_FOLDER . 'icon-user.jpg');
+        $this->dataTransfer = 'PessoaFisicaDTO';
+        $this->colunaImagem = 'im_perfil';
+        $this->imgFolder = IMG_UPLOADS_FOLDER . "{$this->getTabela()}/";
+        $this->fotoDefault = IMG_UPLOADS_FOLDER . 'icon-user.jpg';
 
         $this->setImageManager(new ImageModel($this));
     }
 
+    public function gravar(PessoaFisicaDTO $pessoaFisica)
+    {
+        if ($pessoaFisica->getCdPessoaFisica() == '') {
+            $obj = $this->insert($pessoaFisica);
+        } else {
+            $obj = $this->update($pessoaFisica);
+        }
+        var_dump($obj);
+        /** Grava a foto do perfil */
+        $this->setFoto($obj->getCdPessoaFisica());
+        /** Recupera a foto gravada para ser exibida no Perfil */
+        $this->getFoto($obj->getCdPessoaFisica());
 
-    public function save(PessoaFisica $pessoaFisica)
+    }
+
+    public function save(PessoaFisicaDTO $pessoaFisica)
     {
         if ($pessoaFisica->getCdPessoaFisica() == '') {
             $sql = "
@@ -78,17 +89,13 @@ class PessoaFisicaDAO extends DataAccessObject implements IModelComFoto
         $stmt->bindValue(':ie_estuda', $pessoaFisica->getIeEstuda(), PDO::PARAM_STR);
         $stmt->bindValue(':cd_instituicao', $pessoaFisica->getCdInstituicao(), PDO::PARAM_INT);
 
-        $stmt->execute();
-    }
+        try {
+            $stmt->execute();
+        } catch (Exception $e) {
+            CodeFail((int)$e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
+            die;
+        }
 
-    protected function read(PessoaFisica $pessoaFisica)
-    {
-        // TODO: Implement read() method.
-    }
-
-    protected function delete(PessoaFisica $pessoaFisica)
-    {
-        // TODO: Implement delete() method.
     }
 
     /**
@@ -99,34 +106,10 @@ class PessoaFisicaDAO extends DataAccessObject implements IModelComFoto
     private function getImgUrl(array $perfil)
     {
         if (!file_exists($this->getImageFolder() . $perfil[$this->getPrimaryKey()] . '.jpg')) {
-            $this->getFoto($perfil[$this->getPrimaryKey()] );
+            $this->getFoto($perfil[$this->getPrimaryKey()]);
         }
         return $perfil[$this->getColunaImagem()] ?
             $this->getImageFolder() . $perfil[$this->getPrimaryKey()] . '.jpg' : $this->getFotoDefault();
-    }
-
-    /**
-     * @param string $img_folder
-     */
-    public function setImageFolder($img_folder)
-    {
-        $this->imgFolder = $img_folder;
-    }
-
-    /**
-     * @param mixed $coluna_imagem
-     */
-    public function setColunaImagem($coluna_imagem)
-    {
-        $this->colunaImagem = $coluna_imagem;
-    }
-
-    /**
-     * @param string $foto_default
-     */
-    public function setFotoDefault($foto_default)
-    {
-        $this->fotoDefault = $foto_default;
     }
 
     /**
@@ -166,32 +149,6 @@ class PessoaFisicaDAO extends DataAccessObject implements IModelComFoto
     public function recebefoto()
     {
         $this->imageManager->uploadFoto();
-    }
-
-    public function getPrimaryKey()
-    {
-        return $this->primaryKey;
-    }
-
-    public function getTabela()
-    {
-        return $this->tabela;
-    }
-
-    /**
-     * @param mixed $primaryKey
-     */
-    public function setPrimaryKey($primaryKey)
-    {
-        $this->primaryKey = $primaryKey;
-    }
-
-    /**
-     * @param mixed $tabela
-     */
-    public function setTabela($tabela)
-    {
-        $this->tabela = $tabela;
     }
 
 }
