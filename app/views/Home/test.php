@@ -6,18 +6,6 @@
  * Time: 00:51
  */
 
-/*$con = DataBase::getConnection();
-
-$query = $con->query("select * from tb_pessoa_fisica");
-$query->setFetchMode(PDO::FETCH_CLASS, 'PessoaFisicaDTO');
-$r = new PessoaFisicaDTO();
-$r = $query->fetch();*/
-
-$rPessoaFisica = new PessoaFisicaDAO();
-//$r = $rPessoaFisica->getById(32);
-$arrObj = new ArrayObject();
-//var_dump($r);
-
 $pe = new PessoaFisicaDTO();
 
 $pe->setNmPessoaFisica('Bruce Banner');
@@ -41,6 +29,12 @@ $pe->setIeEstuda('A');
 $pe->setCdInstituicao(3);
 
 $pdao = new PessoaFisicaDAO();
-$arr = $pdao->fullList();
-var_dump($arr);
+
+/** @var $r PessoaFisicaDTO */
+$r = $pdao->getById(1);
+$r->setCpf("123.456.789-87");
+//$r->setNmPessoaFisica('Meu nome');
+$pdao->gravar($r);
 //$pdao->gravar($pe);
+$pdao->
+var_dump($r);

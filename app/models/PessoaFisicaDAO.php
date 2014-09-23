@@ -6,26 +6,22 @@
  * Date: 02/08/14
  * Time: 19:14
  */
-class PessoaFisicaDAO extends DataAccessObject implements IModelComFoto
-{
 
-    private $colunaImagem; // coluna que guarda imagens
-    private $imgFolder;
-    private $fotoDefault;
-    /** @var  ImageModel */
-    private $imageManager;
+
+
+class PessoaFisicaDAO extends DataAccessObject
+{
 
     public function __construct()
     {
         parent::__construct();
-        $this->setTabela('tb_pessoa_fisica');
-        $this->setPrimaryKey('cd_pessoa_fisica');
+        $this->tabela = 'tb_pessoa_fisica';
+        $this->primaryKey = 'cd_pessoa_fisica';
         $this->dataTransfer = 'PessoaFisicaDTO';
         $this->colunaImagem = 'im_perfil';
-        $this->imgFolder = IMG_UPLOADS_FOLDER . "{$this->getTabela()}/";
+        $this->imgFolder = IMG_UPLOADS_FOLDER . "{$this->tabela}/";
         $this->fotoDefault = IMG_UPLOADS_FOLDER . 'icon-user.jpg';
 
-        $this->setImageManager(new ImageModel($this));
     }
 
     public function gravar(PessoaFisicaDTO $pessoaFisica)
@@ -36,10 +32,10 @@ class PessoaFisicaDAO extends DataAccessObject implements IModelComFoto
             $obj = $this->update($pessoaFisica);
         }
         var_dump($obj);
-        /** Grava a foto do perfil */
-        $this->setFoto($obj->getCdPessoaFisica());
-        /** Recupera a foto gravada para ser exibida no Perfil */
-        $this->getFoto($obj->getCdPessoaFisica());
+
+        if ($this->importaFoto($obj->getCdPessoaFisica())) {
+            $this->exportaFoto($obj->getCdPessoaFisica());
+        }
 
     }
 
@@ -96,59 +92,6 @@ class PessoaFisicaDAO extends DataAccessObject implements IModelComFoto
             die;
         }
 
-    }
-
-    /**
-     * Recebe um array com dados do Perfil e testa se ele tem uma imagem gravada
-     * @param array $perfil
-     * @return string = endereço da imagem do Perfil ou imagem padrão
-     */
-    private function getImgUrl(array $perfil)
-    {
-        if (!file_exists($this->getImageFolder() . $perfil[$this->getPrimaryKey()] . '.jpg')) {
-            $this->getFoto($perfil[$this->getPrimaryKey()]);
-        }
-        return $perfil[$this->getColunaImagem()] ?
-            $this->getImageFolder() . $perfil[$this->getPrimaryKey()] . '.jpg' : $this->getFotoDefault();
-    }
-
-    /**
-     * @return string
-     */
-    public function getFotoDefault()
-    {
-        return $this->fotoDefault;
-    }
-
-    // Métodos obrigatórios para interface IModelComFoto
-    public function getImageFolder()
-    {
-        return $this->imgFolder;
-    }
-
-    public function getColunaImagem()
-    {
-        return $this->colunaImagem;
-    }
-
-    public function setImageManager(ImageModel $image_manager)
-    {
-        $this->imageManager = $image_manager;
-    }
-
-    public function getFoto($id)
-    {
-        $this->imageManager->exportaFoto($id);
-    }
-
-    public function setFoto($id)
-    {
-        $this->imageManager->importaFoto($id);
-    }
-
-    public function recebefoto()
-    {
-        $this->imageManager->uploadFoto();
     }
 
 }

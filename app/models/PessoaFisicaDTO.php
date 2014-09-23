@@ -8,28 +8,28 @@
  */
 class PessoaFisicaDTO extends DataTransferObject
 {
-    protected $cd_pessoa_fisica;
-    protected $cd_pessoa_juridica;
-    protected $cd_profissao;
-    protected $nm_pessoa_fisica;
-    protected $cpf;
-    protected $rg;
-    protected $cd_catg_org_rg;
-    protected $cd_vl_catg_org_rg;
-    protected $email;
-    protected $dt_nascimento;
-    protected $fone;
-    protected $celular;
-    protected $ie_sexo;
-    protected $im_perfil;
-    protected $cd_usuario_criacao;
-    protected $dt_usuario_criacao;
-    protected $cd_usuario_atualiza;
-    protected $dt_usuario_atualiza;
-    protected $ie_estuda;
-    protected $cd_instituicao;
+    private $cd_pessoa_fisica;
+    private $cd_pessoa_juridica;
+    private $cd_profissao;
+    private $nm_pessoa_fisica;
+    private $cpf;
+    private $rg;
+    private $cd_catg_org_rg;
+    private $cd_vl_catg_org_rg;
+    private $email;
+    private $dt_nascimento;
+    private $fone;
+    private $celular;
+    private $ie_sexo;
+    private $im_perfil;
+    private $cd_usuario_criacao;
+    private $dt_usuario_criacao;
+    private $cd_usuario_atualiza;
+    private $dt_usuario_atualiza;
+    private $ie_estuda;
+    private $cd_instituicao;
     /** @var  array */
-    protected $reflex;
+    private $reflex;
 
     public function __construct()
     {
@@ -54,7 +54,11 @@ class PessoaFisicaDTO extends DataTransferObject
             'ie_estuda' => 'getIeEstuda',
             'cd_instituicao' => 'getCdInstituicao'
         );
-        $this->setImPerfil('minha foto');
+        if ($this->getImPerfil()) {
+            $this->setImPerfil("img/uploads/tb_pessoa_fisica/{$this->cd_pessoa_fisica}.jpg");
+        } else {
+            $this->setImPerfil("img/uploads/icon-user.jpg");
+        }
     }
 
     /**
