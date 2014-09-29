@@ -24,9 +24,8 @@
 <?php
 $perfil = $data['perfil'];
 $perfil_form = new PessoaFisica();
-$perfil_form->cadastra($data['id']);//Não cadastra na entra pois ainda não tem Token
+$perfil_form->cadastra($perfil);//Não cadastra na entra pois ainda não tem Token
 
-var_dump($this);
 if (Session::exists('sucesso')) {
     Session::flash('sucesso');
 }
@@ -40,10 +39,10 @@ if (Session::exists('sucesso')) {
             <legend>Cadastro</legend>
             <div class="form-group">
                 <div class="col-lg-12">
-                    <label for="im_foto" class="control-label">Foto</label>
+                    <label for="im_perfil" class="control-label">Foto</label>
 
 
-                    <input type="file" class="form-control" id="im_foto" name="im_foto">
+                    <input type="file" class="form-control" id="im_perfil" name="im_perfil">
                 </div>
             </div>
 
@@ -172,7 +171,7 @@ if (Session::exists('sucesso')) {
                 <div class="col-lg-12">
                     <a href="#" id="limpar" class="btn btn-default"><span class="fa fa-undo"></span> Cancelar</a>
                     <button type="reset" name="cancelar" class="btn btn-info"><span class="fa fa-recycle"></span> Limpar</button>
-                    <a href="Perfil/formperfil" id="novo" class="btn btn-success"><span class="fa fa-file"></span> Novo</a>
+                    <a href="PessoaFisica/formperfil" id="novo" class="btn btn-success"><span class="fa fa-file"></span> Novo</a>
                     <button type="submit" name="cadastrar" class="btn btn-primary"><span class="fa fa-check"></span> Salvar</button>
                 </div>
             </div>

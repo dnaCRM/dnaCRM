@@ -72,7 +72,7 @@ abstract class DataAccessObject
         }
         $parametros = implode(', ', $parametros);
 
-        $sql = "UPDATE {$this->tabela} SET {$parametros} WHERE {$this->primaryKey} = :{$this->primaryKey}";
+        $sql = "UPDATE {$this->tabela} SET {$parametros} WHERE {$this->primaryKey} = :{$this->primaryKey} returning *";
 
         foreach ($dto->getReflex() as $atributo => $method) {
             $dados[$atributo] = $dto->{$method}();
@@ -285,6 +285,8 @@ abstract class DataAccessObject
      */
     protected function importaFoto($id)
     {
+        $this->uploadFoto();
+
         if ($this->fotoEnviada) {
 
             $file = SITE_ROOT . IMG_UPLOADS_FOLDER . $this->arquivoTemp;

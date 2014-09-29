@@ -22,8 +22,8 @@
             <?php
             $perfil = $data['perfil'];
 
-            $action = new PessoaFisicaDTO();
-            //$action->removerPerfil($perfil->getCdPessoaFisica());
+            $action = new PessoaFisica();
+            $action->removerPessoaFisica($perfil);
 
             ?>
 

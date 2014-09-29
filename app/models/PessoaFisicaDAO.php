@@ -31,7 +31,6 @@ class PessoaFisicaDAO extends DataAccessObject
         } else {
             $obj = $this->update($pessoaFisica);
         }
-        var_dump($obj);
 
         if ($this->importaFoto($obj->getCdPessoaFisica())) {
             $this->exportaFoto($obj->getCdPessoaFisica());

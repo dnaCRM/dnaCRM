@@ -44,13 +44,13 @@
                     <div class="panel-body">
                         <?php
 
-                        $perfil = new PerfilModel();
-                        $ultimo_perfil = $perfil->getPerfilList()[0];
+                        $perfil = new PessoaFisicaDAO();
+                        $ultimo_perfil = $perfil->fullList()[0];
 
-                        echo '<img src="' . $ultimo_perfil['im_perfil'] . '" class="img-circle profilefoto">';
+                        echo '<img src="' . $ultimo_perfil->getImPerfil() . '" class="img-circle profilefoto">';
                         echo '<div class="well">';
-                        echo '<strong>Nome:</strong> ' . $ultimo_perfil['nm_pessoa_fisica'] . '<br>';
-                        echo '<strong>E-mail:</strong> ' . $ultimo_perfil['email'] . '<br>';
+                        echo '<strong>Nome:</strong> ' . $ultimo_perfil->getNmPessoaFisica(). '<br>';
+                        echo '<strong>E-mail:</strong> ' . $ultimo_perfil->getEmail() . '<br>';
                         echo '</div>';
                         //var_dump($ultimo_perfil);
                         ?>
@@ -123,6 +123,7 @@
                 </div>
                 <div class="tab-pane fade" id="profile">
                     <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
+                    <?php var_dump($ultimo_perfil); ?>
                 </div>
                 <div class="tab-pane fade" id="dropdown1">
                     <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork.</p>

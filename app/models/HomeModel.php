@@ -6,7 +6,7 @@
  * Time: 22:48
  */
 
-class HomeModel extends Model
+class HomeModel extends DataAccessObject
 {
     public $name;
 }

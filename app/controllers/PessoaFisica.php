@@ -38,6 +38,7 @@ class PessoaFisica extends Controller
     public function formperfil($id = null)
     {
         if ($id) {
+            /** @var PessoaFisicaDTO */
             $perfilarr = $this->getModel()->getById($id);
 
             $nasc = new DateTime($perfilarr->getDtNascimento());
@@ -107,4 +108,26 @@ class PessoaFisica extends Controller
         $this->view = new View('PessoaFisica', 'confirmDelete');
         $this->view->output($dados);
     }
-} 
+
+    public function cadastra(PessoaFisicaDTO $dto) {
+        if (Input::exists()) {
+
+            if (Token::check(Input::get('token'))) {
+                $dto->setNmPessoaFisica(Input::get('nm_pessoa_fisica'));
+                $this->model->gravar($dto);
+            }
+        }
+    }
+
+    public function removerPessoaFisica(PessoaFisicaDTO $dto) {
+        if (Input::exists()) {
+
+            if (Token::check(Input::get('token'))) {
+
+                //$this->model->delete($dto);
+                echo 'Deletou perfil';
+
+            }
+        }
+    }
+}

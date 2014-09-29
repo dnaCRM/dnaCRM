@@ -9,7 +9,9 @@
 
 abstract class Controller
 {
+    /** @var  DataAccessObject */
     protected $model;
+    /** @var  View */
     protected $view;
     protected $dados;
 
@@ -17,9 +19,7 @@ abstract class Controller
     {
         $this->model = $model;
     }
-/*
- *
- */
+
     protected function getModel()
     {
         return $this->model;
