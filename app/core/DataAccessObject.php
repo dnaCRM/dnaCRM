@@ -152,6 +152,7 @@ abstract class DataAccessObject
             } else {
                 $this->statement->execute();
             }
+
             $this->resultado = $this->statement->fetchAll(PDO::FETCH_CLASS, $this->dataTransfer);
             $this->numRegistros = $this->statement->rowCount();
             $this->success = true;

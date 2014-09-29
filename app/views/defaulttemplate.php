@@ -50,10 +50,10 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Perfis <span
                             class="caret"></span></a>
                     <ul class="dropdown-menu" aria-labelledby="themes">
-                        <li><a href="Perfil">Lista</a></li>
+                        <li><a href="PessoaFisica">Lista</a></li>
                         <li class="divider"></li>
-                        <li><a href="Perfil/formperfil">Novo Perfil</a></li>
-                        <li><a href="Perfil">Item</a></li>
+                        <li><a href="PessoaFisica/formperfil">Nova Pessoa Fisica</a></li>
+                        <li><a href="PessoaFisica">Item</a></li>
                     </ul>
                 </li>
                 <li>
@@ -118,7 +118,7 @@
                 <i class="fa pull-right fa-angle-left"></i>
             </a>
             <ul class="treeview-menu" style="display: none;">
-                <li><a href="Perfil/"><i class="fa fa-angle-double-right"></i>Pessoa Física</a></li>
+                <li><a href="PessoaFisica/"><i class="fa fa-angle-double-right"></i>Pessoa Física</a></li>
                 <li><a href="PerfilPJ/"><i class="fa fa-angle-double-right"></i> Pessoa Jurídica</a></li>
             </ul>
         </li>
@@ -129,7 +129,7 @@
                 <i class="fa pull-right fa-angle-left"></i>
             </a>
             <ul class="treeview-menu" style="display: none;">
-                <li><a href="Perfil/formperfil"><i class="fa fa-angle-double-right"></i> Pessoa Física</a></li>
+                <li><a href="PessoaFisica/formperfil"><i class="fa fa-angle-double-right"></i> Pessoa Física</a></li>
                 <li><a href="PerfilPJ/formpj"><i class="fa fa-angle-double-right"></i> Pessoa Jurídica</a></li>
                 <li><a href="Setor/formsetor"><i class="fa fa-angle-double-right"></i> Setores</a></li>
                 <li><a href="Condominio/formcondo"><i class="fa fa-angle-double-right"></i> Condomínio</a></li>

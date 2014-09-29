@@ -6,7 +6,7 @@
  * Date: 02/08/14
  * Time: 19:14
  */
-class Perfil extends PerfilController
+class Perfil extends Controller
 {
 
     public function __construct()

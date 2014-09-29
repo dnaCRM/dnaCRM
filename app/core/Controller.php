@@ -13,7 +13,7 @@ abstract class Controller
     protected $view;
     protected $dados;
 
-    protected  function setModel(Model $model)
+    protected  function setModel(DataAccessObject $model)
     {
         $this->model = $model;
     }

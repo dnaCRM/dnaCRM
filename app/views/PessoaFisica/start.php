@@ -41,11 +41,11 @@
 
             foreach ($data['list'] as $perfil) {
 
-                $nasc = new DateTime($perfil['dt_nascimento']);
+                $nasc = new DateTime($perfil->getDtNascimento());
                 echo '<tr>';
-                echo '<td><img src="' . $perfil['im_perfil'] . '" class="img-circle" title="' . $perfil['cd_pessoa_fisica'] . '"></td>';
-                echo '<td><a href="Perfil/visualizar/' . $perfil['cd_pessoa_fisica'] . '">' . $perfil['nm_pessoa_fisica'] . '</a></td>';
-                echo '<td>' . $perfil['email'] . '</td>';
+                echo '<td><img src="' . $perfil->getImPerfil() . '" class="img-circle" title="' . $perfil->getCdPessoaFisica() . '"></td>';
+                echo '<td><a href="PessoaFisica/visualizar/' . $perfil->getCdPessoaFisica() . '">' . $perfil->getNmPessoaFisica() . '</a></td>';
+                echo '<td>' . $perfil->getEmail() . '</td>';
                 echo '<td>' . $nasc->format('d/m/Y') . '</td>';
                 echo '</tr>';
 

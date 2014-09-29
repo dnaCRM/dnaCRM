@@ -39,4 +39,12 @@ class PessoaFisicaDAO extends DataAccessObject
 
     }
 
+    /**
+     * @return mixed
+     */
+    public function getFotoDefault()
+    {
+        return $this->fotoDefault;
+    }
+
 }

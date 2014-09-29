@@ -125,20 +125,6 @@ $(document).ready(function () {
                     }
                 }
             },
-            cd_cgc: {
-                validators: {
-                    notEmpty: {
-                        message: 'Campo obrigatório'
-                    }
-                }
-            },
-            cd_profissao: {
-                validators: {
-                    notEmpty: {
-                        message: 'Campo obrigatório'
-                    }
-                }
-            },
             nm_pessoa_fisica: {
                 validators: {
                     notEmpty: {
@@ -165,30 +151,6 @@ $(document).ready(function () {
                 }
             },
             rg: {
-                group: '.col-lg-4',
-                validators: {
-                    notEmpty: {
-                        message: 'Campo obrigatório'
-                    }
-                }
-            },
-            org_rg: {
-                group: '.col-lg-4',
-                validators: {
-                    notEmpty: {
-                        message: 'Campo obrigatório'
-                    }
-                }
-            },
-            fone: {
-                group: '.col-lg-4',
-                validators: {
-                    notEmpty: {
-                        message: 'Campo obrigatório'
-                    }
-                }
-            },
-            celular: {
                 group: '.col-lg-4',
                 validators: {
                     notEmpty: {

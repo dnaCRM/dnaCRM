@@ -10,14 +10,14 @@
         <div class="well">
 
             <a class="btn btn-primary btn-sm"
-               href="Perfil/formperfil/<?php echo $data['perfil']['cd_pessoa_fisica']; ?>">
+               href="PessoaFisica/formperfil/<?php echo $data['perfil']->getCdPessoaFisica(); ?>">
                 <span class="fa fa-edit"></span> Editar</a>
 
             <a class="btn btn-warning btn-sm"
-               href="Perfil/confirmDelete/<?php echo $data['perfil']['cd_pessoa_fisica']; ?>">
+               href="PessoaFisica/confirmDelete/<?php echo $data['perfil']->getCdPessoaFisica(); ?>">
                 <span class="fa fa-trash-o"></span> Deletar</a>
             <a class="btn btn-info btn-sm"
-               href="User/formuser/<?php echo $data['perfil']['cd_pessoa_fisica']; ?>">
+               href="User/formuser/<?php echo $data['perfil']->getCdPessoaFisica(); ?>">
                 <span class="fa fa-trash-o"></span> Cadastrar Usuário</a>
 
 
@@ -30,22 +30,23 @@
     <div class="col-md-6">
 
         <img class="img-circle profilefoto"
-             src="<?php echo $data['perfil']['im_perfil']; ?>">
+             src="<?php echo $data['perfil']->getImPerfil(); ?>">
         <?php
 
         $perfil = $data['perfil'];
-        $nasc = new DateTime($perfil['dt_nascimento']);
-        $perfil['dt_nascimento'] = $nasc->format('d/m/Y');
+        $nasc = new DateTime($perfil->getDtNascimento());
+        $perfil->setDtNascimento($nasc->format('d/m/Y'));
 
         echo '<table class="table table-striped table-hover ">';
 
-        foreach ($perfil as $campo => $dado) {
-
             echo '<tr>';
-            echo "<td><strong>{$campo}</strong>: {$dado}</td>";
+            echo "<td><strong>Nome: </strong>: {$perfil->getNmPessoaFisica()}</td>";
+            echo '</tr>';
+            echo '<tr>';
+            echo "<td><strong>E-mail: </strong>: {$perfil->getEmail()}</td>";
             echo '</tr>';
 
-        }
+
         echo '</table>';
         ?>
 

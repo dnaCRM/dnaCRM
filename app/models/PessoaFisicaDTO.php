@@ -18,16 +18,19 @@ class PessoaFisicaDTO extends DataTransferObject
     private $cd_vl_catg_org_rg;
     private $email;
     private $dt_nascimento;
-    private $fone;
-    private $celular;
     private $ie_sexo;
     private $im_perfil;
+    private $ie_estuda;
+    private $cd_instituicao;
+    private $dt_inicio_curso;
+    private $dt_fim_curso;
+    private $cd_catg_grau_ensino;
+    private $cd_vl_catg_grau_ensino;
     private $cd_usuario_criacao;
     private $dt_usuario_criacao;
     private $cd_usuario_atualiza;
     private $dt_usuario_atualiza;
-    private $ie_estuda;
-    private $cd_instituicao;
+
     /** @var  array */
     private $reflex;
 
@@ -44,15 +47,17 @@ class PessoaFisicaDTO extends DataTransferObject
             'cd_vl_catg_org_rg' => 'getCdVlCatgOrgRg',
             'email' => 'getEmail',
             'dt_nascimento' => 'getDtNascimento',
-            'fone' => 'getFone',
-            'celular' => 'getCelular',
             'ie_sexo' => 'getIeSexo',
+            'ie_estuda' => 'getIeEstuda',
+            'cd_instituicao' => 'getCdInstituicao',
+            'dt_inicio_curso' => 'getDtInicioCurso',
+            'dt_fim_curso' => 'getDtFimCurso',
+            'cd_catg_grau_ensino' => 'getCdCatgGrauEnsino',
+            'cd_vl_catg_grau_ensino' => 'getCdVlCatgGrauEnsino',
             'cd_usuario_criacao' => 'getCdUsuarioCriacao',
             'dt_usuario_criacao' => 'getDtUsuarioCriacao',
             'cd_usuario_atualiza' => 'getCdUsuarioAtualiza',
             'dt_usuario_atualiza' => 'getDtUsuarioAtualiza',
-            'ie_estuda' => 'getIeEstuda',
-            'cd_instituicao' => 'getCdInstituicao'
         );
         if ($this->getImPerfil()) {
             $this->setImPerfil("img/uploads/tb_pessoa_fisica/{$this->cd_pessoa_fisica}.jpg");
@@ -73,6 +78,13 @@ class PessoaFisicaDTO extends DataTransferObject
         return $this->reflex;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getCdCatgGrauEnsino()
+    {
+        return $this->cd_catg_grau_ensino;
+    }
 
     /**
      * @return mixed
@@ -133,6 +145,14 @@ class PessoaFisicaDTO extends DataTransferObject
     /**
      * @return mixed
      */
+    public function getCdVlCatgGrauEnsino()
+    {
+        return $this->cd_vl_catg_grau_ensino;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getCdVlCatgOrgRg()
     {
         return $this->cd_vl_catg_org_rg;
@@ -141,17 +161,25 @@ class PessoaFisicaDTO extends DataTransferObject
     /**
      * @return mixed
      */
-    public function getCelular()
+    public function getCpf()
     {
-        return $this->celular;
+        return $this->cpf;
     }
 
     /**
      * @return mixed
      */
-    public function getCpf()
+    public function getDtFimCurso()
     {
-        return $this->cpf;
+        return $this->dt_fim_curso;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDtInicioCurso()
+    {
+        return $this->dt_inicio_curso;
     }
 
     /**
@@ -184,14 +212,6 @@ class PessoaFisicaDTO extends DataTransferObject
     public function getEmail()
     {
         return $this->email;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFone()
-    {
-        return $this->fone;
     }
 
     /**
@@ -234,164 +254,139 @@ class PessoaFisicaDTO extends DataTransferObject
         return $this->rg;
     }
 
-    /**
-     * @param mixed $cd_catg_org_rg
-     */
+
+######### SETTERS #################################################################3
+
+    public function setCdCatgGrauEnsino($cd_catg_grau_ensino)
+    {
+        $this->cd_catg_grau_ensino = $cd_catg_grau_ensino;
+        return $this;
+    }
+
     public function setCdCatgOrgRg($cd_catg_org_rg)
     {
         $this->cd_catg_org_rg = $cd_catg_org_rg;
+        return $this;
     }
 
-    /**
-     * @param mixed $cd_instituicao
-     */
     public function setCdInstituicao($cd_instituicao)
     {
         $this->cd_instituicao = $cd_instituicao;
+        return $this;
     }
 
-    /**
-     * @param mixed $cd_pessoa_fisica
-     */
     public function setCdPessoaFisica($cd_pessoa_fisica)
     {
         $this->cd_pessoa_fisica = $cd_pessoa_fisica;
+        return $this;
     }
 
-    /**
-     * @param mixed $cd_pessoa_juridica
-     */
     public function setCdPessoaJuridica($cd_pessoa_juridica)
     {
         $this->cd_pessoa_juridica = $cd_pessoa_juridica;
+        return $this;
     }
 
-    /**
-     * @param mixed $cd_profissao
-     */
     public function setCdProfissao($cd_profissao)
     {
         $this->cd_profissao = $cd_profissao;
+        return $this;
     }
 
-    /**
-     * @param mixed $cd_usuario_atualiza
-     */
     public function setCdUsuarioAtualiza($cd_usuario_atualiza)
     {
         $this->cd_usuario_atualiza = $cd_usuario_atualiza;
+        return $this;
     }
 
-    /**
-     * @param mixed $cd_usuario_criacao
-     */
     public function setCdUsuarioCriacao($cd_usuario_criacao)
     {
         $this->cd_usuario_criacao = $cd_usuario_criacao;
+        return $this;
     }
 
-    /**
-     * @param mixed $cd_vl_catg_org_rg
-     */
+    public function setCdVlCatgGrauEnsino($cd_vl_catg_grau_ensino)
+    {
+        $this->cd_vl_catg_grau_ensino = $cd_vl_catg_grau_ensino;
+        return $this;
+    }
+
     public function setCdVlCatgOrgRg($cd_vl_catg_org_rg)
     {
         $this->cd_vl_catg_org_rg = $cd_vl_catg_org_rg;
+        return $this;
     }
 
-    /**
-     * @param mixed $celular
-     */
-    public function setCelular($celular)
-    {
-        $this->celular = $celular;
-    }
-
-    /**
-     * @param mixed $cpf
-     */
     public function setCpf($cpf)
     {
         $this->cpf = $cpf;
+        return $this;
     }
 
-    /**
-     * @param mixed $dt_nascimento
-     */
+    public function setDtFimCurso($dt_fim_curso)
+    {
+        $this->dt_fim_curso = $dt_fim_curso;
+        return $this;
+    }
+
+    public function setDtInicioCurso($dt_inicio_curso)
+    {
+        $this->dt_inicio_curso = $dt_inicio_curso;
+        return $this;
+    }
+
     public function setDtNascimento($dt_nascimento)
     {
         $this->dt_nascimento = $dt_nascimento;
+        return $this;
     }
 
-    /**
-     * @param mixed $dt_usuario_atualiza
-     */
     public function setDtUsuarioAtualiza($dt_usuario_atualiza)
     {
         $this->dt_usuario_atualiza = $dt_usuario_atualiza;
+        return $this;
     }
 
-    /**
-     * @param mixed $dt_usuario_criacao
-     */
     public function setDtUsuarioCriacao($dt_usuario_criacao)
     {
         $this->dt_usuario_criacao = $dt_usuario_criacao;
+        return $this;
     }
 
-    /**
-     * @param mixed $email
-     */
     public function setEmail($email)
     {
         $this->email = $email;
+        return $this;
     }
 
-    /**
-     * @param mixed $fone
-     */
-    public function setFone($fone)
-    {
-        $this->fone = $fone;
-    }
-
-    /**
-     * @param mixed $ie_estuda
-     */
     public function setIeEstuda($ie_estuda)
     {
         $this->ie_estuda = $ie_estuda;
+        return $this;
     }
 
-    /**
-     * @param mixed $ie_sexo
-     */
     public function setIeSexo($ie_sexo)
     {
         $this->ie_sexo = $ie_sexo;
+        return $this;
     }
 
-    /**
-     * @param mixed $im_perfil
-     */
     public function setImPerfil($im_perfil)
     {
         $this->im_perfil = $im_perfil;
+        return $this;
     }
 
-    /**
-     * @param mixed $nm_pessoa_fisica
-     */
     public function setNmPessoaFisica($nm_pessoa_fisica)
     {
         $this->nm_pessoa_fisica = $nm_pessoa_fisica;
+        return $this;
     }
 
-    /**
-     * @param mixed $rg
-     */
     public function setRg($rg)
     {
         $this->rg = $rg;
+        return $this;
     }
 
 

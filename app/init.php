@@ -27,40 +27,20 @@ define('SITE_ROOT', $root_url); //'C:\htdocs\dnacrm\\'
 define('IMG_UPLOADS_FOLDER', 'img/uploads/');
 
 /**
- * Dicionário de campos de tabelas
- */
-
-$dic= array(
-    'cd_cgc' => 'Empresa',
-    'cd_profissao' => 'Profissão',
-    'cd_pessoa_fisica' => 'Cod.',
-    'nm_pessoa_fisica' => 'Nome',
-    'email' => 'E-mail',
-    'cpf' => 'CPF',
-    'rg' => 'RG',
-    'org_rg' => 'UF',
-    'fone' => 'Telefone Fixo',
-    'celular' => 'Celular',
-    'dt_nascimento' => 'Data de Nascimento',
-    'ie_sexo' => 'Sexo',
-);
-
-/**
  * Guarda configurações gerais
  */
 $GLOBALS['config'] = array(
     'database' => array(
         'sgbd' => 'pgsql',
         'host' =>'127.0.0.1',
-        'user' => 'postgres',
+        'user' => '1',
         'pass' => '123456',
         'dbname' => 'dnacrm'
     ),
     'session' => array(
         'session_name' => 'user',
         'token_name' => 'token'
-    ),
-    'dicionario' => $dic // ver declaração acima
+    )
 );
 
 //Classes CSS para personalização de mensagens

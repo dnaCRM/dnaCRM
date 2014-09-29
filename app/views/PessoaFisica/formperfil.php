@@ -23,17 +23,17 @@
 
 <?php
 $perfil = $data['perfil'];
-$perfil_form = new Perfil;
-$perfil_form->newPerfil($data['id']);
+$perfil_form = new PessoaFisica();
+$perfil_form->cadastra($data['id']);//Não cadastra na entra pois ainda não tem Token
 
-
+var_dump($this);
 if (Session::exists('sucesso')) {
     Session::flash('sucesso');
 }
 
 ?>
     <img class="img-circle profilefoto"
-         src="<?php echo $perfil['im_perfil']; ?>">
+         src="<?php echo $perfil->getImPerfil(); ?>">
 
     <form id="pessoafisicaform" class="form-horizontal" method="post" action="" enctype="multipart/form-data">
         <fieldset>
@@ -55,10 +55,10 @@ if (Session::exists('sucesso')) {
                     <select class="form-control" id="cd_cgc" name="cd_cgc">
                         <option value="">-- Selecione uma empresa</option>
                         <?php //echo escape(Input::get('cd_cgc'));
-                        $perfil['cd_cgc'] = $perfil['cd_cgc'] == '' ? Input::get('cd_cgc') : $perfil['cd_cgc'];
+                        $perfil->setCdPessoaJuridica($perfil->getCdPessoaJuridica() == '' ? Input::get('cd_cgc') : $perfil->getCdPessoaJuridica());
                         foreach ((new PessoaJuridicaModel())->fullList() as $empresa) {
 
-                            if ($empresa['cd_pessoa_juridica'] == $perfil['cd_pessoa_juridica']) {
+                            if ($empresa['cd_pessoa_juridica'] == $perfil->getCdPessoaJuridica()) {
                                 echo '<option value="' . $empresa['cd_pessoa_juridica'] . '" selected>' . $empresa['nm_fantasia'] . '</option>';
                             } else {
                                 echo '<option value="' . $empresa['cd_pessoa_juridica'] . ' ">' . $empresa['nm_fantasia'] . '</option>';
@@ -76,9 +76,9 @@ if (Session::exists('sucesso')) {
                     <select class="form-control" id="cd_profissao" name="cd_profissao">
                         <option value="">-- Selecione uma profissão</option>
                         <?php //echo escape(Input::get('cd_profissao'));
-                        $perfil['cd_profissao'] = $perfil['cd_profissao'] == '' ? Input::get('cd_profissao') : $perfil['cd_profissao'];
+                        $perfil->setCdProfissao($perfil->getCdProfissao() == '' ? Input::get('cd_profissao') : $perfil->getCdProfissao());
                         foreach ((new ProfissoesModel())->fullList() as $profissao) {
-                            if ($profissao['cd_profissao'] == $perfil['cd_profissao']) {
+                            if ($profissao['cd_profissao'] == $perfil->getCdProfissao()) {
                                 echo '<option value="' . $profissao['cd_profissao'] . '" selected>' . $profissao['nm_profissao'] . '</option>';
                             } else {
                                 echo '<option value="' . $profissao['cd_profissao'] . ' ">' . $profissao['nm_profissao'] . '</option>';
@@ -95,7 +95,7 @@ if (Session::exists('sucesso')) {
 
 
                     <input type="text" class="form-control" id="nm_pessoa_fisica" name="nm_pessoa_fisica"
-                           value="<?php echo $perfil['nm_pessoa_fisica'] == '' ? Input::get('nm_pessoa_fisica') : $perfil['nm_pessoa_fisica']; ?>" placeholder="Nome">
+                           value="<?php echo $perfil->getNmPessoaFisica() == '' ? Input::get('nm_pessoa_fisica') : $perfil->getNmPessoaFisica(); ?>" placeholder="Nome">
                 </div>
             </div>
             <div class="form-group">
@@ -104,7 +104,7 @@ if (Session::exists('sucesso')) {
 
 
                     <input type="text" class="form-control" id="email" name="email"
-                           value="<?php echo $perfil['email'] == '' ? Input::get('email') : $perfil['email']; ?>" placeholder="Email">
+                           value="<?php echo $perfil->getEmail() == '' ? Input::get('email') : $perfil->getEmail(); ?>" placeholder="Email">
                 </div>
             </div>
 
@@ -117,7 +117,7 @@ if (Session::exists('sucesso')) {
 
 
                     <input type="text" class="form-control"
-                           value="<?php echo $perfil['dt_nascimento'] == '' ? Input::get('dt_nascimento') : $perfil['dt_nascimento']; ?>" id="dt_nascimento"
+                           value="<?php echo $perfil->getDtNascimento() == '' ? Input::get('dt_nascimento') : $perfil->getDtNascimento(); ?>" id="dt_nascimento"
                            name="dt_nascimento" placeholder="___/___/____">
                 </div>
             </div>
@@ -128,7 +128,7 @@ if (Session::exists('sucesso')) {
 
 
                     <input type="text" class="form-control" id="cpf" name="cpf"
-                           value="<?php echo $perfil['cpf'] == '' ? Input::get('cpf') : $perfil['cpf']; ?>" placeholder="000.000.000-00"
+                           value="<?php echo $perfil->getCpf() == '' ? Input::get('cpf') : $perfil->getCpf(); ?>" placeholder="000.000.000-00"
                            maxlength="14">
                 </div>
                 <div class="col-lg-4 inputGroupContainer">
@@ -136,7 +136,7 @@ if (Session::exists('sucesso')) {
 
 
                     <input type="text" class="form-control" id="rg" name="rg"
-                           value="<?php echo $perfil['rg'] == '' ? Input::get('rg') : $perfil['rg']; ?>" placeholder="00000000"
+                           value="<?php echo $perfil->getRg() == '' ? Input::get('rg') : $perfil->getRg(); ?>" placeholder="00000000"
                            maxlength="12">
                 </div>
                 <div class="col-lg-4 inputGroupContainer">
@@ -155,11 +155,11 @@ if (Session::exists('sucesso')) {
                     <div class="btn-group" data-toggle="buttons">
                         <label class="btn btn-default control-label">
                             <input type="radio" name="ie_sexo"
-                                   value="m" <?php echo (($perfil['ie_sexo']) == 'm' || Input::get('ie_sexo') == 'm') ? 'checked' : ''; ?>/> Masculino
+                                   value="m" <?php echo (($perfil->getIeSexo()) == 'm' || Input::get('ie_sexo') == 'm') ? 'checked' : ''; ?>/> Masculino
                         </label>
                         <label class="btn btn-default control-label">
                             <input type="radio" name="ie_sexo"
-                                   value="f" <?php echo (($perfil['ie_sexo']) == 'f' || Input::get('ie_sexo') == 'f') ? 'checked' : ''; ?>/> Feminino
+                                   value="f" <?php echo (($perfil->getIeSexo()) == 'f' || Input::get('ie_sexo') == 'f') ? 'checked' : ''; ?>/> Feminino
                         </label>
                     </div>
                 </div>
