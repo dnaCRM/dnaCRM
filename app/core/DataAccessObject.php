@@ -299,6 +299,7 @@ abstract class DataAccessObject
             $stmt->execute();
             $this->con->commit();
 
+            unlink($file);
             return true;
         }
 
