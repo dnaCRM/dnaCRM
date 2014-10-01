@@ -26,11 +26,21 @@ $pe->setNmPessoaFisica('Clark Kent')
     ->setCdInstituicao(1);
 
 $pdao = new PessoaFisicaDAO();
-var_dump($pe);
+//var_dump($pe);
 /** @var $r PessoaFisicaDTO */
 //$r = $pdao->getById(1);
 //$r->setCpf("123.456.789-87");
 //$r->setNmPessoaFisica('Meu nome');
-$pdao->gravar($pe);
+//$pdao->gravar($pe);
 //$pdao->gravar($pe);
 
+$con = DataBase::getConnection();
+// Testado
+//--fc_criar_usuario(login,senha,nivel,status,cd_pessoa_fisica,login_trocar)
+$stmt = $con->prepare("
+
+    SELECT fc_criar_usuario('maria','123456',1,'A',2,null)
+
+");
+
+var_dump($stmt->execute());

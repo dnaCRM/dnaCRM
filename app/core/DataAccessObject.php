@@ -66,7 +66,9 @@ abstract class DataAccessObject
     public function update(DataTransferObject $dto)
     {
         foreach ($dto->getReflex() as $atributo => $method) {
-            if ($atributo != $this->primaryKey) {
+            if ($atributo != $this->primaryKey
+                && $atributo != 'cd_usuario_criacao'
+                && $atributo != 'dt_usuario_criacao') {
                 $parametros[] = $atributo . ' = :' . $atributo;
             }
         }
@@ -130,7 +132,7 @@ abstract class DataAccessObject
     public function delete(DataTransferObject $dto)
     {
         //$where = ($where != null ? " WHERE {$where}" : "");
-        $sql = "DELETE FROM {$this->tabela} WHERE {$this->primaryKey} = {$dto->{$dto->getReflex()[$this->primaryKey]}()}";
+        $sql = "DELETE FROM {$this->tabela} WHERE {$this->primaryKey} = {$dto->{$dto->getReflex()[$this->primaryKey]}()}  returning *";
         if ($this->query($sql, $this->dataTransfer, array())->success()) {
             return $this->getResultado();
         }

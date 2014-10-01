@@ -16,7 +16,7 @@ class PessoaFisica extends Controller
 
     public function start()
     { //Pega a lista completa de perfis
-        $perfil_list = $this->getModel()->fulllist();
+        $perfil_list = $this->getModel()->fullList();
 
         $dados = array(
             'pagesubtitle' => '',
@@ -95,6 +95,7 @@ class PessoaFisica extends Controller
     public function confirmDelete($id)
     {
         $id = (int)$id;
+
         $perfilarr = $this->getModel()->getById($id);
 
         $dados = array(
