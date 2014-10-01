@@ -45,7 +45,8 @@ abstract class DataAccessObject
         $colunas = implode(', ', array_keys($reflex));
         $campos = ':' . implode(', :', array_keys($reflex));
 
-        $sql = "INSERT INTO {$this->tabela} ({$colunas}) VALUES ({$campos}) returning *";
+        $sql = "INSERT INTO {$this->tabela} ({$colunas})
+                VALUES ({$campos}) returning *";
 
         foreach ($dto->getReflex() as $atributo => $method) {
             if ($atributo != $this->primaryKey) {
@@ -68,20 +69,23 @@ abstract class DataAccessObject
         foreach ($dto->getReflex() as $atributo => $method) {
             if ($atributo != $this->primaryKey
                 && $atributo != 'cd_usuario_criacao'
-                && $atributo != 'dt_usuario_criacao') {
+                && $atributo != 'dt_usuario_criacao'
+            ) {
                 $parametros[] = $atributo . ' = :' . $atributo;
             }
         }
         $parametros = implode(', ', $parametros);
 
-        $sql = "UPDATE {$this->tabela} SET {$parametros} WHERE {$this->primaryKey} = :{$this->primaryKey} returning *";
+        $sql = "UPDATE {$this->tabela}
+                SET {$parametros}
+                WHERE {$this->primaryKey} = :{$this->primaryKey} returning *";
 
         foreach ($dto->getReflex() as $atributo => $method) {
             $dados[$atributo] = $dto->{$method}();
         }
 
         if ($this->query($sql, $this->dataTransfer, $dados)->success()) {
-            return $this->getResultado()[0] ;
+            return $this->getResultado()[0];
         }
         return false;
     }
@@ -100,7 +104,8 @@ abstract class DataAccessObject
         $offset = ($offset != null ? " OFFSET {$offset}" : "");
         $orderby = ($orderby != null ? " ORDER BY {$orderby}" : "");
 
-        $sql = "SELECT * FROM {$this->tabela}{$where}{$limit}{$offset}{$orderby}";
+        $sql = "SELECT *
+                FROM {$this->tabela}{$where}{$limit}{$offset}{$orderby}";
 
         if ($this->query($sql, $this->dataTransfer, array())->success()) {
             return $this->getResultado();
@@ -112,7 +117,8 @@ abstract class DataAccessObject
      * @param $where
      * @return bool | DataTransferObject
      */
-    public function get($where) {
+    public function get($where)
+    {
         return $this->select($where, null, null, null);
     }
 
@@ -131,8 +137,9 @@ abstract class DataAccessObject
      */
     public function delete(DataTransferObject $dto)
     {
-        //$where = ($where != null ? " WHERE {$where}" : "");
-        $sql = "DELETE FROM {$this->tabela} WHERE {$this->primaryKey} = {$dto->{$dto->getReflex()[$this->primaryKey]}()}  returning *";
+        $sql = "DELETE FROM {$this->tabela}
+                WHERE {$this->primaryKey} = {$dto->{$dto->getReflex()[$this->primaryKey]}()}  returning *";
+
         if ($this->query($sql, $this->dataTransfer, array())->success()) {
             return $this->getResultado();
         }
@@ -195,7 +202,8 @@ abstract class DataAccessObject
      * Retorna primeiro objeto resultante da consulta ao banco de dados
      * @return DataTransferObject
      */
-    public function first() {
+    public function first()
+    {
         return $this->resultado[0];
     }
 
@@ -206,15 +214,6 @@ abstract class DataAccessObject
     {
         return $this->numRegistros;
     }
-
-    /**
-     * @return PDO
-     */
-    public function getCon()
-    {
-        return $this->con;
-    }
-
 
     ################ MÉTODOS PARA MANIPULAÇÃO DE IMAGENS ########################
     /**

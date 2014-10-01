@@ -51,7 +51,8 @@ class DB
         $colunas = implode(', ', array_keys($dados));
         $aliases = ':' . implode(', :', array_keys($dados));
 
-        $sql = "INSERT INTO {$tabela} ($colunas) VALUES ({$aliases}) returning *";
+        $sql = "INSERT INTO {$tabela} ($colunas)
+                VALUES ({$aliases}) returning *";
 
         if ($this->query($sql, $dados)->success()) {
             return true;
@@ -72,7 +73,9 @@ class DB
         }
 
         $parametros = implode(', ', $parametros);
-        $sql = "UPDATE {$tabela} SET {$parametros} WHERE {$where}";
+        $sql = "UPDATE {$tabela}
+                SET {$parametros}
+                WHERE {$where}";
 
         if ($this->query($sql, $dados)->success()) {
             return true;
@@ -95,7 +98,8 @@ class DB
         $offset = ($offset != null ? " OFFSET {$offset}" : "");
         $orderby = ($orderby != null ? " ORDER BY {$orderby}" : "");
 
-        $sql = "SELECT * FROM {$tabela}{$where}{$limit}{$offset}{$orderby}";
+        $sql = "SELECT *
+                FROM {$tabela}{$where}{$limit}{$offset}{$orderby}";
 
         if ($this->query($sql, array())->success()) {
             return $this;
@@ -121,6 +125,7 @@ class DB
     {
         $where = ($where != null ? " WHERE {$where}" : "");
         $sql = "DELETE FROM {$tabela}{$where}";
+
         if ($this->query($sql, array())->success()) {
             return $this;
         }

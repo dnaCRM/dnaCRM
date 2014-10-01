@@ -110,12 +110,20 @@ class PessoaFisica extends Controller
         $this->view->output($dados);
     }
 
+    /**
+     * @todo implementar lógica para receber dados do $_POST antes de montar o Objeto
+     * Sanitizar entrada de dados
+     * @param PessoaFisicaDTO $dto
+     */
     public function cadastra(PessoaFisicaDTO $dto) {
         if (Input::exists()) {
-
             if (Token::check(Input::get('token'))) {
-                $dto->setNmPessoaFisica(Input::get('nm_pessoa_fisica'));
+
+                $dto->setNmPessoaFisica(Input::get('nm_pessoa_fisica'))
+                    ->setCpf('000.000.000-00');
+
                 $this->model->gravar($dto);
+
             }
         }
     }
