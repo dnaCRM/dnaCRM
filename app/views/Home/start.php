@@ -6,9 +6,14 @@
             Olá, <?php echo (isset($data['name'])) ? $data['name'] : ""; ?>!
         </p>
         <?php
+
         if (Session::exists('fail')) {
             Session::flash('fail');
         }
+        if (Session::exists('msg')) {
+            Session::flash('msg');
+        }
+
         ?>
     </div>
     <div class="col-lg-6" style="padding: 15px 15px 0 15px;">

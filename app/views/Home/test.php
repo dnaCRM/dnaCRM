@@ -31,7 +31,7 @@ $pdao = new PessoaFisicaDAO();
 //$r = $pdao->getById(1);
 //$r->setCpf("123.456.789-87");
 //$r->setNmPessoaFisica('Meu nome');
-//$pdao->gravar($pe);
+$pdao->gravar($pe);
 //$pdao->gravar($pe);
 
 $con = DataBase::getConnection();

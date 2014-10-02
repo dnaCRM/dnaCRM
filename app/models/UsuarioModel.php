@@ -40,6 +40,7 @@ class UsuarioModel extends Model
                 Session::put('user', $login);
                 Session::put('pass', $senha);
                 Session::put('usuario', $usuario->getLogin());
+                Session::flash('msg', 'Logado!', 'success');
                 return true;
             } catch (PDOException $e) {
                 CodeFail((int)$e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());

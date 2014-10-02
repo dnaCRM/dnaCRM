@@ -1,36 +1,26 @@
 <div class="row">
-    <div class="col-lg-8" style="padding: 15px 15px 0 15px;">
-        <div class="well">
+    <div class="col-lg-6">
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-md-3">
+                <img src="img/dna_m_big.png" class="img-responsive pull-left">
+            </div>
+            <div class="col-md-4 pull-left">
+                <h1><?php echo(isset($data['pagetitle']) ? $data['pagetitle'] : ""); ?></h1>
 
-            <p>
-                Bem-vindo! "Lembrar de definir includes para header e scripts"
-            </p>
+                <p class="lead">
+                    <?php echo (isset($data['pagesubtitle'])) ? $data['pagesubtitle'] : ""; ?>
+                </p>
+            </div>
 
         </div>
     </div>
-
-    <div class="col-lg-4">
-        <h1><?php echo(isset($data['pagetitle']) ? $data['pagetitle'] : ""); ?></h1>
-
-        <p class="lead">
-            <?php echo (isset($data['pagesubtitle'])) ? $data['pagesubtitle'] : ""; ?>
-        </p>
-    </div>
 </div>
+<p></p>
 
-<!--Teste de Form-->
 <div class="row">
 
-    <div class="col-lg-8">
-        <?php
-        echo '$_SESSION';
-        var_dump($_SESSION);
-        echo '$_POST';
-        var_dump($_POST);
-        ?>
-    </div>
-
-    <div class="col-lg-4">
+    <div class="col-lg-6">
 
         <?php
 
@@ -78,4 +68,63 @@
         </form>
 
     </div>
+
+        <div class="col-md-6">
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                $_POST
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <?php
+
+                            var_dump($_POST);
+
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                $_SESSION
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <?php
+
+                            var_dump($_SESSION);
+
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                                <i class="glyphicon glyphicon-leaf"></i> $data
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <?php
+
+                            var_dump($data);
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 </div>

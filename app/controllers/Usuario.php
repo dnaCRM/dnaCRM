@@ -30,7 +30,6 @@ class Usuario extends Controller
                 $senha = filter_var(Input::get('senha'), FILTER_SANITIZE_STRING);
 
                 if ($usuarioModel->login($usuario, $senha)) {
-                    Session::flash('msg', 'Logado!', 'success');
                     Redirect::to(SITE_URL);
                 } else {
                     Session::flash('msg', 'Falha no login!', 'danger');
@@ -155,7 +154,7 @@ class Usuario extends Controller
     function loginScreen()
     {
         $dados = array(
-            'pagesubtitle' => 'Login Screen - Acesso ao Sistema',
+            'pagesubtitle' => 'Acesso ao Sistema',
             'pagetitle' => 'dnaCRM'
         );
 
