@@ -29,12 +29,15 @@ define('IMG_UPLOADS_FOLDER', 'img/uploads/');
 /**
  * Guarda configurações gerais
  */
+$dbUser = Session::exists('user') ? Session::get('user') : '1';
+$dbPass = Session::exists('pass') ? Session::get('pass') : '123456';
+
 $GLOBALS['config'] = array(
     'database' => array(
         'sgbd' => 'pgsql',
         'host' =>'127.0.0.1',
-        'user' => '1',
-        'pass' => '123456',
+        'user' => $dbUser,
+        'pass' => $dbPass,
         'dbname' => 'dnacrm'
     ),
     'session' => array(
@@ -92,18 +95,19 @@ function CodeFail($numero, $mensagem, $arquivo, $linha)
             $classecss = CSS_WARNING;
             break;
     }
-/*
+
     echo "<div class=\"alert alert-{$classecss}\">";
     echo "<strong>Erro na Linha: #{$linha} :: </strong> {$mensagem}<br>";
     echo "<small>{$arquivo}</small><br>";
     echo "<small>Erro número {$numero}</small>";
     echo '</div>';
-*/
-    echo "<div class=\"alert alert-dismissable alert-{$classecss}\">";
+
+/*    echo "<div class=\"alert alert-dismissable alert-{$classecss}\">";
     echo '<button type="button" class="close" data-dismiss="alert">×</button>';
     echo '<strong>ALERTA! </strong><br>';
     echo $mensagem;
     echo "</div>";
+*/
 }
 
 // Define manipulador de erro padrão

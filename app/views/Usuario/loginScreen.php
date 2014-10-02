@@ -1,12 +1,5 @@
 <div class="row">
-    <div class="col-lg-6">
-        <h1><?php echo(isset($data['pagetitle']) ? $data['pagetitle'] : ""); ?></h1>
-
-        <p class="lead">
-            <?php echo (isset($data['pagesubtitle'])) ? $data['pagesubtitle'] : ""; ?>
-        </p>
-    </div>
-    <div class="col-lg-6" style="padding: 15px 15px 0 15px;">
+    <div class="col-lg-8" style="padding: 15px 15px 0 15px;">
         <div class="well">
 
             <p>
@@ -15,15 +8,33 @@
 
         </div>
     </div>
+
+    <div class="col-lg-4">
+        <h1><?php echo(isset($data['pagetitle']) ? $data['pagetitle'] : ""); ?></h1>
+
+        <p class="lead">
+            <?php echo (isset($data['pagesubtitle'])) ? $data['pagesubtitle'] : ""; ?>
+        </p>
+    </div>
 </div>
 
 <!--Teste de Form-->
 <div class="row">
-    <div class="col-lg-6">
+
+    <div class="col-lg-8">
+        <?php
+        echo '$_SESSION';
+        var_dump($_SESSION);
+        echo '$_POST';
+        var_dump($_POST);
+        ?>
+    </div>
+
+    <div class="col-lg-4">
 
         <?php
 
-        $user = new User;
+        $user = new Usuario;
         $user->processLogin();
 
         if (Session::exists('msg')) {
@@ -34,6 +45,7 @@
                 CodeError($erro, E_USER_WARNING);
             }
         }
+
         ?>
         <!--Formulário de Cadastro-->
         <form class="form-horizontal" method="post" action="">
@@ -52,11 +64,6 @@
                     <div class="col-lg-10">
                         <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha">
                         <br>
-                        <div class="btn-group" data-toggle="buttons">
-                            <label class="btn btn-xs btn-default">
-                                <input type="checkbox" name="lembrar" id="lembrar"> Lembrar
-                            </label>
-                        </div>
                     </div>
                 </div>
 
@@ -64,21 +71,11 @@
 
                 <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
-                        <button type="reset" class="btn btn-default">Limpar</button>
                         <button type="submit" class="btn btn-primary" id="login">Login</button>
                     </div>
                 </div>
             </fieldset>
         </form>
 
-    </div>
-
-    <div class="col-lg-6">
-<?php
-        echo '$_SESSION';
-        var_dump($_SESSION);
-        echo '$_POST';
-        var_dump($_POST);
-        ?>
     </div>
 </div>

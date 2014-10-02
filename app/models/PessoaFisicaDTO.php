@@ -2,7 +2,7 @@
 
 /**
  * Created by PhpStorm.
- * User: Vinicius
+ * Usuario: Vinicius
  * Date: 13/09/14
  * Time: 22:43
  */
@@ -256,133 +256,220 @@ class PessoaFisicaDTO extends DataTransferObject
 
 
 ######### SETTERS #################################################################3
-
+    /**
+     * @param $cd_catg_grau_ensino
+     * @return PessoaFisicaDTO
+     */
     public function setCdCatgGrauEnsino($cd_catg_grau_ensino)
     {
         $this->cd_catg_grau_ensino = $cd_catg_grau_ensino;
         return $this;
     }
 
+    /**
+     * @param $cd_catg_org_rg
+     * @return PessoaFisicaDTO
+     */
     public function setCdCatgOrgRg($cd_catg_org_rg)
     {
         $this->cd_catg_org_rg = $cd_catg_org_rg;
         return $this;
     }
 
+    /**
+     * @param $cd_instituicao
+     * @return PessoaFisicaDTO
+     */
     public function setCdInstituicao($cd_instituicao)
     {
         $this->cd_instituicao = $cd_instituicao;
         return $this;
     }
 
+    /**
+     * @param $cd_pessoa_fisica
+     * @return PessoaFisicaDTO
+     */
     public function setCdPessoaFisica($cd_pessoa_fisica)
     {
         $this->cd_pessoa_fisica = $cd_pessoa_fisica;
         return $this;
     }
 
+    /**
+     * @param $cd_pessoa_juridica
+     * @return PessoaFisicaDTO
+     */
     public function setCdPessoaJuridica($cd_pessoa_juridica)
     {
         $this->cd_pessoa_juridica = $cd_pessoa_juridica;
         return $this;
     }
 
+    /**
+     * @param $cd_profissao
+     * @return PessoaFisicaDTO
+     */
     public function setCdProfissao($cd_profissao)
     {
         $this->cd_profissao = $cd_profissao;
         return $this;
     }
 
+    /**
+     * @param $cd_usuario_atualiza
+     * @return PessoaFisicaDTO
+     */
     public function setCdUsuarioAtualiza($cd_usuario_atualiza)
     {
         $this->cd_usuario_atualiza = $cd_usuario_atualiza;
         return $this;
     }
 
+    /**
+     * @param $cd_usuario_criacao
+     * @return PessoaFisicaDTO
+     */
     public function setCdUsuarioCriacao($cd_usuario_criacao)
     {
         $this->cd_usuario_criacao = $cd_usuario_criacao;
         return $this;
     }
 
+    /**
+     * @param $cd_vl_catg_grau_ensino
+     * @return PessoaFisicaDTO
+     */
     public function setCdVlCatgGrauEnsino($cd_vl_catg_grau_ensino)
     {
         $this->cd_vl_catg_grau_ensino = $cd_vl_catg_grau_ensino;
         return $this;
     }
 
+    /**
+     * @param $cd_vl_catg_org_rg
+     * @return PessoaFisicaDTO
+     */
     public function setCdVlCatgOrgRg($cd_vl_catg_org_rg)
     {
         $this->cd_vl_catg_org_rg = $cd_vl_catg_org_rg;
         return $this;
     }
 
+    /**
+     * @param $cpf
+     * @return PessoaFisicaDTO
+     */
     public function setCpf($cpf)
     {
         $this->cpf = $cpf;
         return $this;
     }
 
+    /**
+     * @param $dt_fim_curso
+     * @return PessoaFisicaDTO
+     */
     public function setDtFimCurso($dt_fim_curso)
     {
         $this->dt_fim_curso = $dt_fim_curso;
         return $this;
     }
 
+    /**
+     * @param $dt_inicio_curso
+     * @return PessoaFisicaDTO
+     */
     public function setDtInicioCurso($dt_inicio_curso)
     {
         $this->dt_inicio_curso = $dt_inicio_curso;
         return $this;
     }
 
+    /**
+     * @param $dt_nascimento
+     * @return PessoaFisicaDTO
+     */
     public function setDtNascimento($dt_nascimento)
     {
         $this->dt_nascimento = $dt_nascimento;
         return $this;
     }
 
+    /**
+     * @param $dt_usuario_atualiza
+     * @return PessoaFisicaDTO
+     */
     public function setDtUsuarioAtualiza($dt_usuario_atualiza)
     {
         $this->dt_usuario_atualiza = $dt_usuario_atualiza;
         return $this;
     }
 
+    /**
+     * @param $dt_usuario_criacao
+     * @return PessoaFisicaDTO
+     */
     public function setDtUsuarioCriacao($dt_usuario_criacao)
     {
         $this->dt_usuario_criacao = $dt_usuario_criacao;
         return $this;
     }
 
+    /**
+     * @param $email
+     * @return PessoaFisicaDTO
+     */
     public function setEmail($email)
     {
         $this->email = $email;
         return $this;
     }
 
+    /**
+     * @param $ie_estuda
+     * @return PessoaFisicaDTO
+     */
     public function setIeEstuda($ie_estuda)
     {
         $this->ie_estuda = $ie_estuda;
         return $this;
     }
 
+    /**
+     * @param $ie_sexo
+     * @return PessoaFisicaDTO
+     */
     public function setIeSexo($ie_sexo)
     {
         $this->ie_sexo = $ie_sexo;
         return $this;
     }
 
+    /**
+     * @param $im_perfil
+     * @return PessoaFisicaDTO
+     */
     public function setImPerfil($im_perfil)
     {
         $this->im_perfil = $im_perfil;
         return $this;
     }
 
+    /**
+     * @param $nm_pessoa_fisica
+     * @return PessoaFisicaDTO
+     */
     public function setNmPessoaFisica($nm_pessoa_fisica)
     {
         $this->nm_pessoa_fisica = $nm_pessoa_fisica;
         return $this;
     }
 
+    /**
+     * @param $rg
+     * @return PessoaFisicaDTO
+     */
     public function setRg($rg)
     {
         $this->rg = $rg;

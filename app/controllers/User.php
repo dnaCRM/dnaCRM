@@ -16,7 +16,7 @@ class User extends Controller
             if (Token::check(Input::get('token'))) {
 
                 $login = $this->model->login(Input::get('login'), Input::get('senha'));
-                //$this->model->logout();
+
                 if ($login) {
                     Session::flash('msg', 'Logado!', 'success');
                     Redirect::to(SITE_URL);
@@ -85,7 +85,7 @@ class User extends Controller
     }
 
     /**
-     * View padrão para o model User
+     * View padrão para o model Usuario
      */
     public
     function start()
@@ -98,7 +98,7 @@ class User extends Controller
             'list' => $userlist
         ];
 
-        $this->view = new View('User', 'start');
+        $this->view = new View('Usuario', 'start');
         $this->view->output($dados);
     }
 
@@ -126,7 +126,7 @@ class User extends Controller
             );
         }
 
-        $this->view = new View('User', 'formuser');
+        $this->view = new View('Usuario', 'formuser');
         $this->view->output($dados);
     }
 
@@ -141,7 +141,7 @@ class User extends Controller
             'pagetitle' => 'dnaCRM'
         );
 
-        $this->view = new View('User', 'loginScreen');
+        $this->view = new View('Usuario', 'loginScreen');
         $this->view->output($dados, 'login');
     }
 
@@ -156,7 +156,7 @@ class User extends Controller
             'user' => $userarr
         );
 
-        $this->view = new View('User', 'updateUser');
+        $this->view = new View('Usuario', 'updateUser');
         $this->view->output($dados);
     }
 

@@ -29,7 +29,7 @@
     <div class="container">
 
 
-        <?php require($this->viewfile); ?>
+        <?php require_once($this->viewfile); ?>
 
 
 

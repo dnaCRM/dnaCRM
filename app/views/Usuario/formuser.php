@@ -22,12 +22,13 @@
 <div class="row">
     <div class="col-lg-6">
         <img class="img-circle profilefoto"
-             src="<?php echo $data['perfil']['im_foto']; ?>">
+             src="<?php echo $data['perfil']->getImPerfil(); ?>">
         <?php
 
-        $user = new User;
-        $user->newUser();
+        $user = new Usuario();
+        $user->salvarUsuario();
         $perfil = $data['perfil'];
+        $usuario = isset($data['usuario']) ? $data['usuario'] : '';
 
         if (Session::exists('msg')) {
             echo Session::flash('msg');
@@ -41,7 +42,10 @@
                 <div class="form-group">
                     <label for="usuario" class="col-lg-2 control-label">Usuário</label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" id="usuario" name="usuario" value="<?php echo escape(Input::get('usuario')); ?>" placeholder="Usuário">
+                        <input type="text" class="form-control" id="usuario" name="usuario"
+                               value="<?php echo $usuario->getLogin() ?
+                                        $usuario->getLogin() : escape(Input::get('usuario')); ?>"
+                               placeholder="Usuário">
                     </div>
                 </div>
                 <div class="form-group">
@@ -57,7 +61,7 @@
                     </div>
                 </div>
 
-                <input type="hidden" name="id_perfil" value="<?php echo $perfil['cd_pessoa_fisica']; ?>">
+                <input type="hidden" name="id_perfil" value="<?php echo $perfil->getCdPessoaFisica(); ?>">
                 <input type="hidden" name="nivel" value="1">
                 <input type="hidden" name="ie_status" value="A">
                 <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">

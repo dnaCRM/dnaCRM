@@ -17,7 +17,7 @@
                href="PessoaFisica/confirmDelete/<?php echo $data['perfil']->getCdPessoaFisica(); ?>">
                 <span class="fa fa-trash-o"></span> Deletar</a>
             <a class="btn btn-info btn-sm"
-               href="User/formuser/<?php echo $data['perfil']->getCdPessoaFisica(); ?>">
+               href="Usuario/formuser/<?php echo $data['perfil']->getCdPessoaFisica(); ?>">
                 <span class="fa fa-trash-o"></span> Cadastrar Usuário</a>
 
 

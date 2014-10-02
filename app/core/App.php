@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Vinicius
+ * Usuario: Vinicius
  * Date: 22/07/14
  * Time: 21:10
  */
@@ -14,6 +14,15 @@ class App
 
     public function __construct()
     {
+        /*Verifica se existe uma sessão de login ativo*/
+        if (!Session::exists('user')) {
+            //caso o usuário não esteja logado
+            //executa o método loginScreen da Classe Usuario
+
+            require_once 'app/controllers/Usuario.php';
+            return (new Usuario)->loginScreen();
+        }
+
         $url = $this->parseUrl();
 
         if (file_exists('app/controllers/' . $url[0] . '.php')) {
@@ -35,18 +44,6 @@ class App
         //se params estiver vazio, recebe um array vazio
         $this->params = $url ? array_values($url) : array();
 
-        //Verifica se existe uma sessão de login ativo
-/*        if (1Session::exists('user')) {
-            //caso o usuário não esteja logado
-            //executa o método loginScreen da Classe User
-            require_once 'app/controllers/User.php';
-            $login = new User;
-            $login->loginScreen();
-        } else {
-            // caso a sessão 'user' exista, quer dizer que tem um usuário logado
-            // sendo assim, executa o Controller e o método originalmente chamado
-            call_user_func_array(array($this->controller, $this->method), $this->params);
-        }*/
         call_user_func_array(array($this->controller, $this->method), $this->params);
     }
 

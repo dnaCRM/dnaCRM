@@ -134,7 +134,7 @@ class UserModel extends Model
             return $usuario_dados;
         }
         Session::flash('fail', 'Usuário não encontrado', 'danger');
-        Redirect::to(SITE_URL . 'User');
+        Redirect::to(SITE_URL . 'Usuario');
     }
 
     /**

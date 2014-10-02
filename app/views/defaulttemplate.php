@@ -81,7 +81,7 @@
                 <li>
                 <li>
                     <a><i class="glyphicon glyphicon-user"></i>
-                        <span><?php echo(Session::exists('nome_usuario') ? Session::get('nome_usuario') : 'Usuário'); ?></span></a>
+                        <span><?php echo(Session::exists('usuario') ? Session::get('usuario') : 'Usuário'); ?></span></a>
 
                 </li>
             </ul>
@@ -175,10 +175,10 @@
                 <i class="fa pull-right fa-angle-left"></i>
             </a>
             <ul class="treeview-menu" style="display: none;">
-                <li><a href="User"><i class="fa fa-angle-double-right"></i> Usuários</a></li>
+                <li><a href="Usuario"><i class="fa fa-angle-double-right"></i> Usuários</a></li>
                 <!--<li><a href="User/updateUser/<?php /*echo Session::get('user'); */ ?>"><i class="fa fa-angle-double-right"></i> Atualzar dados</a></li>-->
-                <li><a href="User/registerUser"><i class="fa fa-angle-double-right"></i> Novo usuário</a></li>
-                <li><a href="User/logoff"><i class="fa fa-angle-double-right"></i> Logoff</a></li>
+
+                <li><a href="Usuario/logoff"><i class="fa fa-angle-double-right"></i> Logoff</a></li>
             </ul>
         </li>
     </ul>
@@ -188,7 +188,7 @@
 
 <div class="container"><!-- container start -->
 
-    <?php require($this->viewfile); ?>
+    <?php require_once($this->viewfile); ?>
 
 
     <footer>

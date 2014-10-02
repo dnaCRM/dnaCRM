@@ -2,7 +2,7 @@
 
 /**
  * Created by PhpStorm.
- * User: Vinicius
+ * Usuario: Vinicius
  * Date: 13/09/14
  * Time: 22:41
  */
@@ -31,6 +31,14 @@ abstract class DataAccessObject
     {
         $this->con = DataBase::getConnection();
         $this->arquivoTemp = session_id() . '.tmp';
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPrimaryKey()
+    {
+        return $this->primaryKey;
     }
 
     /**
@@ -81,7 +89,9 @@ abstract class DataAccessObject
                 WHERE {$this->primaryKey} = :{$this->primaryKey} returning *";
 
         foreach ($dto->getReflex() as $atributo => $method) {
-            $dados[$atributo] = $dto->{$method}();
+            if ($atributo != 'cd_usuario_criacao' && $atributo != 'dt_usuario_criacao') {
+                $dados[$atributo] = $dto->{$method}();
+            }
         }
 
         if ($this->query($sql, $this->dataTransfer, $dados)->success()) {
@@ -128,7 +138,13 @@ abstract class DataAccessObject
      */
     public function getById($id)
     {
-        return $this->get("{$this->primaryKey} = {$id};")[0];
+        $this->resultado = $this->get("{$this->primaryKey} = {$id}");
+
+        if ($this->resultado) {
+            return $this->resultado[0];
+        }
+
+        return false;
     }
 
     /**

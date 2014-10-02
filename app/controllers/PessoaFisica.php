@@ -2,7 +2,7 @@
 
 /**
  * Created by PhpStorm.
- * User: Vinicius
+ * Usuario: Vinicius
  * Date: 29/09/14
  * Time: 10:25
  */
@@ -39,7 +39,7 @@ class PessoaFisica extends Controller
     {
         if ($id) {
             /** @var PessoaFisicaDTO */
-            $perfilarr = $this->getModel()->getById($id);
+            $perfilarr = $this->findById($id);
 
             $nasc = new DateTime($perfilarr->getDtNascimento());
             $perfilarr->setDtNascimento($nasc->format('d/m/Y'));
@@ -72,7 +72,7 @@ class PessoaFisica extends Controller
     public function visualizar($id = null)
     {
         $id = (int)$id;
-        $perfilarr = $this->getModel()->getById($id);
+        $perfilarr = $this->findById($id);
 
         $dados = array(
             //o campo 'obs' vai ser o subtítulo
@@ -96,7 +96,7 @@ class PessoaFisica extends Controller
     {
         $id = (int)$id;
 
-        $perfilarr = $this->getModel()->getById($id);
+        $perfilarr = $this->findById($id);
 
         $dados = array(
             //o campo 'obs' vai ser o subtítulo
