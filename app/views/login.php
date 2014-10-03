@@ -35,12 +35,17 @@
 
     </div> <!-- /container -->
 
+
     <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/moment-with-locales.min.js"></script>
     <script src="js/bootstrapValidator.min.js"></script>
-    <script src="js/language/pt_BR.js"></script>
-    <script src="js/jquery.inputmask.bundle.min.js"></script>
+    <script src="js/language/pt_BR.js" type="text/javascript"></script>
+    <script src="js/jquery.mask.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/bootswatch.js"></script>
+    <script src="js/bootstrap-datetimepicker.min.js"></script>
+    <script src="js/datatables/js/jquery.dataTables.js"></script>
+    <script src="js/datatables/js/dataTables.bootstrap.js"></script>
+    <script src="js/datatables/js/dataTables.responsive.min.js"></script>
     <script src="js/custom.js"></script>
 
     </body>

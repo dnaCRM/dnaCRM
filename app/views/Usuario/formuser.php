@@ -26,12 +26,13 @@
         <?php
 
         $user = new Usuario();
+        $user->setAtualizar($data['atualizar']);
         $user->salvarUsuario();
         $perfil = $data['perfil'];
         $usuario = $data['usuario'];
 
-        if (Session::exists('msg')) {
-            echo Session::flash('msg');
+        if (Session::exists('usuario_cadastrado')) {
+            echo Session::flash('usuario_cadastrado');
         }
 
         ?>

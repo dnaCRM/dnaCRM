@@ -8,6 +8,7 @@
  */
 class Usuario extends Controller
 {
+    private $atualizar;
 
     public function __construct()
     {
@@ -47,18 +48,9 @@ class Usuario extends Controller
         if (Input::exists()) {
             if (Token::check(Input::get('token'))) {
 
-                try {
-                    if (!$id) {
-                        $this->setDados();
-                        $this->getModel()->create($this->dados);
-                    } else {
-                        $this->setUpdateDados();
-                        $this->getModel()->updateUser($id, $this->dados);
-                    }
-                    Session::flash('msg', 'Você está registrado.', 'success');
-                } catch (Exception $e) {
-                    CodeFail($e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
-                }
+                $usuario = $this->setDados();
+                $this->getModel()->gravar($usuario, $this->atualizar);
+
             }
         }
     }
@@ -67,29 +59,20 @@ class Usuario extends Controller
     private function setDados()
     {
 
-        $this->dados = array(
-            'cd_pessoa_fisica' => (int)Input::get('id_perfil'),
-            'login' => (string)Input::get('usuario'),
-            'senha' => Hash::make(Input::get('senha'), Input::get('usuario')),
-            'nivel' => Input::get('nivel'),
-            'ie_status' => Input::get('ie_status'),
-            'cd_usuario_criacao' => (int)Input::get('id_perfil'),
-            'dt_usuario_criacao' => (new DateTime())->format('Y-m-d H:i:s'),
-            'cd_usuario_atualiza' => (int)Input::get('cd_usuario_atualiza'),
-            'dt_usuario_atializa' => (new DateTime())->format('Y-m-d H:i:s'),
-        );
-    }
+        $_POST = Input::emptyToNull($_POST);
 
-    private function setUpdateDados()
-    {
+        $usuario = new UsuarioDTO();
+        $usuario->setLogin(Input::get('usuario'))
+            ->setSenha(Input::get('senha'))
+            ->setCdUsuario(Input::get('id_perfil'))
+            ->setNivel(Input::get('nivel'))
+            ->setIeStatus(Input::get('ie_status'))
+            ->setCdUsuarioCriacao(Session::get('user'))
+            ->setDtUsuarioCriacao('now()')
+            ->setCdUsuarioAtualiza(Session::get('user'))
+            ->setDtUsuarioAtualiza('now()');
 
-        $this->dados = array(
-            'senha' => Hash::make(Input::get('senha'), Input::get('usuario')),
-            'nivel' => Input::get('nivel'),
-            'ie_status' => Input::get('ie_status'),
-            'cd_usuario_atualiza' => Input::get('cd_usuario_atualiza'),
-            'dt_usuario_atializa' => (new DateTime())->format('Y-m-d H:i:s'),
-        );
+        return $usuario;
     }
 
     /**
@@ -129,7 +112,7 @@ class Usuario extends Controller
                 'pagetitle' => 'Atualização de Usuário',
                 'perfil' => $pessoa,
                 'usuario' => $usuario,
-                'acao' => ''
+                'atualizar' => true
             );
         } else {
 
@@ -139,7 +122,7 @@ class Usuario extends Controller
                 'pagetitle' => 'Cadastro de Usuário',
                 'perfil' => $pessoa,
                 'usuario' => $usuario,
-                'acao' => ''
+                'atualizar' => false,
             );
         }
 
@@ -147,6 +130,10 @@ class Usuario extends Controller
         $this->view->output($dados);
     }
 
+    public function setAtualizar($set)
+    {
+        $this->atualizar = $set;
+    }
     /**
      * View para tela de login
      */

@@ -38,7 +38,7 @@
 
         ?>
         <!--Formulário de Cadastro-->
-        <form class="form-horizontal" method="post" action="">
+        <form id="login" class="form-horizontal" method="post" action="">
             <fieldset>
                 <div class="form-group" id="user-form-group">
                     <label for="usuario" class="col-lg-2 control-label">Usuário</label>

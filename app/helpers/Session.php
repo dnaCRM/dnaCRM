@@ -52,16 +52,17 @@ class Session {
      * Ao passar somente o nome, a mensagem é retornada em forma de string
      * @param string $name = nome para a mensagem
      * @param string $string = mensagem
-     * @param string $css = classe da caixa de mensagem ('info', 'primary', 'success','warning','danger')
+     * @param string $css = classe da caixa de mensagem ('info','success','warning','danger')
      * @return mixed/string
      */
     public static function flash($name, $string = '', $css = '') {
         if (self::exists($name)) {
             $session = self::get($name);
+            $titulo = 'MENSAGEM!';
 
             echo "<div class=\"alert alert-dismissable alert-{$session['css']}\">";
             echo '<button type="button" class="close" data-dismiss="alert">×</button>';
-            echo '<strong>ALERTA! </strong><br>';
+            echo "<strong> {$titulo} </strong><br>";
             echo $session['mensagem'];
             echo "</div>";
 
