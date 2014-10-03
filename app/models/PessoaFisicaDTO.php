@@ -62,7 +62,7 @@ class PessoaFisicaDTO extends DataTransferObject
         if ($this->getImPerfil()) {
             $this->setImPerfil("img/uploads/tb_pessoa_fisica/{$this->cd_pessoa_fisica}.jpg");
         } else {
-            $this->setImPerfil("img/uploads/icon-user.jpg");
+            $this->setImPerfil("img/icon-user.jpg");
         }
     }
 
