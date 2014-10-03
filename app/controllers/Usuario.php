@@ -58,9 +58,6 @@ class Usuario extends Controller
 
     private function setDados()
     {
-
-        $_POST = Input::emptyToNull($_POST);
-
         $usuario = new UsuarioDTO();
         $usuario->setLogin(Input::get('usuario'))
             ->setSenha(Input::get('senha'))

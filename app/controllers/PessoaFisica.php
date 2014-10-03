@@ -128,9 +128,6 @@ class PessoaFisica extends Controller
 
     private function setDados()
     {
-
-        $_POST = Input::emptyToNull($_POST);
-
         $dto = new PessoaFisicaDTO();
 
         $dto->setCdPessoaFisica(Input::get('cd_pessoa_fisica'))
