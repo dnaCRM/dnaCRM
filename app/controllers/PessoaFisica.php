@@ -111,8 +111,7 @@ class PessoaFisica extends Controller
     }
 
     /**
-     * @todo implementar lógica para receber dados do $_POST antes de montar o Objeto
-     * Sanitizar entrada de dados
+     * @todo Sanitizar entrada de dados
      */
     public function cadastra() {
         if (Input::exists()) {

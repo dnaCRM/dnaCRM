@@ -50,8 +50,15 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Perfis <span
                             class="caret"></span></a>
                     <ul class="dropdown-menu" aria-labelledby="themes">
-                        <li><a href="PessoaFisica">Lista</a></li>
+                        <li><a href="PessoaFisica">Pessoa Física</a></li>
                         <li class="divider"></li>
+                        <li><a href="PessoaFisica">Item</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Cadastrar <span
+                            class="caret"></span></a>
+                    <ul class="dropdown-menu" aria-labelledby="themes">
                         <li><a href="PessoaFisica/formperfil">Nova Pessoa Fisica</a></li>
                         <li><a href="PessoaFisica">Item</a></li>
                     </ul>
@@ -98,6 +105,17 @@
         </button>-->
 
 <nav class="menu-side"><!-- side-bar start -->
+
+    <div class="usuario-panel clearfix">
+        <div class="pull-left image">
+            <img src="img/uploads/tb_pessoa_fisica/<?php echo Session::get('user');?>.jpg" class="img-circle">
+        </div>
+        <div class="pull-left info">
+            <p><?php echo Session::get('usuario') ;?></p>
+
+            <a href="Usuario/logoff"><i class="fa fa-circle text-danger"></i> Sair</a>
+        </div>
+    </div>
 
     <ul class="sidebar-menu">
         <li>
@@ -192,24 +210,25 @@
 
 
     <footer>
-        <div class="row">
-            <div class="col-lg-12">
-                <hr>
-                <p>Feito por <a href="https://github.com/inshideru" rel="nofollow">Vinicius Sorrentino</a>. Contato <a
-                        href="mailto:inshideru@gmail.com">inshideru@gmail.com</a>,
-                    <a href="https://github.com/inshideru" rel="nofollow">Gabriel Borges</a>. Contato <a
-                        href="mailto:gabrielborc@gmail.com">gabrielborc@gmail.com</a>,
-                    <a href="https://github.com/inshideru" rel="nofollow">Raul Martinez</a>. Contato <a
-                        href="mailto:demartinez.raul@gmail.com">demartinez.raul@gmail.com</a>.</p>
 
-                <p>Code released under the <a href="">MIT License</a>.</p>
+        <hr>
+        <p>Desenvolvedores por:<br>
+            <a href="https://github.com/inshideru" rel="nofollow">Vinicius Sorrentino</a>. Contato <a
+                href="mailto:inshideru@gmail.com">inshideru@gmail.com</a>,
+            <a href="https://github.com/inshideru" rel="nofollow">Gabriel Borges</a>. Contato <a
+                href="mailto:gabrielborc@gmail.com">gabrielborc@gmail.com</a>,
+            <a href="https://github.com/inshideru" rel="nofollow">Raul Martinez</a>. Contato <a
+                href="mailto:demartinez.raul@gmail.com">demartinez.raul@gmail.com</a>.</p>
 
-                <p>Based on <a href="http://getbootstrap.com" rel="nofollow">Bootstrap</a>. Icons from <a
-                        href="http://fortawesome.github.io/Font-Awesome/" rel="nofollow">Font Awesome</a>. Web fonts
-                    from <a href="http://www.google.com/webfonts" rel="nofollow">Google</a>.</p>
-            </div>
-        </div>
+        <p><span class="fa fa-github"></span> <a href="https://github.com/dnaCRM">GitHub </a>.<br>
+            Código sob licença <a href="">MIT</a></p>
+
+        <p>Front-end baseado no <a href="http://getbootstrap.com" rel="nofollow">Bootstrap</a>. Ícones <a
+                href="http://fortawesome.github.io/Font-Awesome/" rel="nofollow">Font Awesome</a>. Web fonts
+            do <a href="http://www.google.com/webfonts" rel="nofollow">Google</a>.</p>
+
     </footer>
+
 
 </div>
 <!-- container end -->

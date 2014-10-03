@@ -133,9 +133,26 @@ td > .img-circle {
     width: 40px;
 }
 
+.usuario-panel {
+    padding: 10px;
+}
+.useruario-panel:after {
+    clear: both;
+}
+.usuario-panel > .image > img {
+    width: 45px;
+    height: 45px;
+}
+
+.usuario-panel > .info {
+    padding: 5px 5px 5px 15px;
+    font-size: 14px;
+    line-height: 1;
+}
 .profilefoto {
     max-width: 250px;
 }
+
 /*Controle de formulários
 #pessoafisicaform .selectContainer .form-control-feedback,
 #pessoafisicaform .inputGroupContainer .form-control-feedback{

@@ -20,20 +20,7 @@
         <div class="well">
 
             Well, well...
-            <?php
-            //'073.596.567-61'
-            $cpf = '073.596.567-61';
-            echo Input::clean($cpf);
 
-            echo '<br>';
-            $telefone = "1134587988";
-            $pattern = '/(\d{2})(\d*)(\d{4})/';
-            $telefoneN = preg_replace($pattern, '($1) $2-$3', $telefone);
-            echo $telefoneN . '<br><br>';
-
-            echo var_dump(Hash::make('123456', 'postgres'));
-
-            ?>
 
         </div>
     </div>
