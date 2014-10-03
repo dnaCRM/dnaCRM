@@ -122,15 +122,14 @@ class Usuario extends Controller
             Redirect::to(SITE_URL . 'Home');
         }
 
-        $usuario = $this->getModel()->getById($id);
+        if ($usuario = $this->getModel()->getById($id)) {
 
-        if ($usuario) {
-            $pessoa = $pessoaFisica->getById($usuario->getCdUsuario());
             $dados = array(
                 'pagesubtitle' => $pessoa->getNmPessoaFisica(),
                 'pagetitle' => 'Atualização de Usuário',
                 'perfil' => $pessoa,
-                'usuario' => $usuario
+                'usuario' => $usuario,
+                'acao' => ''
             );
         } else {
 
@@ -139,7 +138,8 @@ class Usuario extends Controller
                 'pagesubtitle' => $pessoa->getNmPessoaFisica(),
                 'pagetitle' => 'Cadastro de Usuário',
                 'perfil' => $pessoa,
-                'usuario' => $usuario
+                'usuario' => $usuario,
+                'acao' => ''
             );
         }
 

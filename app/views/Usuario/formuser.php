@@ -28,7 +28,7 @@
         $user = new Usuario();
         $user->salvarUsuario();
         $perfil = $data['perfil'];
-        $usuario = isset($data['usuario']) ? $data['usuario'] : '';
+        $usuario = $data['usuario'];
 
         if (Session::exists('msg')) {
             echo Session::flash('msg');

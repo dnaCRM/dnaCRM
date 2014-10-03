@@ -10,6 +10,7 @@ class UsuarioDTO extends DataTransferObject{
 
     private $cd_usuario;
     private $login;
+    private $senha;
     private $nivel;
     private $ie_status;
     private $cd_usuario_criacao;
@@ -26,6 +27,7 @@ class UsuarioDTO extends DataTransferObject{
             'cd_usuario' => 'getCdUsuario',
             'login' => 'getLogin',
             'nivel' => 'getNivel',
+            'senha' => 'getSenha',
             'ie_status' => 'getIeStatus',
             'cd_usuario_criacao' => 'getCdUsuarioCriacao',
             'dt_usuario_criacao' => 'getDtUsuarioCriacao',
@@ -108,6 +110,28 @@ class UsuarioDTO extends DataTransferObject{
     }
 
     /**
+     * @return mixed
+     */
+    public function getSenha()
+    {
+        return $this->senha;
+    }
+
+    ##################### SETTERS #########################3
+
+    /**
+     * @param $senha
+     * @return UsuarioDTO
+     */
+    public function setSenha($senha)
+    {
+        $this->senha = $senha;
+        return $this;
+    }
+
+
+
+    /**
      * @param $cd_usuario
      * @return UsuarioDTO
      */
@@ -118,7 +142,7 @@ class UsuarioDTO extends DataTransferObject{
     }
 
     /**
-     * @param $cd_usuario_atualizacao
+     * @param $cd_usuario_atualiza
      * @return UsuarioDTO
      */
     public function setCdUsuarioAtualiza($cd_usuario_atualiza)
@@ -138,7 +162,7 @@ class UsuarioDTO extends DataTransferObject{
     }
 
     /**
-     * @param $dt_usuario_atualizacao
+     * @param $dt_usuario_atualiza
      * @return UsuarioDTO
      */
     public function setDtUsuarioAtualiza($dt_usuario_atualiza)
