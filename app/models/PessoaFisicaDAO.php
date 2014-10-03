@@ -6,9 +6,6 @@
  * Date: 02/08/14
  * Time: 19:14
  */
-
-
-
 class PessoaFisicaDAO extends DataAccessObject
 {
 
@@ -26,14 +23,20 @@ class PessoaFisicaDAO extends DataAccessObject
 
     public function gravar(PessoaFisicaDTO $pessoaFisica)
     {
-        if ($pessoaFisica->getCdPessoaFisica() == '') {
-            $obj = $this->insert($pessoaFisica);
-        } else {
-            $obj = $this->update($pessoaFisica);
-        }
+        try {
+            if ($pessoaFisica->getCdPessoaFisica() == '') {
+                $obj = $this->insert($pessoaFisica);
+            } else {
+                $obj = $this->update($pessoaFisica);
+            }
 
-        if ($this->importaFoto($obj->getCdPessoaFisica())) {
-            $this->exportaFoto($obj->getCdPessoaFisica());
+            if ($this->importaFoto($obj->getCdPessoaFisica())) {
+                $this->exportaFoto($obj->getCdPessoaFisica());
+            }
+            return true;
+        } catch (Exception $e) {
+            CodeFail((int)$e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
+            return false;
         }
 
     }

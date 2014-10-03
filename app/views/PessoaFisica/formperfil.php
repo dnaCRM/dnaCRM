@@ -26,8 +26,8 @@ $perfil = $data['perfil'];
 $perfil_form = new PessoaFisica();
 $perfil_form->cadastra($perfil);//Não cadastra na entra pois ainda não tem Token
 
-if (Session::exists('sucesso')) {
-    Session::flash('sucesso');
+if (Session::exists('sucesso_salvar_pf')) {
+    Session::flash('sucesso_salvar_pf');
 }
 
 ?>
@@ -48,10 +48,10 @@ if (Session::exists('sucesso')) {
 
             <div class="form-group">
                 <div class="col-lg-12 selectContainer">
-                    <label for="cd_cgc" class="control-label">Empresa</label>
+                    <label for="cd_pessoa_juridica" class="control-label">Empresa</label>
 
 
-                    <select class="form-control" id="cd_cgc" name="cd_cgc">
+                    <select class="form-control" id="cd_cgc" name="cd_pessoa_juridica">
                         <option value="">-- Selecione uma empresa</option>
                         <?php //echo escape(Input::get('cd_cgc'));
                         $perfil->setCdPessoaJuridica($perfil->getCdPessoaJuridica() == '' ? Input::get('cd_cgc') : $perfil->getCdPessoaJuridica());
@@ -143,7 +143,7 @@ if (Session::exists('sucesso')) {
 
 
                     <input type="text" class="form-control" id="org_rg" name="org_rg"
-                           value="" placeholder="XX" maxlength="2">
+                           value="" placeholder="XX" maxlength="2" disabled>
                 </div>
             </div>
 
@@ -165,6 +165,7 @@ if (Session::exists('sucesso')) {
 
             </div>
 
+            <input type="hidden" name="cd_pessoa_fisica" value="<?php echo $data['id']; ?>">
             <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
 
             <div class="form-group ">

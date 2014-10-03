@@ -113,19 +113,42 @@ class PessoaFisica extends Controller
     /**
      * @todo implementar lógica para receber dados do $_POST antes de montar o Objeto
      * Sanitizar entrada de dados
-     * @param PessoaFisicaDTO $dto
      */
-    public function cadastra(PessoaFisicaDTO $dto) {
+    public function cadastra() {
         if (Input::exists()) {
             if (Token::check(Input::get('token'))) {
 
-                $dto->setNmPessoaFisica(Input::get('nm_pessoa_fisica'))
-                    ->setCpf('000.000.000-00');
-
-                $this->model->gravar($dto);
+                $pessoaFisica = $this->setDados();
+                if ($this->model->gravar($pessoaFisica)) {
+                    Session::flash('sucesso_salvar_pf', 'Cadastro salvo!', 'success');
+                }
 
             }
         }
+    }
+
+    private function setDados()
+    {
+
+        $_POST = Input::emptyToNull($_POST);
+
+        $dto = new PessoaFisicaDTO();
+
+        $dto->setCdPessoaFisica(Input::get('cd_pessoa_fisica'))
+        ->setNmPessoaFisica(Input::get('nm_pessoa_fisica'))
+        ->setCdPessoaJuridica(Input::get('cd_pessoa_juridica'))
+        ->setCdProfissao(Input::get('cd_profissao'))
+        ->setCpf(Input::get('cpf'))
+        ->setRg(Input::get('rg'))
+        ->setEmail(Input::get('email'))
+        ->setDtNascimento(Input::get('dt_nascimento'))
+        ->setIeSexo(Input::get('ie_sexo'))
+        ->setCdUsuarioCriacao(Session::get('user'))
+        ->setDtUsuarioCriacao('now()')
+        ->setCdUsuarioAtualiza(Session::get('user'))
+        ->setDtUsuarioAtualiza('now()');
+
+        return $dto;
     }
 
     public function removerPessoaFisica(PessoaFisicaDTO $dto) {
