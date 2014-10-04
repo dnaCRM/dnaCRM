@@ -6,41 +6,45 @@
  * Time: 00:51
  */
 
-$pe = new PessoaFisicaDTO();
+// Testando Pessoa Física
+$pdao = new PessoaFisicaDAO();
+/** @var $r PessoaFisicaDTO */
+$r = $pdao->getById(1);
+//$r->setCpf("123.456.789-87");
+$r->setNmPessoaFisica('Administrador');
 
-$pe->setNmPessoaFisica('Clark Kent')
-    ->setCdPessoaJuridica(1)
-    ->setCdProfissao(1)
-    ->setCpf('213.416.489-09')
-    ->setRg('111031')
-    ->setCdCatgOrgRg(1)
-    ->setCdVlCatgOrgRg(1)
-    ->setEmail('clark@net.com')
-    ->setDtNascimento('12/12/1987')
-    ->setIeSexo('f')
+
+
+
+// Testado
+//--fc_criar_usuario(login,senha,nivel,status,cd_pessoa_fisica,login_trocar)
+    //SELECT fc_criar_usuario('maria','123456',1,'A',2,null)
+
+$in = new InstituicaoEnsinoDTO();
+$in->setDsInstituicao('Unifran')
+    ->setCdCatgInstituicao(1)
+    ->setCdVlCatgInstituicao(1)
     ->setCdUsuarioCriacao(1)
     ->setDtUsuarioCriacao('now()')
     ->setCdUsuarioAtualiza(1)
-    ->setDtUsuarioAtualiza('now()')
-    ->setIeEstuda('A')
-    ->setCdInstituicao(1);
+    ->setDtUsuarioAtualiza('now()');
 
-$pdao = new PessoaFisicaDAO();
-//var_dump($pe);
-/** @var $r PessoaFisicaDTO */
-//$r = $pdao->getById(1);
-//$r->setCpf("123.456.789-87");
-//$r->setNmPessoaFisica('Meu nome');
-$pdao->gravar($pe);
-//$pdao->gravar($pe);
+$inDao = new InstituicaoEnsinoDAO();
 
-$con = DataBase::getConnection();
-// Testado
-//--fc_criar_usuario(login,senha,nivel,status,cd_pessoa_fisica,login_trocar)
-$stmt = $con->prepare("
+/** @var InstituicaoEnsinoDTO $i */
+$i = $inDao->getById(5);
 
-    SELECT fc_criar_usuario('maria','123456',1,'A',2,null)
+$i->setCdCatgInstituicao(1);
+try {
+    //$inDao->gravar($i);
+    $pdao->gravar($r);
+    Session::flash('sucesso_salvar_pf', 'Cadastro salvo!', 'success');
+} catch (Exception $e) {
+    CodeFail((int)$e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
+}
 
-");
+if (Session::exists('sucesso_salvar_pf')){
+    Session::flash('sucesso_salvar_pf');
+}
 
-var_dump($stmt->execute());
+var_dump($r);

@@ -21,24 +21,25 @@ class PessoaFisicaDAO extends DataAccessObject
 
     }
 
+    /**
+     * @param PessoaFisicaDTO $pessoaFisica
+     * @throws Exception
+     */
     public function gravar(PessoaFisicaDTO $pessoaFisica)
     {
-        try {
             if ($pessoaFisica->getCdPessoaFisica() == '') {
-                $obj = $this->insert($pessoaFisica);
+                if (!$obj = $this->insert($pessoaFisica)) {
+                    throw new Exception('Impossível Inserir Pessoa Física');
+                }
             } else {
-                $obj = $this->update($pessoaFisica);
+                if (!$obj = $this->update($pessoaFisica)) {
+                    throw new Exception('Impossível Atualizar Pessoa Física');
+                }
             }
 
             if ($this->importaFoto($obj->getCdPessoaFisica())) {
                 $this->exportaFoto($obj->getCdPessoaFisica());
             }
-            return true;
-        } catch (Exception $e) {
-            CodeFail((int)$e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
-            return false;
-        }
-
     }
 
     /**

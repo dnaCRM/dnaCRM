@@ -118,12 +118,16 @@ class PessoaFisica extends Controller
             if (Token::check(Input::get('token'))) {
 
                 $pessoaFisica = $this->setDados();
-                if ($this->model->gravar($pessoaFisica)) {
-                    Session::flash('sucesso_salvar_pf', 'Cadastro salvo!', 'success');
-                }
 
+                try {
+                    $this->model->gravar($pessoaFisica);
+                    Session::flash('sucesso_salvar_pf', 'Cadastro salvo!', 'success');
+                } catch (Exception $e) {
+                    CodeFail((int)$e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
+                }
             }
         }
+
     }
 
     private function setDados()
