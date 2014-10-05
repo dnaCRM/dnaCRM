@@ -1,25 +1,25 @@
 <?php
 
-$obj = new PessoaJuridicaTelefoneDTO();
+$obj = new ServicoAdicionalDTO();
 $obj
-    ->setCdPessoaJuridica(1)
-    ->setFone('(16) 3344-5566')
-    ->setObservacao('Isto é uma observação. Então observe!')
-    ->setCdCatgFonePj(1)
-    ->setCdVlCatgFonePj(1)
-    ->setCdCatgOperadora(1)
-    ->setCdVlCatgOperadora(1)
-    ->setObservacao('Orgplan')
+    ->setCdOrdemServico(1)
+    ->setCdPessoaFisica(1)
+    ->setCdCatgServico(1)
+    ->setCdVlCatgServico(1)
+    ->setCdSetor(1)
+    ->setCdVaga(1)
+    ->setDtInicio('now()')
+    ->setDtFim('now()')
     ->setCdUsuarioCriacao(1)
     ->setDtUsuarioCriacao('now()')
     ->setCdUsuarioAtualiza(2)
     ->setDtUsuarioAtualiza('now()');
 
-$objDao = new PessoaJuridicaTelefoneDAO();
+$objDao = new ServicoAdicionalDAO();
 
-/** @var PessoaJuridicaEnderecoDTO $obj */
+/** @var ServicoAdicionalDTO $obj */
 $obj = $objDao->getById(1);
-$obj->setObservacao('Número Desconhecido');
+$obj->setDtFim('25/12/2014');
 
 
 $obj = $objDao->gravar($obj);
