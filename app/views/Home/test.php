@@ -1,6 +1,6 @@
 <?php
 
-$obj = new PessoaFisicaEnderecoDTO();
+$obj = new PessoaJuridicaEnderecoDTO();
 $obj
     ->setCdCatgEnd(1)
     ->setCdVlCatgEnd(1)
@@ -12,17 +12,17 @@ $obj
     ->setCidade('Franca')
     ->setCdCatgEstado(1)
     ->setCdVlCatgEstado(1)
-    ->setObservacao('Endereço Comercial')
+    ->setObservacao('Orgplan')
     ->setCdUsuarioCriacao(1)
     ->setDtUsuarioCriacao('now()')
     ->setCdUsuarioAtualiza(2)
     ->setDtUsuarioAtualiza('now()');
 
-$objDao = new PessoaFisicaEnderecoDAO();
+$objDao = new PessoaJuridicaEnderecoDAO();
 
-/** @var PessoaFisicaEnderecoDTO $obj */
+/** @var PessoaJuridicaEnderecoDTO $obj */
 $obj = $objDao->getById(2);
-$obj->setObservacao('Condomínio Vila Brasil');
+$obj->setObservacao('ORGPLAN PARTICIPAÇÕES LTDA');
 
 
 $obj = $objDao->gravar($obj);
