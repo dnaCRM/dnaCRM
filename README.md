@@ -11,8 +11,8 @@
 * Este projeto será o resultado de um estudo sobre Programação Orientada a Objetos, Padrões de Projeto, Projeto e Implementação de Banco de dados Relacional.
 
 #### Alguns detalhes
-* Linguagem: Php
-* SGBD: PostgreSQL
+* Linguagem: Php 5.3 (mínimo)
+* SGBD: PostgreSQL 9.1 (mínimo)
 
 #### Status
 * Este projeto ainda se encotra em fase inicial e ainda não tem intenção de ser um sistema pronto para utilização.

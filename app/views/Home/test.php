@@ -1,19 +1,30 @@
 <?php
 
-$pj = new PessoaJuridicaDTO();
-$pj
-    ->setCnpj('22.345.654/0001-09')
-    ->setNmFantasia('WayneTech')
-    ->setDescRazao('Future Technology')
-    ->setDescAtividade('Tecnologia em Bugingangas')
-    ->setEmail('wayne@tech.com')
+$obj = new PessoaFisicaEnderecoDTO();
+$obj
+    ->setCdCatgEnd(1)
+    ->setCdVlCatgEnd(1)
+    ->setCdPessoaFisica(2)
+    ->setCep('14403-180')
+    ->setRua('Rua Alfredo Tosi')
+    ->setNumero('1821')
+    ->setBairro('Núcleo Alpha')
+    ->setCidade('Franca')
+    ->setCdCatgEstado(1)
+    ->setCdVlCatgEstado(1)
+    ->setObservacao('Endereço Comercial')
     ->setCdUsuarioCriacao(1)
     ->setDtUsuarioCriacao('now()')
     ->setCdUsuarioAtualiza(2)
     ->setDtUsuarioAtualiza('now()');
 
-$pjDao = new PessoaJuridicaDAO();
+$objDao = new PessoaFisicaEnderecoDAO();
 
-$pj = $pjDao->fullList();
+/** @var PessoaFisicaEnderecoDTO $obj */
+$obj = $objDao->getById(2);
+$obj->setObservacao('Condomínio Vila Brasil');
 
-var_dump($pj);
+
+$obj = $objDao->gravar($obj);
+$obj = $objDao->fullList();
+var_dump($obj);
