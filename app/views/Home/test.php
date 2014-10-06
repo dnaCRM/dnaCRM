@@ -18,10 +18,11 @@ $obj
 $objDao = new ServicoAdicionalDAO();
 
 /** @var ServicoAdicionalDTO $obj */
-$obj = $objDao->getById(1);
-$obj->setDtFim('25/12/2014');
+//$obj = $objDao->getById(2);
+//$obj->setDtFim('25/12/2014');
 
 
-$obj = $objDao->gravar($obj);
-$obj = $objDao->fullList();
-var_dump($obj);
+$objDao->gravar($obj);
+
+$res = $objDao->fullList();
+var_dump($res);
