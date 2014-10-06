@@ -45,7 +45,7 @@ abstract class DataAccessObject
      * @param DataTransferObject $dto
      * @return bool | DataTransferObject
      */
-    public function insert(DataTransferObject $dto)
+    protected function insert(DataTransferObject $dto)
     {
         $reflex = $dto->getReflex();
         unset($reflex[$this->primaryKey]);
@@ -72,7 +72,7 @@ abstract class DataAccessObject
      * @param DataTransferObject $dto
      * @return bool| DataTransferObject
      */
-    public function update(DataTransferObject $dto)
+    protected function update(DataTransferObject $dto)
     {
         foreach ($dto->getReflex() as $atributo => $method) {
             if ($atributo != 'cd_usuario_criacao'
@@ -150,7 +150,7 @@ abstract class DataAccessObject
      * @param DataTransferObject $dto
      * @return bool | DataTransferObject
      */
-    public function delete(DataTransferObject $dto)
+    protected function delete(DataTransferObject $dto)
     {
         $sql = "DELETE FROM {$this->tabela}
                 WHERE {$this->primaryKey} = {$dto->{$dto->getReflex()[$this->primaryKey]}()}  returning *";
@@ -163,11 +163,11 @@ abstract class DataAccessObject
 
     /**
      * @param string $sql = SQL para ser preparada
-     * @param DataTransferObject $obj = Objeto usado para capturar a classe
+     * @param string $obj = Nome da Classe DTO
      * @param array $parametros = dados a serem enviados para o banco de dados
      * @return $this
      */
-    private function query($sql, $obj, array $parametros)
+    protected function query($sql, $obj, array $parametros)
     {
         try {
             $this->statement = $this->con->prepare($sql);
@@ -191,7 +191,7 @@ abstract class DataAccessObject
     /**
      * @return bool
      */
-    private function success()
+    protected function success()
     {
         return $this->success;
     }
@@ -236,7 +236,7 @@ abstract class DataAccessObject
      * Este método utiliza uma classe externa que não foi criada por mim
      * @return bool
      */
-    public function uploadFoto()
+    protected function uploadFoto()
     {
         if (Input::exists('files')) {
             $fotoperfil = isset($_FILES[$this->colunaImagem]) ?
