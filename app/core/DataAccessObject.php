@@ -330,7 +330,7 @@ abstract class DataAccessObject
      * @param $id
      * @return bool
      */
-    protected function exportaFoto($id)
+    public function exportaFoto($id)
     {
 
         if (!file_exists($this->imgFolder)) {

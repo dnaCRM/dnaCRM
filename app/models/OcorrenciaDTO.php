@@ -49,132 +49,244 @@ class OcorrenciaDTO extends DataTransferObject
         return $this->reflex;
     }
 
-    public function getCd_ocorrencia() {
-        return $this->cd_ocorrencia;
-    }
-
-    public function getCd_pf_informante() {
-        return $this->cd_pf_informante;
-    }
-
-    public function getDesc_assunto() {
-        return $this->desc_assunto;
-    }
-
-    public function getDesc_ocorrencia() {
-        return $this->desc_ocorrencia;
-    }
-
-    public function getDt_ocorrencia() {
-        return $this->dt_ocorrencia;
-    }
-
-    public function getIe_situacao() {
-        return $this->ie_situacao;
-    }
-
-    public function getDt_fim() {
-        return $this->dt_fim;
-    }
-
-    public function getDesc_conclusao() {
-        return $this->desc_conclusao;
-    }
-
-    public function getCd_catg_estagio() {
+    /**
+     * @return mixed
+     */
+    public function getCdCatgEstagio()
+    {
         return $this->cd_catg_estagio;
     }
 
-    public function getCd_vl_catg_estagio() {
-        return $this->cd_vl_catg_estagio;
+    /**
+     * @return mixed
+     */
+    public function getCdOcorrencia()
+    {
+        return $this->cd_ocorrencia;
     }
 
-    public function getCd_usuario_criacao() {
-        return $this->cd_usuario_criacao;
+    /**
+     * @return mixed
+     */
+    public function getCdPfInformante()
+    {
+        return $this->cd_pf_informante;
     }
 
-    public function getDt_usuario_criacao() {
-        return $this->dt_usuario_criacao;
-    }
-
-    public function getCd_usuario_atualiza() {
+    /**
+     * @return mixed
+     */
+    public function getCdUsuarioAtualiza()
+    {
         return $this->cd_usuario_atualiza;
     }
 
-    public function getDt_usuario_atualiza() {
+    /**
+     * @return mixed
+     */
+    public function getCdUsuarioCriacao()
+    {
+        return $this->cd_usuario_criacao;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCdVlCatgEstagio()
+    {
+        return $this->cd_vl_catg_estagio;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescAssunto()
+    {
+        return $this->desc_assunto;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescConclusao()
+    {
+        return $this->desc_conclusao;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescOcorrencia()
+    {
+        return $this->desc_ocorrencia;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDtFim()
+    {
+        return $this->dt_fim;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDtOcorrencia()
+    {
+        return $this->dt_ocorrencia;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDtUsuarioAtualiza()
+    {
         return $this->dt_usuario_atualiza;
     }
-    
-    ############################# SETTERS #############################
 
-    public function setCd_ocorrencia($cd_ocorrencia) {
-        $this->cd_ocorrencia = $cd_ocorrencia;
-        return $this;
+    /**
+     * @return mixed
+     */
+    public function getDtUsuarioCriacao()
+    {
+        return $this->dt_usuario_criacao;
     }
 
-    public function setCd_pf_informante($cd_pf_informante) {
-        $this->cd_pf_informante = $cd_pf_informante;
-        return $this;
+    /**
+     * @return mixed
+     */
+    public function getIeSituacao()
+    {
+        return $this->ie_situacao;
     }
 
-    public function setDesc_assunto($desc_assunto) {
-        $this->desc_assunto = $desc_assunto;
-        return $this;
-    }
+    ################## SETTERS #######################
 
-    public function setDesc_ocorrencia($desc_ocorrencia) {
-        $this->desc_ocorrencia = $desc_ocorrencia;
-        return $this;
-    }
-
-    public function setDt_ocorrencia($dt_ocorrencia) {
-        $this->dt_ocorrencia = $dt_ocorrencia;
-        return $this;
-    }
-
-    public function setIe_situacao($ie_situacao) {
-        $this->ie_situacao = $ie_situacao;
-        return $this;
-    }
-
-    public function setDt_fim($dt_fim) {
-        $this->dt_fim = $dt_fim;
-        return $this;
-    }
-
-    public function setDesc_conclusao($desc_conclusao) {
-        $this->desc_conclusao = $desc_conclusao;
-        return $this;
-    }
-
-    public function setCd_catg_estagio($cd_catg_estagio) {
+    /**
+     * @param mixed $cd_catg_estagio
+     */
+    public function setCdCatgEstagio($cd_catg_estagio)
+    {
         $this->cd_catg_estagio = $cd_catg_estagio;
         return $this;
     }
 
-    public function setCd_vl_catg_estagio($cd_vl_catg_estagio) {
-        $this->cd_vl_catg_estagio = $cd_vl_catg_estagio;
+    /**
+     * @param mixed $cd_ocorrencia
+     */
+    public function setCdOcorrencia($cd_ocorrencia)
+    {
+        $this->cd_ocorrencia = $cd_ocorrencia;
         return $this;
     }
 
-    public function setCd_usuario_criacao($cd_usuario_criacao) {
-        $this->cd_usuario_criacao = $cd_usuario_criacao;
+    /**
+     * @param mixed $cd_pf_informante
+     */
+    public function setCdPfInformante($cd_pf_informante)
+    {
+        $this->cd_pf_informante = $cd_pf_informante;
         return $this;
     }
 
-    public function setDt_usuario_criacao($dt_usuario_criacao) {
-        $this->dt_usuario_criacao = $dt_usuario_criacao;
-        return $this;
-    }
-
-    public function setCd_usuario_atualiza($cd_usuario_atualiza) {
+    /**
+     * @param mixed $cd_usuario_atualiza
+     */
+    public function setCdUsuarioAtualiza($cd_usuario_atualiza)
+    {
         $this->cd_usuario_atualiza = $cd_usuario_atualiza;
         return $this;
     }
 
-    public function setDt_usuario_atualiza($dt_usuario_atualiza) {
+    /**
+     * @param mixed $cd_usuario_criacao
+     */
+    public function setCdUsuarioCriacao($cd_usuario_criacao)
+    {
+        $this->cd_usuario_criacao = $cd_usuario_criacao;
+        return $this;
+    }
+
+    /**
+     * @param mixed $cd_vl_catg_estagio
+     */
+    public function setCdVlCatgEstagio($cd_vl_catg_estagio)
+    {
+        $this->cd_vl_catg_estagio = $cd_vl_catg_estagio;
+        return $this;
+    }
+
+    /**
+     * @param mixed $desc_assunto
+     */
+    public function setDescAssunto($desc_assunto)
+    {
+        $this->desc_assunto = $desc_assunto;
+        return $this;
+    }
+
+    /**
+     * @param mixed $desc_conclusao
+     */
+    public function setDescConclusao($desc_conclusao)
+    {
+        $this->desc_conclusao = $desc_conclusao;
+        return $this;
+    }
+
+    /**
+     * @param mixed $desc_ocorrencia
+     */
+    public function setDescOcorrencia($desc_ocorrencia)
+    {
+        $this->desc_ocorrencia = $desc_ocorrencia;
+        return $this;
+    }
+
+    /**
+     * @param mixed $dt_fim
+     */
+    public function setDtFim($dt_fim)
+    {
+        $this->dt_fim = $dt_fim;
+        return $this;
+    }
+
+    /**
+     * @param mixed $dt_ocorrencia
+     */
+    public function setDtOcorrencia($dt_ocorrencia)
+    {
+        $this->dt_ocorrencia = $dt_ocorrencia;
+        return $this;
+    }
+
+    /**
+     * @param mixed $dt_usuario_atualiza
+     */
+    public function setDtUsuarioAtualiza($dt_usuario_atualiza)
+    {
         $this->dt_usuario_atualiza = $dt_usuario_atualiza;
         return $this;
     }
+
+    /**
+     * @param mixed $dt_usuario_criacao
+     */
+    public function setDtUsuarioCriacao($dt_usuario_criacao)
+    {
+        $this->dt_usuario_criacao = $dt_usuario_criacao;
+        return $this;
+    }
+
+    /**
+     * @param mixed $ie_situacao
+     */
+    public function setIeSituacao($ie_situacao)
+    {
+        $this->ie_situacao = $ie_situacao;
+        return $this;
+    }
+
 }
-    
