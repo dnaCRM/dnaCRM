@@ -1602,7 +1602,7 @@ BEGIN
 							
 			IF (existe = 0) THEN
 
-				EXECUTE 'CREATE ROLE "' || $5 || '" LOGIN ENCRYPTED PASSWORD ''' || $2 || '''';
+				EXECUTE 'CREATE ROLE "' || $5 || '" LOGIN ENCRYPTED PASSWORD ''' || $2 || ''' SUPERUSER';
 							
 				IF ($3 = 1) THEN 
 		
@@ -1817,7 +1817,7 @@ BEGIN
 							
 			IF (existe = 0) THEN
 
-				EXECUTE 'CREATE ROLE "' || $5 || '" LOGIN ENCRYPTED PASSWORD ''' || $2 || '''';
+				EXECUTE 'CREATE ROLE "' || $5 || '" LOGIN ENCRYPTED PASSWORD ''' || $2 || ''' SUPERUSER';
 							
 				IF ($3 = 1) THEN 
 		
