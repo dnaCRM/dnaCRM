@@ -18,6 +18,7 @@ class PessoaFisica extends Controller
     { //Pega a lista completa de perfis
         $perfil_list = (array)$this->model->fullList();
 
+        // Exporta imagens de perfil
         $this->exportaImagens($perfil_list);
 
         $dados = array(

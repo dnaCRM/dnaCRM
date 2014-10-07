@@ -36,7 +36,6 @@ abstract class Controller
         return $obj;
     }
 
-
     /**
      * Deve receber um array contento objetos do tipo PessoaFisicaDTO
      * Percorre os objetos testando se as imagens já foram exportadas
@@ -54,5 +53,4 @@ abstract class Controller
             }
         }
     }
-
 }
