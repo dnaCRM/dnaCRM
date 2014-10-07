@@ -47,6 +47,9 @@ class App
         call_user_func_array(array($this->controller, $this->method), $this->params);
     }
 
+    /**
+     * @return array
+     */
     public function parseUrl()
     {
         if (isset($_GET['url'])) {
