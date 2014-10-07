@@ -65,7 +65,7 @@ class PessoaFisicaTelefoneDTO extends DataTransferObject
      */
     public function getCdPessoaFisica()
     {
-        return $this->cd_pessoa_Fisica;
+        return $this->cd_pessoa_fisica;
     }
 
     /**

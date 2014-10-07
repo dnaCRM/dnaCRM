@@ -1,32 +1,29 @@
 <?php
 
-$obj = new OrdemServicoDTO();
+$obj = new PessoaFisicaTelefoneDTO();
 $obj
-    ->setCdOcorrencia(1)
-    ->setCdPfExecutor(1)
-    ->setCdPfSolicitante(1)
-    ->setDescAssunto(1)
-    ->setDescOrdemServico(1)
-    ->setDtInicio('now()')
-    ->setDtFim('now()')
-    ->setCdCatgEstagio(1)
-    ->setCdVlCatgEstagio(1)
-    ->setDescConclusao(1)
+    ->setCdPessoaFisica(2)
+    ->setFone(1)
+    ->setObservacao(1)
+    ->setCdCatgFonePf(1)
+    ->setCdVlCatgFonePf(1)
+    ->setCdCatgOperadora(1)
+    ->setCdVlCatgOperadora(1)
     ->setCdUsuarioCriacao(1)
     ->setDtUsuarioCriacao('now()')
     ->setCdUsuarioAtualiza(1)
     ->setDtUsuarioAtualiza('now()');
 
-$objDao = new OrdemServicoDAO();
+$objDao = new PessoaFisicaTelefoneDAO();
 
 /** @var ServicoAdicionalDTO $obj */
-//$obj = $objDao->getById(2);
-//$obj->setDtFim('25/12/2014');
+//$obj = $objDao->getById(8);
+//$obj->setDtUsuarioAtualiza('25/12/2014');
 
 /**
  * Deletar id selecionado
  */
-//$obj = $objDao->getById(3);
+//$obj = $objDao->getById(8);
 //$objDao->delete($obj);
 
 $obj = $objDao->gravar($obj);
