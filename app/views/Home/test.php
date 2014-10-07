@@ -1,30 +1,25 @@
 <?php
 
-$obj = new PessoaFisicaEnderecoDTO();
+$obj = new RelacionadosDTO();
 $obj
-    ->setCdCatgEnd(1)
-    ->setCdVlCatgEnd(1)
-    ->setCdPessoaFisica(2)
-    ->setCep('14403-180')
-    ->setRua('Rua Alfredo Tosi')
-    ->setNumero('1821')
-    ->setBairro('Núcleo Alpha')
-    ->setCidade('Franca')
-    ->setCdCatgEstado(1)
-    ->setCdVlCatgEstado(1)
-    ->setObservacao('Endereço Comercial')
+    ->setCdPessoaFisica1(2)
+    ->setCdPessoaFisica2(1)
+    ->setCdCatgRelacPf1(1)
+    ->setCdVlCatgRelacPf1(1)
+    ->setCdCatgRelacPf2(1)
+    ->setCdVlCatgRelacPf2(1)
     ->setCdUsuarioCriacao(1)
     ->setDtUsuarioCriacao('now()')
     ->setCdUsuarioAtualiza(2)
     ->setDtUsuarioAtualiza('now()');
 
-$objDao = new PessoaFisicaEnderecoDAO();
+$objDao = new RelacionadosDAO();
 
-/** @var PessoaFisicaEnderecoDTO $obj */
-$obj = $objDao->getById(2);
-$obj->setObservacao('Condomínio Vila Brasil');
+/** @var RelacionadosDTO $obj */
+//$obj = $objDao->getById(null,2);
+//$obj->setDtFim('25/12/2014');
 
 
-$obj = $objDao->gravar($obj);
+//$obj = $objDao->gravar($obj);
 $obj = $objDao->fullList();
 var_dump($obj);
