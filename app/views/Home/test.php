@@ -1,27 +1,25 @@
 <?php
 
-$obj = new SetorDTO();
+$obj = new VagaGaragemDTO();
 $obj
-    ->setCdCondominio(1)
-    ->setNmSetor(1)
-    ->setObservacao(1)
-    ->setImPerfil(null)
+    ->setDsVaga(1)
+    ->setCdSetor(1)
     ->setCdUsuarioCriacao(1)
     ->setDtUsuarioCriacao('now()')
     ->setCdUsuarioAtualiza(1)
     ->setDtUsuarioAtualiza('now()');
 
-$objDao = new SetorDAO();
+$objDao = new VagaGaragemDAO();
 
 /** @var ServicoAdicionalDTO $obj */
-$obj = $objDao->getById(2);
-$obj->setDtUsuarioAtualiza('25/12/2014');
+//$obj = $objDao->getById(2);
+//$obj->setDsVaga('T2');
 
 /**
  * Deletar id selecionado
  */
-$obj = $objDao->getById(2);
-$objDao->delete($obj);
+//$obj = $objDao->getById(2);
+//$objDao->delete($obj);
 
 $obj = $objDao->gravar($obj);
 
