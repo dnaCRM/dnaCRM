@@ -118,6 +118,7 @@ CREATE TABLE TB_OCORRENCIA_PF_ENVOLVIDA(
 
 CREATE TABLE TB_OCORRENCIA(
   CD_OCORRENCIA SERIAL,
+  CD_SETOR INTEGER,
   CD_PF_INFORMANTE INTEGER CONSTRAINT NN_TB_OCORRENCIA_CD_PF_INFORMANTE NOT NULL,
   DESC_ASSUNTO VARCHAR(50) CONSTRAINT NN_TB_OCORRENCIA_DESC_ASSUNTO NOT NULL,
   DESC_OCORRENCIA TEXT CONSTRAINT NN_TB_OCORRENCIA_DESC_OCORRENCIA NOT NULL,
@@ -318,6 +319,7 @@ CREATE TABLE TB_USUARIO(
   LOGIN VARCHAR(60) CONSTRAINT NN_TB_USUARIO_LOGIN NOT NULL,
   NIVEL INTEGER CONSTRAINT NN_TB_USUARIO_NIVEL NOT NULL,
   IE_STATUS CHAR(1) CONSTRAINT NN_TB_USUARIO_IE_STATUS NOT NULL,
+  CD_USU_BANCO_OID BIGINT CONSTRAINT NN_TB_USUARIO_CD_USU_BANCO_OID NOT NULL,
   CD_USUARIO_CRIACAO INTEGER,
   DT_USUARIO_CRIACAO TIMESTAMP,   
   CD_USUARIO_ATUALIZA INTEGER,
@@ -500,6 +502,9 @@ FOREIGN KEY(CD_CATG_ESTADO,CD_VL_CATG_ESTADO) REFERENCES TB_CATEGORIA_VALOR(CD_C
 
 ALTER TABLE TB_PJ_ENDERECO ADD CONSTRAINT FK_TB_PJ_ENDERECO_CD_CATG_ESTADO_CD_CATG_VL_ESTADO  
 FOREIGN KEY(CD_CATG_ESTADO,CD_VL_CATG_ESTADO) REFERENCES TB_CATEGORIA_VALOR(CD_CATEGORIA,CD_VL_CATEGORIA);
+
+ALTER TABLE TB_OCORRENCIA ADD CONSTRAINT FK_TB_OCORRENCIA_CD_SETOR
+FOREIGN KEY(CD_SETOR) REFERENCES TB_SETOR(CD_SETOR);
 
 ALTER TABLE TB_USUARIO ADD CONSTRAINT FK_TB_USUARIO_CD_USUARIO_CRIACAO 
 FOREIGN KEY(CD_USUARIO_CRIACAO) REFERENCES TB_USUARIO(CD_USUARIO);
@@ -764,6 +769,7 @@ CREATE TABLE TB_OCORRENCIA_LOG(
   DT_EXECUTOR TIMESTAMP CONSTRAINT NN_TB_OCORRENCIA_LOG_DT_EXECUTOR NOT NULL,
   COMANDO_EXECUTADO CHAR(1) CONSTRAINT NN_TB_OCORRENCIA_LOG_COMANDO_EXECUTADO NOT NULL,
   CD_OCORRENCIA INTEGER CONSTRAINT NN_TB_OCORRENCIA_LOG_CD_OCORRENCIA NOT NULL,
+  CD_SETOR INTEGER,
   CD_PF_INFORMANTE INTEGER CONSTRAINT NN_TB_OCORRENCIA_LOG_CD_PF_INFORMANTE NOT NULL,
   DESC_ASSUNTO VARCHAR(50) CONSTRAINT NN_TB_OCORRENCIA_LOG_DESC_ASSUNTO NOT NULL,
   DESC_OCORRENCIA TEXT CONSTRAINT NN_TB_OCORRENCIA_LOG_DESC_OCORRENCIA NOT NULL,
@@ -996,6 +1002,7 @@ CREATE TABLE TB_USUARIO_LOG(
  LOGIN VARCHAR(60) CONSTRAINT NN_TB_USUARIO_LOGIN_LOGIN NOT NULL,
  NIVEL INTEGER CONSTRAINT NN_TB_USUARIO_LOG_NIVEL NOT NULL,
  IE_STATUS CHAR(1) CONSTRAINT NN_TB_USUARIO_LOG_IE_STATUS NOT NULL,
+ CD_USU_BANCO_OID BIGINT CONSTRAINT NN_TB_USUARIO_LOG_CD_USU_BANCO_OID NOT NULL,
  CD_USUARIO_CRIACAO INTEGER CONSTRAINT NN_TB_USUARIO_LOG_CD_USUARIO_CRIACAO NOT NULL,
  DT_USUARIO_CRIACAO TIMESTAMP CONSTRAINT NN_TB_USUARIO_LOG_DT_USUARIO_CRIACAO NOT NULL,   
  CD_USUARIO_ATUALIZA INTEGER CONSTRAINT NN_TB_USUARIO_LOG_CD_USUARIO_ATUALIZA NOT NULL,
@@ -1319,152 +1326,227 @@ NO CYCLE;
 
 CREATE SEQUENCE seq_cd_usuario;
 
-DROP GROUP IF EXISTS administrador;
+DELETE 
+FROM pg_authid
+WHERE rolname = 'administrador';
+
 CREATE GROUP administrador;
 
-	GRANT SELECT, UPDATE ON pg_authid TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_apartamento TO administrador;
 	GRANT SELECT, INSERT ON tb_apartamento_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_apartamento_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_categoria TO administrador;
 	GRANT SELECT, INSERT ON tb_categoria_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_categoria_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_categoria_valor TO administrador;
-	GRANT SELECT, INSERT ON tb_categoria_log TO administrador;
+	GRANT SELECT, INSERT ON tb_categoria_valor_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_categoria_valor_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_condominio TO administrador;
 	GRANT SELECT, INSERT ON tb_condominio_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_condominio_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_instituicao_ensino TO administrador;
 	GRANT SELECT, INSERT ON tb_instituicao_ensino_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_instituicao_ensino_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_itens_orcamento TO administrador;
 	GRANT SELECT, INSERT  ON tb_itens_orcamento_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_itens_orcamento_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_morador_endereco TO administrador;
 	GRANT SELECT, INSERT ON tb_morador_endereco_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_morador_endereco_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_ocorrencia TO administrador;
 	GRANT SELECT, INSERT ON tb_ocorrencia_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_ocorrencia_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_ocorrencia_pf_envolvida TO administrador;
 	GRANT SELECT, INSERT ON tb_ocorrencia_pf_envolvida_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_ocorrencia_pf_envolvida_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_orcamento TO administrador;
 	GRANT SELECT, INSERT ON tb_orcamento_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_orcamento_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_ordem_servico TO administrador;
 	GRANT SELECT, INSERT ON tb_ordem_servico_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_ordem_servico_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_pessoa_fisica TO administrador;
 	GRANT SELECT, INSERT ON tb_pessoa_fisica_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_pessoa_fisica_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_pessoa_juridica TO administrador;
 	GRANT SELECT, INSERT ON tb_pessoa_juridica_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_pessoa_juridica_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_pf_endereco TO administrador;
 	GRANT SELECT, INSERT ON tb_pf_endereco_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_pf_endereco_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_pf_telefone TO administrador;
 	GRANT SELECT, INSERT ON tb_pf_telefone_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_pf_telefone_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_pj_endereco TO administrador;
 	GRANT SELECT, INSERT ON tb_pj_endereco_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_pj_endereco_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_pj_telefone TO administrador;
 	GRANT SELECT, INSERT ON tb_pj_telefone_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_pj_telefone_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_profissao TO administrador;
 	GRANT SELECT, INSERT ON tb_profissao_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_profissao_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_relacionados TO administrador;
 	GRANT SELECT, INSERT ON tb_relacionados_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_relacionados_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_servico_adicional TO administrador;
 	GRANT SELECT, INSERT ON tb_servico_adicional_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_servico_adicional_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_setor TO administrador;
 	GRANT SELECT, INSERT ON tb_setor_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_setor_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_usuario TO administrador;
 	GRANT SELECT, INSERT ON tb_usuario_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_usuario_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_vaga_garagem TO administrador;
 	GRANT SELECT, INSERT ON tb_vaga_garagem_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_vaga_garagem_log TO administrador;
 
-DROP GROUP IF EXISTS atendente;	
+DELETE 
+FROM pg_authid
+WHERE rolname = 'atendente';
+
 CREATE GROUP atendente;
 
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_apartamento TO atendente;
 	GRANT INSERT ON tb_apartamento_log TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_apartamento_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_categoria TO atendente;
 	GRANT INSERT ON tb_categoria_log TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_categoria_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_categoria_valor TO atendente;
-	GRANT INSERT ON tb_categoria_log TO atendente;
+	GRANT INSERT ON tb_categoria_valor_log TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_categoria_valor_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_condominio TO atendente;
 	GRANT INSERT ON tb_condominio_log TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_condominio_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_instituicao_ensino TO atendente;
 	GRANT INSERT ON tb_instituicao_ensino_log TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_instituicao_ensino_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_itens_orcamento TO atendente;
 	GRANT INSERT  ON tb_itens_orcamento_log TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_itens_orcamento_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_morador_endereco TO atendente;
 	GRANT INSERT ON tb_morador_endereco_log TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_morador_endereco_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_ocorrencia TO atendente;
 	GRANT INSERT ON tb_ocorrencia_log TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_ocorrencia_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_ocorrencia_pf_envolvida TO atendente;
 	GRANT INSERT ON tb_ocorrencia_pf_envolvida_log TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_ocorrencia_pf_envolvida_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_orcamento TO atendente;
 	GRANT INSERT ON tb_orcamento_log TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_orcamento_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_ordem_servico TO atendente;
 	GRANT INSERT ON tb_ordem_servico_log TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_ordem_servico_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_pessoa_fisica TO atendente;
 	GRANT INSERT ON tb_pessoa_fisica_log TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_pessoa_fisica_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_pessoa_juridica TO atendente;
 	GRANT INSERT ON tb_pessoa_juridica_log TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_pessoa_juridica_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_pf_endereco TO atendente;
 	GRANT INSERT ON tb_pf_endereco_log TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_pf_endereco_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_pf_telefone TO atendente;
 	GRANT INSERT ON tb_pf_telefone_log TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_pf_telefone_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_pj_endereco TO atendente;
 	GRANT INSERT ON tb_pj_endereco_log TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_pj_endereco_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_pj_telefone TO atendente;
 	GRANT INSERT ON tb_pj_telefone_log TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_pj_telefone_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_profissao TO atendente;
 	GRANT INSERT ON tb_profissao_log TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_profissao_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_relacionados TO atendente;
 	GRANT INSERT ON tb_relacionados_log TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_relacionados_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_servico_adicional TO atendente;
 	GRANT INSERT ON tb_servico_adicional_log TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_servico_adicional_log  TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_setor TO atendente;
 	GRANT INSERT ON tb_setor_log TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_setor_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_vaga_garagem TO atendente;
 	GRANT INSERT ON tb_vaga_garagem_log TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_vaga_garagem_log TO administrador;
 
-DROP GROUP IF EXISTS usuario;
+DELETE 
+FROM pg_authid
+WHERE rolname = 'usuario';
+
 CREATE GROUP usuario;
 
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_apartamento TO usuario;
 	GRANT INSERT ON tb_apartamento_log TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_apartamento_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_categoria TO usuario;
 	GRANT INSERT ON tb_categoria_log TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_categoria_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_categoria_valor TO usuario;
-	GRANT INSERT ON tb_categoria_log TO usuario;
+	GRANT INSERT ON tb_categoria_valor_log TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_categoria_valor_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_condominio TO usuario;
 	GRANT INSERT ON tb_condominio_log TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_condominio_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_instituicao_ensino TO usuario;
 	GRANT INSERT ON tb_instituicao_ensino_log TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_instituicao_ensino_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_itens_orcamento TO usuario;
 	GRANT INSERT  ON tb_itens_orcamento_log TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_itens_orcamento_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_morador_endereco TO usuario;
 	GRANT INSERT ON tb_morador_endereco_log TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_morador_endereco_log TO administrador;
 	GRANT SELECT ON tb_ocorrencia TO usuario;
 	GRANT INSERT ON tb_ocorrencia_log TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_ocorrencia_log TO administrador;
 	GRANT SELECT ON tb_ocorrencia_pf_envolvida TO usuario;
 	GRANT INSERT ON tb_ocorrencia_pf_envolvida_log TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_ocorrencia_pf_envolvida_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_orcamento TO usuario;
 	GRANT INSERT ON tb_orcamento_log TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_orcamento_log TO administrador;
 	GRANT SELECT ON tb_ordem_servico TO usuario;
 	GRANT INSERT ON tb_ordem_servico_log TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_ordem_servico_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_pessoa_fisica TO usuario;
 	GRANT INSERT ON tb_pessoa_fisica_log TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_pessoa_fisica_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_pessoa_juridica TO usuario;
 	GRANT INSERT ON tb_pessoa_juridica_log TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_pessoa_juridica_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_pf_endereco TO usuario;
 	GRANT INSERT ON tb_pf_endereco_log TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_pf_endereco_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_pf_telefone TO usuario;
 	GRANT INSERT ON tb_pf_telefone_log TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_pf_telefone_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_pj_endereco TO usuario;
 	GRANT INSERT ON tb_pj_endereco_log TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_pj_endereco_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_pj_telefone TO usuario;
 	GRANT INSERT ON tb_pj_telefone_log TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_pj_telefone_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_profissao TO usuario;
 	GRANT INSERT ON tb_profissao_log TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_profissao_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_relacionados TO usuario;
 	GRANT INSERT ON tb_relacionados_log TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_relacionados_log TO administrador;
 	GRANT SELECT ON tb_servico_adicional TO usuario;
 	GRANT INSERT ON tb_servico_adicional_log TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_servico_adicional_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_setor TO usuario;
 	GRANT INSERT ON tb_setor_log TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_setor_log TO administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_vaga_garagem TO usuario;
 	GRANT INSERT ON tb_vaga_garagem_log TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_vaga_garagem_log TO administrador;
 	
 INSERT INTO TB_PESSOA_FISICA(
 NM_PESSOA_FISICA,
@@ -1488,7 +1570,7 @@ DECLARE
 	existe INTEGER;
 	existe2 INTEGER;
 	existe3 INTEGER;
-	existe4 INTEGER;
+	cd_usu_banco_oid BIGINT;
 	existe5 INTEGER;
 	aux_nivel INTEGER;
 			
@@ -1510,11 +1592,6 @@ BEGIN
 	WHERE cd_pessoa_fisica = $5;
 	
 	SELECT count(*)
-	INTO existe4
-	FROM tb_usuario
-	WHERE cd_usuario = $5;
-	
-	SELECT count(*)
 	INTO existe5		
 	FROM tb_usuario
 	WHERE login = $6;
@@ -1525,40 +1602,44 @@ BEGIN
 							
 			IF (existe = 0) THEN
 
-				EXECUTE 'CREATE USER "' || $5 || '" WITH PASSWORD ''' || $2 || '''';
+				EXECUTE 'CREATE ROLE "' || $5 || '" LOGIN ENCRYPTED PASSWORD ''' || $2 || '''';
 							
 				IF ($3 = 1) THEN 
 		
 					EXECUTE 'ALTER GROUP administrador ADD USER "' || $5 || '"';	
 					
-					EXECUTE 'ALTER USER "' || $5 || '" CREATEUSER';
+					EXECUTE 'ALTER ROLE "' || $5 || '" CREATEROLE';
 				
 				ELSIF ($3 = 2) THEN
 		
 					EXECUTE 'ALTER GROUP atendente ADD USER "' || $5 || '"';	
 					
-					EXECUTE 'ALTER USER "' || $5 || '" NOCREATEUSER';
+					EXECUTE 'ALTER ROLE "' || $5 || '" NOCREATEROLE';
 	
 				ELSIF ($3 = 3) THEN
 		
 					EXECUTE 'ALTER GROUP usuario ADD USER "' || $5 || '"';
 					
-					EXECUTE 'ALTER USER "' || $5 || '" NOCREATEUSER';
+					EXECUTE 'ALTER ROLE "' || $5 || '" NOCREATEROLE';
 		
 				END IF;
 		
 				IF ($4 = 'I') THEN
 		
-					UPDATE pg_authid SET
-					rolcanlogin = false
-					WHERE rolname = cd_usu_v;		
-				
+					EXECUTE 'ALTER ROLE "' || $5 || '" NOLOGIN';
+								
 				END IF;
+				
+				SELECT oid
+				INTO cd_usu_banco_oid
+				FROM pg_roles
+				WHERE rolname = $5::VARCHAR(60);
 				
 				INSERT INTO tb_usuario SELECT $5, 
 											  $1,
 											  $3, 
-											  $4, 
+											  $4,
+								cd_usu_banco_oid,											  
 											  1,
 											  now(),
 											  1,
@@ -1574,122 +1655,114 @@ BEGIN
 		
 		ELSE
 												
-			IF (existe4 = 0) THEN
-
-				IF ($6 IS NOT NULL) THEN 				
+			IF ($6 IS NOT NULL) THEN 				
 		
-					IF (existe5 = 0) THEN
+				IF (existe5 = 0) THEN
 													
-						UPDATE tb_usuario SET	
-							login = $6							
-						WHERE cd_usuario = $5;						
-						
-					ELSE
-				
-						RETURN 'A outro perfil que já possui uma conta de usuário com esse nome!';
-				
-					END IF;
-
-				END IF;
-
-				IF ($2 IS NOT NULL) THEN				
-			
-					EXECUTE 'ALTER USER "' || $5 || '" WITH ENCRYPTED PASSWORD ''' || $2 || '''';
-					
-				END IF;
-				
-				IF ($4 IS NOT NULL) THEN 
-				
-					IF ($4 = 'I') THEN
-		
-						UPDATE pg_authid SET
-						rolcanlogin = false
-						WHERE rolname = $5::VARCHAR(60);	
-
-						UPDATE tb_usuario SET	
-							IE_STATUS = $4
-						WHERE cd_usuario = $5;											
-				
-					END IF;
-					
-					IF ($4 = 'A') THEN
-		
-						UPDATE pg_authid SET
-						rolcanlogin = true
-						WHERE rolname = $5::VARCHAR(60);	
-
-						UPDATE tb_usuario SET	
-							IE_STATUS = $4
-						WHERE cd_usuario = $5;											
-				
-					END IF;
-					
-				END IF;
-						
-				IF($3 IS NOT NULL) THEN
-			
-					SELECT NIVEL
-					INTO aux_nivel
-					FROM tb_usuario
-					WHERE cd_usuario = $5;
-					
 					UPDATE tb_usuario SET	
-						nivel = $3,
-						CD_USUARIO_CRIACAO =  user::INTEGER,
-						DT_USUARIO_CRIACAO = now(),
-						CD_USUARIO_ATUALIZA = user::INTEGER,
-					    DT_USUARIO_ATUALIZA = now()
-					WHERE cd_usuario = $5;	
-		
-					IF (aux_nivel = 1) THEN 
-		
-						EXECUTE 'ALTER GROUP administrador DROP USER "' || $5 || '"';
-			
-					ELSIF (aux_nivel = 2) THEN
-		
-						EXECUTE 'ALTER GROUP atendente DROP USER "' || $5 || '"';	
-							
-					ELSIF (aux_nivel = 3) THEN
-		
-						EXECUTE 'ALTER GROUP usuario DROP USER "' || $5 || '"';
-		
-					END IF;		
-		
-					IF ($3 = 1) THEN 
-		
-						EXECUTE 'ALTER GROUP administrador ADD USER "' || $5 || '"';
+						login = $6							
+					WHERE cd_usuario = $5;						
 						
-						EXECUTE 'ALTER USER "' || $5 || '" CREATEUSER';
-			
-					ELSIF ($3 = 2) THEN
-		
-						EXECUTE 'ALTER GROUP atendente ADD USER "' || $5 || '"';	
-						
-						EXECUTE 'ALTER USER "' || $5 || '" NOCREATEUSER';
-		
-					ELSIF ($3 = 3) THEN
-		
-						EXECUTE 'ALTER GROUP usuario ADD USER "' || $5 || '"';	
-						
-						EXECUTE 'ALTER USER "' || $5 || '" NOCREATEUSER';
-		
-					END IF;
+				ELSE
+				
+					RETURN 'A outro perfil que já possui uma conta de usuário com esse nome!';
 					
-					RETURN 'Usuario alterado com sucesso!';
-									
 				END IF;
+
+			END IF;
+
+			IF ($2 IS NOT NULL) THEN				
+			
+				EXECUTE 'ALTER ROLE "' || $5 || '" WITH ENCRYPTED PASSWORD ''' || $2 || '''';
+				
+			END IF;
+				
+			IF ($4 IS NOT NULL) THEN 
+				
+				IF ($4 = 'I') THEN
+		
+					EXECUTE 'ALTER ROLE "' || $5 || '" NOLOGIN';	
+
+					UPDATE tb_usuario SET	
+					IE_STATUS = $4
+					WHERE cd_usuario = $5;											
+				
+				END IF;
+					
+				IF ($4 = 'A') THEN
+		
+					EXECUTE 'ALTER ROLE "' || $5 || '" LOGIN';	
+
+					UPDATE tb_usuario SET	
+					IE_STATUS = $4
+					WHERE cd_usuario = $5;											
+				
+				END IF;
+					
+			END IF;
 						
-				UPDATE tb_usuario SET 
-					CD_USUARIO_CRIACAO = user::INTEGER,
+			IF($3 IS NOT NULL) THEN
+			
+				SELECT NIVEL
+				INTO aux_nivel
+				FROM tb_usuario
+				WHERE cd_usuario = $5;
+					
+				UPDATE tb_usuario SET	
+					nivel = $3,
+					CD_USUARIO_CRIACAO =  user::INTEGER,
 					DT_USUARIO_CRIACAO = now(),
 					CD_USUARIO_ATUALIZA = user::INTEGER,
-					DT_USUARIO_ATUALIZA = now()
+				    DT_USUARIO_ATUALIZA = now()
+				WHERE cd_usuario = $5;	
+		
+				IF (aux_nivel = 1) THEN 
+		
+					EXECUTE 'ALTER GROUP administrador DROP USER "' || $5 || '"';
+		
+				ELSIF (aux_nivel = 2) THEN
+	
+					EXECUTE 'ALTER GROUP atendente DROP USER "' || $5 || '"';	
+						
+				ELSIF (aux_nivel = 3) THEN
+
+					EXECUTE 'ALTER GROUP usuario DROP USER "' || $5 || '"';
+	
+				END IF;		
+		
+				IF ($3 = 1) THEN 
+		
+					EXECUTE 'ALTER GROUP administrador ADD USER "' || $5 || '"';
+						
+					EXECUTE 'ALTER ROLE "' || $5 || '" CREATEROLE';
+			
+				ELSIF ($3 = 2) THEN
+		
+					EXECUTE 'ALTER GROUP atendente ADD USER "' || $5 || '"';	
+						
+					EXECUTE 'ALTER ROLE "' || $5 || '" NOCREATEROLE';
+		
+				ELSIF ($3 = 3) THEN
+		
+					EXECUTE 'ALTER GROUP usuario ADD USER "' || $5 || '"';	
+					
+					EXECUTE 'ALTER ROLE "' || $5 || '" NOCREATEROLE';
+		
+				END IF;
+					
+				RETURN 'Usuario alterado com sucesso!';
+									
+			END IF;
+						
+			UPDATE tb_usuario SET 
+				CD_USUARIO_CRIACAO = user::INTEGER,
+				DT_USUARIO_CRIACAO = now(),
+				CD_USUARIO_ATUALIZA = user::INTEGER,
+				DT_USUARIO_ATUALIZA = now()
 			WHERE CD_USUARIO = $5;
 			
 			RETURN 'Usuario alterado com sucesso!';
-
-			END IF;
-			
+						
 		END IF;
 	
 	ELSE
@@ -1711,7 +1784,7 @@ DECLARE
 	existe INTEGER;
 	existe2 INTEGER;
 	existe3 INTEGER;
-	existe4 INTEGER;
+	cd_usu_banco_oid BIGINT;
 	existe5 INTEGER;
 	aux_nivel INTEGER;
 			
@@ -1731,11 +1804,7 @@ BEGIN
 	INTO existe3
 	FROM tb_pessoa_fisica
 	WHERE cd_pessoa_fisica = $5;
-	
-	SELECT count(*)
-	INTO existe4
-	FROM tb_usuario
-	WHERE cd_usuario = $5;
+
 	
 	SELECT count(*)
 	INTO existe5		
@@ -1748,40 +1817,44 @@ BEGIN
 							
 			IF (existe = 0) THEN
 
-				EXECUTE 'CREATE USER "' || $5 || '" WITH PASSWORD ''' || $2 || '''';
+				EXECUTE 'CREATE ROLE "' || $5 || '" LOGIN ENCRYPTED PASSWORD ''' || $2 || '''';
 							
 				IF ($3 = 1) THEN 
 		
 					EXECUTE 'ALTER GROUP administrador ADD USER "' || $5 || '"';	
 					
-					EXECUTE 'ALTER USER "' || $5 || '" CREATEUSER';
+					EXECUTE 'ALTER ROLE "' || $5 || '" CREATEROLE';
 				
 				ELSIF ($3 = 2) THEN
 		
 					EXECUTE 'ALTER GROUP atendente ADD USER "' || $5 || '"';	
 					
-					EXECUTE 'ALTER USER "' || $5 || '" NOCREATEUSER';
+					EXECUTE 'ALTER ROLE "' || $5 || '" NOCREATEROLE';
 	
 				ELSIF ($3 = 3) THEN
 		
 					EXECUTE 'ALTER GROUP usuario ADD USER "' || $5 || '"';
 					
-					EXECUTE 'ALTER USER "' || $5 || '" NOCREATEUSER';
+					EXECUTE 'ALTER ROLE "' || $5 || '" NOCREATEROLE';
 		
 				END IF;
 		
 				IF ($4 = 'I') THEN
 		
-					UPDATE pg_authid SET
-					rolcanlogin = false
-					WHERE rolname = cd_usu_v;		
+					EXECUTE 'ALTER ROLE "' || $5 || '" NOLOGIN';
 				
 				END IF;
+				
+				SELECT oid
+				INTO cd_usu_banco_oid
+				FROM pg_roles
+				WHERE rolname = $5::VARCHAR(60);
 				
 				INSERT INTO tb_usuario SELECT $5, 
 											  $1,
 											  $3, 
-											  $4, 
+											  $4,
+								cd_usu_banco_oid,		  
 											  user::INTEGER,
 											  now(),
 											  user::INTEGER,
@@ -1797,122 +1870,115 @@ BEGIN
 		
 		ELSE
 												
-			IF (existe4 = 0) THEN
-
-				IF ($6 IS NOT NULL) THEN 				
+			IF ($6 IS NOT NULL) THEN 				
 		
-					IF (existe5 = 0) THEN
+				IF (existe5 = 0) THEN
 													
-						UPDATE tb_usuario SET	
-							login = $6							
-						WHERE cd_usuario = $5;						
-						
-					ELSE
-				
-						RETURN 'A outro perfil que já possui uma conta de usuário com esse nome!';
-				
-					END IF;
-
-				END IF;
-
-				IF ($2 IS NOT NULL) THEN				
-			
-					EXECUTE 'ALTER USER "' || $5 || '" WITH ENCRYPTED PASSWORD ''' || $2 || '''';
-					
-				END IF;
-				
-				IF ($4 IS NOT NULL) THEN 
-				
-					IF ($4 = 'I') THEN
-		
-						UPDATE pg_authid SET
-						rolcanlogin = false
-						WHERE rolname = $5::VARCHAR(60);	
-
-						UPDATE tb_usuario SET	
-							IE_STATUS = $4
-						WHERE cd_usuario = $5;	
-				
-					END IF;
-					
-					IF ($4 = 'A') THEN
-		
-						UPDATE pg_authid SET
-						rolcanlogin = true
-						WHERE rolname = $5::VARCHAR(60);	
-
-						UPDATE tb_usuario SET	
-							IE_STATUS = $4
-						WHERE cd_usuario = $5;											
-				
-					END IF;
-					
-				END IF;
-						
-				IF($3 IS NOT NULL) THEN
-			
-					SELECT NIVEL
-					INTO aux_nivel
-					FROM tb_usuario
-					WHERE cd_usuario = $5;
-					
 					UPDATE tb_usuario SET	
-						nivel = $3,
-						CD_USUARIO_CRIACAO = user::INTEGER,
-						DT_USUARIO_CRIACAO = now(),
-						CD_USUARIO_ATUALIZA = user::INTEGER,
-					    DT_USUARIO_ATUALIZA = now()
-					WHERE cd_usuario = $5;	
-		
-					IF (aux_nivel = 1) THEN 
-		
-						EXECUTE 'ALTER GROUP administrador DROP USER "' || $5 || '"';
-			
-					ELSIF (aux_nivel = 2) THEN
-		
-						EXECUTE 'ALTER GROUP atendente DROP USER "' || $5 || '"';	
-							
-					ELSIF (aux_nivel = 3) THEN
-		
-						EXECUTE 'ALTER GROUP usuario DROP USER "' || $5 || '"';
-		
-					END IF;		
-		
-					IF ($3 = 1) THEN 
-		
-						EXECUTE 'ALTER GROUP administrador ADD USER "' || $5 || '"';
+						login = $6							
+					WHERE cd_usuario = $5;						
 						
-						EXECUTE 'ALTER USER "' || $5 || '" CREATEUSER';
-			
-					ELSIF ($3 = 2) THEN
-		
-						EXECUTE 'ALTER GROUP atendente ADD USER "' || $5 || '"';	
-						
-						EXECUTE 'ALTER USER "' || $5 || '" NOCREATEUSER';
-		
-					ELSIF ($3 = 3) THEN
-		
-						EXECUTE 'ALTER GROUP usuario ADD USER "' || $5 || '"';	
-						
-						EXECUTE 'ALTER USER "' || $5 || '" NOCREATEUSER';
-		
-					END IF;
-					
-					RETURN 'Usuario alterado com sucesso!';
-									
+				ELSE
+				
+					RETURN 'A outro perfil que já possui uma conta de usuário com esse nome!';
+				
 				END IF;
+
+			END IF;
+
+			IF ($2 IS NOT NULL) THEN				
+			
+				EXECUTE 'ALTER ROLE "' || $5 || '" WITH ENCRYPTED PASSWORD ''' || $2 || '''';
+					
+			END IF;
+				
+			IF ($4 IS NOT NULL) THEN 
+				
+				IF ($4 = 'I') THEN
+		
+					EXECUTE 'ALTER ROLE "' || $5 || '" NOLOGIN';	
+
+					UPDATE tb_usuario SET	
+					IE_STATUS = $4
+					WHERE cd_usuario = $5;	
+				
+				END IF;
+					
+				IF ($4 = 'A') THEN
+		
+					EXECUTE 'ALTER ROLE "' || $5 || '" LOGIN';	
+
+					UPDATE tb_usuario SET	
+					IE_STATUS = $4
+					WHERE cd_usuario = $5;											
+				
+				END IF;
+					
+			END IF;
 						
-				UPDATE tb_usuario SET 
+			IF($3 IS NOT NULL) THEN
+			
+				SELECT NIVEL
+				INTO aux_nivel
+				FROM tb_usuario
+				WHERE cd_usuario = $5;
+					
+				UPDATE tb_usuario SET	
+					nivel = $3,
 					CD_USUARIO_CRIACAO = user::INTEGER,
 					DT_USUARIO_CRIACAO = now(),
 					CD_USUARIO_ATUALIZA = user::INTEGER,
-					DT_USUARIO_ATUALIZA = now()
+				    DT_USUARIO_ATUALIZA = now()
+				WHERE cd_usuario = $5;	
+		
+				IF (aux_nivel = 1) THEN 
+		
+					EXECUTE 'ALTER GROUP administrador DROP USER "' || $5 || '"';
+			
+				ELSIF (aux_nivel = 2) THEN
+		
+					EXECUTE 'ALTER GROUP atendente DROP USER "' || $5 || '"';	
+							
+				ELSIF (aux_nivel = 3) THEN
+		
+					EXECUTE 'ALTER GROUP usuario DROP USER "' || $5 || '"';
+		
+				END IF;		
+		
+				IF ($3 = 1) THEN 
+		
+					EXECUTE 'ALTER GROUP administrador ADD USER "' || $5 || '"';
+						
+					EXECUTE 'ALTER ROLE "' || $5 || '" CREATEROLE';
+			
+				ELSIF ($3 = 2) THEN
+		
+					EXECUTE 'ALTER GROUP atendente ADD USER "' || $5 || '"';	
+					
+					EXECUTE 'ALTER ROLE "' || $5 || '" NOCREATEROLE';
+		
+				ELSIF ($3 = 3) THEN
+		
+					EXECUTE 'ALTER GROUP usuario ADD USER "' || $5 || '"';	
+						
+					EXECUTE 'ALTER ROLE "' || $5 || '" NOCREATEROLE';
+		
+				END IF;
+					
+				RETURN 'Usuario alterado com sucesso!';
+									
+			END IF;
+						
+			UPDATE tb_usuario SET 
+				CD_USUARIO_CRIACAO = user::INTEGER,
+				DT_USUARIO_CRIACAO = now(),
+				CD_USUARIO_ATUALIZA = user::INTEGER,
+				DT_USUARIO_ATUALIZA = now()
 			WHERE CD_USUARIO = $5;
 			
 			RETURN 'Usuario alterado com sucesso!';
 
-			END IF;
-			
+						
 		END IF;
 	
 	ELSE
