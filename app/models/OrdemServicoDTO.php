@@ -50,140 +50,261 @@ class OrdemServicoDTO extends DataTransferObject
     {
         return $this->reflex;
     }
-    public function getCd_ordem_servico() {
-        return $this->cd_ordem_servico;
-    }
 
-    public function getCd_ocorrencia() {
-        return $this->cd_ocorrencia;
-    }
-
-    public function getCd_pf_executor() {
-        return $this->cd_pf_executor;
-    }
-
-    public function getCd_pf_solicitante() {
-        return $this->cd_pf_solicitante;
-    }
-
-    public function getDesc_assunto() {
-        return $this->desc_assunto;
-    }
-
-    public function getDesc_ordem_servico() {
-        return $this->desc_ordem_servico;
-    }
-
-    public function getDt_inicio() {
-        return $this->dt_inicio;
-    }
-
-    public function getDt_fim() {
-        return $this->dt_fim;
-    }
-
-    public function getCd_catg_estagio() {
+    /**
+     * @return mixed
+     */
+    public function getCdCatgEstagio()
+    {
         return $this->cd_catg_estagio;
     }
 
-    public function getCd_vl_catg_estagio() {
-        return $this->cd_vl_catg_estagio;
+    /**
+     * @return mixed
+     */
+    public function getCdOcorrencia()
+    {
+        return $this->cd_ocorrencia;
     }
 
-    public function getDesc_conclusao() {
-        return $this->desc_conclusao;
+    /**
+     * @return mixed
+     */
+    public function getCdOrdemServico()
+    {
+        return $this->cd_ordem_servico;
     }
 
-    public function getCd_usuario_criacao() {
-        return $this->cd_usuario_criacao;
+    /**
+     * @return mixed
+     */
+    public function getCdPfExecutor()
+    {
+        return $this->cd_pf_executor;
     }
 
-    public function getDt_usuario_criacao() {
-        return $this->dt_usuario_criacao;
+    /**
+     * @return mixed
+     */
+    public function getCdPfSolicitante()
+    {
+        return $this->cd_pf_solicitante;
     }
 
-    public function getCd_usuario_atualiza() {
+    /**
+     * @return mixed
+     */
+    public function getCdUsuarioAtualiza()
+    {
         return $this->cd_usuario_atualiza;
     }
 
-    public function getDt_usuario_atualiza() {
+    /**
+     * @return mixed
+     */
+    public function getCdVlCatgEstagio()
+    {
+        return $this->cd_vl_catg_estagio;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCdUsuarioCriacao()
+    {
+        return $this->cd_usuario_criacao;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescAssunto()
+    {
+        return $this->desc_assunto;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescConclusao()
+    {
+        return $this->desc_conclusao;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescOrdemServico()
+    {
+        return $this->desc_ordem_servico;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDtFim()
+    {
+        return $this->dt_fim;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDtInicio()
+    {
+        return $this->dt_inicio;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDtUsuarioAtualiza()
+    {
         return $this->dt_usuario_atualiza;
     }
-    
-    ############################# SETTERS #############################
 
-    public function setCd_ordem_servico($cd_ordem_servico) {
-        $this->cd_ordem_servico = $cd_ordem_servico;
-        return $this;
+    /**
+     * @return mixed
+     */
+    public function getDtUsuarioCriacao()
+    {
+        return $this->dt_usuario_criacao;
     }
 
-    public function setCd_ocorrencia($cd_ocorrencia) {
-        $this->cd_ocorrencia = $cd_ocorrencia;
-        return $this;
-    }
+    ################## SETTERS #######################
 
-    public function setCd_pf_executor($cd_pf_executor) {
-        $this->cd_pf_executor = $cd_pf_executor;
-        return $this;
-    }
-
-    public function setCd_pf_solicitante($cd_pf_solicitante) {
-        $this->cd_pf_solicitante = $cd_pf_solicitante;
-        return $this;
-    }
-
-    public function setDesc_assunto($desc_assunto) {
-        $this->desc_assunto = $desc_assunto;
-        return $this;
-    }
-
-    public function setDesc_ordem_servico($desc_ordem_servico) {
-        $this->desc_ordem_servico = $desc_ordem_servico;
-        return $this;
-    }
-
-    public function setDt_inicio($dt_inicio) {
-        $this->dt_inicio = $dt_inicio;
-        return $this;
-    }
-
-    public function setDt_fim($dt_fim) {
-        $this->dt_fim = $dt_fim;
-        return $this;
-    }
-
-    public function setCd_catg_estagio($cd_catg_estagio) {
+    /**
+     * @param mixed $cd_catg_estagio
+     */
+    public function setCdCatgEstagio($cd_catg_estagio)
+    {
         $this->cd_catg_estagio = $cd_catg_estagio;
         return $this;
     }
 
-    public function setCd_vl_catg_estagio($cd_vl_catg_estagio) {
-        $this->cd_vl_catg_estagio = $cd_vl_catg_estagio;
+    /**
+     * @param mixed $cd_ocorrencia
+     */
+    public function setCdOcorrencia($cd_ocorrencia)
+    {
+        $this->cd_ocorrencia = $cd_ocorrencia;
         return $this;
     }
 
-    public function setDesc_conclusao($desc_conclusao) {
-        $this->desc_conclusao = $desc_conclusao;
+    /**
+     * @param mixed $cd_ordem_servico
+     */
+    public function setCdOrdemServico($cd_ordem_servico)
+    {
+        $this->cd_ordem_servico = $cd_ordem_servico;
         return $this;
     }
 
-    public function setCd_usuario_criacao($cd_usuario_criacao) {
-        $this->cd_usuario_criacao = $cd_usuario_criacao;
+    /**
+     * @param mixed $cd_pf_executor
+     */
+    public function setCdPfExecutor($cd_pf_executor)
+    {
+        $this->cd_pf_executor = $cd_pf_executor;
         return $this;
     }
 
-    public function setDt_usuario_criacao($dt_usuario_criacao) {
-        $this->dt_usuario_criacao = $dt_usuario_criacao;
+    /**
+     * @param mixed $cd_pf_solicitante
+     */
+    public function setCdPfSolicitante($cd_pf_solicitante)
+    {
+        $this->cd_pf_solicitante = $cd_pf_solicitante;
         return $this;
     }
 
-    public function setCd_usuario_atualiza($cd_usuario_atualiza) {
+    /**
+     * @param mixed $cd_usuario_atualiza
+     */
+    public function setCdUsuarioAtualiza($cd_usuario_atualiza)
+    {
         $this->cd_usuario_atualiza = $cd_usuario_atualiza;
         return $this;
     }
 
-    public function setDt_usuario_atualiza($dt_usuario_atualiza) {
+    /**
+     * @param mixed $cd_usuario_criacao
+     */
+    public function setCdUsuarioCriacao($cd_usuario_criacao)
+    {
+        $this->cd_usuario_criacao = $cd_usuario_criacao;
+        return $this;
+    }
+
+    /**
+     * @param mixed $cd_vl_catg_estagio
+     */
+    public function setCdVlCatgEstagio($cd_vl_catg_estagio)
+    {
+        $this->cd_vl_catg_estagio = $cd_vl_catg_estagio;
+        return $this;
+    }
+
+    /**
+     * @param mixed $desc_assunto
+     */
+    public function setDescAssunto($desc_assunto)
+    {
+        $this->desc_assunto = $desc_assunto;
+        return $this;
+    }
+
+    /**
+     * @param mixed $desc_conclusao
+     */
+    public function setDescConclusao($desc_conclusao)
+    {
+        $this->desc_conclusao = $desc_conclusao;
+        return $this;
+    }
+
+    /**
+     * @param mixed $desc_ordem_servico
+     */
+    public function setDescOrdemServico($desc_ordem_servico)
+    {
+        $this->desc_ordem_servico = $desc_ordem_servico;
+        return $this;
+    }
+
+    /**
+     * @param mixed $dt_fim
+     */
+    public function setDtFim($dt_fim)
+    {
+        $this->dt_fim = $dt_fim;
+        return $this;
+    }
+
+    /**
+     * @param mixed $dt_inicio
+     */
+    public function setDtInicio($dt_inicio)
+    {
+        $this->dt_inicio = $dt_inicio;
+        return $this;
+    }
+
+    /**
+     * @param mixed $dt_usuario_atualiza
+     */
+    public function setDtUsuarioAtualiza($dt_usuario_atualiza)
+    {
         $this->dt_usuario_atualiza = $dt_usuario_atualiza;
+        return $this;
+    }
+
+    /**
+     * @param mixed $dt_usuario_criacao
+     */
+    public function setDtUsuarioCriacao($dt_usuario_criacao)
+    {
+        $this->dt_usuario_criacao = $dt_usuario_criacao;
         return $this;
     }
 
