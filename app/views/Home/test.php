@@ -1,24 +1,27 @@
 <?php
 
-$obj = new ProfissaoDTO();
+$obj = new SetorDTO();
 $obj
-    ->setNmProfissao("Lindo")
+    ->setCdCondominio(1)
+    ->setNmSetor(1)
+    ->setObservacao(1)
+    ->setImPerfil(null)
     ->setCdUsuarioCriacao(1)
     ->setDtUsuarioCriacao('now()')
     ->setCdUsuarioAtualiza(1)
     ->setDtUsuarioAtualiza('now()');
 
-$objDao = new ProfissaoDAO();
+$objDao = new SetorDAO();
 
 /** @var ServicoAdicionalDTO $obj */
-//$obj = $objDao->getById(8);
-//$obj->setDtUsuarioAtualiza('25/12/2014');
+$obj = $objDao->getById(2);
+$obj->setDtUsuarioAtualiza('25/12/2014');
 
 /**
  * Deletar id selecionado
  */
-//$obj = $objDao->getById(8);
-//$objDao->delete($obj);
+$obj = $objDao->getById(2);
+$objDao->delete($obj);
 
 $obj = $objDao->gravar($obj);
 
