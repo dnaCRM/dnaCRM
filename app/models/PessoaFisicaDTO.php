@@ -59,6 +59,7 @@ class PessoaFisicaDTO extends DataTransferObject
             'cd_usuario_atualiza' => 'getCdUsuarioAtualiza',
             'dt_usuario_atualiza' => 'getDtUsuarioAtualiza',
         );
+
         if ($this->getImPerfil()) {
             $this->setImPerfil("img/uploads/tb_pessoa_fisica/{$this->cd_pessoa_fisica}.jpg");
         } else {

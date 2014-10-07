@@ -18,7 +18,6 @@ class PessoaFisicaDAO extends DataAccessObject
         $this->colunaImagem = 'im_perfil';
         $this->imgFolder = IMG_UPLOADS_FOLDER . "{$this->tabela}/";
         $this->fotoDefault = 'img/icon-user.jpg';
-
     }
 
     /**
@@ -42,6 +41,10 @@ class PessoaFisicaDAO extends DataAccessObject
             }
     }
 
+    public function getImgFolder()
+    {
+        return $this->imgFolder;
+    }
     /**
      * @return mixed
      */
