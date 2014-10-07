@@ -150,7 +150,7 @@ abstract class DataAccessObject
      * @param DataTransferObject $dto
      * @return bool | DataTransferObject
      */
-    protected function delete(DataTransferObject $dto)
+    public function delete(DataTransferObject $dto)
     {
         $sql = "DELETE FROM {$this->tabela}
                 WHERE {$this->primaryKey} = {$dto->{$dto->getReflex()[$this->primaryKey]}()}  returning *";
