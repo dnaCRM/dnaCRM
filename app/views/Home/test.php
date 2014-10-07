@@ -1,20 +1,14 @@
 <?php
 
-$obj = new PessoaFisicaTelefoneDTO();
+$obj = new ProfissaoDTO();
 $obj
-    ->setCdPessoaFisica(2)
-    ->setFone(1)
-    ->setObservacao(1)
-    ->setCdCatgFonePf(1)
-    ->setCdVlCatgFonePf(1)
-    ->setCdCatgOperadora(1)
-    ->setCdVlCatgOperadora(1)
+    ->setNmProfissao("Lindo")
     ->setCdUsuarioCriacao(1)
     ->setDtUsuarioCriacao('now()')
     ->setCdUsuarioAtualiza(1)
     ->setDtUsuarioAtualiza('now()');
 
-$objDao = new PessoaFisicaTelefoneDAO();
+$objDao = new ProfissaoDAO();
 
 /** @var ServicoAdicionalDTO $obj */
 //$obj = $objDao->getById(8);

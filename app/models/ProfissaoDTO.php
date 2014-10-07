@@ -1,5 +1,5 @@
 <?php
-class PessoaJuridicaTelefoneDTO extends DataTransferObject
+class ProfissaoDTO extends DataTransferObject
 {
     private $cd_profissao;
     private $nm_profissao;
@@ -31,59 +31,109 @@ class PessoaJuridicaTelefoneDTO extends DataTransferObject
     {
         return $this->reflex;
     }
-    public function getCd_profissao() {
+
+    /**
+     * @return mixed
+     */
+    public function getCdProfissao()
+    {
         return $this->cd_profissao;
     }
 
-    public function getNm_profissao() {
-        return $this->nm_profissao;
-    }
-
-    public function getCd_usuario_criacao() {
-        return $this->cd_usuario_criacao;
-    }
-
-    public function getDt_usuario_criacao() {
-        return $this->dt_usuario_criacao;
-    }
-
-    public function getCd_usuario_atualiza() {
+    /**
+     * @return mixed
+     */
+    public function getCdUsuarioAtualiza()
+    {
         return $this->cd_usuario_atualiza;
     }
 
-    public function getDt_usuario_atualiza() {
+    /**
+     * @return mixed
+     */
+    public function getCdUsuarioCriacao()
+    {
+        return $this->cd_usuario_criacao;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDtUsuarioAtualiza()
+    {
         return $this->dt_usuario_atualiza;
     }
-    
-    ############################## SETTERS ##############################
 
-    public function setCd_profissao($cd_profissao) {
+    /**
+     * @return mixed
+     */
+    public function getDtUsuarioCriacao()
+    {
+        return $this->dt_usuario_criacao;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNmProfissao()
+    {
+        return $this->nm_profissao;
+    }
+
+    ###################### SETTERS ########################
+
+    /**
+     * @param mixed $cd_profissao
+     */
+    public function setCdProfissao($cd_profissao)
+    {
         $this->cd_profissao = $cd_profissao;
         return $this;
     }
 
-    public function setNm_profissao($nm_profissao) {
-        $this->nm_profissao = $nm_profissao;
-        return $this;
-    }
-
-    public function setCd_usuario_criacao($cd_usuario_criacao) {
-        $this->cd_usuario_criacao = $cd_usuario_criacao;
-        return $this;
-    }
-
-    public function setDt_usuario_criacao($dt_usuario_criacao) {
-        $this->dt_usuario_criacao = $dt_usuario_criacao;
-        return $this;
-    }
-
-    public function setCd_usuario_atualiza($cd_usuario_atualiza) {
+    /**
+     * @param mixed $cd_usuario_atualiza
+     */
+    public function setCdUsuarioAtualiza($cd_usuario_atualiza)
+    {
         $this->cd_usuario_atualiza = $cd_usuario_atualiza;
         return $this;
     }
 
-    public function setDt_usuario_atualiza($dt_usuario_atualiza) {
+    /**
+     * @param mixed $cd_usuario_criacao
+     */
+    public function setCdUsuarioCriacao($cd_usuario_criacao)
+    {
+        $this->cd_usuario_criacao = $cd_usuario_criacao;
+        return $this;
+    }
+
+    /**
+     * @param mixed $dt_usuario_atualiza
+     */
+    public function setDtUsuarioAtualiza($dt_usuario_atualiza)
+    {
         $this->dt_usuario_atualiza = $dt_usuario_atualiza;
         return $this;
     }
+
+    /**
+     * @param mixed $dt_usuario_criacao
+     */
+    public function setDtUsuarioCriacao($dt_usuario_criacao)
+    {
+        $this->dt_usuario_criacao = $dt_usuario_criacao;
+        return $this;
+    }
+
+    /**
+     * @param mixed $nm_profissao
+     */
+    public function setNmProfissao($nm_profissao)
+    {
+        $this->nm_profissao = $nm_profissao;
+        return $this;
+    }
+
 }
