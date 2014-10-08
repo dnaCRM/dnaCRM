@@ -98,19 +98,20 @@ class OcorrenciaPessoaFisicaEnvolvidaDAO extends DataAccessObject
                 WHERE cd_ocorrencia = :cd_ocorrencia
                  AND cd_pessoa_fisica = :cd_pessoa_fisica returning *";
 
-        if ($this->query($sql, $this->dataTransfer, array())->success()) {
+        $array_info = array(
+            'cd_ocorrencia' => $dto->getCdOcorrencia(),
+            'cd_pessoa_fisica' => $dto->getCdPessoaFisica()
+        );
+
+        if ($this->query($sql, $this->dataTransfer, $array_info)->success()) {
             return $this->getResultado();
         }
         return false;
     }
 
     /**
-     * Informar código de acordo com o critério de pesquisa
-     * $ocorrencia para pesquisar pela ocorrencia (informar null para não usar)
-     * $pf para pesquisar pela Pessoa Física  (informar null para não usar)
-     * Informar os dois parâmetros para pesquiser a chave primária inteira
      * @param null $ocorrencia
-     * @param null $pf
+     * @param null $pessoafisica
      * @return bool|DataTransferObject
      */
     public function getById($ocorrencia = null, $pessoafisica = null)
