@@ -113,20 +113,20 @@ class OcorrenciaPessoaFisicaEnvolvidaDAO extends DataAccessObject
      * @param null $pf
      * @return bool|DataTransferObject
      */
-    public function getById($ocorrencia = null, $pf1 = null)
+    public function getById($ocorrencia = null, $pessoafisica = null)
     {
         $where = "";
         if ($ocorrencia) {
             $ocorrencia = (int)$ocorrencia;
             $where .= "cd_ocorrencia = {$ocorrencia}";
-        } elseif ($pf) {
-            $pf = (int)$pf;
-            $where .= "cd_pessoa_fisica = {$pf}";
-        } elseif ($pf && $pf) {
+        } elseif ($pessoafisica) {
+            $pessoafisica = (int)$pessoafisica;
+            $where .= "cd_pessoa_fisica = {$pessoafisica}";
+        } elseif ($pessoafisica && $pessoafisica) {
             $ocorrencia = (int)$ocorrencia;
-            $pf = (int)$pf;
+            $pessoafisica = (int)$pessoafisica;
             $where .= "cd_ocorrencia = {$ocorrencia}
-                      AND cd_pessoa_fisica = {$pf}";
+                      AND cd_pessoa_fisica = {$pessoafisica}";
         }
         $this->resultado = $this->get($where);
 

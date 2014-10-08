@@ -12,14 +12,15 @@ $obj
 $objDao = new OcorrenciaPessoaFisicaEnvolvidaDAO();
 
 /** @var ServicoAdicionalDTO $obj */
-//$obj = $objDao->getById(2);
-//$obj->setCdUsuarioCriacao('2');
+$obj = $objDao->getById(2);
+$obj->setDtUsuarioAtualiza('07/10/2014');
 
 /**
  * Deletar id selecionado
  */
-$obj = $objDao->getById(2);
-$objDao->delete($obj);
+//$obj = $objDao->getById(1);
+//$objDao->delete($obj);
+//var_dump($obj);
 
 $obj = $objDao->gravar($obj);
 
@@ -27,7 +28,7 @@ $obj = $objDao->fullList();
 var_dump($obj);
 
 /**
- *   Atualizar Foto da Pessoa Fisica 
+ *   Atualizar Foto da Pessoa Fisica
  */
 //$p = new PessoaFisicaDAO();
 //$peee = $p->getById(18);
