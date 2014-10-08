@@ -3,18 +3,18 @@
 $obj = new OcorrenciaPessoaFisicaEnvolvidaDTO();
 $obj
     ->setCdOcorrencia(1)
-    ->setCdPessoaFisica(1)
+    ->setCdPessoaFisica(3)
     ->setCdUsuarioCriacao(1)
     ->setDtUsuarioCriacao('now()')
-    ->setCdUsuarioAtualiza(1)
+    ->setCdUsuarioAtualiza(2)
     ->setDtUsuarioAtualiza('now()');
 
 $objDao = new OcorrenciaPessoaFisicaEnvolvidaDAO();
 
-$obj = $objDao->getById(1);
-//$obj->setDtUsuarioAtualiza('07/10/2014');
+//$obj = $objDao->fullList();
+//$obj = $objDao->getBy2Ids(1,3);
 
-//$obj = $objDao->gravar($obj);
+$objDao->gravar($obj);
 //$obj = $objDao->delete($obj);
 //$obj = $objDao->fullList();
 var_dump($obj);

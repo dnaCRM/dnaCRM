@@ -23,7 +23,7 @@ class OcorrenciaPessoaFisicaEnvolvidaDAO extends DataAccessObject
      */
     public function gravar(OcorrenciaPessoaFisicaEnvolvidaDTO $dto)
     {
-        if (!$this->getById($dto->getCdOcorrencia(), $dto->getCdPessoaFisica())) {
+        if (!$this->getBy2Ids($dto->getCdOcorrencia(), $dto->getCdPessoaFisica())) {
             if (!$this->insert($dto)) {
                 throw new Exception('Impossível Gravar Ocorrencia de Pessoa Fisica Envolvida');
             }
@@ -114,16 +114,10 @@ class OcorrenciaPessoaFisicaEnvolvidaDAO extends DataAccessObject
      * @param null $pessoafisica
      * @return bool|DataTransferObject
      */
-    public function getById($ocorrencia = null, $pessoafisica = null)
+    public function getBy2Ids($ocorrencia, $pessoafisica)
     {
         $where = "";
-        if ($ocorrencia) {
-            $ocorrencia = (int)$ocorrencia;
-            $where .= "cd_ocorrencia = {$ocorrencia}";
-        } elseif ($pessoafisica) {
-            $pessoafisica = (int)$pessoafisica;
-            $where .= "cd_pessoa_fisica = {$pessoafisica}";
-        } elseif ($pessoafisica && $pessoafisica) {
+        if ($pessoafisica && $pessoafisica) {
             $ocorrencia = (int)$ocorrencia;
             $pessoafisica = (int)$pessoafisica;
             $where .= "cd_ocorrencia = {$ocorrencia}
