@@ -108,7 +108,7 @@ class RelacionadosDAO extends DataAccessObject
      * Informar código de acordo com o critério de pesquisa
      * $pf1 para pesquisar pela Pessoa Física 1 (informar null para não usar)
      * $pf2 para pesquisar pela Pessoa Física 2 (informar null para não usar)
-     * Informar os dois parâmetros para pesquiser a chave primária inteira
+     * Informar os dois parâmetros para pesquisar a chave primária inteira
      * @param null $pf1
      * @param null $pf2
      * @return bool|DataTransferObject
