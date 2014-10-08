@@ -11,7 +11,6 @@ $obj
 
 $objDao = new OcorrenciaPessoaFisicaEnvolvidaDAO();
 
-
 $obj = $objDao->getById(1);
 //$obj->setDtUsuarioAtualiza('07/10/2014');
 
