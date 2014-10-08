@@ -98,7 +98,12 @@ class RelacionadosDAO extends DataAccessObject
                 WHERE cd_pessoa_fisica_1 = :cd_pessoa_fisica_1
                  AND cd_pessoa_fisica_2 = :cd_pessoa_fisica_2 returning *";
 
-        if ($this->query($sql, $this->dataTransfer, array())->success()) {
+        $array_info = array(
+            'cd_pessoa_fisica_1' => $dto->getCdPessoaFisica1(),
+            'cd_pessoa_fisica_2' => $dto->getCdPessoaFisica2()
+        );
+
+        if ($this->query($sql, $this->dataTransfer, $array_info)->success()) {
             return $this->getResultado();
         }
         return false;
