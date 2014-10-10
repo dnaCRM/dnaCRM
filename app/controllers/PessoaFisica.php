@@ -77,6 +77,9 @@ class PessoaFisica extends Controller
         $id = (int)$id;
         $perfilarr = $this->findById($id);
 
+        // Exporta imagem de perfil
+        $this->exportaImagens($perfilarr);
+
         $dados = array(
             //o campo 'obs' vai ser o subtítulo
             'pagesubtitle' => $perfilarr->getEmail(),

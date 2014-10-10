@@ -6,7 +6,6 @@
  * Date: 22/07/14
  * Time: 21:16
  */
-
 abstract class Controller
 {
     /** @var  DataAccessObject */
@@ -15,7 +14,7 @@ abstract class Controller
     protected $view;
     protected $dados;
 
-    protected  function setModel(DataAccessObject $model)
+    protected function setModel(DataAccessObject $model)
     {
         $this->model = $model;
     }
@@ -40,16 +39,22 @@ abstract class Controller
      * Deve receber um array contento objetos do tipo PessoaFisicaDTO
      * Percorre os objetos testando se as imagens já foram exportadas
      * e exporta caso necessário
-     * @param array $arr_perfil
      */
-    protected function exportaImagens(array $arr_perfil)
+    protected function exportaImagens($arr_perfil)
     {
-        foreach($arr_perfil as $perfil) {
-            if ($perfil->getImPerfil()
-                && !file_exists($this->model->getImgFolder().$perfil->getCdPessoaFisica().'.jpg')) {
-
-                $this->model->exportaFoto($perfil->getCdPessoaFisica());
-
+        if (is_array($arr_perfil)) {
+            foreach ($arr_perfil as $perfil) {
+                if ($perfil->getImPerfil()
+                    && !file_exists($this->model->getImgFolder() . $perfil->getCdPessoaFisica() . '.jpg')
+                ) {
+                    $this->model->exportaFoto($perfil->getCdPessoaFisica());
+                }
+            }
+        } else {
+            if ($arr_perfil->getImPerfil()
+                && !file_exists($this->model->getImgFolder() . $arr_perfil->getCdPessoaFisica() . '.jpg')
+            ) {
+                $this->model->exportaFoto($arr_perfil->getCdPessoaFisica());
             }
         }
     }
