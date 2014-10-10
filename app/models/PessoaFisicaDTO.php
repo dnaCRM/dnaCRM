@@ -88,6 +88,7 @@ class PessoaFisicaDTO extends DataTransferObject
     }
 
     /**
+
      * @return mixed
      */
     public function getCdCatgOrgRg()
@@ -254,6 +255,7 @@ class PessoaFisicaDTO extends DataTransferObject
     {
         return $this->rg;
     }
+
 
 
 ######### SETTERS #################################################################3
