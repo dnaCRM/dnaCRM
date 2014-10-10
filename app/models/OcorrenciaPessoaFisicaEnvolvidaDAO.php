@@ -18,8 +18,8 @@ class OcorrenciaPessoaFisicaEnvolvidaDAO extends DataAccessObject
     }
 
     /**
-     * @todo A tabela correspondente a esta Classe usa chave composta.
-     * Como resolver?
+     * @param OcorrenciaPessoaFisicaEnvolvidaDTO $dto
+     * @throws Exception
      */
     public function gravar(OcorrenciaPessoaFisicaEnvolvidaDTO $dto)
     {

@@ -9,6 +9,11 @@ class OrdemServicoDAO extends DataAccessObject
         $this->dataTransfer = 'OrdemServicoDTO';
     }
 
+    /**
+     * @param OrdemServicoDTO $dto
+     * @throws Exception
+     */
+
     public function gravar(OrdemServicoDTO $dto)
     {
         if ($dto->getCdOrdemServico() == '') {
