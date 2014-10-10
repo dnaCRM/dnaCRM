@@ -46,9 +46,9 @@ Class CondominioDTO extends DataTransferObject
         );
 
         if($this->getImPerfil()){
-            $this->setImPerfil("img/uploads/tb_pessoa_fisica/{$this->cd_pessoa_fisica}.jpg");
+            $this->setImPerfil("img/uploads/tb_condominio/{$this->cd_condominio}.jpg");
         } else {
-            $
+            $this->setImPerfil("img/con-user.jpg");
         }
     }
 
