@@ -38,7 +38,7 @@ class OcorrenciaPessoaFisicaEnvolvidaDAO extends DataAccessObject
      * @param DataTransferObject $dto
      * @return bool|DataTransferObject
      */
-    public function insert(DataTransferObject $dto)
+    protected function insert(DataTransferObject $dto)
     {
         $reflex = $dto->getReflex();
 
@@ -62,7 +62,7 @@ class OcorrenciaPessoaFisicaEnvolvidaDAO extends DataAccessObject
      * @param DataTransferObject $dto
      * @return bool|DataTransferObject
      */
-    public function update(DataTransferObject $dto)
+    protected function update(DataTransferObject $dto)
     {
         foreach ($dto->getReflex() as $atributo => $method) {
             if ($atributo != 'cd_usuario_criacao' && $atributo != 'dt_usuario_criacao') {
@@ -132,4 +132,4 @@ class OcorrenciaPessoaFisicaEnvolvidaDAO extends DataAccessObject
         return false;
     }
 
-} 
+}

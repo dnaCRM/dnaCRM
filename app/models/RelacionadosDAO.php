@@ -38,7 +38,7 @@ class RelacionadosDAO extends DataAccessObject
      * @param DataTransferObject $dto
      * @return bool|DataTransferObject
      */
-    public function insert(DataTransferObject $dto)
+    protected function insert(DataTransferObject $dto)
     {
         $reflex = $dto->getReflex();
 
@@ -62,7 +62,7 @@ class RelacionadosDAO extends DataAccessObject
      * @param DataTransferObject $dto
      * @return bool|DataTransferObject
      */
-    public function update(DataTransferObject $dto)
+    protected function update(DataTransferObject $dto)
     {
         foreach ($dto->getReflex() as $atributo => $method) {
             if ($atributo != 'cd_usuario_criacao' && $atributo != 'dt_usuario_criacao') {
@@ -118,7 +118,7 @@ class RelacionadosDAO extends DataAccessObject
      * @param null $pf2
      * @return bool|DataTransferObject
      */
-    public function getById($pf1, $pf2)
+    public function getBy2Ids($pf1, $pf2)
     {
         $where = "";
         if ($pf2 && $pf2) {
