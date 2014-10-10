@@ -43,7 +43,7 @@ class SetorDAO extends DataAccessObject
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getFotoDefault()
     {
