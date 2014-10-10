@@ -23,7 +23,7 @@ class RelacionadosDAO extends DataAccessObject
      */
     public function gravar(RelacionadosDTO $dto)
     {
-        if (!$this->getById($dto->getCdPessoaFisica1(), $dto->getCdPessoaFisica2())) {
+        if (!$this->getBy2Ids($dto->getCdPessoaFisica1(), $dto->getCdPessoaFisica2())) {
             if (!$this->insert($dto)) {
                 throw new Exception('Impossível Gravar Relacionamento');
             }
@@ -98,7 +98,12 @@ class RelacionadosDAO extends DataAccessObject
                 WHERE cd_pessoa_fisica_1 = :cd_pessoa_fisica_1
                  AND cd_pessoa_fisica_2 = :cd_pessoa_fisica_2 returning *";
 
-        if ($this->query($sql, $this->dataTransfer, array())->success()) {
+        $array_info = array(
+            'cd_pessoa_fisica_1' => $dto->getCdPessoaFisica1(),
+            'cd_pessoa_fisica_2' => $dto->getCdPessoaFisica2()
+        );
+
+        if ($this->query($sql, $this->dataTransfer, $array_info)->success()) {
             return $this->getResultado();
         }
         return false;
@@ -113,16 +118,10 @@ class RelacionadosDAO extends DataAccessObject
      * @param null $pf2
      * @return bool|DataTransferObject
      */
-    public function getById($pf1 = null, $pf2 = null)
+    public function getById($pf1, $pf2)
     {
         $where = "";
-        if ($pf1) {
-            $pf1 = (int)$pf1;
-            $where .= "cd_pessoa_fisica_1 = {$pf1}";
-        } elseif ($pf2) {
-            $pf2 = (int)$pf2;
-            $where .= "cd_pessoa_fisica_2 = {$pf2}";
-        } elseif ($pf2 && $pf2) {
+        if ($pf2 && $pf2) {
             $pf1 = (int)$pf1;
             $pf2 = (int)$pf2;
             $where .= "cd_pessoa_fisica_1 = {$pf1}
