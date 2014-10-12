@@ -1,30 +1,23 @@
 <?php
 
-$obj = new OcorrenciaPessoaFisicaEnvolvidaDTO();
+$obj = new CondominioDTO();
 $obj
-
-    ->setCdOcorrencia(2)
-    ->setCdPessoaFisica(2)
-    ->setCdOcorrencia(1)
-    ->setCdPessoaFisica(3)
+    ->setNmCondominio('Spazio Florian')
+    ->setCep('14000-123')
+    ->setRua('Rua Jurema')
+    ->setNumero(198)
+    ->setBairro('Santa Terezinha')
+    ->setCidade('Franca')
+    ->setCdCatgEstado(1)
+    ->setCdVlCatgEstado(1)
     ->setCdUsuarioCriacao(1)
     ->setDtUsuarioCriacao('now()')
-    ->setCdUsuarioAtualiza(2)
+    ->setCdUsuarioAtualiza(1)
     ->setDtUsuarioAtualiza('now()');
 
-$objDao = new OcorrenciaPessoaFisicaEnvolvidaDAO();
+$dao = new CondominioDAO();
 
-$obj = $objDao->getById(2);
-//$obj->setDtUsuarioAtualiza('07/10/2014');
 
-//$obj = $objDao->gravar($obj);
-$obj = $objDao->delete($obj);
-$obj = $objDao->fullList();
+//$dao->gravar($obj);
 
-//$obj = $objDao->fullList();
-//$obj = $objDao->getBy2Ids(1,3);
-
-$objDao->gravar($obj);
-//$obj = $objDao->delete($obj);
-//$obj = $objDao->fullList();
-var_dump($obj);
+var_dump($dao->getById(8));

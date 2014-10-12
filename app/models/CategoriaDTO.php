@@ -23,7 +23,7 @@ class CategoriaDTO extends DataTransferObject {
         $this->reflex = array(
             'cd_categoria' => 'getCategoria',
             'desc_categoria' => 'getDescCategoria',
-            'cd_usuario_cricao' => 'getCdUsuarioCriacao',
+            'cd_usuario_criacao' => 'getCdUsuarioCriacao',
             'dt_usuario_criacao' => 'getDtUsuarioCriacao',
             'cd_usuario_atualiza' => 'getCdUsuarioAtualiza',
             'dt_usuario_atualiza' => 'getDtUsuarioAtualiza',
@@ -88,69 +88,42 @@ class CategoriaDTO extends DataTransferObject {
         return $this->dt_usuario_criacao;
     }
 
-    /**
-     * @param mixed $cd_categoria
-     */
+    ################## SETTERS #######################
+
     public function setCdCategoria($cd_categoria)
     {
         $this->cd_categoria = $cd_categoria;
+        return $this;
     }
 
-    /**
-     * @param mixed $cd_usuario_atualiza
-     */
     public function setCdUsuarioAtualiza($cd_usuario_atualiza)
     {
         $this->cd_usuario_atualiza = $cd_usuario_atualiza;
+        return $this;
     }
 
-    /**
-     * @param mixed $cd_usuario_criacao
-     */
     public function setCdUsuarioCriacao($cd_usuario_criacao)
     {
         $this->cd_usuario_criacao = $cd_usuario_criacao;
+        return $this;
     }
 
-    /**
-     * @param mixed $desc_categoria
-     */
     public function setDescCategoria($desc_categoria)
     {
         $this->desc_categoria = $desc_categoria;
+        return $this;
     }
 
-    /**
-     * @param mixed $dt_usuario_atualiza
-     */
     public function setDtUsuarioAtualiza($dt_usuario_atualiza)
     {
         $this->dt_usuario_atualiza = $dt_usuario_atualiza;
+        return $this;
     }
 
-    /**
-     * @param mixed $dt_usuario_criacao
-     */
     public function setDtUsuarioCriacao($dt_usuario_criacao)
     {
         $this->dt_usuario_criacao = $dt_usuario_criacao;
+        return $this;
     }
-
-    /**
-     * @param array $reflex
-     */
-    public function setReflex($reflex)
-    {
-        $this->reflex = $reflex;
-    }
-
-    ################## SETTERS #######################
-
-
-
-
-
-
-
 
 } 

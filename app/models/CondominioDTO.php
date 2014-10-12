@@ -19,8 +19,8 @@ Class CondominioDTO extends DataTransferObject
     private $cd_catg_estado;
     private $cd_vl_catg_estado;
     private $cd_usuario_criacao;
-    private $dt_criacao_criacao;
-    private $cd_usuario_atualiaza;
+    private $dt_usuario_criacao;
+    private $cd_usuario_atualiza;
     private $dt_usuario_atualiza;
 
     /** @var  array */
@@ -37,12 +37,11 @@ Class CondominioDTO extends DataTransferObject
            'bairro' => 'getBairro',
            'cidade' => 'getCidade',
            'cd_catg_estado' => 'getCdCatgEstado',
-           'cd_vl_catg_estado' => 'getVlCatgEstado',
+           'cd_vl_catg_estado' => 'getCdVlCatgEstado',
            'cd_usuario_criacao' => 'getCdUsuarioCriacao',
-           'dt_usuario_atualiza' => 'getDtUsuarioAtualiza',
+           'dt_usuario_criacao' => 'getDtUsuarioCriacao',
            'cd_usuario_atualiza' => 'getCdUsuarioAtualiza',
-           'dt_usuario_atualiza' => 'getDtUsuarioAtualiza',
-
+           'dt_usuario_atualiza' => 'getDtUsuarioAtualiza'
         );
 
         if($this->getImPerfil()){
@@ -63,7 +62,6 @@ Class CondominioDTO extends DataTransferObject
     {
         return $this->reflex;
     }
-
 
     public function getCdCondominio()
     {
@@ -122,12 +120,12 @@ Class CondominioDTO extends DataTransferObject
 
     public function getDtUsuarioCriacao()
     {
-        return $this->dt_criacao_criacao;
+        return $this->dt_usuario_criacao;
     }
 
     public function getCdUsuarioAtualiza()
     {
-        return $this->cd_usuario_atualiaza;
+        return $this->cd_usuario_atualiza;
     }
 
     public function getDtUsuarioAtualiza()
@@ -176,7 +174,7 @@ Class CondominioDTO extends DataTransferObject
     public function setBairro($bairro)
     {
         $this->bairro = $bairro;
-        return $bairro;
+        return $this;
     }
 
     public function setCidade($cidade)
@@ -211,13 +209,13 @@ Class CondominioDTO extends DataTransferObject
 
     public function setCdUsuarioAtualiza($cd_usuario_atualiza)
     {
-        $this->cd_usuario_atualiaza = $cd_usuario_atualiza;
+        $this->cd_usuario_atualiza = $cd_usuario_atualiza;
         return $this;
     }
 
     public function setDtUsuarioAtualiza($dt_usuario_atualiza)
     {
-        $this->dt_usuario_atualiza;
+        $this->dt_usuario_atualiza = $dt_usuario_atualiza;
         return $this;
     }
 }
