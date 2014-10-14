@@ -270,7 +270,8 @@ $(document).ready(function () {
                     }
                 }
             },
-            cnpj: {
+            cpf: {
+                group: '.col-lg-12',
                 validators: {
                     notEmpty: {
                         message: 'Campo obrigatório'

@@ -134,7 +134,7 @@
             </a>
             <ul class="treeview-menu" style="display: none;">
                 <li><a href="PessoaFisica/"><i class="fa fa-angle-double-right"></i>Pessoa Física</a></li>
-                <li><a href="PerfilPJ/"><i class="fa fa-angle-double-right"></i> Pessoa Jurídica</a></li>
+                <li><a href="PessoaJuridica/"><i class="fa fa-angle-double-right"></i> Pessoa Jurídica</a></li>
             </ul>
         </li>
         <li class="treeview">
@@ -145,7 +145,7 @@
             </a>
             <ul class="treeview-menu" style="display: none;">
                 <li><a href="PessoaFisica/formperfil"><i class="fa fa-angle-double-right"></i> Pessoa Física</a></li>
-                <li><a href="PerfilPJ/formpj"><i class="fa fa-angle-double-right"></i> Pessoa Jurídica</a></li>
+                <li><a href="PessoaJuridica/formperfil"><i class="fa fa-angle-double-right"></i> Pessoa Jurídica</a></li>
                 <li><a href="Setor/formsetor"><i class="fa fa-angle-double-right"></i> Setores</a></li>
                 <li><a href="Condominio/formcondo"><i class="fa fa-angle-double-right"></i> Condomínio</a></li>
                 <li><a href="Imovel/formimovel"><i class="fa fa-angle-double-right"></i> Imóveis</a></li>
