@@ -163,4 +163,39 @@ class PessoaJuridica extends Controller
         }
     }
 
+
+    protected function findById($id)
+    {
+        if (!$obj = $this->model->getById($id)) {
+            /** Envia mensagem */
+            Session::flash('fail', 'Cadastro não encontrado', 'danger');
+            /** Redireciona para página de lista de Perfis */
+            Redirect::to(SITE_URL . get_called_class());
+        }
+        return $obj;
+    }
+
+    /**
+     * Deve receber um array contento objetos do tipo PessoaFisicaDTO
+     * Percorre os objetos testando se as imagens já foram exportadas
+     * e exporta caso necessário
+     */
+    protected function exportaImagens($arr_perfil)
+    {
+        if (is_array($arr_perfil)) {
+            foreach ($arr_perfil as $perfil) {
+                if ($perfil->getImPerfil()
+                    && !file_exists($this->model->getImgFolder() . $perfil->getCdPessoaJuridica() . '.jpg')
+                ) {
+                    $this->model->exportaFoto($perfil->getCdPessoaJuridica());
+                }
+            }
+        } else {
+            if ($arr_perfil->getImPerfil()
+                && !file_exists($this->model->getImgFolder() . $arr_perfil->getCdPessoaJuridica() . '.jpg')
+            ) {
+                $this->model->exportaFoto($arr_perfil->getCdPessoaJuridica());
+            }
+        }
+    }
 } 

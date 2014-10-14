@@ -109,6 +109,14 @@ $(document).ready(function () {
         language: 'pt-br',
         pickTime: false
     });
+    $('#dt_inicio_curso_picker').datetimepicker({
+        language: 'pt-br',
+        pickTime: false
+    });
+    $('#dt_fim_curso_picker').datetimepicker({
+        language: 'pt-br',
+        pickTime: false
+    });
 
     $('#pessoafisicaform').bootstrapValidator({
         excluded: ':disabled',
@@ -319,6 +327,16 @@ $(document).ready(function () {
         .on('dp.change dp.show', function(e) {
             // Valida a data quando o usuário inserir
             $('#pessoafisicaform').bootstrapValidator('revalidateField', 'dt_nascimento');
+        });
+    $('#dt_inicio_curso_picker')
+        .on('dp.change dp.show', function(e) {
+            // Valida a data quando o usuário inserir
+            $('#pessoafisicaform').bootstrapValidator('revalidateField', 'dt_inicio_curso_picker');
+        });
+    $('#dt_fim_curso_picker')
+        .on('dp.change dp.show', function(e) {
+            // Valida a data quando o usuário inserir
+            $('#pessoafisicaform').bootstrapValidator('revalidateField', 'dt_fim_curso_picker');
         });
 });
 

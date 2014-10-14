@@ -1,20 +1,29 @@
 <?php
 
-$obj = new CategoriaValorDTO();
-$obj
-    ->setCdCategoria(12)
-    ->setDescVlCatg('Bebedeira')
+$r = new RelacionadosDTO();
+$r
+    ->setCdPessoaFisica1(1)
+    ->setCdPessoaFisica2(4)
+    ->setCdCatgRelacPf1(1)
+    ->setCdVlCatgRelacPf1(1)
+    ->setCdCatgRelacPf2(1)
+    ->setCdVlCatgRelacPf2(1)
     ->setCdUsuarioCriacao(1)
     ->setDtUsuarioCriacao('now()')
     ->setCdUsuarioAtualiza(1)
     ->setDtUsuarioAtualiza('now()');
 
-$dao = new CategoriaValorDAO();
+$rd = new RelacionadosDAO();
+//$rd->gravar($r);
 
-//$dao->gravar($obj);
 
-/** @var CategoriaValorDTO $obj */
+$dao = new PessoaFisicaDAO();
+//$pf = new PessoaFisicaDTO();
+$pf = $dao->getById(1);
 
-//$obj = $dao->getBy2Ids(56,3);
+$pfModel = new PessoaFisicaModel($pf, $dao);
 
-var_dump($dao->getBy2Ids(117,12));
+/** @var ProfissaoDTO $agregado */
+$agregado = $pfModel->getGrauEnsino(new CategoriaValorDAO());
+
+var_dump($agregado);

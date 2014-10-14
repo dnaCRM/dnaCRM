@@ -40,21 +40,34 @@ class PessoaFisica extends Controller
      */
     public function formperfil($id = null)
     {
-        $pessoa_juridica = (new PessoaJuridicaModel())->fullList();
-        $profissoes = (new ProfissoesModel())->fullList();
+        $pessoa_juridica = (new PessoaJuridicaDAO())->fullList();
+        $profissoes = (new ProfissaoDAO())->fullList();
+        $org_rg = (new CategoriaValorDAO())->get('cd_categoria = 1');
+        $inst_ensino = (new InstituicaoEnsinoDAO())->fullList();
+        $grau_ensino = (new CategoriaValorDAO())->get('cd_categoria = 8');
+
         if ($id) {
             /** @var PessoaFisicaDTO */
             $perfilarr = $this->findById($id);
 
             $nasc = new DateTime($perfilarr->getDtNascimento());
             $perfilarr->setDtNascimento($nasc->format('d/m/Y'));
-            $pessoa_juridica = new PessoaJuridicaModel();
+
+            $dt_inicio_curso = new DateTime($perfilarr->getDtInicioCurso());
+            $perfilarr->setDtInicioCurso($dt_inicio_curso->format('d/m/Y'));
+
+            $dt_fim_curso = new DateTime($perfilarr->getDtFimCurso());
+            $perfilarr->setDtFimCurso($dt_fim_curso->format('d/m/Y'));
+
             $dados = array(
 
                 'pagetitle' => $perfilarr->getNmPessoaFisica(),
                 'pagesubtitle' => 'Atualizar Perfil.',
                 'pessoa_juridica' => $pessoa_juridica,
                 'profissoes' => $profissoes,
+                'org_rg' => $org_rg,
+                'inst_ensino' => $inst_ensino,
+                'grau_ensino' => $grau_ensino,
                 'id' => $id,
                 'perfil' => $perfilarr
             );
@@ -65,6 +78,9 @@ class PessoaFisica extends Controller
                 'pagesubtitle' => 'Pessoa Física.',
                 'pessoa_juridica' => $pessoa_juridica,
                 'profissoes' => $profissoes,
+                'org_rg' => $org_rg,
+                'inst_ensino' => $inst_ensino,
+                'grau_ensino' => $grau_ensino,
                 'id' => null,
                 'perfil' => $perfil
             );
@@ -152,9 +168,17 @@ class PessoaFisica extends Controller
         ->setCdProfissao(Input::get('cd_profissao'))
         ->setCpf(Input::get('cpf'))
         ->setRg(Input::get('rg'))
+        ->setCdCatgOrgRg(1)
+        ->setCdVlCatgOrgRg(Input::get('org_rg'))
         ->setEmail(Input::get('email'))
         ->setDtNascimento(Input::get('dt_nascimento'))
         ->setIeSexo(Input::get('ie_sexo'))
+        ->setIeEstuda(Input::get('ie_estuda'))
+        ->setCdInstituicao(Input::get('cd_instituicao'))
+        ->setDtInicioCurso(Input::get('dt_inicio_curso'))
+        ->setDtFimCurso(Input::get('dt_fim_curso'))
+        ->setCdCatgGrauEnsino(8)
+        ->setCdVlCatgGrauEnsino(Input::get('cd_grau_ensino'))
         ->setCdUsuarioCriacao(Session::get('user'))
         ->setDtUsuarioCriacao('now()')
         ->setCdUsuarioAtualiza(Session::get('user'))
@@ -171,6 +195,41 @@ class PessoaFisica extends Controller
                 //$this->model->delete($dto);
                 echo 'Deletou perfil';
 
+            }
+        }
+    }
+
+    protected function findById($id)
+    {
+        if (!$obj = $this->model->getById($id)) {
+            /** Envia mensagem */
+            Session::flash('fail', 'Cadastro não encontrado', 'danger');
+            /** Redireciona para página de lista de Perfis */
+            Redirect::to(SITE_URL . get_called_class());
+        }
+        return $obj;
+    }
+
+    /**
+     * Deve receber um array contento objetos do tipo PessoaFisicaDTO
+     * Percorre os objetos testando se as imagens já foram exportadas
+     * e exporta caso necessário
+     */
+    protected function exportaImagens($arr_perfil)
+    {
+        if (is_array($arr_perfil)) {
+            foreach ($arr_perfil as $perfil) {
+                if ($perfil->getImPerfil()
+                    && !file_exists($this->model->getImgFolder() . $perfil->getCdPessoaFisica() . '.jpg')
+                ) {
+                    $this->model->exportaFoto($perfil->getCdPessoaFisica());
+                }
+            }
+        } else {
+            if ($arr_perfil->getImPerfil()
+                && !file_exists($this->model->getImgFolder() . $arr_perfil->getCdPessoaFisica() . '.jpg')
+            ) {
+                $this->model->exportaFoto($arr_perfil->getCdPessoaFisica());
             }
         }
     }
