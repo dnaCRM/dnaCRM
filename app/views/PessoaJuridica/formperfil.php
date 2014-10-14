@@ -59,9 +59,9 @@
 
 
                     <input type="text" class="form-control" id="cnpj" name="cnpj"
-                           value="<?php echo $perfil->getCnpj() == '' ? Input::get('cnpj') : $perfil->getCnpj(); ?>" placeholder="Cnpj">
-                </div>
-            </div>
+                           value="<?php echo $perfil->getCnpj() == '' ? Input::get('cnpj') : $perfil->getCnpj(); ?>"
+                           placeholder="00.000.000/0000-00"
+                           maxlength="18">
 
             <div class="form-group">
                 <div class="col-lg-12 inputGroupContainer">
