@@ -40,17 +40,21 @@ class PessoaFisica extends Controller
      */
     public function formperfil($id = null)
     {
+        $pessoa_juridica = (new PessoaJuridicaModel())->fullList();
+        $profissoes = (new ProfissoesModel())->fullList();
         if ($id) {
             /** @var PessoaFisicaDTO */
             $perfilarr = $this->findById($id);
 
             $nasc = new DateTime($perfilarr->getDtNascimento());
             $perfilarr->setDtNascimento($nasc->format('d/m/Y'));
-
+            $pessoa_juridica = new PessoaJuridicaModel();
             $dados = array(
 
                 'pagetitle' => $perfilarr->getNmPessoaFisica(),
                 'pagesubtitle' => 'Atualizar Perfil.',
+                'pessoa_juridica' => $pessoa_juridica,
+                'profissoes' => $profissoes,
                 'id' => $id,
                 'perfil' => $perfilarr
             );
@@ -59,6 +63,8 @@ class PessoaFisica extends Controller
             $dados = array(
                 'pagetitle' => 'Cadastro de Perfil',
                 'pagesubtitle' => 'Pessoa Física.',
+                'pessoa_juridica' => $pessoa_juridica,
+                'profissoes' => $profissoes,
                 'id' => null,
                 'perfil' => $perfil
             );

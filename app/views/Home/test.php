@@ -1,23 +1,20 @@
 <?php
 
-$obj = new CondominioDTO();
+$obj = new CategoriaValorDTO();
 $obj
-    ->setNmCondominio('Spazio Florian')
-    ->setCep('14000-123')
-    ->setRua('Rua Jurema')
-    ->setNumero(198)
-    ->setBairro('Santa Terezinha')
-    ->setCidade('Franca')
-    ->setCdCatgEstado(1)
-    ->setCdVlCatgEstado(1)
+    ->setCdCategoria(12)
+    ->setDescVlCatg('Bebedeira')
     ->setCdUsuarioCriacao(1)
     ->setDtUsuarioCriacao('now()')
     ->setCdUsuarioAtualiza(1)
     ->setDtUsuarioAtualiza('now()');
 
-$dao = new CondominioDAO();
-
+$dao = new CategoriaValorDAO();
 
 //$dao->gravar($obj);
 
-var_dump($dao->getById(8));
+/** @var CategoriaValorDTO $obj */
+
+//$obj = $dao->getBy2Ids(56,3);
+
+var_dump($dao->getBy2Ids(117,12));

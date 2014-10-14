@@ -1,12 +1,12 @@
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-sm-6">
         <h1><?php echo $data['pagetitle']; ?></h1>
 
         <p class="lead">
             <?php echo (isset($data['pagesubtitle'])) ? $data['pagesubtitle'] : ""; ?>
         </p>
     </div>
-    <div class="col-md-6" style="padding: 15px 15px 0 15px;">
+    <div class="col-sm-6" style="padding: 15px 15px 0 15px;">
         <div class="well">
 
             <a class="btn btn-primary btn-sm"
@@ -27,7 +27,7 @@
 
 <!--Teste de Perfil-->
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-sm-6">
 
         <img class="img-circle profilefoto"
              src="<?php echo $data['perfil']->getImPerfil(); ?>">
@@ -52,7 +52,7 @@
 
     </div>
 
-    <div class="col-md-6">
+    <div class="col-sm-6">
         <div class="panel-group" id="accordion">
             <div class="panel panel-default">
                 <div class="panel-heading">
