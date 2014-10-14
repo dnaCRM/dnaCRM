@@ -36,7 +36,7 @@
         <img class="img-circle profilefoto"
              src="<?php echo $data['perfil']->getImPerfil(); ?>">
         <?php
-
+        $perfil = $data['perfil'];
         echo '<table class="table table-striped table-hover ">';
 
         echo '<tr>';

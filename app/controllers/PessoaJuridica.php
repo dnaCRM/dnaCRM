@@ -47,7 +47,7 @@ class PessoaJuridica extends Controller
 
             $dados = array(
 
-                'pagetitle' => $perfilarr->getNmPessoaJuridica(),
+                'pagetitle' => $perfilarr->getNmFantasia(),
                 'pagesubtitle' => 'Atualizar Perfil.',
                 'id' => $id,
                 'perfil' => $perfilarr
