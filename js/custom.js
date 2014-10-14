@@ -223,6 +223,65 @@ $(document).ready(function () {
         }
     });
 
+    $('#pessoajuridicaform').bootstrapValidator({
+        excluded: ':disabled',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            nm_fantasia: {
+                validators: {
+                    notEmpty: {
+                        message: 'Campo obrigatório'
+                    }
+                }
+            },
+            desc_razao: {
+                validators: {
+                    notEmpty: {
+                        message: 'Campo obrigatório'
+                    }
+                }
+            },
+            desc_atividade: {
+                validators: {
+                    notEmpty: {
+                        message: 'Campo obrigatório'
+                    }
+                }
+            },
+            email: {
+                validators: {
+                    notEmpty: {
+                        message: 'Campo obrigatório'
+                    },
+                    emailAddress: {
+                        message: 'E-mail inválido'
+                    }
+                }
+            },
+            cnpj: {
+                validators: {
+                    notEmpty: {
+                        message: 'Campo obrigatório'
+                    }
+                }
+            },
+            im_foto: {
+                validators: {
+                    file: {
+                        extension: 'jpg',
+                        type: 'image/jpeg',
+                        /*maxSize: 2048 * 1024,   // 2 MB*/
+                        message: 'O arquivo selecionado não é válido. Apenas aquivos .jpg são permitidos.'
+                    }
+                }
+            }
+        }
+    });
+
     $('#login').bootstrapValidator({
         message: 'This value is not valid',
         feedbackIcons: {
