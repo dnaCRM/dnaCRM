@@ -99,6 +99,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     $('#cpf').mask("999.999.999-99");
+    $('#cnpj').mask("99.999.999/9999-99");
     $('#celular').mask("(99) Z9999-9999", {translation: {'Z': {pattern: /[0-9]/, optional: true}}});  //[] Opcional
     $('#dt_nascimento').mask("99/99/9999");
     $('#fone').mask("(99) 9999-9999");
@@ -270,8 +271,7 @@ $(document).ready(function () {
                     }
                 }
             },
-            cpf: {
-                group: '.col-lg-12',
+            cnpj: {
                 validators: {
                     notEmpty: {
                         message: 'Campo obrigatório'
@@ -325,25 +325,22 @@ $(document).ready(function () {
     });
 
     $('#datetimepicker')
-        .on('dp.change dp.show', function(e) {
+        .on('dp.change dp.show', function (e) {
             // Valida a data quando o usuário inserir
             $('#pessoafisicaform').bootstrapValidator('revalidateField', 'dt_nascimento');
         });
     $('#dt_inicio_curso_picker')
-        .on('dp.change dp.show', function(e) {
+        .on('dp.change dp.show', function (e) {
             // Valida a data quando o usuário inserir
             $('#pessoafisicaform').bootstrapValidator('revalidateField', 'dt_inicio_curso_picker');
         });
     $('#dt_fim_curso_picker')
-        .on('dp.change dp.show', function(e) {
+        .on('dp.change dp.show', function (e) {
             // Valida a data quando o usuário inserir
             $('#pessoafisicaform').bootstrapValidator('revalidateField', 'dt_fim_curso_picker');
         });
 });
 
-$(document).ready(function() {
-
-});
 
 $('#perfillist').dataTable({
     "language": {

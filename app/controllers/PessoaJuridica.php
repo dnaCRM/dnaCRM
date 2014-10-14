@@ -143,6 +143,7 @@ class PessoaJuridica extends Controller
             ->setNmFantasia(Input::get('nm_fantasia'))
             ->setDescRazao(Input::get('desc_razao'))
             ->setDescAtividade(Input::get('desc_atividade'))
+            ->setEmail(Input::get('email'))
             ->setCdUsuarioCriacao(Session::get('user'))
             ->setDtUsuarioCriacao('now()')
             ->setCdUsuarioAtualiza(Session::get('user'))

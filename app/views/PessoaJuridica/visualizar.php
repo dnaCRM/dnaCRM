@@ -24,7 +24,6 @@
                href="PessoaJuridica/confirmDelete/<?php echo $data['perfil']->getCdPessoaJuridica(); ?>">
                 <span class="fa fa-trash-o"></span> Deletar</a>
 
-
         </div>
     </div>
 </div>

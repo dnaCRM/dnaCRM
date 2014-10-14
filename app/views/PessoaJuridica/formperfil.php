@@ -54,17 +54,18 @@
             </div>
 
             <div class="form-group">
-                <div class="col-lg-12 inputGroupContainer">
+                <div class="col-lg-12">
                     <label for="cnpj" class="control-label">Cnpj</label>
-
 
                     <input type="text" class="form-control" id="cnpj" name="cnpj"
                            value="<?php echo $perfil->getCnpj() == '' ? Input::get('cnpj') : $perfil->getCnpj(); ?>"
                            placeholder="00.000.000/0000-00"
                            maxlength="18">
+                </div>
+            </div>
 
             <div class="form-group">
-                <div class="col-lg-12 inputGroupContainer">
+                <div class="col-lg-12">
                     <label for="cnpj" class="control-label">Nome Fantasia</label>
 
 
@@ -75,7 +76,7 @@
 
             <div class="form-group">
 
-                <div class="col-lg-12 inputGroupContainer">
+                <div class="col-lg-12">
                     <label for="desc_razao" class="control-label">Razão Social</label>
 
 
@@ -86,7 +87,7 @@
 
             <div class="form-group">
 
-                <div class="col-lg-12 inputGroupContainer">
+                <div class="col-lg-12">
                     <label for="desc_atividade" class="control-label">Ramo de Atividade</label>
 
 
@@ -96,7 +97,7 @@
             </div>
 
             <div class="form-group">
-                <div class="col-lg-12 inputGroupContainer">
+                <div class="col-lg-12">
                     <label for="email" class="control-label">Email</label>
 
 
