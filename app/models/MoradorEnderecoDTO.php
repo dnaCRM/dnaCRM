@@ -2,14 +2,17 @@
 /**
  * Created by PhpStorm.
  * User: Gabriel
- * Date: 11/10/14
- * Time: 21:39
+ * Date: 12/10/14
+ * Time: 20:50
  */
 
-class CategoriaDTO extends DataTransferObject {
+class MoradorEnderecoDTO extends DataTransferObject{
 
-    private $cd_categoria;
-    private $desc_categoria;
+    private $nr_sequencia;
+    private $cd_pessoa_fisica;
+    private $cd_apartamento;
+    private $dt_entrada;
+    private $dt_saida;
     private $cd_usuario_criacao;
     private $dt_usuario_criacao;
     private $cd_usuario_atualiza;
@@ -19,11 +22,13 @@ class CategoriaDTO extends DataTransferObject {
     private $reflex;
 
     public function __construct(){
-
-        $this->reflex = array(
-            'cd_categoria' => 'getCategoria',
-            'desc_categoria' => 'getDescCategoria',
-            'cd_usuario_cricao' => 'getCdUsuarioCriacao',
+        $this->reflex= array(
+            'nr_sequencia' => 'getNrSequencia',
+            'cd_pessoa_fisica' => 'getCdPessoaFisica',
+            'cd_apartamento' => 'getCdApartamento',
+            'dt_entrada' => 'getDtEntrada',
+            'dt_saida' => 'getDtSaida',
+            'cd_usuario_criacao' => 'getCdUsuarioCriacao',
             'dt_usuario_criacao' => 'getDtUsuarioCriacao',
             'cd_usuario_atualiza' => 'getCdUsuarioAtualiza',
             'dt_usuario_atualiza' => 'getDtUsuarioAtualiza',
@@ -35,17 +40,24 @@ class CategoriaDTO extends DataTransferObject {
      * e os valores são os métodos 'Getter' da respectiva coluna
      * @return array
      */
-    public function getReflex()
-    {
+    public function getReflex(){
         return $this->reflex;
     }
 
     /**
      * @return mixed
      */
-    public function getCdCategoria()
+    public function getCdApartamento()
     {
-        return $this->cd_categoria;
+        return $this->cd_apartamento;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCdPessoaFisica()
+    {
+        return $this->cd_pessoa_fisica;
     }
 
     /**
@@ -67,9 +79,17 @@ class CategoriaDTO extends DataTransferObject {
     /**
      * @return mixed
      */
-    public function getDescCategoria()
+    public function getDtEntrada()
     {
-        return $this->desc_categoria;
+        return $this->dt_entrada;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDtSaida()
+    {
+        return $this->dt_saida;
     }
 
     /**
@@ -88,14 +108,33 @@ class CategoriaDTO extends DataTransferObject {
         return $this->dt_usuario_criacao;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getNrSequencia()
+    {
+        return $this->nr_sequencia;
+    }
+
+
     ################## SETTERS #######################
 
     /**
-     * @param mixed $cd_categoria
+     * @param mixed $cd_apartamento
      */
-    public function setCdCategoria($cd_categoria)
+    public function setCdApartamento($cd_apartamento)
     {
-        $this->cd_categoria = $cd_categoria;
+        $this->cd_apartamento = $cd_apartamento;
+        return $this;
+    }
+
+    /**
+     * @param mixed $cd_pessoa_fisica
+     */
+    public function setCdPessoaFisica($cd_pessoa_fisica)
+    {
+        $this->cd_pessoa_fisica = $cd_pessoa_fisica;
+        return $this;
     }
 
     /**
@@ -104,6 +143,7 @@ class CategoriaDTO extends DataTransferObject {
     public function setCdUsuarioAtualiza($cd_usuario_atualiza)
     {
         $this->cd_usuario_atualiza = $cd_usuario_atualiza;
+        return $this;
     }
 
     /**
@@ -112,14 +152,25 @@ class CategoriaDTO extends DataTransferObject {
     public function setCdUsuarioCriacao($cd_usuario_criacao)
     {
         $this->cd_usuario_criacao = $cd_usuario_criacao;
+        return $this;
     }
 
     /**
-     * @param mixed $desc_categoria
+     * @param mixed $dt_entrada
      */
-    public function setDescCategoria($desc_categoria)
+    public function setDtEntrada($dt_entrada)
     {
-        $this->desc_categoria = $desc_categoria;
+        $this->dt_entrada = $dt_entrada;
+        return $this;
+    }
+
+    /**
+     * @param mixed $dt_saida
+     */
+    public function setDtSaida($dt_saida)
+    {
+        $this->dt_saida = $dt_saida;
+        return $this;
     }
 
     /**
@@ -128,6 +179,7 @@ class CategoriaDTO extends DataTransferObject {
     public function setDtUsuarioAtualiza($dt_usuario_atualiza)
     {
         $this->dt_usuario_atualiza = $dt_usuario_atualiza;
+        return $this;
     }
 
     /**
@@ -136,14 +188,24 @@ class CategoriaDTO extends DataTransferObject {
     public function setDtUsuarioCriacao($dt_usuario_criacao)
     {
         $this->dt_usuario_criacao = $dt_usuario_criacao;
+        return $this;
     }
 
     /**
-     * @param array $reflex
+     * @param mixed $nr_sequencia
      */
-    public function setReflex($reflex)
+    public function setNrSequencia($nr_sequencia)
     {
-        $this->reflex = $reflex;
+        $this->nr_sequencia = $nr_sequencia;
+        return $this;
     }
 
-}
+
+
+
+
+
+
+
+
+} 

@@ -25,12 +25,12 @@ Class ApartamentoDTO extends DataTransferObject
             'dt_usuario_atualiza' => 'getDtUsuarioAtualiza',
         );
     }
+
     /**
      * Deve retornar um array associativo onde os índices são as colunas da tabela
      * e os valores são os métodos 'Getter' da respectiva coluna
      * @return array
      */
-
     public function getReflex()
     {
         return $this->reflex;
