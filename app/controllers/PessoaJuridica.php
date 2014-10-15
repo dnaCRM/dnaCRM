@@ -1,25 +1,26 @@
 <?php
-
 /**
  * Created by PhpStorm.
- * Usuario: Vinicius
- * Date: 29/09/14
- * Time: 10:25
+ * User: Raul
+ * Date: 13/10/14
+ * Time: 22:54
  */
-class PessoaFisica extends Controller
+
+class PessoaJuridica extends Controller
 {
 
     public function __construct()
     { //o método é herdado da classe pai 'Controller'
-        $this->setModel(new PessoaFisicaDAO());
+        $this->setModel(new PessoaJuridicaDAO());
     }
+
 
     public function start()
     { //Pega a lista completa de perfis
         $perfil_list = (array)$this->model->fullList();
 
         // Exporta imagens de perfil
-        $this->exportaImagens($perfil_list);
+        //$this->exportaImagens($perfil_list);
 
         $dados = array(
             'pagesubtitle' => '',
@@ -27,7 +28,7 @@ class PessoaFisica extends Controller
             'list' => $perfil_list
         );
 
-        $this->view = new View('PessoaFisica', 'start');
+        $this->view = new View('PessoaJuridica', 'start');
         $this->view->output($dados);
     }
 
@@ -40,53 +41,28 @@ class PessoaFisica extends Controller
      */
     public function formperfil($id = null)
     {
-        $pessoa_juridica = (new PessoaJuridicaDAO())->fullList();
-        $profissoes = (new ProfissaoDAO())->fullList();
-        $org_rg = (new CategoriaValorDAO())->get('cd_categoria = 1');
-        $inst_ensino = (new InstituicaoEnsinoDAO())->fullList();
-        $grau_ensino = (new CategoriaValorDAO())->get('cd_categoria = 8');
-
         if ($id) {
-            /** @var PessoaFisicaDTO */
+            /** @var PessoaJuridicaDTO */
             $perfilarr = $this->findById($id);
-
-            $nasc = new DateTime($perfilarr->getDtNascimento());
-            $perfilarr->setDtNascimento($nasc->format('d/m/Y'));
-
-            $dt_inicio_curso = new DateTime($perfilarr->getDtInicioCurso());
-            $perfilarr->setDtInicioCurso($dt_inicio_curso->format('d/m/Y'));
-
-            $dt_fim_curso = new DateTime($perfilarr->getDtFimCurso());
-            $perfilarr->setDtFimCurso($dt_fim_curso->format('d/m/Y'));
 
             $dados = array(
 
-                'pagetitle' => $perfilarr->getNmPessoaFisica(),
+                'pagetitle' => $perfilarr->getNmFantasia(),
                 'pagesubtitle' => 'Atualizar Perfil.',
-                'pessoa_juridica' => $pessoa_juridica,
-                'profissoes' => $profissoes,
-                'org_rg' => $org_rg,
-                'inst_ensino' => $inst_ensino,
-                'grau_ensino' => $grau_ensino,
                 'id' => $id,
                 'perfil' => $perfilarr
             );
         } else {
-            $perfil = new PessoaFisicaDTO();
+            $perfil = new PessoaJuridicaDTO();
             $dados = array(
                 'pagetitle' => 'Cadastro de Perfil',
-                'pagesubtitle' => 'Pessoa Física.',
-                'pessoa_juridica' => $pessoa_juridica,
-                'profissoes' => $profissoes,
-                'org_rg' => $org_rg,
-                'inst_ensino' => $inst_ensino,
-                'grau_ensino' => $grau_ensino,
+                'pagesubtitle' => 'Pessoa Juridica.',
                 'id' => null,
                 'perfil' => $perfil
             );
         }
 
-        $this->view = new View('PessoaFisica', 'formperfil');
+        $this->view = new View('PessoaJuridica', 'formperfil');
         $this->view->output($dados);
     }
 
@@ -104,14 +80,14 @@ class PessoaFisica extends Controller
 
         $dados = array(
             //o campo 'obs' vai ser o subtítulo
-            'pagesubtitle' => $perfilarr->getEmail(),
+            'pagesubtitle' => $perfilarr->getDescRazao(),
             //o campo 'nome' vai ser o título da página
-            'pagetitle' => $perfilarr->getNmPessoaFisica(),
+            'pagetitle' => $perfilarr->getNmFantasia(),
             //todos os atributos do perfil
             'perfil' => $perfilarr
         );
 
-        $this->view = new View('PessoaFisica', 'visualizar');
+        $this->view = new View('PessoaJuridica', 'visualizar');
         $this->view->output($dados);
     }
 
@@ -128,13 +104,13 @@ class PessoaFisica extends Controller
 
         $dados = array(
             //o campo 'obs' vai ser o subtítulo
-            'pagesubtitle' => $perfilarr->getEmail(),
+            'pagesubtitle' => $perfilarr->getDescRazao(),
             //o campo 'nome' vai ser o título da página
-            'pagetitle' => $perfilarr->getNmPessoaFisica(),
+            'pagetitle' => $perfilarr->getNmFantasia(),
             'perfil' => $perfilarr
         );
 
-        $this->view = new View('PessoaFisica', 'confirmDelete');
+        $this->view = new View('PessoaJuridica', 'confirmDelete');
         $this->view->output($dados);
     }
 
@@ -145,11 +121,11 @@ class PessoaFisica extends Controller
         if (Input::exists()) {
             if (Token::check(Input::get('token'))) {
 
-                $pessoaFisica = $this->setDados();
+                $pessoaJuridica = $this->setDados();
 
                 try {
-                    $this->model->gravar($pessoaFisica);
-                    Session::flash('sucesso_salvar_pf', 'Cadastro salvo!', 'success');
+                    $this->model->gravar($pessoaJuridica);
+                    Session::flash('sucesso_salvar_pj', 'Cadastro salvo!', 'success');
                 } catch (Exception $e) {
                     CodeFail((int)$e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
                 }
@@ -160,34 +136,23 @@ class PessoaFisica extends Controller
 
     private function setDados()
     {
-        $dto = new PessoaFisicaDTO();
+        $dto = new PessoaJuridicaDTO();
 
-        $dto->setCdPessoaFisica(Input::get('cd_pessoa_fisica'))
-        ->setNmPessoaFisica(Input::get('nm_pessoa_fisica'))
-        ->setCdPessoaJuridica(Input::get('cd_pessoa_juridica'))
-        ->setCdProfissao(Input::get('cd_profissao'))
-        ->setCpf(Input::get('cpf'))
-        ->setRg(Input::get('rg'))
-        ->setCdCatgOrgRg(1)
-        ->setCdVlCatgOrgRg(Input::get('org_rg'))
-        ->setEmail(Input::get('email'))
-        ->setDtNascimento(Input::get('dt_nascimento'))
-        ->setIeSexo(Input::get('ie_sexo'))
-        ->setIeEstuda(Input::get('ie_estuda'))
-        ->setCdInstituicao(Input::get('cd_instituicao'))
-        ->setDtInicioCurso(Input::get('dt_inicio_curso'))
-        ->setDtFimCurso(Input::get('dt_fim_curso'))
-        ->setCdCatgGrauEnsino(8)
-        ->setCdVlCatgGrauEnsino(Input::get('cd_grau_ensino'))
-        ->setCdUsuarioCriacao(Session::get('user'))
-        ->setDtUsuarioCriacao('now()')
-        ->setCdUsuarioAtualiza(Session::get('user'))
-        ->setDtUsuarioAtualiza('now()');
+        $dto->setCdPessoaJuridica(Input::get('cd_pessoa_juridica'))
+            ->setCnpj(Input::get('cnpj'))
+            ->setNmFantasia(Input::get('nm_fantasia'))
+            ->setDescRazao(Input::get('desc_razao'))
+            ->setDescAtividade(Input::get('desc_atividade'))
+            ->setEmail(Input::get('email'))
+            ->setCdUsuarioCriacao(Session::get('user'))
+            ->setDtUsuarioCriacao('now()')
+            ->setCdUsuarioAtualiza(Session::get('user'))
+            ->setDtUsuarioAtualiza('now()');
 
         return $dto;
     }
 
-    public function removerPessoaFisica(PessoaFisicaDTO $dto) {
+    public function removerPessoaJuridica(PessoaJuridicaDTO $dto) {
         if (Input::exists()) {
 
             if (Token::check(Input::get('token'))) {
@@ -198,6 +163,7 @@ class PessoaFisica extends Controller
             }
         }
     }
+
 
     protected function findById($id)
     {
@@ -220,17 +186,17 @@ class PessoaFisica extends Controller
         if (is_array($arr_perfil)) {
             foreach ($arr_perfil as $perfil) {
                 if ($perfil->getImPerfil()
-                    && !file_exists($this->model->getImgFolder() . $perfil->getCdPessoaFisica() . '.jpg')
+                    && !file_exists($this->model->getImgFolder() . $perfil->getCdPessoaJuridica() . '.jpg')
                 ) {
-                    $this->model->exportaFoto($perfil->getCdPessoaFisica());
+                    $this->model->exportaFoto($perfil->getCdPessoaJuridica());
                 }
             }
         } else {
             if ($arr_perfil->getImPerfil()
-                && !file_exists($this->model->getImgFolder() . $arr_perfil->getCdPessoaFisica() . '.jpg')
+                && !file_exists($this->model->getImgFolder() . $arr_perfil->getCdPessoaJuridica() . '.jpg')
             ) {
-                $this->model->exportaFoto($arr_perfil->getCdPessoaFisica());
+                $this->model->exportaFoto($arr_perfil->getCdPessoaJuridica());
             }
         }
     }
-}
+} 

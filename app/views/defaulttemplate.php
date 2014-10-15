@@ -51,8 +51,9 @@
                             class="caret"></span></a>
                     <ul class="dropdown-menu" aria-labelledby="themes">
                         <li><a href="PessoaFisica">Pessoa Física</a></li>
+                        <li><a href="PessoaJuridica">Pessoa Juridica</a></li>
                         <li class="divider"></li>
-                        <li><a href="PessoaFisica">Item</a></li>
+                        <li><a href="#">Item</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -60,7 +61,8 @@
                             class="caret"></span></a>
                     <ul class="dropdown-menu" aria-labelledby="themes">
                         <li><a href="PessoaFisica/formperfil">Nova Pessoa Fisica</a></li>
-                        <li><a href="PessoaFisica">Item</a></li>
+                        <li><a href="PessoaJuridica/formperfil">Nova Pessoa Juridica</a></li>
+                        <li><a href="#">Item</a></li>
                     </ul>
                 </li>
                 <li>
@@ -73,11 +75,10 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Download <span
                             class="caret"></span></a>
                     <ul class="dropdown-menu" aria-labelledby="download">
-                        <li><a href="./bootstrap.min.css">bootstrap.min.css</a></li>
-                        <li><a href="./bootstrap.css">bootstrap.css</a></li>
+                        <li><a href="#">Guia</a></li>
+                        <li><a href="#">Manual</a></li>
                         <li class="divider"></li>
-                        <li><a href="./variables.less">variables.less</a></li>
-                        <li><a href="./bootswatch.less">bootswatch.less</a></li>
+                        <li><a href="#">Logomarca</a></li>
                     </ul>
                 </li>
             </ul>
@@ -134,7 +135,7 @@
             </a>
             <ul class="treeview-menu" style="display: none;">
                 <li><a href="PessoaFisica/"><i class="fa fa-angle-double-right"></i>Pessoa Física</a></li>
-                <li><a href="PerfilPJ/"><i class="fa fa-angle-double-right"></i> Pessoa Jurídica</a></li>
+                <li><a href="PessoaJuridica/"><i class="fa fa-angle-double-right"></i> Pessoa Jurídica</a></li>
             </ul>
         </li>
         <li class="treeview">
@@ -145,7 +146,7 @@
             </a>
             <ul class="treeview-menu" style="display: none;">
                 <li><a href="PessoaFisica/formperfil"><i class="fa fa-angle-double-right"></i> Pessoa Física</a></li>
-                <li><a href="PerfilPJ/formpj"><i class="fa fa-angle-double-right"></i> Pessoa Jurídica</a></li>
+                <li><a href="PessoaJuridica/formperfil"><i class="fa fa-angle-double-right"></i> Pessoa Jurídica</a></li>
                 <li><a href="Setor/formsetor"><i class="fa fa-angle-double-right"></i> Setores</a></li>
                 <li><a href="Condominio/formcondo"><i class="fa fa-angle-double-right"></i> Condomínio</a></li>
                 <li><a href="Imovel/formimovel"><i class="fa fa-angle-double-right"></i> Imóveis</a></li>

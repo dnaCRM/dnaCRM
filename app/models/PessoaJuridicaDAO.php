@@ -42,6 +42,11 @@ class PessoaJuridicaDAO extends DataAccessObject
         }
     }
 
+    public function getImgFolder()
+    {
+        return $this->imgFolder;
+    }
+
     /**
      * @return mixed
      */
