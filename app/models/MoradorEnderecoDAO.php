@@ -9,6 +9,8 @@
 class MoradorEnderecoDAO extends DataAccessObject {
 
      public function __construct(){
+
+         parent::__construct();
          $this->tabela = 'tb_morador_endereco';
          $this->primaryKey = 'nr_sequencia';
          $this->dataTransfer = 'MoradorEnderecoDTO';

@@ -144,7 +144,6 @@ class ItensOrcamentoDTO extends DataTransferObject {
         return $this->valor_unit;
     }
 
-
     ################## SETTERS #######################
 
     /**
@@ -254,8 +253,5 @@ class ItensOrcamentoDTO extends DataTransferObject {
         $this->valor_unit = $valor_unit;
         return $this;
     }
-
-
-
 
 } 

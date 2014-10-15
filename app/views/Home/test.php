@@ -2,18 +2,12 @@
 
 $obj = new MoradorEnderecoDTO();
 
-$obj ->setCdPessoaFisica(2)
-    ->setCdApartamento(1)
-    ->setDtEntrada('now()')
-    ->setCdUsuarioCriacao(1)
-    ->setDtUsuarioCriacao('now()')
-    ->setCdUsuarioAtualiza(1)
-    ->setDtUsuarioAtualiza('now()');
+$obj ->setNrSequencia(2);
 
 
 $dao = new MoradorEnderecoDAO();
 
-$dao->gravar($obj);
+$dao->delete($obj);
 
 /** @var CategoriaValorDTO $obj */
 

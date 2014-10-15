@@ -9,6 +9,8 @@
 class ItensOrcamentoDAO extends DataAccessObject{
 
     public function __construct(){
+
+        parent::__construct();
         $this->tabela = 'tb_itens_orcamento';
         $this->primaryKey = 'nr_sequencia';
         $this->dataTransfer = 'ItensOrcamentoDTO';

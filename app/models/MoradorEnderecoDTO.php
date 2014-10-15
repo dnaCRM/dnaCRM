@@ -109,6 +109,7 @@ class MoradorEnderecoDTO extends DataTransferObject{
     public function setCdApartamento($cd_apartamento)
     {
         $this->cd_apartamento = $cd_apartamento;
+        return $this;
     }
 
     /**
@@ -117,6 +118,7 @@ class MoradorEnderecoDTO extends DataTransferObject{
     public function setCdPessoaFisica($cd_pessoa_fisica)
     {
         $this->cd_pessoa_fisica = $cd_pessoa_fisica;
+        return $this;
     }
 
     /**
@@ -125,6 +127,7 @@ class MoradorEnderecoDTO extends DataTransferObject{
     public function setCdUsuarioAtualiza($cd_usuario_atualiza)
     {
         $this->cd_usuario_atualiza = $cd_usuario_atualiza;
+        return $this;
     }
 
     /**
@@ -133,6 +136,7 @@ class MoradorEnderecoDTO extends DataTransferObject{
     public function setCdUsuarioCriacao($cd_usuario_criacao)
     {
         $this->cd_usuario_criacao = $cd_usuario_criacao;
+        return $this;
     }
 
     /**
@@ -141,6 +145,7 @@ class MoradorEnderecoDTO extends DataTransferObject{
     public function setDtEntrada($dt_entrada)
     {
         $this->dt_entrada = $dt_entrada;
+        return $this;
     }
 
     /**
@@ -149,6 +154,7 @@ class MoradorEnderecoDTO extends DataTransferObject{
     public function setDtSaida($dt_saida)
     {
         $this->dt_saida = $dt_saida;
+        return $this;
     }
 
     /**
@@ -157,6 +163,7 @@ class MoradorEnderecoDTO extends DataTransferObject{
     public function setDtUsuarioAtualiza($dt_usuario_atualiza)
     {
         $this->dt_usuario_atualiza = $dt_usuario_atualiza;
+        return $this;
     }
 
     /**
@@ -165,6 +172,7 @@ class MoradorEnderecoDTO extends DataTransferObject{
     public function setDtUsuarioCriacao($dt_usuario_criacao)
     {
         $this->dt_usuario_criacao = $dt_usuario_criacao;
+        return $this;
     }
 
     /**
@@ -173,6 +181,7 @@ class MoradorEnderecoDTO extends DataTransferObject{
     public function setNrSequencia($nr_sequencia)
     {
         $this->nr_sequencia = $nr_sequencia;
+        return $this;
     }
 
 
