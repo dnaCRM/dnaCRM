@@ -6,7 +6,7 @@
  * Time: 00:08
  */
 
-class ItensOrcamentoDTO {
+class ItensOrcamentoDTO extends DataTransferObject {
 
     private $nr_sequencia;
     private $cd_orcamento;
@@ -28,16 +28,16 @@ class ItensOrcamentoDTO {
         $this->reflex = array(
             'nr_sequencia' => 'getNrSequencia',
             'cd_orcamento' => 'getCdOrcamento',
-            'cd_pessoa_juridica' => 'getCdPessoaFisica',
+            'cd_pessoa_juridica' => 'getCdPessoaJuridica',
             'desc_item' => 'getDescItem',
             'qt_item' => 'getQtItem',
-            'valor_until' => 'getValorUnit',
+            'valor_unit' => 'getValorUnit',
             'valor_total' => 'getValorTotal',
             'ie_aprovado' => 'getIeAprovado',
             'cd_usuario_criacao' => 'getCdUsuarioCriacao',
             'dt_usuario_criacao' => 'getDtUsuarioCriacao',
-            'cd_usuario_atualiza' => 'getCdUsuarioAtualzia',
-            'dt_usuario_atualzia' => 'getDtUsuarioAtualiza',
+            'cd_usuario_atualiza' => 'getCdUsuarioAtualiza',
+            'dt_usuario_atualiza' => 'getDtUsuarioAtualiza',
         );
     }
 

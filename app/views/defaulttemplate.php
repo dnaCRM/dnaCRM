@@ -83,9 +83,6 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="http://builtwithbootstrap.com/" target="_blank">Built</a></li>
-                <li><a href="https://wrapbootstrap.com/?ref=bsw" target="_blank">WrapBS</a></li>
-                <li>
                 <li>
                     <a><i class="glyphicon glyphicon-user"></i>
                         <span><?php echo(Session::exists('usuario') ? Session::get('usuario') : 'Usuário'); ?></span></a>

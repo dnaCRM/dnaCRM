@@ -1,30 +1,22 @@
 <?php
 
-$obj = new OcorrenciaPessoaFisicaEnvolvidaDTO();
-$obj
+$obj = new MoradorEnderecoDTO();
 
-    ->setCdOcorrencia(2)
-    ->setCdPessoaFisica(2)
-    ->setCdOcorrencia(1)
-    ->setCdPessoaFisica(3)
+$obj ->setCdPessoaFisica(1)
+    ->setCdApartamento(1)
+    ->setDtEntrada('now()')
     ->setCdUsuarioCriacao(1)
     ->setDtUsuarioCriacao('now()')
-    ->setCdUsuarioAtualiza(2)
+    ->setCdUsuarioAtualiza(1)
     ->setDtUsuarioAtualiza('now()');
 
-$objDao = new OcorrenciaPessoaFisicaEnvolvidaDAO();
 
-$obj = $objDao->getById(2);
-//$obj->setDtUsuarioAtualiza('07/10/2014');
+$dao = new MoradorEnderecoDAO();
 
-//$obj = $objDao->gravar($obj);
-$obj = $objDao->delete($obj);
-$obj = $objDao->fullList();
+$dao->gravar($obj);
 
-//$obj = $objDao->fullList();
-//$obj = $objDao->getBy2Ids(1,3);
+/** @var CategoriaValorDTO $obj */
 
-$objDao->gravar($obj);
-//$obj = $objDao->delete($obj);
-//$obj = $objDao->fullList();
-var_dump($obj);
+//$obj = $dao->getBy2Ids(56,3);
+
+//var_dump($dao->getById(2));

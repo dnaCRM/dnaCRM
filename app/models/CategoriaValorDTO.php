@@ -1,39 +1,47 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Gabriel
- * Date: 12/10/14
- * Time: 21:42
+ * User: Vinicius
+ * Date: 13/10/14
+ * Time: 22:34
  */
 
-class CategoriaValorDTO {
+class CategoriaValorDTO extends DataTransferObject
+{
+
     private $cd_vl_categoria;
     private $cd_categoria;
     private $desc_vl_catg;
     private $cd_usuario_criacao;
     private $dt_usuario_criacao;
-    private $cd_usuario_atualizacao;
-    private $dt_usuario_atualizacao;
+    private $cd_usuario_atualiza;
+    private $dt_usuario_atualiza;
+
 
     /** @var  array */
     private $reflex;
 
-    public function __construct(){
+    public function __construct()
+    {
+
         $this->reflex = array(
             'cd_vl_categoria' => 'getCdVlCategoria',
             'cd_categoria' => 'getCdCategoria',
             'desc_vl_catg' => 'getDescVlCatg',
             'cd_usuario_criacao' => 'getCdUsuarioCriacao',
             'dt_usuario_criacao' => 'getDtUsuarioCriacao',
-            'cd_usuario_atualizacao' => 'getCdUsuarioAtualizacao',
-            'dt_usuario_atualizacao' => 'getDtUsuarioAtualizacao',
+            'cd_usuario_atualiza' => 'getCdUsuarioAtualiza',
+            'dt_usuario_atualiza' => 'getDtUsuarioAtualiza',
         );
     }
 
     /**
-     * @return mixed
+     * Deve retornar um array associativo onde os índices são as colunas da tabela
+     * e os valores são os métodos 'Getter' da respectiva coluna
+     * @return array
      */
-    public function getReflex(){
+    public function getReflex()
+    {
         return $this->reflex;
     }
 
@@ -48,9 +56,10 @@ class CategoriaValorDTO {
     /**
      * @return mixed
      */
-    public function getCdUsuarioAtualizacao()
+
+    public function getCdUsuarioAtualiza()
     {
-        return $this->cd_usuario_atualizacao;
+        return $this->cd_usuario_atualiza;
     }
 
     /**
@@ -80,9 +89,9 @@ class CategoriaValorDTO {
     /**
      * @return mixed
      */
-    public function getDtUsuarioAtualizacao()
+    public function getDtUsuarioAtualiza()
     {
-        return $this->dt_usuario_atualizacao;
+        return $this->dt_usuario_atualiza;
     }
 
     /**
@@ -101,14 +110,16 @@ class CategoriaValorDTO {
     public function setCdCategoria($cd_categoria)
     {
         $this->cd_categoria = $cd_categoria;
+        return $this;
     }
 
     /**
      * @param mixed $cd_usuario_atualizacao
      */
-    public function setCdUsuarioAtualizacao($cd_usuario_atualizacao)
+    public function setCdUsuarioAtualiza($cd_usuario_atualiza)
     {
-        $this->cd_usuario_atualizacao = $cd_usuario_atualizacao;
+        $this->cd_usuario_atualiza = $cd_usuario_atualiza;
+        return $this;
     }
 
     /**
@@ -117,6 +128,7 @@ class CategoriaValorDTO {
     public function setCdUsuarioCriacao($cd_usuario_criacao)
     {
         $this->cd_usuario_criacao = $cd_usuario_criacao;
+        return $this;
     }
 
     /**
@@ -125,6 +137,7 @@ class CategoriaValorDTO {
     public function setCdVlCategoria($cd_vl_categoria)
     {
         $this->cd_vl_categoria = $cd_vl_categoria;
+        return $this;
     }
 
     /**
@@ -138,9 +151,10 @@ class CategoriaValorDTO {
     /**
      * @param mixed $dt_usuario_atualizacao
      */
-    public function setDtUsuarioAtualizacao($dt_usuario_atualizacao)
+    public function setDtUsuarioAtualizacao($dt_usuario_atualiza)
     {
-        $this->dt_usuario_atualizacao = $dt_usuario_atualizacao;
+        $this->dt_usuario_atualiza = $dt_usuario_atualiza;
+        return $this;
     }
 
     /**
@@ -149,5 +163,7 @@ class CategoriaValorDTO {
     public function setDtUsuarioCriacao($dt_usuario_criacao)
     {
         $this->dt_usuario_criacao = $dt_usuario_criacao;
+        return $this;
     }
+
 }

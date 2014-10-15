@@ -14,7 +14,7 @@ class CondominioDAO extends DataAccessObject{
         parent::__construct();
         $this->tabela = 'tb_condominio';
         $this->primaryKey = 'cd_condominio';
-        $this->dataTransfer = 'CondominioDAO';
+        $this->dataTransfer = 'CondominioDTO';
         $this->colunaImagem = 'im_perfil';
         $this->imgFolder = IMG_UPLOADS_FOLDER . "{$this->tabela}/";
         $this->fotoDefault = 'img/icon-user.jpg';

@@ -25,7 +25,7 @@ class OrcamentoDTO extends DataTransferObject {
 
         $this->reflex = array(
             'cd_orcamento' => 'getCdOrcamento',
-            'cd_ordem_servico' => 'getOrdemServico',
+            'cd_ordem_servico' => 'getCdOrdemServico',
             'ds_orcamento' => 'getDsOrcamento',
             'dt_orcamento' => 'getDtOrcamento',
             'dt_fim' => 'getDtFim',

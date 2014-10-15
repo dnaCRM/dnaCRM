@@ -13,7 +13,7 @@ Class ApartamentoDTO extends DataTransferObject
     /** @var  array */
     private $reflex;
 
-    public function _construct()
+    public function __construct()
     {
         $this->reflex = array(
             'cd_apartamento' => 'getCdApartamento',
