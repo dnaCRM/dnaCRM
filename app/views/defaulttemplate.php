@@ -55,6 +55,7 @@
                         <li class="divider"></li>
                         <li><a href="#">Item</a></li>
                         <li><a href="Apartamento">Apartamento</a></li>
+                        <li><a href="OrdemServico">Ordens de Serviço</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -65,13 +66,14 @@
                         <li><a href="PessoaJuridica/formperfil">Nova Pessoa Juridica</a></li>
                         <li><a href="#">Item</a></li>
                         <li><a href="Apartamento/formapartamento">Novo Apartamento</a></li>
+                        <li><a href="OrdemServico/formOrdemServico">Nova Ordem de Serviço</a></li>
                     </ul>
                 </li>
                 <li>
                     <a href="Home/editor">Help</a>
                 </li>
                 <li>
-                    <a href="http://news.bootswatch.com">Blog</a>
+                    <a href="Blog">Blog</a>
                 </li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Download <span
@@ -212,12 +214,12 @@
     <footer>
 
         <hr>
-        <p>Desenvolvedores por:<br>
+        <p>Desenvolvedores:<br>
             <a href="https://github.com/inshideru" rel="nofollow">Vinicius Sorrentino</a>. Contato <a
                 href="mailto:inshideru@gmail.com">inshideru@gmail.com</a>,
-            <a href="https://github.com/inshideru" rel="nofollow">Gabriel Borges</a>. Contato <a
+            <a href="https://github.com/gabrielborc" rel="nofollow">Gabriel Borges</a>. Contato <a
                 href="mailto:gabrielborc@gmail.com">gabrielborc@gmail.com</a>,
-            <a href="https://github.com/inshideru" rel="nofollow">Raul Martinez</a>. Contato <a
+            <a href="https://github.com/demartinezraul" rel="nofollow">Raul Martinez</a>. Contato <a
                 href="mailto:demartinez.raul@gmail.com">demartinez.raul@gmail.com</a>.</p>
 
         <p><span class="fa fa-github"></span> <a href="https://github.com/dnaCRM">GitHub </a>.<br>

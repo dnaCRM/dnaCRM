@@ -402,3 +402,22 @@ $('#perfillist').dataTable({
     },
     responsive: true
 });
+
+$(document).ready(function(){
+    $('#pessoafisicaform').submit(function(){
+        var dados = $( this ).serialize();
+
+        $.ajax({
+            type: "POST",
+            url: "app/ajax_controllers/processa.php",
+            data: dados,
+            success: function( data )
+            {
+                $('#ajax_response').html(data);
+                console.log( data + 'Alguma coisa aconteceu' );
+            }
+        });
+
+        return false;
+    });
+});

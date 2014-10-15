@@ -1,11 +1,3 @@
-<!--
-/**
- * Created by PhpStorm.
- * User: Raul
- * Date: 15/10/14
- * Time: 01:36
- */
- -->
 <div class="row">
     <div class="col-sm-6">
         <h1><?php echo $data['pagetitle']; ?></h1>

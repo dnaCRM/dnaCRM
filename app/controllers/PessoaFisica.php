@@ -192,8 +192,7 @@ class PessoaFisica extends Controller
 
             if (Token::check(Input::get('token'))) {
 
-                //$this->model->delete($dto);
-                echo 'Deletou perfil';
+                $this->model->delete($dto);
 
             }
         }
