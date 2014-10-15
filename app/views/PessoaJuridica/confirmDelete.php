@@ -72,7 +72,7 @@
                     ?>
                     <div class="col-md-8">
                         <h3>Pessoa Juridica Deletado!</h3>
-                        <a href="PessoaFisica"
+                        <a href="PessoaJuridica"
                            class="btn btn-success" role="button">
                             <span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar</a>
                     </div>

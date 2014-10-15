@@ -47,7 +47,7 @@
             foreach ($data['list'] as $apartamento) {
 
                 echo '<tr>';
-                echo '<td><a href=Apartamento/visualizar/' . $apartamento->getCdSetor() . '">'
+                echo '<td><a href=Apartamento/visualizar/' . $apartamento->getCdSetor() . '>'
                     . $apartamento->getCdApartamento() . '</a></td>';
                     // RESOLVER ESSE PROBLEMA DE ID PARA NOME DE SETOR;
                 echo '<td>' . $apartamento->getDescApartamento() . '</td>';

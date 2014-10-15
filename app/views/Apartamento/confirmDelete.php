@@ -44,10 +44,8 @@
                     <div class="col-md-8">
                         <h1><span class="glyphicon glyphicon-arrow-right"></span> Atenção!</h1>
 
-                        <p>Deseja deletar o apartamento <strong><?php echo $apartamento->getDescApartamento(); ?> </strong>?</p>
-                        <!-- TENHO QUE RESOLVER PARA MOSTRAR O NOME EM VEZ DE CHAVE PRIMARIA ! -->
-
-
+                        <p>Deseja deletar o apartamento <strong><?php echo $apartamento->getCdSetor(); ?>
+                            </strong>?</p> <!-- TENHO QUE RESOLVER PARA MOSTRAR O NOME EM VEZ DE CHAVE PRIMARIA !
                         <!-- form -->
                         <form action="" method="post">
 
@@ -56,10 +54,9 @@
                             <div class="form-group ">
                                 <div class="col-lg-10 col-lg-offset-2">
                                     <a href="Apartamento/visualizar/<?php echo $apartamento->getCdApartamento(); ?>"
-                                    <!--TENHO QUE RESOLVER PARA MOSTRAR O NOME -->
-
-
                                        class="btn btn-success" role="button">
+                                        <!--TENHO QUE RESOLVER COMO COLOCAR O NOME EM VEZ DE ID -->
+
                                         <span class="glyphicon glyphicon-circle-arrow-left"></span> Cancelar</a>
                                     <button type="submit" name="deletar" class="btn btn-danger"><span
                                             class="glyphicon glyphicon-trash"></span> Deletar
@@ -76,7 +73,7 @@
                     ?>
                     <div class="col-md-8">
                         <h3>Apartamento Deletado!</h3>
-                        <a href="PessoaFisica"
+                        <a href="Apartamento"
                            class="btn btn-success" role="button">
                             <span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar</a>
                     </div>
