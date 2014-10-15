@@ -10,7 +10,7 @@ class MoradorEnderecoDAO extends DataAccessObject {
 
      public function __construct(){
          $this->tabela = 'tb_morador_endereco';
-         $this->primaryKey = 'cd_morador_endereco';
+         $this->primaryKey = 'nr_sequencia';
          $this->dataTransfer = 'MoradorEnderecoDTO';
      }
 
@@ -20,7 +20,7 @@ class MoradorEnderecoDAO extends DataAccessObject {
                 throw new Exception('Impossível Inserir Morador Endereço!');
             }
         }else{
-            if(!$dto->update($dto)){
+            if(!$this->update($dto)){
                 throw new Exception('Impossível Atualizar Morador Endereço!');
             }
         }

@@ -1,33 +1,33 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Gabriel
- * Date: 12/10/14
- * Time: 20:50
+ * User: Vinicius
+ * Date: 13/10/14
+ * Time: 22:34
  */
 
-class MoradorEnderecoDTO extends DataTransferObject{
+class CategoriaValorDTO extends DataTransferObject
+{
 
-    private $nr_sequencia;
-    private $cd_pessoa_fisica;
-    private $cd_apartamento;
-    private $dt_entrada;
-    private $dt_saida;
+    private $cd_vl_categoria;
+    private $cd_categoria;
+    private $desc_vl_catg;
     private $cd_usuario_criacao;
     private $dt_usuario_criacao;
     private $cd_usuario_atualiza;
     private $dt_usuario_atualiza;
 
+
     /** @var  array */
     private $reflex;
 
-    public function __construct(){
+    public function __construct()
+    {
+
         $this->reflex = array(
-            'nr_sequencia' => 'getNrSequencia',
-            'cd_pessoa_fisica' => 'getCdPessoaFisica',
-            'cd_apartamento' => 'getCdApartamento',
-            'dt_entrada' => 'getDtEntrada',
-            'dt_saida' => 'getDtSaida',
+            'cd_vl_categoria' => 'getCdVlCategoria',
+            'cd_categoria' => 'getCdCategoria',
+            'desc_vl_catg' => 'getDescVlCatg',
             'cd_usuario_criacao' => 'getCdUsuarioCriacao',
             'dt_usuario_criacao' => 'getDtUsuarioCriacao',
             'cd_usuario_atualiza' => 'getCdUsuarioAtualiza',
@@ -40,29 +40,23 @@ class MoradorEnderecoDTO extends DataTransferObject{
      * e os valores são os métodos 'Getter' da respectiva coluna
      * @return array
      */
-    public function getReflex(){
+    public function getReflex()
+    {
         return $this->reflex;
     }
 
     /**
      * @return mixed
      */
-    public function getCdApartamento()
+    public function getCdCategoria()
     {
-        return $this->cd_apartamento;
+        return $this->cd_categoria;
     }
 
     /**
      * @return mixed
      */
-    public function getCdPessoaFisica()
-    {
-        return $this->cd_pessoa_fisica;
-    }
 
-    /**
-     * @return mixed
-     */
     public function getCdUsuarioAtualiza()
     {
         return $this->cd_usuario_atualiza;
@@ -79,17 +73,17 @@ class MoradorEnderecoDTO extends DataTransferObject{
     /**
      * @return mixed
      */
-    public function getDtEntrada()
+    public function getCdVlCategoria()
     {
-        return $this->dt_entrada;
+        return $this->cd_vl_categoria;
     }
 
     /**
      * @return mixed
      */
-    public function getDtSaida()
+    public function getDescVlCatg()
     {
-        return $this->dt_saida;
+        return $this->desc_vl_catg;
     }
 
     /**
@@ -100,86 +94,6 @@ class MoradorEnderecoDTO extends DataTransferObject{
         return $this->dt_usuario_atualiza;
     }
 
-
-    ################## SETTERS #######################
-
-    /**
-     * @param mixed $cd_apartamento
-     */
-    public function setCdApartamento($cd_apartamento)
-    {
-        $this->cd_apartamento = $cd_apartamento;
-    }
-
-    /**
-     * @param mixed $cd_pessoa_fisica
-     */
-    public function setCdPessoaFisica($cd_pessoa_fisica)
-    {
-        $this->cd_pessoa_fisica = $cd_pessoa_fisica;
-    }
-
-    /**
-     * @param mixed $cd_usuario_atualiza
-     */
-    public function setCdUsuarioAtualiza($cd_usuario_atualiza)
-    {
-        $this->cd_usuario_atualiza = $cd_usuario_atualiza;
-    }
-
-    /**
-     * @param mixed $cd_usuario_criacao
-     */
-    public function setCdUsuarioCriacao($cd_usuario_criacao)
-    {
-        $this->cd_usuario_criacao = $cd_usuario_criacao;
-    }
-
-    /**
-     * @param mixed $dt_entrada
-     */
-    public function setDtEntrada($dt_entrada)
-    {
-        $this->dt_entrada = $dt_entrada;
-    }
-
-    /**
-     * @param mixed $dt_saida
-     */
-    public function setDtSaida($dt_saida)
-    {
-        $this->dt_saida = $dt_saida;
-    }
-
-    /**
-     * @param mixed $dt_usuario_atualiza
-     */
-    public function setDtUsuarioAtualiza($dt_usuario_atualiza)
-    {
-        $this->dt_usuario_atualiza = $dt_usuario_atualiza;
-    }
-
-    /**
-     * @param mixed $dt_usuario_criacao
-     */
-    public function setDtUsuarioCriacao($dt_usuario_criacao)
-    {
-        $this->dt_usuario_criacao = $dt_usuario_criacao;
-    }
-
-    /**
-     * @param mixed $nr_sequencia
-     */
-    public function setNrSequencia($nr_sequencia)
-    {
-        $this->nr_sequencia = $nr_sequencia;
-    }
-
-
-
-
-
-
     /**
      * @return mixed
      */
@@ -188,21 +102,68 @@ class MoradorEnderecoDTO extends DataTransferObject{
         return $this->dt_usuario_criacao;
     }
 
+    ################## SETTERS #######################
+
     /**
-     * @return mixed
+     * @param mixed $cd_categoria
      */
-    public function getNrSequencia()
+    public function setCdCategoria($cd_categoria)
     {
-        return $this->nr_sequencia;
+        $this->cd_categoria = $cd_categoria;
+        return $this;
     }
 
+    /**
+     * @param mixed $cd_usuario_atualizacao
+     */
+    public function setCdUsuarioAtualiza($cd_usuario_atualiza)
+    {
+        $this->cd_usuario_atualiza = $cd_usuario_atualiza;
+        return $this;
+    }
 
+    /**
+     * @param mixed $cd_usuario_criacao
+     */
+    public function setCdUsuarioCriacao($cd_usuario_criacao)
+    {
+        $this->cd_usuario_criacao = $cd_usuario_criacao;
+        return $this;
+    }
 
+    /**
+     * @param mixed $cd_vl_categoria
+     */
+    public function setCdVlCategoria($cd_vl_categoria)
+    {
+        $this->cd_vl_categoria = $cd_vl_categoria;
+        return $this;
+    }
 
+    /**
+     * @param mixed $desc_vl_catg
+     */
+    public function setDescVlCatg($desc_vl_catg)
+    {
+        $this->desc_vl_catg = $desc_vl_catg;
+    }
 
+    /**
+     * @param mixed $dt_usuario_atualizacao
+     */
+    public function setDtUsuarioAtualiza($dt_usuario_atualiza)
+    {
+        $this->dt_usuario_atualiza = $dt_usuario_atualiza;
+        return $this;
+    }
 
+    /**
+     * @param mixed $dt_usuario_criacao
+     */
+    public function setDtUsuarioCriacao($dt_usuario_criacao)
+    {
+        $this->dt_usuario_criacao = $dt_usuario_criacao;
+        return $this;
+    }
 
-
-
-
-} 
+}
