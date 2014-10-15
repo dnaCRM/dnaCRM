@@ -157,7 +157,7 @@
                 <div class="panel-heading">
                     <h4 class="panel-title">
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
-                            <i class="glyphicon glyphicon-user"></i> $perfil
+                            <i class="glyphicon glyphicon-user"></i> $apartamento
                         </a>
                     </h4>
                 </div>
@@ -165,7 +165,7 @@
                     <div class="panel-body">
                         <?php
 
-                        var_dump($perfil);
+                        var_dump($apartamento);
 
                         ?>
                     </div>

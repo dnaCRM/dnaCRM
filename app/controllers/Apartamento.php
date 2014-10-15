@@ -23,7 +23,7 @@ class Apartamento extends Controller
 
         $dados = array(
             'pagesubtitle' => '',
-            'pagetitle' => 'Perfis',
+            'pagetitle' => 'Apartamento',
             'list' => $apartamento_list
         );
 
@@ -48,8 +48,8 @@ class Apartamento extends Controller
 
             $dados = array(
 
-                'pagetitle' => $apartamentoarr->getNmSetor(),
-                'pagesubtitle' => 'Atualizar Apartamento.',
+                'pagetitle' => 'Atualizar Apartamento.',
+                'pagesubtitle' => '',
                 'setor' => $setor, // MINHA DUVIDA ESTA AQUI PAULO
                 'id' => $id,
                 'apartamento' => $apartamentoarr
@@ -83,9 +83,9 @@ class Apartamento extends Controller
 
         $dados = array(
             //o campo 'obs' vai ser o subtítulo
-            'pagesubtitle' => $apartamentoarr->getCdSetor(),
+            'pagesubtitle' => '',
             //o campo 'nome' vai ser o título da página
-            'pagetitle' => $apartamentoarr->getCdSetor(),
+            'pagetitle' => 'Apartamento',
             //todos os atributos do perfil
             'apartamento' => $apartamentoarr
         );
@@ -96,8 +96,8 @@ class Apartamento extends Controller
 
     /**
      * Este método monta a tela de confirmação antes de apagar
-     * o Perfil
-     * @param $id = id do Perfil a ser deletado
+     * o Apartamento
+     * @param $id = id do apartamento a ser deletado
      */
     public function confirmDelete($id)
     {
@@ -107,9 +107,9 @@ class Apartamento extends Controller
 
         $dados = array(
             //o campo 'obs' vai ser o subtítulo
-            'pagesubtitle' => $apartamentoarr->getCdSetor(),
+            'pagesubtitle' => '',
             //o campo 'nome' vai ser o título da página
-            'pagetitle' => $apartamentoarr->getCdSetor(),
+            'pagetitle' => 'Apartamento',
             'apartamento' => $apartamentoarr
         );
 
@@ -175,11 +175,4 @@ class Apartamento extends Controller
         }
         return $obj;
     }
-
-    /**
-     * Deve receber um array contento objetos do tipo PessoaFisicaDTO
-     * Percorre os objetos testando se as imagens já foram exportadas
-     * e exporta caso necessário
-     */
-
 } 
