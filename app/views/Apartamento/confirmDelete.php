@@ -1,10 +1,12 @@
 <!--
+/**
  * Created by PhpStorm.
  * User: Raul
- * Date: 14/10/14
- * Time: 00:28
+ * Date: 15/10/14
+ * Time: 00:50
  */
- -->
+-->
+
 <div class="row">
     <div class="col-md-6">
         <h1><?php echo $data['pagetitle']; ?></h1>
@@ -22,15 +24,15 @@
     </div>
 </div>
 
-<!--Teste de Perfil-->
+<!--Teste de Apartamento-->
 <div class="row">
     <div class="col-md-12">
         <div class="jumbotron">
             <?php
-            $perfil = $data['perfil'];
+            $apartamento = $data['apartamento'];
 
-            $action = new PessoaJuridica();
-            $action->removerPessoaJuridica($perfil);
+            $action = new Apartamento();
+            $action->removerApartamento($apartamento);
 
             ?>
 
@@ -38,15 +40,12 @@
                 <?php
                 if (!Input::exists()) {
                     ?>
-                    <div class="col-md-4">
-                        <img class="img-circle profilefoto left"
-                             src="<?php echo $perfil->getImPerfil(); ?>">
-                    </div>
+
                     <div class="col-md-8">
                         <h1><span class="glyphicon glyphicon-arrow-right"></span> Atenção!</h1>
 
-                        <p>Deseja deletar Pessoa Juridica <strong><?php echo $perfil->getNmFantasia(); ?></strong>?</p>
-
+                        <p>Deseja deletar o apartamento <strong><?php echo $apartamento->getCdSetor(); ?>
+                            </strong>?</p> <!-- TENHO QUE RESOLVER PARA MOSTRAR O NOME EM VEZ DE CHAVE PRIMARIA !
                         <!-- form -->
                         <form action="" method="post">
 
@@ -54,8 +53,10 @@
 
                             <div class="form-group ">
                                 <div class="col-lg-10 col-lg-offset-2">
-                                    <a href="PessoaJuridica/visualizar/<?php echo $perfil->getCdPessoaJuridica(); ?>"
+                                    <a href="Apartamento/visualizar/<?php echo $apartamento->getCdApartamento(); ?>"
                                        class="btn btn-success" role="button">
+                                        <!--TENHO QUE RESOLVER COMO COLOCAR O NOME EM VEZ DE ID -->
+
                                         <span class="glyphicon glyphicon-circle-arrow-left"></span> Cancelar</a>
                                     <button type="submit" name="deletar" class="btn btn-danger"><span
                                             class="glyphicon glyphicon-trash"></span> Deletar
@@ -71,8 +72,8 @@
                 } else {
                     ?>
                     <div class="col-md-8">
-                        <h3>Pessoa Juridica Deletado!</h3>
-                        <a href="PessoaJuridica"
+                        <h3>Apartamento Deletado!</h3>
+                        <a href="Apartamento"
                            class="btn btn-success" role="button">
                             <span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar</a>
                     </div>
