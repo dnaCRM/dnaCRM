@@ -271,7 +271,7 @@ if (Session::exists('sucesso_salvar_pf')) {
 
 <div class="form-group ">
     <div class="col-lg-12">
-        <a href="#" id="limpar" class="btn btn-default"><span class="fa fa-undo"></span> Cancelar</a>
+        <a href="PessoaFisica/visualizar/<?php echo $data['id']; ?>" id="limpar" class="btn btn-default"><span class="fa fa-undo"></span> Cancelar</a>
         <button type="reset" name="cancelar" class="btn btn-info"><span class="fa fa-recycle"></span> Limpar
         </button>
         <a href="PessoaFisica/formperfil" id="novo" class="btn btn-success"><span class="fa fa-file"></span>

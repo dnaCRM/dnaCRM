@@ -6,12 +6,12 @@
  * Time: 22:54
  */
 
-class PessoaJuridica extends Controller
+class OrdemServico extends Controller
 {
 
     public function __construct()
     { //o método é herdado da classe pai 'Controller'
-        $this->setModel(new PessoaJuridicaDAO());
+        $this->setModel(new OrdemServicoDAO());
     }
 
 
@@ -19,16 +19,13 @@ class PessoaJuridica extends Controller
     { //Pega a lista completa de perfis
         $perfil_list = (array)$this->model->fullList();
 
-        // Exporta imagens de perfil
-        $this->exportaImagens($perfil_list);
-
         $dados = array(
             'pagesubtitle' => '',
-            'pagetitle' => 'Perfis',
+            'pagetitle' => 'Ordens de Serviço',
             'list' => $perfil_list
         );
 
-        $this->view = new View('PessoaJuridica', 'start');
+        $this->view = new View('OrdemServico', 'start');
         $this->view->output($dados);
     }
 
@@ -39,30 +36,49 @@ class PessoaJuridica extends Controller
      * Se não receber um id o formulário estará vazio e permitirá registrar
      * um novo perfil
      */
-    public function formperfil($id = null)
+    public function formOrdemServico($id = null)
     {
+        $ocorrencia = (new OcorrenciaDAO())->fullList();
+        $executor = (new PessoaFisicaDAO())->fullList();
+        $solicitante = (new PessoaFisicaDAO())->fullList();
+        $estagio = (new CategoriaValorDAO())->get('cd_categoria = 3');
+
         if ($id) {
-            /** @var PessoaJuridicaDTO */
+            /** @var OrdemServicoDTO */
             $perfilarr = $this->findById($id);
 
+            $dt_inicio = new DateTime($perfilarr->getDtInicio());
+            $perfilarr->setDtInicio($dt_inicio->format('d/m/Y'));
+
+            $dt_fim = new DateTime($perfilarr->getDtFim());
+            $perfilarr->setDtFim($dt_fim->format('d/m/Y'));
+
             $dados = array(
 
-                'pagetitle' => $perfilarr->getNmFantasia(),
-                'pagesubtitle' => 'Atualizar Perfil.',
+                'pagetitle' => $perfilarr->getDescAssunto(),
+                'pagesubtitle' => 'Atualizar OS.',
                 'id' => $id,
-                'perfil' => $perfilarr
+                'perfil' => $perfilarr,
+                'ocorrencia' => $ocorrencia,
+                'executor' => $executor,
+                'solicitante' => $solicitante,
+                'estagio' => $estagio
             );
         } else {
-            $perfil = new PessoaJuridicaDTO();
+            $perfil = new OrdemServicoDTO();
             $dados = array(
-                'pagetitle' => 'Cadastro de Perfil',
-                'pagesubtitle' => 'Pessoa Juridica.',
+                'pagetitle' => 'Cadastro de Ordem de Servico',
+                'pagesubtitle' => 'Ordem de Servico',
                 'id' => null,
-                'perfil' => $perfil
+                'perfil' => $perfil,
+                'ocorrencia' => $ocorrencia,
+                'executor' => $executor,
+                'solicitante' => $solicitante,
+                'estagio' => $estagio
             );
         }
 
-        $this->view = new View('PessoaJuridica', 'formperfil');
+        $this->view = new View('OrdemServico', 'formOrdemServico');
         $this->view->output($dados);
     }
 
@@ -75,19 +91,17 @@ class PessoaJuridica extends Controller
         $id = (int)$id;
         $perfilarr = $this->findById($id);
 
-        // Exporta imagem de perfil
-        $this->exportaImagens($perfilarr);
 
         $dados = array(
             //o campo 'obs' vai ser o subtítulo
-            'pagesubtitle' => $perfilarr->getDescRazao(),
+            'pagesubtitle' => $perfilarr->getDescAssunto(),
             //o campo 'nome' vai ser o título da página
-            'pagetitle' => $perfilarr->getNmFantasia(),
+            'pagetitle' => '',
             //todos os atributos do perfil
             'perfil' => $perfilarr
         );
 
-        $this->view = new View('PessoaJuridica', 'visualizar');
+        $this->view = new View('OrdemServico', 'visualizar');
         $this->view->output($dados);
     }
 
@@ -104,13 +118,13 @@ class PessoaJuridica extends Controller
 
         $dados = array(
             //o campo 'obs' vai ser o subtítulo
-            'pagesubtitle' => $perfilarr->getDescRazao(),
+            'pagetitle' => $perfilarr->getDescAssunto(),
             //o campo 'nome' vai ser o título da página
-            'pagetitle' => $perfilarr->getNmFantasia(),
+            'pagesubtitle' => $perfilarr->getDescOrdemServico(),
             'perfil' => $perfilarr
         );
 
-        $this->view = new View('PessoaJuridica', 'confirmDelete');
+        $this->view = new View('OrdemServico', 'confirmDelete');
         $this->view->output($dados);
     }
 
@@ -121,11 +135,11 @@ class PessoaJuridica extends Controller
         if (Input::exists()) {
             if (Token::check(Input::get('token'))) {
 
-                $pessoaJuridica = $this->setDados();
+                $ordemServico = $this->setDados();
 
                 try {
-                    $this->model->gravar($pessoaJuridica);
-                    Session::flash('sucesso_salvar_pj', 'Cadastro salvo!', 'success');
+                    $this->model->gravar($ordemServico);
+                    Session::flash('sucesso_salvar_os', 'Ordem de Servico salva!', 'success');
                 } catch (Exception $e) {
                     CodeFail((int)$e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
                 }
@@ -136,14 +150,19 @@ class PessoaJuridica extends Controller
 
     private function setDados()
     {
-        $dto = new PessoaJuridicaDTO();
+        $dto = new OrdemServicoDTO();
 
-        $dto->setCdPessoaJuridica(Input::get('cd_pessoa_juridica'))
-            ->setCnpj(Input::get('cnpj'))
-            ->setNmFantasia(Input::get('nm_fantasia'))
-            ->setDescRazao(Input::get('desc_razao'))
-            ->setDescAtividade(Input::get('desc_atividade'))
-            ->setEmail(Input::get('email'))
+        $dto->setCdOrdemServico(Input::get('ordemservico'))
+            ->setCdOcorrencia(Input::get('ocorrencia'))
+            ->setCdPfExecutor(Input::get('executor'))
+            ->setCdPfSolicitante(Input::get('solicitante'))
+            ->setDescAssunto(Input::get('assunto'))
+            ->setDescOrdemServico(Input::get('descricao'))
+            ->setDtInicio(Input::get('dt_inicio'))
+            ->setDtFim(Input::get('dt_fim'))
+            ->setCdCatgEstagio(3)
+            ->setCdVlCatgEstagio(Input::get('estagio'))
+            ->setDescConclusao(Input::get('desc_conclusao'))
             ->setCdUsuarioCriacao(Session::get('user'))
             ->setDtUsuarioCriacao('now()')
             ->setCdUsuarioAtualiza(Session::get('user'))
@@ -152,18 +171,17 @@ class PessoaJuridica extends Controller
         return $dto;
     }
 
-    public function removerPessoaJuridica(PessoaJuridicaDTO $dto) {
+    public function removerOrdemServico(OrdemServicoDTO $dto) {
         if (Input::exists()) {
 
             if (Token::check(Input::get('token'))) {
 
                 //$this->model->delete($dto);
-                echo 'Deletou perfil';
+                echo 'Deletou Ordem de Servico';
 
             }
         }
     }
-
 
     protected function findById($id)
     {
@@ -174,29 +192,5 @@ class PessoaJuridica extends Controller
             Redirect::to(SITE_URL . get_called_class());
         }
         return $obj;
-    }
-
-    /**
-     * Deve receber um array contento objetos do tipo PessoaFisicaDTO
-     * Percorre os objetos testando se as imagens já foram exportadas
-     * e exporta caso necessário
-     */
-    protected function exportaImagens($arr_perfil)
-    {
-        if (is_array($arr_perfil)) {
-            foreach ($arr_perfil as $perfil) {
-                if ($perfil->getImPerfil()
-                    && !file_exists($this->model->getImgFolder() . $perfil->getCdPessoaJuridica() . '.jpg')
-                ) {
-                    $this->model->exportaFoto($perfil->getCdPessoaJuridica());
-                }
-            }
-        } else {
-            if ($arr_perfil->getImPerfil()
-                && !file_exists($this->model->getImgFolder() . $arr_perfil->getCdPessoaJuridica() . '.jpg')
-            ) {
-                $this->model->exportaFoto($arr_perfil->getCdPessoaJuridica());
-            }
-        }
     }
 } 

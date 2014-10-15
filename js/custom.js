@@ -102,6 +102,10 @@ $(document).ready(function () {
     $('#cnpj').mask("99.999.999/9999-99");
     $('#celular').mask("(99) Z9999-9999", {translation: {'Z': {pattern: /[0-9]/, optional: true}}});  //[] Opcional
     $('#dt_nascimento').mask("99/99/9999");
+    $('#dt_inicio_curso').mask("99/99/9999");
+    $('#dt_fim_curso').mask("99/99/9999");
+    $('#dt_inicio').mask("99/99/9999");
+    $('#dt_fim').mask("99/99/9999");
     $('#fone').mask("(99) 9999-9999");
 });
 
@@ -115,6 +119,14 @@ $(document).ready(function () {
         pickTime: false
     });
     $('#dt_fim_curso_picker').datetimepicker({
+        language: 'pt-br',
+        pickTime: false
+    });;
+    $('#dt_inicio_picker').datetimepicker({
+        language: 'pt-br',
+        pickTime: false
+    });
+    $('#dt_fim_picker').datetimepicker({
         language: 'pt-br',
         pickTime: false
     });
@@ -324,6 +336,38 @@ $(document).ready(function () {
         }
     });
 
+    $('#ordemservicoform').bootstrapValidator({
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            solicitante: {
+                validators: {
+                    notEmpty: {
+                        message: 'Informar o solicitante é obrigatório.'
+                    }
+                }
+            },
+            assunto: {
+                validators: {
+                    notEmpty: {
+                        message: 'Informar o assunto é obrigatória'
+                    }
+                }
+            },
+            dt_inicio: {
+                validators: {
+                    notEmpty: {
+                        message: 'Campo obrigatório'
+                    }
+                }
+            }
+        }
+    });
+
     $('#datetimepicker')
         .on('dp.change dp.show', function (e) {
             // Valida a data quando o usuário inserir
@@ -338,6 +382,16 @@ $(document).ready(function () {
         .on('dp.change dp.show', function (e) {
             // Valida a data quando o usuário inserir
             $('#pessoafisicaform').bootstrapValidator('revalidateField', 'dt_fim_curso_picker');
+        });
+    $('#dt_inicio_picker')
+        .on('dp.change dp.show', function (e) {
+            // Valida a data quando o usuário inserir
+            $('#ordemservicoform').bootstrapValidator('revalidateField', 'dt_inicio_picker');
+        });
+    $('#dt_fim_picker')
+        .on('dp.change dp.show', function (e) {
+            // Valida a data quando o usuário inserir
+            $('#ordemservicoform').bootstrapValidator('revalidateField', 'dt_fim_picker');
         });
 });
 

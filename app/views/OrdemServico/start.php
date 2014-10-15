@@ -1,4 +1,10 @@
-
+<!--
+ * Created by PhpStorm.
+ * User: Raul
+ * Date: 14/10/14
+ * Time: 00:47
+ */
+ -->
 <div class="row">
     <div class="col-lg-6">
         <h1><?php echo $data['pagetitle']; ?></h1>
@@ -30,10 +36,9 @@
         <table id="perfillist" class="table table-striped table-hover ">
             <thead>
             <tr>
-                <th>Foto</th>
-                <th>Nome</th>
-                <th>e-mail</th>
-                <th>cnpj</th>
+                <th>Assunto</th>
+                <th>Descriçao</th>
+                <th>Data</th>
             </tr>
             </thead>
             <tbody>
@@ -41,12 +46,12 @@
             <?php
 
             foreach ($data['list'] as $perfil) {
-
+                $dt_inicio = new DateTime($perfil->getDtInicio());
+                $perfil->setDtInicio($dt_inicio->format('d/m/Y'));
                 echo '<tr>';
-                echo '<td><img src="' . $perfil->getImPerfil() . '" class="img-circle" title="' . $perfil->getCdPessoaJuridica() . '"></td>';
-                echo '<td><a href="PessoaJuridica/visualizar/' . $perfil->getCdPessoaJuridica() . '">' . $perfil->getNmFantasia() . '</a></td>';
-                echo '<td>' . $perfil->getEmail() . '</td>';
-                echo '<td>' . $perfil->getCnpj() . '</td>';
+                echo '<td><a href="OrdemServico/visualizar/' . $perfil->getCdOrdemServico() . '">' . $perfil->getDescAssunto() . '</a></td>';
+                echo '<td>' . $perfil->getDescOrdemServico() . '</td>';
+                echo '<td>' . $perfil->getDtInicio() . '</td>';
                 echo '</tr>';
 
             }
