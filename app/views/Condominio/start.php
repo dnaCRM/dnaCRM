@@ -1,3 +1,11 @@
+<!--
+/**
+ * Created by PhpStorm.
+ * User: Raul
+ * Date: 16/10/14
+ * Time: 02:49
+ */
+ -->
 <div class="row">
     <div class="col-lg-6">
         <h1><?php echo $data['pagetitle']; ?></h1>
@@ -29,20 +37,23 @@
         <table id="perfillist" class="table table-striped table-hover ">
             <thead>
             <tr>
-                <th>Setor</th>
-                <th>Descrição</th>
+                <th>Foto</th>
+                <th>Nome</th>
+                <th>Bairro</th>
+                <th>Cep</th>
             </tr>
             </thead>
             <tbody>
 
             <?php
-            foreach ($data['list'] as $apartamento) {
+
+            foreach ($data['list'] as $perfil) {
 
                 echo '<tr>';
-                echo '<td><a href=Apartamento/visualizar/' . $apartamento->getCdSetor() . '>'
-                    . $apartamento->getCdApartamento() . '</a></td>';
-                    // RESOLVER ESSE PROBLEMA DE ID PARA NOME DE SETOR;
-                echo '<td>' . $apartamento->getDescApartamento() . '</td>';
+                echo '<td><img src="' . $perfil->getImPerfil() . '" class="img-circle" title="' . $perfil->getCdCondominio() . '"></td>';
+                echo '<td><a href="Condominio/visualizar/' . $perfil->getCdCondominio() . '">' . $perfil->getNmCondominio() . '</a></td>';
+                echo '<td>' . $perfil->getBairro() . '</td>';
+                echo '<td>' . $perfil->getCep() . '</td>';
                 echo '</tr>';
 
             }

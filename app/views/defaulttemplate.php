@@ -56,6 +56,7 @@
                         <li><a href="#">Item</a></li>
                         <li><a href="Apartamento">Apartamento</a></li>
                         <li><a href="OrdemServico">Ordens de Serviço</a></li>
+                        <li><a href="Condominio">Condominio</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -67,6 +68,7 @@
                         <li><a href="#">Item</a></li>
                         <li><a href="Apartamento/formapartamento">Novo Apartamento</a></li>
                         <li><a href="OrdemServico/formOrdemServico">Nova Ordem de Serviço</a></li>
+                        <li><a href="Condominio/formcondominio">Novo Condominio</a></li>
                     </ul>
                 </li>
                 <li>
