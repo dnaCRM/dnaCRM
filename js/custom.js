@@ -102,6 +102,7 @@ $(document).ready(function () {
     $('#cnpj').mask("99.999.999/9999-99");
     $('#celular').mask("(99) Z9999-9999", {translation: {'Z': {pattern: /[0-9]/, optional: true}}});  //[] Opcional
     $('#dt_nascimento').mask("99/99/9999");
+    $('#nascimento').mask("99/99/9999");
     $('#dt_inicio_curso').mask("99/99/9999");
     $('#dt_fim_curso').mask("99/99/9999");
     $('#dt_inicio').mask("99/99/9999");
@@ -111,6 +112,10 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     $('#datetimepicker').datetimepicker({
+        language: 'pt-br',
+        pickTime: false
+    });
+    $('#nascimento').datetimepicker({
         language: 'pt-br',
         pickTime: false
     });
@@ -194,6 +199,61 @@ $(document).ready(function () {
                         type: 'image/jpeg',
                         /*maxSize: 2048 * 1024,   // 2 MB*/
                         message: 'O arquivo selecionado não é válido. Apenas aquivos .jpg são permitidos.'
+                    }
+                }
+            }
+        }
+    });
+$('#pf_ajax_form').bootstrapValidator({
+        excluded: ':disabled',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            ie_sexo: {
+                validators: {
+                    notEmpty: {
+                        message: 'Gênero é obrigatório'
+                    }
+                }
+            },
+            nm_pessoa_fisica: {
+                validators: {
+                    notEmpty: {
+                        message: 'Campo obrigatório'
+                    }
+                }
+            },
+            email: {
+                validators: {
+                    notEmpty: {
+                        message: 'Campo obrigatório'
+                    },
+                    emailAddress: {
+                        message: 'E-mail inválido'
+                    }
+                }
+            },
+            cpf: {
+                validators: {
+                    notEmpty: {
+                        message: 'Campo obrigatório'
+                    }
+                }
+            },
+            rg: {
+                validators: {
+                    notEmpty: {
+                        message: 'Campo obrigatório'
+                    }
+                }
+            },
+            dt_nascimento: {
+                validators: {
+                    notEmpty: {
+                        message: 'Campo obrigatório'
                     }
                 }
             }
@@ -373,26 +433,17 @@ $(document).ready(function () {
             // Valida a data quando o usuário inserir
             $('#pessoafisicaform').bootstrapValidator('revalidateField', 'dt_nascimento');
         });
-    $('#dt_inicio_curso_picker')
-        .on('dp.change dp.show', function (e) {
-            // Valida a data quando o usuário inserir
-            $('#pessoafisicaform').bootstrapValidator('revalidateField', 'dt_inicio_curso_picker');
-        });
-    $('#dt_fim_curso_picker')
-        .on('dp.change dp.show', function (e) {
-            // Valida a data quando o usuário inserir
-            $('#pessoafisicaform').bootstrapValidator('revalidateField', 'dt_fim_curso_picker');
-        });
     $('#dt_inicio_picker')
         .on('dp.change dp.show', function (e) {
             // Valida a data quando o usuário inserir
             $('#ordemservicoform').bootstrapValidator('revalidateField', 'dt_inicio_picker');
         });
-    $('#dt_fim_picker')
+    $('#datetimepicker')
         .on('dp.change dp.show', function (e) {
             // Valida a data quando o usuário inserir
-            $('#ordemservicoform').bootstrapValidator('revalidateField', 'dt_fim_picker');
+            $('#pf_ajax_form').bootstrapValidator('revalidateField', 'dt_nascimento');
         });
+
 });
 
 
@@ -404,7 +455,7 @@ $('#perfillist').dataTable({
 });
 
 $(document).ready(function(){
-    $('#pessoafisicaform').submit(function(){
+    $('#pf_ajax_form').submit(function(){
         var dados = $( this ).serialize();
 
         $.ajax({

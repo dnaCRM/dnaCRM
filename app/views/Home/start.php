@@ -172,9 +172,9 @@
             <div class="modal-body">
 
                 <div class="col-sm-12">
-                    <span></span id="ajax_response">
+                    <span id="ajax_response"></span>
 
-                    <form class="form-horizontal" method="post" action="" id="pessoafisicaform">
+                    <form class="form-horizontal" method="post" action="" id="pf_ajax_form">
 
                         <div class="form-group">
                             <label for="nome" class="col-lg-2 control-label">Nome:</label>
@@ -208,13 +208,13 @@
 
                         <div class="form-group">
 
-                            <div class="col-lg-4 inputGroupContainer" id="datetimepicker">
-                                <label for="dt_nascimento" class="col-lg-2 control-label">Nascimento</label>
+                            <div class="col-lg-4" id="datetimepicker">
+                                <label for="nascimento" class="col-lg-2 control-label">Nascimento</label>
 
                                 <div>
                                     <input type="text" class="form-control"
                                            value=""
-                                           id="dt_nascimento"
+                                           id="nascimento"
                                            name="dt_nascimento" placeholder="___/___/____">
                                 </div>
                             </div>

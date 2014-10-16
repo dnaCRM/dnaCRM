@@ -1,6 +1,8 @@
 <?php
 require '../init.php';
 
+$_POST = filter_input_array(INPUT_POST);
+
 $p = new PessoaFisicaDTO();
 
 $p
@@ -9,7 +11,7 @@ $p
     ->setRg(Input::get('rg'))
     ->setEmail(Input::get('email'))
     ->setDtNascimento(Input::get('dt_nascimento'))
-    ->setIeSexo('m')
+    ->setIeSexo(Input::get('ie_sexo'))
     ->setCdUsuarioCriacao(Session::get('user'))
     ->setDtUsuarioCriacao('now()')
     ->setCdUsuarioAtualiza(Session::get('user'))

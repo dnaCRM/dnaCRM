@@ -153,7 +153,7 @@ if (Session::exists('sucesso_salvar_pf')) {
 
 <div class="form-group">
 
-    <div class="col-lg-4 inputGroupContainer" id="dt_inicio_curso_picker">
+    <div class="col-lg-4" id="dt_inicio_curso_picker">
         <label for="dt_inicio_curso" class="control-label">Início do Curso</label>
 
 
@@ -162,7 +162,7 @@ if (Session::exists('sucesso_salvar_pf')) {
                id="dt_inicio_curso"
                name="dt_inicio_curso" placeholder="___/___/____">
     </div>
-    <div class="col-lg-4 inputGroupContainer" id="dt_fim_curso_picker">
+    <div class="col-lg-4" id="dt_fim_curso_picker">
         <label for="dt_fim_curso" class="control-label">Fim do Curso</label>
 
 
