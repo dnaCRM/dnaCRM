@@ -1,12 +1,12 @@
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-sm-6">
         <h1><?php echo $data['pagetitle']; ?></h1>
 
         <p class="lead">
             <?php echo (isset($data['pagesubtitle'])) ? $data['pagesubtitle'] : ""; ?>
         </p>
     </div>
-    <div class="col-lg-6" style="padding: 15px 15px 0 15px;">
+    <div class="col-sm-6" style="padding: 15px 15px 0 15px;">
         <div class="well">
 
             <p>
@@ -18,7 +18,7 @@
 </div>
 
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-sm-12">
 
         <?php
         if (Session::exists('fail')) {

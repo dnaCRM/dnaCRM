@@ -1,12 +1,12 @@
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-sm-6">
         <h1><?php echo $data['pagetitle']; ?></h1>
 
         <p class="lead">
             <?php echo (isset($data['pagesubtitle'])) ? $data['pagesubtitle'] : ""; ?>
         </p>
     </div>
-    <div class="col-lg-6" style="padding: 15px 15px 0 15px;">
+    <div class="col-sm-6">
         <div class="well">
 
             <p>
@@ -19,7 +19,7 @@
 
 <!--Teste de Form-->
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-sm-6">
 
         <?php
         $condominio = $data['condominio'];
@@ -38,7 +38,7 @@
             <fieldset>
                 <legend>Cadastro</legend>
                 <div class="form-group">
-                    <div class="col-lg-12">
+                    <div class="col-sm-12">
                         <label for="im_perfil" class="control-label">Foto</label>
 
 
@@ -47,7 +47,7 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="col-lg-12">
+                    <div class="col-sm-12">
                         <label for="nm_condominio" class="control-label">Nome Condominio</label>
 
                         <input type="text" class="form-control" id="nm_condominio" name="nm_condominio"
@@ -58,7 +58,7 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="col-lg-12">
+                    <div class="col-sm-12">
                         <label for="cep" class="control-label">Cep</label>
 
 
@@ -71,7 +71,7 @@
 
                 <div class="form-group">
 
-                    <div class="col-lg-12">
+                    <div class="col-sm-12">
                         <label for="rua" class="control-label">Rua</label>
 
 
@@ -84,7 +84,7 @@
 
                 <div class="form-group">
 
-                    <div class="col-lg-12">
+                    <div class="col-sm-12">
                         <label for="bairro" class="control-label">Bairro</label>
 
 
@@ -96,7 +96,7 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="col-lg-12">
+                    <div class="col-sm-12">
                         <label for="cidade" class="control-label">Cidade</label>
 
 
@@ -112,7 +112,7 @@
                 <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
 
                 <div class="form-group ">
-                    <div class="col-lg-12">
+                    <div class="col-sm-12">
                         <a href="Condomino/visualizar/<?php echo $data['id']; ?>="limpar" class="btn btn-default"><span class="fa fa-undo"></span> Cancelar</a>
                         <button type="reset" name="cancelar" class="btn btn-info"><span class="fa fa-recycle"></span> Limpar</button>
                         <a href="Condominio/formcondominio" id="novo" class="btn btn-success"><span class="fa fa-file"></span> Novo</a>
@@ -124,7 +124,7 @@
 
     </div>
 
-    <div class="col-lg-6">
+    <div class="col-sm-6">
 
         <div class="panel-group" id="accordion">
             <div class="panel panel-default">

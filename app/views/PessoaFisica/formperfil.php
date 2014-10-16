@@ -1,12 +1,12 @@
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-sm-6">
         <h1><?php echo $data['pagetitle']; ?></h1>
 
         <p class="lead">
             <?php echo (isset($data['pagesubtitle'])) ? $data['pagesubtitle'] : ""; ?>
         </p>
     </div>
-    <div class="col-lg-6" style="padding: 15px 15px 0 15px;">
+    <div class="col-sm-6" style="padding: 15px 15px 0 15px;">
         <div class="well">
 
             <p>
@@ -38,7 +38,7 @@ if (Session::exists('sucesso_salvar_pf')) {
 <fieldset>
 <legend>Cadastro</legend>
 <div class="form-group">
-    <div class="col-lg-12">
+    <div class="col-sm-12">
         <label for="im_perfil" class="control-label">Foto</label>
 
 
@@ -47,7 +47,7 @@ if (Session::exists('sucesso_salvar_pf')) {
 </div>
 
 <div class="form-group">
-    <div class="col-lg-12 selectContainer">
+    <div class="col-sm-12 selectContainer">
         <label for="cd_pessoa_juridica" class="control-label">Empresa</label>
 
 
@@ -69,7 +69,7 @@ if (Session::exists('sucesso_salvar_pf')) {
 </div>
 
 <div class="form-group">
-    <div class="col-lg-12 selectContainer">
+    <div class="col-sm-12 selectContainer">
         <label for="cd_profissao" class="control-label">Profissão</label>
 
         <select class="form-control" id="cd_profissao" name="cd_profissao">
@@ -89,9 +89,9 @@ if (Session::exists('sucesso_salvar_pf')) {
 </div>
 
 <div class="form-group pull-right">
-    <label class="control-label col-lg-1">Estuda</label>
+    <label class="control-label col-sm-1">Estuda</label>
 
-    <div class="col-lg-12">
+    <div class="col-sm-12">
         <div class="btn-group" data-toggle="buttons">
             <label
                 class="btn btn-default control-label<?php echo (($perfil->getIeEstuda()) == 's' || Input::get('ie_estuda') == 's') ? ' active' : ''; ?>">
@@ -111,7 +111,7 @@ if (Session::exists('sucesso_salvar_pf')) {
 </div>
 
 <div class="form-group">
-    <div class="col-lg-12 selectContainer">
+    <div class="col-sm-12 selectContainer">
         <label for="cd_pessoa_juridica" class="control-label">Instituição de Ensino</label>
 
         <select class="form-control" id="cd_instituicao" name="cd_instituicao">
@@ -132,7 +132,7 @@ if (Session::exists('sucesso_salvar_pf')) {
 </div>
 
 <div class="form-group">
-    <div class="col-lg-12">
+    <div class="col-sm-12">
         <label for="org_rg" class="control-label">Grau de Ensino</label>
 
         <select class="form-control" id="cd_grau_ensino" name="cd_grau_ensino">
@@ -153,7 +153,7 @@ if (Session::exists('sucesso_salvar_pf')) {
 
 <div class="form-group">
 
-    <div class="col-lg-4" id="dt_inicio_curso_picker">
+    <div class="col-sm-4" id="dt_inicio_curso_picker">
         <label for="dt_inicio_curso" class="control-label">Início do Curso</label>
 
 
@@ -162,7 +162,7 @@ if (Session::exists('sucesso_salvar_pf')) {
                id="dt_inicio_curso"
                name="dt_inicio_curso" placeholder="___/___/____">
     </div>
-    <div class="col-lg-4" id="dt_fim_curso_picker">
+    <div class="col-sm-4" id="dt_fim_curso_picker">
         <label for="dt_fim_curso" class="control-label">Fim do Curso</label>
 
 
@@ -174,7 +174,7 @@ if (Session::exists('sucesso_salvar_pf')) {
 </div>
 
 <div class="form-group">
-    <div class="col-lg-12 inputGroupContainer">
+    <div class="col-sm-12 inputGroupContainer">
         <label for="nm_pessoa_fisica" class="control-label">Nome</label>
 
 
@@ -184,7 +184,7 @@ if (Session::exists('sucesso_salvar_pf')) {
     </div>
 </div>
 <div class="form-group">
-    <div class="col-lg-12 inputGroupContainer">
+    <div class="col-sm-12 inputGroupContainer">
         <label for="email" class="control-label">Email</label>
 
 
@@ -196,7 +196,7 @@ if (Session::exists('sucesso_salvar_pf')) {
 
 <div class="form-group">
 
-    <div class="col-lg-4 inputGroupContainer" id="datetimepicker">
+    <div class="col-sm-4 inputGroupContainer" id="datetimepicker">
         <label for="dt_nascimento" class="control-label">Nascimento</label>
 
 
@@ -208,7 +208,7 @@ if (Session::exists('sucesso_salvar_pf')) {
 </div>
 
 <div class="form-group">
-    <div class="col-lg-4 inputGroupContainer">
+    <div class="col-sm-4 inputGroupContainer">
         <label for="cpf" class="control-label">CPF</label>
 
 
@@ -217,7 +217,7 @@ if (Session::exists('sucesso_salvar_pf')) {
                placeholder="000.000.000-00"
                maxlength="14">
     </div>
-    <div class="col-lg-4 inputGroupContainer">
+    <div class="col-sm-4 inputGroupContainer">
         <label for="rg" class="control-label">RG</label>
 
         <input type="text" class="form-control" id="rg" name="rg"
@@ -225,7 +225,7 @@ if (Session::exists('sucesso_salvar_pf')) {
                placeholder="00000000"
                maxlength="12">
     </div>
-    <div class="col-lg-4 inputGroupContainer">
+    <div class="col-sm-4 inputGroupContainer">
         <label for="org_rg" class="control-label">UF</label>
 
         <select class="form-control" id="org_rg" name="org_rg">
@@ -245,9 +245,9 @@ if (Session::exists('sucesso_salvar_pf')) {
 </div>
 
 <div class="form-group pull-right">
-    <label class="control-label col-lg-1">Sexo</label>
+    <label class="control-label col-sm-1">Sexo</label>
 
-    <div class="col-lg-12">
+    <div class="col-sm-12">
         <div class="btn-group" data-toggle="buttons">
             <label
                 class="btn btn-default control-label<?php echo (($perfil->getIeSexo()) == 'm' || Input::get('ie_sexo') == 'm') ? ' active' : ''; ?>">
@@ -270,7 +270,7 @@ if (Session::exists('sucesso_salvar_pf')) {
 <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
 
 <div class="form-group ">
-    <div class="col-lg-12">
+    <div class="col-sm-12">
         <a href="PessoaFisica/visualizar/<?php echo $data['id']; ?>" id="limpar" class="btn btn-default"><span class="fa fa-undo"></span> Cancelar</a>
         <button type="reset" name="cancelar" class="btn btn-info"><span class="fa fa-recycle"></span> Limpar
         </button>

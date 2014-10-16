@@ -1,19 +1,12 @@
-<!--
- * Created by PhpStorm.
- * User: Raul
- * Date: 13/10/14
- * Time: 23:41
- -->
-
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-sm-6">
         <h1><?php echo $data['pagetitle']; ?></h1>
 
         <p class="lead">
             <?php echo (isset($data['pagesubtitle'])) ? $data['pagesubtitle'] : ""; ?>
         </p>
     </div>
-    <div class="col-lg-6" style="padding: 15px 15px 0 15px;">
+    <div class="col-sm-6" style="padding: 15px 15px 0 15px;">
         <div class="well">
 
             <p>
@@ -26,7 +19,7 @@
 
 <!--Teste de Form-->
 <div class="row">
-<div class="col-lg-6">
+<div class="col-sm-6">
 
     <?php
     $perfil = $data['perfil'];
@@ -45,7 +38,7 @@
         <fieldset>
             <legend>Cadastro</legend>
             <div class="form-group">
-                <div class="col-lg-12">
+                <div class="col-sm-12">
                     <label for="im_perfil" class="control-label">Foto</label>
 
 
@@ -54,7 +47,7 @@
             </div>
 
             <div class="form-group">
-                <div class="col-lg-12">
+                <div class="col-sm-12">
                     <label for="cnpj" class="control-label">Cnpj</label>
 
                     <input type="text" class="form-control" id="cnpj" name="cnpj"
@@ -65,7 +58,7 @@
             </div>
 
             <div class="form-group">
-                <div class="col-lg-12">
+                <div class="col-sm-12">
                     <label for="cnpj" class="control-label">Nome Fantasia</label>
 
 
@@ -76,7 +69,7 @@
 
             <div class="form-group">
 
-                <div class="col-lg-12">
+                <div class="col-sm-12">
                     <label for="desc_razao" class="control-label">Razão Social</label>
 
 
@@ -87,7 +80,7 @@
 
             <div class="form-group">
 
-                <div class="col-lg-12">
+                <div class="col-sm-12">
                     <label for="desc_atividade" class="control-label">Ramo de Atividade</label>
 
 
@@ -97,7 +90,7 @@
             </div>
 
             <div class="form-group">
-                <div class="col-lg-12">
+                <div class="col-sm-12">
                     <label for="email" class="control-label">Email</label>
 
 
@@ -111,7 +104,7 @@
             <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
 
             <div class="form-group ">
-                <div class="col-lg-12">
+                <div class="col-sm-12">
                     <a href="PessoaJuridica/visualizar/<?php echo $data['id']; ?>="limpar" class="btn btn-default"><span class="fa fa-undo"></span> Cancelar</a>
                     <button type="reset" name="cancelar" class="btn btn-info"><span class="fa fa-recycle"></span> Limpar</button>
                     <a href="PessoaJuridica/formperfil" id="novo" class="btn btn-success"><span class="fa fa-file"></span> Novo</a>
@@ -123,7 +116,7 @@
 
 </div>
 
-<div class="col-lg-6">
+<div class="col-sm-6">
 
     <div class="panel-group" id="accordion">
         <div class="panel panel-default">

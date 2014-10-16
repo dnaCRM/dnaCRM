@@ -1,9 +1,9 @@
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-sm-6">
         <h1><?php echo $data['pagetitle']; ?></h1>
 
         <p class="lead">
-            Olá, <?php echo (isset($data['name'])) ? $data['name'] : ""; ?>!
+            Olá, <?php echo (Session::exists('usuario')) ? Session::get('usuario') : ""; ?>!
         </p>
         <?php
 
@@ -16,7 +16,7 @@
 
         ?>
     </div>
-    <div class="col-lg-6" style="padding: 15px 15px 0 15px;">
+    <div class="col-sm-6" style="padding: 15px 15px 0 15px;">
         <div class="well">
 
             Well, well...
@@ -31,7 +31,7 @@
 </div>
 
 <div class="row">
-<div class="col-lg-6">
+<div class="col-sm-6">
     <div class="panel-group" id="accordion">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -100,7 +100,7 @@
         </div>
     </div>
 </div>
-<div class="col-lg-6">
+<div class="col-sm-6">
 
     <div class="">
         <ul class="nav nav-tabs" style="margin-bottom: 15px;">
@@ -177,39 +177,39 @@
                     <form class="form-horizontal" method="post" action="" id="pf_ajax_form">
 
                         <div class="form-group">
-                            <label for="nome" class="col-lg-2 control-label">Nome:</label>
+                            <label for="nome" class="col-sm-2 control-label">Nome:</label>
 
-                            <div class="col-lg-10">
+                            <div class="col-sm-10">
                                 <input class="form-control" type="text" id="nome" name="nm_pessoa_fisica" value=""/>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="email" class="col-lg-2 control-label">E-mail:</label>
+                            <label for="email" class="col-sm-2 control-label">E-mail:</label>
 
-                            <div class="col-lg-10">
+                            <div class="col-sm-10">
                                 <input class="form-control" type="text" id="email" name="email" value=""/>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="cpf" class="col-lg-2 control-label">CPF:</label>
+                            <label for="cpf" class="col-sm-2 control-label">CPF:</label>
 
-                            <div class="col-lg-10">
+                            <div class="col-sm-10">
                                 <input class="form-control" type="text" id="cpf" name="cpf" value=""/>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="rg" class="col-lg-2 control-label">RG:</label>
+                            <label for="rg" class="col-sm-2 control-label">RG:</label>
 
-                            <div class="col-lg-10">
+                            <div class="col-sm-10">
                                 <input class="form-control" type="text" id="rg" name="rg" value=""/>
                             </div>
                         </div>
 
                         <div class="form-group">
 
-                            <div class="col-lg-4" id="datetimepicker">
-                                <label for="nascimento" class="col-lg-2 control-label">Nascimento</label>
+                            <div class="col-sm-4" id="datetimepicker">
+                                <label for="nascimento" class="col-sm-2 control-label">Nascimento</label>
 
                                 <div>
                                     <input type="text" class="form-control"

@@ -1,11 +1,11 @@
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-sm-6">
         <div class="row">
             <div class="col-sm-2"></div>
-            <div class="col-md-3">
+            <div class="col-sm-3">
                 <img src="img/dna_m_big.png" class="img-responsive pull-left">
             </div>
-            <div class="col-md-4 pull-left">
+            <div class="col-sm-4 pull-left">
                 <h1><?php echo(isset($data['pagetitle']) ? $data['pagetitle'] : ""); ?></h1>
 
                 <p class="lead">
@@ -20,7 +20,7 @@
 
 <div class="row">
 
-    <div class="col-lg-6">
+    <div class="col-sm-6">
 
         <?php
 
@@ -41,17 +41,17 @@
         <form id="login" class="form-horizontal" method="post" action="">
             <fieldset>
                 <div class="form-group" id="user-form-group">
-                    <label for="usuario" class="col-lg-2 control-label">Usuário</label>
+                    <label for="usuario" class="col-sm-2 control-label">Usuário</label>
 
-                    <div class="col-lg-10">
+                    <div class="col-sm-10">
                         <input type="text" class="form-control" id="usuario" name="usuario"
                                value="<?php echo escape(Input::get('usuario')); ?>" placeholder="Usuário">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="senha" class="col-lg-2 control-label">Senha</label>
+                    <label for="senha" class="col-sm-2 control-label">Senha</label>
 
-                    <div class="col-lg-10">
+                    <div class="col-sm-10">
                         <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha">
                         <br>
                     </div>
@@ -60,7 +60,7 @@
                 <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
 
                 <div class="form-group">
-                    <div class="col-lg-10 col-lg-offset-2">
+                    <div class="col-sm-10 col-sm-offset-2">
                         <button type="submit" class="btn btn-primary" id="login">Login</button>
                     </div>
                 </div>
@@ -69,7 +69,7 @@
 
     </div>
 
-        <div class="col-md-6">
+        <div class="col-sm-6">
             <div class="panel-group" id="accordion">
                 <div class="panel panel-default">
                     <div class="panel-heading">

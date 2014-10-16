@@ -1,12 +1,12 @@
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-sm-6">
         <h1><?php echo $data['pagetitle']; ?></h1>
 
         <p class="lead">
             <?php echo (isset($data['pagesubtitle'])) ? $data['pagesubtitle'] : ""; ?>
         </p>
     </div>
-    <div class="col-lg-6" style="padding: 15px 15px 0 15px;">
+    <div class="col-sm-6">
         <div class="well">
 
             <p>
@@ -19,7 +19,7 @@
 
 <!--Teste de Form-->
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-sm-6">
 
         <?php
         $apartamento = $data['apartamento'];
@@ -37,7 +37,7 @@
                 <legend>Cadastro</legend>
 
                 <div class="form-group">
-                    <div class="col-lg-12 selectContainer">
+                    <div class="col-sm-12 selectContainer">
                         <label for="cd_setor" class="control-label">Setor</label>
 
 
@@ -60,7 +60,7 @@
 
                 <div class="form-group">
 
-                    <div class="col-lg-12">
+                    <div class="col-sm-12">
                         <label for="desc_apartamento" class="control-label">Descrição</label>
 
 
@@ -75,7 +75,7 @@
                 <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
 
                 <div class="form-group ">
-                    <div class="col-lg-12">
+                    <div class="col-sm-12">
                         <a href="#" id="limpar" class="btn btn-default"><span class="fa fa-undo"></span> Cancelar</a>
                         <button type="reset" name="cancelar" class="btn btn-info"><span class="fa fa-recycle"></span> Limpar</button>
                         <a href="Apartamento/formapartamento" id="novo" class="btn btn-success"><span class="fa fa-file"></span> Novo</a>
@@ -87,7 +87,7 @@
 
     </div>
 
-    <div class="col-lg-6">
+    <div class="col-sm-6">
 
         <div class="panel-group" id="accordion">
             <div class="panel panel-default">

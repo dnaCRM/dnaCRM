@@ -888,13 +888,14 @@ th {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+/* Configuração de tamanho de fonte */
 html {
-    font-size: 10px;
+    font-size: 1em;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
     font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 13px;
+    font-size: .9em;
     line-height: 1.846;
     color: #666666;
     background-color: #ffffff;
@@ -3132,7 +3133,7 @@ tbody.collapse.in {
     padding: 5px 0;
     margin: 2px 0 0;
     list-style: none;
-    font-size: 13px;
+    font-size: 1em;
     text-align: left;
     background-color: #ffffff;
     border: 1px solid #cccccc;

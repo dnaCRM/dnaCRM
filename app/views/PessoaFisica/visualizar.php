@@ -6,7 +6,7 @@
             <?php echo (isset($data['pagesubtitle'])) ? $data['pagesubtitle'] : ""; ?>
         </p>
     </div>
-    <div class="col-sm-6" style="padding: 15px 15px 0 15px;">
+    <div class="col-sm-6">
         <div class="well">
 
             <a class="btn btn-primary btn-sm"

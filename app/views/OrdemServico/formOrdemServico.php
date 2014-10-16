@@ -6,14 +6,14 @@
  -->
 
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-sm-6">
         <h1><?php echo $data['pagetitle']; ?></h1>
 
         <p class="lead">
             <?php echo (isset($data['pagesubtitle'])) ? $data['pagesubtitle'] : ""; ?>
         </p>
     </div>
-    <div class="col-lg-6" style="padding: 15px 15px 0 15px;">
+    <div class="col-sm-6" style="padding: 15px 15px 0 15px;">
         <div class="well">
 
             <p>
@@ -26,7 +26,7 @@
 
 <!--Teste de Form-->
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-sm-6">
 
         <?php
         $perfil = $data['perfil'];
@@ -43,7 +43,7 @@
                 <legend>Cadastro</legend>
 
                 <div class="form-group">
-                    <div class="col-lg-12">
+                    <div class="col-sm-12">
                         <label for="ocorrencia" class="control-label">Ocorrência Relacionada</label>
 
                         <select class="form-control" id="ocorrencia" name="ocorrencia">
@@ -63,7 +63,7 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="col-lg-12">
+                    <div class="col-sm-12">
                         <label for="executor" class="control-label">Executor</label>
 
                         <select class="form-control" id="executor" name="executor">
@@ -83,7 +83,7 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="col-lg-12">
+                    <div class="col-sm-12">
                         <label for="solicitante" class="control-label">Solicitante</label>
 
                         <select class="form-control" id="solicitante" name="solicitante">
@@ -103,7 +103,7 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="col-lg-12">
+                    <div class="col-sm-12">
                         <label for="estagio" class="control-label">Estágio</label>
 
                         <select class="form-control" id="estagio" name="estagio">
@@ -124,7 +124,7 @@
 
                 <div class="form-group">
 
-                    <div class="col-lg-4 inputGroupContainer" id="dt_inicio_picker">
+                    <div class="col-sm-4 inputGroupContainer" id="dt_inicio_picker">
                         <label for="dt_inicio" class="control-label">Início</label>
 
 
@@ -133,7 +133,7 @@
                                id="dt_inicio"
                                name="dt_inicio" placeholder="___/___/____">
                     </div>
-                    <div class="col-lg-4 inputGroupContainer" id="dt_fim_picker">
+                    <div class="col-sm-4 inputGroupContainer" id="dt_fim_picker">
                         <label for="dt_fim" class="control-label">Fim</label>
 
 
@@ -146,7 +146,7 @@
 
                 <div class="form-group">
 
-                    <div class="col-lg-12">
+                    <div class="col-sm-12">
                         <label for="assunto" class="control-label">Assunto</label>
 
                         <input type="text" class="form-control" id="assunto" name="assunto"
@@ -156,7 +156,7 @@
 
                 <div class="form-group">
 
-                    <div class="col-lg-12">
+                    <div class="col-sm-12">
                         <label for="descricao" class="control-label">Descrição</label>
 
                         <textarea id="descricao" class="form-control" name="descricao"
@@ -166,7 +166,7 @@
 
                 <div class="form-group">
 
-                    <div class="col-lg-12">
+                    <div class="col-sm-12">
                         <label for="desc_conclusao" class="control-label">Conclusão</label>
 
                         <textarea id="desc_conclusao" class="form-control" name="desc_conclusao"
@@ -178,7 +178,7 @@
                 <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
 
                 <div class="form-group ">
-                    <div class="col-lg-12">
+                    <div class="col-sm-12">
                         <a href="OrdemServico/visualizar/<?php echo $data['id']; ?>="limpar" class="btn btn-default"><span class="fa fa-undo"></span> Cancelar</a>
                         <button type="reset" name="cancelar" class="btn btn-info"><span class="fa fa-recycle"></span> Limpar</button>
                         <a href="OrdemServico/formOrdemServico" id="novo" class="btn btn-success"><span class="fa fa-file"></span> Novo</a>
@@ -190,7 +190,7 @@
 
     </div>
 
-    <div class="col-lg-6">
+    <div class="col-sm-6">
 
         <div class="panel-group" id="accordion">
             <div class="panel panel-default">
