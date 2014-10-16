@@ -18,7 +18,7 @@
                 <span class="fa fa-trash-o"></span> Deletar</a>
             <a class="btn btn-info btn-sm"
                href="Usuario/formuser/<?php echo $data['perfil']->getCdPessoaFisica(); ?>">
-                <span class="fa fa-trash-o"></span> Cadastrar Usuário</a>
+                <span class="fa fa-user"></span> Cadastrar Usuário</a>
 
 
         </div>
@@ -40,10 +40,10 @@
         echo '<table class="table table-striped table-hover ">';
 
             echo '<tr>';
-            echo "<td><strong>Nome: </strong>: {$perfil->getNmPessoaFisica()}</td>";
+            echo "<td><strong>Nome: </strong> {$perfil->getNmPessoaFisica()}</td>";
             echo '</tr>';
             echo '<tr>';
-            echo "<td><strong>E-mail: </strong>: {$perfil->getEmail()}</td>";
+            echo "<td><strong>E-mail: </strong> {$perfil->getEmail()}</td>";
             echo '</tr>';
 
 

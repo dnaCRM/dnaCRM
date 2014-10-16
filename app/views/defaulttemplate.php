@@ -10,7 +10,7 @@
     <title><?php echo APP_NAME . ' - ' . (isset($data['pagetitle']) ? $data['pagetitle'] : ''); ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="favicon.ico"/>
-    <link rel="stylesheet" href="css/bootstrap.css" media="screen">
+    <link rel="stylesheet" href="css/paper.css" media="screen">
     <link rel="stylesheet" href="js/datatables/css/jquery.dataTables.min.css" media="screen">
     <link rel="stylesheet" href="js/datatables/css/dataTables.bootstrap.css" media="screen">
     <link rel="stylesheet" href="js/datatables/css/dataTables.responsive.css" media="screen">
@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css"/>
 
     <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/custom_paper.css">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -29,7 +29,7 @@
 </head>
 <body class="menu">
 <!-- top-bar start -->
-<div class="navbar navbar-default navbar-fixed-top">
+<div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
 
