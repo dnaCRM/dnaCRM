@@ -26,12 +26,12 @@
 
 <!--Teste de Form-->
 <div class="row">
-    <div class="col-sm-6">
-
+<div class="col-sm-6">
+    <div class="well">
         <?php
         $perfil = $data['perfil'];
         $perfil_form = new OrdemServico();
-        $perfil_form->cadastra($perfil);//Não cadastra na entra pois ainda não tem Token
+        $perfil_form->cadastra($perfil); //Não cadastra na entra pois ainda não tem Token
 
         if (Session::exists('sucesso_salvar_os')) {
             Session::flash('sucesso_salvar_os');
@@ -150,7 +150,8 @@
                         <label for="assunto" class="control-label">Assunto</label>
 
                         <input type="text" class="form-control" id="assunto" name="assunto"
-                               value="<?php echo $perfil->getDescAssunto() == '' ? Input::get('assunto') : $perfil->getDescAssunto(); ?>" placeholder="Assunto">
+                               value="<?php echo $perfil->getDescAssunto() == '' ? Input::get('assunto') : $perfil->getDescAssunto(); ?>"
+                               placeholder="Assunto">
                     </div>
                 </div>
 
@@ -160,7 +161,8 @@
                         <label for="descricao" class="control-label">Descrição</label>
 
                         <textarea id="descricao" class="form-control" name="descricao"
-                                  placeholder="Ocorrência" rows="5"><?php echo $perfil->getDescOrdemServico() == '' ? Input::get('descricao') : $perfil->getDescOrdemServico(); ?></textarea>
+                                  placeholder="Ocorrência"
+                                  rows="5"><?php echo $perfil->getDescOrdemServico() == '' ? Input::get('descricao') : $perfil->getDescOrdemServico(); ?></textarea>
                     </div>
                 </div>
 
@@ -170,7 +172,8 @@
                         <label for="desc_conclusao" class="control-label">Conclusão</label>
 
                         <textarea id="desc_conclusao" class="form-control" name="desc_conclusao"
-                                  placeholder="Como a OS foi concluída" rows="5"><?php echo $perfil->getDescConclusao() == '' ? Input::get('desc_conclusao') : $perfil->getDescConclusao(); ?></textarea>
+                                  placeholder="Como a OS foi concluída"
+                                  rows="5"><?php echo $perfil->getDescConclusao() == '' ? Input::get('desc_conclusao') : $perfil->getDescConclusao(); ?></textarea>
                     </div>
                 </div>
 
@@ -179,92 +182,99 @@
 
                 <div class="form-group ">
                     <div class="col-sm-12">
-                        <a href="OrdemServico/visualizar/<?php echo $data['id']; ?>="limpar" class="btn btn-default"><span class="fa fa-undo"></span> Cancelar</a>
-                        <button type="reset" name="cancelar" class="btn btn-info"><span class="fa fa-recycle"></span> Limpar</button>
-                        <a href="OrdemServico/formOrdemServico" id="novo" class="btn btn-success"><span class="fa fa-file"></span> Novo</a>
-                        <button type="submit" name="cadastrar" class="btn btn-primary"><span class="fa fa-check"></span> Salvar</button>
+                        <a href="OrdemServico/visualizar/<?php echo $data['id']; ?>=" limpar" class="btn
+                        btn-default"><span class="fa fa-undo"></span> Cancelar</a>
+                        <button type="reset" name="cancelar" class="btn btn-info"><span class="fa fa-recycle"></span>
+                            Limpar
+                        </button>
+                        <a href="OrdemServico/formOrdemServico" id="novo" class="btn btn-success"><span
+                                class="fa fa-file"></span> Novo</a>
+                        <button type="submit" name="cadastrar" class="btn btn-primary"><span class="fa fa-check"></span>
+                            Salvar
+                        </button>
                     </div>
                 </div>
             </fieldset>
         </form>
 
     </div>
+</div>
 
-    <div class="col-sm-6">
+<div class="col-sm-6">
 
-        <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                            $_POST
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseOne" class="panel-collapse collapse in">
-                    <div class="panel-body">
-                        <?php
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                        $_POST
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <?php
 
-                        var_dump($_POST);
+                    var_dump($_POST);
 
-                        ?>
-                    </div>
+                    ?>
                 </div>
             </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                            $_SESSION
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseTwo" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <?php
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                        $_SESSION
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <?php
 
-                        var_dump($_SESSION);
+                    var_dump($_SESSION);
 
-                        ?>
-                    </div>
+                    ?>
                 </div>
             </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                            <i class="glyphicon glyphicon-leaf"></i> $_FILES
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseThree" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <?php
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                        <i class="glyphicon glyphicon-leaf"></i> $_FILES
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <?php
 
-                        var_dump($_FILES);
+                    var_dump($_FILES);
 
-                        ?>
-                    </div>
+                    ?>
                 </div>
             </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
-                            <i class="glyphicon glyphicon-user"></i> $perfil
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseFour" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <?php
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+                        <i class="glyphicon glyphicon-user"></i> $perfil
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseFour" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <?php
 
-                        var_dump($perfil,$data);
+                    var_dump($perfil, $data);
 
-                        ?>
-                    </div>
+                    ?>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>

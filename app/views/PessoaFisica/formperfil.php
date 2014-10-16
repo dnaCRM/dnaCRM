@@ -20,7 +20,7 @@
 <!--Teste de Form-->
 <div class="row">
 <div class="col-sm-6">
-
+<div class="well">
 <?php
 $perfil = $data['perfil'];
 $perfil_form = new PessoaFisica();
@@ -271,7 +271,8 @@ if (Session::exists('sucesso_salvar_pf')) {
 
 <div class="form-group ">
     <div class="col-sm-12">
-        <a href="PessoaFisica/visualizar/<?php echo $data['id']; ?>" id="limpar" class="btn btn-default"><span class="fa fa-undo"></span> Cancelar</a>
+        <a href="PessoaFisica/visualizar/<?php echo $data['id']; ?>" id="limpar" class="btn btn-default"><span
+                class="fa fa-undo"></span> Cancelar</a>
         <button type="reset" name="cancelar" class="btn btn-info"><span class="fa fa-recycle"></span> Limpar
         </button>
         <a href="PessoaFisica/formperfil" id="novo" class="btn btn-success"><span class="fa fa-file"></span>
@@ -283,7 +284,7 @@ if (Session::exists('sucesso_salvar_pf')) {
 </div>
 </fieldset>
 </form>
-
+</div>
 </div>
 
 <div class="col-sm-6">

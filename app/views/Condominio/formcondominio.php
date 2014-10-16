@@ -20,7 +20,7 @@
 <!--Teste de Form-->
 <div class="row">
     <div class="col-sm-6">
-
+        <div class="well">
         <?php
         $condominio = $data['condominio'];
         $condominio_form = new Condominio();
@@ -122,6 +122,7 @@
             </fieldset>
         </form>
 
+    </div>
     </div>
 
     <div class="col-sm-6">
