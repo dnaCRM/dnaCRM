@@ -38,11 +38,11 @@
                 <fieldset>
                     <legend>Cadastro</legend>
                     <div class="form-group">
-                        <div class="col-sm-12">
-                            <label for="im_perfil" class="control-label">Foto</label>
+                        <div class="col-xs-offset-8">
+                            <label for="im_perfil" class="btn btn-default control-label">Escolher Foto</label>
 
 
-                            <input type="file" class="form-control" id="im_perfil" name="im_perfil">
+                            <input type="file" class="hidden" id="im_perfil" name="im_perfil">
                         </div>
                     </div>
 

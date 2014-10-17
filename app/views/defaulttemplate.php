@@ -72,7 +72,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="Home/editor">Help</a>
+                    <a href="Home/help">Help</a>
                 </li>
                 <li>
                     <a href="Blog">Blog</a>
