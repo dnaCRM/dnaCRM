@@ -37,7 +37,7 @@ class CondominioDAO extends DataAccessObject{
         }
     }
 
-    public function getImFolder()
+    public function getImgFolder()
     {
         return $this->imgFolder;
     }
