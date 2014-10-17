@@ -154,7 +154,7 @@
                 <li><a href="PessoaFisica/formperfil"><i class="fa fa-angle-double-right"></i> Pessoa Física</a></li>
                 <li><a href="PessoaJuridica/formperfil"><i class="fa fa-angle-double-right"></i> Pessoa Jurídica</a></li>
                 <li><a href="Setor/formsetor"><i class="fa fa-angle-double-right"></i> Setores</a></li>
-                <li><a href="Condominio/formcondo"><i class="fa fa-angle-double-right"></i> Condomínio</a></li>
+                <li><a href="Condominio/formcondominio"><i class="fa fa-angle-double-right"></i> Condomínio</a></li>
                 <li><a href="Apartamento/formapartamento"><i class="fa fa-angle-double-right"></i> Apartamento</a></li>
             </ul>
         </li>

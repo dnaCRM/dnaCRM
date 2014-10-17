@@ -18,9 +18,6 @@ class Apartamento extends Controller
     { //Pega a lista completa de apartamentos
         $apartamento_list = (array)$this->model->fullList();
 
-        // Exporta imagens de perfil
-        //$this->exportaImagens($perfil_list);
-
         $dados = array(
             'pagesubtitle' => '',
             'pagetitle' => 'Apartamento',
@@ -40,7 +37,7 @@ class Apartamento extends Controller
      */
     public function formapartamento($id = null)
     {
-        $setor = (new setorDAO())->fullList(); // MINHA DUVIDA ESTA AQUI PAULO
+        $setor = (new setorDAO())->fullList();
 
         if ($id) {
             /** @var ApartamentoDTO */
@@ -50,7 +47,7 @@ class Apartamento extends Controller
 
                 'pagetitle' => 'Atualizar Apartamento.',
                 'pagesubtitle' => '',
-                'setor' => $setor, // MINHA DUVIDA ESTA AQUI PAULO
+                'setor' => $setor,
                 'id' => $id,
                 'apartamento' => $apartamentoarr
             );
@@ -59,7 +56,7 @@ class Apartamento extends Controller
             $dados = array(
                 'pagetitle' => 'Cadastro de Apartamento',
                 'pagesubtitle' => '',
-                'setor' => $setor, // MINHA DUVIDA ESTA AQUI PAULO
+                'setor' => $setor,
                 'id' => null,
                 'apartamento' => $apartamento
             );
@@ -107,7 +104,7 @@ class Apartamento extends Controller
 
         $dados = array(
             //o campo 'obs' vai ser o subtítulo
-            'pagesubtitle' => '',
+            'pagesubtitle' => $apartamentoarr->getDescApartamento(),
             //o campo 'nome' vai ser o título da página
             'pagetitle' => 'Apartamento',
             'apartamento' => $apartamentoarr

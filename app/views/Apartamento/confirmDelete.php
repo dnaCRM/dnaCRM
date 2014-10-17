@@ -35,8 +35,7 @@
                     <div class="col-md-8">
                         <h1><span class="glyphicon glyphicon-arrow-right"></span> Atenção!</h1>
 
-                        <p>Deseja deletar o apartamento <strong><?php echo $apartamento->getCdSetor(); ?>
-                            </strong>?</p> <!-- TENHO QUE RESOLVER PARA MOSTRAR O NOME EM VEZ DE CHAVE PRIMARIA !
+                        <p>Deseja deletar o apartamento <strong><?php echo $apartamento->getCdSetor(); ?></strong>?</p> <!-- TENHO QUE RESOLVER PARA MOSTRAR O NOME EM VEZ DE CHAVE PRIMARIA !
                         <!-- form -->
                         <form action="" method="post">
 
