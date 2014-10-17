@@ -29,7 +29,7 @@
         <table id="perfillist" class="table table-striped table-hover ">
             <thead>
             <tr>
-                <th>Setor</th>
+                <th>Código</th>
                 <th>Descrição</th>
             </tr>
             </thead>
@@ -40,7 +40,7 @@
 
                 echo '<tr>';
                 echo '<td><a href=Apartamento/visualizar/' . $apartamento->getCdApartamento() . '>'
-                    . $apartamento->getCdSetor() . '</a></td>';
+                    . $apartamento->getCdApartamento() . '</a></td>';
                 // RESOLVER ESSE PROBLEMA DE ID PARA NOME DE SETOR;
                 echo '<td>' . $apartamento->getDescApartamento() . '</td>';
                 echo '</tr>';

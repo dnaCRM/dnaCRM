@@ -154,8 +154,7 @@ class Apartamento extends Controller
 
             if (Token::check(Input::get('token'))) {
 
-                //$this->model->delete($dto);
-                echo 'Deletou Apartamento';
+                $this->model->delete($dto);
 
             }
         }

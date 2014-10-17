@@ -44,7 +44,7 @@
 
                             <div class="form-group ">
                                 <div class="col-lg-10 col-lg-offset-2">
-                                    <a href="PessoaFisica/visualizar/<?php echo $perfil->getCdOrdemServico(); ?>"
+                                    <a href="OrdemServico/visualizar/<?php echo $perfil->getCdOrdemServico(); ?>"
                                        class="btn btn-success" role="button">
                                         <span class="glyphicon glyphicon-circle-arrow-left"></span> Cancelar</a>
                                     <button type="submit" name="deletar" class="btn btn-danger"><span
