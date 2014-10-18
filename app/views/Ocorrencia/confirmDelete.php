@@ -20,10 +20,10 @@
     <div class="col-md-12">
         <div class="jumbotron">
             <?php
-            $ocorrencia = $data['ocorrencia'];
+            $ocorrencia = $data['perfil'];
 
             $action = new Ocorrencia();
-            $action->removerPessoaFisica($ocorrencia);
+            $action->removerOcorrencia($ocorrencia);
 
             ?>
 
@@ -34,7 +34,7 @@
                     <div class="col-md-8">
                         <h1><span class="glyphicon glyphicon-arrow-right"></span> Atenção!</h1>
 
-                        <p>Deseja deletar a ocorrencia <strong><?php echo $ocorrencia->getCdOcorrencia(); ?></strong>?</p>
+                        <p>Deseja deletar a ocorrência <strong><?php echo $ocorrencia->getDescAssunto(); ?></strong>?</p>
 
                         <!-- form -->
                         <form action="" method="post">
@@ -61,7 +61,7 @@
                     ?>
                     <div class="col-md-8">
                         <h3>Ocorrencia Deletada!</h3>
-                        <a href="PessoaFisica"
+                        <a href="Ocorrencia"
                            class="btn btn-success" role="button">
                             <span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar</a>
                     </div>

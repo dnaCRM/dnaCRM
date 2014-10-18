@@ -11,7 +11,7 @@ Class Ocorrencia extends Controller
 
     public function __construct()
 { //o método é herdado da classe pai 'Controller'
-    $this->setModel(new OrcorrenciaDAO());
+    $this->setModel(new OcorrenciaDAO());
 }
 
 
@@ -45,8 +45,8 @@ Class Ocorrencia extends Controller
         /** @var OrdemServicoDTO */
         $ocorrenciaarr = $this->findById($id);
 
-        $dt_ocorrencia = new DateTime($ocorrenciaarr->getDtOcorrenica());
-        $ocorrenciaarr->setDtOcorrenica($dt_ocorrencia->format('d/m/Y'));
+        $dt_ocorrencia = new DateTime($ocorrenciaarr->getDtOcorrencia());
+        $ocorrenciaarr->setDtOcorrencia($dt_ocorrencia->format('d/m/Y'));
 
         $dt_fim = new DateTime($ocorrenciaarr->getDtFim());
         $ocorrenciaarr->setDtFim($dt_fim->format('d/m/Y'));
@@ -57,7 +57,7 @@ Class Ocorrencia extends Controller
             'pagesubtitle' => 'Atualizar Ocorrência.',
             'id' => $id,
             'perfil' => $ocorrenciaarr,
-            'Informante' => $informante,
+            'informante' => $informante,
             'estagio' => $estagio
         );
     } else {
@@ -67,7 +67,7 @@ Class Ocorrencia extends Controller
             'pagesubtitle' => 'Ocorrência',
             'id' => null,
             'perfil' => $ocorrencia,
-            'Informante' => $informante,
+            'informante' => $informante,
             'estagio' => $estagio
         );
     }
@@ -133,7 +133,7 @@ Class Ocorrencia extends Controller
 
             try {
                 $this->model->gravar($ocorrencia);
-                Session::flash('sucesso_salvar_os', 'Ordem de Servico salva!', 'success');
+                Session::flash('sucesso_salvar_oc', 'Ocorrência salva!', 'success');
             } catch (Exception $e) {
                 CodeFail((int)$e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
             }

@@ -29,7 +29,8 @@
         <table id="perfillist" class="table table-striped table-hover ">
             <thead>
             <tr>
-                <th>Informante</th>
+                <th>Assunto</th>
+                <th>Descrição</th>
                 <th>Data</th>
             </tr>
             </thead>
@@ -38,11 +39,12 @@
             <?php
 
             foreach ($data['list'] as $ocorrencia) {
-
-                $nasc = new DateTime($ocorrencia->getDtOcorrencia());
+                $dat = new DateTime($ocorrencia->getDtOcorrencia());
+                $ocorrencia->setDtOcorrencia($dat->format('d/m/Y'));
                 echo '<tr>';
-                echo '<td><a href="Ocorrencia/visualizar/' . $ocorrencia->getCdOcorrencia() . '">' . $perfil->getCdPfInformante() . '</a></td>';
-                echo '<td>' . $nasc->format('d/m/Y') . '</td>';
+                echo '<td><a href="Ocorrencia/visualizar/' . $ocorrencia->getCdOcorrencia() . '">' . $ocorrencia->getDescAssunto() . '</a></td>';
+                echo '<td>' . $ocorrencia->getDescOcorrencia() . '</td>';
+                echo '<td>' . $dat->format('d/m/Y') . '</td>';
                 echo '</tr>';
 
             }

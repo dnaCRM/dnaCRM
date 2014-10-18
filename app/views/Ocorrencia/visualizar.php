@@ -10,7 +10,7 @@
         <div class="well">
 
             <a class="btn btn-primary btn-sm"
-               href="Ocorrencia/formperfil/<?php echo $data['perfil']->getCdOcorrencia(); ?>">
+               href="Ocorrencia/formOcorrencia/<?php echo $data['perfil']->getCdOcorrencia(); ?>">
                 <span class="fa fa-edit"></span> Editar</a>
 
             <a class="btn btn-warning btn-sm"
@@ -27,17 +27,15 @@
 
         <?php
 
-        $ocorrencia = $data['ocorrencia'];
-        $dat = new DateTime($ocorrencia->getDtOcorrencia());
-        $ocorrencia->setDtNascimento($dat->format('d/m/Y'));
+        $ocorrencia = $data['perfil'];
 
         echo '<table class="table table-striped table-hover ">';
 
         echo '<tr>';
-        echo "<td><strong>Informante: </strong> {$ocorrencia->getCdPfInformante()}</td>";
+        echo "<td><strong>Assunto: </strong>: {$ocorrencia->getDescAssunto()}</td>";
         echo '</tr>';
         echo '<tr>';
-        echo "<td><strong>E-mail: </strong> {$dat}</td>";
+        echo "<td><strong>Descricao: </strong>: {$ocorrencia->getDescOcorrencia()}</td>";
         echo '</tr>';
 
 
