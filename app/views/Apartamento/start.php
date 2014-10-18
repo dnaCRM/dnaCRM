@@ -29,7 +29,7 @@
         <table id="perfillist" class="table table-striped table-hover ">
             <thead>
             <tr>
-                <th>Setor</th>
+                <th>Código</th>
                 <th>Descrição</th>
             </tr>
             </thead>
@@ -39,9 +39,9 @@
             foreach ($data['list'] as $apartamento) {
 
                 echo '<tr>';
-                echo '<td><a href=Apartamento/visualizar/' . $apartamento->getCdSetor() . '>'
+                echo '<td><a href=Apartamento/visualizar/' . $apartamento->getCdApartamento() . '>'
                     . $apartamento->getCdApartamento() . '</a></td>';
-                    // RESOLVER ESSE PROBLEMA DE ID PARA NOME DE SETOR;
+                // RESOLVER ESSE PROBLEMA DE ID PARA NOME DE SETOR;
                 echo '<td>' . $apartamento->getDescApartamento() . '</td>';
                 echo '</tr>';
 

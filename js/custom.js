@@ -169,7 +169,7 @@ $(document).ready(function () {
                 }
             },
             cpf: {
-                group: '.col-lg-4',
+                group: '.col-sm-4',
                 validators: {
                     notEmpty: {
                         message: 'Campo obrigatório'
@@ -177,7 +177,7 @@ $(document).ready(function () {
                 }
             },
             rg: {
-                group: '.col-lg-4',
+                group: '.col-sm-4',
                 validators: {
                     notEmpty: {
                         message: 'Campo obrigatório'
@@ -185,14 +185,14 @@ $(document).ready(function () {
                 }
             },
             dt_nascimento: {
-                group: '.col-lg-4',
+                group: '.col-sm-4',
                 validators: {
                     notEmpty: {
                         message: 'Campo obrigatório'
                     }
                 }
             },
-            im_foto: {
+            im_perfil: {
                 validators: {
                     file: {
                         extension: 'jpg',
@@ -350,7 +350,7 @@ $('#pf_ajax_form').bootstrapValidator({
                     }
                 }
             },
-            im_foto: {
+            im_perfil: {
                 validators: {
                     file: {
                         extension: 'jpg',

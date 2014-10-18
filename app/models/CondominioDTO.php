@@ -44,10 +44,10 @@ Class CondominioDTO extends DataTransferObject
            'dt_usuario_atualiza' => 'getDtUsuarioAtualiza',
         );
 
-        if($this->getImPerfil()){
+        if ($this->getImPerfil()){
             $this->setImPerfil("img/uploads/tb_condominio/{$this->cd_condominio}.jpg");
         } else {
-            $this->setImPerfil("img/con-user.jpg");
+            $this->setImPerfil("img/icon-user.jpg");
         }
     }
 

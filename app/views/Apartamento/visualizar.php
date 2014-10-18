@@ -10,11 +10,11 @@
         <div class="well">
 
             <a class="btn btn-primary btn-sm"
-               href="Apartamento/formapartamento/<?php echo $data['apartamento']->getCdSetor(); ?>">
+               href="Apartamento/formapartamento/<?php echo $data['apartamento']->getCdApartamento(); ?>">
                 <span class="fa fa-edit"></span> Editar</a>
 
             <a class="btn btn-warning btn-sm"
-               href="Apartamento/confirmDelete/<?php echo $data['apartamento']->getCdSetor(); ?>">
+               href="Apartamento/confirmDelete/<?php echo $data['apartamento']->getCdApartamento(); ?>">
                 <span class="fa fa-trash-o"></span> Deletar</a>
 
 
@@ -32,7 +32,7 @@
         echo '<table class="table table-striped table-hover ">';
 
         echo '<tr>';
-        echo "<td><strong>Nome: </strong>: {$apartamento->getCdSetor()}</td>";
+        echo "<td><strong>Nome: </strong>: {$apartamento->getCdApartamento()}</td>";
         echo '</tr>';
         echo '<tr>';
         echo "<td><strong>Descrição: </strong>: {$apartamento->getDescApartamento()}</td>";

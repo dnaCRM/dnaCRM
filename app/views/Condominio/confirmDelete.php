@@ -20,10 +20,10 @@
     <div class="col-md-12">
         <div class="jumbotron">
             <?php
-            $perfil = $data['perfil'];
+            $condominio = $data['condominio'];
 
-            $action = new OrdemServico();
-            $action->removerOrdemServico($perfil);
+            $action = new Condominio();
+            $action->removerCondominio($condominio);
 
             ?>
 
@@ -31,11 +31,14 @@
                 <?php
                 if (!Input::exists()) {
                     ?>
+                    <div class="col-md-4">
+                        <img class="img-circle profilefoto left"
+                             src="<?php echo $condominio->getImPerfil(); ?>">
                     </div>
                     <div class="col-md-8">
                         <h1><span class="glyphicon glyphicon-arrow-right"></span> Atenção!</h1>
 
-                        <p>Deseja deletar a Ordem de Servico <strong><?php echo $perfil->getDescAssunto(); ?></strong>?</p>
+                        <p>Deseja deletar Condominio <strong><?php echo $condominio->getNmCondominio(); ?></strong>?</p>
 
                         <!-- form -->
                         <form action="" method="post">
@@ -44,7 +47,7 @@
 
                             <div class="form-group ">
                                 <div class="col-lg-10 col-lg-offset-2">
-                                    <a href="OrdemServico/visualizar/<?php echo $perfil->getCdOrdemServico(); ?>"
+                                    <a href="Condominio/visualizar/<?php echo $condominio->getCdCondominio(); ?>"
                                        class="btn btn-success" role="button">
                                         <span class="glyphicon glyphicon-circle-arrow-left"></span> Cancelar</a>
                                     <button type="submit" name="deletar" class="btn btn-danger"><span
@@ -61,8 +64,8 @@
                 } else {
                     ?>
                     <div class="col-md-8">
-                        <h3>Cadastro Deletado!</h3>
-                        <a href="OrdemServico"
+                        <h3>Condominio Deletado!</h3>
+                        <a href="Condominio"
                            class="btn btn-success" role="button">
                             <span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar</a>
                     </div>

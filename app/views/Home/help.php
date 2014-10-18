@@ -1,21 +1,21 @@
 <div class="page-header" id="banner">
     <div class="row">
         <div class="col-lg-6">
-            <h1>Lumen</h1>
-            <p class="lead">Light and shadow</p>
+            <h1>Bootswatch</h1>
+            <p class="lead">Bootstrap Theme</p>
         </div>
         <div class="col-lg-6" style="padding: 15px 15px 0 15px;">
             <div class="well sponsor">
-                <a href="http://srv.buysellads.com/direct/click/track/yes/x/G6NDC27ICWAI627UCWALYK7UCKBILKJMCT7I5" onclick="_gaq.push(['_trackEvent', 'banner', 'click', 'treehouse']);" rel="nofollow" target="_blank">
+                <a href="https://github.com/dnaCRM">
                 <span style="float: left; margin-right: 15px;">
-                  <img src="http://srv.buysellads.com/direct/image/track/yes/x/G6NDC27ICWAI627UCWALYK7UCKBILKJMCT7I5" onload="_gaq.push(['_trackEvent', 'banner', 'impression', 'treehouse']);" width="175" height="135">
+                  <img src="img/dna_m_big.png">
                 </span>
                 </a>
-                <a href="http://srv.buysellads.com/direct/click/track/yes/x/G6NDC27ICWAI627UCWALYK7UCKBILKJMCT7I5" onclick="_gaq.push(['_trackEvent', 'banner', 'click', 'treehouse']);" rel="nofollow" target="_blank">
-                    <h4 style="margin-bottom: 0.4em;">Treehouse</h4>
+                <a href="https://github.com/dnaCRM">
+                    <h4 style="margin-bottom: 0.4em;">dnaCRM</h4>
                     <div class="clearfix">
-                        <p>Learn Web Design, Coding, Mobile App Development &amp; More.</p>
-                        <p>Start Learning for Free!</p>
+                        <p>Guia de componentes.</p>
+                        <p>...!</p>
                     </div>
                 </a>
             </div>
