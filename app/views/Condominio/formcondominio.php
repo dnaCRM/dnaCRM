@@ -64,7 +64,7 @@
 
                         <input type="text" class="form-control" id="cep" name="cep"
                                value="<?php echo $condominio->getCep() == '' ? Input::get('cep') : $condominio->getCep(); ?>"
-                               placeholder="Cep"
+                               placeholder="00000-000"
                                maxlength="9">
                     </div>
                 </div>
