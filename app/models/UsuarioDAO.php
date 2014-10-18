@@ -52,7 +52,6 @@ class UsuarioDAO extends DataAccessObject
         if ($this->resultado) {
             return $this->resultado[0];
         }
-
         return false;
     }
 } 

@@ -205,13 +205,15 @@
         </li>
     </ul>
 
-</nav>
-<!-- side-bar end -->
+</nav><!-- side-bar end -->
 
 <div class="container"><!-- container start -->
 
     <?php require_once($this->viewfile); ?>
 
+</div><!-- container end -->
+
+<div class="container">
 
     <footer>
 
@@ -233,9 +235,7 @@
 
     </footer>
 
-
 </div>
-<!-- container end -->
 
 <script src="js/jquery-1.10.2.min.js"></script>
 <script src="js/moment-with-locales.min.js"></script>

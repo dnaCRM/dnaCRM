@@ -8,7 +8,7 @@
  */
 class Usuario extends Controller
 {
-    private $atualizar;
+    private $atualizar = false;
 
     public function __construct()
     {
@@ -49,6 +49,9 @@ class Usuario extends Controller
             if (Token::check(Input::get('token'))) {
 
                 $usuario = $this->setDados();
+                if ($this->getModel()->findByLogin($usuario)) {
+                    $this->atualizar = true;
+                }
                 $this->getModel()->gravar($usuario, $this->atualizar);
 
             }
@@ -97,6 +100,7 @@ class Usuario extends Controller
     function formuser($id = null)
     {
         $pessoaFisica = new PessoaFisicaDAO();
+        $niveis = array('3' => 'Usuário', '2' => 'Atendente', '1' => 'Administrador');
 
         if (!$id || !$pessoa = $pessoaFisica->getById($id)) {
             Redirect::to(SITE_URL . 'Home');
@@ -109,6 +113,7 @@ class Usuario extends Controller
                 'pagetitle' => 'Atualização de Usuário',
                 'perfil' => $pessoa,
                 'usuario' => $usuario,
+                'niveis' => $niveis,
                 'atualizar' => true
             );
         } else {
