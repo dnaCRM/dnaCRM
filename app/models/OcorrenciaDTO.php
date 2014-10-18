@@ -27,7 +27,6 @@ class OcorrenciaDTO extends DataTransferObject
             'desc_assunto' => 'getDescAssunto',
             'desc_ocorrencia' => 'getDescOcorrencia',
             'dt_ocorrencia' => 'getDtOcorrencia',
-            'ie_situacao' => 'getIeSituacao',
             'dt_fim' => 'getDtFim',
             'desc_conclusao' => 'getDescConclusao',
             'cd_catg_estagio' => 'getCdCatgEstagio',
@@ -153,13 +152,6 @@ class OcorrenciaDTO extends DataTransferObject
         return $this->dt_usuario_criacao;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getIeSituacao()
-    {
-        return $this->ie_situacao;
-    }
 
     ################## SETTERS #######################
 
@@ -280,13 +272,5 @@ class OcorrenciaDTO extends DataTransferObject
         return $this;
     }
 
-    /**
-     * @param mixed $ie_situacao
-     */
-    public function setIeSituacao($ie_situacao)
-    {
-        $this->ie_situacao = $ie_situacao;
-        return $this;
-    }
 
 }
