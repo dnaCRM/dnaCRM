@@ -108,6 +108,7 @@ $(document).ready(function () {
     $('#dt_inicio').mask("99/99/9999");
     $('#dt_fim').mask("99/99/9999");
     $('#fone').mask("(99) 9999-9999");
+    $('#cep').mask("99999-999");
 });
 
 $(document).ready(function () {
@@ -422,6 +423,85 @@ $('#pf_ajax_form').bootstrapValidator({
                 validators: {
                     notEmpty: {
                         message: 'Campo obrigatório'
+                    }
+                }
+            }
+        }
+    });
+    $('#apartamentoform').bootstrapValidator({
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            cd_setor: {
+                validators: {
+                    notEmpty: {
+                        message: 'Campo obrigatório.'
+                    }
+                }
+            },
+            desc_apartamento: {
+                validators: {
+                    notEmpty: {
+                        message: 'Informar descrição é obrigatório.'
+                    }
+                }
+            }
+        }
+    });
+    $('#condominioform').bootstrapValidator({
+        excluded: ':disabled',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            nm_condominio: {
+                validators: {
+                    notEmpty: {
+                        message: 'Informar nome é obrigatório'
+                    }
+                }
+            },
+            cep: {
+                validators: {
+                    notEmpty: {
+                        message: 'Informar cep é obrigatório'
+                    }
+                }
+            },
+            rua: {
+                validators: {
+                    notEmpty: {
+                        message: 'Informar rua é obrigatório'
+                    }
+                }
+            },
+            bairro: {
+                validators: {
+                    notEmpty: {
+                        message: 'Informar bairro é obrigatório'
+                    }
+                }
+            },
+            cidade: {
+                validators: {
+                    notEmpty: {
+                        message: 'Informar cidade obrigatório'
+                    }
+                }
+            },
+            im_perfil: {
+                validators: {
+                    file: {
+                        extension: 'jpg',
+                        type: 'image/jpeg',
+                        /*maxSize: 2048 * 1024,   // 2 MB*/
+                        message: 'O arquivo selecionado não é válido. Apenas aquivos .jpg são permitidos.'
                     }
                 }
             }
