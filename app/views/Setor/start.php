@@ -37,11 +37,12 @@
 
             <?php
 
-            foreach ($data['list'] as $perfil) {
+            foreach ($data['list'] as $setor) {
 
                 echo '<tr>';
-                echo '<td><img src="' . $perfil->getImPerfil() . '" class="img-circle" title="' . $perfil->getCdSetor() . '"></td>';
-                echo '<td><a href="Setor/visualizar/' . $perfil->getCdSetor() . '">' . $perfil->getNmSetor() . '</a></td>';
+                echo '<td><img src="' . $setor->getImPerfil() . '" class="img-circle" title="' . $setor->getCdSetor() . '"></td>';
+                echo '<td><a href="Setor/visualizar/' . $setor->getCdSetor() . '">' . $setor->getNmSetor() . '</a></td>';
+                echo '<td>' . $perfil->getObservacao() . '</td>';
                 echo '</tr>';
 
             }

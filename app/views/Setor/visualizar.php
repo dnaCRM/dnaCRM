@@ -10,11 +10,11 @@
         <div class="well">
 
             <a class="btn btn-primary btn-sm"
-               href="PessoaFisica/formperfil/<?php echo $data['perfil']->getCdSetor(); ?>">
+               href="Setor/formSetor/<?php echo $data['perfil']->getCdSetor(); ?>">
                 <span class="fa fa-edit"></span> Editar</a>
 
             <a class="btn btn-warning btn-sm"
-               href="PessoaFisica/confirmDelete/<?php echo $data['perfil']->getCdSetor(); ?>">
+               href="Setor/confirmDelete/<?php echo $data['perfil']->getCdSetor(); ?>">
                 <span class="fa fa-trash-o"></span> Deletar</a>
 
 
@@ -31,12 +31,15 @@
              src="<?php echo $data['perfil']->getImPerfil(); ?>">
         <?php
 
-        $perfil = $data['perfil'];
+        $setor = $data['perfil'];
 
         echo '<table class="table table-striped table-hover ">';
 
         echo '<tr>';
-        echo "<td><strong>Nome: </strong> {$perfil->getNmPessoaFisica()}</td>";
+        echo "<td><strong>Nome: </strong> {$setor->getNmSetor()}</td>";
+        echo '</tr>';
+        echo '<tr>';
+        echo "<td><strong>Observação: </strong> {$setor->getObservacao()}</td>";
         echo '</tr>';
 
         echo '</table>';

@@ -20,10 +20,10 @@
     <div class="col-md-12">
         <div class="jumbotron">
             <?php
-            $perfil = $data['perfil'];
+            $setor = $data['perfil'];
 
             $action = new Setor();
-            $action->removerSetor($perfil);
+            $action->removerSetor($setor);
 
             ?>
 
@@ -33,12 +33,12 @@
                     ?>
                     <div class="col-md-4">
                         <img class="img-circle profilefoto left"
-                             src="<?php echo $perfil->getImPerfil(); ?>">
+                             src="<?php echo $setor->getImPerfil(); ?>">
                     </div>
                     <div class="col-md-8">
                         <h1><span class="glyphicon glyphicon-arrow-right"></span> Atenção!</h1>
 
-                        <p>Deseja deletar o setor <strong><?php echo $perfil->getNmSetor(); ?></strong>?</p>
+                        <p>Deseja deletar o setor <strong><?php echo $setor->getNmSetor(); ?></strong>?</p>
 
                         <!-- form -->
                         <form action="" method="post">
@@ -47,7 +47,7 @@
 
                             <div class="form-group ">
                                 <div class="col-lg-10 col-lg-offset-2">
-                                    <a href="Setor/visualizar/<?php echo $perfil->getCdSetor(); ?>"
+                                    <a href="Setor/visualizar/<?php echo $setor->getCdSetor(); ?>"
                                        class="btn btn-success" role="button">
                                         <span class="glyphicon glyphicon-circle-arrow-left"></span> Cancelar</a>
                                     <button type="submit" name="deletar" class="btn btn-danger"><span

@@ -5,7 +5,7 @@
  * Date: 16/10/14
  * Time: 21:25
  */
-class PessoaFisica extends Controller
+class Setor extends Controller
 {
 
     public function __construct()
@@ -37,9 +37,9 @@ class PessoaFisica extends Controller
      * Se não receber um id o formulário estará vazio e permitirá registrar
      * um novo perfil
      */
-    public function formperfil($id = null)
+    public function formSetor($id = null)
     {
-        $condominio = (new CondominioaDAO())->fullList();
+        $condominio = (new CondominioDAO())->fullList();
 
 
         if ($id) {
@@ -57,7 +57,7 @@ class PessoaFisica extends Controller
         } else {
             $perfil = new SetorDTO();
             $dados = array(
-                'pagetitle' => 'Cadastro do Setor',
+                'pagetitle' => 'Cadastro de Setor',
                 'pagesubtitle' => 'Setor.',
                 'condominio' => $condominio,
                 'id' => null,
@@ -65,7 +65,7 @@ class PessoaFisica extends Controller
             );
         }
 
-        $this->view = new View('Setor', 'formperfil');
+        $this->view = new View('Setor', 'formSetor');
         $this->view->output($dados);
     }
 
@@ -82,6 +82,8 @@ class PessoaFisica extends Controller
         $this->exportaImagens($setorarr);
 
         $dados = array(
+            //o campo 'obs' vai ser o subtítulo
+            'pagesubtitle' => $setorarr->getObservacao(),
             //o campo 'nome' vai ser o título da página
             'pagetitle' => $setorarr->getNmSetor(),
             //todos os atributos do perfil
@@ -104,12 +106,14 @@ class PessoaFisica extends Controller
         $setorarr = $this->findById($id);
 
         $dados = array(
+             //o campo 'obs' vai ser o subtítulo
+            'pagesubtitle' => $setorarr->getObservacao(),
              //o campo 'nome' vai ser o título da página
             'pagetitle' => $setorarr->getNmSetor(),
             'perfil' => $setorarr
         );
 
-        $this->view = new View('PessoaFisica', 'confirmDelete');
+        $this->view = new View('Setor', 'confirmDelete');
         $this->view->output($dados);
     }
 
@@ -176,21 +180,21 @@ class PessoaFisica extends Controller
      * Percorre os objetos testando se as imagens já foram exportadas
      * e exporta caso necessário
      */
-    protected function exportaImagens($arr_perfil)
+    protected function exportaImagens($arr_setor)
     {
-        if (is_array($arr_perfil)) {
-            foreach ($arr_perfil as $perfil) {
-                if ($perfil->getImPerfil()
-                    && !file_exists($this->model->getImgFolder() . $perfil->getCdSetor() . '.jpg')
+        if (is_array($arr_setor)) {
+            foreach ($arr_setor as $setor) {
+                if ($setor->getImPerfil()
+                    && !file_exists($this->model->getImgFolder() . $setor->getCdSetor() . '.jpg')
                 ) {
-                    $this->model->exportaFoto($perfil->getCdPessoaFisica());
+                    $this->model->exportaFoto($setor->getCdSetor());
                 }
             }
         } else {
-            if ($arr_perfil->getImPerfil()
-                && !file_exists($this->model->getImgFolder() . $arr_perfil->getCdSetor() . '.jpg')
+            if ($arr_setor->getImPerfil()
+                && !file_exists($this->model->getImgFolder() . $arr_setor->getCdSetor() . '.jpg')
             ) {
-                $this->model->exportaFoto($arr_perfil->getCdSetor());
+                $this->model->exportaFoto($arr_setor->getCdSetor());
             }
         }
     }
