@@ -31,18 +31,22 @@
             <tr>
                 <th>Foto</th>
                 <th>Nome</th>
+                <th>Observação</th>
             </tr>
             </thead>
             <tbody>
 
             <?php
 
+            $condominio = (new CondominioDAO());
+
             foreach ($data['list'] as $setor) {
+                $condominio = $condominio->getById($setor->getCdCondominio());
 
                 echo '<tr>';
                 echo '<td><img src="' . $setor->getImPerfil() . '" class="img-circle" title="' . $setor->getCdSetor() . '"></td>';
                 echo '<td><a href="Setor/visualizar/' . $setor->getCdSetor() . '">' . $setor->getNmSetor() . '</a></td>';
-                echo '<td>' . $perfil->getObservacao() . '</td>';
+                echo '<td>' . $condominio->getNmCondominio()  . '</td>';
                 echo '</tr>';
 
             }

@@ -428,6 +428,98 @@ $('#pf_ajax_form').bootstrapValidator({
             }
         }
     });
+
+
+    $('#ocorrenciaform').bootstrapValidator({
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            informante: {
+                validators: {
+                    notEmpty: {
+                        message: 'Informar o informante é obrigatório.'
+                    }
+                }
+            },
+            estagio: {
+                validators: {
+                    notEmpty: {
+                        message: 'Informar o estagio é obrigatório.'
+                    }
+                }
+            },
+            dt_ocorrencia: {
+                validators: {
+                    notEmpty: {
+                        message: 'Campo obrigatório'
+                    }
+                }
+            },
+            assunto: {
+                validators: {
+                    notEmpty: {
+                        message: 'Informar o assunto é obrigatória'
+                    }
+                }
+            },
+
+            descricao: {
+                validators: {
+                    notEmpty: {
+                        message: 'Informar o descrição é obrigatória'
+                    }
+                }
+            }
+        }
+    });
+
+    $('#setorform').bootstrapValidator({
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            im_perfil: {
+                validators: {
+                    file: {
+                        extension: 'jpg',
+                        type: 'image/jpeg',
+                        /*maxSize: 2048 * 1024,   // 2 MB*/
+                        message: 'O arquivo selecionado não é válido. Apenas aquivos .jpg são permitidos.'
+                    }
+                }
+            },
+            cd_condominio: {
+                validators: {
+                    notEmpty: {
+                        message: 'Informar o condominio é obrigatório.'
+                    }
+                }
+            },
+            nm_setor: {
+                validators: {
+                    notEmpty: {
+                        message: 'Informar o nome do setor é obrigatório.'
+                    }
+                }
+            },
+            observacao: {
+                validators: {
+                    notEmpty: {
+                        message: 'Informar a observação é obrigatório.'
+                    }
+                }
+            }
+        }
+    });
+
+
     $('#apartamentoform').bootstrapValidator({
         message: 'This value is not valid',
         feedbackIcons: {

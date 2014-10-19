@@ -42,6 +42,12 @@ class SetorDAO extends DataAccessObject
             }
     }
 
+
+    public function getImgFolder()
+    {
+        return $this->imgFolder;
+    }
+
     /**
      * @return string
      */

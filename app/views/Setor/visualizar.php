@@ -31,7 +31,11 @@
              src="<?php echo $data['perfil']->getImPerfil(); ?>">
         <?php
 
+        $condominio = (new CondominioDAO());
+
         $setor = $data['perfil'];
+
+        $condominio = $condominio->getById($setor->getCdCondominio());
 
         echo '<table class="table table-striped table-hover ">';
 
@@ -39,7 +43,7 @@
         echo "<td><strong>Nome: </strong> {$setor->getNmSetor()}</td>";
         echo '</tr>';
         echo '<tr>';
-        echo "<td><strong>Observação: </strong> {$setor->getObservacao()}</td>";
+        echo "<td><strong>Condomínio: </strong> {$condominio->getNmCondominio()}</td>";
         echo '</tr>';
 
         echo '</table>';

@@ -81,7 +81,7 @@
 
                 <div class="form-group">
 
-                    <div class="col-sm-4 inputGroupContainer" id="dt_ocorrencia_picker">
+                    <div class="col-sm-4 inputGroupContainer" id="dt_inicio_picker">
                         <label for="dt_ocorrencia" class="control-label">Início</label>
 
 
