@@ -104,7 +104,7 @@ class Condominio extends Controller
 
         $dados = array(
             //o campo 'obs' vai ser o subtítulo
-            'pagesubtitle' => $condominioarr->getCdSetor(),
+            'pagesubtitle' => $condominioarr->getNmCondominio(),
             //o campo 'nome' vai ser o título da página
             'pagetitle' => '',
             'condominio' => $condominioarr
@@ -160,7 +160,7 @@ class Condominio extends Controller
 
             if (Token::check(Input::get('token'))) {
 
-                //$this->model->delete($dto);
+                $this->model->delete($dto);
                 echo 'Deletou condominio';
 
             }
