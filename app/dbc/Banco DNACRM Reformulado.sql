@@ -2493,12 +2493,12 @@ VALUES
 1,now(),1,now());
 
 
+
 INSERT INTO tb_ocorrencia
 (cd_pf_informante,
 desc_assunto,
 desc_ocorrencia,
 dt_ocorrencia,
-ie_situacao,
 cd_catg_estagio,
 cd_vl_catg_estagio,
 cd_usuario_criacao,
@@ -2508,7 +2508,7 @@ dt_usuario_atualiza)
 VALUES
 (1,'vidro quebrado',
 'O administrador quebrou o vidro',
-now(), 1, 3, 55,
+now(), 3, 55,
 1,now(),1,now());
 
 INSERT INTO tb_orcamento(
