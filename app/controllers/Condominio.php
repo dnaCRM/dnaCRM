@@ -42,7 +42,7 @@ class Condominio extends Controller
     public function formcondominio($id = null)
     {
         if ($id) {
-            /** @var PessoaJuridicaDTO */
+            /** @var CondominioDTO */
             $condominioarr = $this->findById($id);
 
             $dados = array(
@@ -145,7 +145,7 @@ class Condominio extends Controller
             ->setNumero(100)
             ->setBairro(Input::get('bairro'))
             ->setCidade(Input::get('cidade'))
-            ->setCdCatgEstado(1)
+            ->setCdCatgEstado(2)
             ->setCdVlCatgEstado(2)
             ->setCdUsuarioCriacao(Session::get('user'))
             ->setDtUsuarioCriacao('now()')
