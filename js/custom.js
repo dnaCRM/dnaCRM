@@ -94,10 +94,6 @@ $(document).ready(function () {
         $('html, body').animate({scrollTop: 0}, 400);
         return false;
     });
-
-});
-
-$(document).ready(function () {
     $('#cpf').mask("999.999.999-99");
     $('#cnpj').mask("99.999.999/9999-99");
     $('#celular').mask("(99) Z9999-9999", {translation: {'Z': {pattern: /[0-9]/, optional: true}}});  //[] Opcional
@@ -109,33 +105,6 @@ $(document).ready(function () {
     $('#dt_fim').mask("99/99/9999");
     $('#fone').mask("(99) 9999-9999");
     $('#cep').mask("99999-999");
-});
-
-$(document).ready(function () {
-    $('#datetimepicker').datetimepicker({
-        language: 'pt-br',
-        pickTime: false
-    });
-    $('#nascimento').datetimepicker({
-        language: 'pt-br',
-        pickTime: false
-    });
-    $('#dt_inicio_curso_picker').datetimepicker({
-        language: 'pt-br',
-        pickTime: false
-    });
-    $('#dt_fim_curso_picker').datetimepicker({
-        language: 'pt-br',
-        pickTime: false
-    });;
-    $('#dt_inicio_picker').datetimepicker({
-        language: 'pt-br',
-        pickTime: false
-    });
-    $('#dt_fim_picker').datetimepicker({
-        language: 'pt-br',
-        pickTime: false
-    });
 
     $('#pessoafisicaform').bootstrapValidator({
         excluded: ':disabled',
@@ -205,7 +174,7 @@ $(document).ready(function () {
             }
         }
     });
-$('#pf_ajax_form').bootstrapValidator({
+    $('#pf_ajax_form').bootstrapValidator({
         excluded: ':disabled',
         feedbackIcons: {
             valid: 'glyphicon glyphicon-ok',
@@ -429,7 +398,6 @@ $('#pf_ajax_form').bootstrapValidator({
         }
     });
 
-
     $('#ocorrenciaform').bootstrapValidator({
         message: 'This value is not valid',
         feedbackIcons: {
@@ -519,7 +487,6 @@ $('#pf_ajax_form').bootstrapValidator({
         }
     });
 
-
     $('#apartamentoform').bootstrapValidator({
         message: 'This value is not valid',
         feedbackIcons: {
@@ -599,45 +566,23 @@ $('#pf_ajax_form').bootstrapValidator({
             }
         }
     });
+    $('#perfillist').dataTable({
+        "language": {
+            "url": "js/datatables/js/dataTables.pt-br.lang"
+        },
+        responsive: true
+    });
 
-    $('#datetimepicker')
-        .on('dp.change dp.show', function (e) {
-            // Valida a data quando o usuário inserir
-            $('#pessoafisicaform').bootstrapValidator('revalidateField', 'dt_nascimento');
-        });
-    $('#dt_inicio_picker')
-        .on('dp.change dp.show', function (e) {
-            // Valida a data quando o usuário inserir
-            $('#ordemservicoform').bootstrapValidator('revalidateField', 'dt_inicio_picker');
-        });
-    $('#datetimepicker')
-        .on('dp.change dp.show', function (e) {
-            // Valida a data quando o usuário inserir
-            $('#pf_ajax_form').bootstrapValidator('revalidateField', 'dt_nascimento');
-        });
-
-});
-
-
-$('#perfillist').dataTable({
-    "language": {
-        "url": "js/datatables/js/dataTables.pt-br.lang"
-    },
-    responsive: true
-});
-
-$(document).ready(function(){
-    $('#pf_ajax_form').submit(function(){
-        var dados = $( this ).serialize();
+    $('#pf_ajax_form').submit(function () {
+        var dados = $(this).serialize();
 
         $.ajax({
             type: "POST",
             url: "app/ajax_controllers/processa.php",
             data: dados,
-            success: function( data )
-            {
+            success: function (data) {
                 $('#ajax_response').html(data);
-                console.log( data + 'Alguma coisa aconteceu' );
+                console.log(data + 'Alguma coisa aconteceu');
             }
         });
 
