@@ -111,31 +111,6 @@ $(document).ready(function () {
     $('#cep').mask("99999-999");
 });
 
-$(document).ready(function () {
-    $('#datetimepicker').datetimepicker({
-        language: 'pt-br',
-        pickTime: false
-    });
-    $('#nascimento').datetimepicker({
-        language: 'pt-br',
-        pickTime: false
-    });
-    $('#dt_inicio_curso_picker').datetimepicker({
-        language: 'pt-br',
-        pickTime: false
-    });
-    $('#dt_fim_curso_picker').datetimepicker({
-        language: 'pt-br',
-        pickTime: false
-    });;
-    $('#dt_inicio_picker').datetimepicker({
-        language: 'pt-br',
-        pickTime: false
-    });
-    $('#dt_fim_picker').datetimepicker({
-        language: 'pt-br',
-        pickTime: false
-    });
 
     $('#pessoafisicaform').bootstrapValidator({
         excluded: ':disabled',
@@ -608,26 +583,6 @@ $('#pf_ajax_form').bootstrapValidator({
         },
         responsive: true
     });
-
-
-
-    $('#datetimepicker')
-        .on('dp.change dp.show', function (e) {
-            // Valida a data quando o usuário inserir
-            $('#pessoafisicaform').bootstrapValidator('revalidateField', 'dt_nascimento');
-        });
-    $('#dt_inicio_picker')
-        .on('dp.change dp.show', function (e) {
-            // Valida a data quando o usuário inserir
-            $('#ordemservicoform').bootstrapValidator('revalidateField', 'dt_inicio_picker');
-        });
-    $('#datetimepicker')
-        .on('dp.change dp.show', function (e) {
-            // Valida a data quando o usuário inserir
-            $('#pf_ajax_form').bootstrapValidator('revalidateField', 'dt_nascimento');
-        });
-
-});
 
 
 $('#perfillist').dataTable({
