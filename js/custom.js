@@ -174,61 +174,6 @@ $(document).ready(function () {
             }
         }
     });
-    $('#pf_ajax_form').bootstrapValidator({
-        excluded: ':disabled',
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
-        },
-        fields: {
-            ie_sexo: {
-                validators: {
-                    notEmpty: {
-                        message: 'Gênero é obrigatório'
-                    }
-                }
-            },
-            nm_pessoa_fisica: {
-                validators: {
-                    notEmpty: {
-                        message: 'Campo obrigatório'
-                    }
-                }
-            },
-            email: {
-                validators: {
-                    notEmpty: {
-                        message: 'Campo obrigatório'
-                    },
-                    emailAddress: {
-                        message: 'E-mail inválido'
-                    }
-                }
-            },
-            cpf: {
-                validators: {
-                    notEmpty: {
-                        message: 'Campo obrigatório'
-                    }
-                }
-            },
-            rg: {
-                validators: {
-                    notEmpty: {
-                        message: 'Campo obrigatório'
-                    }
-                }
-            },
-            dt_nascimento: {
-                validators: {
-                    notEmpty: {
-                        message: 'Campo obrigatório'
-                    }
-                }
-            }
-        }
-    });
 
     $('#cadastro_usuario').bootstrapValidator({
         message: 'This value is not valid',
@@ -572,8 +517,10 @@ $(document).ready(function () {
         },
         responsive: true
     });
+});
 
-    $('#pf_ajax_form').submit(function () {
+$('#pf_ajax_form')
+    .submit(function () {
         var dados = $(this).serialize();
 
         $.ajax({
@@ -588,4 +535,3 @@ $(document).ready(function () {
 
         return false;
     });
-});
