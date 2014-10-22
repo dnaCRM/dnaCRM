@@ -150,11 +150,12 @@ class Condominio extends Controller
             ->setBairro(Input::get('bairro'))
             ->setCidade(Input::get('cidade'))
             ->setCdCatgEstado(2)
-<<<<<<< HEAD
+
             ->setCdVlCatgEstado(Input::get('estado'))
-=======
+
+
             ->setCdVlCatgEstado(2)
->>>>>>> 59e35efc529e9b19f9e3d05ba4ea994472e692e1
+
             ->setCdUsuarioCriacao(Session::get('user'))
             ->setDtUsuarioCriacao('now()')
             ->setCdUsuarioAtualiza(Session::get('user'))

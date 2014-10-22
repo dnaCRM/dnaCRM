@@ -105,7 +105,7 @@ $(document).ready(function () {
     $('#dt_fim').mask("99/99/9999");
     $('#fone').mask("(99) 9999-9999");
     $('#cep').mask("99999-999");
-<<<<<<< HEAD
+
     $('#numero').mask("99999");
 });
 
@@ -134,8 +134,6 @@ $(document).ready(function () {
         language: 'pt-br',
         pickTime: false
     });
-=======
->>>>>>> 59e35efc529e9b19f9e3d05ba4ea994472e692e1
 
     $('#pessoafisicaform').bootstrapValidator({
         excluded: ':disabled',
