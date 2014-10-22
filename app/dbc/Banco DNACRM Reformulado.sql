@@ -1571,6 +1571,7 @@ DECLARE
 	cd_usu_banco_oid BIGINT;
 	existe5 INTEGER;
 	aux_nivel INTEGER;
+	login_prop INTEGER;
 			
 BEGIN
 	
@@ -1593,6 +1594,12 @@ BEGIN
 	INTO existe5		
 	FROM tb_usuario
 	WHERE login = $6;
+	
+	SELECT count(*)
+	INTO login_prop		
+	FROM tb_usuario
+	WHERE login = $6
+	AND cd_usuario = $5;
 	
 	IF (existe3 = 1) THEN
 	
@@ -1655,15 +1662,19 @@ BEGIN
 												
 			IF ($6 IS NOT NULL) THEN 				
 		
-				IF (existe5 = 0) THEN
-													
-					UPDATE tb_usuario SET	
-						login = $6							
-					WHERE cd_usuario = $5;						
-						
-				ELSE
+				IF (login_prop = 0) THEN
 				
-					RETURN 'A outro perfil que já possui uma conta de usuário com esse nome!';
+					IF (existe5 = 0) THEN
+													
+						UPDATE tb_usuario SET	
+							login = $6							
+						WHERE cd_usuario = $5;						
+						
+					ELSE
+				
+						RETURN 'A outro perfil que já possui uma conta de usuário com esse nome!';
+				
+					END IF;
 					
 				END IF;
 
@@ -1785,6 +1796,8 @@ DECLARE
 	cd_usu_banco_oid BIGINT;
 	existe5 INTEGER;
 	aux_nivel INTEGER;
+	login_prop INTEGER;
+	
 			
 BEGIN
 	
@@ -1808,6 +1821,12 @@ BEGIN
 	INTO existe5		
 	FROM tb_usuario
 	WHERE login = $6;
+	
+	SELECT count(*)
+	INTO login_prop		
+	FROM tb_usuario
+	WHERE login = $6
+	AND cd_usuario = $5;
 	
 	IF (existe3 = 1) THEN
 	
@@ -1870,16 +1889,20 @@ BEGIN
 												
 			IF ($6 IS NOT NULL) THEN 				
 		
-				IF (existe5 = 0) THEN
+				IF (login_prop = 0) THEN
+				
+					IF (existe5 = 0) THEN
 													
-					UPDATE tb_usuario SET	
-						login = $6							
-					WHERE cd_usuario = $5;						
+						UPDATE tb_usuario SET	
+							login = $6							
+						WHERE cd_usuario = $5;						
 						
-				ELSE
+					ELSE
 				
-					RETURN 'A outro perfil que já possui uma conta de usuário com esse nome!';
+						RETURN 'A outro perfil que já possui uma conta de usuário com esse nome!';
 				
+					END IF;
+					
 				END IF;
 
 			END IF;
@@ -2493,12 +2516,12 @@ VALUES
 1,now(),1,now());
 
 
+
 INSERT INTO tb_ocorrencia
 (cd_pf_informante,
 desc_assunto,
 desc_ocorrencia,
 dt_ocorrencia,
-ie_situacao,
 cd_catg_estagio,
 cd_vl_catg_estagio,
 cd_usuario_criacao,
@@ -2508,7 +2531,7 @@ dt_usuario_atualiza)
 VALUES
 (1,'vidro quebrado',
 'O administrador quebrou o vidro',
-now(), 1, 3, 55,
+now(), 3, 55,
 1,now(),1,now());
 
 INSERT INTO tb_orcamento(

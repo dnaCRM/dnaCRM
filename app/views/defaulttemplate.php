@@ -53,22 +53,33 @@
                         <li><a href="PessoaFisica">Pessoa Física</a></li>
                         <li><a href="PessoaJuridica">Pessoa Juridica</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">Item</a></li>
                         <li><a href="Apartamento">Apartamento</a></li>
+                        <li><a href="Setor">Setor</a></li>
+                        <li><a href="Condominio">Condomínio</a></li>
+                        <li class="divider"></li>
                         <li><a href="OrdemServico">Ordens de Serviço</a></li>
-                        <li><a href="Condominio">Condominio</a></li>
+                        <li><a href="Ocorrencia">Ocorrência</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Cadastrar <span
                             class="caret"></span></a>
                     <ul class="dropdown-menu" aria-labelledby="themes">
-                        <li><a href="PessoaFisica/formperfil">Nova Pessoa Fisica</a></li>
-                        <li><a href="PessoaJuridica/formperfil">Nova Pessoa Juridica</a></li>
-                        <li><a href="#">Item</a></li>
-                        <li><a href="Apartamento/formapartamento">Novo Apartamento</a></li>
-                        <li><a href="OrdemServico/formOrdemServico">Nova Ordem de Serviço</a></li>
-                        <li><a href="Condominio/formcondominio">Novo Condominio</a></li>
+                        <li><a href="PessoaFisica/formperfil">Pessoa Fisica</a></li>
+                        <li><a href="PessoaJuridica/formperfil">Pessoa Juridica</a></li>
+                        <li class="divider"></li>
+                        <li><a href="Apartamento/formapartamento">Apartamento</a></li>
+                        <li><a href="Setor/formSetor">Setor</a></li>
+                        <li><a href="Condominio/formcondominio">Condominio</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Registrar <span
+                            class="caret"></span></a>
+                    <ul class="dropdown-menu" aria-labelledby="themes">
+                        <li><a href="Ocorrencia/formOcorrencia">Ocorrência</a></li>
+                        <li><a href="OrdemServico/formOrdemServico">Ordem de Serviço</a></li>
+                        <li><a href="Orcamento/formorcamento">Orçamento</a></li>
                     </ul>
                 </li>
                 <li>
@@ -142,6 +153,11 @@
             <ul class="treeview-menu" style="display: none;">
                 <li><a href="PessoaFisica/"><i class="fa fa-angle-double-right"></i>Pessoa Física</a></li>
                 <li><a href="PessoaJuridica/"><i class="fa fa-angle-double-right"></i> Pessoa Jurídica</a></li>
+                <li><a href="Condominio/"><i class="fa fa-angle-double-right"></i> Condomínio</a></li>
+                <li><a href="Apartamento/"><i class="fa fa-angle-double-right"></i> Apartamento</a></li>
+                <li><a href="Setor/"><i class="fa fa-angle-double-right"></i> Setor</a></li>
+                <li><a href="OrdemServico/"><i class="fa fa-angle-double-right"></i> Ordem de Servico</a></li>
+                <li><a href="Ocorrencia/"><i class="fa fa-angle-double-right"></i> Ocorrência</a></li>
             </ul>
         </li>
         <li class="treeview">
@@ -153,7 +169,7 @@
             <ul class="treeview-menu" style="display: none;">
                 <li><a href="PessoaFisica/formperfil"><i class="fa fa-angle-double-right"></i> Pessoa Física</a></li>
                 <li><a href="PessoaJuridica/formperfil"><i class="fa fa-angle-double-right"></i> Pessoa Jurídica</a></li>
-                <li><a href="Setor/formsetor"><i class="fa fa-angle-double-right"></i> Setores</a></li>
+                <li><a href="Setor/formSetor"><i class="fa fa-angle-double-right"></i> Setores</a></li>
                 <li><a href="Condominio/formcondominio"><i class="fa fa-angle-double-right"></i> Condomínio</a></li>
                 <li><a href="Apartamento/formapartamento"><i class="fa fa-angle-double-right"></i> Apartamento</a></li>
             </ul>
@@ -164,8 +180,8 @@
                 <i class="fa pull-right fa-angle-left"></i>
             </a>
             <ul class="treeview-menu" style="display: none;">
-                <li><a href="Ocorrencia/formocorrencia"><i class="fa fa-angle-double-right"></i> Ocorrência</a></li>
-                <li><a href="OS/formos"><i class="fa fa-angle-double-right"></i> Ordem de Serviço</a></li>
+                <li><a href="Ocorrencia/formOcorrencia"><i class="fa fa-angle-double-right"></i> Ocorrência</a></li>
+                <li><a href="OrdemServico/formOrdemServico"><i class="fa fa-angle-double-right"></i> Ordem de Serviço</a></li>
                 <li><a href="Orcamento/formorcamento"><i class="fa fa-angle-double-right"></i> Orçamento</a></li>
             </ul>
         </li>
@@ -243,7 +259,6 @@
 <script src="js/language/pt_BR.js" type="text/javascript"></script>
 <script src="js/jquery.mask.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="js/bootstrap-datetimepicker.min.js"></script>
 <script src="js/datatables/js/jquery.dataTables.js"></script>
 <script src="js/datatables/js/dataTables.bootstrap.js"></script>
 <script src="js/datatables/js/dataTables.responsive.min.js"></script>
