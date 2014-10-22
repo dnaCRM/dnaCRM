@@ -597,6 +597,7 @@ $(document).ready(function () {
                     }
                 }
             },
+            
             im_perfil: {
                 validators: {
                     file: {
