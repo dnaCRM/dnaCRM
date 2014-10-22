@@ -124,6 +124,7 @@ class Usuario extends Controller
                 'pagetitle' => 'Cadastro de Usuário',
                 'perfil' => $pessoa,
                 'usuario' => $usuario,
+                'niveis' => $niveis,
                 'atualizar' => false,
             );
         }

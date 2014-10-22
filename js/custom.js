@@ -584,15 +584,6 @@ $('#pf_ajax_form').bootstrapValidator({
         responsive: true
     });
 
-
-$('#perfillist').dataTable({
-    "language": {
-        "url": "js/datatables/js/dataTables.pt-br.lang"
-    },
-    responsive: true
-});
-
-
     $('#pf_ajax_form').submit(function(){
         var dados = $( this ).serialize();
 
