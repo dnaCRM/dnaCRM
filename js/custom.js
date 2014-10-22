@@ -1,13 +1,13 @@
 // * SIDEBAR MENU
 // * ------------
 // * This is a custom plugin for the sidebar menu. It provides a tree view.
-// * 
+// *
 // * Usage:
 // * $(".sidebar).tree();
-// * 
+// *
 // * Note: This plugin does not accept any options. Instead, it only requires a class
 // *       added to the element that contains a sub-menu.
-// *       
+// *
 // * When used with the sidebar, for example, it would look something like this:
 // * <ul class='sidebar-menu'>
 // *      <li class="treeview active">
@@ -17,7 +17,7 @@
 // *          </ul>
 // *      </li>
 // * </ul>
-// * 
+// *
 // * Add .active class to <li> elements if you want the menu to be open automatically
 // * on page load. See above for an example.
 // */
@@ -94,6 +94,10 @@ $(document).ready(function () {
         $('html, body').animate({scrollTop: 0}, 400);
         return false;
     });
+
+});
+
+$(document).ready(function () {
     $('#cpf').mask("999.999.999-99");
     $('#cnpj').mask("99.999.999/9999-99");
     $('#celular').mask("(99) Z9999-9999", {translation: {'Z': {pattern: /[0-9]/, optional: true}}});  //[] Opcional
@@ -105,8 +109,6 @@ $(document).ready(function () {
     $('#dt_fim').mask("99/99/9999");
     $('#fone').mask("(99) 9999-9999");
     $('#cep').mask("99999-999");
-
-    $('#numero').mask("99999");
 });
 
 $(document).ready(function () {
@@ -203,7 +205,7 @@ $(document).ready(function () {
             }
         }
     });
-    $('#pf_ajax_form').bootstrapValidator({
+$('#pf_ajax_form').bootstrapValidator({
         excluded: ':disabled',
         feedbackIcons: {
             valid: 'glyphicon glyphicon-ok',
@@ -427,6 +429,7 @@ $(document).ready(function () {
         }
     });
 
+
     $('#ocorrenciaform').bootstrapValidator({
         message: 'This value is not valid',
         feedbackIcons: {
@@ -516,6 +519,7 @@ $(document).ready(function () {
         }
     });
 
+
     $('#apartamentoform').bootstrapValidator({
         message: 'This value is not valid',
         feedbackIcons: {
@@ -558,7 +562,7 @@ $(document).ready(function () {
             cep: {
                 validators: {
                     notEmpty: {
-                        message: 'Campo cep é obrigatório'
+                        message: 'Informar cep é obrigatório'
                     }
                 }
             },
@@ -583,21 +587,6 @@ $(document).ready(function () {
                     }
                 }
             },
-            numero: {
-                validators: {
-                    notEmpty: {
-                        message: 'Numero obrigatório'
-                    }
-                }
-            },
-            estado: {
-                validators: {
-                    notEmpty: {
-                        message: 'Campo Estado obrigatório'
-                    }
-                }
-            },
-            
             im_perfil: {
                 validators: {
                     file: {
@@ -610,23 +599,45 @@ $(document).ready(function () {
             }
         }
     });
-    $('#perfillist').dataTable({
-        "language": {
-            "url": "js/datatables/js/dataTables.pt-br.lang"
-        },
-        responsive: true
-    });
 
-    $('#pf_ajax_form').submit(function () {
-        var dados = $(this).serialize();
+    $('#datetimepicker')
+        .on('dp.change dp.show', function (e) {
+            // Valida a data quando o usuário inserir
+            $('#pessoafisicaform').bootstrapValidator('revalidateField', 'dt_nascimento');
+        });
+    $('#dt_inicio_picker')
+        .on('dp.change dp.show', function (e) {
+            // Valida a data quando o usuário inserir
+            $('#ordemservicoform').bootstrapValidator('revalidateField', 'dt_inicio_picker');
+        });
+    $('#datetimepicker')
+        .on('dp.change dp.show', function (e) {
+            // Valida a data quando o usuário inserir
+            $('#pf_ajax_form').bootstrapValidator('revalidateField', 'dt_nascimento');
+        });
+
+});
+
+
+$('#perfillist').dataTable({
+    "language": {
+        "url": "js/datatables/js/dataTables.pt-br.lang"
+    },
+    responsive: true
+});
+
+$(document).ready(function(){
+    $('#pf_ajax_form').submit(function(){
+        var dados = $( this ).serialize();
 
         $.ajax({
             type: "POST",
             url: "app/ajax_controllers/processa.php",
             data: dados,
-            success: function (data) {
+            success: function( data )
+            {
                 $('#ajax_response').html(data);
-                console.log(data + 'Alguma coisa aconteceu');
+                console.log( data + 'Alguma coisa aconteceu' );
             }
         });
 
