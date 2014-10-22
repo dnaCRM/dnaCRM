@@ -109,6 +109,7 @@ $(document).ready(function () {
     $('#dt_fim').mask("99/99/9999");
     $('#fone').mask("(99) 9999-9999");
     $('#cep').mask("99999-999");
+    $('#numero').mask("99999");
 });
 
 $(document).ready(function () {
@@ -562,7 +563,7 @@ $('#pf_ajax_form').bootstrapValidator({
             cep: {
                 validators: {
                     notEmpty: {
-                        message: 'Informar cep é obrigatório'
+                        message: 'Campo cep é obrigatório'
                     }
                 }
             },
@@ -584,6 +585,20 @@ $('#pf_ajax_form').bootstrapValidator({
                 validators: {
                     notEmpty: {
                         message: 'Informar cidade obrigatório'
+                    }
+                }
+            },
+            numero: {
+                validators: {
+                    notEmpty: {
+                        message: 'Numero obrigatório'
+                    }
+                }
+            },
+            estado: {
+                validators: {
+                    notEmpty: {
+                        message: 'Campo Estado obrigatório'
                     }
                 }
             },
