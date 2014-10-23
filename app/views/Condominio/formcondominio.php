@@ -58,18 +58,6 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="col-sm-12">
-                        <label for="cep" class="control-label">Cep</label>
-
-
-                        <input type="text" class="form-control" id="cep" name="cep"
-                               value="<?php echo $condominio->getCep() == '' ? Input::get('cep') : $condominio->getCep(); ?>"
-                               placeholder="00000-000"
-                               maxlength="9">
-                    </div>
-                </div>
-
-                <div class="form-group">
 
                     <div class="col-sm-12">
                         <label for="rua" class="control-label">Rua</label>
@@ -104,6 +92,43 @@
                                value="<?php echo $condominio->getCidade() == '' ? Input::get('cidade') : $condominio->getCidade(); ?>"
                                placeholder="Cidade"
                                maxlength="25">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-4 inputGroupContainer">
+                        <label for="cep" class="control-label">Cep</label>
+
+
+                        <input type="text" class="form-control" id="cep" name="cep"
+                               value="<?php echo $condominio->getCep() == '' ? Input::get('cep') : $condominio->getCep(); ?>"
+                               placeholder="99999-999"
+                               maxlength="9">
+                    </div>
+                    <div class="col-sm-4 inputGroupContainer">
+                        <label for="numero" class="control-label">Nº</label>
+
+                        <input type="text" class="form-control" id="numero" name="numero"
+                               value="<?php echo $condominio->getNumero() == '' ? Input::get('numero') : $condominio->getNumero(); ?>"
+                               placeholder="99999"
+                               maxlength="5">
+                    </div>
+                    <div class="col-sm-4 inputGroupContainer">
+                        <label for="estado" class="control-label">Estado</label>
+
+                        <select class="form-control" id="estado" name="estado">
+                            <option value="">--</option>
+                            <?php
+                            $condominio->setCdVlCatgEstado($condominio->getCdVlCatgEstado() == '' ? Input::get('estado') : $condominio->getCdVlCatgEstado());
+                            foreach ($data['estado'] as $org) {
+                                if ($org->getCdVlCategoria() == $condominio->getCdVlCatgEstado()) {
+                                    echo '<option value="' . $org->getCdVlCategoria() . '" selected>' . $org->getDescVlCatg() . '</option>';
+                                } else {
+                                    echo '<option value="' . $org->getCdVlCategoria() . ' ">' . $org->getDescVlCatg() . '</option>';
+                                }
+                            }
+                            ?>
+                        </select>
                     </div>
                 </div>
 

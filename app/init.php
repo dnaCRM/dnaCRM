@@ -94,7 +94,7 @@ function CodeFail($numero, $mensagem, $arquivo, $linha)
             break;
     }
 
-    //$mensagem = ExceptionMsg::msg($mensagem);
+    $mensagem = ExceptionMsg::msg($mensagem);
     $msg = "<div class=\"alert alert-dismissable alert-{$classecss}\">"
         . '<button type="button" class="close" data-dismiss="alert">×</button>'
         . '<strong>ALERTA! </strong><br>'
@@ -107,7 +107,7 @@ function CodeFail($numero, $mensagem, $arquivo, $linha)
             . "<small>Erro número {$numero}</small>"
             .'</div>';
 
-    echo $erro;
+    echo $msg;
 
 }
 

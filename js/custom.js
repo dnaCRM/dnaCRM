@@ -1,13 +1,13 @@
 // * SIDEBAR MENU
 // * ------------
 // * This is a custom plugin for the sidebar menu. It provides a tree view.
-// * 
+// *
 // * Usage:
 // * $(".sidebar).tree();
-// * 
+// *
 // * Note: This plugin does not accept any options. Instead, it only requires a class
 // *       added to the element that contains a sub-menu.
-// *       
+// *
 // * When used with the sidebar, for example, it would look something like this:
 // * <ul class='sidebar-menu'>
 // *      <li class="treeview active">
@@ -17,7 +17,7 @@
 // *          </ul>
 // *      </li>
 // * </ul>
-// * 
+// *
 // * Add .active class to <li> elements if you want the menu to be open automatically
 // * on page load. See above for an example.
 // */
@@ -111,31 +111,6 @@ $(document).ready(function () {
     $('#cep').mask("99999-999");
 });
 
-$(document).ready(function () {
-    $('#datetimepicker').datetimepicker({
-        language: 'pt-br',
-        pickTime: false
-    });
-    $('#nascimento').datetimepicker({
-        language: 'pt-br',
-        pickTime: false
-    });
-    $('#dt_inicio_curso_picker').datetimepicker({
-        language: 'pt-br',
-        pickTime: false
-    });
-    $('#dt_fim_curso_picker').datetimepicker({
-        language: 'pt-br',
-        pickTime: false
-    });;
-    $('#dt_inicio_picker').datetimepicker({
-        language: 'pt-br',
-        pickTime: false
-    });
-    $('#dt_fim_picker').datetimepicker({
-        language: 'pt-br',
-        pickTime: false
-    });
 
     $('#pessoafisicaform').bootstrapValidator({
         excluded: ':disabled',
@@ -205,6 +180,8 @@ $(document).ready(function () {
             }
         }
     });
+
+
 $('#pf_ajax_form').bootstrapValidator({
         excluded: ':disabled',
         feedbackIcons: {
@@ -260,6 +237,7 @@ $('#pf_ajax_form').bootstrapValidator({
             }
         }
     });
+
 
     $('#cadastro_usuario').bootstrapValidator({
         message: 'This value is not valid',
@@ -519,7 +497,6 @@ $('#pf_ajax_form').bootstrapValidator({
         }
     });
 
-
     $('#apartamentoform').bootstrapValidator({
         message: 'This value is not valid',
         feedbackIcons: {
@@ -600,35 +577,16 @@ $('#pf_ajax_form').bootstrapValidator({
         }
     });
 
-    $('#datetimepicker')
-        .on('dp.change dp.show', function (e) {
-            // Valida a data quando o usuário inserir
-            $('#pessoafisicaform').bootstrapValidator('revalidateField', 'dt_nascimento');
-        });
-    $('#dt_inicio_picker')
-        .on('dp.change dp.show', function (e) {
-            // Valida a data quando o usuário inserir
-            $('#ordemservicoform').bootstrapValidator('revalidateField', 'dt_inicio_picker');
-        });
-    $('#datetimepicker')
-        .on('dp.change dp.show', function (e) {
-            // Valida a data quando o usuário inserir
-            $('#pf_ajax_form').bootstrapValidator('revalidateField', 'dt_nascimento');
-        });
+    $('#perfillist').dataTable({
+        "language": {
+            "url": "js/datatables/js/dataTables.pt-br.lang"
+        },
+        responsive: true
+    });
 
-});
-
-
-$('#perfillist').dataTable({
-    "language": {
-        "url": "js/datatables/js/dataTables.pt-br.lang"
-    },
-    responsive: true
-});
-
-$(document).ready(function(){
     $('#pf_ajax_form').submit(function(){
         var dados = $( this ).serialize();
+
 
         $.ajax({
             type: "POST",
@@ -643,4 +601,3 @@ $(document).ready(function(){
 
         return false;
     });
-});

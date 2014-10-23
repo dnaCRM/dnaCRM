@@ -271,7 +271,7 @@ if (Session::exists('sucesso_salvar_pf')) {
 
 <div class="form-group ">
     <div class="col-sm-12">
-        <a href="PessoaFisica/visualizar/<?php echo $data['id']; ?>" id="limpar" class="btn btn-default"><span
+        <a href="PessoaFisica/visualizar/<?php echo $data['id']; ?>" id="cancel" class="btn btn-default"><span
                 class="fa fa-undo"></span> Cancelar</a>
         <button type="reset" name="cancelar" class="btn btn-info"><span class="fa fa-recycle"></span> Limpar
         </button>
@@ -288,6 +288,76 @@ if (Session::exists('sucesso_salvar_pf')) {
 </div>
 
 <div class="col-sm-6">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">Telefone</h3>
+        </div>
+        <div class="panel-body">
+            <form action="" method="post" id="form_tel" class="form-horizontal">
+                <fieldset>
+                    <div class="form-group">
+                        <div class="col-sm-12 inputGroupContainer">
+                            <label for="pf_tel" class="control-label">Telefone</label>
+
+
+                            <input type="text" class="form-control" id="pf_tel" name="pf_tel"
+                                   value="">
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <input type="submit" id="enviatel" class="btn btn-primary" value="Salvar">
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title">Endereço</h3>
+        </div>
+        <div class="panel-body">
+            <form action="" method="post" id="form_tel" class="form-horizontal">
+                <fieldset>
+                    <div class="form-group">
+                        <div class="col-sm-12 inputGroupContainer">
+                            <label for="pf_tel" class="control-label">Endereço</label>
+
+
+                            <input type="text" class="form-control" id="pf_tel" name="pf_tel"
+                                   value="">
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <input type="submit" id="enviatel" class="btn btn-primary" value="Salvar">
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Relacionados</h3>
+        </div>
+        <div class="panel-body">
+            <form action="" method="post" id="relacionados" class="form-horizontal">
+                <fieldset>
+                    <div class="form-group">
+                        <div class="col-sm-12 inputGroupContainer">
+                            <label for="pf_tel" class="control-label">Relacionados</label>
+
+
+                            <input type="text" class="form-control" id="pf_tel" name="pf_tel"
+                                   value="">
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <input type="submit" id="enviatel" class="btn btn-primary" value="Salvar">
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
 
     <div class="panel-group" id="accordion">
         <div class="panel panel-default">

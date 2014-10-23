@@ -174,7 +174,7 @@
                 <div class="col-sm-12">
                     <span id="ajax_response"></span>
 
-                    <form class="form-horizontal" method="post" action="" id="pf_ajax_form">
+                    <form class="form-horizontal" id="pf_ajax_form">
 
                         <div class="form-group">
                             <label for="nome" class="col-sm-2 control-label">Nome:</label>
@@ -238,6 +238,7 @@
                         </div>
 
                         <input type="submit" class="btn btn-primary col-xs-offset-2" name="enviar" value="Enviar"/>
+                        <input type="hidden" name="token" value="<?php Token::generate();?>"
                     </form>
 
                 </div>

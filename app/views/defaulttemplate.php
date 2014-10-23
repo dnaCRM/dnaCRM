@@ -259,7 +259,6 @@
 <script src="js/language/pt_BR.js" type="text/javascript"></script>
 <script src="js/jquery.mask.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="js/bootstrap-datetimepicker.min.js"></script>
 <script src="js/datatables/js/jquery.dataTables.js"></script>
 <script src="js/datatables/js/dataTables.bootstrap.js"></script>
 <script src="js/datatables/js/dataTables.responsive.min.js"></script>

@@ -41,6 +41,8 @@ class Condominio extends Controller
      */
     public function formcondominio($id = null)
     {
+        $estado = (new CategoriaValorDAO())->get('cd_categoria = 2');
+
         if ($id) {
             /** @var CondominioDTO */
             $condominioarr = $this->findById($id);
@@ -50,6 +52,7 @@ class Condominio extends Controller
                 'pagetitle' => $condominioarr->getNmCondominio(),
                 'pagesubtitle' => 'Atualizar Condominio.',
                 'id' => $id,
+                'estado' => $estado,
                 'condominio' => $condominioarr
             );
         } else {
@@ -58,6 +61,7 @@ class Condominio extends Controller
                 'pagetitle' => 'Cadastro de condominio',
                 'pagesubtitle' => '',
                 'id' => null,
+                'estado' => $estado,
                 'condominio' => $condominio
             );
         }
@@ -80,9 +84,9 @@ class Condominio extends Controller
 
         $dados = array(
             //o campo 'obs' vai ser o subtítulo
-            'pagesubtitle' => $condominioarr->getNmCondominio(),
+            'pagesubtitle' => '',
             //o campo 'nome' vai ser o título da página
-            'pagetitle' => '',
+            'pagetitle' => $condominioarr->getNmCondominio(),
             //todos os atributos do perfil
             'condominio' => $condominioarr
         );
@@ -142,11 +146,16 @@ class Condominio extends Controller
             ->setNmCondominio(Input::get('nm_condominio'))
             ->setCep(Input::get('cep'))
             ->setRua(Input::get('rua'))
-            ->setNumero(100)
+            ->setNumero(Input::get('numero'))
             ->setBairro(Input::get('bairro'))
             ->setCidade(Input::get('cidade'))
             ->setCdCatgEstado(2)
+
+            ->setCdVlCatgEstado(Input::get('estado'))
+
+
             ->setCdVlCatgEstado(2)
+
             ->setCdUsuarioCriacao(Session::get('user'))
             ->setDtUsuarioCriacao('now()')
             ->setCdUsuarioAtualiza(Session::get('user'))
