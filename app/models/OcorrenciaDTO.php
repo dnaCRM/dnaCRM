@@ -2,11 +2,11 @@
 class OcorrenciaDTO extends DataTransferObject
 {
     private $cd_ocorrencia;
+    private $cd_setor;
     private $cd_pf_informante;
     private $desc_assunto;
     private $desc_ocorrencia;
     private $dt_ocorrencia;
-    private $ie_situacao;
     private $dt_fim;
     private $desc_conclusao;
     private $cd_catg_estagio;
@@ -23,6 +23,7 @@ class OcorrenciaDTO extends DataTransferObject
     {
         $this->reflex = array(
             'cd_ocorrencia' => 'getCdOcorrencia',
+            'cd_setor' => 'getCdSetor',
             'cd_pf_informante' => 'getCdPfInformante',
             'desc_assunto' => 'getDescAssunto',
             'desc_ocorrencia' => 'getDescOcorrencia',
@@ -86,6 +87,12 @@ class OcorrenciaDTO extends DataTransferObject
     public function getCdUsuarioCriacao()
     {
         return $this->cd_usuario_criacao;
+    }
+
+
+    public function getCdSetor()
+    {
+        return $this->cd_setor;
     }
 
     /**
@@ -197,6 +204,13 @@ class OcorrenciaDTO extends DataTransferObject
     public function setCdUsuarioCriacao($cd_usuario_criacao)
     {
         $this->cd_usuario_criacao = $cd_usuario_criacao;
+        return $this;
+    }
+
+
+    public function setCdSetor($cd_setor)
+    {
+        $this->cd_setor = $cd_setor;
         return $this;
     }
 

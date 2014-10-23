@@ -61,6 +61,28 @@
 
                 <div class="form-group">
                     <div class="col-sm-12">
+                        <label for="setor" class="control-label">Setor</label>
+
+                        <select class="form-control" id="setor" name="setor">
+                            <option value="">--</option>
+                            <?php
+                            $ocorrencia->setCdSetor($ocorrencia->getCdSetor() == '' ? Input::get('setor') : $ocorrencia->getCdSetor());
+                            foreach ($data['setor'] as $setor) {
+                                if ($setor->getCdSetor() == $ocorrencia->getCdSetor()) {
+                                    echo '<option value="' . $setor->getCdSetor() . '" selected>' . $setor->getNmSetor() . '</option>';
+                                } else {
+                                    echo '<option value="' . $setor->getCdSetor() . ' ">' . $setor->getNmSetor() . '</option>';
+                                }
+                            }
+                            ?>
+                        </select>
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <div class="col-sm-12">
                         <label for="estagio" class="control-label">Estágio</label>
 
                         <select class="form-control" id="estagio" name="estagio">
