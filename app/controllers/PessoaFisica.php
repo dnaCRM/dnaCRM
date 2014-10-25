@@ -31,6 +31,24 @@ class PessoaFisica extends Controller
         $this->view->output($dados);
     }
 
+    public function formnovo()
+    {
+        $perfil = new PessoaFisicaDTO();
+        $dados = array(
+            'pagesubtitle' => '',
+            'pagetitle' => 'Cadastrar Pessoa Física',
+            'perfil' => $perfil
+        );
+
+        $this->view = new View('PessoaFisica', 'formnovo');
+        $this->view->output($dados);
+    }
+
+    public function novo()
+    {
+        echo json_encode($_POST);
+    }
+
     /**
      * @param int $id = Caso receba um id retorna um array
      * para a view com os dados do perfil. Este array irá popular o formulário

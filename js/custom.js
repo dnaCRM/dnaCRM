@@ -112,492 +112,522 @@ $(document).ready(function () {
 });
 
 
-    $('#pessoafisicaform').bootstrapValidator({
-        excluded: ':disabled',
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
+$('#pessoafisicaform').bootstrapValidator({
+    excluded: ':disabled',
+    feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+    },
+    fields: {
+        ie_sexo: {
+            validators: {
+                notEmpty: {
+                    message: 'Gênero é obrigatório'
+                }
+            }
         },
-        fields: {
-            ie_sexo: {
-                validators: {
-                    notEmpty: {
-                        message: 'Gênero é obrigatório'
-                    }
+        nm_pessoa_fisica: {
+            validators: {
+                notEmpty: {
+                    message: 'Campo obrigatório'
                 }
-            },
-            nm_pessoa_fisica: {
-                validators: {
-                    notEmpty: {
-                        message: 'Campo obrigatório'
-                    }
+            }
+        },
+        email: {
+            validators: {
+                notEmpty: {
+                    message: 'Campo obrigatório'
+                },
+                emailAddress: {
+                    message: 'E-mail inválido'
                 }
-            },
-            email: {
-                validators: {
-                    notEmpty: {
-                        message: 'Campo obrigatório'
-                    },
-                    emailAddress: {
-                        message: 'E-mail inválido'
-                    }
+            }
+        },
+        cpf: {
+            group: '.col-sm-4',
+            validators: {
+                notEmpty: {
+                    message: 'Campo obrigatório'
                 }
-            },
-            cpf: {
-                group: '.col-sm-4',
-                validators: {
-                    notEmpty: {
-                        message: 'Campo obrigatório'
-                    }
+            }
+        },
+        rg: {
+            group: '.col-sm-4',
+            validators: {
+                notEmpty: {
+                    message: 'Campo obrigatório'
                 }
-            },
-            rg: {
-                group: '.col-sm-4',
-                validators: {
-                    notEmpty: {
-                        message: 'Campo obrigatório'
-                    }
+            }
+        },
+        dt_nascimento: {
+            validators: {
+                notEmpty: {
+                    message: 'Campo obrigatório'
                 }
-            },
-            dt_nascimento: {
-                group: '.col-sm-4',
-                validators: {
-                    notEmpty: {
-                        message: 'Campo obrigatório'
-                    }
-                }
-            },
-            im_perfil: {
-                validators: {
-                    file: {
-                        extension: 'jpg',
-                        type: 'image/jpeg',
-                        /*maxSize: 2048 * 1024,   // 2 MB*/
-                        message: 'O arquivo selecionado não é válido. Apenas aquivos .jpg são permitidos.'
-                    }
+            }
+        },
+        im_perfil: {
+            validators: {
+                file: {
+                    extension: 'jpg',
+                    type: 'image/jpeg',
+                    /*maxSize: 2048 * 1024,   // 2 MB*/
+                    message: 'O arquivo selecionado não é válido. Apenas aquivos .jpg são permitidos.'
                 }
             }
         }
-    });
+    }
+});
 
 
-$('#pf_ajax_form').bootstrapValidator({
-        excluded: ':disabled',
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
+$('#pfformnovo').bootstrapValidator({
+    excluded: ':disabled',
+    feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+    },
+    fields: {
+        ie_sexo: {
+            validators: {
+                notEmpty: {
+                    message: 'Gênero é obrigatório'
+                }
+            }
         },
-        fields: {
-            ie_sexo: {
-                validators: {
-                    notEmpty: {
-                        message: 'Gênero é obrigatório'
-                    }
+        nm_pessoa_fisica: {
+            validators: {
+                notEmpty: {
+                    message: 'Campo obrigatório'
                 }
-            },
-            nm_pessoa_fisica: {
-                validators: {
-                    notEmpty: {
-                        message: 'Campo obrigatório'
-                    }
+            }
+        },
+        email: {
+            validators: {
+                notEmpty: {
+                    message: 'Campo obrigatório'
+                },
+                emailAddress: {
+                    message: 'E-mail inválido'
                 }
-            },
-            email: {
-                validators: {
-                    notEmpty: {
-                        message: 'Campo obrigatório'
-                    },
-                    emailAddress: {
-                        message: 'E-mail inválido'
-                    }
+            }
+        },
+        cpf: {
+            validators: {
+                notEmpty: {
+                    message: 'Campo obrigatório'
                 }
-            },
-            cpf: {
-                validators: {
-                    notEmpty: {
-                        message: 'Campo obrigatório'
-                    }
+            }
+        },
+        rg: {
+            validators: {
+                notEmpty: {
+                    message: 'Campo obrigatório'
                 }
-            },
-            rg: {
-                validators: {
-                    notEmpty: {
-                        message: 'Campo obrigatório'
-                    }
+            }
+        },
+        dt_nascimento: {
+            validators: {
+                notEmpty: {
+                    message: 'Campo obrigatório'
                 }
-            },
-            dt_nascimento: {
-                validators: {
-                    notEmpty: {
-                        message: 'Campo obrigatório'
-                    }
+            }
+        },
+        im_perfil: {
+            validators: {
+                file: {
+                    extension: 'jpg',
+                    type: 'image/jpeg',
+                    /*maxSize: 2048 * 1024,   // 2 MB*/
+                    message: 'O arquivo selecionado não é válido. Apenas aquivos .jpg são permitidos.'
                 }
             }
         }
+    }
+}).on('success.form.bv', function (e) {
+    // Prevent form submission
+    e.preventDefault();
+
+    // Get the form instance
+    var $form = $(e.target);
+
+    // Get the BootstrapValidator instance
+    var bv = $form.data('bootstrapValidator');
+
+    var dados = $(this).serialize();
+
+    $.ajax({
+        type: "POST",
+        url: "PessoaFisica/novo",
+        data: dados,
+        dataType: 'json',
+        success: function (data) {
+            $('#ajax_response').html(data);
+            console.log(data);
+        }
     });
+    return false;
+});
 
-
-    $('#cadastro_usuario').bootstrapValidator({
-        message: 'This value is not valid',
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
+$('#cadastro_usuario').bootstrapValidator({
+    message: 'This value is not valid',
+    feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+    },
+    fields: {
+        usuario: {
+            validators: {
+                notEmpty: {
+                    message: 'Nome de usuário é obrigatório.'
+                },
+                different: {
+                    field: 'senha',
+                    message: 'Nome de usuário deve ser diferente da senha'
+                }
+            }
         },
-        fields: {
-            usuario: {
-                validators: {
-                    notEmpty: {
-                        message: 'Nome de usuário é obrigatório.'
-                    },
-                    different: {
-                        field: 'senha',
-                        message: 'Nome de usuário deve ser diferente da senha'
-                    }
+        senha: {
+            validators: {
+                notEmpty: {
+                    message: 'Senha é obrigatória'
+                },
+                different: {
+                    field: 'usuario',
+                    message: 'Senha deve ser diferente do nome de usuário'
                 }
-            },
-            senha: {
-                validators: {
-                    notEmpty: {
-                        message: 'Senha é obrigatória'
-                    },
-                    different: {
-                        field: 'usuario',
-                        message: 'Senha deve ser diferente do nome de usuário'
-                    }
-                }
-            },
-            confirmar_senha: {
-                validators: {
-                    notEmpty: {
-                        message: 'Confirmação de senha obrigatória.'
-                    },
-                    identical: {
-                        field: 'senha',
-                        message: 'O valor informado deve ser igual a senha informada.'
-                    }
+            }
+        },
+        confirmar_senha: {
+            validators: {
+                notEmpty: {
+                    message: 'Confirmação de senha obrigatória.'
+                },
+                identical: {
+                    field: 'senha',
+                    message: 'O valor informado deve ser igual a senha informada.'
                 }
             }
         }
-    });
+    }
+});
 
-    $('#pessoajuridicaform').bootstrapValidator({
-        excluded: ':disabled',
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
+$('#pessoajuridicaform').bootstrapValidator({
+    excluded: ':disabled',
+    feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+    },
+    fields: {
+        nm_fantasia: {
+            validators: {
+                notEmpty: {
+                    message: 'Campo obrigatório'
+                }
+            }
         },
-        fields: {
-            nm_fantasia: {
-                validators: {
-                    notEmpty: {
-                        message: 'Campo obrigatório'
-                    }
+        desc_razao: {
+            validators: {
+                notEmpty: {
+                    message: 'Campo obrigatório'
                 }
-            },
-            desc_razao: {
-                validators: {
-                    notEmpty: {
-                        message: 'Campo obrigatório'
-                    }
+            }
+        },
+        desc_atividade: {
+            validators: {
+                notEmpty: {
+                    message: 'Campo obrigatório'
                 }
-            },
-            desc_atividade: {
-                validators: {
-                    notEmpty: {
-                        message: 'Campo obrigatório'
-                    }
+            }
+        },
+        email: {
+            validators: {
+                notEmpty: {
+                    message: 'Campo obrigatório'
+                },
+                emailAddress: {
+                    message: 'E-mail inválido'
                 }
-            },
-            email: {
-                validators: {
-                    notEmpty: {
-                        message: 'Campo obrigatório'
-                    },
-                    emailAddress: {
-                        message: 'E-mail inválido'
-                    }
+            }
+        },
+        cnpj: {
+            validators: {
+                notEmpty: {
+                    message: 'Campo obrigatório'
                 }
-            },
-            cnpj: {
-                validators: {
-                    notEmpty: {
-                        message: 'Campo obrigatório'
-                    }
-                }
-            },
-            im_perfil: {
-                validators: {
-                    file: {
-                        extension: 'jpg',
-                        type: 'image/jpeg',
-                        /*maxSize: 2048 * 1024,   // 2 MB*/
-                        message: 'O arquivo selecionado não é válido. Apenas aquivos .jpg são permitidos.'
-                    }
+            }
+        },
+        im_perfil: {
+            validators: {
+                file: {
+                    extension: 'jpg',
+                    type: 'image/jpeg',
+                    /*maxSize: 2048 * 1024,   // 2 MB*/
+                    message: 'O arquivo selecionado não é válido. Apenas aquivos .jpg são permitidos.'
                 }
             }
         }
-    });
+    }
+});
 
-    $('#login').bootstrapValidator({
-        message: 'This value is not valid',
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
-        },
-        fields: {
-            usuario: {
-                validators: {
-                    notEmpty: {
-                        message: 'Nome de usuário é obrigatório.'
-                    },
-                    different: {
-                        field: 'senha',
-                        message: 'Nome de usuário deve ser diferente da senha'
-                    }
+$('#login').bootstrapValidator({
+    message: 'This value is not valid',
+    feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+    },
+    fields: {
+        usuario: {
+            validators: {
+                notEmpty: {
+                    message: 'Nome de usuário é obrigatório.'
+                },
+                different: {
+                    field: 'senha',
+                    message: 'Nome de usuário deve ser diferente da senha'
                 }
-            },
-            senha: {
-                validators: {
-                    notEmpty: {
-                        message: 'Senha é obrigatória'
-                    },
-                    different: {
-                        field: 'usuario',
-                        message: 'Senha deve ser diferente do nome de usuário'
-                    }
+            }
+        },
+        senha: {
+            validators: {
+                notEmpty: {
+                    message: 'Senha é obrigatória'
+                },
+                different: {
+                    field: 'usuario',
+                    message: 'Senha deve ser diferente do nome de usuário'
                 }
             }
         }
-    });
+    }
+});
 
-    $('#ordemservicoform').bootstrapValidator({
-        message: 'This value is not valid',
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
+$('#ordemservicoform').bootstrapValidator({
+    message: 'This value is not valid',
+    feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+    },
+    fields: {
+        solicitante: {
+            validators: {
+                notEmpty: {
+                    message: 'Informar o solicitante é obrigatório.'
+                }
+            }
         },
-        fields: {
-            solicitante: {
-                validators: {
-                    notEmpty: {
-                        message: 'Informar o solicitante é obrigatório.'
-                    }
+        assunto: {
+            validators: {
+                notEmpty: {
+                    message: 'Informar o assunto é obrigatória'
                 }
-            },
-            assunto: {
-                validators: {
-                    notEmpty: {
-                        message: 'Informar o assunto é obrigatória'
-                    }
-                }
-            },
-            dt_inicio: {
-                validators: {
-                    notEmpty: {
-                        message: 'Campo obrigatório'
-                    }
+            }
+        },
+        dt_inicio: {
+            validators: {
+                notEmpty: {
+                    message: 'Campo obrigatório'
                 }
             }
         }
-    });
+    }
+});
 
 
-    $('#ocorrenciaform').bootstrapValidator({
-        message: 'This value is not valid',
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
+$('#ocorrenciaform').bootstrapValidator({
+    message: 'This value is not valid',
+    feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+    },
+    fields: {
+        informante: {
+            validators: {
+                notEmpty: {
+                    message: 'Informar o informante é obrigatório.'
+                }
+            }
         },
-        fields: {
-            informante: {
-                validators: {
-                    notEmpty: {
-                        message: 'Informar o informante é obrigatório.'
-                    }
+        estagio: {
+            validators: {
+                notEmpty: {
+                    message: 'Informar o estagio é obrigatório.'
                 }
-            },
-            estagio: {
-                validators: {
-                    notEmpty: {
-                        message: 'Informar o estagio é obrigatório.'
-                    }
+            }
+        },
+        dt_ocorrencia: {
+            validators: {
+                notEmpty: {
+                    message: 'Campo obrigatório'
                 }
-            },
-            dt_ocorrencia: {
-                validators: {
-                    notEmpty: {
-                        message: 'Campo obrigatório'
-                    }
+            }
+        },
+        assunto: {
+            validators: {
+                notEmpty: {
+                    message: 'Informar o assunto é obrigatória'
                 }
-            },
-            assunto: {
-                validators: {
-                    notEmpty: {
-                        message: 'Informar o assunto é obrigatória'
-                    }
-                }
-            },
+            }
+        },
 
-            descricao: {
-                validators: {
-                    notEmpty: {
-                        message: 'Informar o descrição é obrigatória'
-                    }
+        descricao: {
+            validators: {
+                notEmpty: {
+                    message: 'Informar o descrição é obrigatória'
                 }
             }
         }
-    });
+    }
+});
 
-    $('#setorform').bootstrapValidator({
-        message: 'This value is not valid',
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
+$('#setorform').bootstrapValidator({
+    message: 'This value is not valid',
+    feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+    },
+    fields: {
+        im_perfil: {
+            validators: {
+                file: {
+                    extension: 'jpg',
+                    type: 'image/jpeg',
+                    /*maxSize: 2048 * 1024,   // 2 MB*/
+                    message: 'O arquivo selecionado não é válido. Apenas aquivos .jpg são permitidos.'
+                }
+            }
         },
-        fields: {
-            im_perfil: {
-                validators: {
-                    file: {
-                        extension: 'jpg',
-                        type: 'image/jpeg',
-                        /*maxSize: 2048 * 1024,   // 2 MB*/
-                        message: 'O arquivo selecionado não é válido. Apenas aquivos .jpg são permitidos.'
-                    }
+        cd_condominio: {
+            validators: {
+                notEmpty: {
+                    message: 'Informar o condominio é obrigatório.'
                 }
-            },
-            cd_condominio: {
-                validators: {
-                    notEmpty: {
-                        message: 'Informar o condominio é obrigatório.'
-                    }
+            }
+        },
+        nm_setor: {
+            validators: {
+                notEmpty: {
+                    message: 'Informar o nome do setor é obrigatório.'
                 }
-            },
-            nm_setor: {
-                validators: {
-                    notEmpty: {
-                        message: 'Informar o nome do setor é obrigatório.'
-                    }
-                }
-            },
-            observacao: {
-                validators: {
-                    notEmpty: {
-                        message: 'Informar a observação é obrigatório.'
-                    }
+            }
+        },
+        observacao: {
+            validators: {
+                notEmpty: {
+                    message: 'Informar a observação é obrigatório.'
                 }
             }
         }
-    });
+    }
+});
 
-    $('#apartamentoform').bootstrapValidator({
-        message: 'This value is not valid',
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
-        },
-        fields: {
-            cd_setor: {
-                validators: {
-                    notEmpty: {
-                        message: 'Campo obrigatório.'
-                    }
+$('#apartamentoform').bootstrapValidator({
+    message: 'This value is not valid',
+    feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+    },
+    fields: {
+        cd_setor: {
+            validators: {
+                notEmpty: {
+                    message: 'Campo obrigatório.'
                 }
-            },
-            desc_apartamento: {
-                validators: {
-                    notEmpty: {
-                        message: 'Informar descrição é obrigatório.'
-                    }
+            }
+        },
+        desc_apartamento: {
+            validators: {
+                notEmpty: {
+                    message: 'Informar descrição é obrigatório.'
                 }
             }
         }
-    });
-    $('#condominioform').bootstrapValidator({
-        excluded: ':disabled',
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
+    }
+});
+$('#condominioform').bootstrapValidator({
+    excluded: ':disabled',
+    feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+    },
+    fields: {
+        nm_condominio: {
+            validators: {
+                notEmpty: {
+                    message: 'Informar nome é obrigatório'
+                }
+            }
         },
-        fields: {
-            nm_condominio: {
-                validators: {
-                    notEmpty: {
-                        message: 'Informar nome é obrigatório'
-                    }
+        cep: {
+            validators: {
+                notEmpty: {
+                    message: 'Informar cep é obrigatório'
                 }
-            },
-            cep: {
-                validators: {
-                    notEmpty: {
-                        message: 'Informar cep é obrigatório'
-                    }
+            }
+        },
+        rua: {
+            validators: {
+                notEmpty: {
+                    message: 'Informar rua é obrigatório'
                 }
-            },
-            rua: {
-                validators: {
-                    notEmpty: {
-                        message: 'Informar rua é obrigatório'
-                    }
+            }
+        },
+        bairro: {
+            validators: {
+                notEmpty: {
+                    message: 'Informar bairro é obrigatório'
                 }
-            },
-            bairro: {
-                validators: {
-                    notEmpty: {
-                        message: 'Informar bairro é obrigatório'
-                    }
+            }
+        },
+        cidade: {
+            validators: {
+                notEmpty: {
+                    message: 'Informar cidade obrigatório'
                 }
-            },
-            cidade: {
-                validators: {
-                    notEmpty: {
-                        message: 'Informar cidade obrigatório'
-                    }
-                }
-            },
-            im_perfil: {
-                validators: {
-                    file: {
-                        extension: 'jpg',
-                        type: 'image/jpeg',
-                        /*maxSize: 2048 * 1024,   // 2 MB*/
-                        message: 'O arquivo selecionado não é válido. Apenas aquivos .jpg são permitidos.'
-                    }
+            }
+        },
+        im_perfil: {
+            validators: {
+                file: {
+                    extension: 'jpg',
+                    type: 'image/jpeg',
+                    /*maxSize: 2048 * 1024,   // 2 MB*/
+                    message: 'O arquivo selecionado não é válido. Apenas aquivos .jpg são permitidos.'
                 }
             }
         }
+    }
+});
+
+$('#perfillist').dataTable({
+    "language": {
+        "url": "js/datatables/js/dataTables.pt-br.lang"
+    },
+    responsive: true
+});
+
+$('#pf_ajax_form').submit(function () {
+    var dados = $(this).serialize();
+
+    $.ajax({
+        type: "POST",
+        url: "app/ajax_controllers/processa.php",
+        data: dados,
+        success: function (data) {
+            $('#ajax_response').html(data);
+            console.log(data + 'Alguma coisa aconteceu');
+        }
     });
 
-    $('#perfillist').dataTable({
-        "language": {
-            "url": "js/datatables/js/dataTables.pt-br.lang"
-        },
-        responsive: true
-    });
+    return false;
+});
 
-    $('#pf_ajax_form').submit(function(){
-        var dados = $( this ).serialize();
-
-
-        $.ajax({
-            type: "POST",
-            url: "app/ajax_controllers/processa.php",
-            data: dados,
-            success: function( data )
-            {
-                $('#ajax_response').html(data);
-                console.log( data + 'Alguma coisa aconteceu' );
-            }
-        });
-
-        return false;
-    });

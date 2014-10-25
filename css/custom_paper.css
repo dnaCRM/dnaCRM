@@ -234,7 +234,8 @@ table.dataTable.no-footer {
     right: -15px;
 }
 */
-#pessoafisicaform .btn-group .form-control-feedback {
+#pessoafisicaform .btn-group .form-control-feedback,
+#pfformnovo .btn-group .form-control-feedback {
     top: 0;
     right: -30px;
 }
