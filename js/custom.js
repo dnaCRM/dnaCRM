@@ -631,3 +631,71 @@ $('#pf_ajax_form').submit(function () {
     return false;
 });
 
+$('#form_pf_telefones').bootstrapValidator({
+    feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+    },
+    fields: {
+        fone: {
+            validators: {
+                notEmpty: {
+                    message: 'Informe o número de telefone.'
+                }
+            }
+        },
+        observacao: {
+            validators: {
+                notEmpty: {
+                    message: 'Observação obrigatória.'
+                }
+            }
+        },
+        categoria: {
+            validators: {
+                notEmpty: {
+                    message: 'Informe a categoria.'
+                }
+            }
+        },
+        operadora: {
+            validators: {
+                notEmpty: {
+                    message: 'Informe a categoria.'
+                }
+            }
+        }
+    }
+}).on('success.form.bv', function (e) {
+    // Prevent form submission
+    e.preventDefault();
+
+    // Get the form instance
+    var $form = $(e.target);
+
+    // Get the BootstrapValidator instance
+    var bv = $form.data('bootstrapValidator');
+
+    // Use Ajax to submit form data
+    /*
+     $.post($form.attr('action'), $form.serialize(), function(result) {
+     // ... Process the result ...
+     }, 'json');
+     */
+
+    var dados = $(this).serialize();
+
+    $.ajax({
+        type: "POST",
+        url: "PessoaFisicaTelefone/cadastra",
+        data: dados,
+        success: function (data) {
+            //$(data).appendTo('#lista_tel').hide().fadeIn();
+            console.log('Gravou!');
+            console.log(data);
+            bv.resetForm(true);
+        }
+    });
+    return false;
+});

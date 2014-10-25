@@ -3,6 +3,12 @@ $perfil = $data['perfil'];
 $perfil_form = new PessoaFisica();
 $perfil_form->cadastra($perfil); //Não cadastra na entra pois ainda não tem Token
 
+$id_check = $data['id'];
+$operadoras = $data['operadora'];
+$pf_telefones = $data['pf_telefone'];
+$telefones = $data['telefones'];
+$token = Token::generate();
+
 if (Session::exists('sucesso_salvar_pf')) {
     Session::flash('sucesso_salvar_pf');
 }
@@ -10,10 +16,11 @@ if (Session::exists('sucesso_salvar_pf')) {
 ?>
 <div class="row">
     <div class="col-sm-12">
-        <h3 class="page-header"><?php echo $data['pagetitle']; ?></h3>
+        <h3 class="page-header"><?php echo $data['pagetitle']; ?>
+            <small><?php echo $data['pagesubtitle']; ?></small>
+        </h3>
     </div>
 </div>
-
 
 <div class="row">
 
@@ -21,136 +28,135 @@ if (Session::exists('sucesso_salvar_pf')) {
 
 <div>
 <ul class="nav nav-tabs">
-    <li class="active"><a href="#principal" data-toggle="tab">Principal</a></li>
-    <li><a href="#morador" data-toggle="tab">Morador</a></li>
-    <li><a href="#telefones" data-toggle="tab">Telefones</a></li>
-    <li><a href="#enderecos" data-toggle="tab">Outros Endereços</a></li>
+    <li class="active"><a href="#principal" data-toggle="tab">Dados Pessoais</a></li>
+    <?php if ($id_check): ?>
+        <li><a href="#morador" data-toggle="tab">Morador</a></li>
+        <li><a href="#telefones" data-toggle="tab">Telefones</a></li>
+        <li><a href="#enderecos" data-toggle="tab">Outros Endereços</a></li>
+    <?php endif; ?>
 </ul>
 <div id="TabAdicionais" class="tab-content">
 <div class="tab-pane fade active in" id="principal">
 
 <div class="row">
-    <form id="pessoafisicaform" class="form-horizontal" method="post" action="" enctype="multipart/form-data">
-        <fieldset>
-            <legend class="col-md-12"></legend>
-            <div class="col-md-2">
+<form id="pessoafisicaform" class="form-horizontal" method="post" action="" enctype="multipart/form-data">
+<fieldset>
+
+<div class="col-md-2">
 
 
-                <img class="img-circle img-responsive" src="<?php echo $perfil->getImPerfil(); ?>"><br>
+    <img class="img-circle img-responsive" src="<?php echo $perfil->getImPerfil(); ?>"><br>
 
-                <div class="form-group col-sm-10">
-                    <div>
-                        <label for="im_perfil" class="btn btn-default">Foto</label>
+    <div class="form-group col-sm-10">
+        <div>
+            <label for="im_perfil" class="btn btn-default">Foto</label>
 
-                        <input type="file" class="hidden" id="im_perfil" name="im_perfil">
-                    </div>
-                </div>
+            <input type="file" class="hidden" id="im_perfil" name="im_perfil">
+        </div>
+    </div>
 
-            </div>
+</div>
 
-            <div class="col-md-6">
+<div class="col-md-6">
 
-                <div class="form-group">
-                    <div class="col-sm-12 inputGroupContainer">
-                        <label for="nm_pessoa_fisica" class="control-label">Nome</label>
-
-
-                        <input type="text" class="form-control" id="nm_pessoa_fisica" name="nm_pessoa_fisica"
-                               value="<?php echo $perfil->getNmPessoaFisica() == '' ? Input::get('nm_pessoa_fisica') : $perfil->getNmPessoaFisica(); ?>"
-                               placeholder="Nome">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-12 inputGroupContainer">
-                        <label for="email" class="control-label">Email</label>
+    <div class="form-group">
+        <div class="col-sm-12 inputGroupContainer">
+            <label for="nm_pessoa_fisica" class="control-label">Nome</label>
 
 
-                        <input type="text" class="form-control" id="email" name="email"
-                               value="<?php echo $perfil->getEmail() == '' ? Input::get('email') : $perfil->getEmail(); ?>"
-                               placeholder="Email">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-sm-4 inputGroupContainer">
-                        <label for="cpf" class="control-label">CPF</label>
-
-                        <input type="text" class="form-control" id="cpf" name="cpf"
-                               value="<?php echo $perfil->getCpf() == '' ? Input::get('cpf') : $perfil->getCpf(); ?>"
-                               placeholder="000.000.000-00"
-                               maxlength="14">
-                    </div>
-                    <div class="col-sm-4 inputGroupContainer">
-                        <label for="rg" class="control-label">RG</label>
-
-                        <input type="text" class="form-control" id="rg" name="rg"
-                               value="<?php echo $perfil->getRg() == '' ? Input::get('rg') : $perfil->getRg(); ?>"
-                               placeholder="00000000"
-                               maxlength="12">
-                    </div>
-                    <div class="col-sm-4 inputGroupContainer">
-                        <label for="org_rg" class="control-label">UF</label>
-
-                        <select class="form-control" id="org_rg" name="org_rg">
-                            <option value="">--</option>
-                            <?php
-                            $perfil->setCdVlCatgOrgRg($perfil->getCdVlCatgOrgRg() == '' ? Input::get('org_rg') : $perfil->getCdVlCatgOrgRg());
-                            foreach ($data['org_rg'] as $org) {
-                                if ($org->getCdVlCategoria() == $perfil->getCdVlCatgOrgRg()) {
-                                    echo '<option value="' . $org->getCdVlCategoria() . '" selected>' . $org->getDescVlCatg() . '</option>';
-                                } else {
-                                    echo '<option value="' . $org->getCdVlCategoria() . ' ">' . $org->getDescVlCatg() . '</option>';
-                                }
-                            }
-                            ?>
-                        </select>
-                    </div>
-                </div>
-                <div class="row">
-
-                    <div class="form-group col-sm-6"
-                    ">
-                    <label class="control-label col-sm-1">Sexo</label>
-
-                    <div class="col-sm-12">
-                        <div class="btn-group" data-toggle="buttons">
-                            <label
-                                class="btn btn-default<?php echo (($perfil->getIeSexo()) == 'm' || Input::get('ie_sexo') == 'm') ? ' active' : ''; ?>">
-                                <input type="radio" name="ie_sexo"
-                                       value="m" <?php echo (($perfil->getIeSexo()) == 'm' || Input::get('ie_sexo') == 'm') ? 'checked' : ''; ?>/>
-                                Masculino
-                            </label>
-                            <label
-                                class="btn btn-default<?php echo (($perfil->getIeSexo()) == 'f' || Input::get('ie_sexo') == 'f') ? ' active' : ''; ?>">
-                                <input type="radio" name="ie_sexo"
-                                       value="f" <?php echo (($perfil->getIeSexo()) == 'f' || Input::get('ie_sexo') == 'f') ? 'checked' : ''; ?>/>
-                                Feminino
-                            </label>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="form-group col-sm-6">
-
-                    <div class="col-sm-12 inputGroupContainer" id="datetimepicker">
-                        <label for="dt_nascimento" class="control-label">Nascimento</label>
+            <input type="text" class="form-control" id="nm_pessoa_fisica" name="nm_pessoa_fisica"
+                   value="<?php echo $perfil->getNmPessoaFisica() == '' ? Input::get('nm_pessoa_fisica') : $perfil->getNmPessoaFisica(); ?>"
+                   placeholder="Nome">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-12 inputGroupContainer">
+            <label for="email" class="control-label">Email</label>
 
 
-                        <input type="text" class="form-control"
-                               value="<?php echo $perfil->getDtNascimento() == '' ? Input::get('dt_nascimento') : $perfil->getDtNascimento(); ?>"
-                               id="dt_nascimento"
-                               name="dt_nascimento" placeholder="___/___/____">
-                    </div>
+            <input type="text" class="form-control" id="email" name="email"
+                   value="<?php echo $perfil->getEmail() == '' ? Input::get('email') : $perfil->getEmail(); ?>"
+                   placeholder="Email">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-4 inputGroupContainer">
+            <label for="cpf" class="control-label">CPF</label>
+
+            <input type="text" class="form-control" id="cpf" name="cpf"
+                   value="<?php echo $perfil->getCpf() == '' ? Input::get('cpf') : $perfil->getCpf(); ?>"
+                   placeholder="000.000.000-00"
+                   maxlength="14">
+        </div>
+        <div class="col-sm-4 inputGroupContainer">
+            <label for="rg" class="control-label">RG</label>
+
+            <input type="text" class="form-control" id="rg" name="rg"
+                   value="<?php echo $perfil->getRg() == '' ? Input::get('rg') : $perfil->getRg(); ?>"
+                   placeholder="00000000"
+                   maxlength="12">
+        </div>
+        <div class="col-sm-4 inputGroupContainer">
+            <label for="org_rg" class="control-label">UF</label>
+
+            <select class="form-control" id="org_rg" name="org_rg">
+                <option value="">--</option>
+                <?php
+                $perfil->setCdVlCatgOrgRg($perfil->getCdVlCatgOrgRg() == '' ? Input::get('org_rg') : $perfil->getCdVlCatgOrgRg());
+                foreach ($data['org_rg'] as $org) {
+                    if ($org->getCdVlCategoria() == $perfil->getCdVlCatgOrgRg()) {
+                        echo '<option value="' . $org->getCdVlCategoria() . '" selected>' . $org->getDescVlCatg() . '</option>';
+                    } else {
+                        echo '<option value="' . $org->getCdVlCategoria() . ' ">' . $org->getDescVlCatg() . '</option>';
+                    }
+                }
+                ?>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="form-group col-sm-6">
+            <label class="control-label col-sm-1">Sexo</label>
+
+            <div class="col-sm-12">
+                <div class="btn-group" data-toggle="buttons">
+                    <label
+                        class="btn btn-default<?php echo (($perfil->getIeSexo()) == 'm' || Input::get('ie_sexo') == 'm') ? ' active' : ''; ?>">
+                        <input type="radio" name="ie_sexo"
+                               value="m" <?php echo (($perfil->getIeSexo()) == 'm' || Input::get('ie_sexo') == 'm') ? 'checked' : ''; ?>/>
+                        Masculino
+                    </label>
+                    <label
+                        class="btn btn-default<?php echo (($perfil->getIeSexo()) == 'f' || Input::get('ie_sexo') == 'f') ? ' active' : ''; ?>">
+                        <input type="radio" name="ie_sexo"
+                               value="f" <?php echo (($perfil->getIeSexo()) == 'f' || Input::get('ie_sexo') == 'f') ? 'checked' : ''; ?>/>
+                        Feminino
+                    </label>
                 </div>
             </div>
+
+        </div>
+
+        <div class="form-group col-sm-6">
+
+            <div class="col-sm-12 inputGroupContainer" id="datetimepicker">
+                <label for="dt_nascimento" class="control-label">Nascimento</label>
+
+
+                <input type="text" class="form-control"
+                       value="<?php echo $perfil->getDtNascimento() == '' ? Input::get('dt_nascimento') : $perfil->getDtNascimento(); ?>"
+                       id="dt_nascimento"
+                       name="dt_nascimento" placeholder="___/___/____">
+            </div>
+        </div>
+    </div>
 </div>
 <div class="col-md-4">
-
     <div class="form-group">
         <div class="col-sm-12 selectContainer">
             <label for="cd_pessoa_juridica" class="control-label">Empresa</label>
-
 
             <select class="form-control" id="cd_cgc" name="cd_pessoa_juridica">
                 <option value="">-- Selecione uma empresa</option>
@@ -272,7 +278,7 @@ if (Session::exists('sucesso_salvar_pf')) {
     </div>
 
     <input type="hidden" name="cd_pessoa_fisica" value="<?php echo $data['id']; ?>">
-    <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
+    <input type="hidden" name="token" value="<?php echo $token; ?>">
 
     <div class="form-group">
         <div class="col-sm-12 clearfix">
@@ -292,53 +298,139 @@ if (Session::exists('sucesso_salvar_pf')) {
 </div>
 
 </div>
-<div class="tab-pane fade" id="telefones">
-    <form class="form-horizontal" id="form_produtos">
-        <fieldset class="well">
-            <div class="row">
+<?php if ($id_check): ?>
+    <div class="tab-pane fade" id="telefones">
 
-                <p class="col-sm-6">Telefone: <input name="ds_prod" class="form-control" type="text"
-                                                     id="ds_prod"></p>
 
-                <p class="col-sm-6">Operadora: <input name="fg_ativo" class="form-control" type="text"
-                                                      id="fg_ativo" value=""></p>
+        <div class="row">
+            <div class="col-md-6">
+                <form class="form-horizontal" id="form_pf_telefones">
+                    <fieldset class="well">
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="celular" class="control-label">Telefone</label>
 
-                <p class="col-sm-6">Categoria: <input name="preco_venda" class="form-control"
-                                                      type="text"
-                                                      id="preco_venda"></p>
+                                <div>
+                                    <input name="fone" class="form-control" type="text" id="celular">
+                                </div>
+                            </div>
 
-                <p class="col-sm-6">Observação: <input name="preco_custo" class="form-control"
-                                                       type="text"
-                                                       id="preco_custo"></p>
+                            <div class="form-group col-md-6">
+                                <label for="operadora" class="control-label">Operadora</label>
 
-                <p class="col-sm-6">
-                    <input type="reset" name="reset" class="btn btn-success" id="reset" value="Limpar">
-                    <input type="submit" name="cadastrar" class="btn btn-primary" id="cadastrar"
-                           value="Cadastrar">
-                    <input type="hidden" name="cd_pessoa_fisica"
-                           value="<?php echo $perfil->getCdPessoaFisica(); ?>">
-                </p>
+                                <div>
+                                    <select class="form-control" name="operadora" id="operadora">
+                                        <option value="">--</option>
+                                        <?php
+                                        foreach ($operadoras as $operadora) {
+                                            echo '<option value="' . $operadora->getCdVlCategoria() . '">' . $operadora->getDescVlCatg() . '</option>';
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="observacao" class="control-label">Observação</label>
+
+                                <div>
+                                    <input name="observacao" class="form-control" type="text" id="observacao">
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="categoria" class="control-label">Categoria</label>
+
+                                <div>
+                                    <select class="form-control" name="categoria" id="categoria">
+                                        <option value="">--</option>
+                                        <?php
+                                        foreach ($pf_telefones as $tel) {
+                                            echo '<option value="' . $tel->getCdVlCategoria() . '">' . $tel->getDescVlCatg() . '</option>';
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="col-md-12">
+                            <input type="reset" name="reset" class="btn btn-success" id="reset" value="Limpar">
+                            <input type="submit" name="cadastrar" class="btn btn-primary" id="cadastrar"
+                                   value="Cadastrar">
+                            <input type="hidden" name="cd_pessoa_fisica"
+                                   value="<?php echo $perfil->getCdPessoaFisica(); ?>">
+                            <input type="hidden" name="token"
+                                   value="<?php echo $token; ?>">
+                        </p>
+                    </fieldset>
+                </form>
             </div>
-        </fieldset>
-    </form>
-</div>
-<div class="tab-pane fade" id="morador">
-    <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.
-        Exercitation
-        +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko
-        farm-to-table
-        craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts
-        ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus
-        mollit.</p>
-</div>
-<div class="tab-pane fade" id="enderecos">
-    <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua,
-        retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica.
-        Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure
-        terry
-        richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american
-        apparel, butcher voluptate nisi qui.</p>
-</div>
+            <div class="col-md-6">
+                <table id="tb_telefones" class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>Telefone</th>
+                        <th>Operadora</th>
+                        <th>Categoria</th>
+                        <th>Observacao</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    //var_dump($pf_telefones);
+                    foreach($telefones as $telefone) {
+                        echo "
+                     <tr>
+                        <td>{$telefone->getFone()}</td>
+                        <td>
+                        ";
+                        foreach($operadoras as $catg_tel){
+                            if ($catg_tel->getCdVlCategoria() == $telefone->getCdVlCatgOperadora()) {
+                                echo $catg_tel->getDescVlCatg();
+                            }
+                        }
+                        echo "
+                        </td>
+                        <td>
+                        ";
+                        foreach($pf_telefones as $pf_tel){
+                            if ($pf_tel->getCdVlCategoria() == $telefone->getCdVlCatgFonePf()) {
+                                echo $pf_tel->getDescVlCatg();
+                            }
+                        }
+                        echo "
+                        </td>
+                        <td>{$telefone->getObservacao()}</td>
+                    </tr>";
+                    };?>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="tab-pane fade" id="morador">
+        <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.
+            Exercitation
+            +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko
+            farm-to-table
+            craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts
+            ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus
+            mollit.</p>
+    </div>
+    <div class="tab-pane fade" id="enderecos">
+        <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua,
+            retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica.
+            Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure
+            terry
+            richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american
+            apparel, butcher voluptate nisi qui.</p>
+    </div>
+<?php endif; ?>
 </div>
 </div>
 </div>

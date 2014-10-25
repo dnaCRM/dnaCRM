@@ -63,10 +63,14 @@ class PessoaFisica extends Controller
         $org_rg = (new CategoriaValorDAO())->get('cd_categoria = 1');
         $inst_ensino = (new InstituicaoEnsinoDAO())->fullList();
         $grau_ensino = (new CategoriaValorDAO())->get('cd_categoria = 8');
+        $pf_telefone = (new CategoriaValorDAO())->get('cd_categoria = 5');
+        $operadora = (new CategoriaValorDAO())->get('cd_categoria = 10');
 
         if ($id) {
             /** @var PessoaFisicaDTO */
             $perfilarr = $this->findById($id);
+
+            $telefones = (new PessoaFisicaTelefoneDAO())->get("cd_pessoa_fisica = {$id}");
 
             $nasc = new DateTime($perfilarr->getDtNascimento());
             $perfilarr->setDtNascimento($nasc->format('d/m/Y'));
@@ -78,7 +82,6 @@ class PessoaFisica extends Controller
             $perfilarr->setDtFimCurso($dt_fim_curso->format('d/m/Y'));
 
             $dados = array(
-
                 'pagetitle' => $perfilarr->getNmPessoaFisica(),
                 'pagesubtitle' => 'Atualizar Perfil.',
                 'pessoa_juridica' => $pessoa_juridica,
@@ -86,19 +89,24 @@ class PessoaFisica extends Controller
                 'org_rg' => $org_rg,
                 'inst_ensino' => $inst_ensino,
                 'grau_ensino' => $grau_ensino,
+                'pf_telefone' => $pf_telefone,
+                'telefones' => $telefones,
+                'operadora' => $operadora,
                 'id' => $id,
                 'perfil' => $perfilarr
             );
         } else {
             $perfil = new PessoaFisicaDTO();
             $dados = array(
-                'pagetitle' => 'Cadastro de Perfil',
+                'pagetitle' => 'Cadastro',
                 'pagesubtitle' => 'Pessoa Física.',
                 'pessoa_juridica' => $pessoa_juridica,
                 'profissoes' => $profissoes,
                 'org_rg' => $org_rg,
                 'inst_ensino' => $inst_ensino,
                 'grau_ensino' => $grau_ensino,
+                'pf_telefone' => $pf_telefone,
+                'operadora' => $operadora,
                 'id' => null,
                 'perfil' => $perfil
             );

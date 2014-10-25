@@ -11,6 +11,7 @@ class PessoaFisicaTelefoneDAO extends DataAccessObject
 
     /**
      * @param PessoaFisicaTelefoneDTO $dto
+     * @return DataTransferObject
      * @throws Exception
      */
     public function gravar(PessoaFisicaTelefoneDTO $dto)
@@ -24,5 +25,7 @@ class PessoaFisicaTelefoneDAO extends DataAccessObject
                 throw new Exception('Impossível Atualizar Telefone');
             }
         }
+
+        return $this->first();
     }
 } 
