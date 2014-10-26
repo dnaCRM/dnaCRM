@@ -406,8 +406,8 @@ if (Session::exists('sucesso_salvar_pf')) {
                         <td>{$telefone->getObservacao()}</td>
                         <td>
 
-                        <a href=\"#\" class=\"btn btn-warning btn-sm pull-right delete_pf_tel\" data-del-pftel-id=\"{$telefone->getCdPfFone()}\" data-toggle=\"modal\" data-target=\"#apagaPfTelModal\"><i class=\"fa fa-trash-o\"></i></a>
-                        <a href=\"#\" class=\"btn btn-primary btn-sm pull-right update_pf_tel\" data-update-pftel-id=\"{$telefone->getCdPfFone()}\" data-toggle=\"modal\" data-target=\"#atualizaPfTelModal\"><i class=\"fa fa-edit\"></i></a>
+                        <a href=\"#\" class=\"btn btn-primary btn-sm update_pf_tel\" data-update-pftel-id=\"{$telefone->getCdPfFone()}\" data-toggle=\"modal\" data-target=\"#atualizaPfTelModal\"><i class=\"fa fa-edit\"></i></a>
+                        &nbsp;<a href=\"#\" class=\"btn btn-warning btn-sm delete_pf_tel\" data-del-pftel-id=\"{$telefone->getCdPfFone()}\" data-toggle=\"modal\" data-target=\"#apagaPfTelModal\"><i class=\"fa fa-trash-o\"></i></a>
 
                         </td>
                     </tr>";

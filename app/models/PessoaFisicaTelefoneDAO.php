@@ -28,4 +28,13 @@ class PessoaFisicaTelefoneDAO extends DataAccessObject
 
         return $this->first();
     }
+
+    /**
+     * @param $where
+     * @return bool | DataTransferObject
+     */
+    public function get($where)
+    {
+        return $this->select($where, null, null, "{$this->primaryKey} desc");
+    }
 } 

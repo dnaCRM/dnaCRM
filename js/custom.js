@@ -641,6 +641,7 @@ $('#pf_ajax_form').submit(function () {
     return false;
 });
 
+/* INÍCIO DO CÓDIGO PARA MANIPULAÇÃO DE TELEFONES DE PESSOA FÍSICA */
 $('#form_pf_telefones').bootstrapValidator({
     feedbackIcons: {
         valid: 'glyphicon glyphicon-ok',
@@ -700,9 +701,13 @@ $('#form_pf_telefones').bootstrapValidator({
         type: "POST",
         url: "PessoaFisicaTelefone/cadastra",
         data: dados,
+        dataType: 'json',
         success: function (data) {
-            $(data).appendTo('#tb_pf_telefones').hide().fadeIn();
-
+            var html = '<tr data-pf-tel="'+data.cd_pf_fone+'"><td>'+data.fone+'</td><td>'+data.operadora+'</td><td>'+data.categoria+'</td><td>'+data.observacao+'</td><td>' +
+                '<a href="#" class="btn btn-primary btn-sm update_pf_tel" data-update-pftel-id="'+data.cd_pf_fone+'" data-toggle="modal" data-target="#atualizaPfTelModal"><i class="fa fa-edit"></i></a>' +
+                '&nbsp;<a href="#" class="btn btn-warning btn-sm delete_pf_tel" data-del-pftel-id="'+data.cd_pf_fone+'" data-toggle="modal" data-target="#apagaPfTelModal"><i class="fa fa-trash-o"></i></a>' +
+                '</td></tr>';
+            $(html).appendTo('#tb_pf_telefones').hide().fadeIn();
             bv.resetForm(true);
         }
     });
@@ -761,17 +766,25 @@ $('#form_atualiza_pf_tel').bootstrapValidator({
         type: "POST",
         url: "PessoaFisicaTelefone/cadastra",
         data: dados,
+        dataType: 'json',
         success: function (data) {
-            console.log(data);
+
             //var prod_id = '#prod_' + data.id_prod;
             //var prod = $(prod_id);
 
-           // prod.html(data.ds_prod + ' R$ ' + data.preco_venda);
+            var linha = $('#tb_pf_telefones tr[data-pf-tel=' + data.cd_pf_fone + ']');
+
+            var html = '<td>'+data.fone+'</td><td>'+data.operadora+'</td><td>'+data.categoria+'</td><td>'+data.observacao+'</td><td>' +
+                ' <a href="#" class="btn btn-warning btn-sm pull-right delete_pf_tel" data-del-pftel-id="'+data.cd_pf_fone+'" data-toggle="modal" data-target="#apagaPfTelModal"><i class="fa fa-trash-o"></i></a>' +
+                '<a href="#" class="btn btn-primary btn-sm pull-right update_pf_tel" data-update-pftel-id="'+data.cd_pf_fone+'" data-toggle="modal" data-target="#atualizaPfTelModal"><i class="fa fa-edit"></i></a>' +
+                '</td>';
 
             bv.resetForm(true);
 
-            $('#atualizaModalLabel').html('<span class="text-success"><i class="fa fa-check"></i> Produto atualizado!</span>')
+            $('#atualizaModalLabel').html('<span class="text-success"><i class="fa fa-check"></i> Telefone atualizado!</span>')
                 .fadeIn();
+
+            linha.html(html);
 
             $form.parents('#atualizaPfTelModal').modal('hide');
 
@@ -844,9 +857,10 @@ $('#tb_pf_telefones').delegate('.delete_pf_tel', 'click', function () {
 
             $('#form_apaga_pf_tel input[name=cd_pf_fone]').val(data.cd_pf_fone);
 
-            $('#del_pf_tel_confirma').html('<span class="text-danger"><i class="fa fa-trash-o"></i> Apagar produto ' + data.fone + '?</span>');
+            $('#del_pf_tel_confirma').html('<span class="text-danger"><i class="fa fa-trash-o"></i> Apagar telefone ' + data.fone + '?</span>');
 
         }
     });
 });
 /** Fim - Botões Atualizar e Apagar PF Telefone*/
+/* FIM DO CÓDIGO PARA MANIPULAÇÃO DE TELEFONES DE PESSOA FÍSICA */

@@ -36,39 +36,24 @@ class PessoaFisicaTelefone extends Controller
                 CodeFail((int)$e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
             }
 
-            $return = "
-                     <tr data-pf-tel=\"{$telefone->getCdPfFone()}\">
-                        <td>{$telefone->getFone()}</td>
-                        <td>
-                        ";
+            $return['fone']  =$telefone->getFone();
+
             foreach ($this->operadoras as $catg_tel) {
                 if ($catg_tel->getCdVlCategoria() == $telefone->getCdVlCatgOperadora()) {
-                    $return .= $catg_tel->getDescVlCatg();
+                    $return['operadora'] = $catg_tel->getDescVlCatg();
                 }
             }
-            $return .= "
-                        </td>
-                        <td>
-                        ";
+
             foreach ($this->categorias as $pf_tel) {
                 if ($pf_tel->getCdVlCategoria() == $telefone->getCdVlCatgFonePf()) {
-                    $return .= $pf_tel->getDescVlCatg();
+                    $return['categoria'] = $pf_tel->getDescVlCatg();
                 }
             }
-            $return .= "
-                        </td>
-                        <td>{$telefone->getObservacao()}</td>
-                        <td>
+            $return['observacao'] = $telefone->getObservacao();
+            $return['cd_pf_fone'] = $telefone->getCdPfFone();
 
-                        <a href=\"#\" class=\"btn btn-warning btn-sm pull-right delete_pf_tel\" data-del-pftel-id=\"{$telefone->getCdPfFone()}\" data-toggle=\"modal\" data-target=\"#apagaPfTelModal\"><i class=\"fa fa-trash-o\"></i></a>
-                        <a href=\"#\" class=\"btn btn-primary btn-sm pull-right update_pf_tel\" data-update-pftel-id=\"{$telefone->getCdPfFone()}\" data-toggle=\"modal\" data-target=\"#atualizaPfTelModal\"><i class=\"fa fa-edit\"></i></a>
-
-                        </td>
-                    </tr>";
-
-            echo $return;
+            echo json_encode($return);
         }
-        //}
 
     }
 
