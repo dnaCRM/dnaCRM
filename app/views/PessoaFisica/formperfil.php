@@ -368,13 +368,14 @@ if (Session::exists('sucesso_salvar_pf')) {
                 </form>
             </div>
             <div class="col-md-6">
-                <table id="tb_telefones" class="table table-striped table-hover">
+                <table id="tb_pf_telefones" class="table table-striped table-hover">
                     <thead>
                     <tr>
                         <th>Telefone</th>
                         <th>Operadora</th>
                         <th>Categoria</th>
-                        <th>Observacao</th>
+                        <th>Observação</th>
+                        <th>Editar</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -382,7 +383,7 @@ if (Session::exists('sucesso_salvar_pf')) {
                     //var_dump($pf_telefones);
                     foreach($telefones as $telefone) {
                         echo "
-                     <tr>
+                     <tr data-pf-tel=\"{$telefone->getCdPfFone()}\">
                         <td>{$telefone->getFone()}</td>
                         <td>
                         ";
@@ -403,6 +404,12 @@ if (Session::exists('sucesso_salvar_pf')) {
                         echo "
                         </td>
                         <td>{$telefone->getObservacao()}</td>
+                        <td>
+
+                        <a href=\"#\" class=\"btn btn-warning btn-sm pull-right delete_pf_tel\" data-del-pftel-id=\"{$telefone->getCdPfFone()}\" data-toggle=\"modal\" data-target=\"#apagaPfTelModal\"><i class=\"fa fa-trash-o\"></i></a>
+                        <a href=\"#\" class=\"btn btn-primary btn-sm pull-right update_pf_tel\" data-update-pftel-id=\"{$telefone->getCdPfFone()}\" data-toggle=\"modal\" data-target=\"#atualizaPfTelModal\"><i class=\"fa fa-edit\"></i></a>
+
+                        </td>
                     </tr>";
                     };?>
 
@@ -434,4 +441,129 @@ if (Session::exists('sucesso_salvar_pf')) {
 </div>
 </div>
 </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="atualizaPfTelModal" tabindex="-1" role="dialog" aria-labelledby="pfTelModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <form class="form-horizontal" id="form_atualiza_pf_tel">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span
+                            aria-hidden="true">&times;</span><span
+                            class="sr-only">Fechar</span></button>
+                    <h4 class="modal-title" id="atualizaModalLabel">Atualizar Telefone</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="col-sm-12">
+                        <fieldset class="well">
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="celular" class="control-label">Telefone</label>
+
+                                    <div>
+                                        <input name="fone" class="form-control" type="text" id="celular">
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label for="operadora" class="control-label">Operadora</label>
+
+                                    <div>
+                                        <select class="form-control" name="operadora" id="operadora">
+                                            <option value="">--</option>
+                                            <?php
+                                            foreach ($operadoras as $operadora) {
+                                                echo '<option value="' . $operadora->getCdVlCategoria() . '">' . $operadora->getDescVlCatg() . '</option>';
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="observacao" class="control-label">Observação</label>
+
+                                    <div>
+                                        <input name="observacao" class="form-control" type="text" id="observacao">
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label for="categoria" class="control-label">Categoria</label>
+
+                                    <div>
+                                        <select class="form-control" name="categoria" id="categoria">
+                                            <option value="">--</option>
+                                            <?php
+                                            foreach ($pf_telefones as $tel) {
+                                                echo '<option value="' . $tel->getCdVlCategoria() . '"'.
+                                                    ($tel->getCdVlCategoria() == 0 ? ' selected' : '')
+                                                . '>' . $tel->getDescVlCatg() . '</option>';
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="col-md-12">
+
+                                <input type="hidden" name="cd_pessoa_fisica"
+                                       value="<?php echo $perfil->getCdPessoaFisica(); ?>">
+                                <input type="hidden" name="token"
+                                       value="<?php echo $token; ?>">
+                            </p>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    <input type="submit" class="btn btn-primary col-xs-offset-2" name="enviar" value="Salvar"/>
+                </div>
+
+                <input type="hidden" name="cd_pf_fone" value="">
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="apagaPfTelModal" tabindex="-1" role="dialog" aria-labelledby="apagaPfTelLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <form class="form-horizontal" id="form_apaga_pf_tel">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span
+                            aria-hidden="true">&times;</span><span
+                            class="sr-only">Fechar</span></button>
+
+                    <span class="modal-title" id="deletaModalLabel"></span>
+
+                </div>
+                <div class="modal-body">
+
+                    <div class="col-sm-12 center">
+
+                        <h5 id="del_pf_tel_confirma"></h5>
+
+                        <p></p>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    <input type="submit" class="btn btn-danger col-xs-offset-2" name="deletar" value="Deletar"/>
+                </div>
+
+                <input type="hidden" name="cd_pf_fone" value="">
+            </form>
+        </div>
+    </div>
 </div>

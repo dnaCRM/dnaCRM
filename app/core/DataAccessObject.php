@@ -156,7 +156,7 @@ abstract class DataAccessObject
                 WHERE {$this->primaryKey} = {$dto->{$dto->getReflex()[$this->primaryKey]}()}  returning *";
 
         if ($this->query($sql, $this->dataTransfer, array())->success()) {
-            return $this->getResultado();
+            return $this->first();
         }
         return false;
     }

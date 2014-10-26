@@ -97,6 +97,23 @@ $(document).ready(function () {
 
 });
 
+/* DataTables */
+$('#perfillist').dataTable({
+    "language": {
+        "url": "js/datatables/js/dataTables.pt-br.lang"
+    },
+    responsive: true
+});
+
+$('#tb_pf_telefonesll').dataTable({
+    "language": {
+        "url": "js/datatables/js/dataTables.pt-br.lang"
+    },
+    scrollY: 200,
+    paging: false,
+    "searching": false
+});
+
 $(document).ready(function () {
     $('#cpf').mask("999.999.999-99");
     $('#cnpj').mask("99.999.999/9999-99");
@@ -608,13 +625,6 @@ $('#condominioform').bootstrapValidator({
     }
 });
 
-$('#perfillist').dataTable({
-    "language": {
-        "url": "js/datatables/js/dataTables.pt-br.lang"
-    },
-    responsive: true
-});
-
 $('#pf_ajax_form').submit(function () {
     var dados = $(this).serialize();
 
@@ -691,11 +701,152 @@ $('#form_pf_telefones').bootstrapValidator({
         url: "PessoaFisicaTelefone/cadastra",
         data: dados,
         success: function (data) {
-            //$(data).appendTo('#lista_tel').hide().fadeIn();
-            console.log('Gravou!');
-            console.log(data);
+            $(data).appendTo('#tb_pf_telefones').hide().fadeIn();
+
             bv.resetForm(true);
         }
     });
     return false;
 });
+
+$('#form_atualiza_pf_tel').bootstrapValidator({
+    feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+    },
+    fields: {
+        fone: {
+            validators: {
+                notEmpty: {
+                    message: 'Informe o número de telefone.'
+                }
+            }
+        },
+        observacao: {
+            validators: {
+                notEmpty: {
+                    message: 'Observação obrigatória.'
+                }
+            }
+        },
+        categoria: {
+            validators: {
+                notEmpty: {
+                    message: 'Informe a categoria.'
+                }
+            }
+        },
+        operadora: {
+            validators: {
+                notEmpty: {
+                    message: 'Informe a categoria.'
+                }
+            }
+        }
+    }
+}).on('success.form.bv', function (e) {
+// Prevent form submission
+    e.preventDefault();
+
+    // Get the form instance
+    var $form = $(e.target);
+
+    // Get the BootstrapValidator instance
+    var bv = $form.data('bootstrapValidator');
+
+    var dados = $(this).serialize();
+
+    $.ajax({
+        type: "POST",
+        url: "PessoaFisicaTelefone/cadastra",
+        data: dados,
+        success: function (data) {
+            console.log(data);
+            //var prod_id = '#prod_' + data.id_prod;
+            //var prod = $(prod_id);
+
+           // prod.html(data.ds_prod + ' R$ ' + data.preco_venda);
+
+            bv.resetForm(true);
+
+            $('#atualizaModalLabel').html('<span class="text-success"><i class="fa fa-check"></i> Produto atualizado!</span>')
+                .fadeIn();
+
+            $form.parents('#atualizaPfTelModal').modal('hide');
+
+        },
+        error: function(data) {
+            console.log(data.responseText);
+        }
+    });
+    return false;
+});
+
+$('#form_apaga_pf_tel')
+    .submit(function () {
+
+        var dados = $(this).serialize();
+
+        $.ajax({
+            type: "POST",
+            url: "PessoaFisicaTelefone/apagar",
+            data: dados,
+            dataType: 'json',
+            success: function (data) {
+                $('#form_apaga_pf_tel input[name=cd_pf_fone]').val('');
+
+                $('#del_pf_tel_confirma').html('<span class="text-success"><i class="fa fa-check"></i> Telefone ' + data.fone + ' Apagado!</span>')
+                    .hide().fadeIn();
+
+                $('#tb_pf_telefones tr[data-pf-tel=' + data.cd_pf_fone + ']').remove();
+                $('#apagaPfTelModal').modal('hide');
+            }
+        });
+        return false;
+    });
+
+
+/** Início - Botões Atualizar e Apagar  PF Telefone */
+$('#tb_pf_telefones').delegate('.update_pf_tel', 'click', function () {
+
+    var id = $(this).attr('data-update-pftel-id');
+
+    $.ajax({
+        type: "GET",
+        url: "PessoaFisicaTelefone/findById/" + id,
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function (data) {
+
+            $('#form_atualiza_pf_tel input[name=cd_pf_fone]').val(data.cd_pf_fone);
+            $('#form_atualiza_pf_tel input[name=fone]').val(data.fone);
+            $('#form_atualiza_pf_tel input[name=operadora]').val(data.operadora);
+            $('#form_atualiza_pf_tel input[name=observacao]').val(data.observacao);
+            $('#form_atualiza_pf_tel input[name=categoria]').val(data.categoria);
+
+            $('#atualizaModalLabel').html('Atualizar Telefone!!!!');
+
+        }
+    });
+});
+
+$('#tb_pf_telefones').delegate('.delete_pf_tel', 'click', function () {
+
+    var id = $(this).attr('data-del-pftel-id');
+
+    $.ajax({
+        type: "GET",
+        url: "PessoaFisicaTelefone/findById/" + id,
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function (data) {
+
+            $('#form_apaga_pf_tel input[name=cd_pf_fone]').val(data.cd_pf_fone);
+
+            $('#del_pf_tel_confirma').html('<span class="text-danger"><i class="fa fa-trash-o"></i> Apagar produto ' + data.fone + '?</span>');
+
+        }
+    });
+});
+/** Fim - Botões Atualizar e Apagar PF Telefone*/
