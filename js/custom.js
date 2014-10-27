@@ -787,6 +787,7 @@ $('#form_atualiza_pf_tel').bootstrapValidator({
         },
         error: function(data) {
             console.log(data.responseText);
+            $(data.responseText).appendTo('#responseAjaxError');
         }
     });
     return false;
@@ -830,9 +831,9 @@ $('#tb_pf_telefones').delegate('.update_pf_tel', 'click', function () {
 
             $('#form_atualiza_pf_tel input[name=cd_pf_fone]').val(data.cd_pf_fone);
             $('#form_atualiza_pf_tel input[name=fone]').val(data.fone);
-            $('#form_atualiza_pf_tel input[name=operadora]').val(data.operadora);
             $('#form_atualiza_pf_tel input[name=observacao]').val(data.observacao);
-            $('#form_atualiza_pf_tel input[name=categoria]').val(data.categoria);
+            $('#tel_operadora option[value='+data.operadora+']').prop("selected", "selected");
+            $('#tel_categoria option[value='+data.categoria+']').prop("selected", "selected");
 
             $('#atualizaModalLabel').html('Atualizar Telefone!!!!');
 
@@ -870,6 +871,7 @@ $('#form_pf_enderecos').bootstrapValidator({
     },
     fields: {
         rua: {
+            group: '.col-sm-5',
             validators: {
                 notEmpty: {
                     message: 'Informe a rua.'
@@ -877,6 +879,7 @@ $('#form_pf_enderecos').bootstrapValidator({
             }
         },
         numero: {
+            group: '.col-sm-1',
             validators: {
                 notEmpty: {
                     message: 'Informe o número.'
@@ -887,6 +890,7 @@ $('#form_pf_enderecos').bootstrapValidator({
             }
         },
         bairro: {
+            group: '.col-sm-3',
             validators: {
                 notEmpty: {
                     message: 'Informe o bairro.'
@@ -894,6 +898,7 @@ $('#form_pf_enderecos').bootstrapValidator({
             }
         },
         cidade: {
+            group: '.col-sm-3',
             validators: {
                 notEmpty: {
                     message: 'Informe a cidade.'
@@ -901,6 +906,7 @@ $('#form_pf_enderecos').bootstrapValidator({
             }
         },
         cep: {
+            group: '.col-sm-3',
             validators: {
                 notEmpty: {
                     message: 'Informe o CEP.'
@@ -908,6 +914,7 @@ $('#form_pf_enderecos').bootstrapValidator({
             }
         },
         estado: {
+            group: '.col-sm-3',
             validators: {
                 notEmpty: {
                     message: 'Informe o estado.'
@@ -915,6 +922,7 @@ $('#form_pf_enderecos').bootstrapValidator({
             }
         },
         categoria: {
+            group: '.col-sm-3',
             validators: {
                 notEmpty: {
                     message: 'Informe a categoria.'
@@ -937,15 +945,25 @@ $('#form_pf_enderecos').bootstrapValidator({
         data: dados,
         dataType: 'json',
         success: function (data) {
-            console.log(data);
-            var html =
-                '<tr data-pf-endereco="'+data.id_endereco+'">' +
-                    '<td>'+ data.rua + '</td><td>'+data.numero+'</td><td>'+data.bairro+'</td><td>'+data.cidade+'</td><td>'+data.cep+'</td><td>'+data.estado+'</td><td>'+data.categoria+'</td><td>'+data.observacao+'</td><td>' +
-                        '<a href="#" class="btn btn-primary btn-sm update_pf_end" data-update-pfend-id="'+data.id_endereco+'" data-toggle="modal" data-target="#atualizaPfEndModal"><i class="fa fa-edit"></i></a>' +
-                        '&nbsp;<a href="#" class="btn btn-warning btn-sm delete_pf_end" data-del-pfend-id="'+data.id_endereco+'" data-toggle="modal" data-target="#apagaPfEndModal"><i class="fa fa-trash-o"></i></a></td>' +
-                '</tr>';
 
-            $(html).appendTo('#tb_pf_enderecos').hide().fadeIn();
+            var celulas = '<td>'+ data.rua + '</td><td>'+data.numero+'</td><td>'+data.bairro+'</td><td>'+data.cidade+'</td><td>'+data.cep+'</td><td>'+data.estado+'</td><td>'+data.categoria+'</td><td>'+data.observacao+'</td><td>' +
+                        '<a href="#" class="btn btn-primary btn-sm update_pf_end" data-update-pfend-id="'+data.id_endereco+'" data-toggle="modal" data-target="#atualizaPfEndModal"><i class="fa fa-edit"></i></a>' +
+                        '&nbsp;<a href="#" class="btn btn-warning btn-sm delete_pf_end" data-del-pfend-id="'+data.id_endereco+'" data-toggle="modal" data-target="#apagaPfEndModal"><i class="fa fa-trash-o"></i></a></td>';
+
+            var linha = '<tr data-pf-endereco="'+data.id_endereco+'">' + celulas + '</tr>';
+
+            var id_end = $('#id_endereco').attr('value');
+
+            if (id_end){
+                var registro = $('#tb_pf_enderecos tr[data-pf-endereco=' + id_end + ']');
+                registro.html(celulas);
+                registro.addClass('active');
+                $('#form_pf_enderecos input[name=id_endereco]').val('');
+                $('#legend_form_enderecos').html('Cadastrar Endereço').removeClass('text-primary');
+            } else {
+                $(linha).appendTo('#tb_pf_enderecos').hide().fadeIn();
+            }
+            $('html, body').animate({scrollTop: 400}, 400);
             bv.resetForm(true);
         },
         error: function(data) {
@@ -956,101 +974,24 @@ $('#form_pf_enderecos').bootstrapValidator({
     return false;
 });
 
-$('#form_atualiza_pf_tel').bootstrapValidator({
-    feedbackIcons: {
-        valid: 'glyphicon glyphicon-ok',
-        invalid: 'glyphicon glyphicon-remove',
-        validating: 'glyphicon glyphicon-refresh'
-    },
-    fields: {
-        fone: {
-            validators: {
-                notEmpty: {
-                    message: 'Informe o número de telefone.'
-                }
-            }
-        },
-        observacao: {
-            validators: {
-                notEmpty: {
-                    message: 'Observação obrigatória.'
-                }
-            }
-        },
-        categoria: {
-            validators: {
-                notEmpty: {
-                    message: 'Informe a categoria.'
-                }
-            }
-        },
-        operadora: {
-            validators: {
-                notEmpty: {
-                    message: 'Informe a categoria.'
-                }
-            }
-        }
-    }
-}).on('success.form.bv', function (e) {
-
-    e.preventDefault();
-
-    var $form = $(e.target);
-
-    var bv = $form.data('bootstrapValidator');
-
-    var dados = $(this).serialize();
-
-    $.ajax({
-        type: "POST",
-        url: "PessoaFisicaTelefone/cadastra",
-        data: dados,
-        dataType: 'json',
-        success: function (data) {
-
-            var linha = $('#tb_pf_telefones tr[data-pf-tel=' + data.cd_pf_fone + ']');
-
-            var html = '<td>'+data.fone+'</td><td>'+data.operadora+'</td><td>'+data.categoria+'</td><td>'+data.observacao+'</td><td>' +
-                '<a href="#" class="btn btn-primary btn-sm update_pf_tel" data-update-pftel-id="'+data.cd_pf_fone+'" data-toggle="modal" data-target="#atualizaPfTelModal"><i class="fa fa-edit"></i></a>' +
-                '&nbsp;<a href="#" class="btn btn-warning btn-sm delete_pf_tel" data-del-pftel-id="'+data.cd_pf_fone+'" data-toggle="modal" data-target="#apagaPfTelModal"><i class="fa fa-trash-o"></i></a>' +
-                '</td>';
-
-            bv.resetForm(true);
-
-            $('#atualizaModalLabel').html('<span class="text-success"><i class="fa fa-check"></i> Telefone atualizado!</span>')
-                .fadeIn();
-
-            linha.html(html);
-
-            $form.parents('#atualizaPfTelModal').modal('hide');
-
-        },
-        error: function(data) {
-            console.log(data.responseText);
-        }
-    });
-    return false;
-});
-
-$('#form_apaga_pf_tel')
+$('#form_apaga_pf_end')
     .submit(function () {
 
         var dados = $(this).serialize();
 
         $.ajax({
             type: "POST",
-            url: "PessoaFisicaTelefone/apagar",
+            url: "PessoaFisicaEndereco/apagar",
             data: dados,
             dataType: 'json',
             success: function (data) {
-                $('#form_apaga_pf_tel input[name=cd_pf_fone]').val('');
+                $('#form_apaga_pf_end input[name=id_endereco]').val('');
 
-                $('#del_pf_tel_confirma').html('<span class="text-success"><i class="fa fa-check"></i> Telefone ' + data.fone + ' Apagado!</span>')
+                $('#del_pf_end_confirma').html('<span class="text-success"><i class="fa fa-check"></i> Endereço Apagado!</span>')
                     .hide().fadeIn();
 
-                $('#tb_pf_telefones tr[data-pf-tel=' + data.cd_pf_fone + ']').remove();
-                $('#apagaPfTelModal').modal('hide');
+                $('#tb_pf_enderecos tr[data-pf-endereco=' + data.id_endereco + ']').remove();
+                $('#apagaPfEndModal').modal('hide');
             }
         });
         return false;
@@ -1058,46 +999,70 @@ $('#form_apaga_pf_tel')
 
 
 /** Início - Botões Atualizar e Apagar  PF Telefone */
-$('#tb_pf_telefones').delegate('.update_pf_tel', 'click', function () {
+$('#tb_pf_enderecos').delegate('.update_pf_end', 'click', function () {
 
-    var id = $(this).attr('data-update-pftel-id');
+    var id = $(this).attr('data-update-pfend-id');
 
+    $('html, body').animate({scrollTop: 180}, 400);
     $.ajax({
         type: "GET",
-        url: "PessoaFisicaTelefone/findById/" + id,
+        url: "PessoaFisicaEndereco/findById/" + id,
         data: $(this).serialize(),
         dataType: 'json',
         success: function (data) {
 
-            $('#form_atualiza_pf_tel input[name=cd_pf_fone]').val(data.cd_pf_fone);
-            $('#form_atualiza_pf_tel input[name=fone]').val(data.fone);
-            $('#form_atualiza_pf_tel input[name=operadora]').val(data.operadora);
-            $('#form_atualiza_pf_tel input[name=observacao]').val(data.observacao);
-            $('#form_atualiza_pf_tel input[name=categoria]').val(data.categoria);
+            $('#form_pf_enderecos input[name=id_endereco]').val(data.id_endereco);
+            $('#form_pf_enderecos input[name=rua]').val(data.rua);
+            $('#form_pf_enderecos input[name=numero]').val(data.numero);
+            $('#form_pf_enderecos input[name=bairro]').val(data.bairro);
+            $('#form_pf_enderecos input[name=cidade]').val(data.cidade);
+            $('#form_pf_enderecos input[name=cep]').val(data.cep);
+            $('#form_pf_enderecos input[name=observacao]').val(data.observacao);
+            $('#form_pf_enderecos input[name=cd_pessoa_fisica]').val(data.cd_pessoa_fisica);
+            $('#end_estado option[value='+data.estado+']').prop("selected", "selected");
+            $('#end_categoria option[value='+data.categoria+']').prop("selected", "selected");
+            $('#legend_form_enderecos').html('Atualizar Endereço.').addClass('text-primary');
 
-            $('#atualizaModalLabel').html('Atualizar Telefone!!!!');
-
+        },
+        error: function(data) {
+            console.log(data);
+            $(data.responseText).appendTo('#responseAjaxError');
         }
     });
 });
 
-$('#tb_pf_telefones').delegate('.delete_pf_tel', 'click', function () {
-
-    var id = $(this).attr('data-del-pftel-id');
+$('#tb_pf_enderecos').delegate('.delete_pf_end', 'click', function () {
+    var id = $(this).attr('data-del-pfend-id');
 
     $.ajax({
         type: "GET",
-        url: "PessoaFisicaTelefone/findById/" + id,
+        url: "PessoaFisicaEndereco/findById/" + id,
         data: $(this).serialize(),
         dataType: 'json',
         success: function (data) {
 
-            $('#form_apaga_pf_tel input[name=cd_pf_fone]').val(data.cd_pf_fone);
+            $('#form_apaga_pf_end input[name=id_endereco]').val(data.id_endereco);
+            var confirm_end = data.rua + ', ' + data.numero + ', ' + data.bairro + ', ' + data.cidade + ', ' + data.estado + ', CEP ' + data.cep;
+            $('#del_pf_end_confirma').html('<span class="text-danger"><i class="fa fa-trash-o"></i> Apagar endereco ' + confirm_end + '?</span>');
 
-            $('#del_pf_tel_confirma').html('<span class="text-danger"><i class="fa fa-trash-o"></i> Apagar telefone ' + data.fone + '?</span>');
-
+        },
+        error: function(data) {
+            $(data.responseText).appendTo('#responseAjaxError');
         }
     });
+});
+
+$('#form_end_reset').click(function() {
+    $('#form_pf_enderecos input[name=id_endereco]').val('');
+    $('#legend_form_enderecos').html('Cadastrar Endereço').removeClass('text-primary');
+
 });
 /** Fim - Botões Atualizar e Apagar PF Telefone*/
 /* FIM DO CÓDIGO PARA MANIPULAÇÃO DE TELEFONES DE PESSOA FÍSICA */
+
+/*
+$('.delete_pf_end').click(function () {
+    $('html, body').animate({scrollTop: 100}, 400);
+    return false;
+});
+*/

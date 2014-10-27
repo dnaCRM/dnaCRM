@@ -6,10 +6,6 @@ $perfil_form->cadastra($perfil); //Não cadastra na entra pois ainda não tem To
 $id_check = $data['id'];
 $operadoras = $data['operadora'];
 $pf_telefones = $data['pf_telefone'];
-$telefones = $data['telefones'];
-$enderecos = $data['enderecos'];
-$estados = $data['estados'];
-$catg_enderecos = $data['catg_enderecos'];
 
 $token = Token::generate();
 
@@ -101,7 +97,7 @@ if (Session::exists('sucesso_salvar_pf')) {
                    placeholder="00000000"
                    maxlength="12">
         </div>
-        <div class="col-sm-4 inputGroupContainer">
+        <div class="col-sm-4 selectContainer">
             <label for="org_rg" class="control-label">UF</label>
 
             <select class="form-control" id="org_rg" name="org_rg">
@@ -262,7 +258,7 @@ if (Session::exists('sucesso_salvar_pf')) {
     </div>
 
     <div class="form-group">
-        <div class="col-sm-12">
+        <div class="col-sm-12 selectContainer">
             <label for="org_rg" class="control-label">Grau de Ensino</label>
 
             <select class="form-control" id="cd_grau_ensino" name="cd_grau_ensino">
@@ -303,6 +299,16 @@ if (Session::exists('sucesso_salvar_pf')) {
 
 </div>
 <?php if ($id_check): ?>
+
+    <?php
+
+    $telefones = $data['telefones'];
+    $enderecos = $data['enderecos'];
+    $estados = $data['estados'];
+    $catg_enderecos = $data['catg_enderecos'];
+
+    ;?>
+
     <div class="tab-pane fade" id="telefones">
 
         <div class="row">
@@ -319,7 +325,7 @@ if (Session::exists('sucesso_salvar_pf')) {
                                 </div>
                             </div>
 
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-6 selectContainer">
                                 <label for="operadora" class="control-label">Operadora</label>
 
                                 <div>
@@ -344,7 +350,7 @@ if (Session::exists('sucesso_salvar_pf')) {
                                 </div>
                             </div>
 
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-6 selectContainer">
                                 <label for="categoria" class="control-label">Categoria</label>
 
                                 <div>
@@ -440,6 +446,7 @@ if (Session::exists('sucesso_salvar_pf')) {
             <div class="col-sm-12">
 
                 <form class="form-horizontal" id="form_pf_enderecos">
+                    <legend id="legend_form_enderecos">Cadastrar Endereço</legend>
                     <fieldset class="well">
                         <div class="row">
                             <div class="form-group col-sm-12">
@@ -449,7 +456,7 @@ if (Session::exists('sucesso_salvar_pf')) {
                                     <input name="rua" class="form-control" type="text" id="rua">
                                 </div>
                                 <div class="col-sm-1">
-                                    <label for="numero" class="control-label">Número</label>
+                                    <label for="numero" class="control-label">Nº</label>
 
                                     <input name="numero" class="form-control" type="text" id="numero">
                                 </div>
@@ -475,10 +482,10 @@ if (Session::exists('sucesso_salvar_pf')) {
                                     <input name="cep" class="form-control" type="text" id="cep">
                                 </div>
 
-                                <div class="col-sm-3">
+                                <div class="col-sm-3 selectContainer">
                                     <label for="estado" class="control-label">Estado</label>
 
-                                    <select class="form-control" name="estado" id="estado">
+                                    <select class="form-control" name="estado" id="end_estado">
                                         <option value="">--</option>
                                         <?php
                                         foreach ($estados as $estado) {
@@ -488,10 +495,10 @@ if (Session::exists('sucesso_salvar_pf')) {
                                     </select>
                                 </div>
 
-                                <div class="col-sm-3">
+                                <div class="col-sm-3 selectContainer">
                                     <label for="categoria" class="control-label">Categoria</label>
 
-                                    <select class="form-control" name="categoria" id="categoria">
+                                    <select class="form-control" name="categoria" id="end_categoria">
                                         <option value="">--</option>
                                         <?php
                                         foreach ($catg_enderecos as $catg) {
@@ -511,13 +518,11 @@ if (Session::exists('sucesso_salvar_pf')) {
 
 
                         <div class="col-sm-12">
-                            <input type="reset" name="reset" class="btn btn-success" id="reset" value="Limpar">
-                            <input type="submit" name="cadastrar" class="btn btn-primary" id="cadastrar"
-                                   value="Cadastrar">
-                            <input type="hidden" name="cd_pessoa_fisica"
-                                   value="<?php echo $perfil->getCdPessoaFisica(); ?>">
-                            <input type="hidden" name="token"
-                                   value="<?php echo $token; ?>">
+                            <input type="reset" name="reset" class="btn btn-success" id="form_end_reset" value="Novo">
+                            <input type="submit" name="cadastrar" class="btn btn-primary" id="cadastrar" value="Cadastrar">
+                            <input type="hidden" name="cd_pessoa_fisica" value="<?php echo $perfil->getCdPessoaFisica(); ?>">
+                            <input type="hidden" name="id_endereco" id="id_endereco" value="">
+                            <input type="hidden" name="token" value="<?php echo $token; ?>">
                         </div>
                     </fieldset>
                 </form>
@@ -570,8 +575,8 @@ if (Session::exists('sucesso_salvar_pf')) {
                         echo "</td>";
                         echo "<td>{$endereco->getObservacao()}</td>";
                         echo "<td>";
-                        echo "<a href=\"#\" class=\"btn btn-primary btn-sm update_pf_end\" data-update-pftel-id=\"{$endereco->getNrSequencia()}\" data-toggle=\"modal\" data-target=\"#apagaPfEndModal\"><i class=\"fa fa-edit\"></i></a>";
-                        echo " <a href=\"#\" class=\"btn btn-warning btn-sm delete_pf_end\" data-del-pftel-id=\"{$endereco->getNrSequencia()}\" data-toggle=\"modal\" data-target=\"#atualizaPfEndModal\"><i class=\"fa fa-trash-o\"></i></a>";
+                        echo "<a href=\"#\" class=\"btn btn-primary btn-sm update_pf_end\" data-update-pfend-id=\"{$endereco->getNrSequencia()}\" data-toggle=\"modal\" data-target=\"#atualizaPfEndModal\"><i class=\"fa fa-edit\"></i></a>";
+                        echo " <a href=\"#\" class=\"btn btn-warning btn-sm delete_pf_end\" data-del-pfend-id=\"{$endereco->getNrSequencia()}\" data-toggle=\"modal\" data-target=\"#apagaPfEndModal\"><i class=\"fa fa-trash-o\"></i></a>";
                         echo "</td>";
                     echo "</tr>";
                     }
@@ -615,11 +620,11 @@ if (Session::exists('sucesso_salvar_pf')) {
                                     </div>
                                 </div>
 
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-6 selectContainer">
                                     <label for="operadora" class="control-label">Operadora</label>
 
                                     <div>
-                                        <select class="form-control" name="operadora" id="operadora">
+                                        <select class="form-control" name="operadora" id="tel_operadora">
                                             <option value="">--</option>
                                             <?php
                                             foreach ($operadoras as $operadora) {
@@ -640,11 +645,11 @@ if (Session::exists('sucesso_salvar_pf')) {
                                     </div>
                                 </div>
 
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-6 selectContainer">
                                     <label for="categoria" class="control-label">Categoria</label>
 
                                     <div>
-                                        <select class="form-control" name="categoria" id="categoria">
+                                        <select class="form-control" name="categoria" id="tel_categoria">
                                             <option value="">--</option>
                                             <?php
                                             foreach ($pf_telefones as $tel) {
@@ -715,4 +720,40 @@ if (Session::exists('sucesso_salvar_pf')) {
     </div>
 </div>
 
+<!-- Modal Apagar PF Endereco-->
+<div class="modal fade" id="apagaPfEndModal" tabindex="-1" role="dialog" aria-labelledby="apagaPfEndLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <form class="form-horizontal" id="form_apaga_pf_end">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span
+                            aria-hidden="true">&times;</span><span
+                            class="sr-only">Fechar</span></button>
+
+                    <span class="modal-title" id="deletaEndModalLabel"></span>
+
+                </div>
+                <div class="modal-body">
+
+                    <div class="col-sm-12 center">
+
+                        <h5 id="del_pf_end_confirma"></h5>
+
+                        <p></p>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    <input type="submit" class="btn btn-danger col-xs-offset-2" name="deletar" value="Deletar"/>
+                </div>
+
+                <input type="hidden" name="id_endereco" value="">
+            </form>
+        </div>
+    </div>
+</div>
 <div id="responseAjaxError"></div>
