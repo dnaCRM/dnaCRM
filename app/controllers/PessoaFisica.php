@@ -71,6 +71,9 @@ class PessoaFisica extends Controller
             $perfilarr = $this->findById($id);
 
             $telefones = (new PessoaFisicaTelefoneDAO())->get("cd_pessoa_fisica = {$id}");
+            $enderecos = (new PessoaFisicaEnderecoDAO())->get("cd_pessoa_fisica = {$id}");
+            $estados = (new CategoriaValorDAO())->get('cd_categoria = 2');
+            $catg_enderecos = (new CategoriaValorDAO())->get('cd_categoria = 9');
 
             $nasc = new DateTime($perfilarr->getDtNascimento());
             $perfilarr->setDtNascimento($nasc->format('d/m/Y'));
@@ -91,7 +94,10 @@ class PessoaFisica extends Controller
                 'grau_ensino' => $grau_ensino,
                 'pf_telefone' => $pf_telefone,
                 'telefones' => $telefones,
+                'enderecos' => $enderecos,
                 'operadora' => $operadora,
+                'estados' => $estados,
+                'catg_enderecos' => $catg_enderecos,
                 'id' => $id,
                 'perfil' => $perfilarr
             );

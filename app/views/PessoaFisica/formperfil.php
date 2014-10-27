@@ -7,6 +7,10 @@ $id_check = $data['id'];
 $operadoras = $data['operadora'];
 $pf_telefones = $data['pf_telefone'];
 $telefones = $data['telefones'];
+$enderecos = $data['enderecos'];
+$estados = $data['estados'];
+$catg_enderecos = $data['catg_enderecos'];
+
 $token = Token::generate();
 
 if (Session::exists('sucesso_salvar_pf')) {
@@ -32,7 +36,7 @@ if (Session::exists('sucesso_salvar_pf')) {
     <?php if ($id_check): ?>
         <li><a href="#morador" data-toggle="tab">Morador</a></li>
         <li><a href="#telefones" data-toggle="tab">Telefones</a></li>
-        <li><a href="#enderecos" data-toggle="tab">Outros Endereços</a></li>
+        <li><a href="#enderecos" data-toggle="tab">Endereços</a></li>
     <?php endif; ?>
 </ul>
 <div id="TabAdicionais" class="tab-content">
@@ -301,8 +305,8 @@ if (Session::exists('sucesso_salvar_pf')) {
 <?php if ($id_check): ?>
     <div class="tab-pane fade" id="telefones">
 
-
         <div class="row">
+            <!-- Formulário de Telefones -->
             <div class="col-md-6">
                 <form class="form-horizontal" id="form_pf_telefones">
                     <fieldset class="well">
@@ -311,7 +315,7 @@ if (Session::exists('sucesso_salvar_pf')) {
                                 <label for="celular" class="control-label">Telefone</label>
 
                                 <div>
-                                    <input name="fone" class="form-control" type="text" id="celular">
+                                    <input name="fone" class="form-control fones" type="text" id="celular">
                                 </div>
                             </div>
 
@@ -367,6 +371,8 @@ if (Session::exists('sucesso_salvar_pf')) {
                     </fieldset>
                 </form>
             </div>
+
+            <!-- Tabela de telefones -->
             <div class="col-md-6">
                 <table id="tb_pf_telefones" class="table table-striped table-hover">
                     <thead>
@@ -380,14 +386,14 @@ if (Session::exists('sucesso_salvar_pf')) {
                     </thead>
                     <tbody>
                     <?php
-                    //var_dump($pf_telefones);
-                    foreach($telefones as $telefone) {
+
+                    foreach ($telefones as $telefone) {
                         echo "
                      <tr data-pf-tel=\"{$telefone->getCdPfFone()}\">
                         <td>{$telefone->getFone()}</td>
                         <td>
                         ";
-                        foreach($operadoras as $catg_tel){
+                        foreach ($operadoras as $catg_tel) {
                             if ($catg_tel->getCdVlCategoria() == $telefone->getCdVlCatgOperadora()) {
                                 echo $catg_tel->getDescVlCatg();
                             }
@@ -396,7 +402,7 @@ if (Session::exists('sucesso_salvar_pf')) {
                         </td>
                         <td>
                         ";
-                        foreach($pf_telefones as $pf_tel){
+                        foreach ($pf_telefones as $pf_tel) {
                             if ($pf_tel->getCdVlCategoria() == $telefone->getCdVlCatgFonePf()) {
                                 echo $pf_tel->getDescVlCatg();
                             }
@@ -404,12 +410,10 @@ if (Session::exists('sucesso_salvar_pf')) {
                         echo "
                         </td>
                         <td>{$telefone->getObservacao()}</td>
-                        <td>
-
-                        <a href=\"#\" class=\"btn btn-primary btn-sm update_pf_tel\" data-update-pftel-id=\"{$telefone->getCdPfFone()}\" data-toggle=\"modal\" data-target=\"#atualizaPfTelModal\"><i class=\"fa fa-edit\"></i></a>
-                        &nbsp;<a href=\"#\" class=\"btn btn-warning btn-sm delete_pf_tel\" data-del-pftel-id=\"{$telefone->getCdPfFone()}\" data-toggle=\"modal\" data-target=\"#apagaPfTelModal\"><i class=\"fa fa-trash-o\"></i></a>
-
-                        </td>
+                        <td>";
+                        echo "<a href=\"#\" class=\"btn btn-primary btn-sm update_pf_tel\" data-update-pftel-id=\"{$telefone->getCdPfFone()}\" data-toggle=\"modal\" data-target=\"#atualizaPfTelModal\"><i class=\"fa fa-edit\"></i></a>";
+                        echo "&nbsp;<a href=\"#\" class=\"btn btn-warning btn-sm delete_pf_tel\" data-del-pftel-id=\"{$telefone->getCdPfFone()}\" data-toggle=\"modal\" data-target=\"#apagaPfTelModal\"><i class=\"fa fa-trash-o\"></i></a>";
+                        echo "</td>
                     </tr>";
                     };?>
 
@@ -418,32 +422,175 @@ if (Session::exists('sucesso_salvar_pf')) {
             </div>
         </div>
 
-
     </div>
     <div class="tab-pane fade" id="morador">
-        <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.
-            Exercitation
-            +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko
-            farm-to-table
-            craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts
-            ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus
-            mollit.</p>
+        <div class="row">
+            <div class="col-md-12">
+
+                <h3 class="text-primary">Ainda não sei o que vêm aqui</h3>
+
+            </div>
+        </div>
     </div>
+
+
     <div class="tab-pane fade" id="enderecos">
-        <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua,
-            retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica.
-            Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure
-            terry
-            richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american
-            apparel, butcher voluptate nisi qui.</p>
+        <!-- Formulário de Endereços -->
+        <div class="row">
+            <div class="col-sm-12">
+
+                <form class="form-horizontal" id="form_pf_enderecos">
+                    <fieldset class="well">
+                        <div class="row">
+                            <div class="form-group col-sm-12">
+                                <div class="col-sm-5">
+                                    <label for="rua" class="control-label">Rua / Av / Alameda / Etc</label>
+
+                                    <input name="rua" class="form-control" type="text" id="rua">
+                                </div>
+                                <div class="col-sm-1">
+                                    <label for="numero" class="control-label">Número</label>
+
+                                    <input name="numero" class="form-control" type="text" id="numero">
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="bairro" class="control-label">Bairro</label>
+
+                                    <input name="bairro" class="form-control" type="text" id="bairro">
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="cidade" class="control-label">Cidade</label>
+
+                                    <input name="cidade" class="form-control" type="text" id="cidade">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="form-group col-sm-12">
+                                <div class="col-sm-3">
+                                    <label for="cep" class="control-label">CEP</label>
+
+                                    <input name="cep" class="form-control" type="text" id="cep">
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <label for="estado" class="control-label">Estado</label>
+
+                                    <select class="form-control" name="estado" id="estado">
+                                        <option value="">--</option>
+                                        <?php
+                                        foreach ($estados as $estado) {
+                                            echo '<option value="' . $estado->getCdVlCategoria() . '">' . $estado->getDescVlCatg() . '</option>';
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <label for="categoria" class="control-label">Categoria</label>
+
+                                    <select class="form-control" name="categoria" id="categoria">
+                                        <option value="">--</option>
+                                        <?php
+                                        foreach ($catg_enderecos as $catg) {
+                                            echo '<option value="' . $catg->getCdVlCategoria() . '">' . $catg->getDescVlCatg() . '</option>';
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <label for="observacao" class="control-label">Observação</label>
+
+                                    <input name="observacao" class="form-control" type="text" id="observacao">
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-12">
+                            <input type="reset" name="reset" class="btn btn-success" id="reset" value="Limpar">
+                            <input type="submit" name="cadastrar" class="btn btn-primary" id="cadastrar"
+                                   value="Cadastrar">
+                            <input type="hidden" name="cd_pessoa_fisica"
+                                   value="<?php echo $perfil->getCdPessoaFisica(); ?>">
+                            <input type="hidden" name="token"
+                                   value="<?php echo $token; ?>">
+                        </div>
+                    </fieldset>
+                </form>
+
+            </div>
+        </div>
+        <!-- Fim do Formulário de Endereços -->
+
+        <!-- Tabela de Endereços -->
+        <div class="row">
+            <div class="col-md-12">
+                <h4 class="page-header">Endereços</h4>
+                <table id="tb_pf_enderecos" class="table table-striped table-hover table-responsive">
+                    <thead>
+                    <tr>
+                        <th>Rua</th>
+                        <th>Número</th>
+                        <th>Bairro</th>
+                        <th>Cidade</th>
+                        <th>CEP</th>
+                        <th>Estado</th>
+                        <th>Tipo</th>
+                        <th>Observação</th>
+                        <th>Editar</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    foreach ($enderecos as $endereco) {
+                    echo  "
+                    <tr data-pf-endereco=\"{$endereco->getNrSequencia()}\">
+                        <td>{$endereco->getRua()}</td>
+                        <td>{$endereco->getNumero()}</td>
+                        <td>{$endereco->getBairro()}</td>
+                        <td>{$endereco->getCidade()}</td>
+                        <td>{$endereco->getCep()}</td>
+                        <td>";
+                        foreach ($estados as $end_estado) {
+                            if ($end_estado->getCdVlCategoria() == $endereco->getCdVlCatgEstado()) {
+                                echo $end_estado->getDescVlCatg();
+                            }
+                        }
+                        echo "</td>";
+                        echo "<td>";
+                        foreach ($catg_enderecos as $catg_end) {
+                            if ($catg_end->getCdVlCategoria() == $endereco->getCdVlCatgEnd()) {
+                                echo $catg_end->getDescVlCatg();
+                            }
+                        }
+                        echo "</td>";
+                        echo "<td>{$endereco->getObservacao()}</td>";
+                        echo "<td>";
+                        echo "<a href=\"#\" class=\"btn btn-primary btn-sm update_pf_end\" data-update-pftel-id=\"{$endereco->getNrSequencia()}\" data-toggle=\"modal\" data-target=\"#apagaPfEndModal\"><i class=\"fa fa-edit\"></i></a>";
+                        echo " <a href=\"#\" class=\"btn btn-warning btn-sm delete_pf_end\" data-del-pftel-id=\"{$endereco->getNrSequencia()}\" data-toggle=\"modal\" data-target=\"#atualizaPfEndModal\"><i class=\"fa fa-trash-o\"></i></a>";
+                        echo "</td>";
+                    echo "</tr>";
+                    }
+                    ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- Fim da Tabela de Endereços -->
     </div>
+
+
 <?php endif; ?>
 </div>
 </div>
 </div>
 </div>
 
-<!-- Modal -->
+<!-- Modal Atualizar PF Telefone -->
 <div class="modal fade" id="atualizaPfTelModal" tabindex="-1" role="dialog" aria-labelledby="pfTelModalLabel"
      aria-hidden="true">
     <div class="modal-dialog">
@@ -461,10 +608,10 @@ if (Session::exists('sucesso_salvar_pf')) {
                         <fieldset class="well">
                             <div class="row">
                                 <div class="form-group col-md-6">
-                                    <label for="celular" class="control-label">Telefone</label>
+                                    <label for="a_celular" class="control-label">Telefone</label>
 
                                     <div>
-                                        <input name="fone" class="form-control" type="text" id="celular">
+                                        <input name="fone" class="form-control fones" type="text" id="a_celular">
                                     </div>
                                 </div>
 
@@ -501,9 +648,9 @@ if (Session::exists('sucesso_salvar_pf')) {
                                             <option value="">--</option>
                                             <?php
                                             foreach ($pf_telefones as $tel) {
-                                                echo '<option value="' . $tel->getCdVlCategoria() . '"'.
+                                                echo '<option value="' . $tel->getCdVlCategoria() . '"' .
                                                     ($tel->getCdVlCategoria() == 0 ? ' selected' : '')
-                                                . '>' . $tel->getDescVlCatg() . '</option>';
+                                                    . '>' . $tel->getDescVlCatg() . '</option>';
                                             }
                                             ?>
                                         </select>
@@ -531,7 +678,7 @@ if (Session::exists('sucesso_salvar_pf')) {
     </div>
 </div>
 
-<!-- Modal -->
+<!-- Modal Apagar PF Telefone-->
 <div class="modal fade" id="apagaPfTelModal" tabindex="-1" role="dialog" aria-labelledby="apagaPfTelLabel"
      aria-hidden="true">
     <div class="modal-dialog">
@@ -567,3 +714,5 @@ if (Session::exists('sucesso_salvar_pf')) {
         </div>
     </div>
 </div>
+
+<div id="responseAjaxError"></div>

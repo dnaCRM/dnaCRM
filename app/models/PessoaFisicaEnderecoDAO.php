@@ -18,6 +18,7 @@ class PessoaFisicaEnderecoDAO extends DataAccessObject
 
     /**
      * @param PessoaFisicaEnderecoDTO $dto
+     * @return DataTransferObject
      * @throws Exception
      */
     public function gravar(PessoaFisicaEnderecoDTO $dto)
@@ -31,5 +32,7 @@ class PessoaFisicaEnderecoDAO extends DataAccessObject
                 throw new Exception('Impossível Atualizar Endereço');
             }
         }
+
+        return $this->first();
     }
 }

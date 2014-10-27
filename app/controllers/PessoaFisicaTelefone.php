@@ -26,8 +26,6 @@ class PessoaFisicaTelefone extends Controller
 
         if (Input::exists()) {
 
-            //if (Token::check(Input::get('token'))) {
-
             $pessoaFisicaTelefone = $this->setDados();
 
             try {
@@ -94,7 +92,7 @@ class PessoaFisicaTelefone extends Controller
         echo json_encode($return);
     }
 
-    public function setDados()
+    private function setDados()
     {
         $dto = new PessoaFisicaTelefoneDTO();
         $_POST = filter_input_array(INPUT_POST);
