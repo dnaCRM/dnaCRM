@@ -192,6 +192,10 @@ $('#pessoafisicaform').bootstrapValidator({
             validators: {
                 notEmpty: {
                     message: 'Campo obrigatório'
+                },
+                date: {
+                    format: 'DD/MM/YYYY',
+                    message: 'Data inválida.'
                 }
             }
         },

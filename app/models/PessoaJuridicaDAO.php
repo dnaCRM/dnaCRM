@@ -17,7 +17,7 @@ class PessoaJuridicaDAO extends DataAccessObject
         $this->dataTransfer = 'PessoaJuridicaDTO';
         $this->colunaImagem = 'im_perfil';
         $this->imgFolder = IMG_UPLOADS_FOLDER . "{$this->tabela}/";
-        $this->fotoDefault = 'img/icon-user.jpg';
+        $this->fotoDefault = ICON_USER;
 
     }
 

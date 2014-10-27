@@ -180,14 +180,14 @@ class PessoaFisica extends Controller
                 $pessoaFisica = $this->setDados();
 
                 try {
-                    $this->model->gravar($pessoaFisica);
-                    Session::flash('sucesso_salvar_pf', 'Cadastro salvo!', 'success');
+                    $obj = $this->model->gravar($pessoaFisica);
+                    return $obj;
                 } catch (Exception $e) {
                     CodeFail((int)$e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
                 }
+                return false;
             }
         }
-
     }
 
     private function setDados()

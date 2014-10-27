@@ -47,7 +47,7 @@ Class CondominioDTO extends DataTransferObject
         if ($this->getImPerfil()){
             $this->setImPerfil("img/uploads/tb_condominio/{$this->cd_condominio}.jpg");
         } else {
-            $this->setImPerfil("img/icon-user.jpg");
+            $this->setImPerfil(ICON_USER);
         }
     }
 

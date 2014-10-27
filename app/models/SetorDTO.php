@@ -36,7 +36,7 @@ class SetorDTO extends DataTransferObject
         if ($this->getImPerfil()) {
             $this->setImPerfil("img/uploads/tb_setor/{$this->cd_setor}.jpg");
         } else {
-            $this->setImPerfil("img/icon-user.jpg");
+            $this->setImPerfil(ICON_USER);
         }
     }
 

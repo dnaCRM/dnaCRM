@@ -60,10 +60,10 @@ class PessoaFisicaDTO extends DataTransferObject
             'dt_usuario_atualiza' => 'getDtUsuarioAtualiza',
         );
 
-        if ($this->getImPerfil()) {
+        if (file_exists("img/uploads/tb_pessoa_fisica/{$this->cd_pessoa_fisica}.jpg")) {
             $this->setImPerfil("img/uploads/tb_pessoa_fisica/{$this->cd_pessoa_fisica}.jpg");
         } else {
-            $this->setImPerfil("img/icon-user.jpg");
+            $this->setImPerfil(ICON_USER);
         }
     }
 

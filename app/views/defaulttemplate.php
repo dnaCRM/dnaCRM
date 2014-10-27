@@ -85,9 +85,6 @@
                 <li>
                     <a href="Home/help">Help</a>
                 </li>
-                <li>
-                    <a href="Blog">Blog</a>
-                </li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Download <span
                             class="caret"></span></a>

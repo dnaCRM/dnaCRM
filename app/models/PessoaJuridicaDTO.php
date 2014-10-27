@@ -41,7 +41,7 @@ class PessoaJuridicaDTO extends DataTransferObject
         if ($this->getImPerfil()) {
             $this->setImPerfil("img/uploads/tb_pessoa_juridica/{$this->cd_pessoa_juridica}.jpg");
         } else {
-            $this->setImPerfil("img/icon-user.jpg");
+            $this->setImPerfil(ICON_USER);
         }
     }
 

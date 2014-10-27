@@ -1,18 +1,13 @@
 <?php
 $perfil = $data['perfil'];
 $perfil_form = new PessoaFisica();
-$perfil_form->cadastra($perfil); //Não cadastra na entra pois ainda não tem Token
+$cadastrado = $perfil_form->cadastra($perfil); //Não cadastra na entra pois ainda não tem Token
 
 $id_check = $data['id'];
 $operadoras = $data['operadora'];
 $pf_telefones = $data['pf_telefone'];
 
 $token = Token::generate();
-
-if (Session::exists('sucesso_salvar_pf')) {
-    Session::flash('sucesso_salvar_pf');
-}
-
 ?>
 <div class="row">
     <div class="col-sm-12">
@@ -39,262 +34,306 @@ if (Session::exists('sucesso_salvar_pf')) {
 <div class="tab-pane fade active in" id="principal">
 
 <div class="row">
-<form id="pessoafisicaform" class="form-horizontal" method="post" action="" enctype="multipart/form-data">
-<fieldset>
+<?php if ($cadastrado): ?>
 
-<div class="col-md-2">
+    <div class="jumbotron">
+        <div class="container">
+            <div class="col-md-4">
 
-
-    <img class="img-circle img-responsive" src="<?php echo $perfil->getImPerfil(); ?>"><br>
-
-    <div class="form-group col-sm-10">
-        <div>
-            <label for="im_perfil" class="btn btn-default">Foto</label>
-
-            <input type="file" class="hidden" id="im_perfil" name="im_perfil">
-        </div>
-    </div>
-
-</div>
-
-<div class="col-md-6">
-
-    <div class="form-group">
-        <div class="col-sm-12 inputGroupContainer">
-            <label for="nm_pessoa_fisica" class="control-label">Nome</label>
-
-
-            <input type="text" class="form-control" id="nm_pessoa_fisica" name="nm_pessoa_fisica"
-                   value="<?php echo $perfil->getNmPessoaFisica() == '' ? Input::get('nm_pessoa_fisica') : $perfil->getNmPessoaFisica(); ?>"
-                   placeholder="Nome">
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-sm-12 inputGroupContainer">
-            <label for="email" class="control-label">Email</label>
-
-
-            <input type="text" class="form-control" id="email" name="email"
-                   value="<?php echo $perfil->getEmail() == '' ? Input::get('email') : $perfil->getEmail(); ?>"
-                   placeholder="Email">
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-sm-4 inputGroupContainer">
-            <label for="cpf" class="control-label">CPF</label>
-
-            <input type="text" class="form-control" id="cpf" name="cpf"
-                   value="<?php echo $perfil->getCpf() == '' ? Input::get('cpf') : $perfil->getCpf(); ?>"
-                   placeholder="000.000.000-00"
-                   maxlength="14">
-        </div>
-        <div class="col-sm-4 inputGroupContainer">
-            <label for="rg" class="control-label">RG</label>
-
-            <input type="text" class="form-control" id="rg" name="rg"
-                   value="<?php echo $perfil->getRg() == '' ? Input::get('rg') : $perfil->getRg(); ?>"
-                   placeholder="00000000"
-                   maxlength="12">
-        </div>
-        <div class="col-sm-4 selectContainer">
-            <label for="org_rg" class="control-label">UF</label>
-
-            <select class="form-control" id="org_rg" name="org_rg">
-                <option value="">--</option>
                 <?php
-                $perfil->setCdVlCatgOrgRg($perfil->getCdVlCatgOrgRg() == '' ? Input::get('org_rg') : $perfil->getCdVlCatgOrgRg());
-                foreach ($data['org_rg'] as $org) {
-                    if ($org->getCdVlCategoria() == $perfil->getCdVlCatgOrgRg()) {
-                        echo '<option value="' . $org->getCdVlCategoria() . '" selected>' . $org->getDescVlCatg() . '</option>';
-                    } else {
-                        echo '<option value="' . $org->getCdVlCategoria() . ' ">' . $org->getDescVlCatg() . '</option>';
-                    }
+
+                if (file_exists("img/uploads/tb_pessoa_fisica/{$cadastrado->getCdPessoaFisica()}.jpg")) {
+                    $cadastrado->setImPerfil("img/uploads/tb_pessoa_fisica/{$cadastrado->getCdPessoaFisica()}.jpg");
+                } else {
+                    $cadastrado->setImPerfil(ICON_USER);
                 }
+
                 ?>
-            </select>
+
+                <img class="img-circle profilefoto left" src="<?php
+                echo $cadastrado->getImPerfil();?>">
+            </div>
+            <div class="col-md-8">
+                <h1 class="text-success"><span class="glyphicon glyphicon-arrow-right"></span> Sucesso!</h1>
+
+                <p>Deseja adicionar mais informações ao perfil
+                    <strong><?php echo $cadastrado->getNmPessoaFisica(); ?></strong>?
+                </p>
+
+                <a href="PessoaFisica/" class="btn btn-info" role="button">
+                    <i class="fa fa-arrow-circle-o-left"></i> Voltar
+                </a>
+
+                <a href="PessoaFisica/formperfil/" class="btn btn-success" role="button">
+                    <i class="fa fa-arrow-circle-o-up"></i> Novo
+                </a>
+
+                <a href="PessoaFisica/formperfil/<?php echo $cadastrado->getCdPessoaFisica(); ?>"
+                   class="btn btn-primary">
+                    Avançar <i class="fa fa-arrow-circle-o-right"></i>
+                </a>
+
+            </div>
         </div>
     </div>
-    <div class="row">
+<?php else: ?>
+    <form id="pessoafisicaform" class="form-horizontal" method="post" action="" enctype="multipart/form-data">
+    <fieldset>
 
-        <div class="form-group col-sm-6">
-            <label class="control-label col-sm-1">Sexo</label>
+    <div class="col-md-2">
 
-            <div class="col-sm-12">
-                <div class="btn-group" data-toggle="buttons">
-                    <label
-                        class="btn btn-default<?php echo (($perfil->getIeSexo()) == 'm' || Input::get('ie_sexo') == 'm') ? ' active' : ''; ?>">
-                        <input type="radio" name="ie_sexo"
-                               value="m" <?php echo (($perfil->getIeSexo()) == 'm' || Input::get('ie_sexo') == 'm') ? 'checked' : ''; ?>/>
-                        Masculino
-                    </label>
-                    <label
-                        class="btn btn-default<?php echo (($perfil->getIeSexo()) == 'f' || Input::get('ie_sexo') == 'f') ? ' active' : ''; ?>">
-                        <input type="radio" name="ie_sexo"
-                               value="f" <?php echo (($perfil->getIeSexo()) == 'f' || Input::get('ie_sexo') == 'f') ? 'checked' : ''; ?>/>
-                        Feminino
-                    </label>
+
+        <img class="img-circle img-responsive" src="<?php echo $perfil->getImPerfil(); ?>"><br>
+
+        <div class="form-group col-sm-10">
+            <div>
+                <label for="im_perfil" class="btn btn-default">Foto</label>
+
+                <input type="file" class="hidden" id="im_perfil" name="im_perfil">
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-6">
+
+        <div class="form-group">
+            <div class="col-sm-12 inputGroupContainer">
+                <label for="nm_pessoa_fisica" class="control-label">Nome</label>
+
+
+                <input type="text" class="form-control" id="nm_pessoa_fisica" name="nm_pessoa_fisica"
+                       value="<?php echo $perfil->getNmPessoaFisica() == '' ? Input::get('nm_pessoa_fisica') : $perfil->getNmPessoaFisica(); ?>"
+                       placeholder="Nome">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12 inputGroupContainer">
+                <label for="email" class="control-label">Email</label>
+
+
+                <input type="text" class="form-control" id="email" name="email"
+                       value="<?php echo $perfil->getEmail() == '' ? Input::get('email') : $perfil->getEmail(); ?>"
+                       placeholder="Email">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-4 inputGroupContainer">
+                <label for="cpf" class="control-label">CPF</label>
+
+                <input type="text" class="form-control" id="cpf" name="cpf"
+                       value="<?php echo $perfil->getCpf() == '' ? Input::get('cpf') : $perfil->getCpf(); ?>"
+                       placeholder="000.000.000-00"
+                       maxlength="14">
+            </div>
+            <div class="col-sm-4 inputGroupContainer">
+                <label for="rg" class="control-label">RG</label>
+
+                <input type="text" class="form-control" id="rg" name="rg"
+                       value="<?php echo $perfil->getRg() == '' ? Input::get('rg') : $perfil->getRg(); ?>"
+                       placeholder="00000000"
+                       maxlength="12">
+            </div>
+            <div class="col-sm-4 selectContainer">
+                <label for="org_rg" class="control-label">UF</label>
+
+                <select class="form-control" id="org_rg" name="org_rg">
+                    <option value="">--</option>
+                    <?php
+                    $perfil->setCdVlCatgOrgRg($perfil->getCdVlCatgOrgRg() == '' ? Input::get('org_rg') : $perfil->getCdVlCatgOrgRg());
+                    foreach ($data['org_rg'] as $org) {
+                        if ($org->getCdVlCategoria() == $perfil->getCdVlCatgOrgRg()) {
+                            echo '<option value="' . $org->getCdVlCategoria() . '" selected>' . $org->getDescVlCatg() . '</option>';
+                        } else {
+                            echo '<option value="' . $org->getCdVlCategoria() . ' ">' . $org->getDescVlCatg() . '</option>';
+                        }
+                    }
+                    ?>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="form-group col-sm-6">
+                <label class="control-label col-sm-1">Sexo</label>
+
+                <div class="col-sm-12">
+                    <div class="btn-group" data-toggle="buttons">
+                        <label
+                            class="btn btn-default<?php echo (($perfil->getIeSexo()) == 'm' || Input::get('ie_sexo') == 'm') ? ' active' : ''; ?>">
+                            <input type="radio" name="ie_sexo"
+                                   value="m" <?php echo (($perfil->getIeSexo()) == 'm' || Input::get('ie_sexo') == 'm') ? 'checked' : ''; ?>/>
+                            Masculino
+                        </label>
+                        <label
+                            class="btn btn-default<?php echo (($perfil->getIeSexo()) == 'f' || Input::get('ie_sexo') == 'f') ? ' active' : ''; ?>">
+                            <input type="radio" name="ie_sexo"
+                                   value="f" <?php echo (($perfil->getIeSexo()) == 'f' || Input::get('ie_sexo') == 'f') ? 'checked' : ''; ?>/>
+                            Feminino
+                        </label>
+                    </div>
                 </div>
+
             </div>
 
+            <div class="form-group col-sm-6">
+
+                <div class="col-sm-12 inputGroupContainer" id="datetimepicker">
+                    <label for="dt_nascimento" class="control-label">Nascimento</label>
+
+
+                    <input type="text" class="form-control"
+                           value="<?php echo $perfil->getDtNascimento() == '' ? Input::get('dt_nascimento') : $perfil->getDtNascimento(); ?>"
+                           id="dt_nascimento"
+                           name="dt_nascimento" placeholder="___/___/____">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <div class="col-sm-12 selectContainer">
+                <label for="cd_pessoa_juridica" class="control-label">Empresa</label>
+
+                <select class="form-control" id="cd_cgc" name="cd_pessoa_juridica">
+                    <option value="">-- Selecione uma empresa</option>
+                    <?php //echo escape(Input::get('cd_cgc'));
+                    $perfil->setCdPessoaJuridica($perfil->getCdPessoaJuridica() == '' ? Input::get('cd_cgc') : $perfil->getCdPessoaJuridica());
+                    foreach ($data['pessoa_juridica'] as $empresa) {
+
+                        if ($empresa->getCdPessoaJuridica() == $perfil->getCdPessoaJuridica()) {
+                            echo '<option value="' . $empresa->getCdPessoaJuridica() . '" selected>' . $empresa->getNmFantasia() . '</option>';
+                        } else {
+                            echo '<option value="' . $empresa->getCdPessoaJuridica() . ' ">' . $empresa->getNmFantasia() . '</option>';
+                        }
+                    }
+                    ?>
+                </select>
+            </div>
         </div>
 
-        <div class="form-group col-sm-6">
+        <div class="form-group">
+            <div class="col-sm-12 selectContainer">
+                <label for="cd_profissao" class="control-label">Profissão</label>
 
-            <div class="col-sm-12 inputGroupContainer" id="datetimepicker">
-                <label for="dt_nascimento" class="control-label">Nascimento</label>
+                <select class="form-control" id="cd_profissao" name="cd_profissao">
+                    <option value="">-- Selecione uma profissão</option>
+                    <?php //echo escape(Input::get('cd_profissao'));
+                    $perfil->setCdProfissao($perfil->getCdProfissao() == '' ? Input::get('cd_profissao') : $perfil->getCdProfissao());
+                    foreach ($data['profissoes'] as $profissao) {
+                        if ($profissao->getCdProfissao() == $perfil->getCdProfissao()) {
+                            echo '<option value="' . $profissao->getCdProfissao() . '" selected>' . $profissao->getNmProfissao() . '</option>';
+                        } else {
+                            echo '<option value="' . $profissao->getCdProfissao() . ' ">' . $profissao->getNmProfissao() . '</option>';
+                        }
+                    }
+                    ?>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-4">
+                <label class="control-label">Estuda</label>
+
+                <div>
+                    <div class="btn-group" data-toggle="buttons">
+                        <label
+                            class="btn btn-default <?php echo (($perfil->getIeEstuda()) == 's' || Input::get('ie_estuda') == 's') ? ' active' : ''; ?>">
+                            <input type="radio" name="ie_estuda"
+                                   value="s" <?php echo (($perfil->getIeEstuda()) == 's' || Input::get('ie_estuda') == 's') ? 'checked' : ''; ?>/>
+                            S
+                        </label>
+                        <label
+                            class="btn btn-default <?php echo (($perfil->getIeEstuda()) == 'n' || Input::get('ie_estuda') == 'n') ? ' active' : ''; ?>">
+                            <input type="radio" name="ie_estuda"
+                                   value="n" <?php echo (($perfil->getIeEstuda()) == 'n' || Input::get('ie_estuda') == 'n') ? 'checked' : ''; ?>/>
+                            N
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4" id="dt_inicio_curso_picker">
+                <label for="dt_inicio_curso" class="control-label">Início do Curso</label>
 
 
                 <input type="text" class="form-control"
-                       value="<?php echo $perfil->getDtNascimento() == '' ? Input::get('dt_nascimento') : $perfil->getDtNascimento(); ?>"
-                       id="dt_nascimento"
-                       name="dt_nascimento" placeholder="___/___/____">
+                       value="<?php echo $perfil->getDtInicioCurso() == '' ? Input::get('dt_inicio_curso') : $perfil->getDtInicioCurso(); ?>"
+                       id="dt_inicio_curso"
+                       name="dt_inicio_curso" placeholder="___/___/____">
+            </div>
+            <div class="col-sm-4" id="dt_fim_curso_picker">
+                <label for="dt_fim_curso" class="control-label">Fim do Curso</label>
+
+
+                <input type="text" class="form-control"
+                       value="<?php echo $perfil->getDtFimCurso() == '' ? Input::get('dt_fim_curso') : $perfil->getDtFimCurso(); ?>"
+                       id="dt_fim_curso"
+                       name="dt_fim_curso" placeholder="___/___/____">
             </div>
         </div>
-    </div>
-</div>
-<div class="col-md-4">
-    <div class="form-group">
-        <div class="col-sm-12 selectContainer">
-            <label for="cd_pessoa_juridica" class="control-label">Empresa</label>
 
-            <select class="form-control" id="cd_cgc" name="cd_pessoa_juridica">
-                <option value="">-- Selecione uma empresa</option>
-                <?php //echo escape(Input::get('cd_cgc'));
-                $perfil->setCdPessoaJuridica($perfil->getCdPessoaJuridica() == '' ? Input::get('cd_cgc') : $perfil->getCdPessoaJuridica());
-                foreach ($data['pessoa_juridica'] as $empresa) {
+        <div class="form-group">
+            <div class="col-sm-12 selectContainer">
+                <label for="cd_pessoa_juridica" class="control-label">Instituição de Ensino</label>
 
-                    if ($empresa->getCdPessoaJuridica() == $perfil->getCdPessoaJuridica()) {
-                        echo '<option value="' . $empresa->getCdPessoaJuridica() . '" selected>' . $empresa->getNmFantasia() . '</option>';
-                    } else {
-                        echo '<option value="' . $empresa->getCdPessoaJuridica() . ' ">' . $empresa->getNmFantasia() . '</option>';
+                <select class="form-control" id="cd_instituicao" name="cd_instituicao">
+                    <option value="">-- Selecione uma Instituição de Ensino</option>
+                    <?php //echo escape(Input::get('cd_cgc'));
+                    $perfil->setCdInstituicao($perfil->getCdInstituicao() == '' ? Input::get('cd_instituicao') : $perfil->getCdInstituicao());
+                    foreach ($data['inst_ensino'] as $inst_ensino) {
+
+                        if ($inst_ensino->getCdInstituicao() == $perfil->getCdInstituicao()) {
+                            echo '<option value="' . $inst_ensino->getCdInstituicao() . '" selected>' . $inst_ensino->getDsInstituicao() . '</option>';
+                        } else {
+                            echo '<option value="' . $inst_ensino->getCdInstituicao() . ' ">' . $inst_ensino->getDsInstituicao() . '</option>';
+                        }
                     }
-                }
-                ?>
-            </select>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-sm-12 selectContainer">
-            <label for="cd_profissao" class="control-label">Profissão</label>
-
-            <select class="form-control" id="cd_profissao" name="cd_profissao">
-                <option value="">-- Selecione uma profissão</option>
-                <?php //echo escape(Input::get('cd_profissao'));
-                $perfil->setCdProfissao($perfil->getCdProfissao() == '' ? Input::get('cd_profissao') : $perfil->getCdProfissao());
-                foreach ($data['profissoes'] as $profissao) {
-                    if ($profissao->getCdProfissao() == $perfil->getCdProfissao()) {
-                        echo '<option value="' . $profissao->getCdProfissao() . '" selected>' . $profissao->getNmProfissao() . '</option>';
-                    } else {
-                        echo '<option value="' . $profissao->getCdProfissao() . ' ">' . $profissao->getNmProfissao() . '</option>';
-                    }
-                }
-                ?>
-            </select>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-sm-4">
-            <label class="control-label">Estuda</label>
-
-            <div>
-                <div class="btn-group" data-toggle="buttons">
-                    <label
-                        class="btn btn-default <?php echo (($perfil->getIeEstuda()) == 's' || Input::get('ie_estuda') == 's') ? ' active' : ''; ?>">
-                        <input type="radio" name="ie_estuda"
-                               value="s" <?php echo (($perfil->getIeEstuda()) == 's' || Input::get('ie_estuda') == 's') ? 'checked' : ''; ?>/>
-                        S
-                    </label>
-                    <label
-                        class="btn btn-default <?php echo (($perfil->getIeEstuda()) == 'n' || Input::get('ie_estuda') == 'n') ? ' active' : ''; ?>">
-                        <input type="radio" name="ie_estuda"
-                               value="n" <?php echo (($perfil->getIeEstuda()) == 'n' || Input::get('ie_estuda') == 'n') ? 'checked' : ''; ?>/>
-                        N
-                    </label>
-                </div>
+                    ?>
+                </select>
             </div>
         </div>
-        <div class="col-sm-4" id="dt_inicio_curso_picker">
-            <label for="dt_inicio_curso" class="control-label">Início do Curso</label>
 
+        <div class="form-group">
+            <div class="col-sm-12 selectContainer">
+                <label for="org_rg" class="control-label">Grau de Ensino</label>
 
-            <input type="text" class="form-control"
-                   value="<?php echo $perfil->getDtInicioCurso() == '' ? Input::get('dt_inicio_curso') : $perfil->getDtInicioCurso(); ?>"
-                   id="dt_inicio_curso"
-                   name="dt_inicio_curso" placeholder="___/___/____">
-        </div>
-        <div class="col-sm-4" id="dt_fim_curso_picker">
-            <label for="dt_fim_curso" class="control-label">Fim do Curso</label>
-
-
-            <input type="text" class="form-control"
-                   value="<?php echo $perfil->getDtFimCurso() == '' ? Input::get('dt_fim_curso') : $perfil->getDtFimCurso(); ?>"
-                   id="dt_fim_curso"
-                   name="dt_fim_curso" placeholder="___/___/____">
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-sm-12 selectContainer">
-            <label for="cd_pessoa_juridica" class="control-label">Instituição de Ensino</label>
-
-            <select class="form-control" id="cd_instituicao" name="cd_instituicao">
-                <option value="">-- Selecione uma Instituição de Ensino</option>
-                <?php //echo escape(Input::get('cd_cgc'));
-                $perfil->setCdInstituicao($perfil->getCdInstituicao() == '' ? Input::get('cd_instituicao') : $perfil->getCdInstituicao());
-                foreach ($data['inst_ensino'] as $inst_ensino) {
-
-                    if ($inst_ensino->getCdInstituicao() == $perfil->getCdInstituicao()) {
-                        echo '<option value="' . $inst_ensino->getCdInstituicao() . '" selected>' . $inst_ensino->getDsInstituicao() . '</option>';
-                    } else {
-                        echo '<option value="' . $inst_ensino->getCdInstituicao() . ' ">' . $inst_ensino->getDsInstituicao() . '</option>';
+                <select class="form-control" id="cd_grau_ensino" name="cd_grau_ensino">
+                    <option value="">--</option>
+                    <?php
+                    $perfil->setCdVlCatgGrauEnsino($perfil->getCdVlCatgGrauEnsino() == '' ? Input::get('cd_grau_ensino') : $perfil->getCdVlCatgGrauEnsino());
+                    foreach ($data['grau_ensino'] as $grau_ensino) {
+                        if ($grau_ensino->getCdVlCategoria() == $perfil->getCdVlCatgGrauEnsino()) {
+                            echo '<option value="' . $grau_ensino->getCdVlCategoria() . '" selected>' . $grau_ensino->getDescVlCatg() . '</option>';
+                        } else {
+                            echo '<option value="' . $grau_ensino->getCdVlCategoria() . ' ">' . $grau_ensino->getDescVlCatg() . '</option>';
+                        }
                     }
-                }
-                ?>
-            </select>
+                    ?>
+                </select>
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <div class="col-sm-12 selectContainer">
-            <label for="org_rg" class="control-label">Grau de Ensino</label>
+        <input type="hidden" name="cd_pessoa_fisica" value="<?php echo $data['id']; ?>">
+        <input type="hidden" name="token" value="<?php echo $token; ?>">
 
-            <select class="form-control" id="cd_grau_ensino" name="cd_grau_ensino">
-                <option value="">--</option>
-                <?php
-                $perfil->setCdVlCatgGrauEnsino($perfil->getCdVlCatgGrauEnsino() == '' ? Input::get('cd_grau_ensino') : $perfil->getCdVlCatgGrauEnsino());
-                foreach ($data['grau_ensino'] as $grau_ensino) {
-                    if ($grau_ensino->getCdVlCategoria() == $perfil->getCdVlCatgGrauEnsino()) {
-                        echo '<option value="' . $grau_ensino->getCdVlCategoria() . '" selected>' . $grau_ensino->getDescVlCatg() . '</option>';
-                    } else {
-                        echo '<option value="' . $grau_ensino->getCdVlCategoria() . ' ">' . $grau_ensino->getDescVlCatg() . '</option>';
-                    }
-                }
-                ?>
-            </select>
+        <div class="form-group">
+            <div class="col-sm-12 clearfix">
+                <a href="PessoaFisica/visualizar/<?php echo $data['id']; ?>" id="cancel" class="btn btn-default"><span
+                        class="fa fa-undo"></span> Cancelar</a>
+                <a href="PessoaFisica/formperfil" id="novo" class="btn btn-success"><span class="fa fa-file"></span>
+                    Novo</a>
+                <button type="submit" name="cadastrar" class="btn btn-primary"><span class="fa fa-check"></span>
+                    Salvar
+                </button>
+            </div>
         </div>
+
     </div>
-
-    <input type="hidden" name="cd_pessoa_fisica" value="<?php echo $data['id']; ?>">
-    <input type="hidden" name="token" value="<?php echo $token; ?>">
-
-    <div class="form-group">
-        <div class="col-sm-12 clearfix">
-            <a href="PessoaFisica/visualizar/<?php echo $data['id']; ?>" id="cancel" class="btn btn-default"><span
-                    class="fa fa-undo"></span> Cancelar</a>
-            <a href="PessoaFisica/formperfil" id="novo" class="btn btn-success"><span class="fa fa-file"></span>
-                Novo</a>
-            <button type="submit" name="cadastrar" class="btn btn-primary"><span class="fa fa-check"></span>
-                Salvar
-            </button>
-        </div>
-    </div>
-
-</div>
-</fieldset>
-</form>
+    </fieldset>
+    </form>
+<?php endif; ?>
 </div>
 
 </div>
@@ -305,9 +344,7 @@ if (Session::exists('sucesso_salvar_pf')) {
     $telefones = $data['telefones'];
     $enderecos = $data['enderecos'];
     $estados = $data['estados'];
-    $catg_enderecos = $data['catg_enderecos'];
-
-    ;?>
+    $catg_enderecos = $data['catg_enderecos'];;?>
 
     <div class="tab-pane fade" id="telefones">
 
@@ -496,7 +533,7 @@ if (Session::exists('sucesso_salvar_pf')) {
                                 </div>
 
                                 <div class="col-sm-3 selectContainer">
-                                    <label for="categoria" class="control-label">Categoria</label>
+                                    <label for="categoria" class="control-label">Tipo</label>
 
                                     <select class="form-control" name="categoria" id="end_categoria">
                                         <option value="">--</option>
@@ -519,8 +556,10 @@ if (Session::exists('sucesso_salvar_pf')) {
 
                         <div class="col-sm-12">
                             <input type="reset" name="reset" class="btn btn-success" id="form_end_reset" value="Novo">
-                            <input type="submit" name="cadastrar" class="btn btn-primary" id="cadastrar" value="Cadastrar">
-                            <input type="hidden" name="cd_pessoa_fisica" value="<?php echo $perfil->getCdPessoaFisica(); ?>">
+                            <input type="submit" name="cadastrar" class="btn btn-primary" id="cadastrar"
+                                   value="Cadastrar">
+                            <input type="hidden" name="cd_pessoa_fisica"
+                                   value="<?php echo $perfil->getCdPessoaFisica(); ?>">
                             <input type="hidden" name="id_endereco" id="id_endereco" value="">
                             <input type="hidden" name="token" value="<?php echo $token; ?>">
                         </div>
@@ -552,7 +591,7 @@ if (Session::exists('sucesso_salvar_pf')) {
                     <tbody>
                     <?php
                     foreach ($enderecos as $endereco) {
-                    echo  "
+                        echo "
                     <tr data-pf-endereco=\"{$endereco->getNrSequencia()}\">
                         <td>{$endereco->getRua()}</td>
                         <td>{$endereco->getNumero()}</td>
@@ -578,7 +617,7 @@ if (Session::exists('sucesso_salvar_pf')) {
                         echo "<a href=\"#\" class=\"btn btn-primary btn-sm update_pf_end\" data-update-pfend-id=\"{$endereco->getNrSequencia()}\" data-toggle=\"modal\" data-target=\"#atualizaPfEndModal\"><i class=\"fa fa-edit\"></i></a>";
                         echo " <a href=\"#\" class=\"btn btn-warning btn-sm delete_pf_end\" data-del-pfend-id=\"{$endereco->getNrSequencia()}\" data-toggle=\"modal\" data-target=\"#apagaPfEndModal\"><i class=\"fa fa-trash-o\"></i></a>";
                         echo "</td>";
-                    echo "</tr>";
+                        echo "</tr>";
                     }
                     ?>
                     </tbody>

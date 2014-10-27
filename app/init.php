@@ -26,6 +26,9 @@ define('SITE_URL', $base_url); //'http://localhost/dnacrm/'
 define('SITE_ROOT', $root_url); //'C:\htdocs\dnacrm\\'
 define('IMG_UPLOADS_FOLDER', 'img/uploads/');
 
+//Imagem padrão para Pessoa Física
+define('ICON_USER', 'img/icon-user.jpg');
+
 /**
  * Guarda configurações gerais
  */

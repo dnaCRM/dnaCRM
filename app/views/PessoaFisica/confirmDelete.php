@@ -74,64 +74,6 @@
                 }
                 ?>
             </div>
-
-        </div>
-
-        <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                            $_POST
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseOne" class="panel-collapse collapse in">
-                    <div class="panel-body">
-                        <?php
-
-                        var_dump($_POST);
-
-                        ?>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                            $_SESSION
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseTwo" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <?php
-
-                        var_dump($_SESSION);
-
-                        ?>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                            <i class="glyphicon glyphicon-leaf"></i> $_FILES
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseThree" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <?php
-
-                        var_dump($_FILES);
-
-                        ?>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
