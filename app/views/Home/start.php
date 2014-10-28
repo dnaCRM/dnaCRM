@@ -20,11 +20,6 @@
         <div class="well">
 
             Well, well...
-            <p>
-                <a href="#" data-toggle="modal" data-target="#novoPFModal">
-                    Nova Pessoa Física.
-                </a>
-            </p>
 
         </div>
     </div>
@@ -157,97 +152,5 @@
             </div>
         </div>
 
-    </div>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="novoPFModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
-                        class="sr-only">Fechar</span></button>
-                <h4 class="modal-title" id="myModalLabel">Cadastrar Pessoa Física</h4>
-            </div>
-            <div class="modal-body">
-
-                <div class="col-sm-12">
-                    <span id="ajax_response"></span>
-
-                    <form class="form-horizontal" id="pf_ajax_form">
-
-                        <div class="form-group">
-                            <label for="nome" class="col-sm-2 control-label">Nome:</label>
-
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" id="nome" name="nm_pessoa_fisica" value=""/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="email" class="col-sm-2 control-label">E-mail:</label>
-
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" id="email" name="email" value=""/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="cpf" class="col-sm-2 control-label">CPF:</label>
-
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" id="cpf" name="cpf" value=""/>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="rg" class="col-sm-2 control-label">RG:</label>
-
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" id="rg" name="rg" value=""/>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-
-                            <div class="col-sm-4" id="datetimepicker">
-                                <label for="nascimento" class="col-sm-2 control-label">Nascimento</label>
-
-                                <div>
-                                    <input type="text" class="form-control"
-                                           value=""
-                                           id="nascimento"
-                                           name="dt_nascimento" placeholder="___/___/____">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="btn-group pull-right" data-toggle="buttons">
-                                <label
-                                    class="btn btn-default control-label">
-                                    <input type="radio" name="ie_sexo"
-                                           value="m"/>
-                                    Masculino
-                                </label>
-                                <label
-                                    class="btn btn-default control-label">
-                                    <input type="radio" name="ie_sexo"
-                                           value="f"/>
-                                    Feminino
-                                </label>
-                            </div>
-                        </div>
-
-                        <input type="submit" class="btn btn-primary col-xs-offset-2" name="enviar" value="Enviar"/>
-                        <input type="hidden" name="token" value="<?php Token::generate();?>"
-                    </form>
-
-                </div>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
     </div>
 </div>

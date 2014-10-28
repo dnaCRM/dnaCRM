@@ -114,6 +114,7 @@ $('#tb_pf_telefonesll').dataTable({
     "searching": false
 });
 
+/** Função para configuração do plugin de máscara para telefones com '9' opcional no início*/
 var SPMaskBehavior = function (val) {
         return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
     },
@@ -122,7 +123,6 @@ var SPMaskBehavior = function (val) {
             field.mask(SPMaskBehavior.apply({}, arguments), options);
         }
     };
-
 
 $(document).ready(function () {
     $('#cpf').mask("999.999.999-99");
@@ -638,22 +638,6 @@ $('#condominioform').bootstrapValidator({
             }
         }
     }
-});
-
-$('#pf_ajax_form').submit(function () {
-    var dados = $(this).serialize();
-
-    $.ajax({
-        type: "POST",
-        url: "app/ajax_controllers/processa.php",
-        data: dados,
-        success: function (data) {
-            $('#ajax_response').html(data);
-            console.log(data + 'Alguma coisa aconteceu');
-        }
-    });
-
-    return false;
 });
 
 /* INÍCIO DO CÓDIGO PARA MANIPULAÇÃO DE TELEFONES DE PESSOA FÍSICA */
