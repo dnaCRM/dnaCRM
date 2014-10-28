@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <noscript>
@@ -237,7 +237,7 @@
             <a href="https://github.com/gabrielborc" rel="nofollow">Gabriel Borges</a>. Contato <a
                 href="mailto:gabrielborc@gmail.com">gabrielborc@gmail.com</a>,
             <a href="https://github.com/demartinezraul" rel="nofollow">Raul Martinez</a>. Contato <a
-                href="mailto:demartinez.raul@gmail.com">demartinez.raul@gmail.com</a>.</p>
+                href="mailto:demartinez.raul@gmail.com">demartinezraul@gmail.com</a>.</p>
 
         <p><span class="fa fa-github"></span> <a href="https://github.com/dnaCRM">GitHub </a>.<br>
             Código sob licença <a href="">MIT</a></p>

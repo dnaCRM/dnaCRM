@@ -31,5 +31,16 @@ class PessoaJuridicaTelefoneDAO extends DataAccessObject
                 throw new Exception('Impossível Atualizar Telefone');
             }
         }
+
+        return $this->first();
+    }
+
+    /**
+     * @param $where
+     * @return bool | DataTransferObject
+     */
+    public function get($where)
+    {
+        return $this->select($where, null, null, "{$this->primaryKey} desc");
     }
 } 

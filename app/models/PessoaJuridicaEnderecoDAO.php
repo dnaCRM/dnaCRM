@@ -31,5 +31,6 @@ class PessoaJuridicaEnderecoDAO extends DataAccessObject
                 throw new Exception('Impossível Atualizar Endereço');
             }
         }
+        return $this->first();
     }
 }
