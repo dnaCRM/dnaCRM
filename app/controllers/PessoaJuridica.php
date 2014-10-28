@@ -32,6 +32,11 @@ class PessoaJuridica extends Controller
         $this->view->output($dados);
     }
 
+    public function novo()
+    {
+        echo json_encode($_POST);
+    }
+
     /**
      * @param int $id = Caso receba um id retorna um array
      * para a view com os dados do perfil. Este array irá popular o formulário
@@ -41,22 +46,39 @@ class PessoaJuridica extends Controller
      */
     public function formperfil($id = null)
     {
+        $pj_telefone = (new CategoriaValorDAO())->get('cd_categoria = 6');
+        $operadora = (new CategoriaValorDAO())->get('cd_categoria = 10');
+
+
         if ($id) {
             /** @var PessoaJuridicaDTO */
             $perfilarr = $this->findById($id);
+
+            $telefones = (new PessoaJuridicaTelefoneDAO())->get("cd_pessoa_juridica = {$id}");
+            $enderecos = (new PessoaJuridicaEnderecoDAO())->get("cd_pessoa_juridica = {$id}");
+            $estados = (new CategoriaValorDAO())->get('cd_categoria = 2');
+            $catg_enderecos = (new CategoriaValorDAO())->get('cd_categoria = 9');
 
             $dados = array(
 
                 'pagetitle' => $perfilarr->getNmFantasia(),
                 'pagesubtitle' => 'Atualizar Perfil.',
+                'pj_telefone' => $pj_telefone,
+                'operadora' => $operadora,
+                'telefones' => $telefones,
+                'enderecos' => $enderecos,
+                'estados' => $estados,
+                'catg_enderecos' => $catg_enderecos,
                 'id' => $id,
                 'perfil' => $perfilarr
             );
         } else {
             $perfil = new PessoaJuridicaDTO();
             $dados = array(
-                'pagetitle' => 'Cadastro de Perfil',
+                'pagetitle' => 'Cadastro',
                 'pagesubtitle' => 'Pessoa Juridica.',
+                'pj_telefone' => $pj_telefone,
+                'operadora' => $operadora,
                 'id' => null,
                 'perfil' => $perfil
             );
@@ -124,11 +146,12 @@ class PessoaJuridica extends Controller
                 $pessoaJuridica = $this->setDados();
 
                 try {
-                    $this->model->gravar($pessoaJuridica);
-                    Session::flash('sucesso_salvar_pj', 'Cadastro salvo!', 'success');
+                    $obj = $this->model->gravar($pessoaJuridica);
+                    return $obj;
                 } catch (Exception $e) {
                     CodeFail((int)$e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
                 }
+                return false;
             }
         }
 
@@ -157,8 +180,7 @@ class PessoaJuridica extends Controller
 
             if (Token::check(Input::get('token'))) {
 
-                //$this->model->delete($dto);
-                echo 'Deletou perfil';
+                $this->model->delete($dto);
 
             }
         }

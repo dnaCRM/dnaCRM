@@ -208,7 +208,7 @@ class PessoaJuridicaEnderecoDTO extends DataTransferObject
         return $this;
     }
 
-    public function setCdPessoaFisica($cd_pessoa_juridica)
+    public function setCdPessoaJuridica($cd_pessoa_juridica)
     {
         $this->cd_pessoa_juridica = $cd_pessoa_juridica;
         return $this;
