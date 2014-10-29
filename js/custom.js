@@ -114,6 +114,15 @@ $('#tb_pf_telefonesll').dataTable({
     "searching": false
 });
 
+$('#tb_pj_telefonesll').dataTable({
+    "language": {
+        "url": "js/datatables/js/dataTables.pt-br.lang"
+    },
+    scrollY: 200,
+    paging: false,
+    "searching": false
+});
+
 /** Função para configuração do plugin de máscara para telefones com '9' opcional no início*/
 var SPMaskBehavior = function (val) {
         return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
@@ -1057,9 +1066,7 @@ $('.delete_pf_end').click(function () {
 
 
 
-
-
-/* INÍCIO DO CÓDIGO PARA MANIPULAÇÃO DE TELEFONES DE PESSOA JURIDICA */
+/* INÍCIO DO CÓDIGO PARA MANIPULAÇÃO DE TELEFONES DE PESSOA FÍSICA */
 $('#form_pj_telefones').bootstrapValidator({
     feedbackIcons: {
         valid: 'glyphicon glyphicon-ok',
@@ -1266,10 +1273,10 @@ $('#tb_pj_telefones').delegate('.delete_pj_tel', 'click', function () {
         }
     });
 });
-/** Fim - Botões Atualizar e Apagar PJ Telefone*/
-/* FIM DO CÓDIGO PARA MANIPULAÇÃO DE TELEFONES DE PESSOA JURIDICA */
+/** Fim - Botões Atualizar e Apagar PF Telefone*/
+/* FIM DO CÓDIGO PARA MANIPULAÇÃO DE TELEFONES DE PESSOA FÍSICA */
 
-/* INÍCIO DO CÓDIGO PARA MANIPULAÇÃO DE ENDEREÇOS DE PESSOA JURIDICA */
+/* INÍCIO DO CÓDIGO PARA MANIPULAÇÃO DE ENDEREÇOS DE PESSOA FÍSICA */
 $('#form_pj_enderecos').bootstrapValidator({
     feedbackIcons: {
         valid: 'glyphicon glyphicon-ok',
@@ -1397,7 +1404,7 @@ $('#form_apaga_pj_end')
                 $('#del_pj_end_confirma').html('<span class="text-success"><i class="fa fa-check"></i> Endereço Apagado!</span>')
                     .hide().fadeIn();
 
-                $('#tb_pj_enderecos tr[data-pj-endereco=' + data.id_endereco + ']').remove();
+                $('#tb_pf_enderecos tr[data-pj-endereco=' + data.id_endereco + ']').remove();
                 $('#apagaPjEndModal').modal('hide');
             }
         });
