@@ -23,9 +23,9 @@ class Usuario extends Controller
             //echo var_dump(Token::check(Input::get('token'))) . Input::get('token');
             //if (Token::check(Input::get('token'))) {
 
-                $usuarioDAO = new UsuarioDAO();
                 $usuarioDTO = new UsuarioDTO();
-                $usuarioModel = new UsuarioModel($usuarioDAO, $usuarioDTO);
+                $usuarioModel = new UsuarioModel();
+                $usuarioModel->setDTO($usuarioDTO);
 
                 $usuario = filter_var(Input::get('usuario'), FILTER_SANITIZE_STRING);
                 $senha = filter_var(Input::get('senha'), FILTER_SANITIZE_STRING);

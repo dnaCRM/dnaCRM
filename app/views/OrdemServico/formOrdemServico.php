@@ -128,7 +128,7 @@
                         <label for="dt_inicio" class="control-label">Início</label>
 
 
-                        <input type="text" class="form-control"
+                        <input type="text" class="form-control data-input"
                                value="<?php echo $perfil->getDtInicio() == '' ? Input::get('dt_inicio') : $perfil->getDtInicio(); ?>"
                                id="dt_inicio"
                                name="dt_inicio" placeholder="___/___/____">
@@ -137,7 +137,7 @@
                         <label for="dt_fim" class="control-label">Fim</label>
 
 
-                        <input type="text" class="form-control"
+                        <input type="text" class="form-control data-input"
                                value="<?php echo $perfil->getDtFim() == '' ? Input::get('dt_fim') : $perfil->getDtFim(); ?>"
                                id="dt_fim"
                                name="dt_fim" placeholder="___/___/____">

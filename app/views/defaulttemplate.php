@@ -79,7 +79,6 @@
                     <ul class="dropdown-menu" aria-labelledby="themes">
                         <li><a href="Ocorrencia/formOcorrencia">Ocorrência</a></li>
                         <li><a href="OrdemServico/formOrdemServico">Ordem de Serviço</a></li>
-                        <li><a href="Orcamento/formorcamento">Orçamento</a></li>
                     </ul>
                 </li>
                 <li>

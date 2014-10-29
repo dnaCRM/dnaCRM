@@ -176,6 +176,20 @@ class Setor extends Controller
     }
 
     /**
+     * @param $id
+     */
+    public function listByCondId($id)
+    {
+        $setores = $this->model->get("cd_condominio = {$id}");
+        $return = '<option value="">Setores</option>';
+        foreach ($setores as $setor) {
+            $return .= "<option value=\"{$setor->getCdSetor()}\">{$setor->getNmSetor()}</option>";
+        }
+
+        echo $return;
+    }
+
+    /**
      * Deve receber um array contento objetos do tipo PessoaFisicaDTO
      * Percorre os objetos testando se as imagens já foram exportadas
      * e exporta caso necessário

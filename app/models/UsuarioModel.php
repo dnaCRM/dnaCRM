@@ -8,20 +8,21 @@
  */
 class UsuarioModel extends Model
 {
-    private $usuarioDAO;
-    private $usuarioDTO;
+    /** @var UsuarioDTO  */
+    private $dto;
+    /** @var  UsuarioDAO */
+    private $dao;
 
-    public function __construct(UsuarioDAO $usuarioDAO, UsuarioDTO $usuarioDTO)
+    public function __construct()
     {
-        $this->usuarioDAO = $usuarioDAO;
-        $this->usuarioDTO = $usuarioDTO;
+        $this->dao = new UsuarioDAO();
     }
 
     public function login($usuario, $senha)
     {
-        $this->usuarioDTO->setLogin($usuario);
+        $this->dto->setLogin($usuario);
 
-        if (!$usuario = $this->usuarioDAO->findByLogin($this->usuarioDTO)) {
+        if (!$usuario = $this->dao->findByLogin($this->dto)) {
             Session::flash('msg', 'Usuário inexistente', 'danger');
             Redirect::to(SITE_URL . 'Usuario/loginScreen');
         }
@@ -57,4 +58,14 @@ class UsuarioModel extends Model
         Session::delete('usuario');
     }
 
+    public function getDAO()
+    {
+        return $this->dao;
+    }
+
+    public function setDTO(UsuarioDTO $dto)
+    {
+        $this->dto = $dto;
+        return $this;
+    }
 }

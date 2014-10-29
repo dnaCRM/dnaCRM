@@ -9,71 +9,161 @@
 class PessoaFisicaModel extends Model
 {
     /** @var  PessoaFisicaDTO */
-    private $pessoaFisicaDTO;
+    private $dto;
     /** @var  PessoaFisicaDAO */
-    private $pessoaFisicaDAO;
+    private $dao;
 
     /**
-     * @param PessoaFisicaDTO $dto
-     * @param PessoaFisicaDAO $dao
+     *
      */
-    public function __construct(PessoaFisicaDTO $dto, PessoaFisicaDAO $dao)
+    public function __construct()
     {
-        $this->pessoaFisicaDTO = $dto;
-        $this->pessoaFisicaDAO = $dao;
+        $this->dao = new PessoaFisicaDAO();
+    }
+
+    public function getArrayDados()
+    {
+        $categoria = new CategoriaValorDAO();
+        $uf = '';
+
+        if ($this->dto->getCdCatgOrgRg()) {
+            $catg = $categoria->getBy2Ids($this->dto->getCdVlCatgOrgRg(), $this->dto->getCdCatgOrgRg());
+            $uf = $catg->getDescVlCatg();
+        }
+
+        $grau = '';
+        if ($this->dto->getCdCatgGrauEnsino()) {
+            $catg = $categoria->getBy2Ids($this->dto->getCdVlCatgGrauEnsino(), $this->dto->getCdCatgGrauEnsino());
+            $grau = $catg->getDescVlCatg();
+        }
+        $instituicao = '';
+        if ($this->dto->getCdInstituicao()) {
+            $instituicao = (new InstituicaoEnsinoDAO())->getById($this->dto->getCdInstituicao())
+                ->getDsInstituicao();
+        }
+
+        $empresa = '';
+        if ($this->dto->getCdPessoaJuridica()) {
+            $empresa = (new PessoaJuridicaDAO())->getById($this->dto->getCdPessoaJuridica())
+                ->getNmFantasia();
+        }
+        return array(
+            'cd_pessoa_fisica' => $this->dto->getCdPessoaFisica(),
+            'cd_pessoa_juridica' => $this->dto->getCdPessoaJuridica(),
+            'empresa' => $empresa,
+            'cd_profissao' => $this->dto->getCdProfissao(),
+            'profissao' => '',
+            'nm_pessoa_fisica' => $this->dto->getNmPessoaFisica(),
+            'cpf' => $this->dto->getCpf(),
+            'rg' => $this->dto->getRg(),
+            'uf' => $uf,
+            'cd_catg_org_rg' => $this->dto->getCdCatgOrgRg(),
+            'cd_vl_catg_org_rg' => $this->dto->getCdVlCatgOrgRg(),
+            'email' => $this->dto->getEmail(),
+            'dt_nascimento' => $this->dto->getDtNascimento(),
+            'ie_sexo' => $this->dto->getIeSexo(),
+            'ie_estuda' => $this->dto->getIeEstuda(),
+            'cd_instituicao' => $this->dto->getCdInstituicao(),
+            'instituicao' => $instituicao,
+            'dt_inicio_curso' => $this->dto->getDtInicioCurso(),
+            'dt_fim_curso' => $this->dto->getDtFimCurso(),
+            'grau' => $grau,
+            'cd_catg_grau_ensino' => $this->dto->getCdCatgGrauEnsino(),
+            'cd_vl_catg_grau_ensino' => $this->dto->getCdVlCatgGrauEnsino()
+        );
     }
 
     public function getPessoaFisica()
     {
+        $_POST = filter_input_array(INPUT_POST);
+        $nome = Input::get('nome');
+        $pessoas = $this->dao->get("nm_pessoa_fisica ilike '%{$nome}%' order by nm_pessoa_fisica limit 5");
 
+        $resultado = array();
+
+        foreach ($pessoas as $pessoa) {
+            $resultado[] = array(
+                'id' => $pessoa->getCdPessoaFisica(),
+                'nome' => $pessoa->getNmPessoaFisica(),
+                'foto' => $pessoa->getImPerfil()
+            );
+        }
+
+        return $resultado;
     }
 
-    public function getEmpresa(PessoaJuridicaDao $empresa)
+    public function getEmpresa(PessoaJuridicaDAO $empresa)
     {
-        return ($this->pessoaFisicaDTO->getCdPessoaJuridica()
-            ? $empresa->getById($this->pessoaFisicaDTO->getCdPessoaJuridica())
-            : false);
+        if ($this->dto->getCdPessoaJuridica()) {
+            $emp = $empresa->getById($this->dto->getCdPessoaJuridica());
+            return (new PessoaJuridicaModel())->setDTO($emp)->getArrayDados();
+        }
+        return false;
     }
 
     public function getProfissao(ProfissaoDAO $profissao)
     {
-        return ($this->pessoaFisicaDTO->getCdProfissao()
-            ? $profissao->getById(($this->pessoaFisicaDTO->getCdProfissao()))
-            : false);
+        if ($this->dto->getCdProfissao()) {
+            $pro = $profissao->getById($this->dto->getCdProfissao());
+            return (new ProfissaoModel())->setDTO($pro)->getArrayDados();
+        }
+        return false;
     }
 
     public function getOrgRg(CategoriaValorDAO $categoria)
     {
-        return ($this->pessoaFisicaDTO->getCdCatgOrgRg()
-            ? $categoria->getBy2Ids($this->pessoaFisicaDTO->getCdVlCatgOrgRg(), $this->pessoaFisicaDTO->getCdCatgOrgRg())
-            : false);
+        if ($this->dto->getCdCatgOrgRg()) {
+            $catg = $categoria->getBy2Ids($this->dto->getCdVlCatgOrgRg(), $this->dto->getCdCatgOrgRg());
+            return $catg->getDescVlCatg();
+        }
+        return false;
     }
 
     public function getInstEnsino(InstituicaoEnsinoDAO $instituicao)
     {
-        return ($this->pessoaFisicaDTO->getCdInstituicao()
-            ? $instituicao->getById($this->pessoaFisicaDTO->getCdInstituicao())
-            : false);
+        if ($this->dto->getCdInstituicao()) {
+            $inst = $instituicao->getById($this->dto->getCdInstituicao());
+            return $inst->getDsInstituicao();
+        }
+        return false;
     }
 
     public function getGrauEnsino(CategoriaValorDAO $categoria)
     {
-        return ($this->pessoaFisicaDTO->getCdCatgGrauEnsino()
-            ? $categoria->getBy2Ids($this->pessoaFisicaDTO->getCdVlCatgOrgRg(), $this->pessoaFisicaDTO->getCdCatgGrauEnsino())
-            : false);
+        if ($this->dto->getCdCatgGrauEnsino()) {
+            $catg = $categoria->getBy2Ids($this->dto->getCdVlCatgGrauEnsino(), $this->dto->getCdCatgGrauEnsino());
+            return $catg->getDescVlCatg();
+        }
+        return false;
     }
 
     public function getRelacionados(RelacionadosDAO $relacionados)
     {
-        if ($this->pessoaFisicaDTO->getCdPessoaFisica()) {
-            $relacionados = $relacionados->get("cd_pessoa_fisica_1 = {$this->pessoaFisicaDTO->getCdPessoaFisica()}");
+        if ($this->dto->getCdPessoaFisica()) {
+            $relacionados = $relacionados->get("cd_pessoa_fisica_1 = {$this->dto->getCdPessoaFisica()}");
 
             foreach ($relacionados as $relacionado) {
-                $lista[] = $this->pessoaFisicaDAO->getById($relacionado->getCdPessoaFisica2());
+                $lista[] = $this->dao->getById($relacionado->getCdPessoaFisica2());
             }
 
             return $lista;
         }
         return false;
+    }
+
+    public function getTelefones(PessoaFisicaTelefoneModel $pessoaFisicaTelefone)
+    {
+        return $pessoaFisicaTelefone->getTelefonesPessoaFisica($this->dto->getCdPessoaFisica());
+    }
+
+    public function getDAO()
+    {
+        return $this->dao;
+    }
+
+    public function setDTO(PessoaFisicaDTO $dto)
+    {
+        $this->dto = $dto;
+        return $this;
     }
 } 
