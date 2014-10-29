@@ -12,7 +12,7 @@ class PessoaFisica extends Controller
     public function __construct()
     { //o método é herdado da classe pai 'Controller'
         $this->setModel(new PessoaFisicaDAO());
-        $this->pessoaFisicaModel = new PessoaFisicaModel(new PessoaFisicaDTO(), new PessoaFisicaDAO());
+        $this->pessoaFisicaModel = new PessoaFisicaModel();
     }
 
     public function start()
@@ -54,25 +54,21 @@ class PessoaFisica extends Controller
 
             $condominios = (new CondominioDAO())->fullList();
 
-            $morador_endereco = (new MoradorEnderecoDAO())->get("cd_pessoa_fisica = {$id}");
-            $moradorEndereco = array();
-            foreach($morador_endereco as $me){
-                $moradorEndereco[] = (new MoradorEnderecoModel())->getArrayDados($me);
-            }
+            $moradorEnderecos = (new MoradorEnderecoModel())->getEnderecosMorador($id);
+            $telefones = (new PessoaFisicaTelefoneModel())->getTelefonesPessoaFisica($id);
 
             $pf_telefone = (new CategoriaValorDAO())->get('cd_categoria = 5');
             $operadora = (new CategoriaValorDAO())->get('cd_categoria = 10');
-            $telefones = (new PessoaFisicaTelefoneDAO())->get("cd_pessoa_fisica = {$id}");
+
             $enderecos = (new PessoaFisicaEnderecoDAO())->get("cd_pessoa_fisica = {$id}");
             $estados = (new CategoriaValorDAO())->get('cd_categoria = 2');
             $catg_enderecos = (new CategoriaValorDAO())->get('cd_categoria = 9');
 
+            //Formatação de datas
             $nasc = new DateTime($perfilarr->getDtNascimento());
             $perfilarr->setDtNascimento($nasc->format('d/m/Y'));
-
             $dt_inicio_curso = new DateTime($perfilarr->getDtInicioCurso());
             $perfilarr->setDtInicioCurso($dt_inicio_curso->format('d/m/Y'));
-
             $dt_fim_curso = new DateTime($perfilarr->getDtFimCurso());
             $perfilarr->setDtFimCurso($dt_fim_curso->format('d/m/Y'));
 
@@ -91,7 +87,7 @@ class PessoaFisica extends Controller
                 'estados' => $estados,
                 'catg_enderecos' => $catg_enderecos,
                 'condominios' => $condominios,
-                'morador_endereco' => $moradorEndereco,
+                'morador_endereco' => $moradorEnderecos,
                 'id' => $id,
                 'perfil' => $perfilarr
             );

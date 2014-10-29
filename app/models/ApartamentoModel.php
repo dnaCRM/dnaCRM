@@ -8,10 +8,39 @@
 
 class ApartamentoModel extends Model
 {
+    /** @var  ApartamentoDTO */
+    private $dto;
+    /** @var  ApartamentoDAO */
+    private $dao;
+
     public function __construct()
     {
-        parent::__construct();
-        $this->setTabela('tb_apartamento');
-        $this->setPrimaryKey('cd_apartamento');
+        $this->dao = new ApartamentoDAO();
+    }
+
+    public function getArrayDados()
+    {
+        $setor = (new SetorDAO())->getById($this->dto->getCdSetor());
+        $condominio = (new CondominioDAO())->getById($setor->getCdCondominio());
+
+        return array(
+            'cd_apartamento' => $this->dto->getCdApartamento(),
+            'desc_apartamento' => $this->dto->getDescApartamento(),
+            'cd_setor' => $this->dto->getCdSetor(),
+            'setor' => $setor->getNmSetor(),
+            'cd_condominio' => $setor->getCdCondominio(),
+            'condominio' => $condominio->getNmCondominio()
+        );
+    }
+
+    public function getDAO()
+    {
+        return $this->dao;
+    }
+
+    public function setDTO(ApartamentoDTO $dto)
+    {
+        $this->dto = $dto;
+        return $this;
     }
 }

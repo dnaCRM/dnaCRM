@@ -35,6 +35,7 @@ Class Ocorrencia extends Controller
      * permitindo editar dados do perfil e gravar no banco
      * Se não receber um id o formulário estará vazio e permitirá registrar
      * um novo perfil
+     * @todo Implementar busca de condomínio por Ajax para escolher Setor
      */
     public function formOcorrencia($id = null)
 {

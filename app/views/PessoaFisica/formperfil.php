@@ -437,30 +437,13 @@ $token = Token::generate();
 
                     foreach ($telefones as $telefone) {
                         echo "
-                     <tr data-pf-tel=\"{$telefone->getCdPfFone()}\">
-                        <td>{$telefone->getFone()}</td>
-                        <td>
-                        ";
-                        foreach ($operadoras as $catg_tel) {
-                            if ($catg_tel->getCdVlCategoria() == $telefone->getCdVlCatgOperadora()) {
-                                echo $catg_tel->getDescVlCatg();
-                            }
-                        }
-                        echo "
-                        </td>
-                        <td>
-                        ";
-                        foreach ($pf_telefones as $pf_tel) {
-                            if ($pf_tel->getCdVlCategoria() == $telefone->getCdVlCatgFonePf()) {
-                                echo $pf_tel->getDescVlCatg();
-                            }
-                        }
-                        echo "
-                        </td>
-                        <td>{$telefone->getObservacao()}</td>
-                        <td>";
-                        echo "<a href=\"#\" class=\"btn btn-primary btn-sm update_pf_tel\" data-update-pftel-id=\"{$telefone->getCdPfFone()}\" data-toggle=\"modal\" data-target=\"#atualizaPfTelModal\"><i class=\"fa fa-edit\"></i></a>";
-                        echo "&nbsp;<a href=\"#\" class=\"btn btn-warning btn-sm delete_pf_tel\" data-del-pftel-id=\"{$telefone->getCdPfFone()}\" data-toggle=\"modal\" data-target=\"#apagaPfTelModal\"><i class=\"fa fa-trash-o\"></i></a>";
+                     <tr data-pf-tel=\"{$telefone['id_fone']}\">
+                        <td>{$telefone['fone']}</td>
+                        <td>{$telefone['operadora']}</td>
+                        <td>{$telefone['categoria']}</td>
+                        <td>{$telefone['observacao']}</td>";
+                        echo "<td><a href=\"#\" class=\"btn btn-primary btn-sm update_pf_tel\" data-update-pftel-id=\"{$telefone['id_fone']}\" data-toggle=\"modal\" data-target=\"#atualizaPfTelModal\"><i class=\"fa fa-edit\"></i></a>";
+                        echo "&nbsp;<a href=\"#\" class=\"btn btn-warning btn-sm delete_pf_tel\" data-del-pftel-id=\"{$telefone['id_fone']}\" data-toggle=\"modal\" data-target=\"#apagaPfTelModal\"><i class=\"fa fa-trash-o\"></i></a>";
                         echo "</td>
                     </tr>";
                     };?>

@@ -22,7 +22,7 @@ class MoradorEndereco extends Controller
 
             try {
                 $moradorEndereco = $this->model->gravar($obj);
-                $arrayDados = $this->moradorEnderecoModel->getArrayDados($moradorEndereco);
+                $arrayDados = $this->moradorEnderecoModel->setDTO($moradorEndereco)->getArrayDados();
                 echo json_encode($arrayDados);
             } catch (Exception $e) {
                 CodeFail((int)$e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
@@ -53,8 +53,8 @@ class MoradorEndereco extends Controller
     public function findById($id)
     {
         $moradorEndereco = $this->model->getById($id);
-        $result = $this->moradorEnderecoModel->getArrayDados($moradorEndereco);
-        //var_dump($moradorEndereco,$result,json_encode($result));die;
+        $result = $this->moradorEnderecoModel->setDTO($moradorEndereco)->getArrayDados();
+
         echo json_encode($result);
     }
 
@@ -65,7 +65,7 @@ class MoradorEndereco extends Controller
         $dto = $this->model->getById($id);
         $moradorEndereco = $this->model->delete($dto);
 
-        $result = $this->moradorEnderecoModel->getArrayDados($moradorEndereco);
+        $result = $this->moradorEnderecoModel->setDTO($moradorEndereco)->getArrayDados();
         echo json_encode($result);
     }
 } 

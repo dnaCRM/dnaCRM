@@ -7,10 +7,47 @@
  */
 class CondominioModel extends Model
 {
+    /** @var  CondominioDTO */
+    private $dto;
+    /** @var  CondominioDAO */
+    private $dao;
+
     public function __construct()
     {
-        parent::__construct();
-        $this->setTabela('tb_condominio');
-        $this->setPrimaryKey('cd_condominio');
+        $this->dao = new CondominioDAO();
+    }
+
+    public function getArrayDados()
+    {
+        $categoria = new CategoriaValorDAO();
+        $estado = '';
+
+        if ($this->dto->getCdCatgEstado()) {
+            $catg = $categoria->getBy2Ids($this->dto->getCdVlCatgEstado(), $this->dto->getCdCatgEstado());
+            $estado = $catg->getDescVlCatg();
+        }
+
+        return array(
+            'cd_condominio' => $this->dto->getCdCondominio(),
+            'nm_condominio' => $this->dto->getNmCondominio(),
+            'im_perfil' => $this->dto->getImPerfil(),
+            'cep' => $this->dto->getCep(),
+            'rua' => $this->dto->getRua(),
+            'numero' => $this->dto->getNumero(),
+            'bairro' => $this->dto->getBairro(),
+            'cidade' => $this->dto->getCidade(),
+            'estado' => $estado
+        );
+    }
+
+    public function getDAO()
+    {
+        return $this->dao;
+    }
+
+    public function setDTO(CondominioDTO $dto)
+    {
+        $this->dto = $dto;
+        return $this;
     }
 }

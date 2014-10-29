@@ -15,35 +15,54 @@ class MoradorEnderecoModel extends Model
 
     public function __construct()
     {
-        $this->dto = new MoradorEnderecoDTO();
         $this->dao = new MoradorEnderecoDAO();
     }
 
     /**
-     * @param MoradorEnderecoDTO $moradorEndereco
-     * @return array|mixed
+     * @return array
      */
-    public function getArrayDados(MoradorEnderecoDTO $moradorEndereco)
+    public function getArrayDados()
     {
-        $apartamento = (new ApartamentoDAO())->getById($moradorEndereco->getCdApartamento());
+        $apartamento = (new ApartamentoDAO())->getById($this->dto->getCdApartamento());
         $setor = (new SetorDAO())->getById($apartamento->getCdSetor());
         $condominio = (new CondominioDAO())->getById($setor->getCdCondominio());
 
-        $dt_entrada = (new DateTime($moradorEndereco->getDtEntrada()))->format('d/m/Y');
-        $dt_saida = ($moradorEndereco->getDtSaida() ?
-            (new DateTime($moradorEndereco->getDtSaida()))->format('d/m/Y') : '');
+        $dt_entrada = (new DateTime($this->dto->getDtEntrada()))->format('d/m/Y');
+        $dt_saida = ($this->dto->getDtSaida() ?
+            (new DateTime($this->dto->getDtSaida()))->format('d/m/Y') : '');
 
         return array(
-            'id_m_end' => $moradorEndereco->getNrSequencia(),
-            'cd_pessoa_fisica' => $moradorEndereco->getCdPessoaFisica(),
+            'id_m_end' => $this->dto->getNrSequencia(),
+            'cd_pessoa_fisica' => $this->dto->getCdPessoaFisica(),
             'm_end_dt_entrada' => $dt_entrada,
             'm_end_dt_saida' => $dt_saida,
-            'cd_apartamento' => $moradorEndereco->getCdApartamento(),
+            'cd_apartamento' => $this->dto->getCdApartamento(),
             'apartamento' => $apartamento->getDescApartamento(),
             'cd_setor' => $setor->getCdSetor(),
             'setor' => $setor->getNmSetor(),
             'cd_condominio' => $condominio->getCdCondominio(),
             'condominio' => $condominio->getNmCondominio()
         );
+    }
+
+    public function getDAO()
+    {
+        return $this->dao;
+    }
+
+    public function setDTO(MoradorEnderecoDTO $dto)
+    {
+        $this->dto = $dto;
+        return $this;
+    }
+    
+    public function getEnderecosMorador($id)
+    {
+        $morador_endereco = $this->dao->get("cd_pessoa_fisica = {$id}");
+        $lista = array();
+        foreach($morador_endereco as $me){
+            $lista[] = $this->setDTO($me)->getArrayDados();
+        }
+        return $lista;
     }
 } 

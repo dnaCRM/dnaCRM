@@ -3,7 +3,7 @@ session_start();
 ### Função para carregamento automático de classes
 function autoload($class)
 {
-    $folder = ['core', 'dbc', 'helpers', 'models'];
+    $folder = ['core', 'dbc', 'helpers', 'models', 'data_access'];
 
     foreach ($folder as $foldername) {
         if (file_exists(__DIR__ . DIRECTORY_SEPARATOR . $foldername . DIRECTORY_SEPARATOR . $class . '.php')

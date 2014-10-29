@@ -7,10 +7,38 @@
  */
 class SetorModel extends Model
 {
+    /** @var  SetorDTO */
+    private $dto;
+    /** @var  SetorDAO */
+    private $dao;
+
     public function __construct()
     {
-        parent::__construct();
-        $this->setTabela('tb_setor');
-        $this->setPrimaryKey('cd_setor');
+        $this->dao = new SetorDAO();
+    }
+
+    public function getArrayDados()
+    {
+        $condominio = (new CondominioDAO())->getById($this->dto->getCdCondominio());
+
+        return array(
+            'cd_setor' => $this->dto->getCdSetor(),
+            'nm_setor' => $this->dto->getNmSetor(),
+            'cd_condominio' => $this->dto->getCdCondominio(),
+            'condominio' => $condominio->getNmCondominio(),
+            'obervacao' => $this->dto->getObservacao(),
+            'im_perfil' => $this->dto->getImPerfil()
+        );
+    }
+
+    public function getDAO()
+    {
+        return $this->dao;
+    }
+
+    public function setDTO(SetorDTO $dto)
+    {
+        $this->dto = $dto;
+        return $this;
     }
 }
