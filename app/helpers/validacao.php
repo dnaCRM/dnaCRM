@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Classe para valida��o de dados
+ * Classe para valida??o de dados
  * author faael
  * copyright 2008
  */
@@ -15,17 +15,17 @@ class validacao
     function mensagens($num, $campo, $max, $min)
     {
 
-        $this->msg[0] = "Preencha o campo com um email v�lido <br />"; // EMAIL
-        $this->msg[1] = "CEP com formato inv�lido (Ex: XXXXX-XXX) <br />"; // CEP
-        $this->msg[2] = "Data em formato inv�lido (Ex: DD/MM/AAAA) <br />"; // DATA
-        $this->msg[3] = "Telefone inv�lido (Ex: 01433333333) <br />"; // TELEFONE
-        $this->msg[4] = "CPF inv�lido (Ex: 11111111111) <br />"; // CPF
-        $this->msg[5] = "IP inv�lido (Ex: 192.168.10.1) <br />"; // IP
+        $this->msg[0] = "Preencha o campo com um email v?lido <br />"; // EMAIL
+        $this->msg[1] = "CEP com formato inv?lido (Ex: XXXXX-XXX) <br />"; // CEP
+        $this->msg[2] = "Data em formato inv?lido (Ex: DD/MM/AAAA) <br />"; // DATA
+        $this->msg[3] = "Telefone inv?lido (Ex: 01433333333) <br />"; // TELEFONE
+        $this->msg[4] = "CPF inv?lido (Ex: 11111111111) <br />"; // CPF
+        $this->msg[5] = "IP inv?lido (Ex: 192.168.10.1) <br />"; // IP
         $this->msg[6] = "Preencha o campo " . $campo . " com numeros <br />"; // APENAS NUMEROS
-        $this->msg[7] = "URL especificada � inv�lida (Ex: http://www.google.com) <br />"; // URL
+        $this->msg[7] = "URL especificada ? inv?lida (Ex: http://www.google.com) <br />"; // URL
         $this->msg[8] = "Preencha o campo " . $campo . " <br />"; // CAMPO VAZIO
-        $this->msg[9] = "O " . $campo . " deve ter no m�ximo " . $max . " caracteres <br />"; // M�XIMO DE CARACTERES
-        $this->msg[10] = "O " . $campo . " deve ter no m�nimo " . $min . " caracteres <br />"; // M�NIMO DE CARACTERES
+        $this->msg[9] = "O " . $campo . " deve ter no m?ximo " . $max . " caracteres <br />"; // M?XIMO DE CARACTERES
+        $this->msg[10] = "O " . $campo . " deve ter no m?nimo " . $min . " caracteres <br />"; // M?NIMO DE CARACTERES
 
         return $this->msg[$num];
     }
@@ -75,7 +75,7 @@ class validacao
             for ($i = 0; $i <= 8; $i++) {
                 $digito[$i] = substr($cpf, $i, 1);
             }
-            # Calcula o valor do 10� digito de verifica��o
+            # Calcula o valor do 10? digito de verifica??o
             $posicao = 10;
             $soma = 0;
 
@@ -92,7 +92,7 @@ class validacao
                 $digito[9] = 11 - $digito[9];
             }
 
-            # Calcula o valor do 11� digito de verifica��o
+            # Calcula o valor do 11? digito de verifica??o
             $posicao = 11;
             $soma = 0;
 
@@ -109,7 +109,7 @@ class validacao
                 $digito[10] = 11 - $digito[10];
             }
 
-            # Verifica de o dv � igual ao informado
+            # Verifica de o dv ? igual ao informado
             $dv = $digito[9] * 10 + $digito[10];
 
             if ($dv != $dv_informado) {
@@ -150,7 +150,7 @@ class validacao
         }
     }
 
-    // Verifica��o simples (Campo vazio, maximo/minimo de caracteres)
+    // Verifica??o simples (Campo vazio, maximo/minimo de caracteres)
     function validarCampo($campo, $valor, $max, $min)
     {
         $this->campo = $campo;
@@ -164,7 +164,7 @@ class validacao
     }
 
 
-    // Verifica se h� erros
+    // Verifica se h? erros
     function verifica()
     {
         if (sizeof($this->msg) == 0) {

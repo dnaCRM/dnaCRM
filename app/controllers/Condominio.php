@@ -32,6 +32,11 @@ class Condominio extends Controller
         $this->view->output($dados);
     }
 
+    public function novo()
+    {
+        echo json_encode($_POST);
+    }
+
     /**
      * @param int $id = Caso receba um id retorna um array
      * para a view com os dados do condominio. Este array irá popular o formulário
@@ -128,11 +133,12 @@ class Condominio extends Controller
                 $condominio = $this->setDados();
 
                 try {
-                    $this->model->gravar($condominio);
-                    Session::flash('sucesso_salvar_condominio', 'Cadastro salvo!', 'success');
+                    $obj =$this->model->gravar($condominio);
+                    return $obj;
                 } catch (Exception $e) {
                     CodeFail((int)$e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
                 }
+                return false;
             }
         }
 
@@ -151,6 +157,7 @@ class Condominio extends Controller
             ->setCidade(Input::get('cidade'))
             ->setCdCatgEstado(2)
             ->setCdVlCatgEstado(Input::get('estado'))
+            ->setCdVlCatgEstado(2)
             ->setCdUsuarioCriacao(Session::get('user'))
             ->setDtUsuarioCriacao('now()')
             ->setCdUsuarioAtualiza(Session::get('user'))
