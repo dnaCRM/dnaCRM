@@ -133,12 +133,11 @@ class Condominio extends Controller
                 $condominio = $this->setDados();
 
                 try {
-                    $obj =$this->model->gravar($condominio);
-                    return $obj;
+                    $this->model->gravar($condominio);
+                    Session::flash('sucesso_salvar_apartamento', 'Cadastro salvo!', 'success');
                 } catch (Exception $e) {
                     CodeFail((int)$e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
                 }
-                return false;
             }
         }
 
@@ -155,7 +154,7 @@ class Condominio extends Controller
             ->setNumero(Input::get('numero'))
             ->setBairro(Input::get('bairro'))
             ->setCidade(Input::get('cidade'))
-            ->setCdCatgEstado(2)
+            ->setCdCatgEstado(1)
             ->setCdVlCatgEstado(Input::get('estado'))
             ->setCdVlCatgEstado(2)
             ->setCdUsuarioCriacao(Session::get('user'))

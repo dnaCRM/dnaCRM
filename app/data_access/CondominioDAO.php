@@ -35,8 +35,6 @@ class CondominioDAO extends DataAccessObject{
         if($this->importaFoto($obj->getCdCondominio())){
            $this->exportaFoto($obj->getCdCondominio());
         }
-
-        return $obj;
     }
 
     public function getImgFolder()
