@@ -107,7 +107,7 @@
                         <label for="dt_ocorrencia" class="control-label">Início</label>
 
 
-                        <input type="text" class="form-control"
+                        <input type="text" class="form-control data-input"
                                value="<?php echo $ocorrencia->getDtOcorrencia() == '' ? Input::get('dt_ocorrencia') : $ocorrencia->getDtOcorrencia(); ?>"
                                id="dt_ocorrencia"
                                name="dt_ocorrencia" placeholder="___/___/____">
@@ -116,7 +116,7 @@
                         <label for="dt_fim" class="control-label">Fim</label>
 
 
-                        <input type="text" class="form-control"
+                        <input type="text" class="form-control data-input"
                                value="<?php echo $ocorrencia->getDtFim() == '' ? Input::get('dt_fim') : $ocorrencia->getDtFim(); ?>"
                                id="dt_fim"
                                name="dt_fim" placeholder="___/___/____">

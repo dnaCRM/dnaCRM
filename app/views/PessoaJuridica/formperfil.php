@@ -23,7 +23,7 @@ $token = Token::generate();
 
 <div>
 <ul class="nav nav-tabs">
-    <li class="active"><a href="#principal" data-toggle="tab">Dados Pessoais</a></li>
+    <li class="active"><a href="#principal" data-toggle="tab">Dados Cadastrais</a></li>
     <?php if ($id_check): ?>
         <li><a href="#telefones" data-toggle="tab">Telefones</a></li>
         <li><a href="#enderecos" data-toggle="tab">Endereços</a></li>

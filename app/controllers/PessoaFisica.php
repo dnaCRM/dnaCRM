@@ -8,10 +8,11 @@
  */
 class PessoaFisica extends Controller
 {
-
+    private $pessoaFisicaModel;
     public function __construct()
     { //o método é herdado da classe pai 'Controller'
         $this->setModel(new PessoaFisicaDAO());
+        $this->pessoaFisicaModel = new PessoaFisicaModel(new PessoaFisicaDTO(), new PessoaFisicaDAO());
     }
 
     public function start()
@@ -31,24 +32,6 @@ class PessoaFisica extends Controller
         $this->view->output($dados);
     }
 
-    public function formnovo()
-    {
-        $perfil = new PessoaFisicaDTO();
-        $dados = array(
-            'pagesubtitle' => '',
-            'pagetitle' => 'Cadastrar Pessoa Física',
-            'perfil' => $perfil
-        );
-
-        $this->view = new View('PessoaFisica', 'formnovo');
-        $this->view->output($dados);
-    }
-
-    public function novo()
-    {
-        echo json_encode($_POST);
-    }
-
     /**
      * @param int $id = Caso receba um id retorna um array
      * para a view com os dados do perfil. Este array irá popular o formulário
@@ -63,13 +46,22 @@ class PessoaFisica extends Controller
         $org_rg = (new CategoriaValorDAO())->get('cd_categoria = 1');
         $inst_ensino = (new InstituicaoEnsinoDAO())->fullList();
         $grau_ensino = (new CategoriaValorDAO())->get('cd_categoria = 8');
-        $pf_telefone = (new CategoriaValorDAO())->get('cd_categoria = 5');
-        $operadora = (new CategoriaValorDAO())->get('cd_categoria = 10');
+
 
         if ($id) {
             /** @var PessoaFisicaDTO */
             $perfilarr = $this->findById($id);
 
+            $condominios = (new CondominioDAO())->fullList();
+
+            $morador_endereco = (new MoradorEnderecoDAO())->get("cd_pessoa_fisica = {$id}");
+            $moradorEndereco = array();
+            foreach($morador_endereco as $me){
+                $moradorEndereco[] = (new MoradorEnderecoModel())->getArrayDados($me);
+            }
+
+            $pf_telefone = (new CategoriaValorDAO())->get('cd_categoria = 5');
+            $operadora = (new CategoriaValorDAO())->get('cd_categoria = 10');
             $telefones = (new PessoaFisicaTelefoneDAO())->get("cd_pessoa_fisica = {$id}");
             $enderecos = (new PessoaFisicaEnderecoDAO())->get("cd_pessoa_fisica = {$id}");
             $estados = (new CategoriaValorDAO())->get('cd_categoria = 2');
@@ -98,6 +90,8 @@ class PessoaFisica extends Controller
                 'operadora' => $operadora,
                 'estados' => $estados,
                 'catg_enderecos' => $catg_enderecos,
+                'condominios' => $condominios,
+                'morador_endereco' => $moradorEndereco,
                 'id' => $id,
                 'perfil' => $perfilarr
             );
@@ -111,8 +105,6 @@ class PessoaFisica extends Controller
                 'org_rg' => $org_rg,
                 'inst_ensino' => $inst_ensino,
                 'grau_ensino' => $grau_ensino,
-                'pf_telefone' => $pf_telefone,
-                'operadora' => $operadora,
                 'id' => null,
                 'perfil' => $perfil
             );
@@ -240,6 +232,13 @@ class PessoaFisica extends Controller
         }
         return $obj;
     }
+
+    public function buscaAjax()
+    {
+        $return = $this->pessoaFisicaModel->getPessoaFisica();
+        echo json_encode($return);
+    }
+
 
     /**
      * Deve receber um array contento objetos do tipo PessoaFisicaDTO

@@ -25,8 +25,23 @@ class PessoaFisicaModel extends Model
 
     public function getPessoaFisica()
     {
+        $_POST = filter_input_array(INPUT_POST);
+        $nome = Input::get('nome');
+        $pessoas = $this->pessoaFisicaDAO->get("nm_pessoa_fisica ilike '%{$nome}%' order by nm_pessoa_fisica limit 5");
+        
+        $resultado = array();
 
+        foreach($pessoas as $pessoa) {
+            $resultado[] = array(
+                'id' => $pessoa->getCdPessoaFisica(),
+                'nome' => $pessoa->getNmPessoaFisica(),
+                'foto' => $pessoa->getImPerfil()
+            );
+        }
+
+        return $resultado;
     }
+
 
     public function getEmpresa(PessoaJuridicaDao $empresa)
     {

@@ -4,8 +4,6 @@ $perfil_form = new PessoaFisica();
 $cadastrado = $perfil_form->cadastra($perfil); //Não cadastra na entra pois ainda não tem Token
 
 $id_check = $data['id'];
-$operadoras = $data['operadora'];
-$pf_telefones = $data['pf_telefone'];
 
 $token = Token::generate();
 ?>
@@ -25,9 +23,10 @@ $token = Token::generate();
 <ul class="nav nav-tabs">
     <li class="active"><a href="#principal" data-toggle="tab">Dados Pessoais</a></li>
     <?php if ($id_check): ?>
-        <li><a href="#morador" data-toggle="tab">Morador</a></li>
         <li><a href="#telefones" data-toggle="tab">Telefones</a></li>
         <li><a href="#enderecos" data-toggle="tab">Endereços</a></li>
+        <li><a href="#morador" data-toggle="tab">Morador</a></li>
+        <li><a href="#relacionamentos" data-toggle="tab">Relacionamentos</a></li>
     <?php endif; ?>
 </ul>
 <div id="TabAdicionais" class="tab-content">
@@ -183,7 +182,7 @@ $token = Token::generate();
                     <label for="dt_nascimento" class="control-label">Nascimento</label>
 
 
-                    <input type="text" class="form-control"
+                    <input type="text" class="form-control data-input"
                            value="<?php echo $perfil->getDtNascimento() == '' ? Input::get('dt_nascimento') : $perfil->getDtNascimento(); ?>"
                            id="dt_nascimento"
                            name="dt_nascimento" placeholder="___/___/____">
@@ -258,7 +257,7 @@ $token = Token::generate();
                 <label for="dt_inicio_curso" class="control-label">Início do Curso</label>
 
 
-                <input type="text" class="form-control"
+                <input type="text" class="form-control data-input"
                        value="<?php echo $perfil->getDtInicioCurso() == '' ? Input::get('dt_inicio_curso') : $perfil->getDtInicioCurso(); ?>"
                        id="dt_inicio_curso"
                        name="dt_inicio_curso" placeholder="___/___/____">
@@ -267,7 +266,7 @@ $token = Token::generate();
                 <label for="dt_fim_curso" class="control-label">Fim do Curso</label>
 
 
-                <input type="text" class="form-control"
+                <input type="text" class="form-control data-input"
                        value="<?php echo $perfil->getDtFimCurso() == '' ? Input::get('dt_fim_curso') : $perfil->getDtFimCurso(); ?>"
                        id="dt_fim_curso"
                        name="dt_fim_curso" placeholder="___/___/____">
@@ -340,11 +339,16 @@ $token = Token::generate();
 <?php if ($id_check): ?>
 
     <?php
-
+    $condominios = $data['condominios'];
+    $morador_endereco = $data['morador_endereco'];
+    $operadoras = $data['operadora'];
+    $pf_telefones = $data['pf_telefone'];
     $telefones = $data['telefones'];
     $enderecos = $data['enderecos'];
     $estados = $data['estados'];
-    $catg_enderecos = $data['catg_enderecos'];;?>
+    $catg_enderecos = $data['catg_enderecos'];
+
+    ?>
 
     <div class="tab-pane fade" id="telefones">
 
@@ -352,6 +356,7 @@ $token = Token::generate();
             <!-- Formulário de Telefones -->
             <div class="col-md-6">
                 <form class="form-horizontal" id="form_pf_telefones">
+                    <legend id="legend_form_telefones">Cadastrar Telefone</legend>
                     <fieldset class="well">
                         <div class="row">
                             <div class="form-group col-md-6">
@@ -468,25 +473,115 @@ $token = Token::generate();
     </div>
     <div class="tab-pane fade" id="morador">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
 
                 <form class="form-horizontal" id="form_end_morador">
                     <legend id="legend_form_end_morador">Dados do Morador</legend>
-                    <fieldset>
+                    <fieldset class="well">
+                        <div class="form-group">
+                            <div class="col-sm-4 selectContainer">
+                                <label for="m_end_codominio" class="control-label">Condomínio</label>
 
+                                <select class="form-control" name="m_end_condominio" id="m_end_condominio">
+                                    <option value="">--</option>
+                                    <?php
+                                    foreach ($condominios as $condominio) {
+                                        echo "<option value=\"{$condominio->getCdCondominio()}\">{$condominio->getNmCondominio()}</option>";
+                                    };?>
+                                </select>
+                            </div>
+                            <div class="col-sm-4 selectContainer">
+                                <label for="m_end_setor" class="control-label">Setor</label>
+
+                                <select class="form-control" name="m_end_setor" id="m_end_setor">
+                                    <option value="">--</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-4 selectContainer">
+                                <label for="m_end_apartamento" class="control-label">Apartamento</label>
+
+                                <select class="form-control" name="m_end_apartamento" id="m_end_apartamento">
+                                    <option value="">--</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-6">
+                                <label for="m_end_dt_entrada" class="control-label">Data de Entrada</label>
+
+                                <input type="text" class="form-control data-input" name="m_end_dt_entrada"
+                                       id="m_end_dt_entrada"
+                                       placeholder="___/___/______">
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="m_end_dt_saida" class="control-label">Data de Saída</label>
+
+                                <input type="text" class="form-control data-input" name="m_end_dt_saida"
+                                       id="m_end_dt_saida"
+                                       placeholder="___/___/______">
+                            </div>
+                        </div>
+
+                        <p class="col-md-12">
+                            <input type="reset" name="reset" class="btn btn-success" id="form_m_end_reset"
+                                   value="Limpar">
+                            <input type="submit" name="cadastrar" class="btn btn-primary" id="cadastrar_m_end"
+                                   value="Cadastrar">
+                            <input type="hidden" name="cd_pessoa_fisica"
+                                   value="<?php echo $perfil->getCdPessoaFisica(); ?>">
+                            <input type="hidden" name="id_m_end" id="id_m_end" value="">
+                            <input type="hidden" name="token" value="<?php echo $token; ?>">
+                        </p>
                     </fieldset>
                 </form>
 
             </div>
-        </div>
-    </div>
 
+            <div class="col-md-6">
+
+                <table id="tb_m_enderecos" class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>Condomínio</th>
+                        <th>Setor</th>
+                        <th>Apartamento</th>
+                        <th>Entrada</th>
+                        <th>Saída</th>
+                        <th>Editar</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    foreach ($morador_endereco as $mEnderecos) {
+                        echo
+                        "<tr data-m-end=\"{$mEnderecos['id_m_end']}\">
+                             <td>{$mEnderecos['condominio']}</td>
+                             <td>{$mEnderecos['setor']}</td>
+                             <td>{$mEnderecos['apartamento']}</td>
+                             <td>{$mEnderecos['m_end_dt_entrada']}</td>
+                             <td>{$mEnderecos['m_end_dt_saida']}</td>
+                             <td>";
+                        echo "<a href=\"#\" class=\"btn btn-primary btn-sm update_m_end\" data-update-mend-id=\"{$mEnderecos['id_m_end']}\"
+                                    data-toggle=\"modal\" data-target=\"#atualizaMEndModal\"><i class=\"fa fa-edit\"></i></a>";
+                        echo "&nbsp;<a href=\"#\" class=\"btn btn-warning btn-sm delete_m_end\" data-del-mend-id=\"{$mEnderecos['id_m_end']}\"
+                                    data-toggle=\"modal\" data-target=\"#apagaMEndModal\"><i class=\"fa fa-trash-o\"></i></a>
+                            </td>
+                        </tr>
+                            ";
+                    }
+                    ?>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+    </div>
 
     <div class="tab-pane fade" id="enderecos">
         <!-- Formulário de Endereços -->
         <div class="row">
             <div class="col-sm-12">
-
                 <form class="form-horizontal" id="form_pf_enderecos">
                     <legend id="legend_form_enderecos">Cadastrar Endereço</legend>
                     <fieldset class="well">
@@ -632,7 +727,71 @@ $token = Token::generate();
         <!-- Fim da Tabela de Endereços -->
     </div>
 
+    <div class="tab-pane fade" id="relacionamentos">
+        <div class="row">
+            <div class="col-md-8">
+                <form id="form_pf_relacionamentos" class="form-horizontal">
+                    <legend>Relacionamentos</legend>
+                    <fieldset class="well">
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-6">
+                                    <label for="pessoa_1" class="control-label">Nome</label>
 
+
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="catg_relacionameto_1" class="control-label">Relacionamento</label>
+
+                                    <select name="catg_relacionameto_1" class="form-control" id="catg_relacionameto_1">
+                                        <option value="">Agregado</option>
+                                        <option value="">Pai</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-6">
+                                    <label for="pessoa_2" class="control-label">Nome</label>
+
+                                    <input type="text" id="pessoa_2" class="form-control" name="pessoa_2">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="catg_relacionameto_2" class="control-label">Relacionamento</label>
+
+                                    <select name="catg_relacionameto_2" class="form-control" id="catg_relacionameto_1">
+                                        <option value="">--</option>
+                                        <option value="">Pai</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <p>
+                            <input type="reset" name="reset" class="btn btn-success" id="form_pf_r_reset" value="Novo">
+                            <input type="submit" name="cadastrar" class="btn btn-primary"
+                                   id="cadastrar_pf_relacionamento" value="Cadastrar">
+
+                            <input type="hidden" name="cd_pessoa_fisica"
+                                   value="<?php echo $perfil->getCdPessoaFisica(); ?>">
+                            <input type="hidden" name="id_relacinamento" id="id_relacinamento" value="">
+                            <input type="hidden" name="token" value="<?php echo $token; ?>">
+                        </p>
+                    </fieldset>
+                </form>
+            </div>
+
+            <div class="col-md-4">
+                <div class="legend">Pesquisa</div>
+                <div class="input-group">
+                    <input type="text" id="pessoa_1" class="form-control" name="pessoa_1" placeholder="Nome" autocomplete="off">
+                    <span class="input-group-btn"><input type="submit" name="botao-pesquisar-pessoa" class="btn btn-info"
+                                                         id="botao-pesquisar-pessoa" value="ok"></span>
+                </div>
+                <div id="area-do-resultado"></div>
+            </div>
+        </div>
+    </div>
 <?php endif; ?>
 </div>
 </div>
@@ -796,6 +955,43 @@ $token = Token::generate();
                 </div>
 
                 <input type="hidden" name="id_endereco" value="">
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Apagar Morador Endereco-->
+<div class="modal fade" id="apagaMEndModal" tabindex="-1" role="dialog" aria-labelledby="apagaMEndLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <form class="form-horizontal" id="form_apaga_m_end">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span
+                            aria-hidden="true">&times;</span><span
+                            class="sr-only">Fechar</span></button>
+
+                    <span class="modal-title" id="deletaMEndModalLabel"></span>
+
+                </div>
+                <div class="modal-body">
+
+                    <div class="col-sm-12 center">
+
+                        <h5 id="del_m_end_confirma"></h5>
+
+                        <p></p>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    <input type="submit" class="btn btn-danger col-xs-offset-2" name="deletar" value="Deletar"/>
+                </div>
+
+                <input type="hidden" name="id_m_end" value="">
             </form>
         </div>
     </div>

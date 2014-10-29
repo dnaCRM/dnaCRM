@@ -127,14 +127,8 @@ var SPMaskBehavior = function (val) {
 $(document).ready(function () {
     $('#cpf').mask("999.999.999-99");
     $('#cnpj').mask("99.999.999/9999-99");
-    //$('#celular').mask("(99) Z9999-9999", {translation: {'Z': {pattern: /[0-9]/, optional: true}}});  //[] Opcional
     $('.fones').mask(SPMaskBehavior, spOptions);
-    $('#dt_nascimento').mask("99/99/9999");
-    $('#nascimento').mask("99/99/9999");
-    $('#dt_inicio_curso').mask("99/99/9999");
-    $('#dt_fim_curso').mask("99/99/9999");
-    $('#dt_inicio').mask("99/99/9999");
-    $('#dt_fim').mask("99/99/9999");
+    $('.data-input').mask("99/99/9999");
     $('#cep').mask("99999-999");
     $('#numero').mask("99999999");
 });
@@ -1054,9 +1048,212 @@ $('.delete_pf_end').click(function () {
     return false;
 });
 */
+/** Início da Manipulação de Morador Endereço */
+$("#m_end_condominio").change(function(){
+    var condominio = $("#m_end_condominio").val();
+    $.ajax({
+        type:"get",
+        url:"Setor/listByCondId/"+condominio,
+        success:function(data){
+            $("#m_end_setor").html(data);
+        },
+        error: function(data) {
+            $(data.responseText).appendTo('#responseAjaxError');
+        }
+    });
+});
+$("#m_end_setor").change(function(){
+    var setor = $("#m_end_setor").val();
+    $.ajax({
+        type:"get",
+        url:"Apartamento/listBySetorId/"+setor,
+        success:function(data){
+            $("#m_end_apartamento").html(data);
+        },
+        error: function(data) {
+            $(data.responseText).appendTo('#responseAjaxError');
+        }
+    });
+});
+
+$('#form_end_morador').bootstrapValidator({
+    feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+    },
+    fields: {
+        m_end_condominio: {
+            group: '.col-sm-4',
+            validators: {
+                notEmpty: {
+                    message: 'Campo obrigatório.'
+                }
+            }
+        },
+        m_end_setor: {
+            group: '.col-sm-4',
+            validators: {
+                notEmpty: {
+                    message: 'Campo obrigatório.'
+                }
+            }
+        },
+        m_end_apartamento: {
+            group: '.col-sm-4',
+            validators: {
+                notEmpty: {
+                    message: 'Campo obrigatório.'
+                }
+            }
+        },
+        m_end_dt_entrada: {
+            group: '.col-sm-6',
+            validators: {
+                notEmpty: {
+                    message: 'Campo obrigatório.'
+                }
+            }
+        },
+        m_end_dt_saida: {
+            group: '.col-sm-6',
+            validators: {
+                date: {
+                    message: 'Data inválida.'
+                }
+            }
+        }
+    }
+}).on('success.form.bv', function (e) {
+    e.preventDefault();
+    var $form = $(e.target);
+    var bv = $form.data('bootstrapValidator');
+    var dados = $(this).serialize();
+
+    $.ajax({
+        type: "POST",
+        url: "MoradorEndereco/cadastra",
+        data: dados,
+        dataType: 'json',
+        success: function (data) {
+
+            var celulas_old = '<td>'+ data.rua + '</td><td>'+data.numero+'</td><td>'+data.bairro+'</td><td>'+data.cidade+'</td><td>'+data.cep+'</td><td>'+data.estado+'</td><td>'+data.categoria+'</td><td>'+data.observacao+'</td><td>' +
+                '<a href="#" class="btn btn-primary btn-sm update_pf_end" data-update-pfend-id="'+data.id_endereco+'" data-toggle="modal" data-target="#atualizaPfEndModal"><i class="fa fa-edit"></i></a>' +
+                '&nbsp;<a href="#" class="btn btn-warning btn-sm delete_pf_end" data-del-pfend-id="'+data.id_endereco+'" data-toggle="modal" data-target="#apagaPfEndModal"><i class="fa fa-trash-o"></i></a></td>';
+
+            var celulas = '<td>'+data.condominio+'</td><td>'+data.setor+'</td><td>'+data.apartamento+'</td><td>'+data.m_end_dt_entrada+'</td><td>'+data.m_end_dt_saida +'</td>'+
+                '<td><a href="#" class="btn btn-primary btn-sm update_m_end" data-update-mend-id="'+data.id_m_end+'"'+
+                'data-toggle="modal" data-target="#atualizaMEndModal"><i class="fa fa-edit"></i></a>'+
+                '&nbsp;<a href="#" class="btn btn-warning btn-sm delete_m_end" data-del-mend-id="'+data.id_m_end+'"'+
+                'data-toggle="modal" data-target="#apagaMEndModal"><i class="fa fa-trash-o"></i></a></td>';
 
 
+            var linha = '<tr data-m-end="'+data.id_m_end+'">' + celulas + '</tr>';
 
+            var id_end = $('#id_m_end').attr('value');
+
+            if (id_end){
+                var registro = $('#tb_m_enderecos tr[data-m-end=' + id_end + ']');
+                registro.html(celulas);
+                registro.addClass('active');
+                $('#legend_form_end_morador').html('Cadastrar Endereço').removeClass('text-primary');
+            } else {
+                $(linha).appendTo('#tb_m_enderecos').hide().fadeIn();
+            }
+            $('#form_end_morador input[name=id_m_end]').val('');
+            bv.resetForm(true);
+        },
+        error: function(data) {
+            console.log(data);
+            $(data.responseText).appendTo('#responseAjaxError');
+        }
+    });
+    return false;
+});
+
+$('#form_apaga_m_end')
+    .submit(function () {
+
+        var dados = $(this).serialize();
+
+        $.ajax({
+            type: "POST",
+            url: "MoradorEndereco/apagar",
+            data: dados,
+            dataType: 'json',
+            success: function (data) {
+                $('#form_apaga_m_end input[name=id_m_end]').val('');
+
+                $('#del_m_end_confirma').html('<span class="text-success"><i class="fa fa-check"></i> Endereço Apagado!</span>')
+                    .hide().fadeIn();
+
+                $('#tb_m_enderecos tr[data-m-end=' + data.id_m_end + ']').remove();
+                $('#apagaMEndModal').modal('hide');
+            },
+            error: function(data) {
+                $(data.responseText).appendTo('#responseAjaxError');
+            }
+        });
+        return false;
+    });
+
+/** Início - Botões Atualizar e Apagar  PF Telefone */
+$('#tb_m_enderecos').delegate('.update_m_end', 'click', function () {
+
+    var id = $(this).attr('data-update-mend-id');
+
+    $('html, body').animate({scrollTop: 180}, 400);
+    $.ajax({
+        type: "GET",
+        url: "MoradorEndereco/findById/" + id,
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function (data) {
+
+            $('#form_end_morador input[name=id_m_end]').val(data.id_m_end);
+            $('#form_end_morador input[name=m_end_dt_entrada]').val(data.m_end_dt_entrada);
+            $('#form_end_morador input[name=m_end_dt_saida]').val(data.m_end_dt_saida);
+            $('#form_end_morador input[name=cd_pessoa_fisica]').val(data.cd_pessoa_fisica);
+            $('#m_end_condominio option[value='+data.cd_condominio+']').prop("selected", "selected");
+            $('#m_end_setor option[value='+data.cd_setor+']').prop("selected", "selected");
+            $('#m_end_apartamento option[value='+data.cd_apartamento+']').prop("selected", "selected");
+            $('#legend_form_end_morador').html('Atualizar Endereço.').addClass('text-primary');
+
+        },
+        error: function(data) {
+            $(data.responseText).appendTo('#responseAjaxError');
+        }
+    });
+});
+
+$('#tb_m_enderecos').delegate('.delete_m_end', 'click', function () {
+    var id = $(this).attr('data-del-mend-id');
+
+    $.ajax({
+        type: "GET",
+        url: "MoradorEndereco/findById/" + id,
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function (data) {
+
+            $('#form_apaga_m_end input[name=id_m_end]').val(data.id_m_end);
+            var confirm_end = data.condominio + ', ' + data.setor + ', ' + data.apartamento + ', ' + data.m_end_dt_entrada;
+            $('#del_m_end_confirma').html('<span class="text-danger"><i class="fa fa-trash-o"></i> Apagar endereco ' + confirm_end + '?</span>');
+
+        },
+        error: function(data) {
+            $(data.responseText).appendTo('#responseAjaxError');
+        }
+    });
+});
+
+$('#form_m_end_reset').click(function() {
+    $('#form_end_morador input[name=id_m_end]').val('');
+    $('#legend_form_enderecos').html('Cadastrar Endereço').removeClass('text-primary');
+
+});
+/** Fim - Botões Atualizar e Apagar PF Telefone*/
+/* Fim da da Manipulação de Morador Endereço */
 
 
 /* INÍCIO DO CÓDIGO PARA MANIPULAÇÃO DE TELEFONES DE PESSOA JURIDICA */
@@ -1463,4 +1660,49 @@ $('#form_end_reset').click(function() {
     $('#form_pj_enderecos input[name=id_endereco]').val('');
     $('#legend_form_enderecos').html('Cadastrar Endereço').removeClass('text-primary');
 
+});
+
+/** Testes com busca Pessoa Física */
+$(document).ready(function(){
+    function search() {
+        var nome = $('#pessoa_1').val();
+        console.log(nome)
+        if (nome != '') {
+            $('#area-do-resultado').html('<i class="fa fa-spinner fa-spin"></i>');
+            $.ajax({
+                type: 'post',
+                url: 'PessoaFisica/buscaAjax/',
+                data: 'nome='+nome,
+                dataType: 'json',
+                success: function(data) {
+
+                    var html = '';
+                    for(var i = 0; i < data.length; i++){
+                        html += '<div class="list-group"><div class="list-group-item panel"><div class=""><img src="'+data[i].foto+'" class="img-circle img-thumb-panel pull-left">'+
+                                '<h5 class="list-group-item-heading"><a title="Visualizar perfil" href="PessoaFisica/visualizar/'+data[i].id+'">'+data[i].nome+'</a></h5>' +
+                                '<p class="list-group-item-text"><a class="btn btn-xs btn-primary" href="#"><i class="fa fa-plus"></i> Adicionar</a></p></div></div></div>';
+                    }
+
+                    var resultBody = '<div class="row"><div class="col-md-12">' + html + '</div></div>';
+                    $('#area-do-resultado').html(resultBody).hide().fadeIn();
+                    console.log(data);
+                    //'<img src="'+data[0].foto+'">'
+                    //$('#pessoa_1').val('');
+                },
+                error: function(data) {
+                    $(data.responseText).appendTo('#area-do-resultado');
+                }
+            });
+        }
+    }
+
+    $('#botao-pesquisar-pessoa').click(function(){
+        search();
+    });
+    $('#pessoa_1').keyup(function(e){
+        search();
+/*        if(e.keyCode == 13) {
+            //Executa esta linha se 'enter' for apertado
+        }*/
+    });
 });

@@ -160,6 +160,19 @@ class Apartamento extends Controller
         }
     }
 
+    /**
+     * @param $id
+     */
+    public function listBySetorId($id)
+    {
+        $apartamentos = $this->model->get("cd_setor = {$id}");
+        $return = '<option value="">Apartamentos</option>';
+        foreach ($apartamentos as $apartamento) {
+            $return .= "<option value=\"{$apartamento->getCdApartamento()}\">{$apartamento->getDescApartamento()}</option>";
+        }
+
+        echo $return;
+    }
 
     protected function findById($id)
     {
