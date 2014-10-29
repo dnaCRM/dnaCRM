@@ -52,6 +52,7 @@ $token = Token::generate();
                 <img class="img-circle profilefoto left" src="<?php
                 echo $cadastrado->getImPerfil();?>">
             </div>
+
             <div class="col-md-8">
                 <h1 class="text-success"><span class="glyphicon glyphicon-arrow-right"></span> Sucesso!</h1>
 
@@ -71,7 +72,6 @@ $token = Token::generate();
                    class="btn btn-primary">
                     Avançar <i class="fa fa-arrow-circle-o-right"></i>
                 </a>
-
             </div>
         </div>
     </div>

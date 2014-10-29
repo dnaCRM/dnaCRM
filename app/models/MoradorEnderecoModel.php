@@ -49,6 +49,21 @@ class MoradorEnderecoModel extends Model
         );
     }
 
+
+    /**
+     * @param $id = id de uma Pessoa Física
+     * @return array
+     */
+    public function getEnderecosMorador($id)
+    {
+        $morador_endereco = $this->dao->get("cd_pessoa_fisica = {$id}");
+        $lista = array();
+        foreach($morador_endereco as $me){
+            $lista[] = $this->setDTO($me)->getArrayDados();
+        }
+        return $lista;
+    }
+
     public function getDAO()
     {
         return $this->dao;
@@ -59,14 +74,5 @@ class MoradorEnderecoModel extends Model
         $this->dto = $dto;
         return $this;
     }
-    
-    public function getEnderecosMorador($id)
-    {
-        $morador_endereco = $this->dao->get("cd_pessoa_fisica = {$id}");
-        $lista = array();
-        foreach($morador_endereco as $me){
-            $lista[] = $this->setDTO($me)->getArrayDados();
-        }
-        return $lista;
-    }
+
 } 

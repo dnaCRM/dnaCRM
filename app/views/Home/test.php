@@ -1,12 +1,13 @@
 <?php
 //var_dump((new PessoaJuridicaEnderecoDAO())->fullList());die;
-$class = 'PessoaJuridicaTelefone';
+$class = 'MoradorEndereco';
 
 $classModel = $class.'Model';
 $model = new $classModel;
 //$dto = $model->getDAO()->fullList();var_dump($dto);die;
 
-$dto = $model->getDAO()->getById(3);
+$dto = $model->getDAO()->getById(2);
+var_dump($model->getEnderecosMorador(2));die;
 $obj = $model
     ->setDTO($dto)
     ->getArrayDados();

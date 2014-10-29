@@ -45,6 +45,20 @@ class PessoaJuridicaEnderecoModel extends Model
         );
     }
 
+    /**
+     * @param $id = id de uma Pessoa Jurídica
+     * @return array
+     */
+    public function getEnderecosPessoaJuridica($id)
+    {
+        $endereco = $this->dao->get("cd_pessoa_juridica = {$id}");
+        $lista = array();
+        foreach($endereco as $me){
+            $lista[] = $this->setDTO($me)->getArrayDados();
+        }
+        return $lista;
+    }
+
     public function getDAO()
     {
         return $this->dao;

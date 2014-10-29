@@ -94,9 +94,9 @@ class OrdemServico extends Controller
 
         $dados = array(
             //o campo 'obs' vai ser o subtítulo
-            'pagesubtitle' => $perfilarr->getDescAssunto(),
+            'pagesubtitle' => '',
             //o campo 'nome' vai ser o título da página
-            'pagetitle' => '',
+            'pagetitle' => $perfilarr->getDescAssunto(),
             //todos os atributos do perfil
             'perfil' => $perfilarr
         );
