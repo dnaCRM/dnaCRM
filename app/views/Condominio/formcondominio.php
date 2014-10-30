@@ -125,10 +125,7 @@ $token = Token::generate();
                                        placeholder="Cidade"
                                        maxlength="25">
                             </div>
-
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-12">
+                            <div class="col-sm-4 inputGroupContainer">
                                 <label for="cep" class="control-label">Cep</label>
 
 
@@ -146,24 +143,26 @@ $token = Token::generate();
                                    placeholder="99999"
                                    maxlength="5">
                         </div>
-                        <div class="col-sm-4 inputGroupContainer">
-                            <label for="estado" class="control-label">Estado</label>
+                        <div class="form-group">
+                            <div class="col-sm-4 inputGroupContainer">
+                                <label for="estado" class="control-label">Estado</label>
 
-                            <select class="form-control" id="estado" name="estado">
-                                <option value="">--</option>
-                                <?php
-                                $condominio->setCdVlCatgEstado($condominio->getCdVlCatgEstado() == '' ? Input::get('estado') : $condominio->getCdVlCatgEstado());
-                                foreach ($data['estado'] as $org) {
-                                    if ($org->getCdVlCategoria() == $condominio->getCdVlCatgEstado()) {
-                                        echo '<option value="' . $org->getCdVlCategoria() . '" selected>' . $org->getDescVlCatg() . '</option>';
-                                    } else {
-                                        echo '<option value="' . $org->getCdVlCategoria() . ' ">' . $org->getDescVlCatg() . '</option>';
+                                <select class="form-control" id="estado" name="estado">
+                                    <option value="">--</option>
+                                    <?php
+                                    $condominio->setCdVlCatgEstado($condominio->getCdVlCatgEstado() == '' ? Input::get('estado') : $condominio->getCdVlCatgEstado());
+                                    foreach ($data['estado'] as $org) {
+                                        if ($org->getCdVlCategoria() == $condominio->getCdVlCatgEstado()) {
+                                            echo '<option value="' . $org->getCdVlCategoria() . '" selected>' . $org->getDescVlCatg() . '</option>';
+                                        } else {
+                                            echo '<option value="' . $org->getCdVlCategoria() . ' ">' . $org->getDescVlCatg() . '</option>';
+                                        }
                                     }
-                                }
-                                ?>
-                            </select>
+                                    ?>
+                                </select>
+                            </div>
                         </div>
-                    </div>
+
                     <div class="col-sm-offset-4">
 
                         <input type="hidden" name="cd_condominio" value="<?php echo $data['id']; ?>">
