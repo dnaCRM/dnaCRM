@@ -115,11 +115,13 @@ $token = Token::generate();
                         </div>
 
                         <div class="form-group">
-                            <label for="observacao" class="control-label">Observação</label>
+                            <div class="col-sm-12">
+                                <label for="observacao" class="control-label">Observação</label>
 
-                            <textarea id="observacao" class="form-control" name="observacao"
+                                <textarea id="observacao" class="form-control" name="observacao"
                                      placeholder="Observação"
                                      rows="5"><?php echo $setor->getObservacao() == '' ? Input::get('observacao') : $setor->getObservacao(); ?></textarea>
+                            </div>
                         </div>
                     </div>
 
