@@ -186,5 +186,4 @@ $token = Token::generate();
             </form>
         <?php endif; ?>
     </div>
-
 </div>
