@@ -22,7 +22,7 @@ class Setor extends Controller
 
         $dados = array(
             'pagesubtitle' => '',
-            'pagetitle' => 'Perfis',
+            'pagetitle' => 'Setor',
             'list' => $setor_list
         );
 
@@ -52,20 +52,20 @@ class Setor extends Controller
                 'pagesubtitle' => 'Atualizar Setor.',
                 'condominio' => $condominio,
                 'id' => $id,
-                'perfil' => $setorarr
+                'setor' => $setorarr
             );
         } else {
-            $perfil = new SetorDTO();
+            $setor = new SetorDTO();
             $dados = array(
                 'pagetitle' => 'Cadastro de Setor',
-                'pagesubtitle' => 'Setor.',
+                'pagesubtitle' => '',
                 'condominio' => $condominio,
                 'id' => null,
-                'perfil' => $perfil
+                'setor' => $setor
             );
         }
 
-        $this->view = new View('Setor', 'formSetor');
+        $this->view = new View('Setor', 'formsetor');
         $this->view->output($dados);
     }
 
@@ -87,7 +87,7 @@ class Setor extends Controller
             //o campo 'nome' vai ser o título da página
             'pagetitle' => $setorarr->getNmSetor(),
             //todos os atributos do perfil
-            'perfil' => $setorarr
+            'setor' => $setorarr
         );
 
         $this->view = new View('Setor', 'visualizar');
@@ -110,7 +110,7 @@ class Setor extends Controller
             'pagesubtitle' => $setorarr->getObservacao(),
              //o campo 'nome' vai ser o título da página
             'pagetitle' => $setorarr->getNmSetor(),
-            'perfil' => $setorarr
+            'setor' => $setorarr
         );
 
         $this->view = new View('Setor', 'confirmDelete');
@@ -127,11 +127,12 @@ class Setor extends Controller
                 $setor = $this->setDados();
 
                 try {
-                    $this->model->gravar($setor);
-                    Session::flash('sucesso_salvar_st', 'Cadastro salvo!', 'success');
+                    $obj = $this->model->gravar($setor);
+                    return $obj;
                 } catch (Exception $e) {
                     CodeFail((int)$e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
                 }
+                return false;
             }
         }
 

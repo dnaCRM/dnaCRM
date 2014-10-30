@@ -171,7 +171,6 @@ class Condominio extends Controller
             if (Token::check(Input::get('token'))) {
 
                 $this->model->delete($dto);
-                echo 'Deletou condominio';
 
             }
         }

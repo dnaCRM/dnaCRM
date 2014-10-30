@@ -12,12 +12,12 @@
     <div class="col-sm-6">
 
         <img class="img-circle profilefoto"
-             src="<?php echo $data['perfil']->getImPerfil(); ?>">
+             src="<?php echo $data['setor']->getImPerfil(); ?>">
         <?php
 
         $condominio = (new CondominioDAO());
 
-        $setor = $data['perfil'];
+        $setor = $data['setor'];
 
         $condominio = $condominio->getById($setor->getCdCondominio());
 
@@ -39,10 +39,10 @@
     <div class="col-sm-6">
         <div class="well">
             <a class="btn btn-primary btn-sm"
-               href="Setor/formSetor/<?php echo $data['perfil']->getCdSetor(); ?>">
+               href="Setor/formsetor/<?php echo $data['setor']->getCdSetor(); ?>">
                 <span class="fa fa-edit"></span> Editar</a>
             <a class="btn btn-warning btn-sm"
-               href="Setor/confirmDelete/<?php echo $data['perfil']->getCdSetor(); ?>">
+               href="Setor/confirmDelete/<?php echo $data['setor']->getCdSetor(); ?>">
                 <span class="fa fa-trash-o"></span> Deletar</a>
         </div>
     </div>
