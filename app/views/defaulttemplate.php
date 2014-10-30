@@ -62,36 +62,28 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Cadastrar <span
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="novoscadastros">Novo<span
                             class="caret"></span></a>
-                    <ul class="dropdown-menu" aria-labelledby="themes">
+                    <ul class="dropdown-menu" aria-labelledby="novoscadastros">
                         <li><a href="PessoaFisica/formperfil">Pessoa Fisica</a></li>
                         <li><a href="PessoaJuridica/formperfil">Pessoa Juridica</a></li>
                         <li class="divider"></li>
                         <li><a href="Apartamento/formapartamento">Apartamento</a></li>
                         <li><a href="Setor/formSetor">Setor</a></li>
                         <li><a href="Condominio/formcondominio">Condominio</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Registrar <span
-                            class="caret"></span></a>
-                    <ul class="dropdown-menu" aria-labelledby="themes">
+                        <li class="divider"></li>
                         <li><a href="Ocorrencia/formOcorrencia">Ocorrência</a></li>
                         <li><a href="OrdemServico/formOrdemServico">Ordem de Serviço</a></li>
                     </ul>
                 </li>
-                <li>
-                    <a href="Home/help">Help</a>
-                </li>
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Download <span
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="sobre">Sobre <span
                             class="caret"></span></a>
-                    <ul class="dropdown-menu" aria-labelledby="download">
+                    <ul class="dropdown-menu" aria-labelledby="sobre">
                         <li><a href="#">Guia</a></li>
                         <li><a href="#">Manual</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">Logomarca</a></li>
+                        <li><a href="Home/help">Help</a></li>
                     </ul>
                 </li>
             </ul>

@@ -1,10 +1,3 @@
-<!--
- * Created by PhpStorm.
- * User: Raul
- * Date: 13/10/14
- * Time: 23:41
- -->
-
 <div class="row">
     <div class="col-sm-6">
         <h1><?php echo $data['pagetitle']; ?></h1>
@@ -261,7 +254,7 @@
             <div class="panel-heading">
                 <h4 class="panel-title">
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
-                        <i class="glyphicon glyphicon-user"></i> $perfil
+                        <i c    lass="glyphicon glyphicon-user"></i> $perfil
                     </a>
                 </h4>
             </div>

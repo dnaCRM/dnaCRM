@@ -50,8 +50,10 @@ class OrdemServico extends Controller
             $dt_inicio = new DateTime($perfilarr->getDtInicio());
             $perfilarr->setDtInicio($dt_inicio->format('d/m/Y'));
 
-            $dt_fim = new DateTime($perfilarr->getDtFim());
-            $perfilarr->setDtFim($dt_fim->format('d/m/Y'));
+            if ($perfilarr->getDtFim()) {
+                $dt_fim = new DateTime();
+                $perfilarr->setDtFim($dt_fim->format('d/m/Y'));
+            }
 
             $dados = array(
 

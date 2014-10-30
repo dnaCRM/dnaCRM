@@ -1256,7 +1256,7 @@ dt {
 dd {
     margin-left: 0;
 }
-@media (min-width: 768px) {
+@media (min-width: 400px) {
     .dl-horizontal dt {
         float: left;
         width: 160px;

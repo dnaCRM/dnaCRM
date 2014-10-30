@@ -59,13 +59,14 @@ class PessoaFisicaModel extends Model
             'cd_profissao' => $this->dto->getCdProfissao(),
             'profissao' => $profissao,
             'nm_pessoa_fisica' => $this->dto->getNmPessoaFisica(),
+            'im_perfil' => $this->dto->getImPerfil(),
             'cpf' => $this->dto->getCpf(),
             'rg' => $this->dto->getRg(),
             'uf' => $uf,
             'cd_catg_org_rg' => $this->dto->getCdCatgOrgRg(),
             'cd_vl_catg_org_rg' => $this->dto->getCdVlCatgOrgRg(),
             'email' => $this->dto->getEmail(),
-            'dt_nascimento' => $this->dto->getDtNascimento(),
+            'dt_nascimento' => (new DateTime($this->dto->getDtNascimento()))->format('d/m/Y'),
             'ie_sexo' => $this->dto->getIeSexo(),
             'ie_estuda' => $this->dto->getIeEstuda(),
             'cd_instituicao' => $this->dto->getCdInstituicao(),
@@ -98,51 +99,46 @@ class PessoaFisicaModel extends Model
         return $resultado;
     }
 
-    public function getEmpresa(PessoaJuridicaDAO $empresa)
+    public function getTelefones(PessoaFisicaTelefoneModel $pessoaFisicaTelefone)
     {
-        if ($this->dto->getCdPessoaJuridica()) {
-            $emp = $empresa->getById($this->dto->getCdPessoaJuridica());
-            return (new PessoaJuridicaModel())->setDTO($emp)->getArrayDados();
-        }
-        return false;
+        return $pessoaFisicaTelefone->getTelefonesPessoaFisica($this->dto->getCdPessoaFisica());
     }
 
-    public function getProfissao(ProfissaoDAO $profissao)
+    public function getEnderecos(PessoaFisicaEnderecoModel $pessoaFisicaEndereco)
     {
-        if ($this->dto->getCdProfissao()) {
-            $pro = $profissao->getById($this->dto->getCdProfissao());
-            return (new ProfissaoModel())->setDTO($pro)->getArrayDados();
-        }
-        return false;
+        return $pessoaFisicaEndereco->getEnderecosPessoaFisica($this->dto->getCdPessoaFisica());
     }
 
-    public function getOrgRg(CategoriaValorDAO $categoria)
+    public function getMoradorEnderecos(MoradorEnderecoModel $moradorEndereco)
     {
-        if ($this->dto->getCdCatgOrgRg()) {
-            $catg = $categoria->getBy2Ids($this->dto->getCdVlCatgOrgRg(), $this->dto->getCdCatgOrgRg());
-            return $catg->getDescVlCatg();
-        }
-        return false;
+        return $moradorEndereco->getEnderecosMorador($this->dto->getCdPessoaFisica());
     }
 
-    public function getInstEnsino(InstituicaoEnsinoDAO $instituicao)
+    public function getOsSolicitadas(OrdemServicoModel $ordemServico)
     {
-        if ($this->dto->getCdInstituicao()) {
-            $inst = $instituicao->getById($this->dto->getCdInstituicao());
-            return $inst->getDsInstituicao();
-        }
-        return false;
+        return $ordemServico->getPorSolicitante($this->dto->getCdPessoaFisica());
     }
 
-    public function getGrauEnsino(CategoriaValorDAO $categoria)
+    public function getOsExecutadas(OrdemServicoModel $ordemServico)
     {
-        if ($this->dto->getCdCatgGrauEnsino()) {
-            $catg = $categoria->getBy2Ids($this->dto->getCdVlCatgGrauEnsino(), $this->dto->getCdCatgGrauEnsino());
-            return $catg->getDescVlCatg();
-        }
-        return false;
+        return $ordemServico->getPorExecutor($this->dto->getCdPessoaFisica());
     }
 
+    public function getDAO()
+    {
+        return $this->dao;
+    }
+
+    public function setDTO(PessoaFisicaDTO $dto)
+    {
+        $this->dto = $dto;
+        return $this;
+    }
+
+    /**
+     * @param RelacionadosDAO $relacionados
+     * @return array|bool
+     */
     public function getRelacionados(RelacionadosDAO $relacionados)
     {
         if ($this->dto->getCdPessoaFisica()) {
@@ -157,19 +153,4 @@ class PessoaFisicaModel extends Model
         return false;
     }
 
-    public function getTelefones(PessoaFisicaTelefoneModel $pessoaFisicaTelefone)
-    {
-        return $pessoaFisicaTelefone->getTelefonesPessoaFisica($this->dto->getCdPessoaFisica());
-    }
-
-    public function getDAO()
-    {
-        return $this->dao;
-    }
-
-    public function setDTO(PessoaFisicaDTO $dto)
-    {
-        $this->dto = $dto;
-        return $this;
-    }
 } 
