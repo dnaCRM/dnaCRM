@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <noscript>
@@ -119,10 +119,10 @@
 
     <div class="usuario-panel clearfix">
         <div class="pull-left image">
-            <img src="img/uploads/tb_pessoa_fisica/<?php echo Session::get('user');?>.jpg" class="img-circle">
+            <img src="img/uploads/tb_pessoa_fisica/<?php echo Session::get('user'); ?>.jpg" class="img-circle">
         </div>
         <div class="pull-left info">
-            <p><?php echo Session::get('usuario') ;?></p>
+            <p><?php echo Session::get('usuario'); ?></p>
 
             <a href="Usuario/logoff"><i class="fa fa-circle text-danger"></i> Sair</a>
         </div>
@@ -164,7 +164,8 @@
             </a>
             <ul class="treeview-menu" style="display: none;">
                 <li><a href="PessoaFisica/formperfil"><i class="fa fa-angle-double-right"></i> Pessoa Física</a></li>
-                <li><a href="PessoaJuridica/formperfil"><i class="fa fa-angle-double-right"></i> Pessoa Jurídica</a></li>
+                <li><a href="PessoaJuridica/formperfil"><i class="fa fa-angle-double-right"></i> Pessoa Jurídica</a>
+                </li>
                 <li><a href="Setor/formSetor"><i class="fa fa-angle-double-right"></i> Setores</a></li>
                 <li><a href="Condominio/formcondominio"><i class="fa fa-angle-double-right"></i> Condomínio</a></li>
                 <li><a href="Apartamento/formapartamento"><i class="fa fa-angle-double-right"></i> Apartamento</a></li>
@@ -177,7 +178,8 @@
             </a>
             <ul class="treeview-menu" style="display: none;">
                 <li><a href="Ocorrencia/formOcorrencia"><i class="fa fa-angle-double-right"></i> Ocorrência</a></li>
-                <li><a href="OrdemServico/formOrdemServico"><i class="fa fa-angle-double-right"></i> Ordem de Serviço</a></li>
+                <li><a href="OrdemServico/formOrdemServico"><i class="fa fa-angle-double-right"></i> Ordem de
+                        Serviço</a></li>
                 <li><a href="Orcamento/formorcamento"><i class="fa fa-angle-double-right"></i> Orçamento</a></li>
             </ul>
         </li>
@@ -217,13 +219,15 @@
         </li>
     </ul>
 
-</nav><!-- side-bar end -->
+</nav>
+<!-- side-bar end -->
 
 <div class="container"><!-- container start -->
 
     <?php require_once($this->viewfile); ?>
 
-</div><!-- container end -->
+</div>
+<!-- container end -->
 
 <div class="container">
 
@@ -246,6 +250,16 @@
             do <a href="http://www.google.com/webfonts" rel="nofollow">Google</a>.</p>
 
     </footer>
+
+    <div class="well-lg">
+        <?php
+        echo "Tempo de execução = " . xdebug_time_index() ;
+        echo " // ";
+        echo "Máximo de Memória usada: ". xdebug_peak_memory_usage() . " bytes\n";
+        echo " // ";
+        echo xdebug_get_function_count() . " funções executadas.";
+        ?>
+    </div>
 
 </div>
 
