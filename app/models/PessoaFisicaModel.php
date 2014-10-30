@@ -47,12 +47,17 @@ class PessoaFisicaModel extends Model
             $empresa = (new PessoaJuridicaDAO())->getById($this->dto->getCdPessoaJuridica())
                 ->getNmFantasia();
         }
+        $profissao = '';
+        if ($this->dto->getCdProfissao()) {
+            $profissao = (new ProfissaoDAO())->getById($this->dto->getCdProfissao())
+                ->getNmProfissao();
+        }
         return array(
             'cd_pessoa_fisica' => $this->dto->getCdPessoaFisica(),
             'cd_pessoa_juridica' => $this->dto->getCdPessoaJuridica(),
             'empresa' => $empresa,
             'cd_profissao' => $this->dto->getCdProfissao(),
-            'profissao' => '',
+            'profissao' => $profissao,
             'nm_pessoa_fisica' => $this->dto->getNmPessoaFisica(),
             'cpf' => $this->dto->getCpf(),
             'rg' => $this->dto->getRg(),

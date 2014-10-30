@@ -18,21 +18,22 @@ class PessoaJuridicaTelefoneDAO extends DataAccessObject
 
     /**
      * @param PessoaJuridicaTelefoneDTO $dto
+     * @return bool|DataTransferObject
      * @throws Exception
      */
     public function gravar(PessoaJuridicaTelefoneDTO $dto)
     {
         if ($dto->getCdPjFone() == '') {
-            if (!$this->insert($dto)) {
+            if (!$obj = $this->insert($dto)) {
                 throw new Exception('Impossível Inserir Telefone');
             }
         } else {
-            if (!$this->update($dto)) {
+            if (!$obj = $this->update($dto)) {
                 throw new Exception('Impossível Atualizar Telefone');
             }
         }
 
-        return $this->first();
+        return $obj;
     }
 
     /**

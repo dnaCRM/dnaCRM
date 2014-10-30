@@ -24,11 +24,11 @@ class InstituicaoEnsinoDAO extends DataAccessObject
     public function gravar(InstituicaoEnsinoDTO $dto)
     {
         if ($dto->getCdInstituicao() == '') {
-            if ($obj = !$this->insert($dto)){
+            if (!$obj = $this->insert($dto)){
                 throw new Exception('Impossível Inserir Instituição');
             }
         } else {
-            if ($obj = !$this->update($dto)) {
+            if (!$obj = $this->update($dto)) {
                 throw new Exception('Impossível Atualizar Instituição');
             }
         }

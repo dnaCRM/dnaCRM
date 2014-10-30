@@ -120,14 +120,6 @@
                     Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure
                     terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan
                     american apparel, butcher voluptate nisi qui.</p>
-
-
-                <p>$_POST</p>
-                <?php var_dump($_POST); ?>
-                <p>$_SESSION</p>
-                <?php var_dump($_SESSION); ?>
-                <p>$_GLOBALS['config']</p>
-                <?php var_dump($GLOBALS['config']); ?>
             </div>
             <div class="tab-pane fade" id="profile">
                 <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.
@@ -135,7 +127,6 @@
                     loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk
                     aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore
                     aesthetic magna delectus mollit.</p>
-                <?php var_dump($ultimo_perfil); ?>
             </div>
             <div class="tab-pane fade" id="dropdown1">
                 <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo

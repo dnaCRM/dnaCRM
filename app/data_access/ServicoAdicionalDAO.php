@@ -16,16 +16,22 @@ class ServicoAdicionalDAO extends DataAccessObject
         $this->dataTransfer = 'ServicoAdicionalDTO';
     }
 
+    /**
+     * @param ServicoAdicionalDTO $dto
+     * @return bool|DataTransferObject
+     * @throws Exception
+     */
     public function gravar(ServicoAdicionalDTO $dto)
     {
         if ($dto->getCdServAdicional() == '') {
-            if (!$this->insert($dto)) {
+            if (!$obj = $this->insert($dto)) {
                 throw new Exception('Impossível Inserir Serviço Adicional');
             }
         } else {
-            if (!$this->update($dto)) {
+            if (!$obj = $this->update($dto)) {
                 throw new Exception('Impossível Atualizar Serviço Adicional');
             }
         }
+        return $obj;
     }
 } 

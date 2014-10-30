@@ -17,11 +17,11 @@ class PessoaFisicaTelefoneDAO extends DataAccessObject
     public function gravar(PessoaFisicaTelefoneDTO $dto)
     {
         if ($dto->getCdPfFone() == '') {
-            if ($obj = !$this->insert($dto)) {
+            if (!$obj = $this->insert($dto)) {
                 throw new Exception('Impossível Inserir Telefone');
             }
         } else {
-            if ($obj = !$this->update($dto)) {
+            if (!$obj = $this->update($dto)) {
                 throw new Exception('Impossível Atualizar Telefone');
             }
         }
