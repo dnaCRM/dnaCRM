@@ -19,19 +19,21 @@ class OcorrenciaPessoaFisicaEnvolvidaDAO extends DataAccessObject
 
     /**
      * @param OcorrenciaPessoaFisicaEnvolvidaDTO $dto
+     * @return bool
      * @throws Exception
      */
     public function gravar(OcorrenciaPessoaFisicaEnvolvidaDTO $dto)
     {
         if (!$this->getBy2Ids($dto->getCdOcorrencia(), $dto->getCdPessoaFisica())) {
-            if (!$this->insert($dto)) {
+            if (!$obj = $this->insert($dto)) {
                 throw new Exception('Impossível Gravar Ocorrencia de Pessoa Fisica Envolvida');
             }
         } else {
-            if (!$this->update($dto)) {
+            if (!$obj = $this->update($dto)) {
                 throw new Exception('Impossível Atualizar Ocorrencia de Pessoa Fisica Envolvida');
             }
         }
+        return $obj;
     }
 
     /**

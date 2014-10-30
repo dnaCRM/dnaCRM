@@ -63,8 +63,36 @@ class OrdemServicoModel extends Model
             'estagio' => $estagio,
             'desc_conclusao' => $this->dto->getDescConclusao(),
             'dt_inicio' => (new DateTime($this->dto->getDtInicio()))->format('d/m/Y'),
-            'dt_fim' => (new DateTime($this->dto->getDtFim()))->format('d/m/Y'),
+            'dt_fim' => ($this->dto->getDtFim() ? (new DateTime($this->dto->getDtFim()))->format('d/m/Y') : 'em aberto')
         );
+    }
+
+    /**
+     * @param $id = id de uma Pessoa Física
+     * @return array
+     */
+    public function getPorExecutor($id)
+    {
+        $ordens = $this->dao->get("cd_pf_executor = {$id}");
+        $lista = array();
+        foreach($ordens as $os){
+            $lista[] = $this->setDTO($os)->getArrayDados();
+        }
+        return $lista;
+    }
+
+    /**
+     * @param $id = id de uma Pessoa Física
+     * @return array
+     */
+    public function getPorSolicitante($id)
+    {
+        $ordens = $this->dao->get("cd_pf_solicitante = {$id}");
+        $lista = array();
+        foreach($ordens as $os){
+            $lista[] = $this->setDTO($os)->getArrayDados();
+        }
+        return $lista;
     }
 
     public function getDAO()

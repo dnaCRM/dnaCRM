@@ -19,19 +19,22 @@ class CategoriaValorDAO extends DataAccessObject
 
     /**
      * @param CategoriaValorDTO $dto
+     * @return bool|DataTransferObject
      * @throws Exception
      */
     public function gravar(CategoriaValorDTO $dto)
     {
         if (!$dto->getCdVlCategoria()) {
-            if (!$this->insert($dto)) {
+            if (!$obj = $this->insert($dto)) {
                 throw new Exception('Impossível Gravar Valor');
             }
         } else {
-            if (!$this->update($dto)) {
+            if (!$obj = $this->update($dto)) {
                 throw new Exception('Impossível Atualizar Valor');
             }
         }
+
+        return $obj;
     }
 
     /**

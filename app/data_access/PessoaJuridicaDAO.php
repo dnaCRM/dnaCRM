@@ -23,6 +23,7 @@ class PessoaJuridicaDAO extends DataAccessObject
 
     /**
      * @param PessoaJuridicaDTO $pessoaJuridica
+     * @return bool|DataTransferObject
      * @throws Exception
      */
     public function gravar(PessoaJuridicaDTO $pessoaJuridica)
@@ -40,6 +41,8 @@ class PessoaJuridicaDAO extends DataAccessObject
         if ($this->importaFoto($obj->getCdPessoaJuridica())) {
             $this->exportaFoto($obj->getCdPessoaJuridica());
         }
+
+        return $obj;
     }
 
     public function getImgFolder()

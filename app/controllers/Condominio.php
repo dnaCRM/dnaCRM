@@ -133,7 +133,7 @@ class Condominio extends Controller
                 $condominio = $this->setDados();
 
                 try {
-                    $obj =$this->model->gravar($condominio);
+                    $obj = $this->model->gravar($condominio);
                     return $obj;
                 } catch (Exception $e) {
                     CodeFail((int)$e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
@@ -157,7 +157,6 @@ class Condominio extends Controller
             ->setCidade(Input::get('cidade'))
             ->setCdCatgEstado(2)
             ->setCdVlCatgEstado(Input::get('estado'))
-            ->setCdVlCatgEstado(2)
             ->setCdUsuarioCriacao(Session::get('user'))
             ->setDtUsuarioCriacao('now()')
             ->setCdUsuarioAtualiza(Session::get('user'))
@@ -172,7 +171,6 @@ class Condominio extends Controller
             if (Token::check(Input::get('token'))) {
 
                 $this->model->delete($dto);
-                echo 'Deletou condominio';
 
             }
         }

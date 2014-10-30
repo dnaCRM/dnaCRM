@@ -40,6 +40,16 @@ class PessoaJuridicaTelefoneModel extends Model
         );
     }
 
+    public function getTelefonesPessoaJuridica($id)
+    {
+        $telefones = $this->dao->get("cd_pessoa_juridica = {$id}");
+        $lista = array();
+        foreach ($telefones as $tel) {
+            $lista[] = $this->setDTO($tel)->getArrayDados();
+        }
+        return $lista;
+    }
+
     public function getDAO()
     {
         return $this->dao;

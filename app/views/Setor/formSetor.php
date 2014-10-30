@@ -1,201 +1,149 @@
+<?php
+$setor = $data['setor'];
+$setor_form = new Setor();
+$cadastrado = $setor_form->cadastra($setor); //Não cadastra na entra pois ainda não tem Token
+
+$id_check = $data['id'];
+
+$token = Token::generate();
+?>
 <div class="row">
-    <div class="col-sm-6">
-        <h1><?php echo $data['pagetitle']; ?></h1>
-
-        <p class="lead">
-            <?php echo (isset($data['pagesubtitle'])) ? $data['pagesubtitle'] : ""; ?>
-        </p>
-    </div>
-    <div class="col-sm-6" style="padding: 15px 15px 0 15px;">
-        <div class="well">
-
-            <p>
-                Alguma coisa!
-            </p>
-
-        </div>
+    <div class="col-sm-12">
+        <h3 class="page-header"><?php echo $data['pagetitle']; ?>
+            <small><?php echo $data['pagesubtitle']; ?></small>
+        </h3>
     </div>
 </div>
 
-<!--Teste de Form-->
 <div class="row">
-    <div class="col-sm-6">
-        <div class="well">
-            <?php
-            $setor = $data['perfil'];
-            $setor_form = new Setor();
-            $setor_form->cadastra($setor); //Não cadastra na entra pois ainda não tem Token
 
-            if (Session::exists('sucesso_salvar_st')) {
-                Session::flash('sucesso_salvar_st');
-            }
+<div class="col-md-12">
 
-            ?>
-            <img class="img-circle profilefoto"
-                 src="<?php echo $setor->getImPerfil(); ?>">
+<div>
+<ul class="nav nav-tabs">
+   <li class="active"><a href="#principal" data-toggle="tab">Dados Cadastrais</a></li>
+</ul>
+<div id="TabAdicionais" class="tab-content">
+<div class="tab-pane fade active in" id="principal">
 
+    <div class="row">
+        <?php if ($cadastrado): ?>
+
+             <div class="jumbotron">
+                 <div class="container">
+                     <div class="col-md-4">
+
+                         <?php
+
+                         if (file_exists("img/uploads/tb_setor/{$cadastrado->getCdSetor()}.jpg")) {
+                             $cadastrado->setImPerfil("img/uploads/tb_setor/{$cadastrado->getCdSetor()}.jpg");
+                         } else {
+                             $cadastrado->setImPerfil(ICON_USER);
+                         }
+
+                         ?>
+
+                         <img class="img-circle profilefoto left" src="<?php
+                         echo $cadastrado->getImPerfil();?>">
+                     </div>
+                     <div class="col-md-8">
+                         <h1 class="text-success"><span class="glyphicon glyphicon-arrow-right"></span> Sucesso!</h1>
+
+                         <p>Deseja adicionar outro setor?
+                         </p>
+
+                         <a href="Setor/" class="btn btn-info" role="button">
+                             <i class="fa fa-arrow-circle-o-left"></i> Voltar
+                         </a>
+
+                         <a href="Setor/formsetor/" class="btn btn-success" role="button">
+                             <i class="fa fa-arrow-circle-o-up"></i> Novo
+                         </a>
+
+                     </div>
+                 </div>
+             </div>
+        <?php else: ?>
             <form id="setorform" class="form-horizontal" method="post" action="" enctype="multipart/form-data">
                 <fieldset>
-                    <legend>Cadastro</legend>
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <label for="im_perfil" class="control-label">Foto</label>
+
+                    <div class="col-md-2">
+
+                        <img class="img-circle img-responsive" src="<?php echo $setor->getImPerfil(); ?>"><br>
+
+                        <div class="form-group col-sm-10">
+                            <div>
+                                <label for="im_perfil" class="btn btn-default">Foto</label>
+                                <input type="file" class="hidden" id="im_perfil" name="im_perfil">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <div class="form-group">
+                            <div class="col-sm-12 selectContainer">
+                                <label for="cd_condominio" class="control-label">Condominio</label>
 
 
-                            <input type="file" class="form-control" id="im_perfil" name="im_perfil">
+                                <select class="form-control" id="cd_condominio" name="cd_condominio">
+                                       <option value="">-- Selecione um condominio</option>
+                                       <?php //echo escape(Input::get('cd_cgc'));
+                                       $setor->setCdCondominio($setor->getCdCondominio() == '' ? Input::get('condominio') : $setor->getCdCondominio());
+                                       foreach ($data['condominio'] as $condominio) {
+
+                                             if ($condominio->getCdCondominio() == $setor->getCdCondominio()) {
+                                                 echo '<option value="' . $condominio->getCdCondominio() . '" selected>' . $condominio->getNmCondominio() . '</option>';
+                                             } else {
+                                                 echo '<option value="' . $condominio->getCdCondominio() . ' ">' . $condominio->getNmCondominio() . '</option>';
+                                             }
+                                             }
+                                       ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label for="nm_setor" class="control-label">Nome</label>
+
+
+                                <input type="text" class="form-control" id="nm_setor" name="nm_setor"
+                                value="<?php echo $setor->getNmSetor() == '' ? Input::get('nm_setor') : $setor->getNmSetor(); ?>"
+                                placeholder="Nome">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label for="observacao" class="control-label">Observação</label>
+
+                                <textarea id="observacao" class="form-control" name="observacao"
+                                     placeholder="Observação"
+                                     rows="5"><?php echo $setor->getObservacao() == '' ? Input::get('observacao') : $setor->getObservacao(); ?></textarea>
+                            </div>
                         </div>
                     </div>
 
+                    <div class="col-sm-offset-4">
 
-                    <div class="form-group">
-                        <div class="col-sm-12 selectContainer">
-                            <label for="cd_condominio" class="control-label">Condominio</label>
+                        <input type="hidden" name="cd_setor" value="<?php echo $data['id']; ?>">
+                        <input type="hidden" name="token" value="<?php echo $token; ?>">
 
-
-                            <select class="form-control" id="cd_cgc" name="cd_condominio">
-                                <option value="">-- Selecione um condominio</option>
-                                <?php //echo escape(Input::get('cd_cgc'));
-                                $setor->setCdCondominio($setor->getCdCondominio() == '' ? Input::get('condominio') : $setor->getCdCondominio());
-                                foreach ($data['condominio'] as $condominio) {
-
-                                    if ($condominio->getCdCondominio() == $setor->getCdCondominio()) {
-                                        echo '<option value="' . $condominio->getCdCondominio() . '" selected>' . $condominio->getNmCondominio() . '</option>';
-                                    } else {
-                                        echo '<option value="' . $condominio->getCdCondominio() . ' ">' . $condominio->getNmCondominio() . '</option>';
-                                    }
-                                }
-                                ?>
-                            </select>
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <div class="col-sm-12 inputGroupContainer">
-                            <label for="nm_setor" class="control-label">Nome</label>
-
-
-                            <input type="text" class="form-control" id="nm_setor" name="nm_setor"
-                                   value="<?php echo $setor->getNmSetor() == '' ? Input::get('nm_setor') : $setor->getNmSetor(); ?>"
-                                   placeholder="Nome">
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <div class="col-sm-12">
-                            <label for="observacao" class="control-label">Observação</label>
-
-                            <textarea id="observacao" class="form-control" name="observacao"
-                                      placeholder="Observação"
-                                      rows="5"><?php echo $setor->getObservacao() == '' ? Input::get('observacao') : $setor->getObservacao(); ?></textarea>
-                        </div>
-                    </div>
-
-
-
-                    <input type="hidden" name="cd_setor" value="<?php echo $data['id']; ?>">
-                    <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
-
-                    <div class="form-group ">
-                        <div class="col-sm-12">
-                            <a href="Setor/visualizoar/<?php echo $data['id']; ?>" id="limpar"
-                               class="btn btn-default"><span
-                                    class="fa fa-undo"></span> Cancelar</a>
-                            <button type="reset" name="cancelar" class="btn btn-info"><span
-                                    class="fa fa-recycle"></span> Limpar
-                            </button>
-                            <a href="Setor/formSetor" id="novo" class="btn btn-success"><span
-                                    class="fa fa-file"></span>
-                                Novo</a>
-                            <button type="submit" name="cadastrar" class="btn btn-primary"><span
-                                    class="fa fa-check"></span>
-                                Salvar
-                            </button>
+                        <div class="form-group">
+                            <div class="col-sm-12 clearfix">
+                                <a href="setor/visualizar/<?php echo $data['id']; ?>" id="cancel" class="btn btn-default"><span
+                                     class="fa fa-undo"></span> Cancelar</a>
+                                <a href="Setor/formSetor" id="novo" class="btn btn-success"><span class="fa fa-file"></span>
+                                     Novo</a>
+                                <button type="submit" name="cadastrar" class="btn btn-primary"><span class="fa fa-check"></span>
+                                     Salvar
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </fieldset>
             </form>
-        </div>
+        <?php endif; ?>
     </div>
-
-    <div class="col-sm-6">
-
-        <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                            $_POST
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseOne" class="panel-collapse collapse in">
-                    <div class="panel-body">
-                        <?php
-
-                        var_dump($_POST);
-
-                        ?>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                            $_SESSION
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseTwo" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <?php
-
-                        var_dump($_SESSION);
-
-                        ?>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                            <i class="glyphicon glyphicon-leaf"></i> $_FILES
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseThree" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <?php
-
-                        var_dump($_FILES);
-
-                        ?>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
-                            <i class="glyphicon glyphicon-user"></i> $perfil
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseFour" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <?php
-
-                        var_dump($perfil);
-
-                        ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
 </div>

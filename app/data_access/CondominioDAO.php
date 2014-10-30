@@ -20,6 +20,11 @@ class CondominioDAO extends DataAccessObject{
         $this->fotoDefault = ICON_USER;
     }
 
+    /**
+     * @param CondominioDTO $condominio
+     * @return bool|DataTransferObject
+     * @throws Exception
+     */
     public function gravar(CondominioDTO $condominio)
     {
         if($condominio->getCdCondominio() == ''){

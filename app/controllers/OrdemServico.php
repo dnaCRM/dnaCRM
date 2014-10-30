@@ -50,8 +50,10 @@ class OrdemServico extends Controller
             $dt_inicio = new DateTime($perfilarr->getDtInicio());
             $perfilarr->setDtInicio($dt_inicio->format('d/m/Y'));
 
-            $dt_fim = new DateTime($perfilarr->getDtFim());
-            $perfilarr->setDtFim($dt_fim->format('d/m/Y'));
+            if ($perfilarr->getDtFim()) {
+                $dt_fim = new DateTime();
+                $perfilarr->setDtFim($dt_fim->format('d/m/Y'));
+            }
 
             $dados = array(
 
@@ -94,9 +96,9 @@ class OrdemServico extends Controller
 
         $dados = array(
             //o campo 'obs' vai ser o subtítulo
-            'pagesubtitle' => $perfilarr->getDescAssunto(),
+            'pagesubtitle' => '',
             //o campo 'nome' vai ser o título da página
-            'pagetitle' => '',
+            'pagetitle' => $perfilarr->getDescAssunto(),
             //todos os atributos do perfil
             'perfil' => $perfilarr
         );

@@ -15,16 +15,23 @@ class CategoriaDAO extends DataAccessObject {
         $this->dataTransfer = 'CategoriaDTO';
     }
 
+    /**
+     * @param CategoriaDTO $dto
+     * @return bool|DataTransferObject
+     * @throws Exception
+     */
     public function gravar(CategoriaDTO $dto){
         if($dto->getCdCategoria() == ''){
-            if(!$this->insert($dto)){
+            if(!$obj = $this->insert($dto)){
              throw new Exception('Impossível Inserir Categoria!');
             }
         } else {
-           if(!$this->update($dto)){
+           if(!$obj = $this->update($dto)){
             throw new Exception('Impossível Atualizar Categoria!');
            }
         }
+
+        return $obj;
     }
 
 } 

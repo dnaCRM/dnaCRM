@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <noscript>
@@ -62,40 +62,37 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Cadastrar <span
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="novoscadastros">Novo<span
                             class="caret"></span></a>
-                    <ul class="dropdown-menu" aria-labelledby="themes">
+                    <ul class="dropdown-menu" aria-labelledby="novoscadastros">
                         <li><a href="PessoaFisica/formperfil">Pessoa Fisica</a></li>
                         <li><a href="PessoaJuridica/formperfil">Pessoa Juridica</a></li>
                         <li class="divider"></li>
                         <li><a href="Apartamento/formapartamento">Apartamento</a></li>
                         <li><a href="Setor/formSetor">Setor</a></li>
                         <li><a href="Condominio/formcondominio">Condominio</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Registrar <span
-                            class="caret"></span></a>
-                    <ul class="dropdown-menu" aria-labelledby="themes">
+                        <li class="divider"></li>
                         <li><a href="Ocorrencia/formOcorrencia">Ocorrência</a></li>
                         <li><a href="OrdemServico/formOrdemServico">Ordem de Serviço</a></li>
                     </ul>
                 </li>
-                <li>
-                    <a href="Home/help">Help</a>
-                </li>
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Download <span
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="sobre">Sobre <span
                             class="caret"></span></a>
-                    <ul class="dropdown-menu" aria-labelledby="download">
+                    <ul class="dropdown-menu" aria-labelledby="sobre">
                         <li><a href="#">Guia</a></li>
                         <li><a href="#">Manual</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">Logomarca</a></li>
+                        <li><a href="Home/help">Help</a></li>
                     </ul>
                 </li>
             </ul>
+            <form class="navbar-form navbar-left dropdown" id="nav-top-form-busca">
+                <input type="text" class="form-control col-lg-8 hidden" placeholder="Search">
+                <input type="text" class="form-control col-lg-8" id="pessoa_1" name="pessoa_1" placeholder="Buscar Pessoa" autocomplete="off" data-toggle="busca">
 
+                <div id="area-do-resultado" class="dropdown-busca list-group" aria-labelledby="busca"></div>
+            </form>
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a><i class="glyphicon glyphicon-user"></i>
@@ -119,10 +116,10 @@
 
     <div class="usuario-panel clearfix">
         <div class="pull-left image">
-            <img src="img/uploads/tb_pessoa_fisica/<?php echo Session::get('user');?>.jpg" class="img-circle">
+            <img src="img/uploads/tb_pessoa_fisica/<?php echo Session::get('user'); ?>.jpg" class="img-circle">
         </div>
         <div class="pull-left info">
-            <p><?php echo Session::get('usuario') ;?></p>
+            <p><?php echo Session::get('usuario'); ?></p>
 
             <a href="Usuario/logoff"><i class="fa fa-circle text-danger"></i> Sair</a>
         </div>
@@ -164,7 +161,8 @@
             </a>
             <ul class="treeview-menu" style="display: none;">
                 <li><a href="PessoaFisica/formperfil"><i class="fa fa-angle-double-right"></i> Pessoa Física</a></li>
-                <li><a href="PessoaJuridica/formperfil"><i class="fa fa-angle-double-right"></i> Pessoa Jurídica</a></li>
+                <li><a href="PessoaJuridica/formperfil"><i class="fa fa-angle-double-right"></i> Pessoa Jurídica</a>
+                </li>
                 <li><a href="Setor/formSetor"><i class="fa fa-angle-double-right"></i> Setores</a></li>
                 <li><a href="Condominio/formcondominio"><i class="fa fa-angle-double-right"></i> Condomínio</a></li>
                 <li><a href="Apartamento/formapartamento"><i class="fa fa-angle-double-right"></i> Apartamento</a></li>
@@ -177,7 +175,8 @@
             </a>
             <ul class="treeview-menu" style="display: none;">
                 <li><a href="Ocorrencia/formOcorrencia"><i class="fa fa-angle-double-right"></i> Ocorrência</a></li>
-                <li><a href="OrdemServico/formOrdemServico"><i class="fa fa-angle-double-right"></i> Ordem de Serviço</a></li>
+                <li><a href="OrdemServico/formOrdemServico"><i class="fa fa-angle-double-right"></i> Ordem de
+                        Serviço</a></li>
                 <li><a href="Orcamento/formorcamento"><i class="fa fa-angle-double-right"></i> Orçamento</a></li>
             </ul>
         </li>
@@ -217,13 +216,15 @@
         </li>
     </ul>
 
-</nav><!-- side-bar end -->
+</nav>
+<!-- side-bar end -->
 
 <div class="container"><!-- container start -->
 
     <?php require_once($this->viewfile); ?>
 
-</div><!-- container end -->
+</div>
+<!-- container end -->
 
 <div class="container">
 
@@ -247,6 +248,16 @@
 
     </footer>
 
+    <div class="well-lg">
+        <?php
+        echo "Tempo de execução = " . xdebug_time_index() ;
+        echo " // ";
+        echo "Máximo de Memória usada: ". xdebug_peak_memory_usage() . " bytes\n";
+        echo " // ";
+        echo xdebug_get_function_count() . " funções executadas.";
+        ?>
+    </div>
+
 </div>
 
 <script src="js/jquery-1.10.2.min.js"></script>
@@ -261,7 +272,6 @@
 <script src="js/custom.js"></script>
 
 <a id="toTop" href="#"><span id="toTopHover"></span><img width="45" height="45" alt="" src="img/to-top.png"></a>
-
 
 </body>
 </html>

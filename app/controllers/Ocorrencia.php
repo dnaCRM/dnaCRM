@@ -92,9 +92,9 @@ Class Ocorrencia extends Controller
 
     $dados = array(
         //o campo 'obs' vai ser o subtítulo
-        'pagesubtitle' => $ocorrenciaarr->getDescAssunto(),
+        'pagesubtitle' => '',
         //o campo 'nome' vai ser o título da página
-        'pagetitle' => '',
+        'pagetitle' => $ocorrenciaarr->getDescAssunto(),
         //todos os atributos do perfil
         'perfil' => $ocorrenciaarr
     );

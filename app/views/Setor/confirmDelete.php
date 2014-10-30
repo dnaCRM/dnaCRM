@@ -20,7 +20,7 @@
     <div class="col-md-12">
         <div class="jumbotron">
             <?php
-            $setor = $data['perfil'];
+            $setor = $data['setor'];
 
             $action = new Setor();
             $action->removerSetor($setor);

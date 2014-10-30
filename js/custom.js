@@ -215,96 +215,6 @@ $('#pessoafisicaform').bootstrapValidator({
     }
 });
 
-
-$('#pfformnovo').bootstrapValidator({
-    excluded: ':disabled',
-    feedbackIcons: {
-        valid: 'glyphicon glyphicon-ok',
-        invalid: 'glyphicon glyphicon-remove',
-        validating: 'glyphicon glyphicon-refresh'
-    },
-    fields: {
-        ie_sexo: {
-            validators: {
-                notEmpty: {
-                    message: 'Gênero é obrigatório'
-                }
-            }
-        },
-        nm_pessoa_fisica: {
-            validators: {
-                notEmpty: {
-                    message: 'Campo obrigatório'
-                }
-            }
-        },
-        email: {
-            validators: {
-                notEmpty: {
-                    message: 'Campo obrigatório'
-                },
-                emailAddress: {
-                    message: 'E-mail inválido'
-                }
-            }
-        },
-        cpf: {
-            validators: {
-                notEmpty: {
-                    message: 'Campo obrigatório'
-                }
-            }
-        },
-        rg: {
-            validators: {
-                notEmpty: {
-                    message: 'Campo obrigatório'
-                }
-            }
-        },
-        dt_nascimento: {
-            validators: {
-                notEmpty: {
-                    message: 'Campo obrigatório'
-                }
-            }
-        },
-        im_perfil: {
-            validators: {
-                file: {
-                    extension: 'jpg',
-                    type: 'image/jpeg',
-                    /*maxSize: 2048 * 1024,   // 2 MB*/
-                    message: 'O arquivo selecionado não é válido. Apenas aquivos .jpg são permitidos.'
-                }
-            }
-        }
-    }
-}).on('success.form.bv', function (e) {
-    // Prevent form submission
-    e.preventDefault();
-
-    // Get the form instance
-    var $form = $(e.target);
-
-    // Get the BootstrapValidator instance
-    var bv = $form.data('bootstrapValidator');
-
-    var dados = $(this).serialize();
-
-    $.ajax({
-        type: "POST",
-        url: "PessoaFisica/novo",
-        data: dados,
-        dataType: 'json',
-        success: function (data) {
-            $('#ajax_response').html(data);
-            console.log(data);
-        }
-    });
-    return false;
-});
-
 $('#cadastro_usuario').bootstrapValidator({
     message: 'This value is not valid',
     feedbackIcons: {
@@ -529,16 +439,6 @@ $('#setorform').bootstrapValidator({
         validating: 'glyphicon glyphicon-refresh'
     },
     fields: {
-        im_perfil: {
-            validators: {
-                file: {
-                    extension: 'jpg',
-                    type: 'image/jpeg',
-                    /*maxSize: 2048 * 1024,   // 2 MB*/
-                    message: 'O arquivo selecionado não é válido. Apenas aquivos .jpg são permitidos.'
-                }
-            }
-        },
         cd_condominio: {
             validators: {
                 notEmpty: {
@@ -557,6 +457,16 @@ $('#setorform').bootstrapValidator({
             validators: {
                 notEmpty: {
                     message: 'Informar a observação é obrigatório.'
+                }
+            }
+        },
+        im_perfil: {
+            validators: {
+                file: {
+                    extension: 'jpg',
+                    type: 'image/jpeg',
+                    /*maxSize: 2048 * 1024,   // 2 MB*/
+                    message: 'O arquivo selecionado não é válido. Apenas aquivos .jpg são permitidos.'
                 }
             }
         }
@@ -1674,7 +1584,7 @@ $('#form_end_reset').click(function() {
 $(document).ready(function(){
     function search() {
         var nome = $('#pessoa_1').val();
-        console.log(nome)
+
         if (nome != '') {
             $('#area-do-resultado').html('<i class="fa fa-spinner fa-spin"></i>');
             $.ajax({
@@ -1686,14 +1596,13 @@ $(document).ready(function(){
 
                     var html = '';
                     for(var i = 0; i < data.length; i++){
-                        html += '<div class="list-group"><div class="list-group-item panel"><div class=""><img src="'+data[i].foto+'" class="img-circle img-thumb-panel pull-left">'+
-                                '<h5 class="list-group-item-heading"><a title="Visualizar perfil" href="PessoaFisica/visualizar/'+data[i].id+'">'+data[i].nome+'</a></h5>' +
-                                '<p class="list-group-item-text"><a class="btn btn-xs btn-primary" href="#"><i class="fa fa-plus"></i> Adicionar</a></p></div></div></div>';
+                        html += '<a title="Visualizar perfil" href="PessoaFisica/visualizar/'+data[i].id+'"><div class="list-group-item"><div><img src="'+data[i].foto+'" class="img-circle img-thumb-panel pull-left">'+
+                                '<p class="list-group-item-heading">'+data[i].nome+'</p>' +
+                                '<p class="list-group-item-text">'+data[i].email+'</p></div></div></a>';
                     }
 
                     var resultBody = '<div class="row"><div class="col-md-12">' + html + '</div></div>';
                     $('#area-do-resultado').html(resultBody).hide().fadeIn();
-                    console.log(data);
                     //'<img src="'+data[0].foto+'">'
                     //$('#pessoa_1').val('');
                 },
@@ -1701,6 +1610,8 @@ $(document).ready(function(){
                     $(data.responseText).appendTo('#area-do-resultado');
                 }
             });
+        } else {
+            $('#area-do-resultado').fadeOut();
         }
     }
 
@@ -1709,8 +1620,12 @@ $(document).ready(function(){
     });
     $('#pessoa_1').keyup(function(e){
         search();
+
 /*        if(e.keyCode == 13) {
             //Executa esta linha se 'enter' for apertado
         }*/
     });
+    $('#nav-top-form-busca').focusout(function(){
+        $('#area-do-resultado').fadeOut();
+    })
 });

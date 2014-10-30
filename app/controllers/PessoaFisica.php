@@ -117,18 +117,27 @@ class PessoaFisica extends Controller
     public function visualizar($id = null)
     {
         $id = (int)$id;
-        $perfilarr = $this->findById($id);
+        $pessoa = $this->findById($id);
+        $dadosPessoais = $this->pessoaFisicaModel->setDTO($pessoa)->getArrayDados();
 
+        $telefones = $this->pessoaFisicaModel->getTelefones(new PessoaFisicaTelefoneModel());
+        $enderecos = $this->pessoaFisicaModel->getEnderecos(new PessoaFisicaEnderecoModel());
+        $moradorEnderecos = $this->pessoaFisicaModel->getMoradorEnderecos(new MoradorEnderecoModel());
+        $ordensSolicitadas = $this->pessoaFisicaModel->getOsSolicitadas(new OrdemServicoModel());
         // Exporta imagem de perfil
-        $this->exportaImagens($perfilarr);
+        $this->exportaImagens($pessoa);
 
         $dados = array(
             //o campo 'obs' vai ser o subtítulo
-            'pagesubtitle' => $perfilarr->getEmail(),
+            'pagesubtitle' => $dadosPessoais['email'],
             //o campo 'nome' vai ser o título da página
-            'pagetitle' => $perfilarr->getNmPessoaFisica(),
+            'pagetitle' => $dadosPessoais['nm_pessoa_fisica'],
             //todos os atributos do perfil
-            'perfil' => $perfilarr
+            'dados_pessoais' => $dadosPessoais,
+            'telefones' => $telefones,
+            'enderecos' => $enderecos,
+            'morador_enderecos' => $moradorEnderecos,
+            'os_solicitadas' => $ordensSolicitadas
         );
 
         $this->view = new View('PessoaFisica', 'visualizar');
