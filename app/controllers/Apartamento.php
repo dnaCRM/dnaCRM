@@ -16,6 +16,8 @@ class Apartamento extends Controller
 
     public function start()
     { //Pega a lista completa de apartamentos
+
+
         $apartamento_list = (array)$this->model->fullList();
 
         $dados = array(
@@ -38,10 +40,12 @@ class Apartamento extends Controller
     public function formapartamento($id = null)
     {
         $setor = (new setorDAO())->fullList();
+        $condominios = (new CondominioDAO())->fullList();
 
         if ($id) {
             /** @var ApartamentoDTO */
             $apartamentoarr = $this->findById($id);
+
 
             $dados = array(
 
@@ -49,16 +53,21 @@ class Apartamento extends Controller
                 'pagesubtitle' => '',
                 'setor' => $setor,
                 'id' => $id,
-                'apartamento' => $apartamentoarr
+                'apartamento' => $apartamentoarr,
+                'condominios' => $condominios
+
             );
         } else {
+
             $apartamento = new ApartamentoDTO();
             $dados = array(
                 'pagetitle' => 'Cadastro de Apartamento',
                 'pagesubtitle' => '',
                 'setor' => $setor,
                 'id' => null,
-                'apartamento' => $apartamento
+                'apartamento' => $apartamento,
+                'condominios' => $condominios
+
             );
         }
 
@@ -139,7 +148,7 @@ class Apartamento extends Controller
         $dto = new ApartamentoDTO();
 
         $dto->setCdApartamento(Input::get('cd_apartamento'))
-            ->setCdSetor(Input::get('cd_setor'))
+            ->setCdSetor(Input::get('setor'))
             ->setDescApartamento(Input::get('desc_apartamento'))
             ->setCdUsuarioCriacao(Session::get('user'))
             ->setDtUsuarioCriacao('now()')

@@ -22,6 +22,7 @@
     <div class="col-sm-6">
         <div class="well">
             <?php
+            $condominios = $data['condominios'];
             $apartamento = $data['apartamento'];
             $apartamento_form = new Apartamento();
             $apartamento_form->cadastra($apartamento); //Não cadastra na entra pois ainda não tem Token
@@ -38,22 +39,22 @@
 
                     <div class="form-group">
                         <div class="col-sm-12 selectContainer">
-                            <label for="cd_setor" class="control-label">Setor</label>
+                            <label for="m_end_codominio" class="control-label">Condomínio</label>
 
+                            <select class="form-control" name="m_end_condominio" id="m_end_condominio">
+                                <option value="">--</option>
+                                <?php
+                                foreach ($condominios as $condominio) {
+                                    echo "<option value=\"{$condominio->getCdCondominio()}\">{$condominio->getNmCondominio()}</option>";
+                                };?>
+                            </select>
 
-                            <select class="form-control" id="cd_setor" name="cd_setor">
-                                <option value="">-- Selecione um setor</option>
-                                <?php //echo escape(Input::get('cd_cgc'));
-                                $apartamento->setCdSetor($apartamento->getCdSetor() == '' ? Input::get('cd_setor') : $apartamento->getCdSetor());
-                                foreach ($data['setor'] as $setor) {
+                        </div>
+                        <div class="col-sm-12 selectContainer">
+                            <label for="m_end_setor" class="control-label">Setor</label>
 
-                                    if ($setor->getCdSetor() == $apartamento->getCdSetor()) {
-                                        echo '<option value="' . $setor->getCdSetor() . '" selected>' . $setor->getNmSetor() . '</option>';
-                                    } else {
-                                        echo '<option value="' . $setor->getCdSetor() . ' ">' . $setor->getNmSetor() . '</option>';
-                                    }
-                                }
-                                ?>
+                            <select class="form-control" name="setor" id="m_end_setor">
+                                <option value="">--</option>
                             </select>
                         </div>
                     </div>
