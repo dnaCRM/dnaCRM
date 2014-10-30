@@ -133,11 +133,12 @@ class Condominio extends Controller
                 $condominio = $this->setDados();
 
                 try {
-                    $this->model->gravar($condominio);
-                    Session::flash('sucesso_salvar_apartamento', 'Cadastro salvo!', 'success');
+                    $obj = $this->model->gravar($condominio);
+                    return $obj;
                 } catch (Exception $e) {
                     CodeFail((int)$e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
                 }
+                return false;
             }
         }
 
