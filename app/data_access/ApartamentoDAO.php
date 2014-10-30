@@ -13,18 +13,24 @@ class ApartamentoDAO extends DataAccessObject
 
     }
 
-
+    /**
+     * @param ApartamentoDTO $dto
+     * @return bool|DataTransferObject
+     * @throws Exception
+     */
     public function gravar(ApartamentoDTO $dto)
     {
         if($dto->getCdApartamento() == ''){
-           if(!$this->insert($dto)){
+           if(!$obj = $this->insert($dto)){
                throw new Exception('Impossível Inserir Apartamento!');
            }
         }else{
-            if(!$this->update($dto)){
+            if(!$obj = $this->update($dto)){
                throw new Exception('Impossível Atualizar Apartamento!') ;
             }
         }
+
+        return $obj;
     }
 
 

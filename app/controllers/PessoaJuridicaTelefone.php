@@ -43,7 +43,7 @@ class PessoaJuridicaTelefone extends Controller
             }
 
             foreach ($this->categorias as $pj_tel) {
-                if ($pj_tel->getCdVlCategoria() == $telefone->getCdVlCatgFonePf()) {
+                if ($pj_tel->getCdVlCategoria() == $telefone->getCdVlCatgFonePj()) {
                     $return['categoria'] = $pj_tel->getDescVlCatg();
                 }
             }

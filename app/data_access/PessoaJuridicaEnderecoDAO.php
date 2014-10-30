@@ -18,19 +18,20 @@ class PessoaJuridicaEnderecoDAO extends DataAccessObject
 
     /**
      * @param PessoaJuridicaEnderecoDTO $dto
+     * @return bool|DataTransferObject
      * @throws Exception
      */
     public function gravar(PessoaJuridicaEnderecoDTO $dto)
     {
         if ($dto->getNrSequencia() == '') {
-            if (!$this->insert($dto)) {
+            if (!$obj = $this->insert($dto)) {
                 throw new Exception('Impossível Inserir Endereço');
             }
         } else {
-            if (!$this->update($dto)) {
+            if (!$obj = $this->update($dto)) {
                 throw new Exception('Impossível Atualizar Endereço');
             }
         }
-        return $this->first();
+        return $obj;
     }
 }
