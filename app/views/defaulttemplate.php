@@ -95,7 +95,12 @@
                     </ul>
                 </li>
             </ul>
+            <form class="navbar-form navbar-left dropdown" id="nav-top-form-busca">
+                <input type="text" class="form-control col-lg-8 hidden" placeholder="Search">
+                <input type="text" class="form-control col-lg-8" id="pessoa_1" name="pessoa_1" placeholder="Buscar Pessoa" autocomplete="off" data-toggle="busca">
 
+                <div id="area-do-resultado" class="dropdown-busca list-group" aria-labelledby="busca"></div>
+            </form>
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a><i class="glyphicon glyphicon-user"></i>
@@ -275,7 +280,6 @@
 <script src="js/custom.js"></script>
 
 <a id="toTop" href="#"><span id="toTopHover"></span><img width="45" height="45" alt="" src="img/to-top.png"></a>
-
 
 </body>
 </html>

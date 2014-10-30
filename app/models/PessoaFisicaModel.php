@@ -90,7 +90,8 @@ class PessoaFisicaModel extends Model
             $resultado[] = array(
                 'id' => $pessoa->getCdPessoaFisica(),
                 'nome' => $pessoa->getNmPessoaFisica(),
-                'foto' => $pessoa->getImPerfil()
+                'foto' => $pessoa->getImPerfil(),
+                'email' => $pessoa->getEmail()
             );
         }
 

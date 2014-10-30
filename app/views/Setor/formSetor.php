@@ -69,13 +69,11 @@ $token = Token::generate();
 
                     <div class="col-md-2">
 
-
                         <img class="img-circle img-responsive" src="<?php echo $setor->getImPerfil(); ?>"><br>
 
                         <div class="form-group col-sm-10">
                             <div>
                                 <label for="im_perfil" class="btn btn-default">Foto</label>
-
                                 <input type="file" class="hidden" id="im_perfil" name="im_perfil">
                             </div>
                         </div>
@@ -85,11 +83,11 @@ $token = Token::generate();
                     <div class="col-md-6">
 
                         <div class="form-group">
-                            <div class="col-sm-12 inputGroupContainer">
+                            <div class="col-sm-12 selectContainer">
                                 <label for="cd_condominio" class="control-label">Condominio</label>
 
 
-                                <select class="form-control" id="cd_cgc" name="cd_condominio">
+                                <select class="form-control" id="cd_condominio" name="cd_condominio">
                                        <option value="">-- Selecione um condominio</option>
                                        <?php //echo escape(Input::get('cd_cgc'));
                                        $setor->setCdCondominio($setor->getCdCondominio() == '' ? Input::get('condominio') : $setor->getCdCondominio());
@@ -106,7 +104,7 @@ $token = Token::generate();
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-sm-12 inputGroupContainer">
+                            <div class="col-sm-12">
                                 <label for="nm_setor" class="control-label">Nome</label>
 
 

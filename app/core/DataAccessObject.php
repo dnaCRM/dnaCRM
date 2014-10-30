@@ -242,7 +242,7 @@ abstract class DataAccessObject
         if (Input::exists('files')) {
             $fotoperfil = isset($_FILES[$this->colunaImagem]) ?
                 $_FILES[$this->colunaImagem] : null;
-
+            
             if ($fotoperfil['error'] > 0) {
                 echo 'Nenhuma imagem enviada.<br>';
             } else {

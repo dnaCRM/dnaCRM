@@ -81,13 +81,11 @@ $token = Token::generate();
 
     <div class="col-md-2">
 
-
         <img class="img-circle img-responsive" src="<?php echo $perfil->getImPerfil(); ?>"><br>
 
         <div class="form-group col-sm-10">
             <div>
                 <label for="im_perfil" class="btn btn-default">Foto</label>
-
                 <input type="file" class="hidden" id="im_perfil" name="im_perfil">
             </div>
         </div>
@@ -771,7 +769,7 @@ $token = Token::generate();
                     <span class="input-group-btn"><input type="submit" name="botao-pesquisar-pessoa" class="btn btn-info"
                                                          id="botao-pesquisar-pessoa" value="ok"></span>
                 </div>
-                <div id="area-do-resultado"></div>
+                <div id="area-do-resultado-pf-form" class="center-block"></div>
             </div>
         </div>
     </div>
