@@ -17,11 +17,11 @@ class OcorrenciaDAO extends DataAccessObject
     public function gravar(OcorrenciaDTO $dto)
     {
         if ($dto->getCdOcorrencia() == '') {
-            if ($obj = !$this->insert($dto)){
+            if (!$obj = $this->insert($dto)){
                 throw new Exception('Impossível Inserir Ocorrencia');
             }
         } else {
-            if ($obj = !$this->update($dto)) {
+            if (!$obj = $this->update($dto)) {
                 throw new Exception('Impossível Atualizar Ocorrencia');
             }
         }

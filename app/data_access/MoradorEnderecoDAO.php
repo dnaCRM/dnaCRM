@@ -21,11 +21,11 @@ class MoradorEnderecoDAO extends DataAccessObject
     public function gravar(MoradorEnderecoDTO $dto)
     {
         if ($dto->getNrSequencia() == '') {
-            if ($obj = !$this->insert($dto)) {
+            if (!$obj = $this->insert($dto)) {
                 throw new Exception('Impossível Inserir Morador Endereço!');
             }
         } else {
-            if ($obj = !$this->update($dto)) {
+            if (!$obj = $this->update($dto)) {
                 throw new Exception('Impossível Atualizar Morador Endereço!');
             }
         }

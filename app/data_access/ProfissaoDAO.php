@@ -11,18 +11,20 @@ class ProfissaoDAO extends DataAccessObject
 
     /**
      * @param ProfissaoDTO $dto
+     * @return bool|DataTransferObject
      * @throws Exception
      */
     public function gravar(ProfissaoDTO $dto)
     {
         if ($dto->getCdProfissao() == '') {
-            if (!$this->insert($dto)) {
+            if (!$obj = $this->insert($dto)) {
                 throw new Exception('Impossível Inserir Profissao');
             }
         } else {
-            if (!$this->update($dto)) {
+            if (!$obj = $this->update($dto)) {
                 throw new Exception('Impossível Atualizar Profissao');
             }
         }
+        return $obj;
     }
 } 

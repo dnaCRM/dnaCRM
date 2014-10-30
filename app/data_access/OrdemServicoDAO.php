@@ -17,11 +17,11 @@ class OrdemServicoDAO extends DataAccessObject
     public function gravar(OrdemServicoDTO $dto)
     {
         if ($dto->getCdOrdemServico() == '') {
-            if ($obj = !$this->insert($dto)) {
+            if (!$obj = $this->insert($dto)) {
                 throw new Exception('Impossível Inserir Ordem de Serviço');
             }
         } else {
-            if ($obj = !$this->update($dto)) {
+            if (!$obj = $this->update($dto)) {
                 throw new Exception('Impossível Atualizar Ordem de Serviço');
             }
         }

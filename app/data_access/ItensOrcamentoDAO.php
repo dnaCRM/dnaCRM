@@ -23,11 +23,11 @@ class ItensOrcamentoDAO extends DataAccessObject{
      */
     public function gravar(ItensOrcamentoDTO $dto){
         if($dto->getNrSequencia() == ''){
-            if($obj = !$this->insert($dto)){
+            if(!$obj = $this->insert($dto)){
                 throw new Exception('Impossível Inserir Item Orçamento!');
             }
         }else{
-            if($obj = !$this->update($dto)){
+            if(!$obj = $this->update($dto)){
                 throw new Exception('Impossível Inserir Item Orçamento!');
             }
 

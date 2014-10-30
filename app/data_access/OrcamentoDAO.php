@@ -19,11 +19,11 @@ class OrcamentoDAO extends DataAccessObject {
     public function gravar(OrcamentoDTO $dto)
     {
         if($dto->getCdOrcamento() == ''){
-            if($obj = !$this->insert($dto)){
+            if(!$obj = $this->insert($dto)){
                 throw new Exception('Impossível Inserir Orçamento!');
             }
         } else {
-            if($obj = !$this->update($dto)){
+            if(!$obj = $this->update($dto)){
                 throw new Exception('Impossível Atualizar Orçamento!');
             }
         }

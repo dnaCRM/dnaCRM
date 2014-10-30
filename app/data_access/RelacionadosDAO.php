@@ -18,20 +18,22 @@ class RelacionadosDAO extends DataAccessObject
     }
 
     /**
-     * @todo A tabela correspondente a esta Classe usa chave composta.
-     * Como resolver?
+     * @param RelacionadosDTO $dto
+     * @return bool|DataTransferObject
+     * @throws Exception
      */
     public function gravar(RelacionadosDTO $dto)
     {
         if (!$this->getBy2Ids($dto->getCdPessoaFisica1(), $dto->getCdPessoaFisica2())) {
-            if (!$this->insert($dto)) {
+            if (!$obj = $this->insert($dto)) {
                 throw new Exception('Impossível Gravar Relacionamento');
             }
         } else {
-            if (!$this->update($dto)) {
+            if (!$obj = $this->update($dto)) {
                 throw new Exception('Impossível Atualizar Relacionamento');
             }
         }
+        return $obj;
     }
 
     /**

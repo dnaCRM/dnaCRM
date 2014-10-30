@@ -23,23 +23,25 @@ class SetorDAO extends DataAccessObject
 
     /**
      * @param SetorDTO $setor
+     * @return bool|DataTransferObject
      * @throws Exception
      */
     public function gravar(SetorDTO $setor)
     {
-            if ($setor->getCdSetor() == '') {
-                if (!$obj = $this->insert($setor)) {
-                    throw new Exception('Impossível Inserir Setor');
-                }
-            } else {
-                if (!$obj = $this->update($setor)) {
-                    throw new Exception('Impossível Atualizar Setor');
-                }
+        if ($setor->getCdSetor() == '') {
+            if (!$obj = $this->insert($setor)) {
+                throw new Exception('Impossível Inserir Setor');
             }
+        } else {
+            if (!$obj = $this->update($setor)) {
+                throw new Exception('Impossível Atualizar Setor');
+            }
+        }
 
-            if ($this->importaFoto($obj->getCdSetor())) {
-                $this->exportaFoto($obj->getCdSetor());
-            }
+        if ($this->importaFoto($obj->getCdSetor())) {
+            $this->exportaFoto($obj->getCdSetor());
+        }
+        return $obj;
     }
 
 
