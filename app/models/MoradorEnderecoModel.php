@@ -29,7 +29,7 @@ class MoradorEnderecoModel extends Model
 
         $dt_entrada = (new DateTime($this->dto->getDtEntrada()))->format('d/m/Y');
         $dt_saida = ($this->dto->getDtSaida() ?
-            (new DateTime($this->dto->getDtSaida()))->format('d/m/Y') : '');
+            (new DateTime($this->dto->getDtSaida()))->format('d/m/Y') : 'Morador');
 
         $pessoa = (new PessoaFisicaDAO())->getById($this->dto->getCdPessoaFisica())
             ->getNmPessoaFisica();

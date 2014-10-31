@@ -8,12 +8,13 @@
 
 class PessoaJuridica extends Controller
 {
+    private $pessoaJuridicaModel;
 
     public function __construct()
     { //o método é herdado da classe pai 'Controller'
         $this->setModel(new PessoaJuridicaDAO());
+        $this->pessoaJuridicaModel = new PessoaJuridicaModel();
     }
-
 
     public function start()
     { //Pega a lista completa de perfis
@@ -95,18 +96,23 @@ class PessoaJuridica extends Controller
     public function visualizar($id = null)
     {
         $id = (int)$id;
-        $perfilarr = $this->findById($id);
+        $empresa = $this->findById($id);
+        $dadosCadastrais = $this->pessoaJuridicaModel->setDTO($empresa)->getArrayDados();
+
+        $telefones = $this->pessoaJuridicaModel->getTelefones(new PessoaJuridicaTelefoneModel());
+        $enderecos = $this->pessoaJuridicaModel->getEnderecos(new PessoaJuridicaEnderecoModel());
+        $empregados = $this->pessoaJuridicaModel->getEmpregados(new PessoaFisicaModel);
 
         // Exporta imagem de perfil
-        $this->exportaImagens($perfilarr);
+        $this->exportaImagens($empresa);
 
         $dados = array(
-            //o campo 'obs' vai ser o subtítulo
-            'pagesubtitle' => $perfilarr->getDescRazao(),
-            //o campo 'nome' vai ser o título da página
-            'pagetitle' => $perfilarr->getNmFantasia(),
-            //todos os atributos do perfil
-            'perfil' => $perfilarr
+            'pagesubtitle' => $dadosCadastrais['email'],
+            'pagetitle' => $dadosCadastrais['nm_fantasia'],
+            'dados_cadastrais' => $dadosCadastrais,
+            'telefones' => $telefones,
+            'enderecos' => $enderecos,
+            'empregados' => $empregados
         );
 
         $this->view = new View('PessoaJuridica', 'visualizar');
