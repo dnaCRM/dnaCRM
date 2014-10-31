@@ -133,11 +133,12 @@ class Apartamento extends Controller
                 $apartamento = $this->setDados();
 
                 try {
-                    $this->model->gravar($apartamento);
-                    Session::flash('sucesso_salvar_apartamento', 'Cadastro salvo!', 'success');
+                    $obj = $this->model->gravar($apartamento);
+                    return $obj;
                 } catch (Exception $e) {
                     CodeFail((int)$e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
                 }
+                return false;
             }
         }
 
