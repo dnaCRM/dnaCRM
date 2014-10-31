@@ -30,11 +30,16 @@ class OcorrenciaModel extends Model
             'desc_assunto' => $this->dto->getDescAssunto(),
             'desc_ocorrencia' => $this->dto->getDescOcorrencia(),
             'dt_ocorrencia' => $this->dto->getDtOcorrencia(),
-            'dt_fim' => $this->dto->getDtFim(),
+            'dt_fim' => ($this->dto->getDtFim() ? (new DateTime($this->dto->getDtFim()))->format('d/m/Y') : 'em aberto'),
             'desc_conclusao' => $this->dto->getDescConclusao(),
             'cd_catg_estagio' => $this->dto->getCdCatgEstagio(),
             'cd_vl_catg_estagio' => $this->dto->getCdVlCatgEstagio(),
         );
+    }
+
+    public function getPessoasEnvolvidas(OcorrenciaPessoaFisicaEnvolvidaModel $pessoas)
+    {
+        return $pessoas->getPessoasPorOcorrencia(new PessoaFisicaModel(), $this->dto->getCdOcorrencia());
     }
 
     public function getDAO()

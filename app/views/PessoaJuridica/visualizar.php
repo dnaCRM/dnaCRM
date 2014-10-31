@@ -58,11 +58,11 @@
 
                     echo "
                     <div class=\"col-lg-6\">
-                        <div class=\"\">
+                        <div>
                             <img class=\"img-circle img-thumb-panel pull-left\" src=\"{$empregado['im_perfil']}\">
-                            
-                            <h5 class=\"\"><a href=\"PessoaFisica/visualizar/\">{$empregado['nm_pessoa_fisica']}</a></h5>
-                            <p class=\"panel-\">
+
+                            <h6><a href=\"PessoaFisica/visualizar/{$empregado['cd_pessoa_fisica']}\">{$empregado['nm_pessoa_fisica']}</a></h6>
+                            <p>
                                 {$empregado['email']}
                                     <br><span class=\"fa fa-user\"></span> <span class=\"text-info\">{$empregado['profissao']}</span>.
                             </p>
@@ -106,7 +106,7 @@
         </div>
 
         <div class="list-group">
-            <h6 class="list-group-item active">Funcionários</h6>
+            <h6 class="list-group-item active">Endereços</h6>
             <?php
             foreach ($data['enderecos'] as $endereco) {
                 echo "<div class=\"list-group-item\">

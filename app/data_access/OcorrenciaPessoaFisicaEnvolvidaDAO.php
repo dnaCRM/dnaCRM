@@ -19,7 +19,7 @@ class OcorrenciaPessoaFisicaEnvolvidaDAO extends DataAccessObject
 
     /**
      * @param OcorrenciaPessoaFisicaEnvolvidaDTO $dto
-     * @return bool
+     * @return array|bool|DataTransferObject
      * @throws Exception
      */
     public function gravar(OcorrenciaPessoaFisicaEnvolvidaDTO $dto)
@@ -29,9 +29,9 @@ class OcorrenciaPessoaFisicaEnvolvidaDAO extends DataAccessObject
                 throw new Exception('Impossível Gravar Ocorrencia de Pessoa Fisica Envolvida');
             }
         } else {
-            if (!$obj = $this->update($dto)) {
-                throw new Exception('Impossível Atualizar Ocorrencia de Pessoa Fisica Envolvida');
-            }
+            $obj = array(
+                'msg' => 'Registro já existe!'
+            );
         }
         return $obj;
     }

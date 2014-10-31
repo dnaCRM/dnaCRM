@@ -8,10 +8,13 @@
 
 Class Ocorrencia extends Controller
 {
+    /** @var  OcorrenciaModel */
+    private $ocorrenciaModel;
 
     public function __construct()
 { //o método é herdado da classe pai 'Controller'
     $this->setModel(new OcorrenciaDAO());
+    $this->ocorrenciaModel = new OcorrenciaModel();
 }
 
 
@@ -49,9 +52,12 @@ Class Ocorrencia extends Controller
 
         $dt_ocorrencia = new DateTime($ocorrenciaarr->getDtOcorrencia());
         $ocorrenciaarr->setDtOcorrencia($dt_ocorrencia->format('d/m/Y'));
+        $ocorr_pessoas = $this->ocorrenciaModel->setDTO($ocorrenciaarr)->getPessoasEnvolvidas(new OcorrenciaPessoaFisicaEnvolvidaModel());
 
-        $dt_fim = new DateTime($ocorrenciaarr->getDtFim());
-        $ocorrenciaarr->setDtFim($dt_fim->format('d/m/Y'));
+        if ($ocorrenciaarr->getDtFim()) {
+            $dt_fim = new DateTime();
+            $ocorrenciaarr->setDtFim($dt_fim->format('d/m/Y'));
+        }
 
         $dados = array(
 
@@ -61,7 +67,8 @@ Class Ocorrencia extends Controller
             'perfil' => $ocorrenciaarr,
             'setor' => $setor,
             'informante' => $informante,
-            'estagio' => $estagio
+            'estagio' => $estagio,
+            'pessoas' => $ocorr_pessoas
         );
     } else {
         $ocorrencia = new OcorrenciaDTO();

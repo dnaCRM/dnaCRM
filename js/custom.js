@@ -1580,7 +1580,7 @@ $('#form_end_reset').click(function() {
 
 });
 
-/** Testes com busca Pessoa Física */
+/** Busca Pessoa Física */
 $(document).ready(function(){
     function search() {
         var nome = $('#pessoa_1').val();
@@ -1627,5 +1627,95 @@ $(document).ready(function(){
     });
     $('#nav-top-form-busca').focusout(function(){
         $('#area-do-resultado').fadeOut();
-    })
+    });
+});
+
+
+/** Busca Pessoa Física para Ocorrência*/
+$(document).ready(function(){
+    function buscaPessoaOcorrencia() {
+        var nome = $('#ocorr_pessoa').val();
+
+        if (nome != '') {
+            $('#busca-ocorr-pessoa-resultado').html('<i class="fa fa-spinner fa-spin"></i>');
+            $.ajax({
+                type: 'post',
+                url: 'PessoaFisica/buscaAjax/',
+                data: 'nome='+nome,
+                dataType: 'json',
+                success: function(data) {
+
+                    var html = '';
+                    for(var i = 0; i < data.length; i++){
+                        html += '<div class="list-group-item"><div><img src="'+data[i].foto+'" class="img-circle img-thumb-panel pull-left">'+
+                            '<p class="list-group-item-heading"><a title="Visualizar perfil" href="PessoaFisica/visualizar/'+data[i].id+'">'+data[i].nome+'</a></p>' +
+                            '<p class="list-group-item-text text-right">' +
+                            '<button data-id-pessoa="'+data[i].id+'" title="Adicionar" class="btn btn-info btn-xs add-ocorr-pessoa">' +
+                            '<i class="fa fa-plus-circle"></i></button></p></div></div>';
+                    }
+
+                    var resultBody = '<div class="row"><div class="col-md-12">' + html + '</div></div>';
+                    $('#busca-ocorr-pessoa-resultado').html(resultBody).hide().fadeIn();
+                },
+                error: function(data) {
+                    $(data.responseText).appendTo('#area-do-resultado');
+                }
+            });
+        } else {
+            $('#busca-ocorr-pessoa-resultado').fadeOut();
+        }
+    }
+
+    $('#ocorr_pessoa').keyup(function(e){
+        buscaPessoaOcorrencia();
+    });
+    $('#ocorr_pessoa').focusout(function(){
+        $('#busca-ocorr-pessoa-resultado').fadeOut();
+    });
+
+    // Adiciona Pessoa
+    $('#busca-ocorr-pessoa-resultado').delegate('.add-ocorr-pessoa', 'click', function () {
+
+        var pessoa = $(this).attr('data-id-pessoa');
+        var ocorrencia = $('#form-ocorrencia-pessoa input[name=cd_ocorrencia]').val();
+        //var data = $('#form-ocorrencia-pessoa').serialize();
+
+        $.ajax({
+            type: 'post',
+            url: 'OcorrenciaPessoaFisicaEnvolvida/cadastra/',
+            data: 'cd_pessoa_fisica='+pessoa+'&cd_ocorrencia='+ocorrencia,
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                if (data.msg) {
+                    var html = '<div class="alert alert-dismissable alert-warning">' +
+                        '<button type="button" class="close" data-dismiss="alert">×</button>' +
+                        '<h4>'+data.msg+'</h4>' +
+                        '<p>Se fudeu!</p>' +
+                        '</div>';
+                    $('#msg-ja-existe').html(html);
+                } else {
+                var pessoa = '<tr>' +
+                            '<td><img class="img-circle" src="'+data.im_perfil+'"></td>' +
+                            '<td><h6><a href="PessoaFisica/visualizar/'+data.cd_pessoa_fisica+'">'+data.nm_pessoa_fisica+'</a></h6></td>' +
+                            '<td>' +
+                                '<button data-id-pessoa="'+data.cd_pessoa_fisica+'" class="btn btn-danger btn-xs remove-ocorr-pessoa">' +
+                                    '<i class="fa fa-minus-circle"></i>' +
+                                '</button>' +
+                            '</td></tr>';
+
+                $(pessoa).appendTo('#ocorr-envolvidos').hide().fadeIn();
+                }
+            },
+            error: function(data) {
+                $(data.responseText).appendTo('#responseAjaxError');
+            }
+        });
+        return false;
+    });
+
+    $('#ocorr-envolvidos').delegate('.remove-ocorr-pessoa', 'click', function () {
+        console.log('Remove!');
+    });
+
 });

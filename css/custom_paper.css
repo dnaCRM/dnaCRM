@@ -298,7 +298,8 @@ table.dataTable.no-footer {
     font-size: 13px;
 }
 
-#nav-top-form-busca .list-group-item {
+#nav-top-form-busca .list-group-item,
+.dropdown-busca .list-group-item {
     border: 0;
     border-top: 1px solid #d0d0d0;
     line-height: 10px;
