@@ -137,11 +137,12 @@ Class Ocorrencia extends Controller
             $ocorrencia = $this->setDados();
 
             try {
-                $this->model->gravar($ocorrencia);
-                Session::flash('sucesso_salvar_oc', 'Ocorrência salva!', 'success');
+                $obj = $this->model->gravar($ocorrencia);
+                return $obj;
             } catch (Exception $e) {
                 CodeFail((int)$e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
             }
+            return false;
         }
     }
 
