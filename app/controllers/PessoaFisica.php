@@ -54,7 +54,7 @@ class PessoaFisica extends Controller
 
             $condominios = (new CondominioDAO())->fullList();
 
-            $moradorEnderecos = (new MoradorEnderecoModel())->getEnderecosMorador($id);
+            $moradorEnderecos = (new MoradorEnderecoModel())->getPorMorador($id);
             $telefones = (new PessoaFisicaTelefoneModel())->getTelefonesPessoaFisica($id);
 
             $pf_telefone = (new CategoriaValorDAO())->get('cd_categoria = 5');
@@ -124,6 +124,7 @@ class PessoaFisica extends Controller
         $enderecos = $this->pessoaFisicaModel->getEnderecos(new PessoaFisicaEnderecoModel());
         $moradorEnderecos = $this->pessoaFisicaModel->getMoradorEnderecos(new MoradorEnderecoModel());
         $ordensSolicitadas = $this->pessoaFisicaModel->getOsSolicitadas(new OrdemServicoModel());
+        $ocorrencias = $this->pessoaFisicaModel->getOcorrenciasEnvolvidas(new OcorrenciaPessoaFisicaEnvolvidaModel());
         // Exporta imagem de perfil
         $this->exportaImagens($pessoa);
 
@@ -137,7 +138,8 @@ class PessoaFisica extends Controller
             'telefones' => $telefones,
             'enderecos' => $enderecos,
             'morador_enderecos' => $moradorEnderecos,
-            'os_solicitadas' => $ordensSolicitadas
+            'os_solicitadas' => $ordensSolicitadas,
+            'ocorrencias' => $ocorrencias
         );
 
         $this->view = new View('PessoaFisica', 'visualizar');

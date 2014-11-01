@@ -159,7 +159,7 @@ Class Ocorrencia extends Controller
 {
     $dto = new OcorrenciaDTO();
 
-    $dto ->setCdOcorrencia(Input::get('ocorrencia'))
+    $dto ->setCdOcorrencia(Input::get('cd_ocorrencia'))
         ->setCdSetor(Input::get('setor'))
         ->setCdPfInformante(Input::get('informante'))
         ->setDescAssunto(Input::get('assunto'))

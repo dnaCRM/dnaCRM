@@ -317,7 +317,7 @@ $token = Token::generate();
 
         <div class="form-group">
             <div class="col-sm-12 clearfix">
-                <a href="PessoaFisica/visualizar/<?php echo $data['id']; ?>" id="cancel" class="btn btn-default"><span
+                <a href="PessoaFisica<?php echo $data['id'] ? '/visualizar/'.$data['id']:'';?>" id="cancel" class="btn btn-default"><span
                         class="fa fa-undo"></span> Cancelar</a>
                 <a href="PessoaFisica/formperfil" id="novo" class="btn btn-success"><span class="fa fa-file"></span>
                     Novo</a>

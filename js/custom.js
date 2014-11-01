@@ -162,6 +162,10 @@ $('#pessoafisicaform').bootstrapValidator({
             validators: {
                 notEmpty: {
                     message: 'Campo obrigatório'
+                },
+                stringLength: {
+                    min: 5,
+                    message: 'Quantidade de caracteres invalida.'
                 }
             }
         },
@@ -180,6 +184,11 @@ $('#pessoafisicaform').bootstrapValidator({
             validators: {
                 notEmpty: {
                     message: 'Campo obrigatório'
+                },
+                stringLength: {
+                    min: 14,
+                    max: 14,
+                    message: 'Quantidade de caracteres invalida.'
                 }
             }
         },
@@ -188,6 +197,10 @@ $('#pessoafisicaform').bootstrapValidator({
             validators: {
                 notEmpty: {
                     message: 'Campo obrigatório'
+                },
+                stringLength: {
+                    min: 5,
+                    message: 'Quantidade de caracteres invalida.'
                 }
             }
         },
@@ -231,6 +244,11 @@ $('#cadastro_usuario').bootstrapValidator({
                 different: {
                     field: 'senha',
                     message: 'Nome de usuário deve ser diferente da senha'
+                },
+                stringLength: {
+                    min: 5,
+                    max: 14,
+                    message: 'Nome de usuário deve ter entre 5 em 14 caracteres.'
                 }
             }
         },
@@ -242,6 +260,10 @@ $('#cadastro_usuario').bootstrapValidator({
                 different: {
                     field: 'usuario',
                     message: 'Senha deve ser diferente do nome de usuário'
+                },
+                stringLength: {
+                    min: 6,
+                    message: 'Senha deve ter no mínimo 6 caracteres.'
                 }
             }
         },
@@ -271,6 +293,10 @@ $('#pessoajuridicaform').bootstrapValidator({
             validators: {
                 notEmpty: {
                     message: 'Campo obrigatório'
+                },
+                stringLength: {
+                    min: 2,
+                    message: 'Mínimo 2 caracteres.'
                 }
             }
         },
@@ -280,21 +306,14 @@ $('#pessoajuridicaform').bootstrapValidator({
                 notEmpty: {
                     message: 'Campo obrigatório'
                 }
-            }
-        },
-        desc_atividade: {
-            group: '.col-sm-4',
-            validators: {
-                notEmpty: {
-                    message: 'Campo obrigatório'
-                }
+            },
+            stringLength: {
+                min: 5,
+                message: 'Mínimo 5 caracteres.'
             }
         },
         email: {
             validators: {
-                notEmpty: {
-                    message: 'Campo obrigatório'
-                },
                 emailAddress: {
                     message: 'E-mail inválido'
                 }
@@ -304,6 +323,11 @@ $('#pessoajuridicaform').bootstrapValidator({
             validators: {
                 notEmpty: {
                     message: 'Campo obrigatório'
+                },
+                stringLength: {
+                    min: 18,
+                    max: 18,
+                    message: 'Quantidade de caracteres invalida.'
                 }
             }
         },
@@ -369,34 +393,33 @@ $('#ordemservicoform').bootstrapValidator({
                 }
             }
         },
-        ocorrencia: {
-            group: '.col-sm-6',
-            validators: {
-                notEmpty: {
-                    message: 'Informar o solicitante é obrigatório.'
-                }
-            }
-        },
         estagio: {
             group: '.col-sm-6',
             validators: {
                 notEmpty: {
-                    message: 'Informar o solicitante é obrigatório.'
-                }
-            }
-        },
-        executor: {
-            group: '.col-sm-6',
-            validators: {
-                notEmpty: {
-                    message: 'Informar o solicitante é obrigatório.'
+                    message: 'Informar o estágio é obrigatório.'
                 }
             }
         },
         assunto: {
             validators: {
                 notEmpty: {
-                    message: 'Informar o assunto é obrigatória'
+                    message: 'Informar o assunto é obrigatório'
+                },
+                stringLength: {
+                    min: 5,
+                    message: 'No mínimo 5 caracteres.'
+                }
+            }
+        },
+        descricao: {
+            validators: {
+                notEmpty: {
+                    message: 'Informar o descrição é obrigatório'
+                },
+                stringLength: {
+                    min: 18,
+                    message: 'No mínimo 18 caracteres.'
                 }
             }
         },
@@ -405,6 +428,10 @@ $('#ordemservicoform').bootstrapValidator({
             validators: {
                 notEmpty: {
                     message: 'Campo obrigatório'
+                },
+                date: {
+                    format: 'DD/MM/YYYY',
+                    message: 'Data inválida.'
                 }
             }
         }
@@ -428,14 +455,6 @@ $('#ocorrenciaform').bootstrapValidator({
                 }
             }
         },
-        setor: {
-            group: '.col-sm-6',
-            validators: {
-                notEmpty: {
-                    message: 'Informar o informante é obrigatório.'
-                }
-            }
-        },
         estagio: {
             group: '.col-sm-4',
             validators: {
@@ -448,22 +467,29 @@ $('#ocorrenciaform').bootstrapValidator({
             group: '.col-sm-4',
             validators: {
                 notEmpty: {
-                    message: 'Campo obrigatório'
+                    message: 'Campo obrigatório.'
+                },
+                date: {
+                    format: 'DD/MM/YYYY',
+                    message: 'Data inválida.'
                 }
             }
         },
         assunto: {
             validators: {
                 notEmpty: {
-                    message: 'Informar o assunto é obrigatória'
+                    message: 'Informar o assunto é obrigatório.'
+                },
+                stringLength: {
+                    min: 5,
+                    message: 'No mínimo 5 caracteres.'
                 }
             }
         },
-
         descricao: {
             validators: {
                 notEmpty: {
-                    message: 'Informar o descrição é obrigatória'
+                    message: 'Informar o descrição é obrigatório.'
                 }
             }
         }
@@ -489,13 +515,10 @@ $('#setorform').bootstrapValidator({
             validators: {
                 notEmpty: {
                     message: 'Informar o nome do setor é obrigatório.'
-                }
-            }
-        },
-        observacao: {
-            validators: {
-                notEmpty: {
-                    message: 'Informar a observação é obrigatório.'
+                },
+                stringLength: {
+                    min: 5,
+                    message: 'No mínimo 5 caracteres.'
                 }
             }
         },
@@ -527,7 +550,7 @@ $('#apartamentoform').bootstrapValidator({
                 }
             }
         },
-        cd_setor: {
+        setor: {
             validators: {
                 notEmpty: {
                     message: 'Campo obrigatório.'
@@ -555,6 +578,10 @@ $('#condominioform').bootstrapValidator({
             validators: {
                 notEmpty: {
                     message: 'Informar nome é obrigatório'
+                },
+                stringLength: {
+                    min: 5,
+                    message: 'No mínimo 5 caracteres.'
                 }
             }
         },
@@ -563,6 +590,10 @@ $('#condominioform').bootstrapValidator({
             validators: {
                 notEmpty: {
                     message: 'Informar cep é obrigatório'
+                },
+                stringLength: {
+                    min: 9,
+                    message: 'CEP inválido.'
                 }
             }
         },
@@ -570,6 +601,10 @@ $('#condominioform').bootstrapValidator({
             validators: {
                 notEmpty: {
                     message: 'Informar rua é obrigatório'
+                },
+                stringLength: {
+                    min: 5,
+                    message: 'No mínimo 5 caracteres.'
                 }
             }
         },
@@ -578,6 +613,10 @@ $('#condominioform').bootstrapValidator({
             validators: {
                 notEmpty: {
                     message: 'Informar bairro é obrigatório'
+                },
+                stringLength: {
+                    min: 5,
+                    message: 'No mínimo 5 caracteres.'
                 }
             }
         },
@@ -586,6 +625,10 @@ $('#condominioform').bootstrapValidator({
             validators: {
                 notEmpty: {
                     message: 'Informar cidade obrigatório'
+                },
+                stringLength: {
+                    min: 5,
+                    message: 'No mínimo 5 caracteres.'
                 }
             }
         },
@@ -630,6 +673,10 @@ $('#form_pf_telefones').bootstrapValidator({
             validators: {
                 notEmpty: {
                     message: 'Informe o número de telefone.'
+                },
+                stringLength: {
+                    min: 14,
+                    message: 'Informe o número com o código de área'
                 }
             }
         },
@@ -674,7 +721,13 @@ $('#form_pf_telefones').bootstrapValidator({
                 '<a href="#" class="btn btn-primary btn-sm update_pf_tel" data-update-pftel-id="' + data.cd_pf_fone + '" data-toggle="modal" data-target="#atualizaPfTelModal"><i class="fa fa-edit"></i></a>' +
                 '&nbsp;<a href="#" class="btn btn-warning btn-sm delete_pf_tel" data-del-pftel-id="' + data.cd_pf_fone + '" data-toggle="modal" data-target="#apagaPfTelModal"><i class="fa fa-trash-o"></i></a>' +
                 '</td></tr>';
-            $(html).appendTo('#tb_pf_telefones').hide().fadeIn();
+            $(html).appendTo('#tb_pf_tele' +
+                '' +
+                '' +
+                '' +
+                '' +
+                '' +
+                's').hide().fadeIn();
             bv.resetForm(true);
         }
     });
@@ -692,6 +745,10 @@ $('#form_atualiza_pf_tel').bootstrapValidator({
             validators: {
                 notEmpty: {
                     message: 'Informe o número de telefone.'
+                },
+                stringLength: {
+                    min: 14,
+                    message: 'Informe o número com o código de área'
                 }
             }
         },
@@ -876,6 +933,10 @@ $('#form_pf_enderecos').bootstrapValidator({
             validators: {
                 notEmpty: {
                     message: 'Informe o CEP.'
+                },
+                stringLength: {
+                    min: 9,
+                    message: 'CEP incompleto.'
                 }
             }
         },
@@ -1096,6 +1157,10 @@ $('#form_end_morador').bootstrapValidator({
             validators: {
                 notEmpty: {
                     message: 'Campo obrigatório.'
+                },
+                date: {
+                    format: 'DD/MM/YYYY',
+                    message: 'Data inválida.'
                 }
             }
         },
@@ -1103,6 +1168,7 @@ $('#form_end_morador').bootstrapValidator({
             group: '.col-sm-6',
             validators: {
                 date: {
+                    format: 'DD/MM/YYYY',
                     message: 'Data inválida.'
                 }
             }
@@ -1251,6 +1317,10 @@ $('#form_pj_telefones').bootstrapValidator({
             validators: {
                 notEmpty: {
                     message: 'Informe o número de telefone.'
+                },
+                stringLength: {
+                    min: 14,
+                    message: 'Informe o número com o código de área'
                 }
             }
         },
@@ -1313,6 +1383,10 @@ $('#form_atualiza_pj_tel').bootstrapValidator({
             validators: {
                 notEmpty: {
                     message: 'Informe o número de telefone.'
+                },
+                stringLength: {
+                    min: 14,
+                    message: 'Informe o número com o código de área'
                 }
             }
         },
@@ -1497,6 +1571,10 @@ $('#form_pj_enderecos').bootstrapValidator({
             validators: {
                 notEmpty: {
                     message: 'Informe o CEP.'
+                },
+                stringLength: {
+                    min: 9,
+                    message: 'Informe o CEP completo.'
                 }
             }
         },
@@ -1793,12 +1871,12 @@ $(document).ready(function () {
                 var confirm_pessoa =
                     '<div class="profile-card pcard-lg"><div class="panel-body">' +
                         '<div class="profile-card-foto-container">' +
-                            '<img src="' + data.im_perfil + '" class="img-circle profilefoto foto-md">' +
+                        '<img src="' + data.im_perfil + '" class="img-circle profilefoto foto-md">' +
                         '</div>' +
                         '<div class="pcard-name">' + data.nm_pessoa_fisica + '' +
-                            '<div class="pcard-info text-danger"><i class="fa fa-trash-o"></i> Remover envolvido?</div>' +
+                        '<div class="pcard-info text-danger"><i class="fa fa-trash-o"></i> Remover envolvido?</div>' +
                         '</div>' +
-                    '</div></div>';
+                        '</div></div>';
                 $('#del_op_confirma').html(confirm_pessoa);
 
             },

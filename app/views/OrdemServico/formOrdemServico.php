@@ -49,7 +49,7 @@ $token = Token::generate();
                 </div>
             </div>
         <?php else: ?>
-            <form id="ocorrenciaform" class="form-horizontal" method="post" action=""
+            <form id="ordemservicoform" class="form-horizontal" method="post" action=""
                   enctype="multipart/form-data">
                 <fieldset>
                     <!-- Lado Esquerdo -->
@@ -197,7 +197,7 @@ $token = Token::generate();
                         <input type="hidden" name="token" value="<?php echo $token; ?>">
 
                         <div class="">
-                            <a href="OrdemServico/visualizar/<?php echo $data['id']; ?>" id="cancel"
+                            <a href="OrdemServico<?php echo $data['id'] ? '/visualizar/'.$data['id']:'';?>" id="cancel"
                                class="btn btn-default">
                                 <span class="fa fa-undo"></span> Cancelar</a>
                             <a href="OrdemServico/formOrdemServico" id="novo" class="btn btn-success">

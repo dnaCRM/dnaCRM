@@ -111,7 +111,7 @@ class PessoaFisicaModel extends Model
 
     public function getMoradorEnderecos(MoradorEnderecoModel $moradorEndereco)
     {
-        return $moradorEndereco->getEnderecosMorador($this->dto->getCdPessoaFisica());
+        return $moradorEndereco->getPorMorador($this->dto->getCdPessoaFisica());
     }
 
     public function getOsSolicitadas(OrdemServicoModel $ordemServico)

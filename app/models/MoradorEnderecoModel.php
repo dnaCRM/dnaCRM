@@ -54,12 +54,26 @@ class MoradorEnderecoModel extends Model
      * @param $id = id de uma Pessoa Física
      * @return array
      */
-    public function getEnderecosMorador($id)
+    public function getPorMorador($id)
     {
         $morador_endereco = $this->dao->get("cd_pessoa_fisica = {$id}");
         $lista = array();
         foreach($morador_endereco as $me){
             $lista[] = $this->setDTO($me)->getArrayDados();
+        }
+        return $lista;
+    }
+
+    /**
+     * @param $id = id de um Apartamento
+     * @return array
+     */
+    public function getPorApartamento($id)
+    {
+        $endereco_morador = $this->dao->get("cd_apartamento = {$id}");
+        $lista = array();
+        foreach($endereco_morador as $em){
+            $lista[] = $this->setDTO($em)->getArrayDados();
         }
         return $lista;
     }

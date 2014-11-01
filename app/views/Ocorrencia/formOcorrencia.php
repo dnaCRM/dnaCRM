@@ -39,7 +39,7 @@ $token = Token::generate();
                         <h1 class="text-success"><span class="glyphicon glyphicon-arrow-right"></span>
                             Sucesso!</h1>
 
-                        <p>Deseja adicionar mais ocorrencias ?</p>
+                        <p>Clique em avaçar para adicionar pessoas relacionadas à ocorrência?</p>
 
                         <a href="Ocorrencia/" class="btn btn-info" role="button">
                             <i class="fa fa-arrow-circle-o-left"></i> Voltar
@@ -47,6 +47,9 @@ $token = Token::generate();
 
                         <a href="Ocorrencia/formocorrencia/" class="btn btn-success" role="button">
                             <i class="fa fa-arrow-circle-o-up"></i> Novo
+                        </a>
+                        <a href="Ocorrencia/formocorrencia/<?php echo $cadastrado->getCdOcorrencia();?>" class="btn btn-primary" role="button">
+                            <i class="fa fa-arrow-circle-o-right"></i> Avançar
                         </a>
                     </div>
                 </div>
@@ -182,7 +185,7 @@ $token = Token::generate();
                         <input type="hidden" name="token" value="<?php echo $token; ?>">
 
                         <div class="">
-                            <a href="Ocorrencia/visualizar/<?php echo $data['id']; ?>" id="cancel"
+                            <a href="Ocorrencia<?php echo $data['id'] ? '/visualizar/'.$data['id']:'';?>" id="cancel"
                                class="btn btn-default">
                                 <span class="fa fa-undo"></span> Cancelar</a>
                             <a href="Ocorrencia/formOcorrencia" id="novo" class="btn btn-success">

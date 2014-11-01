@@ -98,6 +98,38 @@
                 </table>
             </div>
         </div>
+
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <h3 class="panel-title">Ocorrências envolvidas</h3></div>
+
+            <div class="panel-body">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Assunto</th>
+                        <th>Informante</th>
+                        <th>Fim</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                <?php
+
+                foreach($data['ocorrencias'] as $oc) {
+                    echo "
+                    <tr>
+                        <td>{$oc['dt_ocorrencia']}</td>
+                        <td><a href=\"Ocorrencia/visualizar/{$oc['cd_ocorrencia']}\">{$oc['desc_assunto']}</a></td>
+                        <td>{$oc['informante']}</td>
+                        <td>{$oc['dt_fim']}</td>
+                    </tr>";
+                }
+                ?>
+                </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
     <div class="col-sm-6">

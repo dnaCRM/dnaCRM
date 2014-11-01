@@ -72,9 +72,9 @@ $token = Token::generate();
                                         </div>
                                         <div class="form-group">
                                             <div class="col-sm-12">
-                                                <label for="m_end_setor" class="control-label">Setor</label>
+                                                <label for="setor" class="control-label">Setor</label>
 
-                                                <select class="form-control" name="setor" id="m_end_setor">
+                                                <select class="form-control" name="setor" id="setor">
                                                     <option value="">--</option>
                                                 </select>
                                             </div>
@@ -100,7 +100,7 @@ $token = Token::generate();
 
                                         <div class="form-group">
                                             <div class="col-sm-12 clearfix">
-                                                <a href="apartamento/visualizar/<?php echo $data['id']; ?>" id="cancel" class="btn btn-default"><span
+                                                <a href="Apartamento<?php echo $data['id'] ? '/visualizar/'.$data['id']:'';?>" id="cancel" class="btn btn-default"><span
                                                         class="fa fa-undo"></span> Cancelar</a>
                                                 <a href="Apartamento/formapartamento" id="novo" class="btn btn-success"><span class="fa fa-file"></span>
                                                     Novo</a>
