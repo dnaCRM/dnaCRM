@@ -24,7 +24,7 @@ Class Ocorrencia extends Controller
 
     $dados = array(
         'pagesubtitle' => '',
-        'pagetitle' => 'Orcorrência',
+        'pagetitle' => 'Ocorrência',
         'list' => $ocorrencia_list
     );
 
@@ -183,21 +183,20 @@ Class Ocorrencia extends Controller
         if (Token::check(Input::get('token'))) {
 
             $this->model->delete($dto);
-            echo 'Deletou Ocorrência';
 
         }
     }
 }
 
     protected function findById($id)
-{
-    if (!$obj = $this->model->getById($id)) {
-        /** Envia mensagem */
-        Session::flash('fail', 'Ocorrência não encontrada', 'danger');
-        /** Redireciona para página de lista de Perfis */
-        Redirect::to(SITE_URL . get_called_class());
+    {
+        if (!$obj = $this->model->getById($id)) {
+            /** Envia mensagem */
+            Session::flash('fail', 'Ocorrência não encontrada', 'danger');
+            /** Redireciona para página de lista de Perfis */
+            Redirect::to(SITE_URL . get_called_class());
+        }
+        return $obj;
     }
-    return $obj;
-}
 }
 

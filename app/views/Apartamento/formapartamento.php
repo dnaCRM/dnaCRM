@@ -61,7 +61,7 @@ $token = Token::generate();
                                             <div class="col-sm-12 selectContainer">
                                                 <label for="m_end_codominio" class="control-label">Condomínio</label>
 
-                                                <select class="form-control" name="m_end_condominio" id="m_end_condominio">
+                                                <select class="form-control" name="cd_condominio" id="m_end_condominio">
                                                     <option value="">--</option>
                                                     <?php
                                                     foreach ($condominios as $condominio) {

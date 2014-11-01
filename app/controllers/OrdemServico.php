@@ -179,8 +179,7 @@ class OrdemServico extends Controller
 
             if (Token::check(Input::get('token'))) {
 
-                //$this->model->delete($dto);
-                echo 'Deletou Ordem de Servico';
+                $this->model->delete($dto);
 
             }
         }

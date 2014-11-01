@@ -275,6 +275,7 @@ $('#pessoajuridicaform').bootstrapValidator({
             }
         },
         desc_razao: {
+            group: '.col-sm-4',
             validators: {
                 notEmpty: {
                     message: 'Campo obrigatório'
@@ -282,6 +283,7 @@ $('#pessoajuridicaform').bootstrapValidator({
             }
         },
         desc_atividade: {
+            group: '.col-sm-4',
             validators: {
                 notEmpty: {
                     message: 'Campo obrigatório'
@@ -360,6 +362,31 @@ $('#ordemservicoform').bootstrapValidator({
     },
     fields: {
         solicitante: {
+            group: '.col-sm-6',
+            validators: {
+                notEmpty: {
+                    message: 'Informar o solicitante é obrigatório.'
+                }
+            }
+        },
+        ocorrencia: {
+            group: '.col-sm-6',
+            validators: {
+                notEmpty: {
+                    message: 'Informar o solicitante é obrigatório.'
+                }
+            }
+        },
+        estagio: {
+            group: '.col-sm-6',
+            validators: {
+                notEmpty: {
+                    message: 'Informar o solicitante é obrigatório.'
+                }
+            }
+        },
+        executor: {
+            group: '.col-sm-6',
             validators: {
                 notEmpty: {
                     message: 'Informar o solicitante é obrigatório.'
@@ -374,6 +401,7 @@ $('#ordemservicoform').bootstrapValidator({
             }
         },
         dt_inicio: {
+            group: '.col-sm-6',
             validators: {
                 notEmpty: {
                     message: 'Campo obrigatório'
@@ -393,6 +421,15 @@ $('#ocorrenciaform').bootstrapValidator({
     },
     fields: {
         informante: {
+            group: '.col-sm-6',
+            validators: {
+                notEmpty: {
+                    message: 'Informar o informante é obrigatório.'
+                }
+            }
+        },
+        setor: {
+            group: '.col-sm-6',
             validators: {
                 notEmpty: {
                     message: 'Informar o informante é obrigatório.'
@@ -400,6 +437,7 @@ $('#ocorrenciaform').bootstrapValidator({
             }
         },
         estagio: {
+            group: '.col-sm-4',
             validators: {
                 notEmpty: {
                     message: 'Informar o estagio é obrigatório.'
@@ -407,6 +445,7 @@ $('#ocorrenciaform').bootstrapValidator({
             }
         },
         dt_ocorrencia: {
+            group: '.col-sm-4',
             validators: {
                 notEmpty: {
                     message: 'Campo obrigatório'
@@ -481,6 +520,13 @@ $('#apartamentoform').bootstrapValidator({
         validating: 'glyphicon glyphicon-refresh'
     },
     fields: {
+        cd_condominio: {
+            validators: {
+                notEmpty: {
+                    message: 'Campo obrigatório.'
+                }
+            }
+        },
         cd_setor: {
             validators: {
                 notEmpty: {
@@ -513,6 +559,7 @@ $('#condominioform').bootstrapValidator({
             }
         },
         cep: {
+            group: '.col-sm-4',
             validators: {
                 notEmpty: {
                     message: 'Informar cep é obrigatório'
@@ -527,6 +574,7 @@ $('#condominioform').bootstrapValidator({
             }
         },
         bairro: {
+            group: '.col-sm-4',
             validators: {
                 notEmpty: {
                     message: 'Informar bairro é obrigatório'
@@ -534,9 +582,26 @@ $('#condominioform').bootstrapValidator({
             }
         },
         cidade: {
+            group: '.col-sm-4',
             validators: {
                 notEmpty: {
                     message: 'Informar cidade obrigatório'
+                }
+            }
+        },
+        numero: {
+            group: '.col-sm-4',
+            validators: {
+                notEmpty: {
+                    message: 'Informar numero obrigatório'
+                }
+            }
+        },
+        estado: {
+            group: '.col-sm-4',
+            validators: {
+                notEmpty: {
+                    message: 'Campo estado obrigatório'
                 }
             }
         },

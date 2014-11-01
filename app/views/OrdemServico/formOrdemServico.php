@@ -38,11 +38,11 @@ $token = Token::generate();
 
                         <p>Deseja adicionar mais ordem de serviço ?</p>
 
-                        <a href="Ocorrencia/" class="btn btn-info" role="button">
+                        <a href="OrdemServico/" class="btn btn-info" role="button">
                             <i class="fa fa-arrow-circle-o-left"></i> Voltar
                         </a>
 
-                        <a href="Ocorrencia/formocorrencia/" class="btn btn-success" role="button">
+                        <a href="OrdemServico/formOrdemServico/" class="btn btn-success" role="button">
                             <i class="fa fa-arrow-circle-o-up"></i> Novo
                         </a>
                     </div>

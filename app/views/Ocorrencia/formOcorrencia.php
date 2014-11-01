@@ -185,7 +185,7 @@ $token = Token::generate();
                             <a href="Ocorrencia/visualizar/<?php echo $data['id']; ?>" id="cancel"
                                class="btn btn-default">
                                 <span class="fa fa-undo"></span> Cancelar</a>
-                            <a href="Ocorrencia/formperfil" id="novo" class="btn btn-success">
+                            <a href="Ocorrencia/formOcorrencia" id="novo" class="btn btn-success">
                                 <span class="fa fa-file"></span> Novo</a>
                             <button type="submit" name="cadastrar" class="btn btn-primary">
                                 <span class="fa fa-check"></span> Salvar
