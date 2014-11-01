@@ -57,15 +57,18 @@
                 foreach ($data['empregados'] as $empregado) {
 
                     echo "
-                    <div class=\"col-lg-6\">
-                        <div>
-                            <img class=\"img-circle img-thumb-panel pull-left\" src=\"{$empregado['im_perfil']}\">
+                    <div class=\"row profile-card pcard-sm pull-left\">
+                        <div class=\"panel-body\">
+                        <div class=\"profile-card-foto-container\">
+                            <img class=\"img-circle profilefoto\" src=\"{$empregado['im_perfil']}\">
+                        </div>
+                            <div class=\"pcard-name\"><a href=\"PessoaFisica/visualizar/{$empregado['cd_pessoa_fisica']}\">{$empregado['nm_pessoa_fisica']}</a>
+                            <div class=\"pcard-info\">
+                                {$empregado['email']}<br>
+                                    <span class=\"fa fa-user\"></span> <span class=\"text-info\">{$empregado['profissao']}</span>.
+                            </div>
+                            </div>
 
-                            <h6><a href=\"PessoaFisica/visualizar/{$empregado['cd_pessoa_fisica']}\">{$empregado['nm_pessoa_fisica']}</a></h6>
-                            <p>
-                                {$empregado['email']}
-                                    <br><span class=\"fa fa-user\"></span> <span class=\"text-info\">{$empregado['profissao']}</span>.
-                            </p>
                         </div>
                     </div>";
                 }

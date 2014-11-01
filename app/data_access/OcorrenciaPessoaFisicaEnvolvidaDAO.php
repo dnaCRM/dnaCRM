@@ -106,7 +106,7 @@ class OcorrenciaPessoaFisicaEnvolvidaDAO extends DataAccessObject
         );
 
         if ($this->query($sql, $this->dataTransfer, $array_info)->success()) {
-            return $this->getResultado();
+            return $this->first();
         }
         return false;
     }

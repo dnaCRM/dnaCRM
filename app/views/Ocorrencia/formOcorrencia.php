@@ -230,7 +230,7 @@ $token = Token::generate();
                             <?php
                             foreach ($data['pessoas'] as $pessoa) {
                                 echo "
-                                    <tr>
+                                    <tr data-tr-registro-op=\"{$pessoa['cd_pessoa_fisica']}\">
                                         <td>
                                             <img class=\"img-circle\" src=\"{$pessoa['im_perfil']}\">
                                         </td>
@@ -238,7 +238,7 @@ $token = Token::generate();
                                             <h6><a href=\"PessoaFisica/visualizar/{$pessoa['cd_pessoa_fisica']}\">{$pessoa['nm_pessoa_fisica']}</a></h6>
                                         </td>
                                         <td>
-                                            <button data-id-pessoa=\"{$pessoa['cd_pessoa_fisica']}\" class=\"btn btn-danger btn-xs remove-ocorr-pessoa\"><i class=\"fa fa-minus-circle\"></i></button>
+                                            <a href=\"#\" class=\"btn btn-danger btn-xs remove-ocorr-pessoa\" data-id-ocorrencia=\"{$data['id']}\" data-id-pessoa=\"{$pessoa['cd_pessoa_fisica']}\" data-toggle=\"modal\" data-target=\"#apagaOPModal\"><i class=\"fa fa-minus-circle\"></i></i></a>
                                         </td>
                                         </tr>
                                     ";
@@ -257,5 +257,42 @@ $token = Token::generate();
 </div>
 </div>
 </div>
+</div>
+<!-- Modal Apagar Ocorrência Pessoa Física -->
+<div class="modal fade" id="apagaOPModal" tabindex="-1" role="dialog" aria-labelledby="apagaOPLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <form class="form-horizontal" id="form_apaga_op">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span
+                            aria-hidden="true">&times;</span><span
+                            class="sr-only">Fechar</span></button>
+
+                    <span class="modal-title" id="deletaOPModalLabel"></span>
+
+                </div>
+                <div class="modal-body">
+
+                    <div class="col-sm-12 center">
+
+                        <h5 id="del_op_confirma"></h5>
+
+                        <p></p>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    <input type="submit" class="btn btn-danger col-xs-offset-2" name="deletar-op" value="Deletar"/>
+                </div>
+
+                <input type="hidden" name="cd_pessoa_fisica" value="">
+                <input type="hidden" name="cd_ocorrencia" value="<?php echo $data['id'];?>">
+            </form>
+        </div>
+    </div>
 </div>
 <div id="responseAjaxError"></div>

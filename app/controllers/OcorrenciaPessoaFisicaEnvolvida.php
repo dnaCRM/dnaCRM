@@ -55,8 +55,11 @@ class OcorrenciaPessoaFisicaEnvolvida extends Controller
         return $dto;
     }
 
-    public function findBy2Ids($ocorrencia, $pessoa)
+    public function findBy2Ids()
     {
+        $ocorrencia = (int)Input::get('cd_ocorrencia');
+        $pessoa = (int)Input::get('cd_pessoa_fisica');
+
         $dto = $this->model->getBy2Ids($ocorrencia, $pessoa);
 
         $result = $this->ocorrenciaPessoaFisicaEnvolvidaModel->setDTO($dto)->getArrayDados();
@@ -81,8 +84,8 @@ class OcorrenciaPessoaFisicaEnvolvida extends Controller
 
     public function apagar()
     {
-        $pessoa = Input::get('cd_pessoa_fisica');
-        $ocorrencia = Input::get('cd_ocorrencia');
+        $pessoa = (int)Input::get('cd_pessoa_fisica');
+        $ocorrencia = (int)Input::get('cd_ocorrencia');
 
         $dto = $this->model->getBy2Ids($ocorrencia, $pessoa);
         $ocorrenciaPessoaFisicaEnvolvida = $this->model->delete($dto);
