@@ -140,11 +140,12 @@ class OrdemServico extends Controller
                 $ordemServico = $this->setDados();
 
                 try {
-                    $this->model->gravar($ordemServico);
-                    Session::flash('sucesso_salvar_os', 'Ordem de Servico salva!', 'success');
+                    $obj = $this->model->gravar($ordemServico);
+                    return $obj;
                 } catch (Exception $e) {
                     CodeFail((int)$e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
                 }
+                return false;
             }
         }
 
