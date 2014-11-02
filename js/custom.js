@@ -128,7 +128,7 @@ var SPMaskBehavior = function (val) {
         return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
     },
     spOptions = {
-        onKeyPress: function(val, e, field, options) {
+        onKeyPress: function (val, e, field, options) {
             field.mask(SPMaskBehavior.apply({}, arguments), options);
         }
     };
@@ -162,6 +162,10 @@ $('#pessoafisicaform').bootstrapValidator({
             validators: {
                 notEmpty: {
                     message: 'Campo obrigatório'
+                },
+                stringLength: {
+                    min: 5,
+                    message: 'Quantidade de caracteres invalida.'
                 }
             }
         },
@@ -180,6 +184,11 @@ $('#pessoafisicaform').bootstrapValidator({
             validators: {
                 notEmpty: {
                     message: 'Campo obrigatório'
+                },
+                stringLength: {
+                    min: 14,
+                    max: 14,
+                    message: 'Quantidade de caracteres invalida.'
                 }
             }
         },
@@ -188,6 +197,10 @@ $('#pessoafisicaform').bootstrapValidator({
             validators: {
                 notEmpty: {
                     message: 'Campo obrigatório'
+                },
+                stringLength: {
+                    min: 5,
+                    message: 'Quantidade de caracteres invalida.'
                 }
             }
         },
@@ -231,6 +244,11 @@ $('#cadastro_usuario').bootstrapValidator({
                 different: {
                     field: 'senha',
                     message: 'Nome de usuário deve ser diferente da senha'
+                },
+                stringLength: {
+                    min: 5,
+                    max: 14,
+                    message: 'Nome de usuário deve ter entre 5 em 14 caracteres.'
                 }
             }
         },
@@ -242,6 +260,10 @@ $('#cadastro_usuario').bootstrapValidator({
                 different: {
                     field: 'usuario',
                     message: 'Senha deve ser diferente do nome de usuário'
+                },
+                stringLength: {
+                    min: 6,
+                    message: 'Senha deve ter no mínimo 6 caracteres.'
                 }
             }
         },
@@ -271,28 +293,27 @@ $('#pessoajuridicaform').bootstrapValidator({
             validators: {
                 notEmpty: {
                     message: 'Campo obrigatório'
+                },
+                stringLength: {
+                    min: 2,
+                    message: 'Mínimo 2 caracteres.'
                 }
             }
         },
         desc_razao: {
+            group: '.col-sm-4',
             validators: {
                 notEmpty: {
                     message: 'Campo obrigatório'
                 }
-            }
-        },
-        desc_atividade: {
-            validators: {
-                notEmpty: {
-                    message: 'Campo obrigatório'
-                }
+            },
+            stringLength: {
+                min: 5,
+                message: 'Mínimo 5 caracteres.'
             }
         },
         email: {
             validators: {
-                notEmpty: {
-                    message: 'Campo obrigatório'
-                },
                 emailAddress: {
                     message: 'E-mail inválido'
                 }
@@ -302,6 +323,11 @@ $('#pessoajuridicaform').bootstrapValidator({
             validators: {
                 notEmpty: {
                     message: 'Campo obrigatório'
+                },
+                stringLength: {
+                    min: 18,
+                    max: 18,
+                    message: 'Quantidade de caracteres invalida.'
                 }
             }
         },
@@ -360,23 +386,52 @@ $('#ordemservicoform').bootstrapValidator({
     },
     fields: {
         solicitante: {
+            group: '.col-sm-6',
             validators: {
                 notEmpty: {
                     message: 'Informar o solicitante é obrigatório.'
                 }
             }
         },
+        estagio: {
+            group: '.col-sm-6',
+            validators: {
+                notEmpty: {
+                    message: 'Informar o estágio é obrigatório.'
+                }
+            }
+        },
         assunto: {
             validators: {
                 notEmpty: {
-                    message: 'Informar o assunto é obrigatória'
+                    message: 'Informar o assunto é obrigatório'
+                },
+                stringLength: {
+                    min: 5,
+                    message: 'No mínimo 5 caracteres.'
+                }
+            }
+        },
+        descricao: {
+            validators: {
+                notEmpty: {
+                    message: 'Informar o descrição é obrigatório'
+                },
+                stringLength: {
+                    min: 18,
+                    message: 'No mínimo 18 caracteres.'
                 }
             }
         },
         dt_inicio: {
+            group: '.col-sm-6',
             validators: {
                 notEmpty: {
                     message: 'Campo obrigatório'
+                },
+                date: {
+                    format: 'DD/MM/YYYY',
+                    message: 'Data inválida.'
                 }
             }
         }
@@ -393,6 +448,7 @@ $('#ocorrenciaform').bootstrapValidator({
     },
     fields: {
         informante: {
+            group: '.col-sm-6',
             validators: {
                 notEmpty: {
                     message: 'Informar o informante é obrigatório.'
@@ -400,6 +456,7 @@ $('#ocorrenciaform').bootstrapValidator({
             }
         },
         estagio: {
+            group: '.col-sm-4',
             validators: {
                 notEmpty: {
                     message: 'Informar o estagio é obrigatório.'
@@ -407,24 +464,32 @@ $('#ocorrenciaform').bootstrapValidator({
             }
         },
         dt_ocorrencia: {
+            group: '.col-sm-4',
             validators: {
                 notEmpty: {
-                    message: 'Campo obrigatório'
+                    message: 'Campo obrigatório.'
+                },
+                date: {
+                    format: 'DD/MM/YYYY',
+                    message: 'Data inválida.'
                 }
             }
         },
         assunto: {
             validators: {
                 notEmpty: {
-                    message: 'Informar o assunto é obrigatória'
+                    message: 'Informar o assunto é obrigatório.'
+                },
+                stringLength: {
+                    min: 5,
+                    message: 'No mínimo 5 caracteres.'
                 }
             }
         },
-
         descricao: {
             validators: {
                 notEmpty: {
-                    message: 'Informar o descrição é obrigatória'
+                    message: 'Informar o descrição é obrigatório.'
                 }
             }
         }
@@ -450,13 +515,10 @@ $('#setorform').bootstrapValidator({
             validators: {
                 notEmpty: {
                     message: 'Informar o nome do setor é obrigatório.'
-                }
-            }
-        },
-        observacao: {
-            validators: {
-                notEmpty: {
-                    message: 'Informar a observação é obrigatório.'
+                },
+                stringLength: {
+                    min: 5,
+                    message: 'No mínimo 5 caracteres.'
                 }
             }
         },
@@ -481,7 +543,14 @@ $('#apartamentoform').bootstrapValidator({
         validating: 'glyphicon glyphicon-refresh'
     },
     fields: {
-        cd_setor: {
+        cd_condominio: {
+            validators: {
+                notEmpty: {
+                    message: 'Campo obrigatório.'
+                }
+            }
+        },
+        setor: {
             validators: {
                 notEmpty: {
                     message: 'Campo obrigatório.'
@@ -509,13 +578,22 @@ $('#condominioform').bootstrapValidator({
             validators: {
                 notEmpty: {
                     message: 'Informar nome é obrigatório'
+                },
+                stringLength: {
+                    min: 5,
+                    message: 'No mínimo 5 caracteres.'
                 }
             }
         },
         cep: {
+            group: '.col-sm-4',
             validators: {
                 notEmpty: {
                     message: 'Informar cep é obrigatório'
+                },
+                stringLength: {
+                    min: 9,
+                    message: 'CEP inválido.'
                 }
             }
         },
@@ -523,20 +601,50 @@ $('#condominioform').bootstrapValidator({
             validators: {
                 notEmpty: {
                     message: 'Informar rua é obrigatório'
+                },
+                stringLength: {
+                    min: 5,
+                    message: 'No mínimo 5 caracteres.'
                 }
             }
         },
         bairro: {
+            group: '.col-sm-4',
             validators: {
                 notEmpty: {
                     message: 'Informar bairro é obrigatório'
+                },
+                stringLength: {
+                    min: 5,
+                    message: 'No mínimo 5 caracteres.'
                 }
             }
         },
         cidade: {
+            group: '.col-sm-4',
             validators: {
                 notEmpty: {
                     message: 'Informar cidade obrigatório'
+                },
+                stringLength: {
+                    min: 5,
+                    message: 'No mínimo 5 caracteres.'
+                }
+            }
+        },
+        numero: {
+            group: '.col-sm-4',
+            validators: {
+                notEmpty: {
+                    message: 'Informar numero obrigatório'
+                }
+            }
+        },
+        estado: {
+            group: '.col-sm-4',
+            validators: {
+                notEmpty: {
+                    message: 'Campo estado obrigatório'
                 }
             }
         },
@@ -565,6 +673,10 @@ $('#form_pf_telefones').bootstrapValidator({
             validators: {
                 notEmpty: {
                     message: 'Informe o número de telefone.'
+                },
+                stringLength: {
+                    min: 14,
+                    message: 'Informe o número com o código de área'
                 }
             }
         },
@@ -605,11 +717,17 @@ $('#form_pf_telefones').bootstrapValidator({
         data: dados,
         dataType: 'json',
         success: function (data) {
-            var html = '<tr data-pf-tel="'+data.cd_pf_fone+'"><td>'+data.fone+'</td><td>'+data.operadora+'</td><td>'+data.categoria+'</td><td>'+data.observacao+'</td><td>' +
-                '<a href="#" class="btn btn-primary btn-sm update_pf_tel" data-update-pftel-id="'+data.cd_pf_fone+'" data-toggle="modal" data-target="#atualizaPfTelModal"><i class="fa fa-edit"></i></a>' +
-                '&nbsp;<a href="#" class="btn btn-warning btn-sm delete_pf_tel" data-del-pftel-id="'+data.cd_pf_fone+'" data-toggle="modal" data-target="#apagaPfTelModal"><i class="fa fa-trash-o"></i></a>' +
+            var html = '<tr data-pf-tel="' + data.cd_pf_fone + '"><td>' + data.fone + '</td><td>' + data.operadora + '</td><td>' + data.categoria + '</td><td>' + data.observacao + '</td><td>' +
+                '<a href="#" class="btn btn-primary btn-sm update_pf_tel" data-update-pftel-id="' + data.cd_pf_fone + '" data-toggle="modal" data-target="#atualizaPfTelModal"><i class="fa fa-edit"></i></a>' +
+                '&nbsp;<a href="#" class="btn btn-warning btn-sm delete_pf_tel" data-del-pftel-id="' + data.cd_pf_fone + '" data-toggle="modal" data-target="#apagaPfTelModal"><i class="fa fa-trash-o"></i></a>' +
                 '</td></tr>';
-            $(html).appendTo('#tb_pf_telefones').hide().fadeIn();
+            $(html).appendTo('#tb_pf_tele' +
+                '' +
+                '' +
+                '' +
+                '' +
+                '' +
+                's').hide().fadeIn();
             bv.resetForm(true);
         }
     });
@@ -627,6 +745,10 @@ $('#form_atualiza_pf_tel').bootstrapValidator({
             validators: {
                 notEmpty: {
                     message: 'Informe o número de telefone.'
+                },
+                stringLength: {
+                    min: 14,
+                    message: 'Informe o número com o código de área'
                 }
             }
         },
@@ -671,9 +793,9 @@ $('#form_atualiza_pf_tel').bootstrapValidator({
 
             var linha = $('#tb_pf_telefones tr[data-pf-tel=' + data.cd_pf_fone + ']');
 
-            var html = '<td>'+data.fone+'</td><td>'+data.operadora+'</td><td>'+data.categoria+'</td><td>'+data.observacao+'</td><td>' +
-                '<a href="#" class="btn btn-primary btn-sm update_pf_tel" data-update-pftel-id="'+data.cd_pf_fone+'" data-toggle="modal" data-target="#atualizaPfTelModal"><i class="fa fa-edit"></i></a>' +
-                '&nbsp;<a href="#" class="btn btn-warning btn-sm delete_pf_tel" data-del-pftel-id="'+data.cd_pf_fone+'" data-toggle="modal" data-target="#apagaPfTelModal"><i class="fa fa-trash-o"></i></a>' +
+            var html = '<td>' + data.fone + '</td><td>' + data.operadora + '</td><td>' + data.categoria + '</td><td>' + data.observacao + '</td><td>' +
+                '<a href="#" class="btn btn-primary btn-sm update_pf_tel" data-update-pftel-id="' + data.cd_pf_fone + '" data-toggle="modal" data-target="#atualizaPfTelModal"><i class="fa fa-edit"></i></a>' +
+                '&nbsp;<a href="#" class="btn btn-warning btn-sm delete_pf_tel" data-del-pftel-id="' + data.cd_pf_fone + '" data-toggle="modal" data-target="#apagaPfTelModal"><i class="fa fa-trash-o"></i></a>' +
                 '</td>';
 
             bv.resetForm(true);
@@ -686,7 +808,7 @@ $('#form_atualiza_pf_tel').bootstrapValidator({
             $form.parents('#atualizaPfTelModal').modal('hide');
 
         },
-        error: function(data) {
+        error: function (data) {
             console.log(data.responseText);
             $(data.responseText).appendTo('#responseAjaxError');
         }
@@ -733,8 +855,8 @@ $('#tb_pf_telefones').delegate('.update_pf_tel', 'click', function () {
             $('#form_atualiza_pf_tel input[name=cd_pf_fone]').val(data.cd_pf_fone);
             $('#form_atualiza_pf_tel input[name=fone]').val(data.fone);
             $('#form_atualiza_pf_tel input[name=observacao]').val(data.observacao);
-            $('#tel_operadora option[value='+data.operadora+']').prop("selected", "selected");
-            $('#tel_categoria option[value='+data.categoria+']').prop("selected", "selected");
+            $('#tel_operadora option[value=' + data.operadora + ']').prop("selected", "selected");
+            $('#tel_categoria option[value=' + data.categoria + ']').prop("selected", "selected");
 
             $('#atualizaModalLabel').html('Atualizar Telefone!!!!');
 
@@ -811,6 +933,10 @@ $('#form_pf_enderecos').bootstrapValidator({
             validators: {
                 notEmpty: {
                     message: 'Informe o CEP.'
+                },
+                stringLength: {
+                    min: 9,
+                    message: 'CEP incompleto.'
                 }
             }
         },
@@ -847,15 +973,15 @@ $('#form_pf_enderecos').bootstrapValidator({
         dataType: 'json',
         success: function (data) {
 
-            var celulas = '<td>'+ data.rua + '</td><td>'+data.numero+'</td><td>'+data.bairro+'</td><td>'+data.cidade+'</td><td>'+data.cep+'</td><td>'+data.estado+'</td><td>'+data.categoria+'</td><td>'+data.observacao+'</td><td>' +
-                        '<a href="#" class="btn btn-primary btn-sm update_pf_end" data-update-pfend-id="'+data.id_endereco+'" data-toggle="modal" data-target="#atualizaPfEndModal"><i class="fa fa-edit"></i></a>' +
-                        '&nbsp;<a href="#" class="btn btn-warning btn-sm delete_pf_end" data-del-pfend-id="'+data.id_endereco+'" data-toggle="modal" data-target="#apagaPfEndModal"><i class="fa fa-trash-o"></i></a></td>';
+            var celulas = '<td>' + data.rua + '</td><td>' + data.numero + '</td><td>' + data.bairro + '</td><td>' + data.cidade + '</td><td>' + data.cep + '</td><td>' + data.estado + '</td><td>' + data.categoria + '</td><td>' + data.observacao + '</td><td>' +
+                '<a href="#" class="btn btn-primary btn-sm update_pf_end" data-update-pfend-id="' + data.id_endereco + '" data-toggle="modal" data-target="#atualizaPfEndModal"><i class="fa fa-edit"></i></a>' +
+                '&nbsp;<a href="#" class="btn btn-warning btn-sm delete_pf_end" data-del-pfend-id="' + data.id_endereco + '" data-toggle="modal" data-target="#apagaPfEndModal"><i class="fa fa-trash-o"></i></a></td>';
 
-            var linha = '<tr data-pf-endereco="'+data.id_endereco+'">' + celulas + '</tr>';
+            var linha = '<tr data-pf-endereco="' + data.id_endereco + '">' + celulas + '</tr>';
 
             var id_end = $('#id_endereco').attr('value');
 
-            if (id_end){
+            if (id_end) {
                 var registro = $('#tb_pf_enderecos tr[data-pf-endereco=' + id_end + ']');
                 registro.html(celulas);
                 registro.addClass('active');
@@ -867,7 +993,7 @@ $('#form_pf_enderecos').bootstrapValidator({
             $('html, body').animate({scrollTop: 400}, 400);
             bv.resetForm(true);
         },
-        error: function(data) {
+        error: function (data) {
             console.log(data);
             $(data.responseText).appendTo('#responseAjaxError');
         }
@@ -920,12 +1046,12 @@ $('#tb_pf_enderecos').delegate('.update_pf_end', 'click', function () {
             $('#form_pf_enderecos input[name=cep]').val(data.cep);
             $('#form_pf_enderecos input[name=observacao]').val(data.observacao);
             $('#form_pf_enderecos input[name=cd_pessoa_fisica]').val(data.cd_pessoa_fisica);
-            $('#end_estado option[value='+data.estado+']').prop("selected", "selected");
-            $('#end_categoria option[value='+data.categoria+']').prop("selected", "selected");
+            $('#end_estado option[value=' + data.estado + ']').prop("selected", "selected");
+            $('#end_categoria option[value=' + data.categoria + ']').prop("selected", "selected");
             $('#legend_form_enderecos').html('Atualizar Endereço.').addClass('text-primary');
 
         },
-        error: function(data) {
+        error: function (data) {
             console.log(data);
             $(data.responseText).appendTo('#responseAjaxError');
         }
@@ -947,13 +1073,13 @@ $('#tb_pf_enderecos').delegate('.delete_pf_end', 'click', function () {
             $('#del_pf_end_confirma').html('<span class="text-danger"><i class="fa fa-trash-o"></i> Apagar endereco ' + confirm_end + '?</span>');
 
         },
-        error: function(data) {
+        error: function (data) {
             $(data.responseText).appendTo('#responseAjaxError');
         }
     });
 });
 
-$('#form_end_reset').click(function() {
+$('#form_end_reset').click(function () {
     $('#form_pf_enderecos input[name=id_endereco]').val('');
     $('#legend_form_enderecos').html('Cadastrar Endereço').removeClass('text-primary');
 
@@ -962,34 +1088,34 @@ $('#form_end_reset').click(function() {
 /* FIM DO CÓDIGO PARA MANIPULAÇÃO DE TELEFONES DE PESSOA FÍSICA */
 
 /*
-$('.delete_pf_end').click(function () {
-    $('html, body').animate({scrollTop: 100}, 400);
-    return false;
-});
-*/
+ $('.delete_pf_end').click(function () {
+ $('html, body').animate({scrollTop: 100}, 400);
+ return false;
+ });
+ */
 /** Início da Manipulação de Morador Endereço */
-$("#m_end_condominio").change(function(){
+$("#m_end_condominio").change(function () {
     var condominio = $("#m_end_condominio").val();
     $.ajax({
-        type:"get",
-        url:"Setor/listByCondId/"+condominio,
-        success:function(data){
+        type: "get",
+        url: "Setor/listByCondId/" + condominio,
+        success: function (data) {
             $("#m_end_setor").html(data);
         },
-        error: function(data) {
+        error: function (data) {
             $(data.responseText).appendTo('#responseAjaxError');
         }
     });
 });
-$("#m_end_setor").change(function(){
+$("#m_end_setor").change(function () {
     var setor = $("#m_end_setor").val();
     $.ajax({
-        type:"get",
-        url:"Apartamento/listBySetorId/"+setor,
-        success:function(data){
+        type: "get",
+        url: "Apartamento/listBySetorId/" + setor,
+        success: function (data) {
             $("#m_end_apartamento").html(data);
         },
-        error: function(data) {
+        error: function (data) {
             $(data.responseText).appendTo('#responseAjaxError');
         }
     });
@@ -1031,6 +1157,10 @@ $('#form_end_morador').bootstrapValidator({
             validators: {
                 notEmpty: {
                     message: 'Campo obrigatório.'
+                },
+                date: {
+                    format: 'DD/MM/YYYY',
+                    message: 'Data inválida.'
                 }
             }
         },
@@ -1038,6 +1168,7 @@ $('#form_end_morador').bootstrapValidator({
             group: '.col-sm-6',
             validators: {
                 date: {
+                    format: 'DD/MM/YYYY',
                     message: 'Data inválida.'
                 }
             }
@@ -1056,21 +1187,21 @@ $('#form_end_morador').bootstrapValidator({
         dataType: 'json',
         success: function (data) {
 
-            var celulas_old = '<td>'+ data.rua + '</td><td>'+data.numero+'</td><td>'+data.bairro+'</td><td>'+data.cidade+'</td><td>'+data.cep+'</td><td>'+data.estado+'</td><td>'+data.categoria+'</td><td>'+data.observacao+'</td><td>' +
-                '<a href="#" class="btn btn-primary btn-sm update_pf_end" data-update-pfend-id="'+data.id_endereco+'" data-toggle="modal" data-target="#atualizaPfEndModal"><i class="fa fa-edit"></i></a>' +
-                '&nbsp;<a href="#" class="btn btn-warning btn-sm delete_pf_end" data-del-pfend-id="'+data.id_endereco+'" data-toggle="modal" data-target="#apagaPfEndModal"><i class="fa fa-trash-o"></i></a></td>';
+            var celulas_old = '<td>' + data.rua + '</td><td>' + data.numero + '</td><td>' + data.bairro + '</td><td>' + data.cidade + '</td><td>' + data.cep + '</td><td>' + data.estado + '</td><td>' + data.categoria + '</td><td>' + data.observacao + '</td><td>' +
+                '<a href="#" class="btn btn-primary btn-sm update_pf_end" data-update-pfend-id="' + data.id_endereco + '" data-toggle="modal" data-target="#atualizaPfEndModal"><i class="fa fa-edit"></i></a>' +
+                '&nbsp;<a href="#" class="btn btn-warning btn-sm delete_pf_end" data-del-pfend-id="' + data.id_endereco + '" data-toggle="modal" data-target="#apagaPfEndModal"><i class="fa fa-trash-o"></i></a></td>';
 
-            var celulas = '<td>'+data.condominio+'</td><td>'+data.setor+'</td><td>'+data.apartamento+'</td><td>'+data.m_end_dt_entrada+'</td><td>'+data.m_end_dt_saida +'</td>'+
-                '<td><a href="#" class="btn btn-primary btn-sm update_m_end" data-update-mend-id="'+data.id_m_end+'"'+
-                'data-toggle="modal" data-target="#atualizaMEndModal"><i class="fa fa-edit"></i></a>'+
-                '&nbsp;<a href="#" class="btn btn-warning btn-sm delete_m_end" data-del-mend-id="'+data.id_m_end+'"'+
+            var celulas = '<td>' + data.condominio + '</td><td>' + data.setor + '</td><td>' + data.apartamento + '</td><td>' + data.m_end_dt_entrada + '</td><td>' + data.m_end_dt_saida + '</td>' +
+                '<td><a href="#" class="btn btn-primary btn-sm update_m_end" data-update-mend-id="' + data.id_m_end + '"' +
+                'data-toggle="modal" data-target="#atualizaMEndModal"><i class="fa fa-edit"></i></a>' +
+                '&nbsp;<a href="#" class="btn btn-warning btn-sm delete_m_end" data-del-mend-id="' + data.id_m_end + '"' +
                 'data-toggle="modal" data-target="#apagaMEndModal"><i class="fa fa-trash-o"></i></a></td>';
 
-            var linha = '<tr data-m-end="'+data.id_m_end+'">' + celulas + '</tr>';
+            var linha = '<tr data-m-end="' + data.id_m_end + '">' + celulas + '</tr>';
 
             var id_end = $('#id_m_end').attr('value');
 
-            if (id_end){
+            if (id_end) {
                 var registro = $('#tb_m_enderecos tr[data-m-end=' + id_end + ']');
                 registro.html(celulas);
                 registro.addClass('active');
@@ -1081,7 +1212,7 @@ $('#form_end_morador').bootstrapValidator({
             $('#form_end_morador input[name=id_m_end]').val('');
             bv.resetForm(true);
         },
-        error: function(data) {
+        error: function (data) {
             console.log(data);
             $(data.responseText).appendTo('#responseAjaxError');
         }
@@ -1108,7 +1239,7 @@ $('#form_apaga_m_end')
                 $('#tb_m_enderecos tr[data-m-end=' + data.id_m_end + ']').remove();
                 $('#apagaMEndModal').modal('hide');
             },
-            error: function(data) {
+            error: function (data) {
                 $(data.responseText).appendTo('#responseAjaxError');
             }
         });
@@ -1132,13 +1263,13 @@ $('#tb_m_enderecos').delegate('.update_m_end', 'click', function () {
             $('#form_end_morador input[name=m_end_dt_entrada]').val(data.m_end_dt_entrada);
             $('#form_end_morador input[name=m_end_dt_saida]').val(data.m_end_dt_saida);
             $('#form_end_morador input[name=cd_pessoa_fisica]').val(data.cd_pessoa_fisica);
-            $('#m_end_condominio option[value='+data.cd_condominio+']').prop("selected", "selected");
-            $('#m_end_setor option[value='+data.cd_setor+']').prop("selected", "selected");
-            $('#m_end_apartamento option[value='+data.cd_apartamento+']').prop("selected", "selected");
+            $('#m_end_condominio option[value=' + data.cd_condominio + ']').prop("selected", "selected");
+            $('#m_end_setor option[value=' + data.cd_setor + ']').prop("selected", "selected");
+            $('#m_end_apartamento option[value=' + data.cd_apartamento + ']').prop("selected", "selected");
             $('#legend_form_end_morador').html('Atualizar Endereço.').addClass('text-primary');
 
         },
-        error: function(data) {
+        error: function (data) {
             $(data.responseText).appendTo('#responseAjaxError');
         }
     });
@@ -1159,13 +1290,13 @@ $('#tb_m_enderecos').delegate('.delete_m_end', 'click', function () {
             $('#del_m_end_confirma').html('<span class="text-danger"><i class="fa fa-trash-o"></i> Apagar endereco ' + confirm_end + '?</span>');
 
         },
-        error: function(data) {
+        error: function (data) {
             $(data.responseText).appendTo('#responseAjaxError');
         }
     });
 });
 
-$('#form_m_end_reset').click(function() {
+$('#form_m_end_reset').click(function () {
     $('#form_end_morador input[name=id_m_end]').val('');
     $('#legend_form_enderecos').html('Cadastrar Endereço').removeClass('text-primary');
 
@@ -1186,6 +1317,10 @@ $('#form_pj_telefones').bootstrapValidator({
             validators: {
                 notEmpty: {
                     message: 'Informe o número de telefone.'
+                },
+                stringLength: {
+                    min: 14,
+                    message: 'Informe o número com o código de área'
                 }
             }
         },
@@ -1226,9 +1361,9 @@ $('#form_pj_telefones').bootstrapValidator({
         data: dados,
         dataType: 'json',
         success: function (data) {
-            var html = '<tr data-pj-tel="'+data.cd_pj_fone+'"><td>'+data.fone+'</td><td>'+data.operadora+'</td><td>'+data.categoria+'</td><td>'+data.observacao+'</td><td>' +
-                '<a href="#" class="btn btn-primary btn-sm update_pj_tel" data-update-pjtel-id="'+data.cd_pj_fone+'" data-toggle="modal" data-target="#atualizaPjTelModal"><i class="fa fa-edit"></i></a>' +
-                '&nbsp;<a href="#" class="btn btn-warning btn-sm delete_pj_tel" data-del-pjtel-id="'+data.cd_pj_fone+'" data-toggle="modal" data-target="#apagaPjTelModal"><i class="fa fa-trash-o"></i></a>' +
+            var html = '<tr data-pj-tel="' + data.cd_pj_fone + '"><td>' + data.fone + '</td><td>' + data.operadora + '</td><td>' + data.categoria + '</td><td>' + data.observacao + '</td><td>' +
+                '<a href="#" class="btn btn-primary btn-sm update_pj_tel" data-update-pjtel-id="' + data.cd_pj_fone + '" data-toggle="modal" data-target="#atualizaPjTelModal"><i class="fa fa-edit"></i></a>' +
+                '&nbsp;<a href="#" class="btn btn-warning btn-sm delete_pj_tel" data-del-pjtel-id="' + data.cd_pj_fone + '" data-toggle="modal" data-target="#apagaPjTelModal"><i class="fa fa-trash-o"></i></a>' +
                 '</td></tr>';
             $(html).appendTo('#tb_pj_telefones').hide().fadeIn();
             bv.resetForm(true);
@@ -1248,6 +1383,10 @@ $('#form_atualiza_pj_tel').bootstrapValidator({
             validators: {
                 notEmpty: {
                     message: 'Informe o número de telefone.'
+                },
+                stringLength: {
+                    min: 14,
+                    message: 'Informe o número com o código de área'
                 }
             }
         },
@@ -1292,9 +1431,9 @@ $('#form_atualiza_pj_tel').bootstrapValidator({
 
             var linha = $('#tb_pj_telefones tr[data-pj-tel=' + data.cd_pj_fone + ']');
 
-            var html = '<td>'+data.fone+'</td><td>'+data.operadora+'</td><td>'+data.categoria+'</td><td>'+data.observacao+'</td><td>' +
-                '<a href="#" class="btn btn-primary btn-sm update_pj_tel" data-update-pjtel-id="'+data.cd_pj_fone+'" data-toggle="modal" data-target="#atualizaPjTelModal"><i class="fa fa-edit"></i></a>' +
-                '&nbsp;<a href="#" class="btn btn-warning btn-sm delete_pj_tel" data-del-pjtel-id="'+data.cd_pj_fone+'" data-toggle="modal" data-target="#apagaPjTelModal"><i class="fa fa-trash-o"></i></a>' +
+            var html = '<td>' + data.fone + '</td><td>' + data.operadora + '</td><td>' + data.categoria + '</td><td>' + data.observacao + '</td><td>' +
+                '<a href="#" class="btn btn-primary btn-sm update_pj_tel" data-update-pjtel-id="' + data.cd_pj_fone + '" data-toggle="modal" data-target="#atualizaPjTelModal"><i class="fa fa-edit"></i></a>' +
+                '&nbsp;<a href="#" class="btn btn-warning btn-sm delete_pj_tel" data-del-pjtel-id="' + data.cd_pj_fone + '" data-toggle="modal" data-target="#apagaPjTelModal"><i class="fa fa-trash-o"></i></a>' +
                 '</td>';
 
             bv.resetForm(true);
@@ -1307,7 +1446,7 @@ $('#form_atualiza_pj_tel').bootstrapValidator({
             $form.parents('#atualizaPjTelModal').modal('hide');
 
         },
-        error: function(data) {
+        error: function (data) {
             console.log(data.responseText);
             $(data.responseText).appendTo('#responseAjaxError');
         }
@@ -1354,8 +1493,8 @@ $('#tb_pj_telefones').delegate('.update_pj_tel', 'click', function () {
             $('#form_atualiza_pj_tel input[name=cd_pj_fone]').val(data.cd_pj_fone);
             $('#form_atualiza_pj_tel input[name=fone]').val(data.fone);
             $('#form_atualiza_pj_tel input[name=observacao]').val(data.observacao);
-            $('#tel_operadora option[value='+data.operadora+']').prop("selected", "selected");
-            $('#tel_categoria option[value='+data.categoria+']').prop("selected", "selected");
+            $('#tel_operadora option[value=' + data.operadora + ']').prop("selected", "selected");
+            $('#tel_categoria option[value=' + data.categoria + ']').prop("selected", "selected");
 
             $('#atualizaModalLabel').html('Atualizar Telefone!!!!');
 
@@ -1432,6 +1571,10 @@ $('#form_pj_enderecos').bootstrapValidator({
             validators: {
                 notEmpty: {
                     message: 'Informe o CEP.'
+                },
+                stringLength: {
+                    min: 9,
+                    message: 'Informe o CEP completo.'
                 }
             }
         },
@@ -1468,15 +1611,15 @@ $('#form_pj_enderecos').bootstrapValidator({
         dataType: 'json',
         success: function (data) {
 
-            var celulas = '<td>'+ data.rua + '</td><td>'+data.numero+'</td><td>'+data.bairro+'</td><td>'+data.cidade+'</td><td>'+data.cep+'</td><td>'+data.estado+'</td><td>'+data.categoria+'</td><td>'+data.observacao+'</td><td>' +
-                '<a href="#" class="btn btn-primary btn-sm update_pj_end" data-update-pjend-id="'+data.id_endereco+'" data-toggle="modal" data-target="#atualizaPjEndModal"><i class="fa fa-edit"></i></a>' +
-                '&nbsp;<a href="#" class="btn btn-warning btn-sm delete_pj_end" data-del-pjend-id="'+data.id_endereco+'" data-toggle="modal" data-target="#apagaPjEndModal"><i class="fa fa-trash-o"></i></a></td>';
+            var celulas = '<td>' + data.rua + '</td><td>' + data.numero + '</td><td>' + data.bairro + '</td><td>' + data.cidade + '</td><td>' + data.cep + '</td><td>' + data.estado + '</td><td>' + data.categoria + '</td><td>' + data.observacao + '</td><td>' +
+                '<a href="#" class="btn btn-primary btn-sm update_pj_end" data-update-pjend-id="' + data.id_endereco + '" data-toggle="modal" data-target="#atualizaPjEndModal"><i class="fa fa-edit"></i></a>' +
+                '&nbsp;<a href="#" class="btn btn-warning btn-sm delete_pj_end" data-del-pjend-id="' + data.id_endereco + '" data-toggle="modal" data-target="#apagaPjEndModal"><i class="fa fa-trash-o"></i></a></td>';
 
-            var linha = '<tr data-pj-endereco="'+data.id_endereco+'">' + celulas + '</tr>';
+            var linha = '<tr data-pj-endereco="' + data.id_endereco + '">' + celulas + '</tr>';
 
             var id_end = $('#id_endereco').attr('value');
 
-            if (id_end){
+            if (id_end) {
                 var registro = $('#tb_pj_enderecos tr[data-pj-endereco=' + id_end + ']');
                 registro.html(celulas);
                 registro.addClass('active');
@@ -1488,7 +1631,7 @@ $('#form_pj_enderecos').bootstrapValidator({
             $('html, body').animate({scrollTop: 400}, 400);
             bv.resetForm(true);
         },
-        error: function(data) {
+        error: function (data) {
             console.log(data);
             $(data.responseText).appendTo('#responseAjaxError');
         }
@@ -1541,12 +1684,12 @@ $('#tb_pj_enderecos').delegate('.update_pj_end', 'click', function () {
             $('#form_pj_enderecos input[name=cep]').val(data.cep);
             $('#form_pj_enderecos input[name=observacao]').val(data.observacao);
             $('#form_pj_enderecos input[name=cd_pessoa_juridica]').val(data.cd_pessoa_juridica);
-            $('#end_estado option[value='+data.estado+']').prop("selected", "selected");
-            $('#end_categoria option[value='+data.categoria+']').prop("selected", "selected");
+            $('#end_estado option[value=' + data.estado + ']').prop("selected", "selected");
+            $('#end_categoria option[value=' + data.categoria + ']').prop("selected", "selected");
             $('#legend_form_enderecos').html('Atualizar Endereço.').addClass('text-primary');
 
         },
-        error: function(data) {
+        error: function (data) {
             console.log(data);
             $(data.responseText).appendTo('#responseAjaxError');
         }
@@ -1568,20 +1711,20 @@ $('#tb_pj_enderecos').delegate('.delete_pj_end', 'click', function () {
             $('#del_pj_end_confirma').html('<span class="text-danger"><i class="fa fa-trash-o"></i> Apagar endereco ' + confirm_end + '?</span>');
 
         },
-        error: function(data) {
+        error: function (data) {
             $(data.responseText).appendTo('#responseAjaxError');
         }
     });
 });
 
-$('#form_end_reset').click(function() {
+$('#form_end_reset').click(function () {
     $('#form_pj_enderecos input[name=id_endereco]').val('');
     $('#legend_form_enderecos').html('Cadastrar Endereço').removeClass('text-primary');
 
 });
 
-/** Testes com busca Pessoa Física */
-$(document).ready(function(){
+/** Busca Pessoa Física */
+$(document).ready(function () {
     function search() {
         var nome = $('#pessoa_1').val();
 
@@ -1590,15 +1733,15 @@ $(document).ready(function(){
             $.ajax({
                 type: 'post',
                 url: 'PessoaFisica/buscaAjax/',
-                data: 'nome='+nome,
+                data: 'nome=' + nome,
                 dataType: 'json',
-                success: function(data) {
+                success: function (data) {
 
                     var html = '';
-                    for(var i = 0; i < data.length; i++){
-                        html += '<a title="Visualizar perfil" href="PessoaFisica/visualizar/'+data[i].id+'"><div class="list-group-item"><div><img src="'+data[i].foto+'" class="img-circle img-thumb-panel pull-left">'+
-                                '<p class="list-group-item-heading">'+data[i].nome+'</p>' +
-                                '<p class="list-group-item-text">'+data[i].email+'</p></div></div></a>';
+                    for (var i = 0; i < data.length; i++) {
+                        html += '<a title="Visualizar perfil" href="PessoaFisica/visualizar/' + data[i].id + '"><div class="list-group-item"><div><img src="' + data[i].foto + '" class="img-circle img-thumb-panel pull-left">' +
+                            '<p class="list-group-item-heading">' + data[i].nome + '</p>' +
+                            '<p class="list-group-item-text">' + data[i].email + '</p></div></div></a>';
                     }
 
                     var resultBody = '<div class="row"><div class="col-md-12">' + html + '</div></div>';
@@ -1606,7 +1749,7 @@ $(document).ready(function(){
                     //'<img src="'+data[0].foto+'">'
                     //$('#pessoa_1').val('');
                 },
-                error: function(data) {
+                error: function (data) {
                     $(data.responseText).appendTo('#area-do-resultado');
                 }
             });
@@ -1615,17 +1758,158 @@ $(document).ready(function(){
         }
     }
 
-    $('#botao-pesquisar-pessoa').click(function(){
+    $('#botao-pesquisar-pessoa').click(function () {
         search();
     });
-    $('#pessoa_1').keyup(function(e){
+    $('#pessoa_1').keyup(function (e) {
         search();
 
-/*        if(e.keyCode == 13) {
-            //Executa esta linha se 'enter' for apertado
-        }*/
+        /*        if(e.keyCode == 13) {
+         //Executa esta linha se 'enter' for apertado
+         }*/
     });
-    $('#nav-top-form-busca').focusout(function(){
+    $('#nav-top-form-busca').focusout(function () {
         $('#area-do-resultado').fadeOut();
-    })
+    });
+});
+
+
+/** Busca Pessoa Física para Ocorrência*/
+$(document).ready(function () {
+    function buscaPessoaOcorrencia() {
+        var nome = $('#ocorr_pessoa').val();
+
+        if (nome != '') {
+            $('#busca-ocorr-pessoa-resultado').html('<i class="fa fa-spinner fa-spin"></i>');
+            $.ajax({
+                type: 'post',
+                url: 'PessoaFisica/buscaAjax/',
+                data: 'nome=' + nome,
+                dataType: 'json',
+                success: function (data) {
+
+                    var html = '';
+                    for (var i = 0; i < data.length; i++) {
+                        html += '<div class="list-group-item"><div><img src="' + data[i].foto + '" class="img-circle img-thumb-panel pull-left">' +
+                            '<p class="list-group-item-heading"><a title="Visualizar perfil" href="PessoaFisica/visualizar/' + data[i].id + '">' + data[i].nome + '</a></p>' +
+                            '<p class="list-group-item-text text-right">' +
+                            '<button data-id-pessoa="' + data[i].id + '" title="Adicionar" class="btn btn-info btn-xs add-ocorr-pessoa">' +
+                            '<i class="fa fa-plus-circle"></i></button></p></div></div>';
+                    }
+
+                    var resultBody = '<div class="row"><div class="col-md-12">' + html + '</div></div>';
+                    $('#busca-ocorr-pessoa-resultado').html(resultBody).hide().fadeIn();
+                },
+                error: function (data) {
+                    $(data.responseText).appendTo('#area-do-resultado');
+                }
+            });
+        } else {
+            $('#busca-ocorr-pessoa-resultado').fadeOut();
+        }
+    }
+
+    $('#ocorr_pessoa').keyup(function (e) {
+        buscaPessoaOcorrencia();
+    });
+    $('#ocorr_pessoa').focusout(function () {
+        $('#busca-ocorr-pessoa-resultado').fadeOut();
+    });
+
+    // Adiciona Pessoa
+    $('#busca-ocorr-pessoa-resultado').delegate('.add-ocorr-pessoa', 'click', function () {
+
+        var pessoa = $(this).attr('data-id-pessoa');
+        var ocorrencia = $('#form-ocorrencia-pessoa input[name=cd_ocorrencia]').val();
+        //var data = $('#form-ocorrencia-pessoa').serialize();
+
+        $.ajax({
+            type: 'post',
+            url: 'OcorrenciaPessoaFisicaEnvolvida/cadastra/',
+            data: 'cd_pessoa_fisica=' + pessoa + '&cd_ocorrencia=' + ocorrencia,
+            dataType: 'json',
+            success: function (data) {
+                if (data.msg) {
+                    var html = '<div class="alert alert-dismissable alert-warning">' +
+                        '<button type="button" class="close" data-dismiss="alert">×</button>' +
+                        '<h4>' + data.msg + '</h4>' +
+                        '<p></p>' +
+                        '</div>';
+                    $('#msg-ja-existe').html(html);
+                } else {
+                    var pessoa = '<tr data-tr-registro-op="' + data.cd_pessoa_fisica + '">' +
+                        '<td><img class="img-circle" src="' + data.im_perfil + '"></td>' +
+                        '<td><h6><a href="PessoaFisica/visualizar/' + data.cd_pessoa_fisica + '">' + data.nm_pessoa_fisica + '</a></h6></td>' +
+                        '<td>' +
+                        '<a href=\"#\" data-id-ocorrencia="' + data.cd_ocorrencia + '" data-id-pessoa="' + data.cd_pessoa_fisica + '" class="btn btn-danger btn-xs remove-ocorr-pessoa" data-toggle="modal" data-target="#apagaOPModal"><i class="fa fa-minus-circle"></i></i></a>' +
+                        '</button>' +
+                        '</td></tr>';
+
+                    $(pessoa).appendTo('#ocorr-envolvidos').hide().fadeIn();
+                }
+            },
+            error: function (data) {
+                $(data.responseText).appendTo('#responseAjaxError');
+            }
+        });
+        return false;
+    });
+
+    $('#ocorr-envolvidos').delegate('.remove-ocorr-pessoa', 'click', function () {
+        console.log('Remove!');
+        var pessoa = $(this).attr('data-id-pessoa');
+        var ocorrencia = $(this).attr('data-id-ocorrencia');
+        $.ajax({
+            type: "post",
+            url: "OcorrenciaPessoaFisicaEnvolvida/findBy2Ids/",
+            data: 'cd_pessoa_fisica=' + pessoa + '&cd_ocorrencia=' + ocorrencia,
+            dataType: 'json',
+            success: function (data) {
+
+                $('#form_apaga_op input[name=cd_pessoa_fisica]').val(data.cd_pessoa_fisica);
+
+                var confirm_pessoa =
+                    '<div class="profile-card pcard-lg"><div class="panel-body">' +
+                        '<div class="profile-card-foto-container">' +
+                        '<img src="' + data.im_perfil + '" class="img-circle profilefoto foto-md">' +
+                        '</div>' +
+                        '<div class="pcard-name">' + data.nm_pessoa_fisica + '' +
+                        '<div class="pcard-info text-danger"><i class="fa fa-trash-o"></i> Remover envolvido?</div>' +
+                        '</div>' +
+                        '</div></div>';
+                $('#del_op_confirma').html(confirm_pessoa);
+
+            },
+            error: function (data) {
+                $(data.responseText).appendTo('#responseAjaxError');
+            }
+        });
+    });
+    $('#form_apaga_op')
+        .submit(function () {
+
+            var dados = $(this).serialize();
+
+            $.ajax({
+                type: "POST",
+                url: "OcorrenciaPessoaFisicaEnvolvida/apagar",
+                data: dados,
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    $('#form_apaga_op input[name=cd_pessoa_fisica]').val('');
+
+                    $('#del_op_confirma').html('<span class="text-success"><i class="fa fa-check"></i> Endereço Apagado!</span>')
+                        .hide().fadeIn();
+
+                    $('#ocorr-envolvidos tr[data-tr-registro-op=' + data.cd_pessoa_fisica + ']').remove();
+                    $('#apagaOPModal').modal('hide');
+                },
+                error: function (data) {
+                    console.log(data);
+                    $(data.responseText).appendTo('#responseAjaxError');
+                }
+            });
+            return false;
+        });
 });

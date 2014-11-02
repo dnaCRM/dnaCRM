@@ -8,9 +8,13 @@
 
 class Apartamento extends Controller
 {
+    /** @var  ApartamentoModel */
+    private $apartamentoModel;
+
     public function __construct()
     { //o método é herdado da classe pai 'Controller'
         $this->setModel(new ApartamentoDAO());
+        $this->apartamentoModel = new ApartamentoModel();
     }
 
 
@@ -84,16 +88,22 @@ class Apartamento extends Controller
     {
         $id = (int)$id;
         $apartamentoarr = $this->findById($id);
-
+        $this->apartamentoModel->setDTO($apartamentoarr);
+        $moradorEnderecoModel = new MoradorEnderecoModel();
+        $moradores = $this->apartamentoModel->getMoradores($moradorEnderecoModel);
+        $ex_moradores = $this->apartamentoModel->getExMoradores($moradorEnderecoModel);
+        $dados = $this->apartamentoModel->getArrayDados();
         // Exporta imagem de perfil
 
         $dados = array(
             //o campo 'obs' vai ser o subtítulo
-            'pagesubtitle' => '',
+            'pagesubtitle' => 'Condomínio '.$dados['condominio'],
             //o campo 'nome' vai ser o título da página
-            'pagetitle' => 'Apartamento',
+            'pagetitle' => $dados['desc_apartamento'],
             //todos os atributos do perfil
-            'apartamento' => $apartamentoarr
+            'apartamento' => $dados,
+            'moradores' => $moradores,
+            'ex_moradores' => $ex_moradores
         );
 
         $this->view = new View('Apartamento', 'visualizar');
@@ -133,11 +143,12 @@ class Apartamento extends Controller
                 $apartamento = $this->setDados();
 
                 try {
-                    $this->model->gravar($apartamento);
-                    Session::flash('sucesso_salvar_apartamento', 'Cadastro salvo!', 'success');
+                    $obj = $this->model->gravar($apartamento);
+                    return $obj;
                 } catch (Exception $e) {
                     CodeFail((int)$e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
                 }
+                return false;
             }
         }
 

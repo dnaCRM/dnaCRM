@@ -1,263 +1,301 @@
+<?php
+$ocorrencia = $data['perfil'];
+$ocorrencia_form = new Ocorrencia();
+$cadastrado = $ocorrencia_form->cadastra($ocorrencia); //Não cadastra na entra pois ainda não tem Token
+
+$id_check = $data['id'];
+
+$token = Token::generate();
+?>
 <div class="row">
-    <div class="col-sm-6">
-        <h1><?php echo $data['pagetitle']; ?></h1>
-
-        <p class="lead">
-            <?php echo (isset($data['pagesubtitle'])) ? $data['pagesubtitle'] : ""; ?>
-        </p>
-    </div>
-    <div class="col-sm-6" style="padding: 15px 15px 0 15px;">
-        <div class="well">
-
-            <p>
-                Alguma coisa!
-            </p>
-
-        </div>
+    <div class="col-sm-12">
+        <h3 class="page-header"><?php echo $data['pagetitle']; ?>
+            <small><?php echo $data['pagesubtitle']; ?></small>
+        </h3>
     </div>
 </div>
-
-<!--Teste de Form-->
 
 <div class="row">
-<div class="col-sm-6">
-    <div class="well">
-        <?php
-        $ocorrencia = $data['perfil'];
-        $ocorrencia_form = new Ocorrencia();
-        $ocorrencia_form->cadastra($ocorrencia); //Não cadastra na entra pois ainda não tem Token
 
-        if (Session::exists('sucesso_salvar_oc')) {
-            Session::flash('sucesso_salvar_oc');
-        }
+<div class="col-md-12">
 
-        ?>
+<div>
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#principal" data-toggle="tab">Cadastro</a></li>
+    <?php if ($id_check): ?>
+        <li><a href="#pessoas" data-toggle="tab">Pessoas Envolvidas</a></li>
+    <?php endif; ?>
+</ul>
 
-        <form id="ocorrenciaform" class="form-horizontal" method="post" action="" enctype="multipart/form-data">
-            <fieldset>
-                <legend>Cadastro</legend>
+<div id="TabAdicionais" class="tab-content">
+<div class="tab-pane fade active in" id="principal">
 
+    <div class="row">
+        <?php if ($cadastrado): ?>
 
-                <div class="form-group">
-                    <div class="col-sm-12">
-                        <label for="informante" class="control-label">Informante</label>
+            <div class="jumbotron">
+                <div class="container">
+                    <div class="col-md-8">
+                        <h1 class="text-success"><span class="glyphicon glyphicon-arrow-right"></span>
+                            Sucesso!</h1>
 
-                        <select class="form-control" id="informante" name="informante">
-                            <option value="">--</option>
-                            <?php
-                            $ocorrencia->setCdPfInformante($ocorrencia->getCdPfInformante() == '' ? Input::get('informante') : $ocorrencia->getCdPfInformante());
-                            foreach ($data['informante'] as $informante) {
-                                if ($informante->getCdPessoaFisica() == $ocorrencia->getCdPfInformante()) {
-                                    echo '<option value="' . $informante->getCdPessoaFisica() . '" selected>' . $informante->getNmPessoaFisica() . '</option>';
-                                } else {
-                                    echo '<option value="' . $informante->getCdPessoaFisica() . ' ">' . $informante->getNmPessoaFisica() . '</option>';
-                                }
-                            }
-                            ?>
-                        </select>
+                        <p>Clique em avaçar para adicionar pessoas relacionadas à ocorrência?</p>
+
+                        <a href="Ocorrencia/" class="btn btn-info" role="button">
+                            <i class="fa fa-arrow-circle-o-left"></i> Voltar
+                        </a>
+
+                        <a href="Ocorrencia/formocorrencia/" class="btn btn-success" role="button">
+                            <i class="fa fa-arrow-circle-o-up"></i> Novo
+                        </a>
+                        <a href="Ocorrencia/formocorrencia/<?php echo $cadastrado->getCdOcorrencia();?>" class="btn btn-primary" role="button">
+                            <i class="fa fa-arrow-circle-o-right"></i> Avançar
+                        </a>
                     </div>
                 </div>
+            </div>
+        <?php else: ?>
+            <form id="ocorrenciaform" class="form-horizontal" method="post" action=""
+                  enctype="multipart/form-data">
+                <fieldset>
+                    <!-- Lado Esquerdo -->
+                    <div class="col-md-6">
+
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label for="assunto" class="control-label">Assunto</label>
+
+                                <input type="text" class="form-control" id="assunto" name="assunto"
+                                       value="<?php echo $ocorrencia->getDescAssunto() == '' ? Input::get('assunto') : $ocorrencia->getDescAssunto(); ?>"
+                                       placeholder="Assunto">
+                            </div>
+                        </div>
 
 
-                <div class="form-group">
-                    <div class="col-sm-12">
-                        <label for="setor" class="control-label">Setor</label>
+                        <div class="form-group">
 
-                        <select class="form-control" id="setor" name="setor">
-                            <option value="">--</option>
-                            <?php
-                            $ocorrencia->setCdSetor($ocorrencia->getCdSetor() == '' ? Input::get('setor') : $ocorrencia->getCdSetor());
-                            foreach ($data['setor'] as $setor) {
-                                if ($setor->getCdSetor() == $ocorrencia->getCdSetor()) {
-                                    echo '<option value="' . $setor->getCdSetor() . '" selected>' . $setor->getNmSetor() . '</option>';
-                                } else {
-                                    echo '<option value="' . $setor->getCdSetor() . ' ">' . $setor->getNmSetor() . '</option>';
-                                }
-                            }
-                            ?>
-                        </select>
+                            <div class="col-sm-12">
+                                <label for="descricao" class="control-label">Descrição</label>
+
+                                <textarea id="descricao" class="form-control" name="descricao"
+                                          placeholder="Ocorrência"
+                                          rows="5"><?php echo $ocorrencia->getDescOcorrencia() == '' ? Input::get('descricao') : $ocorrencia->getDescOcorrencia(); ?></textarea>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label for="desc_conclusao" class="control-label">Conclusão</label>
+
+                                <textarea id="desc_conclusao" class="form-control" name="desc_conclusao"
+                                          placeholder="Como a ocorrência foi concluída"
+                                          rows="5"><?php echo $ocorrencia->getDescConclusao() == '' ? Input::get('desc_conclusao') : $ocorrencia->getDescConclusao(); ?></textarea>
+                            </div>
+                        </div>
+
                     </div>
-                </div>
+
+                    <!-- Lado Direito -->
+                    <div class="col-md-6">
+
+                        <div class="form-group">
+                            <div class="col-sm-6">
+                                <label for="informante" class="control-label">Informante</label>
+
+                                <select class="form-control" id="informante" name="informante">
+                                    <option value="">--</option>
+                                    <?php
+                                    $ocorrencia->setCdPfInformante($ocorrencia->getCdPfInformante() == '' ? Input::get('informante') : $ocorrencia->getCdPfInformante());
+                                    foreach ($data['informante'] as $informante) {
+                                        if ($informante->getCdPessoaFisica() == $ocorrencia->getCdPfInformante()) {
+                                            echo '<option value="' . $informante->getCdPessoaFisica() . '" selected>' . $informante->getNmPessoaFisica() . '</option>';
+                                        } else {
+                                            echo '<option value="' . $informante->getCdPessoaFisica() . ' ">' . $informante->getNmPessoaFisica() . '</option>';
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                            </div>
 
 
+                            <div class="col-sm-6">
+                                <label for="setor" class="control-label">Setor</label>
 
-                <div class="form-group">
-                    <div class="col-sm-12">
-                        <label for="estagio" class="control-label">Estágio</label>
+                                <select class="form-control" id="setor" name="setor">
+                                    <option value="">--</option>
+                                    <?php
+                                    $ocorrencia->setCdSetor($ocorrencia->getCdSetor() == '' ? Input::get('setor') : $ocorrencia->getCdSetor());
+                                    foreach ($data['setor'] as $setor) {
+                                        if ($setor->getCdSetor() == $ocorrencia->getCdSetor()) {
+                                            echo '<option value="' . $setor->getCdSetor() . '" selected>' . $setor->getNmSetor() . '</option>';
+                                        } else {
+                                            echo '<option value="' . $setor->getCdSetor() . ' ">' . $setor->getNmSetor() . '</option>';
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
 
-                        <select class="form-control" id="estagio" name="estagio">
-                            <option value="">--</option>
-                            <?php
-                            $ocorrencia->setCdVlCatgEstagio($ocorrencia->getCdVlCatgEstagio() == '' ? Input::get('estagio') : $ocorrencia->getCdVlCatgEstagio());
-                            foreach ($data['estagio'] as $estagio) {
-                                if ($estagio->getCdVlCategoria() == $ocorrencia->getCdVlCatgEstagio()) {
-                                    echo '<option value="' . $estagio->getCdVlCategoria() . '" selected>' . $estagio->getDescVlCatg() . '</option>';
-                                } else {
-                                    echo '<option value="' . $estagio->getCdVlCategoria() . ' ">' . $estagio->getDescVlCatg() . '</option>';
-                                }
-                            }
-                            ?>
-                        </select>
+
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <label for="estagio" class="control-label">Estágio</label>
+
+                                <select class="form-control" id="estagio" name="estagio">
+                                    <option value="">--</option>
+                                    <?php
+                                    $ocorrencia->setCdVlCatgEstagio($ocorrencia->getCdVlCatgEstagio() == '' ? Input::get('estagio') : $ocorrencia->getCdVlCatgEstagio());
+                                    foreach ($data['estagio'] as $estagio) {
+                                        if ($estagio->getCdVlCategoria() == $ocorrencia->getCdVlCatgEstagio()) {
+                                            echo '<option value="' . $estagio->getCdVlCategoria() . '" selected>' . $estagio->getDescVlCatg() . '</option>';
+                                        } else {
+                                            echo '<option value="' . $estagio->getCdVlCategoria() . ' ">' . $estagio->getDescVlCatg() . '</option>';
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <label for="dt_ocorrencia" class="control-label">Início</label>
+
+
+                                <input type="text" class="form-control data-input"
+                                       value="<?php echo $ocorrencia->getDtOcorrencia() == '' ? Input::get('dt_ocorrencia') : $ocorrencia->getDtOcorrencia(); ?>"
+                                       id="dt_ocorrencia"
+                                       name="dt_ocorrencia" placeholder="___/___/____">
+                            </div>
+
+
+                            <div class="col-sm-4">
+                                <label for="dt_fim" class="control-label">Fim</label>
+
+
+                                <input type="text" class="form-control data-input"
+                                       value="<?php echo $ocorrencia->getDtFim() == '' ? Input::get('dt_fim') : $ocorrencia->getDtFim(); ?>"
+                                       id="dt_fim"
+                                       name="dt_fim" placeholder="___/___/____">
+
+                            </div>
+                        </div>
+
+                        <input type="hidden" name="cd_ocorrencia" value="<?php echo $data['id']; ?>">
+                        <input type="hidden" name="token" value="<?php echo $token; ?>">
+
+                        <div class="">
+                            <a href="Ocorrencia<?php echo $data['id'] ? '/visualizar/'.$data['id']:'';?>" id="cancel"
+                               class="btn btn-default">
+                                <span class="fa fa-undo"></span> Cancelar</a>
+                            <a href="Ocorrencia/formOcorrencia" id="novo" class="btn btn-success">
+                                <span class="fa fa-file"></span> Novo</a>
+                            <button type="submit" name="cadastrar" class="btn btn-primary">
+                                <span class="fa fa-check"></span> Salvar
+                            </button>
+                        </div>
+
+
                     </div>
-                </div>
-
-                <div class="form-group">
-
-                    <div class="col-sm-4 inputGroupContainer" id="dt_inicio_picker">
-                        <label for="dt_ocorrencia" class="control-label">Início</label>
-
-
-                        <input type="text" class="form-control data-input"
-                               value="<?php echo $ocorrencia->getDtOcorrencia() == '' ? Input::get('dt_ocorrencia') : $ocorrencia->getDtOcorrencia(); ?>"
-                               id="dt_ocorrencia"
-                               name="dt_ocorrencia" placeholder="___/___/____">
-                    </div>
-                    <div class="col-sm-4 inputGroupContainer" id="dt_fim_picker">
-                        <label for="dt_fim" class="control-label">Fim</label>
-
-
-                        <input type="text" class="form-control data-input"
-                               value="<?php echo $ocorrencia->getDtFim() == '' ? Input::get('dt_fim') : $ocorrencia->getDtFim(); ?>"
-                               id="dt_fim"
-                               name="dt_fim" placeholder="___/___/____">
-                    </div>
-                </div>
-
-                <div class="form-group">
-
-                    <div class="col-sm-12">
-                        <label for="assunto" class="control-label">Assunto</label>
-
-                        <input type="text" class="form-control" id="assunto" name="assunto"
-                               value="<?php echo $ocorrencia->getDescAssunto() == '' ? Input::get('assunto') : $ocorrencia->getDescAssunto(); ?>"
-                               placeholder="Assunto">
-                    </div>
-                </div>
-
-                <div class="form-group">
-
-                    <div class="col-sm-12">
-                        <label for="descricao" class="control-label">Descrição</label>
-
-                        <textarea id="descricao" class="form-control" name="descricao"
-                                  placeholder="Ocorrência"
-                                  rows="5"><?php echo $ocorrencia->getDescOcorrencia() == '' ? Input::get('descricao') : $ocorrencia->getDescOcorrencia(); ?></textarea>
-                    </div>
-                </div>
-
-                <div class="form-group">
-
-                    <div class="col-sm-12">
-                        <label for="desc_conclusao" class="control-label">Conclusão</label>
-
-                        <textarea id="desc_conclusao" class="form-control" name="desc_conclusao"
-                                  placeholder="Como a ocorrência foi concluída"
-                                  rows="5"><?php echo $ocorrencia->getDescConclusao() == '' ? Input::get('desc_conclusao') : $ocorrencia->getDescConclusao(); ?></textarea>
-                    </div>
-                </div>
-
-
-                <input type="hidden" name="ocorrencia" value="<?php echo $data['id']; ?>">
-                <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
-
-                <div class="form-group ">
-                    <div class="col-sm-12">
-                        <a href="Ocorrencia/visualizar/<?php echo $data['id']; ?>" id="limpar"
-                           class="btn btn-default"><span
-                                class="fa fa-undo"></span> Cancelar</a>
-                        <button type="reset" name="cancelar" class="btn btn-info"><span class="fa fa-recycle"></span>
-                            Limpar
-                        </button>
-                        <a href="Ocorrencia/formOcorrencia" id="novo" class="btn btn-success"><span
-                                class="fa fa-file"></span>
-                            Novo</a>
-                        <button type="submit" name="cadastrar" class="btn btn-primary"><span class="fa fa-check"></span>
-                            Salvar
-                        </button>
-                    </div>
-                </div>
-            </fieldset>
-        </form>
-
+                </fieldset>
+            </form>
+        <?php endif; ?>
     </div>
 </div>
+<?php if ($id_check): ?>
+    <div class="tab-pane fade" id="pessoas">
+        <div class="row">
+            <div class="col-md-6">
 
-<div class="col-sm-6">
+                <form class="dropdown" id="form-ocorrencia-pessoa">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="ocorr_pessoa"
+                               name="ocorr_pessoa" placeholder="Buscar Pessoa" autocomplete="off"
+                               data-toggle="busca-pessoa-ocorr">
+                        <input type="hidden" name="cd_ocorrencia" value="<?php echo $data['id']; ?>">
 
-    <div class="panel-group" id="accordion">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                        $_POST
-                    </a>
-                </h4>
+                        <div id="busca-ocorr-pessoa-resultado" class="dropdown-busca list-group"
+                             aria-labelledby="busca-pessoa-ocorr"></div>
+                    </div>
+                </form>
+
+                <div id="msg-ja-existe"></div>
+
             </div>
-            <div id="collapseOne" class="panel-collapse collapse in">
-                <div class="panel-body">
-                    <?php
 
-                    var_dump($_POST);
+            <div class="col-md-6">
+                <div class="legend">Envolvidos</div>
 
-                    ?>
+                <div class="panel panel-info">
+                    <div class="panel-body">
+                        <table class="table" id="ocorr-envolvidos">
+                            <tbody>
+                            <?php
+                            foreach ($data['pessoas'] as $pessoa) {
+                                echo "
+                                    <tr data-tr-registro-op=\"{$pessoa['cd_pessoa_fisica']}\">
+                                        <td>
+                                            <img class=\"img-circle\" src=\"{$pessoa['im_perfil']}\">
+                                        </td>
+                                        <td>
+                                            <h6><a href=\"PessoaFisica/visualizar/{$pessoa['cd_pessoa_fisica']}\">{$pessoa['nm_pessoa_fisica']}</a></h6>
+                                        </td>
+                                        <td>
+                                            <a href=\"#\" class=\"btn btn-danger btn-xs remove-ocorr-pessoa\" data-id-ocorrencia=\"{$data['id']}\" data-id-pessoa=\"{$pessoa['cd_pessoa_fisica']}\" data-toggle=\"modal\" data-target=\"#apagaOPModal\"><i class=\"fa fa-minus-circle\"></i></i></a>
+                                        </td>
+                                        </tr>
+                                    ";
+                            }
+                            ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                        $_SESSION
-                    </a>
-                </h4>
-            </div>
-            <div id="collapseTwo" class="panel-collapse collapse">
-                <div class="panel-body">
-                    <?php
 
-                    var_dump($_SESSION);
 
-                    ?>
-                </div>
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                        <i class="glyphicon glyphicon-leaf"></i> $_FILES
-                    </a>
-                </h4>
-            </div>
-            <div id="collapseThree" class="panel-collapse collapse">
-                <div class="panel-body">
-                    <?php
-
-                    var_dump($_FILES);
-
-                    ?>
-                </div>
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
-                        <i class="glyphicon glyphicon-user"></i> $ocorrencia
-                    </a>
-                </h4>
-            </div>
-            <div id="collapseFour" class="panel-collapse collapse">
-                <div class="panel-body">
-                    <?php
-
-                    var_dump($ocorrencia);
-
-                    ?>
-                </div>
             </div>
         </div>
     </div>
+<?php endif; ?>
 </div>
+</div>
+</div>
+</div>
+<!-- Modal Apagar Ocorrência Pessoa Física -->
+<div class="modal fade" id="apagaOPModal" tabindex="-1" role="dialog" aria-labelledby="apagaOPLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
 
+        <div class="modal-content">
+            <form class="form-horizontal" id="form_apaga_op">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span
+                            aria-hidden="true">&times;</span><span
+                            class="sr-only">Fechar</span></button>
+
+                    <span class="modal-title" id="deletaOPModalLabel"></span>
+
+                </div>
+                <div class="modal-body">
+
+                    <div class="col-sm-12 center">
+
+                        <h5 id="del_op_confirma"></h5>
+
+                        <p></p>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    <input type="submit" class="btn btn-danger col-xs-offset-2" name="deletar-op" value="Deletar"/>
+                </div>
+
+                <input type="hidden" name="cd_pessoa_fisica" value="">
+                <input type="hidden" name="cd_ocorrencia" value="<?php echo $data['id'];?>">
+            </form>
+        </div>
+    </div>
 </div>
+<div id="responseAjaxError"></div>

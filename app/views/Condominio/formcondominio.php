@@ -170,7 +170,7 @@ $token = Token::generate();
 
                         <div class="form-group">
                             <div class="col-sm-12 clearfix">
-                                <a href="condominio/visualizar/<?php echo $data['id']; ?>" id="cancel" class="btn btn-default"><span
+                                <a href="Condominio<?php echo $data['id'] ? '/visualizar/'.$data['id']:'';?>" id="cancel" class="btn btn-default"><span
                                         class="fa fa-undo"></span> Cancelar</a>
                                 <a href="Condominio/formcondominio" id="novo" class="btn btn-success"><span class="fa fa-file"></span>
                                     Novo</a>

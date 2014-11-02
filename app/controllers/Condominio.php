@@ -8,10 +8,13 @@
 
 class Condominio extends Controller
 {
+    /** @var  CondominioModel */
+    private $condominioModel;
 
     public function __construct()
     { //o método é herdado da classe pai 'Controller'
         $this->setModel(new CondominioDAO());
+        $this->condominioModel = new CondominioModel();
     }
 
 
@@ -82,18 +85,21 @@ class Condominio extends Controller
     public function visualizar($id = null)
     {
         $id = (int)$id;
-        $condominioarr = $this->findById($id);
+        $condominioDTO = $this->findById($id);
+        $condominio = $this->condominioModel->setDTO($condominioDTO)->getArrayDados();
+        $setores = $this->condominioModel->getSetores(new SetorModel());
 
         // Exporta imagem de perfil
-        $this->exportaImagens($condominioarr);
+        $this->exportaImagens($condominioDTO);
 
         $dados = array(
             //o campo 'obs' vai ser o subtítulo
             'pagesubtitle' => '',
             //o campo 'nome' vai ser o título da página
-            'pagetitle' => $condominioarr->getNmCondominio(),
+            'pagetitle' => $condominio['nm_condominio'],
             //todos os atributos do perfil
-            'condominio' => $condominioarr
+            'condominio' => $condominio,
+            'setores' => $setores
         );
 
         $this->view = new View('Condominio', 'visualizar');

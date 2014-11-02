@@ -7,10 +7,13 @@
  */
 class Setor extends Controller
 {
+    /** @var  SetorModel */
+    private $setorModel;
 
     public function __construct()
     { //o método é herdado da classe pai 'Controller'
         $this->setModel(new SetorDAO());
+        $this->setorModel = new SetorModel();
     }
 
     public function start()
@@ -76,18 +79,20 @@ class Setor extends Controller
     public function visualizar($id = null)
     {
         $id = (int)$id;
-        $setorarr = $this->findById($id);
-
+        $setorDTO = $this->findById($id);
+        $setor = $this->setorModel->setDTO($setorDTO)->getArrayDados();
+        $apartamentos = $this->setorModel->getApartamentos(new ApartamentoModel());
         // Exporta imagem de perfil
-        $this->exportaImagens($setorarr);
+        $this->exportaImagens($setorDTO);
 
         $dados = array(
             //o campo 'obs' vai ser o subtítulo
-            'pagesubtitle' => $setorarr->getObservacao(),
+            'pagesubtitle' => $setor['condominio'],
             //o campo 'nome' vai ser o título da página
-            'pagetitle' => $setorarr->getNmSetor(),
+            'pagetitle' => $setor['nm_setor'],
             //todos os atributos do perfil
-            'setor' => $setorarr
+            'setor' => $setor,
+            'apartamentos' => $apartamentos
         );
 
         $this->view = new View('Setor', 'visualizar');

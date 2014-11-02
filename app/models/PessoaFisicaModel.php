@@ -88,15 +88,20 @@ class PessoaFisicaModel extends Model
         $resultado = array();
 
         foreach ($pessoas as $pessoa) {
-            $resultado[] = array(
-                'id' => $pessoa->getCdPessoaFisica(),
-                'nome' => $pessoa->getNmPessoaFisica(),
-                'foto' => $pessoa->getImPerfil(),
-                'email' => $pessoa->getEmail()
-            );
+            $resultado[] = $this->setDTO($pessoa)->getBasicInfo();
         }
 
         return $resultado;
+    }
+
+    public function getBasicInfo()
+    {
+        return array(
+            'id' => $this->dto->getCdPessoaFisica(),
+            'nome' => $this->dto->getNmPessoaFisica(),
+            'foto' => $this->dto->getImPerfil(),
+            'email' => $this->dto->getEmail()
+        );
     }
 
     public function getTelefones(PessoaFisicaTelefoneModel $pessoaFisicaTelefone)
@@ -111,7 +116,7 @@ class PessoaFisicaModel extends Model
 
     public function getMoradorEnderecos(MoradorEnderecoModel $moradorEndereco)
     {
-        return $moradorEndereco->getEnderecosMorador($this->dto->getCdPessoaFisica());
+        return $moradorEndereco->getPorMorador($this->dto->getCdPessoaFisica());
     }
 
     public function getOsSolicitadas(OrdemServicoModel $ordemServico)
@@ -122,6 +127,11 @@ class PessoaFisicaModel extends Model
     public function getOsExecutadas(OrdemServicoModel $ordemServico)
     {
         return $ordemServico->getPorExecutor($this->dto->getCdPessoaFisica());
+    }
+
+    public function getOcorrenciasEnvolvidas(OcorrenciaPessoaFisicaEnvolvidaModel $ocorrencias)
+    {
+        return $ocorrencias->getOcorrenciasPorPessoa(new OcorrenciaModel(), $this->dto->getCdPessoaFisica());
     }
 
     public function getDAO()

@@ -28,9 +28,35 @@ class ApartamentoModel extends Model
             'desc_apartamento' => $this->dto->getDescApartamento(),
             'cd_setor' => $this->dto->getCdSetor(),
             'setor' => $setor->getNmSetor(),
+            'setor_foto' => $setor->getImPerfil(),
             'cd_condominio' => $setor->getCdCondominio(),
-            'condominio' => $condominio->getNmCondominio()
+            'condominio' => $condominio->getNmCondominio(),
+            'condo_foto' => $condominio->getImPerfil()
         );
+    }
+
+    public function getMoradores(MoradorEnderecoModel $enderecoMorador)
+    {
+        $moradores = $enderecoMorador->getPorApartamento($this->dto->getCdApartamento());
+        $atuais = array();
+        foreach($moradores as $morador) {
+            if (in_array('Morador', $morador)) {
+                $atuais[] = $morador;
+            }
+        }
+        return $atuais;
+    }
+
+    public function getExMoradores(MoradorEnderecoModel $enderecoMorador)
+    {
+        $moradores = $enderecoMorador->getPorApartamento($this->dto->getCdApartamento());
+        $ex = array();
+        foreach($moradores as $morador) {
+            if (!in_array('Morador', $morador)) {
+                $ex[] = $morador;
+            }
+        }
+        return $ex;
     }
 
     public function getDAO()

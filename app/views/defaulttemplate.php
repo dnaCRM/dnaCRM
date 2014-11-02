@@ -87,12 +87,14 @@
                     </ul>
                 </li>
             </ul>
-            <form class="navbar-form navbar-left dropdown" id="nav-top-form-busca">
-                <input type="text" class="form-control col-lg-8 hidden" placeholder="Search">
-                <input type="text" class="form-control col-lg-8" id="pessoa_1" name="pessoa_1" placeholder="Buscar Pessoa" autocomplete="off" data-toggle="busca">
 
+            <!-- INÍCIO FORMULÁRIO DE PESQUISA -->
+            <form class="navbar-form navbar-left dropdown" id="nav-top-form-busca">
+                <input type="text" class="form-control col-lg-8" id="pessoa_1" name="pessoa_1" placeholder="Buscar Pessoa" autocomplete="off" data-toggle="busca">
                 <div id="area-do-resultado" class="dropdown-busca list-group" aria-labelledby="busca"></div>
             </form>
+            <!-- FIM FORMULÁRIO DE PESQUISA -->
+
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a><i class="glyphicon glyphicon-user"></i>

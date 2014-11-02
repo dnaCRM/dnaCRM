@@ -160,12 +160,120 @@ a:hover {
 }
 
 td > .img-circle {
-    width: 40px;
+    width: 50px;
 }
 
-.profilefoto {
+.profilefoto, .foto-lg{
     max-width: 250px;
 }
+.foto-md {
+    width: 100px;
+}
+
+.foto-sm {
+    width: 50px;
+}
+
+.profile-card {
+    border: 0px solid #000;
+    line-height: 17px;
+}
+
+.profile-card .profilefoto {
+    border: 0px solid #0075b0;
+}
+
+.profile-card .profile-card-foto-container{
+    float: left;
+    clear: both;
+}
+
+.profile-card .pcard-name {
+    padding: 0px;
+    font-size: 16px;
+    position: relative;
+    left: 10px;
+    top: 5px;
+}
+
+.profile-card .pcard-name .pcard-info{
+    font-family: 'Roboto';
+    font-size: 14px;
+    position: relative;
+    top: 10px;
+}
+.pcard-sm .profilefoto {
+    width: 50px;
+}
+
+.pcard-md .profilefoto {
+    width: 70px;
+}
+
+.pcard-lg .profilefoto {
+    width: 150px;
+}
+
+.pcard-sm {
+    width: 290px;
+}
+
+.pcard-md {
+    min-width: 300px;
+}
+
+.pcard-lg{
+    min-width: 300px;
+}
+
+.pcard-md > .panel-body{
+    padding: 10px;
+}
+
+.pcard-sm .pcard-name{
+    font-family: 'Roboto';
+    font-size: 14px;
+    position: relative;
+    left: 10px;
+    top: 5px;
+}
+
+.pcard-md .pcard-name{
+    font-family: 'Roboto';
+    font-size: 14px;
+    position: relative;
+    left: 10px;
+    top: 5px;
+}
+
+.pcard-lg .pcard-name{
+    font-family: 'Roboto';
+    font-size: 22px;
+    position: relative;
+    left: 10px;
+    top: 20px;
+}
+
+.pcard-sm .pcard-name .pcard-info{
+    font-family: 'Roboto';
+    font-size: 11px;
+    margin-left: 15%;
+}
+
+.pcard-md .pcard-name .pcard-info{
+    font-family: 'Roboto';
+    font-size: 12px;
+    position: relative;
+    top: 2px;
+}
+
+.pcard-lg .pcard-name .pcard-info{
+    font-family: 'Roboto';
+    font-size: 18px;
+    position: relative;
+    top: 15px;
+}
+
 .navbar-inverse {
     color: #b2dbfb;
 }
@@ -223,9 +331,6 @@ table.dataTable.no-footer {
     font-size: 14px;
     line-height: 1;
 }
-.profilefoto {
-    max-width: 250px;
-}
 
 /*Controle de formulários
 #pessoafisicaform .selectContainer .form-control-feedback,
@@ -261,7 +366,7 @@ table.dataTable.no-footer {
 .img-thumb-panel {
     height: 45px;
     width: 45px;
-    margin: -8px 10px 10px -8px;
+    margin: -8px 10px 10px 0px;
 }
 
 .legend {
@@ -298,7 +403,8 @@ table.dataTable.no-footer {
     font-size: 13px;
 }
 
-#nav-top-form-busca .list-group-item {
+#nav-top-form-busca .list-group-item,
+.dropdown-busca .list-group-item {
     border: 0;
     border-top: 1px solid #d0d0d0;
     line-height: 10px;

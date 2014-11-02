@@ -8,10 +8,13 @@
 
 Class Ocorrencia extends Controller
 {
+    /** @var  OcorrenciaModel */
+    private $ocorrenciaModel;
 
     public function __construct()
 { //o método é herdado da classe pai 'Controller'
     $this->setModel(new OcorrenciaDAO());
+    $this->ocorrenciaModel = new OcorrenciaModel();
 }
 
 
@@ -21,7 +24,7 @@ Class Ocorrencia extends Controller
 
     $dados = array(
         'pagesubtitle' => '',
-        'pagetitle' => 'Orcorrência',
+        'pagetitle' => 'Ocorrência',
         'list' => $ocorrencia_list
     );
 
@@ -49,9 +52,12 @@ Class Ocorrencia extends Controller
 
         $dt_ocorrencia = new DateTime($ocorrenciaarr->getDtOcorrencia());
         $ocorrenciaarr->setDtOcorrencia($dt_ocorrencia->format('d/m/Y'));
+        $ocorr_pessoas = $this->ocorrenciaModel->setDTO($ocorrenciaarr)->getPessoasEnvolvidas(new OcorrenciaPessoaFisicaEnvolvidaModel());
 
-        $dt_fim = new DateTime($ocorrenciaarr->getDtFim());
-        $ocorrenciaarr->setDtFim($dt_fim->format('d/m/Y'));
+        if ($ocorrenciaarr->getDtFim()) {
+            $dt_fim = new DateTime();
+            $ocorrenciaarr->setDtFim($dt_fim->format('d/m/Y'));
+        }
 
         $dados = array(
 
@@ -61,7 +67,8 @@ Class Ocorrencia extends Controller
             'perfil' => $ocorrenciaarr,
             'setor' => $setor,
             'informante' => $informante,
-            'estagio' => $estagio
+            'estagio' => $estagio,
+            'pessoas' => $ocorr_pessoas
         );
     } else {
         $ocorrencia = new OcorrenciaDTO();
@@ -87,16 +94,19 @@ Class Ocorrencia extends Controller
     public function visualizar($id = null)
 {
     $id = (int)$id;
-    $ocorrenciaarr = $this->findById($id);
-
+    $ocorrenciaDTO = $this->findById($id);
+    $this->ocorrenciaModel->setDTO($ocorrenciaDTO);
+    $ocorrencia = $this->ocorrenciaModel->getArrayDados();
+    $pessoas = $this->ocorrenciaModel->getPessoasEnvolvidas(new OcorrenciaPessoaFisicaEnvolvidaModel());
 
     $dados = array(
         //o campo 'obs' vai ser o subtítulo
         'pagesubtitle' => '',
         //o campo 'nome' vai ser o título da página
-        'pagetitle' => $ocorrenciaarr->getDescAssunto(),
+        'pagetitle' => $ocorrencia['desc_assunto'],
         //todos os atributos do perfil
-        'perfil' => $ocorrenciaarr
+        'ocorrencia' => $ocorrencia,
+        'pessoas' => $pessoas,
     );
 
     $this->view = new View('Ocorrencia', 'visualizar');
@@ -137,11 +147,12 @@ Class Ocorrencia extends Controller
             $ocorrencia = $this->setDados();
 
             try {
-                $this->model->gravar($ocorrencia);
-                Session::flash('sucesso_salvar_oc', 'Ocorrência salva!', 'success');
+                $obj = $this->model->gravar($ocorrencia);
+                return $obj;
             } catch (Exception $e) {
                 CodeFail((int)$e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
             }
+            return false;
         }
     }
 
@@ -151,7 +162,7 @@ Class Ocorrencia extends Controller
 {
     $dto = new OcorrenciaDTO();
 
-    $dto ->setCdOcorrencia(Input::get('ocorrencia'))
+    $dto ->setCdOcorrencia(Input::get('cd_ocorrencia'))
         ->setCdSetor(Input::get('setor'))
         ->setCdPfInformante(Input::get('informante'))
         ->setDescAssunto(Input::get('assunto'))
@@ -175,21 +186,20 @@ Class Ocorrencia extends Controller
         if (Token::check(Input::get('token'))) {
 
             $this->model->delete($dto);
-            echo 'Deletou Ocorrência';
 
         }
     }
 }
 
     protected function findById($id)
-{
-    if (!$obj = $this->model->getById($id)) {
-        /** Envia mensagem */
-        Session::flash('fail', 'Ocorrência não encontrada', 'danger');
-        /** Redireciona para página de lista de Perfis */
-        Redirect::to(SITE_URL . get_called_class());
+    {
+        if (!$obj = $this->model->getById($id)) {
+            /** Envia mensagem */
+            Session::flash('fail', 'Ocorrência não encontrada', 'danger');
+            /** Redireciona para página de lista de Perfis */
+            Redirect::to(SITE_URL . get_called_class());
+        }
+        return $obj;
     }
-    return $obj;
-}
 }
 

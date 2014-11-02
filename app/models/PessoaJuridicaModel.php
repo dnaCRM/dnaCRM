@@ -31,6 +31,30 @@ class PessoaJuridicaModel extends Model
         );
     }
 
+    public function getTelefones(PessoaJuridicaTelefoneModel $pessoaJuridicaTelefone)
+    {
+        return $pessoaJuridicaTelefone->getTelefonesPessoaJuridica($this->dto->getCdPessoaJuridica());
+    }
+
+    public function getEnderecos(PessoaJuridicaEnderecoModel $pessoaJuridicaEndereco)
+    {
+        return $pessoaJuridicaEndereco->getEnderecosPessoaJuridica($this->dto->getCdPessoaJuridica());
+    }
+
+    /**
+     * @param PessoaFisicaModel $pessoaFisica
+     * @return array
+     */
+    public function getEmpregados(PessoaFisicaModel $pessoaFisica)
+    {
+        $empregados = $pessoaFisica->getDAO()->get("cd_pessoa_juridica = {$this->dto->getCdPessoaJuridica()}");
+        $lista = array();
+        foreach($empregados as $empregado) {
+            $lista[] = $pessoaFisica->setDTO($empregado)->getArrayDados();
+        }
+        return $lista;
+    }
+
     public function getDAO()
     {
         return $this->dao;
