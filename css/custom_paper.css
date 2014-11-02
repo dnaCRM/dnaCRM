@@ -190,8 +190,18 @@ td > .img-circle {
 
 .profile-card .pcard-name {
     padding: 0px;
+    font-size: 16px;
+    position: relative;
+    left: 10px;
+    top: 5px;
 }
 
+.profile-card .pcard-name .pcard-info{
+    font-family: 'Roboto';
+    font-size: 14px;
+    position: relative;
+    top: 10px;
+}
 .pcard-sm .profilefoto {
     width: 50px;
 }
@@ -209,7 +219,7 @@ td > .img-circle {
 }
 
 .pcard-md {
-    width: 300px;
+    min-width: 300px;
 }
 
 .pcard-lg{
@@ -219,8 +229,6 @@ td > .img-circle {
 .pcard-md > .panel-body{
     padding: 10px;
 }
-
-
 
 .pcard-sm .pcard-name{
     font-family: 'Roboto';
@@ -264,7 +272,6 @@ td > .img-circle {
     font-size: 18px;
     position: relative;
     top: 15px;
-
 }
 
 .navbar-inverse {

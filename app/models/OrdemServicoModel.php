@@ -23,15 +23,19 @@ class OrdemServicoModel extends Model
         $pessoaFisicaDao = new PessoaFisicaDAO();
 
         $executor = '';
+        $executor_foto = '';
         if ($this->dto->getCdPfExecutor()) {
-            $executor = $pessoaFisicaDao->getById($this->dto->getCdPfExecutor())
-                ->getNmPessoaFisica();
+            $execDTO = $pessoaFisicaDao->getById($this->dto->getCdPfExecutor());
+            $executor = $execDTO->getNmPessoaFisica();
+            $executor_foto = $execDTO->getImPerfil();
         }
 
         $solicitante = '';
+        $solicitante_foto = '';
         if ($this->dto->getCdPfSolicitante()) {
-            $solicitante = $pessoaFisicaDao->getById($this->dto->getCdPfSolicitante())
-                ->getNmPessoaFisica();
+            $soDTO = $pessoaFisicaDao->getById($this->dto->getCdPfSolicitante());
+            $solicitante = $soDTO->getNmPessoaFisica();
+            $solicitante_foto = $soDTO->getImPerfil();
         }
 
         $ocorrencia = '';
@@ -56,8 +60,10 @@ class OrdemServicoModel extends Model
             'desc_ocorrencia' => $ocorrencia,
             'cd_pf_executor' => $this->dto->getCdPfExecutor(),
             'executor' => $executor,
+            'executor_foto' => $executor_foto,
             'cd_pf_solicitante' => $this->dto->getCdPfSolicitante(),
             'solicitante' => $solicitante,
+            'solicitante_foto' => $solicitante_foto,
             'cd_catg_estagio' => $this->dto->getCdCatgEstagio(),
             'cd_vl_catg_estagio' => $this->dto->getCdVlCatgEstagio(),
             'estagio' => $estagio,

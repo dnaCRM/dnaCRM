@@ -72,9 +72,9 @@ $token = Token::generate();
                                         </div>
                                         <div class="form-group">
                                             <div class="col-sm-12">
-                                                <label for="setor" class="control-label">Setor</label>
+                                                <label for="m_end_setor" class="control-label">Setor</label>
 
-                                                <select class="form-control" name="setor" id="setor">
+                                                <select class="form-control" name="setor" id="m_end_setor">
                                                     <option value="">--</option>
                                                 </select>
                                             </div>

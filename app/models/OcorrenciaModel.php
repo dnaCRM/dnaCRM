@@ -21,9 +21,19 @@ class OcorrenciaModel extends Model
     public function getArrayDados()
     {
         $informante = (new PessoaFisicaDAO())->getById($this->dto->getCdPfInformante());
+        $cd_condominio = '';
+        $condominio = '';
+        $condominio_foto = '';
         $setor = '';
+        $setor_foto = '';
         if ($this->dto->getCdSetor()) {
-            $setor = (new SetorDAO())->getById($this->dto->getCdSetor())->getNmSetor();
+            $setorDTO= (new SetorDAO())->getById($this->dto->getCdSetor());
+            $condominioDTO = (new CondominioDAO())->getById($setorDTO->getCdCondominio());
+            $setor = $setorDTO->getNmSetor();
+            $setor_foto = $setorDTO->getImPerfil();
+            $cd_condominio = $condominioDTO->getCdCondominio();
+            $condominio = $condominioDTO->getNmCondominio();
+            $condominio_foto = $condominioDTO->getImPerfil();
         }
 
         $categoria = new CategoriaValorDAO();
@@ -37,8 +47,13 @@ class OcorrenciaModel extends Model
             'cd_ocorrencia' => $this->dto->getCdOcorrencia(),
             'cd_setor' => $this->dto->getCdSetor(),
             'setor' => $setor,
+            'setor_foto' => $setor_foto,
+            'cd_condominio' => $cd_condominio,
+            'condominio' => $condominio,
+            'condominio_foto' => $condominio_foto,
             'cd_pf_informante' => $this->dto->getCdPfInformante(),
             'informante' => $informante->getNmPessoaFisica(),
+            'informante_foto' => $informante->getImPerfil(),
             'desc_assunto' => $this->dto->getDescAssunto(),
             'desc_ocorrencia' => $this->dto->getDescOcorrencia(),
             'dt_ocorrencia' => (new DateTime($this->dto->getDtOcorrencia()))->format('d/m/Y'),

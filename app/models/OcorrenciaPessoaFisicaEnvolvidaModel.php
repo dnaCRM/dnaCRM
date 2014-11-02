@@ -45,7 +45,7 @@ class OcorrenciaPessoaFisicaEnvolvidaModel extends Model
         $lista = array();
         foreach($pessoas as $pessoa) {
             $pessoa = $pessoaFisicaModel->getDAO()->getById($pessoa->getCdPessoaFisica());
-            $lista[] = $pessoaFisicaModel->setDTO($pessoa)->getArrayDados();
+            $lista[] = $pessoaFisicaModel->setDTO($pessoa)->getBasicInfo();
         }
         return $lista;
     }

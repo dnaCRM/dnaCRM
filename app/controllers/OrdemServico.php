@@ -8,10 +8,13 @@
 
 class OrdemServico extends Controller
 {
+    /** @var  OrdemServicoModel */
+    private $ordemServicoModel;
 
     public function __construct()
     { //o método é herdado da classe pai 'Controller'
         $this->setModel(new OrdemServicoDAO());
+        $this->ordemServicoModel = new OrdemServicoModel();
     }
 
 
@@ -91,16 +94,17 @@ class OrdemServico extends Controller
     public function visualizar($id = null)
     {
         $id = (int)$id;
-        $perfilarr = $this->findById($id);
-
+        $ordemServicoDTO = $this->findById($id);
+        $this->ordemServicoModel->setDTO($ordemServicoDTO);
+        $ordemServico = $this->ordemServicoModel->getArrayDados();
 
         $dados = array(
             //o campo 'obs' vai ser o subtítulo
             'pagesubtitle' => '',
             //o campo 'nome' vai ser o título da página
-            'pagetitle' => $perfilarr->getDescAssunto(),
+            'pagetitle' => $ordemServico['desc_assunto'],
             //todos os atributos do perfil
-            'perfil' => $perfilarr
+            'ordem_servico' => $ordemServico
         );
 
         $this->view = new View('OrdemServico', 'visualizar');

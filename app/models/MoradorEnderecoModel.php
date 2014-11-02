@@ -31,13 +31,15 @@ class MoradorEnderecoModel extends Model
         $dt_saida = ($this->dto->getDtSaida() ?
             (new DateTime($this->dto->getDtSaida()))->format('d/m/Y') : 'Morador');
 
-        $pessoa = (new PessoaFisicaDAO())->getById($this->dto->getCdPessoaFisica())
-            ->getNmPessoaFisica();
+        $pessoa = (new PessoaFisicaDAO())->getById($this->dto->getCdPessoaFisica());
+        $pessoaNome = $pessoa->getNmPessoaFisica();
+        $pessoaFoto = $pessoa->getImPerfil();
 
         return array(
             'id_m_end' => $this->dto->getNrSequencia(),
             'cd_pessoa_fisica' => $this->dto->getCdPessoaFisica(),
-            'pessoa' => $pessoa,
+            'pessoa' => $pessoaNome,
+            'pessoa_foto' => $pessoaFoto,
             'm_end_dt_entrada' => $dt_entrada,
             'm_end_dt_saida' => $dt_saida,
             'cd_apartamento' => $this->dto->getCdApartamento(),

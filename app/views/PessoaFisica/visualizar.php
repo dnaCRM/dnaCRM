@@ -77,6 +77,7 @@
                     <tr>
                         <th>Nº da OS</th>
                         <th>Assunto</th>
+                        <th>Status</th>
                         <th>Inicio</th>
                         <th>Fim</th>
                     </tr>
@@ -89,6 +90,7 @@
                     <tr>
                         <td>{$os['cd_ordem_servico']}</td>
                         <td><a href=\"OrdemServico/visualizar/{$os['cd_ordem_servico']}\">{$os['desc_assunto']}</a></td>
+                        <td>{$os['estagio']}</td>
                         <td>{$os['dt_inicio']}</td>
                         <td>{$os['dt_fim']}</td>
                     </tr>";

@@ -88,15 +88,20 @@ class PessoaFisicaModel extends Model
         $resultado = array();
 
         foreach ($pessoas as $pessoa) {
-            $resultado[] = array(
-                'id' => $pessoa->getCdPessoaFisica(),
-                'nome' => $pessoa->getNmPessoaFisica(),
-                'foto' => $pessoa->getImPerfil(),
-                'email' => $pessoa->getEmail()
-            );
+            $resultado[] = $this->setDTO($pessoa)->getBasicInfo();
         }
 
         return $resultado;
+    }
+
+    public function getBasicInfo()
+    {
+        return array(
+            'id' => $this->dto->getCdPessoaFisica(),
+            'nome' => $this->dto->getNmPessoaFisica(),
+            'foto' => $this->dto->getImPerfil(),
+            'email' => $this->dto->getEmail()
+        );
     }
 
     public function getTelefones(PessoaFisicaTelefoneModel $pessoaFisicaTelefone)

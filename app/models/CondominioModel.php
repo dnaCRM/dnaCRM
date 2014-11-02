@@ -40,6 +40,17 @@ class CondominioModel extends Model
         );
     }
 
+    public function getSetores(SetorModel $setorModel)
+    {
+        $setores = $setorModel->getDAO()->get("cd_condominio = {$this->dto->getCdCondominio()}");
+
+        $lista = array();
+        foreach ($setores as $setor) {
+            $lista[] = $setorModel->setDTO($setor)->getArrayDados();
+        }
+        return $lista;
+    }
+
     public function getDAO()
     {
         return $this->dao;

@@ -94,16 +94,19 @@ Class Ocorrencia extends Controller
     public function visualizar($id = null)
 {
     $id = (int)$id;
-    $ocorrenciaarr = $this->findById($id);
-
+    $ocorrenciaDTO = $this->findById($id);
+    $this->ocorrenciaModel->setDTO($ocorrenciaDTO);
+    $ocorrencia = $this->ocorrenciaModel->getArrayDados();
+    $pessoas = $this->ocorrenciaModel->getPessoasEnvolvidas(new OcorrenciaPessoaFisicaEnvolvidaModel());
 
     $dados = array(
         //o campo 'obs' vai ser o subtítulo
         'pagesubtitle' => '',
         //o campo 'nome' vai ser o título da página
-        'pagetitle' => $ocorrenciaarr->getDescAssunto(),
+        'pagetitle' => $ocorrencia['desc_assunto'],
         //todos os atributos do perfil
-        'perfil' => $ocorrenciaarr
+        'ocorrencia' => $ocorrencia,
+        'pessoas' => $pessoas,
     );
 
     $this->view = new View('Ocorrencia', 'visualizar');

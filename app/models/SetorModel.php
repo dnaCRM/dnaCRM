@@ -26,9 +26,21 @@ class SetorModel extends Model
             'nm_setor' => $this->dto->getNmSetor(),
             'cd_condominio' => $this->dto->getCdCondominio(),
             'condominio' => $condominio->getNmCondominio(),
-            'obervacao' => $this->dto->getObservacao(),
+            'condo_foto' => $condominio->getImPerfil(),
+            'observacao' => $this->dto->getObservacao(),
             'im_perfil' => $this->dto->getImPerfil()
         );
+    }
+
+    public function getApartamentos(ApartamentoModel $apartamentoModel)
+    {
+        $apartamentos = $apartamentoModel->getDAO()->get("cd_setor = {$this->dto->getCdSetor()}");
+
+        $lista = array();
+        foreach( $apartamentos as $apartamento) {
+            $lista[] = $apartamentoModel->setDTO($apartamento)->getArrayDados();
+        }
+        return $lista;
     }
 
     public function getDAO()
