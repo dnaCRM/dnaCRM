@@ -57,7 +57,7 @@
                 foreach ($data['empregados'] as $empregado) {
 
                     echo "
-                    <div class=\"row profile-card pcard-sm pull-left\">
+                    <div class=\"profile-card pcard-md\">
                         <div class=\"panel-body\">
                         <div class=\"profile-card-foto-container\">
                             <img class=\"img-circle profilefoto\" src=\"{$empregado['im_perfil']}\">
@@ -68,7 +68,6 @@
                                     <span class=\"fa fa-user\"></span> <span class=\"text-info\">{$empregado['profissao']}</span>.
                             </div>
                             </div>
-
                         </div>
                     </div>";
                 }

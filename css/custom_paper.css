@@ -215,7 +215,7 @@ td > .img-circle {
 }
 
 .pcard-sm {
-    width: 290px;
+    min-width: 290px;
 }
 
 .pcard-md {

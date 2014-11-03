@@ -1367,6 +1367,9 @@ $('#form_pj_telefones').bootstrapValidator({
                 '</td></tr>';
             $(html).appendTo('#tb_pj_telefones').hide().fadeIn();
             bv.resetForm(true);
+        },
+        error: function (data) {
+            $(data.responseText).appendTo('#responseAjaxError');
         }
     });
     return false;
