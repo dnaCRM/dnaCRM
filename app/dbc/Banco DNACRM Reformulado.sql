@@ -43,7 +43,7 @@ CREATE TABLE TB_CATEGORIA(
 CREATE TABLE TB_CATEGORIA_VALOR(
   CD_VL_CATEGORIA SERIAL,
   CD_CATEGORIA INTEGER CONSTRAINT NN_TB_CATEGORIA_VALOR_CD_CATEGORIA NOT NULL,
-  DESC_VL_CATG VARCHAR(25) CONSTRAINT NN_TB_CATEGORIA_VALOR_DESC_VL_CATG NOT NULL,
+  DESC_VL_CATG VARCHAR(40) CONSTRAINT NN_TB_CATEGORIA_VALOR_DESC_VL_CATG NOT NULL,
   CD_USUARIO_CRIACAO INTEGER,
   DT_USUARIO_CRIACAO TIMESTAMP,   
   CD_USUARIO_ATUALIZA INTEGER,
@@ -127,6 +127,8 @@ CREATE TABLE TB_OCORRENCIA(
   DESC_CONCLUSAO TEXT,
   CD_CATG_ESTAGIO INTEGER CONSTRAINT NN_TB_OCORRENCIA_CD_CATG_ESTAGIO NOT NULL,
   CD_VL_CATG_ESTAGIO INTEGER CONSTRAINT NN_TB_OCORRENCIA_CD_CATG_VL_ESTAGIO NOT NULL,
+  CD_CATG_TIPO INTEGER CONSTRAINT NN_TB_OCORRENCIA_CD_CATG_TIPO NOT NULL,
+  CD_VL_CATG_TIPO INTEGER CONSTRAINT NN_TB_OCORRENCIA_CD_CATG_TIPO NOT NULL,
   CD_USUARIO_CRIACAO INTEGER CONSTRAINT NN_TB_OCORRENCIA_CD_USUARIO_CRIACAO NOT NULL,
   DT_USUARIO_CRIACAO TIMESTAMP CONSTRAINT NN_TB_OCORRENCIA_DT_USUARIO_CRIACAO NOT NULL,   
   CD_USUARIO_ATUALIZA INTEGER CONSTRAINT NN_TB_OCORRENCIA_CD_USUARIO_ATUALIZA NOT NULL,
@@ -159,6 +161,8 @@ CREATE TABLE TB_ORDEM_SERVICO(
   CD_CATG_ESTAGIO INTEGER CONSTRAINT NN_TB_ORDEM_SERVICO_CD_CATG_ESTAGIO NOT NULL,
   CD_VL_CATG_ESTAGIO INTEGER CONSTRAINT NN_TB_ORDEM_SERVICO_CD_VL_CATG_ESTAGIO NOT NULL,
   DESC_CONCLUSAO TEXT,
+  CD_CATG_TIPO INTEGER CONSTRAINT NN_TB_ORDEM_SERVICO_CD_CATG_TIPO NOT NULL,
+  CD_VL_CATG_TIPO INTEGER CONSTRAINT NN_TB_ORDEM_SERVICO_CD_CATG_TIPO NOT NULL,
   CD_USUARIO_CRIACAO INTEGER CONSTRAINT NN_TB_ORDEM_SERVICO_CD_USUARIO_CRIACAO NOT NULL,
   DT_USUARIO_CRIACAO TIMESTAMP CONSTRAINT NN_TB_ORDEM_SERVICO_DT_USUARIO_CRIACAO NOT NULL,   
   CD_USUARIO_ATUALIZA INTEGER CONSTRAINT NN_TB_ORDEM_SERVICO_CD_USUARIO_ATUALIZA NOT NULL,
@@ -502,6 +506,13 @@ FOREIGN KEY(CD_CATG_ESTADO,CD_VL_CATG_ESTADO) REFERENCES TB_CATEGORIA_VALOR(CD_C
 ALTER TABLE TB_PJ_ENDERECO ADD CONSTRAINT FK_TB_PJ_ENDERECO_CD_CATG_ESTADO_CD_CATG_VL_ESTADO  
 FOREIGN KEY(CD_CATG_ESTADO,CD_VL_CATG_ESTADO) REFERENCES TB_CATEGORIA_VALOR(CD_CATEGORIA,CD_VL_CATEGORIA);
 
+ALTER TABLE tb_ocorrencia ADD CONSTRAINT fk_tb_ocorrencia_cd_catg_tipo_cd_vl_catg_tipo 
+FOREIGN KEY(cd_catg_tipo,cd_vl_catg_tipo) REFERENCES tb_categoria_valor(cd_categoria,cd_vl_categoria);
+
+ALTER TABLE tb_ordem_servico ADD CONSTRAINT fk_tb_ordem_servico_cd_catg_tipo_cd_catg_vl_tipo 
+FOREIGN KEY(cd_catg_tipo,cd_vl_catg_tipo) REFERENCES tb_categoria_valor(cd_categoria,cd_vl_categoria);
+
+
 ALTER TABLE TB_OCORRENCIA ADD CONSTRAINT FK_TB_OCORRENCIA_CD_SETOR
 FOREIGN KEY(CD_SETOR) REFERENCES TB_SETOR(CD_SETOR);
 
@@ -681,7 +692,7 @@ CREATE TABLE TB_CATEGORIA_VALOR_LOG(
   COMANDO_EXECUTADO CHAR(1) CONSTRAINT NN_TB_CATEGORIA_VALOR_LOG_COMANDO_EXECUTADO NOT NULL,   	
   CD_VL_CATEGORIA INTEGER CONSTRAINT NN_TB_CATEGORIA_VALOR_LOG_NR_SEQ_LOG NOT NULL,
   CD_CATEGORIA INTEGER CONSTRAINT NN_TB_CATEGORIA_VALOR_LOG_CD_CATEGORIA NOT NULL,
-  DESC_VL_CATG VARCHAR(25) CONSTRAINT NN_TB_CATEGORIA_VALOR_LOG_DESC_VL_CATG NOT NULL,
+  DESC_VL_CATG VARCHAR(40) CONSTRAINT NN_TB_CATEGORIA_VALOR_LOG_DESC_VL_CATG NOT NULL,
   CD_USUARIO_CRIACAO INTEGER CONSTRAINT NN_TB_CATEGORIA_VALOR_LOG_CD_USUARIO_CRIACAO NOT NULL,
   DT_USUARIO_CRIACAO TIMESTAMP CONSTRAINT NN_TB_CATEGORIA_VALOR_LOG_DT_USUARIO_CRIACAO NOT NULL,   
   CD_USUARIO_ATUALIZA INTEGER CONSTRAINT NN_TB_CATEGORIA_VALOR_LOG_CD_USUARIO_ATUALIZA NOT NULL,
@@ -777,6 +788,8 @@ CREATE TABLE TB_OCORRENCIA_LOG(
   DESC_CONCLUSAO TEXT,
   CD_CATG_ESTAGIO INTEGER CONSTRAINT NN_TB_OCORRENCIA_LOG_CD_CATG_ESTAGIO NOT NULL,
   CD_VL_CATG_ESTAGIO INTEGER CONSTRAINT NN_TB_OCORRENCIA_LOG_CD_CATG_VL_ESTAGIO NOT NULL,
+  CD_CATG_TIPO INTEGER CONSTRAINT NN_TB_OCORRENCIA_LOG_CD_CATG_TIPO NOT NULL,
+  CD_VL_CATG_TIPO INTEGER CONSTRAINT NN_TB_OCORRENCIA_LOG_CD_CATG_TIPO NOT NULL,
   CD_USUARIO_CRIACAO INTEGER CONSTRAINT NN_TB_OCORRENCIA_LOG_CD_USUARIO_CRIACAO NOT NULL,
   DT_USUARIO_CRIACAO TIMESTAMP CONSTRAINT NN_TB_OCORRENCIA_LOG_DT_USUARIO_CRIACAO NOT NULL,   
   CD_USUARIO_ATUALIZA INTEGER CONSTRAINT NN_TB_OCORRENCIA_LOG_CD_USUARIO_ATUALIZA NOT NULL,
@@ -815,8 +828,10 @@ CREATE TABLE TB_ORDEM_SERVICO_LOG(
   DT_INICIO TIMESTAMP CONSTRAINT NN_TB_ORDEM_SERVICO_LOG_DT_INICIO NOT NULL,
   DT_FIM TIMESTAMP,
   CD_CATG_ESTAGIO INTEGER CONSTRAINT NN_TB_ORDEM_SERVICO_LOG_CD_CATG_ESTAGIO NOT NULL,
-  CD_VL_CATG_ESTAGIO INTEGER CONSTRAINT NN_TB_ORDEM_SERVICO_LOG_CD_VL_CATG_ESTAGIO NOT NULL,
+  CD_VL_CATG_ESTAGIO INTEGER CONSTRAINT NN_TB_ORDEM_SERVICO_LOG_CD_VL_CATG_ESTAGIO NOT NULL,  
   DESC_CONCLUSAO TEXT,
+  CD_CATG_TIPO INTEGER CONSTRAINT NN_TB_ORDEM_SERVICO_LOG_CD_CATG_TIPO NOT NULL,
+  CD_VL_CATG_TIPO INTEGER CONSTRAINT NN_TB_ORDEM_SERVICO_LOG_CD_CATG_TIPO NOT NULL,
   CD_USUARIO_CRIACAO INTEGER CONSTRAINT NN_TB_ORDEM_SERVICO_LOG_CD_USUARIO_CRIACAO NOT NULL,
   DT_USUARIO_CRIACAO TIMESTAMP CONSTRAINT NN_TB_ORDEM_SERVICO_LOG_DT_USUARIO_CRIACAO NOT NULL,   
   CD_USUARIO_ATUALIZA INTEGER CONSTRAINT NN_TB_ORDEM_SERVICO_LOG_CD_USUARIO_ATUALIZA NOT NULL,
@@ -1399,7 +1414,30 @@ CREATE GROUP administrador;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_vaga_garagem TO administrador;
 	GRANT SELECT, INSERT ON tb_vaga_garagem_log TO administrador;
 	GRANT SELECT, USAGE, UPDATE ON seq_tb_vaga_garagem_log TO administrador;
-
+	GRANT SELECT, USAGE, UPDATE ON  tb_apartamento_cd_apartamento_seq TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON  tb_categoria_cd_categoria_seq TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON  tb_categoria_valor_cd_vl_categoria_seq TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON  tb_condominio_cd_condominio_seq TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON  tb_instituicao_ensino_cd_instituicao_seq TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON  tb_itens_orcamento_nr_sequencia_seq TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON  tb_morador_endereco_nr_sequencia_seq TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON  tb_ocorrencia_cd_ocorrencia_seq TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON  tb_ocorrencia_pf_envolvida_cd_ocorrencia_seq TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON  tb_orcamento_cd_orcamento_seq TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON  tb_ordem_servico_cd_ordem_servico_seq TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON  tb_pessoa_fisica_cd_pessoa_fisica_seq TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON  tb_pessoa_juridica_cd_pessoa_juridica_seq TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON  tb_pf_endereco_nr_sequencia_seq TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON  tb_pf_telefone_cd_pf_fone_seq TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON  tb_pj_endereco_nr_sequencia_seq TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON  tb_pj_telefone_cd_pj_fone_seq TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON  tb_profissao_cd_profissao_seq TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON  tb_servico_adicional_cd_serv_adicional_seq TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON  tb_setor_cd_setor_seq TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON  tb_setor_log_cd_setor_seq TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON  tb_vaga_garagem_cd_vaga_seq TO administrador;
+		
+	
 DELETE 
 FROM pg_authid
 WHERE rolname = 'atendente';
@@ -1408,70 +1446,93 @@ CREATE GROUP atendente;
 
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_apartamento TO atendente;
 	GRANT INSERT ON tb_apartamento_log TO atendente;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_apartamento_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_apartamento_log TO atendente;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_categoria TO atendente;
 	GRANT INSERT ON tb_categoria_log TO atendente;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_categoria_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_categoria_log TO atendente;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_categoria_valor TO atendente;
 	GRANT INSERT ON tb_categoria_valor_log TO atendente;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_categoria_valor_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_categoria_valor_log TO atendente;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_condominio TO atendente;
 	GRANT INSERT ON tb_condominio_log TO atendente;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_condominio_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_condominio_log TO atendente;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_instituicao_ensino TO atendente;
 	GRANT INSERT ON tb_instituicao_ensino_log TO atendente;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_instituicao_ensino_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_instituicao_ensino_log TO atendente;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_itens_orcamento TO atendente;
 	GRANT INSERT  ON tb_itens_orcamento_log TO atendente;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_itens_orcamento_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_itens_orcamento_log TO atendente;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_morador_endereco TO atendente;
 	GRANT INSERT ON tb_morador_endereco_log TO atendente;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_morador_endereco_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_morador_endereco_log TO atendente;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_ocorrencia TO atendente;
 	GRANT INSERT ON tb_ocorrencia_log TO atendente;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_ocorrencia_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_ocorrencia_log TO atendente;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_ocorrencia_pf_envolvida TO atendente;
 	GRANT INSERT ON tb_ocorrencia_pf_envolvida_log TO atendente;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_ocorrencia_pf_envolvida_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_ocorrencia_pf_envolvida_log TO atendente;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_orcamento TO atendente;
 	GRANT INSERT ON tb_orcamento_log TO atendente;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_orcamento_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_orcamento_log TO atendente;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_ordem_servico TO atendente;
 	GRANT INSERT ON tb_ordem_servico_log TO atendente;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_ordem_servico_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_ordem_servico_log TO atendente;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_pessoa_fisica TO atendente;
 	GRANT INSERT ON tb_pessoa_fisica_log TO atendente;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_pessoa_fisica_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_pessoa_fisica_log TO atendente;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_pessoa_juridica TO atendente;
 	GRANT INSERT ON tb_pessoa_juridica_log TO atendente;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_pessoa_juridica_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_pessoa_juridica_log TO atendente;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_pf_endereco TO atendente;
 	GRANT INSERT ON tb_pf_endereco_log TO atendente;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_pf_endereco_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_pf_endereco_log TO atendente;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_pf_telefone TO atendente;
 	GRANT INSERT ON tb_pf_telefone_log TO atendente;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_pf_telefone_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_pf_telefone_log TO atendente;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_pj_endereco TO atendente;
 	GRANT INSERT ON tb_pj_endereco_log TO atendente;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_pj_endereco_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_pj_endereco_log TO atendente;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_pj_telefone TO atendente;
 	GRANT INSERT ON tb_pj_telefone_log TO atendente;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_pj_telefone_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_pj_telefone_log TO atendente;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_profissao TO atendente;
 	GRANT INSERT ON tb_profissao_log TO atendente;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_profissao_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_profissao_log TO atendente;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_relacionados TO atendente;
 	GRANT INSERT ON tb_relacionados_log TO atendente;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_relacionados_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_relacionados_log TO atendente;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_servico_adicional TO atendente;
 	GRANT INSERT ON tb_servico_adicional_log TO atendente;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_servico_adicional_log  TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_servico_adicional_log  TO atendente;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_setor TO atendente;
 	GRANT INSERT ON tb_setor_log TO atendente;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_setor_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_setor_log TO atendente;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_vaga_garagem TO atendente;
 	GRANT INSERT ON tb_vaga_garagem_log TO atendente;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_vaga_garagem_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_vaga_garagem_log TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_vaga_garagem_log TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON  tb_apartamento_cd_apartamento_seq TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON  tb_categoria_cd_categoria_seq TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON  tb_categoria_valor_cd_vl_categoria_seq TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON  tb_condominio_cd_condominio_seq TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON  tb_instituicao_ensino_cd_instituicao_seq TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON  tb_itens_orcamento_nr_sequencia_seq TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON  tb_morador_endereco_nr_sequencia_seq TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON  tb_ocorrencia_cd_ocorrencia_seq TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON  tb_ocorrencia_pf_envolvida_cd_ocorrencia_seq TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON  tb_orcamento_cd_orcamento_seq TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON  tb_ordem_servico_cd_ordem_servico_seq TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON  tb_pessoa_fisica_cd_pessoa_fisica_seq TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON  tb_pessoa_juridica_cd_pessoa_juridica_seq TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON  tb_pf_endereco_nr_sequencia_seq TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON  tb_pf_telefone_cd_pf_fone_seq TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON  tb_pj_endereco_nr_sequencia_seq TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON  tb_pj_telefone_cd_pj_fone_seq TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON  tb_profissao_cd_profissao_seq TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON  tb_servico_adicional_cd_serv_adicional_seq TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON  tb_setor_cd_setor_seq TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON  tb_setor_log_cd_setor_seq TO atendente;
+	GRANT SELECT, USAGE, UPDATE ON  tb_vaga_garagem_cd_vaga_seq TO atendente;
 
 DELETE 
 FROM pg_authid
@@ -1481,70 +1542,94 @@ CREATE GROUP usuario;
 
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_apartamento TO usuario;
 	GRANT INSERT ON tb_apartamento_log TO usuario;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_apartamento_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_apartamento_log TO usuario;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_categoria TO usuario;
 	GRANT INSERT ON tb_categoria_log TO usuario;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_categoria_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_categoria_log TO usuario;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_categoria_valor TO usuario;
 	GRANT INSERT ON tb_categoria_valor_log TO usuario;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_categoria_valor_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_categoria_valor_log TO usuario;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_condominio TO usuario;
 	GRANT INSERT ON tb_condominio_log TO usuario;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_condominio_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_condominio_log TO usuario;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_instituicao_ensino TO usuario;
 	GRANT INSERT ON tb_instituicao_ensino_log TO usuario;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_instituicao_ensino_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_instituicao_ensino_log TO usuario;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_itens_orcamento TO usuario;
 	GRANT INSERT  ON tb_itens_orcamento_log TO usuario;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_itens_orcamento_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_itens_orcamento_log TO usuario;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_morador_endereco TO usuario;
 	GRANT INSERT ON tb_morador_endereco_log TO usuario;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_morador_endereco_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_morador_endereco_log TO usuario;
 	GRANT SELECT ON tb_ocorrencia TO usuario;
 	GRANT INSERT ON tb_ocorrencia_log TO usuario;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_ocorrencia_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_ocorrencia_log TO usuario;
 	GRANT SELECT ON tb_ocorrencia_pf_envolvida TO usuario;
 	GRANT INSERT ON tb_ocorrencia_pf_envolvida_log TO usuario;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_ocorrencia_pf_envolvida_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_ocorrencia_pf_envolvida_log TO usuario;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_orcamento TO usuario;
 	GRANT INSERT ON tb_orcamento_log TO usuario;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_orcamento_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_orcamento_log TO usuario;
 	GRANT SELECT ON tb_ordem_servico TO usuario;
 	GRANT INSERT ON tb_ordem_servico_log TO usuario;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_ordem_servico_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_ordem_servico_log TO usuario;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_pessoa_fisica TO usuario;
 	GRANT INSERT ON tb_pessoa_fisica_log TO usuario;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_pessoa_fisica_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_pessoa_fisica_log TO usuario;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_pessoa_juridica TO usuario;
 	GRANT INSERT ON tb_pessoa_juridica_log TO usuario;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_pessoa_juridica_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_pessoa_juridica_log TO usuario;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_pf_endereco TO usuario;
 	GRANT INSERT ON tb_pf_endereco_log TO usuario;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_pf_endereco_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_pf_endereco_log TO usuario;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_pf_telefone TO usuario;
 	GRANT INSERT ON tb_pf_telefone_log TO usuario;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_pf_telefone_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_pf_telefone_log TO usuario;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_pj_endereco TO usuario;
 	GRANT INSERT ON tb_pj_endereco_log TO usuario;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_pj_endereco_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_pj_endereco_log TO usuario;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_pj_telefone TO usuario;
 	GRANT INSERT ON tb_pj_telefone_log TO usuario;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_pj_telefone_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_pj_telefone_log TO usuario;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_profissao TO usuario;
 	GRANT INSERT ON tb_profissao_log TO usuario;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_profissao_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_profissao_log TO usuario;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_relacionados TO usuario;
 	GRANT INSERT ON tb_relacionados_log TO usuario;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_relacionados_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_relacionados_log TO usuario;
 	GRANT SELECT ON tb_servico_adicional TO usuario;
 	GRANT INSERT ON tb_servico_adicional_log TO usuario;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_servico_adicional_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_servico_adicional_log TO usuario;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_setor TO usuario;
 	GRANT INSERT ON tb_setor_log TO usuario;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_setor_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_setor_log TO usuario;
 	GRANT SELECT, INSERT, UPDATE, DELETE ON tb_vaga_garagem TO usuario;
 	GRANT INSERT ON tb_vaga_garagem_log TO usuario;
-	GRANT SELECT, USAGE, UPDATE ON seq_tb_vaga_garagem_log TO administrador;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_vaga_garagem_log TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON seq_tb_vaga_garagem_log TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON  tb_apartamento_cd_apartamento_seq TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON  tb_categoria_cd_categoria_seq TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON  tb_categoria_valor_cd_vl_categoria_seq TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON  tb_condominio_cd_condominio_seq TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON  tb_instituicao_ensino_cd_instituicao_seq TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON  tb_itens_orcamento_nr_sequencia_seq TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON  tb_morador_endereco_nr_sequencia_seq TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON  tb_ocorrencia_cd_ocorrencia_seq TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON  tb_ocorrencia_pf_envolvida_cd_ocorrencia_seq TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON  tb_orcamento_cd_orcamento_seq TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON  tb_ordem_servico_cd_ordem_servico_seq TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON  tb_pessoa_fisica_cd_pessoa_fisica_seq TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON  tb_pessoa_juridica_cd_pessoa_juridica_seq TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON  tb_pf_endereco_nr_sequencia_seq TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON  tb_pf_telefone_cd_pf_fone_seq TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON  tb_pj_endereco_nr_sequencia_seq TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON  tb_pj_telefone_cd_pj_fone_seq TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON  tb_profissao_cd_profissao_seq TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON  tb_servico_adicional_cd_serv_adicional_seq TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON  tb_setor_cd_setor_seq TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON  tb_setor_log_cd_setor_seq TO usuario;
+	GRANT SELECT, USAGE, UPDATE ON  tb_vaga_garagem_cd_vaga_seq TO usuario;
+	
 	
 INSERT INTO TB_PESSOA_FISICA(
 NM_PESSOA_FISICA,
@@ -2025,7 +2110,9 @@ VALUES
 ('Tipo de Instituição'),
 ('Endereço'),
 ('Operadora'),
-('Serviço Adicional');
+('Serviço Adicional'),
+('Tipo Ocorrência'),
+('Tipo Ordem de Serviço');
 
 
 INSERT INTO TB_CATEGORIA_VALOR(
@@ -2147,7 +2234,16 @@ VALUES
 (10,'Embratel'),
 (10,'Net'),
 (11,'Internet'),
-(11,'Vaga de Garagem');
+(11,'Vaga de Garagem'),
+(12,'Barulho no apartamento'),
+(12,'Problema com visitante'),
+(12,'Ácesso sem chip'),
+(12,'Estacionamento em vaga errada'),
+(12,'Danos ao patrimônio'),
+(12,'Outros'),
+(13,'Zeladoria'),
+(13,'Tecnologia'),
+(13,'Outros');
 
 INSERT INTO TB_PROFISSAO(
 NM_PROFISSAO,
@@ -2524,6 +2620,8 @@ desc_ocorrencia,
 dt_ocorrencia,
 cd_catg_estagio,
 cd_vl_catg_estagio,
+cd_catg_tipo,
+cd_vl_catg_tipo,
 cd_usuario_criacao,
 dt_usuario_criacao,
 cd_usuario_atualiza,
@@ -2531,7 +2629,7 @@ dt_usuario_atualiza)
 VALUES
 (1,'vidro quebrado',
 'O administrador quebrou o vidro',
-now(), 3, 55,
+now(), 3, 55, 12, 122,
 1,now(),1,now());
 
 INSERT INTO tb_orcamento(
@@ -2569,13 +2667,15 @@ desc_ordem_servico,
 dt_inicio,
 cd_catg_estagio,
 cd_vl_catg_estagio,
+cd_catg_tipo,
+cd_vl_catg_tipo,
 cd_usuario_criacao,
 dt_usuario_criacao,
 cd_usuario_atualiza,
 dt_usuario_atualiza)
 VALUES
 (1,2,'Internet','solicito a instalação de internet',
-now(),2,52,1,now(),1,now());
+now(),2,52,13,124,1,now(),1,now());
 
 --triggers
 
