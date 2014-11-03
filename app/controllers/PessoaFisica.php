@@ -180,6 +180,7 @@ class PessoaFisica extends Controller
 
                 try {
                     $obj = $this->model->gravar($pessoaFisica);
+                    $this->exportaImagens($obj);
                     return $obj;
                 } catch (Exception $e) {
                     CodeFail((int)$e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());

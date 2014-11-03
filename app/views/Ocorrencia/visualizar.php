@@ -31,7 +31,7 @@ $pessoas = $data['pessoas'];
                     <li class=\"list-group-item\"><span class=\"lead\">Condomínio: </span>
                     <a href=\"Condominio/visualizar/{$ocorrencia['cd_condominio']}\">{$ocorrencia['condominio']}</a></li>
                     <li class=\"list-group-item\"><span class=\"lead\">Informante: </span>
-                    <a href=\"Setor/visualizar/{$ocorrencia['cd_pf_informante']}\">{$ocorrencia['informante']}</a></li>
+                    <a href=\"PessoaFisica/visualizar/{$ocorrencia['cd_pf_informante']}\">{$ocorrencia['informante']}</a></li>
                 ";
                     ?>
                 </ul>
