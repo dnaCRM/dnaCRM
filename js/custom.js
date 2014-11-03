@@ -1832,6 +1832,7 @@ $(document).ready(function () {
             data: 'cd_pessoa_fisica=' + pessoa + '&cd_ocorrencia=' + ocorrencia,
             dataType: 'json',
             success: function (data) {
+                console.log(data);
                 if (data.msg) {
                     var html = '<div class="alert alert-dismissable alert-warning">' +
                         '<button type="button" class="close" data-dismiss="alert">×</button>' +
@@ -1868,7 +1869,7 @@ $(document).ready(function () {
             data: 'cd_pessoa_fisica=' + pessoa + '&cd_ocorrencia=' + ocorrencia,
             dataType: 'json',
             success: function (data) {
-
+                console.log(data);
                 $('#form_apaga_op input[name=cd_pessoa_fisica]').val(data.cd_pessoa_fisica);
 
                 var confirm_pessoa =

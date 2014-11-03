@@ -233,15 +233,15 @@ $token = Token::generate();
                             <?php
                             foreach ($data['pessoas'] as $pessoa) {
                                 echo "
-                                    <tr data-tr-registro-op=\"{$pessoa['cd_pessoa_fisica']}\">
+                                    <tr data-tr-registro-op=\"{$pessoa['id']}\">
                                         <td>
-                                            <img class=\"img-circle\" src=\"{$pessoa['im_perfil']}\">
+                                            <img class=\"img-circle\" src=\"{$pessoa['foto']}\">
                                         </td>
                                         <td>
-                                            <h6><a href=\"PessoaFisica/visualizar/{$pessoa['cd_pessoa_fisica']}\">{$pessoa['nm_pessoa_fisica']}</a></h6>
+                                            <h6><a href=\"PessoaFisica/visualizar/{$pessoa['id']}\">{$pessoa['nome']}</a></h6>
                                         </td>
                                         <td>
-                                            <a href=\"#\" class=\"btn btn-danger btn-xs remove-ocorr-pessoa\" data-id-ocorrencia=\"{$data['id']}\" data-id-pessoa=\"{$pessoa['cd_pessoa_fisica']}\" data-toggle=\"modal\" data-target=\"#apagaOPModal\"><i class=\"fa fa-minus-circle\"></i></i></a>
+                                            <a href=\"#\" class=\"btn btn-danger btn-xs remove-ocorr-pessoa\" data-id-ocorrencia=\"{$data['id']}\" data-id-pessoa=\"{$pessoa['id']}\" data-toggle=\"modal\" data-target=\"#apagaOPModal\"><i class=\"fa fa-minus-circle\"></i></i></a>
                                         </td>
                                         </tr>
                                     ";
