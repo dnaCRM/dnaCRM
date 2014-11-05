@@ -24,7 +24,7 @@ class PessoaFisica extends Controller
 
         $dados = array(
             'pagesubtitle' => '',
-            'pagetitle' => 'Perfis',
+            'pagetitle' => 'Pessoa Física',
             'list' => $perfil_list
         );
 

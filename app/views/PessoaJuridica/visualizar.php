@@ -46,7 +46,7 @@
         </div>
     </div>
     <div class="col-md-6">
-
+        <?php if ($data['empregados']): ?>
         <div class="panel panel-info">
 
             <div class="panel-heading">
@@ -74,7 +74,9 @@
                 ?>
             </div>
         </div>
+        <?php endif; ?>
 
+        <?php if ($data['telefones']): ?>
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title">Telefones</h3>
@@ -106,7 +108,9 @@
 
             </div>
         </div>
+        <?php endif; ?>
 
+        <?php if ($data['enderecos']): ?>
         <div class="list-group">
             <h6 class="list-group-item active">Endereços</h6>
             <?php
@@ -121,6 +125,7 @@
             }
             ?>
         </div>
+        <?php endif; ?>
 
         <div class="panel-group" id="accordion">
             <div class="panel panel-default">
@@ -196,5 +201,6 @@
                 </div>
             </div>
         </div>
+
     </div>
 </div>

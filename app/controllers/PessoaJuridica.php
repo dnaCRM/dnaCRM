@@ -25,7 +25,7 @@ class PessoaJuridica extends Controller
 
         $dados = array(
             'pagesubtitle' => '',
-            'pagetitle' => 'Perfis',
+            'pagetitle' => 'Pessoa Jurídica',
             'list' => $perfil_list
         );
 

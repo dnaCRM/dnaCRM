@@ -737,13 +737,7 @@ $('#form_pf_telefones').bootstrapValidator({
                 '<a href="#" class="btn btn-primary btn-sm update_pf_tel" data-update-pftel-id="' + data.cd_pf_fone + '" data-toggle="modal" data-target="#atualizaPfTelModal"><i class="fa fa-edit"></i></a>' +
                 '&nbsp;<a href="#" class="btn btn-warning btn-sm delete_pf_tel" data-del-pftel-id="' + data.cd_pf_fone + '" data-toggle="modal" data-target="#apagaPfTelModal"><i class="fa fa-trash-o"></i></a>' +
                 '</td></tr>';
-            $(html).appendTo('#tb_pf_tele' +
-                '' +
-                '' +
-                '' +
-                '' +
-                '' +
-                's').hide().fadeIn();
+            $(html).appendTo('#tb_pf_telefones').hide().fadeIn();
             bv.resetForm(true);
         }
     });

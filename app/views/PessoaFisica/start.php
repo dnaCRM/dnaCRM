@@ -1,17 +1,17 @@
 <div class="row">
     <div class="col-lg-6">
-        <h1><?php echo $data['pagetitle']; ?></h1>
+        <h3 class="page-header"><?php echo $data['pagetitle']; ?></h3>
 
         <p class="lead">
             <?php echo (isset($data['pagesubtitle'])) ? $data['pagesubtitle'] : ""; ?>
         </p>
     </div>
-    <div class="col-lg-6" style="padding: 15px 15px 0 15px;">
-        <div class="well">
+    <div class="col-lg-6">
+        <div class="well text-right">
 
-            <p>
-                Alguma coisa!
-            </p>
+            <a href="PessoaFisica/formperfil/" class="btn btn-success" role="button">
+                <i class="fa fa-arrow-circle-o-up"></i> Cadastrar novo
+            </a>
 
         </div>
     </div>
@@ -33,6 +33,7 @@
                 <th>Nome</th>
                 <th>e-mail</th>
                 <th>Nascimento</th>
+                <th>Ação</th>
             </tr>
             </thead>
             <tbody>
@@ -47,6 +48,8 @@
                 echo '<td><a href="PessoaFisica/visualizar/' . $perfil->getCdPessoaFisica() . '">' . $perfil->getNmPessoaFisica() . '</a></td>';
                 echo '<td>' . $perfil->getEmail() . '</td>';
                 echo '<td>' . $nasc->format('d/m/Y') . '</td>';
+                echo "<td><a href=\"PessoaFisica/formperfil/{$perfil->getCdPessoaFisica()}\" class=\"btn btn-primary btn-sm\" role=\"button\">
+                    <i class=\"fa fa-edit\"></i></a></td>";
                 echo '</tr>';
 
             }

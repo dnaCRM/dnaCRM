@@ -21,13 +21,16 @@ class Apartamento extends Controller
     public function start()
     { //Pega a lista completa de apartamentos
 
-
         $apartamento_list = (array)$this->model->fullList();
+        $dados = array();
+        foreach($apartamento_list as $ap) {
+            $dados[] = $this->apartamentoModel->setDTO($ap)->getArrayDados();
+        }
 
         $dados = array(
             'pagesubtitle' => '',
             'pagetitle' => 'Apartamento',
-            'list' => $apartamento_list
+            'list' => $dados
         );
 
         $this->view = new View('Apartamento', 'start');
