@@ -401,6 +401,14 @@ $('#ordemservicoform').bootstrapValidator({
                 }
             }
         },
+        tipo: {
+            group: '.col-sm-6',
+            validators: {
+                notEmpty: {
+                    message: 'Informar o tipo é obrigatório.'
+                }
+            }
+        },
         assunto: {
             validators: {
                 notEmpty: {
@@ -456,15 +464,23 @@ $('#ocorrenciaform').bootstrapValidator({
             }
         },
         estagio: {
-            group: '.col-sm-4',
+            group: '.col-sm-6',
             validators: {
                 notEmpty: {
                     message: 'Informar o estagio é obrigatório.'
                 }
             }
         },
+        tipo: {
+            group: '.col-sm-6',
+            validators: {
+                notEmpty: {
+                    message: 'Informar o tipo é obrigatório.'
+                }
+            }
+        },
         dt_ocorrencia: {
-            group: '.col-sm-4',
+            group: '.col-sm-6',
             validators: {
                 notEmpty: {
                     message: 'Campo obrigatório.'

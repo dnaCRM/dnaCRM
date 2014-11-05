@@ -48,7 +48,8 @@ $token = Token::generate();
                         <a href="Ocorrencia/formocorrencia/" class="btn btn-success" role="button">
                             <i class="fa fa-arrow-circle-o-up"></i> Novo
                         </a>
-                        <a href="Ocorrencia/formocorrencia/<?php echo $cadastrado->getCdOcorrencia();?>" class="btn btn-primary" role="button">
+                        <a href="Ocorrencia/formocorrencia/<?php echo $cadastrado->getCdOcorrencia(); ?>"
+                           class="btn btn-primary" role="button">
                             <i class="fa fa-arrow-circle-o-right"></i> Avançar
                         </a>
                     </div>
@@ -118,7 +119,6 @@ $token = Token::generate();
                                 </select>
                             </div>
 
-
                             <div class="col-sm-6">
                                 <label for="setor" class="control-label">Setor</label>
 
@@ -140,7 +140,7 @@ $token = Token::generate();
 
 
                         <div class="form-group">
-                            <div class="col-sm-4">
+                            <div class="col-sm-6">
                                 <label for="estagio" class="control-label">Estágio</label>
 
                                 <select class="form-control" id="estagio" name="estagio">
@@ -158,7 +158,27 @@ $token = Token::generate();
                                 </select>
                             </div>
 
-                            <div class="col-sm-4">
+                            <div class="col-sm-6">
+                                <label for="tipo" class="control-label">Tipo</label>
+
+                                <select class="form-control" id="tipo" name="tipo">
+                                    <option value="">--</option>
+                                    <?php
+                                    $ocorrencia->setCdVlCatgTipo($ocorrencia->getCdVlCatgTipo() == '' ? Input::get('tipo') : $ocorrencia->getCdVlCatgTipo());
+                                    foreach ($data['tipo'] as $tipo) {
+                                        if ($tipo->getCdVlCategoria() == $ocorrencia->getCdVlCatgTipo()) {
+                                            echo '<option value="' . $tipo->getCdVlCategoria() . '" selected>' . $tipo->getDescVlCatg() . '</option>';
+                                        } else {
+                                            echo '<option value="' . $tipo->getCdVlCategoria() . ' ">' . $tipo->getDescVlCatg() . '</option>';
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-6">
                                 <label for="dt_ocorrencia" class="control-label">Início</label>
 
 
@@ -169,7 +189,7 @@ $token = Token::generate();
                             </div>
 
 
-                            <div class="col-sm-4">
+                            <div class="col-sm-6">
                                 <label for="dt_fim" class="control-label">Fim</label>
 
 
@@ -185,7 +205,8 @@ $token = Token::generate();
                         <input type="hidden" name="token" value="<?php echo $token; ?>">
 
                         <div class="">
-                            <a href="Ocorrencia<?php echo $data['id'] ? '/visualizar/'.$data['id']:'';?>" id="cancel"
+                            <a href="Ocorrencia<?php echo $data['id'] ? '/visualizar/' . $data['id'] : ''; ?>"
+                               id="cancel"
                                class="btn btn-default">
                                 <span class="fa fa-undo"></span> Cancelar</a>
                             <a href="Ocorrencia/formOcorrencia" id="novo" class="btn btn-success">
@@ -293,7 +314,7 @@ $token = Token::generate();
                 </div>
 
                 <input type="hidden" name="cd_pessoa_fisica" value="">
-                <input type="hidden" name="cd_ocorrencia" value="<?php echo $data['id'];?>">
+                <input type="hidden" name="cd_ocorrencia" value="<?php echo $data['id']; ?>">
             </form>
         </div>
     </div>

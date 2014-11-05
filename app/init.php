@@ -1,4 +1,5 @@
 <?php
+session_cache_limiter('none');
 session_start();
 ### Função para carregamento automático de classes
 function autoload($class)

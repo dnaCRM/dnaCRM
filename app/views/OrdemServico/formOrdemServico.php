@@ -132,6 +132,27 @@ $token = Token::generate();
                             </div>
                         </div>
 
+                        <div class="form-group">
+
+                            <div class="col-sm-6">
+                                <label for="tipo" class="control-label">Tipo</label>
+
+                                <select class="form-control" id="tipo" name="tipo">
+                                    <option value="">--</option>
+                                    <?php
+                                    $perfil->setCdVlCatgTipo($perfil->getCdVlCatgTipo() == '' ? Input::get('tipo') : $perfil->getCdVlCatgTipo());
+                                    foreach ($data['tipo'] as $tipo) {
+                                        if ($tipo->getCdVlCategoria() == $perfil->getCdVlCatgTipo()) {
+                                            echo '<option value="' . $tipo->getCdVlCategoria() . '" selected>' . $tipo->getDescVlCatg() . '</option>';
+                                        } else {
+                                            echo '<option value="' . $tipo->getCdVlCategoria() . ' ">' . $tipo->getDescVlCatg() . '</option>';
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+
 
                         <div class="form-group">
                             <div class="col-sm-6">

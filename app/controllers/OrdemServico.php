@@ -45,6 +45,7 @@ class OrdemServico extends Controller
         $executor = (new PessoaFisicaDAO())->fullList();
         $solicitante = (new PessoaFisicaDAO())->fullList();
         $estagio = (new CategoriaValorDAO())->get('cd_categoria = 3');
+        $tipo = (new CategoriaValorDAO())->get('cd_categoria = 13');
 
         if ($id) {
             /** @var OrdemServicoDTO */
@@ -67,7 +68,8 @@ class OrdemServico extends Controller
                 'ocorrencia' => $ocorrencia,
                 'executor' => $executor,
                 'solicitante' => $solicitante,
-                'estagio' => $estagio
+                'estagio' => $estagio,
+                'tipo' => $tipo
             );
         } else {
             $perfil = new OrdemServicoDTO();
@@ -79,7 +81,8 @@ class OrdemServico extends Controller
                 'ocorrencia' => $ocorrencia,
                 'executor' => $executor,
                 'solicitante' => $solicitante,
-                'estagio' => $estagio
+                'estagio' => $estagio,
+                'tipo' => $tipo
             );
         }
 
@@ -169,6 +172,8 @@ class OrdemServico extends Controller
             ->setDtFim(Input::get('dt_fim'))
             ->setCdCatgEstagio(3)
             ->setCdVlCatgEstagio(Input::get('estagio'))
+            ->setCdCatgTipo(13)
+            ->setCdVlCatgTipo(Input::get('tipo'))
             ->setDescConclusao(Input::get('desc_conclusao'))
             ->setCdUsuarioCriacao(Session::get('user'))
             ->setDtUsuarioCriacao('now()')
