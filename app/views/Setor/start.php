@@ -45,7 +45,7 @@
                 echo '<td><img src="' . $setor->getImPerfil() . '" class="img-circle" title="' . $setor->getCdSetor() . '"></td>';
                 echo '<td><a href="Setor/visualizar/' . $setor->getCdSetor() . '">' . $setor->getNmSetor() . '</a></td>';
                 echo '<td>' . $setor->getObservacao()  . '</td>';
-                echo "<td><a href=\"Setor/formsetor/{$setor->getCdSetor()}\" class=\"btn btn-primary btn-sm\" role=\"button\">
+                echo "<td><a href=\"Setor/formsetor/{$setor->getCdSetor()}\" class=\"btn btn-primary btn-circle btn-md\" role=\"button\">
                     <i class=\"fa fa-edit\"></i></a></td>";
                 echo '</tr>';
 

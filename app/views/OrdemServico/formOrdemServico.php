@@ -228,7 +228,6 @@ $token = Token::generate();
                             </button>
                         </div>
 
-
                     </div>
                 </fieldset>
             </form>

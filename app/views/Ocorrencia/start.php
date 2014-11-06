@@ -46,7 +46,7 @@
                 echo '<td><a href="Ocorrencia/visualizar/' . $ocorrencia->getCdOcorrencia() . '">' . $ocorrencia->getDescAssunto() . '</a></td>';
                 echo '<td>' . $ocorrencia->getDescOcorrencia() . '</td>';
                 echo '<td>' . $dat->format('d/m/Y') . '</td>';
-                echo "<td><a href=\"Ocorrencia/formOcorrencia/{$ocorrencia->getCdOcorrencia()}\" class=\"btn btn-primary btn-sm\" role=\"button\">
+                echo "<td><a href=\"Ocorrencia/formOcorrencia/{$ocorrencia->getCdOcorrencia()}\" class=\"btn btn-primary btn-circle btn-md\" role=\"button\">
                     <i class=\"fa fa-edit\"></i></a></td>";
                 echo '</tr>';
 

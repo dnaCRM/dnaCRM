@@ -48,8 +48,8 @@
                 echo '<td><a href="PessoaFisica/visualizar/' . $perfil->getCdPessoaFisica() . '">' . $perfil->getNmPessoaFisica() . '</a></td>';
                 echo '<td>' . $perfil->getEmail() . '</td>';
                 echo '<td>' . $nasc->format('d/m/Y') . '</td>';
-                echo "<td><a href=\"PessoaFisica/formperfil/{$perfil->getCdPessoaFisica()}\" class=\"btn btn-primary btn-sm\" role=\"button\">
-                    <i class=\"fa fa-edit\"></i></a></td>";
+                echo "<td><a href=\"PessoaFisica/formperfil/{$perfil->getCdPessoaFisica()}\" class=\"btn btn-primary btn-circle btn-md\" role=\"button\">
+                    <i class=\"glyphicon glyphicon-pencil\"></i></a></td>";
                 echo '</tr>';
 
             }

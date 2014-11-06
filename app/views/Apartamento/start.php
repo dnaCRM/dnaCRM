@@ -45,7 +45,7 @@
                     . $apartamento['desc_apartamento'] . '</a></td>';
                 echo '<td><a href="Setor/visualizar/' . $apartamento['cd_setor'] . '">' . $apartamento['setor'] . '</a></td>';
                 echo '<td><a href="Condominio/visualizar/' . $apartamento['cd_condominio'] . '">' . $apartamento['condominio'] . '</a></td>';
-                echo "<td><a href=\"Apartamento/formapartamento/{$apartamento['cd_apartamento']}\" class=\"btn btn-primary btn-sm\" role=\"button\">
+                echo "<td><a href=\"Apartamento/formapartamento/{$apartamento['cd_apartamento']}\" class=\"btn btn-primary btn-circle btn-md\" role=\"button\">
                     <i class=\"fa fa-edit\"></i></a></td>";
                 echo '</tr>';
 

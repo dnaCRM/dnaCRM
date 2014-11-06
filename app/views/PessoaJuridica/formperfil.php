@@ -287,8 +287,8 @@ $token = Token::generate();
                         </td>
                         <td>{$telefone->getObservacao()}</td>
                         <td>";
-                        echo "<a href=\"#\" class=\"btn btn-primary btn-sm update_pj_tel\" data-update-pjtel-id=\"{$telefone->getCdPjFone()}\" data-toggle=\"modal\" data-target=\"#atualizaPjTelModal\"><i class=\"fa fa-edit\"></i></a>";
-                        echo "&nbsp;<a href=\"#\" class=\"btn btn-warning btn-sm delete_pj_tel\" data-del-pjtel-id=\"{$telefone->getCdPjFone()}\" data-toggle=\"modal\" data-target=\"#apagaPjTelModal\"><i class=\"fa fa-trash-o\"></i></a>";
+                        echo "<a href=\"#\" class=\"btn btn-primary btn-sm btn-circle update_pj_tel\" data-update-pjtel-id=\"{$telefone->getCdPjFone()}\" data-toggle=\"modal\" data-target=\"#atualizaPjTelModal\"><i class=\"fa fa-edit\"></i></a>";
+                        echo "&nbsp;<a href=\"#\" class=\"btn btn-warning btn-sm btn-circle delete_pj_tel\" data-del-pjtel-id=\"{$telefone->getCdPjFone()}\" data-toggle=\"modal\" data-target=\"#apagaPjTelModal\"><i class=\"fa fa-trash-o\"></i></a>";
                         echo "</td>
                     </tr>";
                     };?>
@@ -438,8 +438,8 @@ $token = Token::generate();
                         echo "</td>";
                         echo "<td>{$endereco->getObservacao()}</td>";
                         echo "<td>";
-                        echo "<a href=\"#\" class=\"btn btn-primary btn-sm update_pj_end\" data-update-pjend-id=\"{$endereco->getNrSequencia()}\" data-toggle=\"modal\" data-target=\"#atualizaPjEndModal\"><i class=\"fa fa-edit\"></i></a>";
-                        echo " <a href=\"#\" class=\"btn btn-warning btn-sm delete_pj_end\" data-del-pjend-id=\"{$endereco->getNrSequencia()}\" data-toggle=\"modal\" data-target=\"#apagaPjEndModal\"><i class=\"fa fa-trash-o\"></i></a>";
+                        echo "<a href=\"#\" class=\"btn btn-primary btn-sm btn-circle update_pj_end\" data-update-pjend-id=\"{$endereco->getNrSequencia()}\" data-toggle=\"modal\" data-target=\"#atualizaPjEndModal\"><i class=\"fa fa-edit\"></i></a>";
+                        echo " <a href=\"#\" class=\"btn btn-warning btn-sm btn-circle delete_pj_end\" data-del-pjend-id=\"{$endereco->getNrSequencia()}\" data-toggle=\"modal\" data-target=\"#apagaPjEndModal\"><i class=\"fa fa-trash-o\"></i></a>";
                         echo "</td>";
                         echo "</tr>";
                     }

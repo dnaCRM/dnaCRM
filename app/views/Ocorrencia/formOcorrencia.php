@@ -262,7 +262,7 @@ $token = Token::generate();
                                             <h6><a href=\"PessoaFisica/visualizar/{$pessoa['id']}\">{$pessoa['nome']}</a></h6>
                                         </td>
                                         <td>
-                                            <a href=\"#\" class=\"btn btn-danger btn-xs remove-ocorr-pessoa\" data-id-ocorrencia=\"{$data['id']}\" data-id-pessoa=\"{$pessoa['id']}\" data-toggle=\"modal\" data-target=\"#apagaOPModal\"><i class=\"fa fa-minus-circle\"></i></i></a>
+                                            <a href=\"#\" class=\"btn btn-danger btn-xs btn-circle remove-ocorr-pessoa\" data-id-ocorrencia=\"{$data['id']}\" data-id-pessoa=\"{$pessoa['id']}\" data-toggle=\"modal\" data-target=\"#apagaOPModal\"><i class=\"fa fa-minus\"></i></i></a>
                                         </td>
                                         </tr>
                                     ";

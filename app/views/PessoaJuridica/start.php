@@ -48,7 +48,7 @@
                 echo '<td><a href="PessoaJuridica/visualizar/' . $perfil->getCdPessoaJuridica() . '">' . $perfil->getNmFantasia() . '</a></td>';
                 echo '<td>' . $perfil->getEmail() . '</td>';
                 echo '<td>' . $perfil->getCnpj() . '</td>';
-                echo "<td><a href=\"PessoaJuridica/formperfil/{$perfil->getCdPessoaJuridica()}\" class=\"btn btn-primary btn-sm\" role=\"button\">
+                echo "<td><a href=\"PessoaJuridica/formperfil/{$perfil->getCdPessoaJuridica()}\" class=\"btn btn-primary btn-circle btn-md\" role=\"button\">
                     <i class=\"fa fa-edit\"></i></a></td>";
                 echo '</tr>';
 

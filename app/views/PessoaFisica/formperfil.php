@@ -440,8 +440,8 @@ $token = Token::generate();
                         <td>{$telefone['operadora']}</td>
                         <td>{$telefone['categoria']}</td>
                         <td>{$telefone['observacao']}</td>";
-                        echo "<td><a href=\"#\" class=\"btn btn-primary btn-sm update_pf_tel\" data-update-pftel-id=\"{$telefone['id_fone']}\" data-toggle=\"modal\" data-target=\"#atualizaPfTelModal\"><i class=\"fa fa-edit\"></i></a>";
-                        echo "&nbsp;<a href=\"#\" class=\"btn btn-warning btn-sm delete_pf_tel\" data-del-pftel-id=\"{$telefone['id_fone']}\" data-toggle=\"modal\" data-target=\"#apagaPfTelModal\"><i class=\"fa fa-trash-o\"></i></a>";
+                        echo "<td><a href=\"#\" class=\"btn btn-primary btn-sm btn-circle update_pf_tel\" data-update-pftel-id=\"{$telefone['id_fone']}\" data-toggle=\"modal\" data-target=\"#atualizaPfTelModal\"><i class=\"fa fa-edit\"></i></a>";
+                        echo "&nbsp;<a href=\"#\" class=\"btn btn-warning btn-sm btn-circle delete_pf_tel\" data-del-pftel-id=\"{$telefone['id_fone']}\" data-toggle=\"modal\" data-target=\"#apagaPfTelModal\"><i class=\"fa fa-trash-o\"></i></a>";
                         echo "</td>
                     </tr>";
                     };?>
@@ -542,9 +542,9 @@ $token = Token::generate();
                              <td>{$mEnderecos['m_end_dt_entrada']}</td>
                              <td>{$mEnderecos['m_end_dt_saida']}</td>
                              <td>";
-                        echo "<a href=\"#\" class=\"btn btn-primary btn-sm update_m_end\" data-update-mend-id=\"{$mEnderecos['id_m_end']}\"
+                        echo "<a href=\"#\" class=\"btn btn-primary btn-sm btn-circle update_m_end\" data-update-mend-id=\"{$mEnderecos['id_m_end']}\"
                                     data-toggle=\"modal\" data-target=\"#atualizaMEndModal\"><i class=\"fa fa-edit\"></i></a>";
-                        echo "&nbsp;<a href=\"#\" class=\"btn btn-warning btn-sm delete_m_end\" data-del-mend-id=\"{$mEnderecos['id_m_end']}\"
+                        echo "&nbsp;<a href=\"#\" class=\"btn btn-warning btn-sm btn-circle delete_m_end\" data-del-mend-id=\"{$mEnderecos['id_m_end']}\"
                                     data-toggle=\"modal\" data-target=\"#apagaMEndModal\"><i class=\"fa fa-trash-o\"></i></a>
                             </td>
                         </tr>
@@ -695,8 +695,8 @@ $token = Token::generate();
                         echo "</td>";
                         echo "<td>{$endereco->getObservacao()}</td>";
                         echo "<td>";
-                        echo "<a href=\"#\" class=\"btn btn-primary btn-sm update_pf_end\" data-update-pfend-id=\"{$endereco->getNrSequencia()}\" data-toggle=\"modal\" data-target=\"#atualizaPfEndModal\"><i class=\"fa fa-edit\"></i></a>";
-                        echo " <a href=\"#\" class=\"btn btn-warning btn-sm delete_pf_end\" data-del-pfend-id=\"{$endereco->getNrSequencia()}\" data-toggle=\"modal\" data-target=\"#apagaPfEndModal\"><i class=\"fa fa-trash-o\"></i></a>";
+                        echo "<a href=\"#\" class=\"btn btn-primary btn-sm btn-circle update_pf_end\" data-update-pfend-id=\"{$endereco->getNrSequencia()}\" data-toggle=\"modal\" data-target=\"#atualizaPfEndModal\"><i class=\"fa fa-edit\"></i></a>";
+                        echo " <a href=\"#\" class=\"btn btn-warning btn-sm btn-circle delete_pf_end\" data-del-pfend-id=\"{$endereco->getNrSequencia()}\" data-toggle=\"modal\" data-target=\"#apagaPfEndModal\"><i class=\"fa fa-trash-o\"></i></a>";
                         echo "</td>";
                         echo "</tr>";
                     }

@@ -46,7 +46,7 @@
                 echo '<td><a href="OrdemServico/visualizar/' . $perfil->getCdOrdemServico() . '">' . $perfil->getDescAssunto() . '</a></td>';
                 echo '<td>' . $perfil->getDescOrdemServico() . '</td>';
                 echo '<td>' . $perfil->getDtInicio() . '</td>';
-                echo "<td><a href=\"OrdemServico/formOrdemServico/{$perfil->getCdOrdemServico()}\" class=\"btn btn-primary btn-sm\" role=\"button\">
+                echo "<td><a href=\"OrdemServico/formOrdemServico/{$perfil->getCdOrdemServico()}\" class=\"btn btn-primary btn-circle btn-md\" role=\"button\">
                     <i class=\"fa fa-edit\"></i></a></td>";
                 echo '</tr>';
 

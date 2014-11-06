@@ -47,7 +47,7 @@
                 echo '<td><a href="Condominio/visualizar/' . $perfil->getCdCondominio() . '">' . $perfil->getNmCondominio() . '</a></td>';
                 echo '<td>' . $perfil->getBairro() . '</td>';
                 echo '<td>' . $perfil->getCep() . '</td>';
-                echo "<td><a href=\"Condominio/formcondominio/{$perfil->getCdCondominio()}\" class=\"btn btn-primary btn-sm\" role=\"button\">
+                echo "<td><a href=\"Condominio/formcondominio/{$perfil->getCdCondominio()}\" class=\"btn btn-primary btn-circle btn-md\" role=\"button\">
                     <i class=\"fa fa-edit\"></i></a></td>";
                 echo '</tr>';
 
