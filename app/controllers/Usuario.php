@@ -52,8 +52,9 @@ class Usuario extends Controller
                 if ($this->getModel()->findByLogin($usuario)) {
                     $this->atualizar = true;
                 }
-                $this->getModel()->gravar($usuario, $this->atualizar);
+                $msg = $this->getModel()->gravar($usuario, $this->atualizar);
 
+                Session::flash('msg', $msg['fc_criar_usuario'] , 'success');
             }
         }
     }

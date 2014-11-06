@@ -32,10 +32,6 @@
         $perfil = $data['perfil'];
         $usuario = $data['usuario'];
 
-        if (Session::exists('usuario_cadastrado')) {
-            echo Session::flash('usuario_cadastrado');
-        }
-
         ?>
         <!--Formulário de Cadastro-->
         <form id="cadastro_usuario" class="form-horizontal" method="post" action="">

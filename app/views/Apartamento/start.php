@@ -32,7 +32,7 @@
                 <th>Nome</th>
                 <th>Setor</th>
                 <th>Condomínio</th>
-                <th>Ação</th>
+                <th>Editar</th>
             </tr>
             </thead>
             <tbody>
@@ -41,10 +41,10 @@
             foreach ($data['list'] as $apartamento) {
 
                 echo '<tr>';
-                echo '<td><a href=Apartamento/visualizar/' . $apartamento['cd_apartamento'] . '>'
+                echo '<td><a href="Apartamento/visualizar/' . $apartamento['cd_apartamento'] . '">'
                     . $apartamento['desc_apartamento'] . '</a></td>';
-                echo '<td>' . $apartamento['setor'] . '</td>';
-                echo '<td>' . $apartamento['condominio'] . '</td>';
+                echo '<td><a href="Setor/visualizar/' . $apartamento['cd_setor'] . '">' . $apartamento['setor'] . '</a></td>';
+                echo '<td><a href="Condominio/visualizar/' . $apartamento['cd_condominio'] . '">' . $apartamento['condominio'] . '</a></td>';
                 echo "<td><a href=\"Apartamento/formapartamento/{$apartamento['cd_apartamento']}\" class=\"btn btn-primary btn-sm\" role=\"button\">
                     <i class=\"fa fa-edit\"></i></a></td>";
                 echo '</tr>';

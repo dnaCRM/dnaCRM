@@ -33,7 +33,7 @@
                 <th>Nome</th>
                 <th>e-mail</th>
                 <th>Nascimento</th>
-                <th>Ação</th>
+                <th>Editar</th>
             </tr>
             </thead>
             <tbody>

@@ -33,8 +33,9 @@ class UsuarioDAO extends DataAccessObject
             $stmt->bindValue(':nivel', $usuario->getNivel());
             $stmt->bindValue(':status', $usuario->getIeStatus());
             $stmt->bindValue(':pessoa_fisica', $usuario->getCdUsuario());
+            $stmt->execute();
 
-            return $stmt->execute();
+            return $stmt->fetch();
 
             //Session::flash('usuario_cadastrado', 'Usuário registrado.', 'success');
             //return true;
