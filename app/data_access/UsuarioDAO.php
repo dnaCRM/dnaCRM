@@ -35,8 +35,10 @@ class UsuarioDAO extends DataAccessObject
             $stmt->bindValue(':pessoa_fisica', $usuario->getCdUsuario());
             $stmt->execute();
 
+            return $stmt->fetch();
+
             //Session::flash('usuario_cadastrado', 'Usuário registrado.', 'success');
-            return true;
+            //return true;
         } catch (PDOException $e) {
             $this->success = false;
             CodeFail((int)$e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());

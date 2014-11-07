@@ -46,7 +46,7 @@
         </div>
     </div>
     <div class="col-md-6">
-
+        <?php if ($data['empregados']): ?>
         <div class="panel panel-info">
 
             <div class="panel-heading">
@@ -57,7 +57,7 @@
                 foreach ($data['empregados'] as $empregado) {
 
                     echo "
-                    <div class=\"row profile-card pcard-sm pull-left\">
+                    <div class=\"profile-card pcard-md\">
                         <div class=\"panel-body\">
                         <div class=\"profile-card-foto-container\">
                             <img class=\"img-circle profilefoto\" src=\"{$empregado['im_perfil']}\">
@@ -68,14 +68,15 @@
                                     <span class=\"fa fa-user\"></span> <span class=\"text-info\">{$empregado['profissao']}</span>.
                             </div>
                             </div>
-
                         </div>
                     </div>";
                 }
                 ?>
             </div>
         </div>
+        <?php endif; ?>
 
+        <?php if ($data['telefones']): ?>
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title">Telefones</h3>
@@ -107,7 +108,9 @@
 
             </div>
         </div>
+        <?php endif; ?>
 
+        <?php if ($data['enderecos']): ?>
         <div class="list-group">
             <h6 class="list-group-item active">Endereços</h6>
             <?php
@@ -122,6 +125,7 @@
             }
             ?>
         </div>
+        <?php endif; ?>
 
         <div class="panel-group" id="accordion">
             <div class="panel panel-default">
@@ -197,5 +201,6 @@
                 </div>
             </div>
         </div>
+
     </div>
 </div>

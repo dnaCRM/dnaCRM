@@ -401,6 +401,14 @@ $('#ordemservicoform').bootstrapValidator({
                 }
             }
         },
+        tipo: {
+            group: '.col-sm-6',
+            validators: {
+                notEmpty: {
+                    message: 'Informar o tipo é obrigatório.'
+                }
+            }
+        },
         assunto: {
             validators: {
                 notEmpty: {
@@ -456,15 +464,23 @@ $('#ocorrenciaform').bootstrapValidator({
             }
         },
         estagio: {
-            group: '.col-sm-4',
+            group: '.col-sm-6',
             validators: {
                 notEmpty: {
                     message: 'Informar o estagio é obrigatório.'
                 }
             }
         },
+        tipo: {
+            group: '.col-sm-6',
+            validators: {
+                notEmpty: {
+                    message: 'Informar o tipo é obrigatório.'
+                }
+            }
+        },
         dt_ocorrencia: {
-            group: '.col-sm-4',
+            group: '.col-sm-6',
             validators: {
                 notEmpty: {
                     message: 'Campo obrigatório.'
@@ -718,16 +734,10 @@ $('#form_pf_telefones').bootstrapValidator({
         dataType: 'json',
         success: function (data) {
             var html = '<tr data-pf-tel="' + data.cd_pf_fone + '"><td>' + data.fone + '</td><td>' + data.operadora + '</td><td>' + data.categoria + '</td><td>' + data.observacao + '</td><td>' +
-                '<a href="#" class="btn btn-primary btn-sm update_pf_tel" data-update-pftel-id="' + data.cd_pf_fone + '" data-toggle="modal" data-target="#atualizaPfTelModal"><i class="fa fa-edit"></i></a>' +
-                '&nbsp;<a href="#" class="btn btn-warning btn-sm delete_pf_tel" data-del-pftel-id="' + data.cd_pf_fone + '" data-toggle="modal" data-target="#apagaPfTelModal"><i class="fa fa-trash-o"></i></a>' +
+                '<a href="#" class="btn btn-primary btn-sm btn-circle update_pf_tel" data-update-pftel-id="' + data.cd_pf_fone + '" data-toggle="modal" data-target="#atualizaPfTelModal"><i class="fa fa-edit"></i></a>' +
+                '&nbsp;<a href="#" class="btn btn-warning btn-sm btn-circle delete_pf_tel" data-del-pftel-id="' + data.cd_pf_fone + '" data-toggle="modal" data-target="#apagaPfTelModal"><i class="fa fa-trash-o"></i></a>' +
                 '</td></tr>';
-            $(html).appendTo('#tb_pf_tele' +
-                '' +
-                '' +
-                '' +
-                '' +
-                '' +
-                's').hide().fadeIn();
+            $(html).appendTo('#tb_pf_telefones').hide().fadeIn();
             bv.resetForm(true);
         }
     });
@@ -794,8 +804,8 @@ $('#form_atualiza_pf_tel').bootstrapValidator({
             var linha = $('#tb_pf_telefones tr[data-pf-tel=' + data.cd_pf_fone + ']');
 
             var html = '<td>' + data.fone + '</td><td>' + data.operadora + '</td><td>' + data.categoria + '</td><td>' + data.observacao + '</td><td>' +
-                '<a href="#" class="btn btn-primary btn-sm update_pf_tel" data-update-pftel-id="' + data.cd_pf_fone + '" data-toggle="modal" data-target="#atualizaPfTelModal"><i class="fa fa-edit"></i></a>' +
-                '&nbsp;<a href="#" class="btn btn-warning btn-sm delete_pf_tel" data-del-pftel-id="' + data.cd_pf_fone + '" data-toggle="modal" data-target="#apagaPfTelModal"><i class="fa fa-trash-o"></i></a>' +
+                '<a href="#" class="btn btn-primary btn-sm btn-circle update_pf_tel" data-update-pftel-id="' + data.cd_pf_fone + '" data-toggle="modal" data-target="#atualizaPfTelModal"><i class="fa fa-edit"></i></a>' +
+                '&nbsp;<a href="#" class="btn btn-warning btn-sm btn-circle delete_pf_tel" data-del-pftel-id="' + data.cd_pf_fone + '" data-toggle="modal" data-target="#apagaPfTelModal"><i class="fa fa-trash-o"></i></a>' +
                 '</td>';
 
             bv.resetForm(true);
@@ -974,8 +984,8 @@ $('#form_pf_enderecos').bootstrapValidator({
         success: function (data) {
 
             var celulas = '<td>' + data.rua + '</td><td>' + data.numero + '</td><td>' + data.bairro + '</td><td>' + data.cidade + '</td><td>' + data.cep + '</td><td>' + data.estado + '</td><td>' + data.categoria + '</td><td>' + data.observacao + '</td><td>' +
-                '<a href="#" class="btn btn-primary btn-sm update_pf_end" data-update-pfend-id="' + data.id_endereco + '" data-toggle="modal" data-target="#atualizaPfEndModal"><i class="fa fa-edit"></i></a>' +
-                '&nbsp;<a href="#" class="btn btn-warning btn-sm delete_pf_end" data-del-pfend-id="' + data.id_endereco + '" data-toggle="modal" data-target="#apagaPfEndModal"><i class="fa fa-trash-o"></i></a></td>';
+                '<a href="#" class="btn btn-primary btn-sm btn-circle update_pf_end" data-update-pfend-id="' + data.id_endereco + '" data-toggle="modal" data-target="#atualizaPfEndModal"><i class="fa fa-edit"></i></a>' +
+                '&nbsp;<a href="#" class="btn btn-warning btn-sm btn-circle delete_pf_end" data-del-pfend-id="' + data.id_endereco + '" data-toggle="modal" data-target="#apagaPfEndModal"><i class="fa fa-trash-o"></i></a></td>';
 
             var linha = '<tr data-pf-endereco="' + data.id_endereco + '">' + celulas + '</tr>';
 
@@ -1188,13 +1198,13 @@ $('#form_end_morador').bootstrapValidator({
         success: function (data) {
 
             var celulas_old = '<td>' + data.rua + '</td><td>' + data.numero + '</td><td>' + data.bairro + '</td><td>' + data.cidade + '</td><td>' + data.cep + '</td><td>' + data.estado + '</td><td>' + data.categoria + '</td><td>' + data.observacao + '</td><td>' +
-                '<a href="#" class="btn btn-primary btn-sm update_pf_end" data-update-pfend-id="' + data.id_endereco + '" data-toggle="modal" data-target="#atualizaPfEndModal"><i class="fa fa-edit"></i></a>' +
-                '&nbsp;<a href="#" class="btn btn-warning btn-sm delete_pf_end" data-del-pfend-id="' + data.id_endereco + '" data-toggle="modal" data-target="#apagaPfEndModal"><i class="fa fa-trash-o"></i></a></td>';
+                '<a href="#" class="btn btn-primary btn-sm btn-circle update_pf_end" data-update-pfend-id="' + data.id_endereco + '" data-toggle="modal" data-target="#atualizaPfEndModal"><i class="fa fa-edit"></i></a>' +
+                '&nbsp;<a href="#" class="btn btn-warning btn-sm btn-circle delete_pf_end" data-del-pfend-id="' + data.id_endereco + '" data-toggle="modal" data-target="#apagaPfEndModal"><i class="fa fa-trash-o"></i></a></td>';
 
             var celulas = '<td>' + data.condominio + '</td><td>' + data.setor + '</td><td>' + data.apartamento + '</td><td>' + data.m_end_dt_entrada + '</td><td>' + data.m_end_dt_saida + '</td>' +
-                '<td><a href="#" class="btn btn-primary btn-sm update_m_end" data-update-mend-id="' + data.id_m_end + '"' +
+                '<td><a href="#" class="btn btn-primary btn-sm btn-circle update_m_end" data-update-mend-id="' + data.id_m_end + '"' +
                 'data-toggle="modal" data-target="#atualizaMEndModal"><i class="fa fa-edit"></i></a>' +
-                '&nbsp;<a href="#" class="btn btn-warning btn-sm delete_m_end" data-del-mend-id="' + data.id_m_end + '"' +
+                '&nbsp;<a href="#" class="btn btn-warning btn-sm btn-circle delete_m_end" data-del-mend-id="' + data.id_m_end + '"' +
                 'data-toggle="modal" data-target="#apagaMEndModal"><i class="fa fa-trash-o"></i></a></td>';
 
             var linha = '<tr data-m-end="' + data.id_m_end + '">' + celulas + '</tr>';
@@ -1362,11 +1372,14 @@ $('#form_pj_telefones').bootstrapValidator({
         dataType: 'json',
         success: function (data) {
             var html = '<tr data-pj-tel="' + data.cd_pj_fone + '"><td>' + data.fone + '</td><td>' + data.operadora + '</td><td>' + data.categoria + '</td><td>' + data.observacao + '</td><td>' +
-                '<a href="#" class="btn btn-primary btn-sm update_pj_tel" data-update-pjtel-id="' + data.cd_pj_fone + '" data-toggle="modal" data-target="#atualizaPjTelModal"><i class="fa fa-edit"></i></a>' +
-                '&nbsp;<a href="#" class="btn btn-warning btn-sm delete_pj_tel" data-del-pjtel-id="' + data.cd_pj_fone + '" data-toggle="modal" data-target="#apagaPjTelModal"><i class="fa fa-trash-o"></i></a>' +
+                '<a href="#" class="btn btn-primary btn-sm btn-circle update_pj_tel" data-update-pjtel-id="' + data.cd_pj_fone + '" data-toggle="modal" data-target="#atualizaPjTelModal"><i class="fa fa-edit"></i></a>' +
+                '&nbsp;<a href="#" class="btn btn-warning btn-sm btn-circle delete_pj_tel" data-del-pjtel-id="' + data.cd_pj_fone + '" data-toggle="modal" data-target="#apagaPjTelModal"><i class="fa fa-trash-o"></i></a>' +
                 '</td></tr>';
             $(html).appendTo('#tb_pj_telefones').hide().fadeIn();
             bv.resetForm(true);
+        },
+        error: function (data) {
+            $(data.responseText).appendTo('#responseAjaxError');
         }
     });
     return false;
@@ -1432,8 +1445,8 @@ $('#form_atualiza_pj_tel').bootstrapValidator({
             var linha = $('#tb_pj_telefones tr[data-pj-tel=' + data.cd_pj_fone + ']');
 
             var html = '<td>' + data.fone + '</td><td>' + data.operadora + '</td><td>' + data.categoria + '</td><td>' + data.observacao + '</td><td>' +
-                '<a href="#" class="btn btn-primary btn-sm update_pj_tel" data-update-pjtel-id="' + data.cd_pj_fone + '" data-toggle="modal" data-target="#atualizaPjTelModal"><i class="fa fa-edit"></i></a>' +
-                '&nbsp;<a href="#" class="btn btn-warning btn-sm delete_pj_tel" data-del-pjtel-id="' + data.cd_pj_fone + '" data-toggle="modal" data-target="#apagaPjTelModal"><i class="fa fa-trash-o"></i></a>' +
+                '<a href="#" class="btn btn-primary btn-sm btn-circle update_pj_tel" data-update-pjtel-id="' + data.cd_pj_fone + '" data-toggle="modal" data-target="#atualizaPjTelModal"><i class="fa fa-edit"></i></a>' +
+                '&nbsp;<a href="#" class="btn btn-warning btn-sm btn-circle delete_pj_tel" data-del-pjtel-id="' + data.cd_pj_fone + '" data-toggle="modal" data-target="#apagaPjTelModal"><i class="fa fa-trash-o"></i></a>' +
                 '</td>';
 
             bv.resetForm(true);
@@ -1612,8 +1625,8 @@ $('#form_pj_enderecos').bootstrapValidator({
         success: function (data) {
 
             var celulas = '<td>' + data.rua + '</td><td>' + data.numero + '</td><td>' + data.bairro + '</td><td>' + data.cidade + '</td><td>' + data.cep + '</td><td>' + data.estado + '</td><td>' + data.categoria + '</td><td>' + data.observacao + '</td><td>' +
-                '<a href="#" class="btn btn-primary btn-sm update_pj_end" data-update-pjend-id="' + data.id_endereco + '" data-toggle="modal" data-target="#atualizaPjEndModal"><i class="fa fa-edit"></i></a>' +
-                '&nbsp;<a href="#" class="btn btn-warning btn-sm delete_pj_end" data-del-pjend-id="' + data.id_endereco + '" data-toggle="modal" data-target="#apagaPjEndModal"><i class="fa fa-trash-o"></i></a></td>';
+                '<a href="#" class="btn btn-primary btn-sm btn-circle update_pj_end" data-update-pjend-id="' + data.id_endereco + '" data-toggle="modal" data-target="#atualizaPjEndModal"><i class="fa fa-edit"></i></a>' +
+                '&nbsp;<a href="#" class="btn btn-warning btn-sm btn-circle delete_pj_end" data-del-pjend-id="' + data.id_endereco + '" data-toggle="modal" data-target="#apagaPjEndModal"><i class="fa fa-trash-o"></i></a></td>';
 
             var linha = '<tr data-pj-endereco="' + data.id_endereco + '">' + celulas + '</tr>';
 
@@ -1793,8 +1806,8 @@ $(document).ready(function () {
                         html += '<div class="list-group-item"><div><img src="' + data[i].foto + '" class="img-circle img-thumb-panel pull-left">' +
                             '<p class="list-group-item-heading"><a title="Visualizar perfil" href="PessoaFisica/visualizar/' + data[i].id + '">' + data[i].nome + '</a></p>' +
                             '<p class="list-group-item-text text-right">' +
-                            '<button data-id-pessoa="' + data[i].id + '" title="Adicionar" class="btn btn-info btn-xs add-ocorr-pessoa">' +
-                            '<i class="fa fa-plus-circle"></i></button></p></div></div>';
+                            '<button data-id-pessoa="' + data[i].id + '" title="Adicionar" class="btn btn-info btn-xs btn-circle add-ocorr-pessoa">' +
+                            '<i class="fa fa-plus"></i></button></p></div></div>';
                     }
 
                     var resultBody = '<div class="row"><div class="col-md-12">' + html + '</div></div>';
@@ -1829,6 +1842,7 @@ $(document).ready(function () {
             data: 'cd_pessoa_fisica=' + pessoa + '&cd_ocorrencia=' + ocorrencia,
             dataType: 'json',
             success: function (data) {
+                console.log(data);
                 if (data.msg) {
                     var html = '<div class="alert alert-dismissable alert-warning">' +
                         '<button type="button" class="close" data-dismiss="alert">×</button>' +
@@ -1841,7 +1855,7 @@ $(document).ready(function () {
                         '<td><img class="img-circle" src="' + data.im_perfil + '"></td>' +
                         '<td><h6><a href="PessoaFisica/visualizar/' + data.cd_pessoa_fisica + '">' + data.nm_pessoa_fisica + '</a></h6></td>' +
                         '<td>' +
-                        '<a href=\"#\" data-id-ocorrencia="' + data.cd_ocorrencia + '" data-id-pessoa="' + data.cd_pessoa_fisica + '" class="btn btn-danger btn-xs remove-ocorr-pessoa" data-toggle="modal" data-target="#apagaOPModal"><i class="fa fa-minus-circle"></i></i></a>' +
+                        '<a href=\"#\" data-id-ocorrencia="' + data.cd_ocorrencia + '" data-id-pessoa="' + data.cd_pessoa_fisica + '" class="btn btn-danger btn-xs btn-circle remove-ocorr-pessoa" data-toggle="modal" data-target="#apagaOPModal"><i class="fa fa-minus-circle"></i></i></a>' +
                         '</button>' +
                         '</td></tr>';
 
@@ -1865,7 +1879,7 @@ $(document).ready(function () {
             data: 'cd_pessoa_fisica=' + pessoa + '&cd_ocorrencia=' + ocorrencia,
             dataType: 'json',
             success: function (data) {
-
+                console.log(data);
                 $('#form_apaga_op input[name=cd_pessoa_fisica]').val(data.cd_pessoa_fisica);
 
                 var confirm_pessoa =

@@ -42,6 +42,11 @@ class OcorrenciaModel extends Model
             $catg = $categoria->getBy2Ids($this->dto->getCdVlCatgEstagio(), $this->dto->getCdCatgEstagio());
             $estagio = $catg->getDescVlCatg();
         }
+        $tipo = '';
+        if ($this->dto->getCdCatgTipo()) {
+            $catg = $categoria->getBy2Ids($this->dto->getCdVlCatgTipo(), $this->dto->getCdCatgTipo());
+            $tipo = $catg->getDescVlCatg();
+        }
 
         return array(
             'cd_ocorrencia' => $this->dto->getCdOcorrencia(),
@@ -62,6 +67,9 @@ class OcorrenciaModel extends Model
             'cd_catg_estagio' => $this->dto->getCdCatgEstagio(),
             'cd_vl_catg_estagio' => $this->dto->getCdVlCatgEstagio(),
             'estagio' => $estagio,
+            'cd_catg_tipo' => $this->dto->getCdCatgTipo(),
+            'cd_vl_catg_tipo' => $this->dto->getCdVlCatgTipo(),
+            'tipo' => $tipo
         );
     }
 

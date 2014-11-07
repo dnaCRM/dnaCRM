@@ -106,8 +106,9 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-6">
 
+
+    <div class="col-sm-6">
         <div class="">
             <ul class="nav nav-tabs" style="margin-bottom: 15px;">
                 <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
@@ -156,3 +157,4 @@
 
         </div>
     </div>
+</div>

@@ -140,6 +140,7 @@ class Condominio extends Controller
 
                 try {
                     $obj = $this->model->gravar($condominio);
+                    $this->exportaImagens($obj);
                     return $obj;
                 } catch (Exception $e) {
                     CodeFail((int)$e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());

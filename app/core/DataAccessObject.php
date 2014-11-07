@@ -340,6 +340,10 @@ abstract class DataAccessObject
 
         $foto = SITE_ROOT . $this->imgFolder . $id . '.jpg';
 
+        if (file_exists($foto)) {
+            unlink($foto);
+        }
+
         $state = $this->con->prepare("SELECT lo_export({$this->colunaImagem}, '{$foto}')
                                       FROM {$this->tabela}
                                       WHERE {$this->primaryKey} = $id");

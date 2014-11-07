@@ -48,7 +48,7 @@ class PessoaJuridicaTelefone extends Controller
                 }
             }
             $return['observacao'] = $telefone->getObservacao();
-            $return['cd_pf_fone'] = $telefone->getCdPjFone();
+            $return['cd_pj_fone'] = $telefone->getCdPjFone();
 
             echo json_encode($return);
         }

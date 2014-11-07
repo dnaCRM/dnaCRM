@@ -66,7 +66,7 @@
             </div>
         </div>
         <!-- Fim Botões de administração -->
-
+        <?php if ($data['os_solicitadas']): ?>
         <div class="panel panel-info">
             <div class="panel-heading">
                 <h3 class="panel-title">Ordens de Serviço Solicitadas</h3></div>
@@ -100,7 +100,9 @@
                 </table>
             </div>
         </div>
+        <?php endif; ?>
 
+        <?php if ($data['ocorrencias']): ?>
         <div class="panel panel-warning">
             <div class="panel-heading">
                 <h3 class="panel-title">Ocorrências envolvidas</h3></div>
@@ -132,9 +134,12 @@
                 </table>
             </div>
         </div>
+        <?php endif; ?>
     </div>
 
     <div class="col-sm-6">
+
+        <?php if ($data['telefones']): ?>
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title">Telefones</h3>
@@ -166,7 +171,9 @@
 
             </div>
         </div>
+        <?php endif; ?>
 
+        <?php if ($data['enderecos']): ?>
         <div class="list-group">
             <h6 class="list-group-item active">Endereços</h6>
             <?php
@@ -181,7 +188,9 @@
             }
             ?>
         </div>
+        <?php endif; ?>
 
+        <?php if ($data['morador_enderecos']): ?>
         <div class="panel panel-info">
             <div class="panel-heading">
                 <h3 class="panel-title">Moradias</h3>
@@ -214,7 +223,9 @@
 
             </div>
         </div>
+        <?php endif; ?>
 
+        <!--
         <div class="panel-group" id="accordion">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -289,5 +300,6 @@
                 </div>
             </div>
         </div>
+        -->
     </div>
 </div>

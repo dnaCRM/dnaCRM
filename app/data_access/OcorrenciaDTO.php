@@ -11,6 +11,8 @@ class OcorrenciaDTO extends DataTransferObject
     private $desc_conclusao;
     private $cd_catg_estagio;
     private $cd_vl_catg_estagio;
+    private $cd_catg_tipo;
+    private $cd_vl_catg_tipo;
     private $cd_usuario_criacao;
     private $dt_usuario_criacao;
     private $cd_usuario_atualiza;
@@ -32,6 +34,8 @@ class OcorrenciaDTO extends DataTransferObject
             'desc_conclusao' => 'getDescConclusao',
             'cd_catg_estagio' => 'getCdCatgEstagio',
             'cd_vl_catg_estagio' => 'getCdVlCatgEstagio',
+            'cd_catg_tipo' => 'getCdCatgTipo',
+            'cd_vl_catg_tipo' => 'getCdVlCatgTipo',
             'cd_usuario_criacao' => 'getCdUsuarioCriacao',
             'dt_usuario_criacao' => 'getDtUsuarioCriacao',
             'cd_usuario_atualiza' => 'getCdUsuarioAtualiza',
@@ -47,6 +51,22 @@ class OcorrenciaDTO extends DataTransferObject
     public function getReflex()
     {
         return $this->reflex;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCdCatgTipo()
+    {
+        return $this->cd_catg_tipo;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCdVlCatgTipo()
+    {
+        return $this->cd_vl_catg_tipo;
     }
 
     /**
@@ -163,7 +183,8 @@ class OcorrenciaDTO extends DataTransferObject
     ################## SETTERS #######################
 
     /**
-     * @param mixed $cd_catg_estagio
+     * @param $cd_catg_estagio
+     * @return $this
      */
     public function setCdCatgEstagio($cd_catg_estagio)
     {
@@ -172,7 +193,8 @@ class OcorrenciaDTO extends DataTransferObject
     }
 
     /**
-     * @param mixed $cd_ocorrencia
+     * @param $cd_ocorrencia
+     * @return $this
      */
     public function setCdOcorrencia($cd_ocorrencia)
     {
@@ -181,7 +203,8 @@ class OcorrenciaDTO extends DataTransferObject
     }
 
     /**
-     * @param mixed $cd_pf_informante
+     * @param $cd_pf_informante
+     * @return $this
      */
     public function setCdPfInformante($cd_pf_informante)
     {
@@ -190,7 +213,8 @@ class OcorrenciaDTO extends DataTransferObject
     }
 
     /**
-     * @param mixed $cd_usuario_atualiza
+     * @param $cd_usuario_atualiza
+     * @return $this
      */
     public function setCdUsuarioAtualiza($cd_usuario_atualiza)
     {
@@ -199,7 +223,8 @@ class OcorrenciaDTO extends DataTransferObject
     }
 
     /**
-     * @param mixed $cd_usuario_criacao
+     * @param $cd_usuario_criacao
+     * @return $this
      */
     public function setCdUsuarioCriacao($cd_usuario_criacao)
     {
@@ -207,7 +232,10 @@ class OcorrenciaDTO extends DataTransferObject
         return $this;
     }
 
-
+    /**
+     * @param $cd_setor
+     * @return $this
+     */
     public function setCdSetor($cd_setor)
     {
         $this->cd_setor = $cd_setor;
@@ -215,7 +243,8 @@ class OcorrenciaDTO extends DataTransferObject
     }
 
     /**
-     * @param mixed $cd_vl_catg_estagio
+     * @param $cd_vl_catg_estagio
+     * @return $this
      */
     public function setCdVlCatgEstagio($cd_vl_catg_estagio)
     {
@@ -224,7 +253,8 @@ class OcorrenciaDTO extends DataTransferObject
     }
 
     /**
-     * @param mixed $desc_assunto
+     * @param $desc_assunto
+     * @return $this
      */
     public function setDescAssunto($desc_assunto)
     {
@@ -233,7 +263,8 @@ class OcorrenciaDTO extends DataTransferObject
     }
 
     /**
-     * @param mixed $desc_conclusao
+     * @param $desc_conclusao
+     * @return $this
      */
     public function setDescConclusao($desc_conclusao)
     {
@@ -242,7 +273,8 @@ class OcorrenciaDTO extends DataTransferObject
     }
 
     /**
-     * @param mixed $desc_ocorrencia
+     * @param $desc_ocorrencia
+     * @return $this
      */
     public function setDescOcorrencia($desc_ocorrencia)
     {
@@ -251,7 +283,8 @@ class OcorrenciaDTO extends DataTransferObject
     }
 
     /**
-     * @param mixed $dt_fim
+     * @param $dt_fim
+     * @return $this
      */
     public function setDtFim($dt_fim)
     {
@@ -260,7 +293,8 @@ class OcorrenciaDTO extends DataTransferObject
     }
 
     /**
-     * @param mixed $dt_ocorrencia
+     * @param $dt_ocorrencia
+     * @return $this
      */
     public function setDtOcorrencia($dt_ocorrencia)
     {
@@ -269,7 +303,8 @@ class OcorrenciaDTO extends DataTransferObject
     }
 
     /**
-     * @param mixed $dt_usuario_atualiza
+     * @param $dt_usuario_atualiza
+     * @return $this
      */
     public function setDtUsuarioAtualiza($dt_usuario_atualiza)
     {
@@ -278,11 +313,32 @@ class OcorrenciaDTO extends DataTransferObject
     }
 
     /**
-     * @param mixed $dt_usuario_criacao
+     * @param $dt_usuario_criacao
+     * @return $this
      */
     public function setDtUsuarioCriacao($dt_usuario_criacao)
     {
         $this->dt_usuario_criacao = $dt_usuario_criacao;
+        return $this;
+    }
+
+    /**
+     * @param $cd_catg_tipo
+     * @return $this
+     */
+    public function setCdCatgTipo($cd_catg_tipo)
+    {
+        $this->cd_catg_tipo = $cd_catg_tipo;
+        return $this;
+    }
+
+    /**
+     * @param $cd_vl_catg_tipo
+     * @return $this
+     */
+    public function setCdVlCatgTipo($cd_vl_catg_tipo)
+    {
+        $this->cd_vl_catg_tipo = $cd_vl_catg_tipo;
         return $this;
     }
 

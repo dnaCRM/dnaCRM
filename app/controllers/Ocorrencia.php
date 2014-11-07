@@ -45,6 +45,7 @@ Class Ocorrencia extends Controller
     $setor = (new SetorDAO())->fullList();
     $informante = (new PessoaFisicaDAO())->fullList();
     $estagio = (new CategoriaValorDAO())->get('cd_categoria = 3');
+    $tipo = (new CategoriaValorDAO())->get('cd_categoria = 12');
 
     if ($id) {
         /** @var OrdemServicoDTO */
@@ -68,6 +69,7 @@ Class Ocorrencia extends Controller
             'setor' => $setor,
             'informante' => $informante,
             'estagio' => $estagio,
+            'tipo' => $tipo,
             'pessoas' => $ocorr_pessoas
         );
     } else {
@@ -79,7 +81,8 @@ Class Ocorrencia extends Controller
             'perfil' => $ocorrencia,
             'setor' => $setor,
             'informante' => $informante,
-            'estagio' => $estagio
+            'estagio' => $estagio,
+            'tipo' => $tipo
         );
     }
 
@@ -172,6 +175,8 @@ Class Ocorrencia extends Controller
         ->setDescConclusao(Input::get('desc_conclusao'))
         ->setCdCatgEstagio(3)
         ->setCdVlCatgEstagio(Input::get('estagio'))
+        ->setCdCatgTipo(12)
+        ->setCdVlCatgTipo(Input::get('tipo'))
         ->setCdUsuarioCriacao(Session::get('user'))
         ->setDtUsuarioCriacao('now()')
         ->setCdUsuarioAtualiza(Session::get('user'))
