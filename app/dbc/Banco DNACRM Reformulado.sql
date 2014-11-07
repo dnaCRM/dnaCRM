@@ -44,6 +44,7 @@ CREATE TABLE TB_CATEGORIA_VALOR(
   CD_VL_CATEGORIA SERIAL,
   CD_CATEGORIA INTEGER CONSTRAINT NN_TB_CATEGORIA_VALOR_CD_CATEGORIA NOT NULL,
   DESC_VL_CATG VARCHAR(40) CONSTRAINT NN_TB_CATEGORIA_VALOR_DESC_VL_CATG NOT NULL,
+  GENERO CHAR(1),
   CD_USUARIO_CRIACAO INTEGER,
   DT_USUARIO_CRIACAO TIMESTAMP,   
   CD_USUARIO_ATUALIZA INTEGER,
@@ -266,19 +267,41 @@ CREATE TABLE TB_PROFISSAO(
   CONSTRAINT PK_TB_PROFISSAO_CD_PROFISSAO PRIMARY KEY(CD_PROFISSAO)
 );
 
-CREATE TABLE TB_RELACIONADOS(
-  CD_PESSOA_FISICA_1 INTEGER CONSTRAINT NN_TB_RELACIONADOS_CD_PESSOA_FISICA_1  NOT NULL,
-  CD_PESSOA_FISICA_2 INTEGER CONSTRAINT NN_TB_RELACIONADOS_CD_PESSOA_FISICA_2 NOT NULL,
-  CD_CATG_RELAC_PF_1 INTEGER CONSTRAINT NN_TB_RELACIONADOS_CD_CATG_RELAC_1 NOT NULL,
-  CD_VL_CATG_RELAC_PF_1 INTEGER CONSTRAINT NN_TB_RELACIONADOS_CD_VL_CATG_RELAC_1 NOT NULL,
-  CD_CATG_RELAC_PF_2 INTEGER CONSTRAINT NN_TB_RELACIONADOS_CD_CATG_RELAC_1 NOT NULL,
-  CD_VL_CATG_RELAC_PF_2 INTEGER CONSTRAINT NN_TB_RELACIONADOS_CD_VL_CATG_RELAC_1 NOT NULL,
-  CD_USUARIO_CRIACAO INTEGER CONSTRAINT NN_TB_RELACIONADOS_CD_USUARIO_CRIACAO NOT NULL,
-  DT_USUARIO_CRIACAO TIMESTAMP CONSTRAINT NN_TB_RELACIONADOS_DT_USUARIO_CRIACAO NOT NULL,   
-  CD_USUARIO_ATUALIZA INTEGER CONSTRAINT NN_TB_RELACIONADOS_CD_USUARIO_ATUALIZA NOT NULL,
-  DT_USUARIO_ATUALIZA TIMESTAMP CONSTRAINT NN_TB_RELACIONADOS_DT_USUARIO_ATUALIZA NOT NULL,
-  CONSTRAINT PK_TB_RELACIONADOS_CD_PESSOA_FISICA_1_CD_PESSOA_FISICA_2  PRIMARY KEY(CD_PESSOA_FISICA_1, CD_PESSOA_FISICA_2)
+
+CREATE TABLE tb_relacionados(
+ cd_pessoa_fisica_1 INTEGER CONSTRAINT nn_tb_relacionados_cd_pessoa_fisica_1 NOT NULL,
+ cd_pessoa_fisica_2 INTEGER CONSTRAINT nn_tb_relacionados_cd_pessoa_fisica_2 NOT NULL,
+ cd_catg_relac INTEGER CONSTRAINT nn_tb_relacionados_cd_catg_relac NOT NULL,
+ cd_catg_vl_relac INTEGER CONSTRAINT nn_tb_relacionados_cd_catg_vl_relac NOT NULL,
+ cd_usuario_criacao INTEGER CONSTRAINT nn_tb_relacionados_cd_usuario_criacao NOT NULL,
+ dt_usuario_criacao TIMESTAMP CONSTRAINT nn_tb_relacionados_dt_usuario_criacao NOT NULL,
+ cd_usuario_atualiza INTEGER CONSTRAINT nn_tb_relacionados_cd_usuario_atualiza NOT NULL,
+ dt_usuario_atualiza TIMESTAMP CONSTRAINT nn_tb_relacionados_dt_usuairo_atualiza NOT NULL,
+ CONSTRAINT pk_tb_relacionados PRIMARY KEY (cd_pessoa_fisica_1,cd_pessoa_fisica_2),
+ CONSTRAINT fk_tb_relacionados_cd_pessoa_fisica_1 FOREIGN KEY(cd_pessoa_fisica_1)
+ REFERENCES tb_pessoa_fisica(cd_pessoa_fisica),
+ CONSTRAINT fk_tb_relacionados_cd_pessoa_fisica_2 FOREIGN KEY(cd_pessoa_fisica_2)
+ REFERENCES tb_pessoa_fisica(cd_pessoa_fisica),
+ CONSTRAINT fk_tb_relacionados_cd_catg_relac FOREIGN KEY(cd_catg_relac,cd_catg_vl_relac)
+ REFERENCES tb_categoria_valor(cd_categoria,cd_vl_categoria) 
 );
+
+
+CREATE TABLE tb_relac_parametro(
+ cd_catg_relac_1 INTEGER CONSTRAINT nn_tb_relac_parametro_cd_catg_relac_1  NOT NULL, 
+ cd_catg_vl_relac_1 INTEGER CONSTRAINT nn_tb_relac_parametro_cd_catg_vl_relac_1 NOT NULL,
+ cd_catg_relac_2 INTEGER CONSTRAINT nn_tb_relac_parametro_cd_catg_relac_2 NOT NULL, 
+ cd_catg_vl_relac_2 INTEGER CONSTRAINT nn_tb_relac_parametro_cd_catg_vl_relac_2 NOT NULL, 
+ cd_usuario_criacao INTEGER CONSTRAINT nn_tb_relac_parametro_cd_usuario_criacao NOT NULL,
+ dt_usuario_criacao TIMESTAMP CONSTRAINT nn_tb_relac_parametro_dt_usuario_criacao NOT NULL,
+ cd_usuario_atualiza INTEGER CONSTRAINT nn_tb_relac_parametro_cd_usuario_atualiza NOT NULL,
+ dt_usuario_atualiza TIMESTAMP CONSTRAINT nn_tb_relac_parametro_dt_usuario_atualiza NOT NULL,
+ CONSTRAINT fk_tb_relac_parametro_catg_1 FOREIGN KEY (cd_catg_relac_1,cd_catg_vl_relac_1)
+ REFERENCES tb_categoria_valor(cd_categoria,cd_vl_categoria),
+ CONSTRAINT fk_tb_relac_parametro_catg_2 FOREIGN KEY (cd_catg_relac_2,cd_catg_vl_relac_2)
+ REFERENCES tb_categoria_valor(cd_categoria,cd_vl_categoria)  
+); 
+
 
 CREATE TABLE TB_SERVICO_ADICIONAL(
   CD_SERV_ADICIONAL SERIAL,
@@ -296,6 +319,9 @@ CREATE TABLE TB_SERVICO_ADICIONAL(
   DT_USUARIO_ATUALIZA TIMESTAMP CONSTRAINT NN_TB_SERVICO_ADICIONAL_DT_USUARIO_ATUALIZA NOT NULL,
   CONSTRAINT PK_TB_SERVICO_ADICIONAL_CD_SERV_ADICIONAL PRIMARY KEY(CD_SERV_ADICIONAL)
 );
+
+
+
 
 CREATE TABLE TB_SETOR(
   CD_SETOR SERIAL,
@@ -431,11 +457,6 @@ FOREIGN KEY(CD_ORDEM_SERVICO) REFERENCES TB_ORDEM_SERVICO(CD_ORDEM_SERVICO);
 ALTER TABLE TB_SERVICO_ADICIONAL ADD CONSTRAINT FK_TB_SERVICO_ADICIONAL_CD_SETOR
 FOREIGN KEY(CD_SETOR) REFERENCES TB_SETOR(CD_SETOR);
 
-ALTER TABLE TB_RELACIONADOS ADD CONSTRAINT FK_TB_RELACIONADOS_CD_PESSOA_FISICA_1 
-FOREIGN KEY(CD_PESSOA_FISICA_1) REFERENCES TB_PESSOA_FISICA(CD_PESSOA_FISICA);
-
-ALTER TABLE TB_RELACIONADOS ADD CONSTRAINT FK_TB_RELACIONADOS_CD_PESSOA_FISICA_2 
-FOREIGN KEY(CD_PESSOA_FISICA_2) REFERENCES TB_PESSOA_FISICA(CD_PESSOA_FISICA);
 
 ALTER TABLE TB_PJ_ENDERECO ADD CONSTRAINT FK_TB_PJ_ENDERECO_CD_PESSOA_JURIDICA 
 FOREIGN KEY(CD_PESSOA_JURIDICA) REFERENCES TB_PESSOA_JURIDICA(CD_PESSOA_JURIDICA);
@@ -693,6 +714,7 @@ CREATE TABLE TB_CATEGORIA_VALOR_LOG(
   CD_VL_CATEGORIA INTEGER CONSTRAINT NN_TB_CATEGORIA_VALOR_LOG_NR_SEQ_LOG NOT NULL,
   CD_CATEGORIA INTEGER CONSTRAINT NN_TB_CATEGORIA_VALOR_LOG_CD_CATEGORIA NOT NULL,
   DESC_VL_CATG VARCHAR(40) CONSTRAINT NN_TB_CATEGORIA_VALOR_LOG_DESC_VL_CATG NOT NULL,
+  GENERO CHAR(1),
   CD_USUARIO_CRIACAO INTEGER CONSTRAINT NN_TB_CATEGORIA_VALOR_LOG_CD_USUARIO_CRIACAO NOT NULL,
   DT_USUARIO_CRIACAO TIMESTAMP CONSTRAINT NN_TB_CATEGORIA_VALOR_LOG_DT_USUARIO_CRIACAO NOT NULL,   
   CD_USUARIO_ATUALIZA INTEGER CONSTRAINT NN_TB_CATEGORIA_VALOR_LOG_CD_USUARIO_ATUALIZA NOT NULL,
@@ -950,23 +972,40 @@ CREATE TABLE TB_PROFISSAO_LOG(
  CONSTRAINT PK_TB_PROFISSAO_LOG_NR_SEQ_LOG PRIMARY KEY(NR_SEQ_LOG)
 );
 
-CREATE TABLE TB_RELACIONADOS_LOG(
- NR_SEQ_LOG INTEGER,
- USU_EXECUTOR INTEGER CONSTRAINT NN_TB_RELACIONADOS_LOG_USU_EXECUTOR NOT NULL,
- DT_EXECUTOR TIMESTAMP CONSTRAINT NN_TB_RELACIONADOS_LOG_DT_EXECUTOR NOT NULL,
- COMANDO_EXECUTADO CHAR(1) CONSTRAINT NN_TB_RELACIONADOS_LOG_COMANDO_EXECUTADO NOT NULL,
- CD_PESSOA_FISICA_1 INTEGER CONSTRAINT NN_TB_RELACIONADOS_LOG_CD_PESSOA_FISICA_1  NOT NULL,
- CD_PESSOA_FISICA_2 INTEGER CONSTRAINT NN_TB_RELACIONADOS_LOG_CD_PESSOA_FISICA_2 NOT NULL,
- CD_CATG_RELAC_PF_1 INTEGER CONSTRAINT NN_TB_RELACIONADOS_LOG_CD_CATG_RELAC_1 NOT NULL,
- CD_VL_CATG_RELAC_PF_1 INTEGER CONSTRAINT NN_TB_RELACIONADOS_LOG_CD_VL_CATG_RELAC_1 NOT NULL,
- CD_CATG_RELAC_PF_2 INTEGER CONSTRAINT NN_TB_RELACIONADOS_LOG_CD_CATG_RELAC_1 NOT NULL,
- CD_VL_CATG_RELAC_PF_2 INTEGER CONSTRAINT NN_TB_RELACIONADOS_LOG_CD_VL_CATG_RELAC_1 NOT NULL,
- CD_USUARIO_CRIACAO INTEGER CONSTRAINT NN_TB_RELACIONADOS_LOG_CD_USUARIO_CRIACAO NOT NULL,
- DT_USUARIO_CRIACAO TIMESTAMP CONSTRAINT NN_TB_RELACIONADOS_LOG_DT_USUARIO_CRIACAO NOT NULL,   
- CD_USUARIO_ATUALIZA INTEGER CONSTRAINT NN_TB_RELACIONADOS_LOG_CD_USUARIO_ATUALIZA NOT NULL,
- DT_USUARIO_ATUALIZA TIMESTAMP CONSTRAINT NN_TB_RELACIONADOS_LOG_DT_USUARIO_ATUALIZA NOT NULL,
- CONSTRAINT PK_TB_RELACIONADOS_LOG_NR_SEQ_LOG PRIMARY KEY(NR_SEQ_LOG)
+
+CREATE TABLE tb_relacionados_log(
+ nr_seq_log INTEGER,
+ usu_executor INTEGER CONSTRAINT nn_tb_relacionados_log_usu_executor NOT NULL,
+ dt_executor TIMESTAMP CONSTRAINT nn_tb_relacionados_log_dt_executor NOT NULL,
+ comando_executado CHAR(1) CONSTRAINT nn_tb_relacionados_log_comando_executado NOT NULL,
+ cd_pessoa_fisica_1 INTEGER CONSTRAINT nn_tb_relacionados_log_cd_pessoa_fisica_1 NOT NULL,
+ cd_pessoa_fisica_2 INTEGER CONSTRAINT nn_tb_relacionados_cd_pessoa_fisica_2 NOT NULL,
+ cd_catg_relac INTEGER CONSTRAINT nn_tb_relacionados_cd_catg_relac NOT NULL,
+ cd_catg_vl_relac INTEGER CONSTRAINT nn_tb_relacionados_cd_catg_vl_relac NOT NULL,
+ cd_usuario_criacao INTEGER CONSTRAINT nn_tb_relacionados_cd_usuario_criacao NOT NULL,
+ dt_usuario_criacao TIMESTAMP CONSTRAINT nn_tb_relacionados_dt_usuario_criacao NOT NULL,
+ cd_usuario_atualiza INTEGER CONSTRAINT nn_tb_relacionados_cd_usuario_atualiza NOT NULL,
+ dt_usuario_atualiza TIMESTAMP CONSTRAINT nn_tb_relacionados_dt_usuairo_atualiza NOT NULL,
+ CONSTRAINT pk_tb_relacionados_nr_seq_log PRIMARY KEY (nr_seq_log)
 );
+
+
+CREATE TABLE tb_relac_parametro_log(
+ nr_seq_log INTEGER,
+ usu_executor INTEGER CONSTRAINT nn_tb_relac_parametro_log_usu_executor NOT NULL,
+ dt_executor TIMESTAMP CONSTRAINT nn_tb_relac_parametro_log_dt_executor NOT NULL,
+ comando_executado CHAR(1) CONSTRAINT nn_tb_relac_parametro_log_comando_executado NOT NULL,	
+ cd_catg_relac_1 INTEGER CONSTRAINT nn_tb_relac_parametro_cd_catg_relac_1  NOT NULL, 
+ cd_catg_vl_relac_1 INTEGER CONSTRAINT nn_tb_relac_parametro_cd_catg_vl_relac_1 NOT NULL,
+ cd_catg_relac_2 INTEGER CONSTRAINT nn_tb_relac_parametro_cd_catg_relac_2 NOT NULL, 
+ cd_catg_vl_relac_2 INTEGER CONSTRAINT nn_tb_relac_parametro_cd_catg_vl_relac_2 NOT NULL, 
+ cd_usuario_criacao INTEGER CONSTRAINT nn_tb_relac_parametro_cd_usuario_criacao NOT NULL,
+ dt_usuario_criacao TIMESTAMP CONSTRAINT nn_tb_relac_parametro_dt_usuario_criacao NOT NULL,
+ cd_usuario_atualiza INTEGER CONSTRAINT nn_tb_relac_parametro_cd_usuario_atualiza NOT NULL,
+ dt_usuario_atualiza TIMESTAMP CONSTRAINT nn_tb_relac_parametro_dt_usuario_atualiza NOT NULL,
+ CONSTRAINT fk_tb_relac_parametro_log_nr_seq_log PRIMARY KEY (nr_seq_log)
+); 
+
 
 CREATE TABLE TB_SERVICO_ADICIONAL_LOG(
  NR_SEQ_LOG INTEGER,
@@ -1165,6 +1204,8 @@ FOREIGN KEY(USU_EXECUTOR) REFERENCES TB_USUARIO(CD_USUARIO);
 ALTER TABLE TB_INSTITUICAO_ENSINO_LOG ADD CONSTRAINT FK_TB_INSTITUICAO_ENSINO_LOG_USU_EXECUTOR 
 FOREIGN KEY(USU_EXECUTOR) REFERENCES TB_USUARIO(CD_USUARIO);
 
+ALTER TABLE tb_relac_parametro_log ADD CONSTRAINT fk_tb_relac_parametro_log_usu_executor
+FOREIGN KEY(USU_EXECUTOR) REFERENCES TB_USUARIO(CD_USUARIO);
 
 CREATE SEQUENCE seq_tb_apartamento_log
 INCREMENT 1
@@ -2097,13 +2138,195 @@ BEGIN
 END;
 $$ LANGUAGE 'plpgsql'; 
 
+CREATE OR REPLACE FUNCTION fn_relacionados(p_pf1 INTEGER, p_pf2 INTEGER, p_cd_catg_relac INTEGER, p_deleta VARCHAR DEFAULT NULL)
+RETURNS VARCHAR AS 
+$$
+DECLARE
+v_cd_catg_relac_2 INTEGER; 
+v_cadastrado INTEGER;
+v_exist_parametro INTEGER;
+v_categoria_1_coluna INTEGER;
+v_genero CHAR(1);
+BEGIN 
+
+		SELECT COUNT(cd_pessoa_fisica_1)
+			INTO v_cadastrado
+		FROM tb_relacionados 
+		WHERE cd_pessoa_fisica_1 = p_pf1;
+		
+		SELECT COUNT(*)
+		INTO v_exist_parametro
+		FROM tb_relac_parametro 
+		WHERE cd_catg_vl_relac_1 = p_cd_catg_relac
+		OR cd_catg_vl_relac_2 = p_cd_catg_relac;
+
+		IF v_exist_parametro >= 1 THEN 
+			
+			SELECT ie_sexo
+				INTO v_genero
+			FROM tb_pessoa_fisica 
+			WHERE cd_pessoa_fisica = p_pf2;
+		
+			SELECT COUNT(*)
+				INTO v_categoria_1_coluna
+			FROM tb_relac_parametro 
+			WHERE cd_catg_vl_relac_1 = p_cd_catg_relac;
+			
+			IF v_categoria_1_coluna >= 1 THEN 
+
+				IF v_genero = 'M' THEN 
+
+					SELECT cd_vl_categoria
+						INTO v_cd_catg_relac_2
+					FROM tb_relac_parametro p,
+					tb_categoria_valor  c
+					WHERE p.cd_catg_vl_relac_2 = c.cd_vl_categoria
+					AND p.cd_catg_vl_relac_1 = p_cd_catg_relac
+					AND c.genero = 'M';
+
+				ELSIF v_genero = 'F' THEN
+
+					SELECT cd_vl_categoria
+						INTO v_cd_catg_relac_2
+					FROM tb_relac_parametro p,
+					tb_categoria_valor  c
+					WHERE p.cd_catg_vl_relac_2 = c.cd_vl_categoria
+					AND p.cd_catg_vl_relac_1 = p_cd_catg_relac
+					AND c.genero = 'F';
+					
+				ELSE
+
+					SELECT cd_catg_vl_relac_2
+						INTO v_cd_catg_relac_2
+					FROM tb_relac_parametro 
+					WHERE cd_catg_vl_relac_1 = p_cd_catg_relac;
+
+				END IF;
+	
+			ELSE
+				
+				IF v_genero = 'M' THEN
+
+					SELECT cd_vl_categoria
+						INTO v_cd_catg_relac_2
+					FROM tb_relac_parametro p,
+					tb_categoria_valor  c
+					WHERE p.cd_catg_vl_relac_1 = c.cd_vl_categoria
+					AND p.cd_catg_vl_relac_2 = p_cd_catg_relac
+					AND c.genero = 'M';					
+
+				ELSiF v_genero = 'F'  THEN
+
+					SELECT cd_vl_categoria
+						INTO v_cd_catg_relac_2
+					FROM tb_relac_parametro p,
+					tb_categoria_valor  c
+					WHERE p.cd_catg_vl_relac_1 = c.cd_vl_categoria
+					AND p.cd_catg_vl_relac_2 = p_cd_catg_relac
+					AND c.genero = 'F';
+
+				ELSE 
+
+					SELECT cd_catg_vl_relac_1
+						INTO v_cd_catg_relac_2
+					FROM tb_relac_parametro 
+					WHERE cd_catg_vl_relac_1 = p_cd_catg_relac;			
+
+				END IF;
+				
+			
+			END IF;
+	
+
+			IF p_deleta IS NOT NULL THEN 
+				
+				IF v_cadastrado > 0 THEN
+				
+					DELETE 
+					FROM  tb_relacionados 
+					WHERE cd_pessoa_fisica_1 = p_pf1
+					AND cd_pessoa_fisica_2 = p_pf2;
+
+					DELETE 
+					FROM  tb_relacionados 
+					WHERE cd_pessoa_fisica_1 = p_pf2
+					AND cd_pessoa_fisica_2 = p_pf1;
+					
+					RETURN 'Relacionamento deletado com sucesso!';
+					
+				ELSE
+				
+					RETURN 'Este relacionamento nao existe para ser excluido!';
+					
+				END IF;
+
+				
+			
+			ELSE
+			
+				IF v_cadastrado = 0 THEN
+	
+					INSERT INTO tb_relacionados(cd_pessoa_fisica_1,
+												cd_pessoa_fisica_2,
+												cd_catg_relac,
+												cd_catg_vl_relac,
+												cd_usuario_criacao,
+												dt_usuario_criacao,
+												cd_usuario_atualiza,
+												dt_usuario_atualiza)
+	
+					VALUES
+					(p_pf1,p_pf2,4,p_cd_catg_relac,user::INTEGER, now(),user::INTEGER, now());
+		
+					INSERT INTO tb_relacionados(cd_pessoa_fisica_1,
+												cd_pessoa_fisica_2,
+												cd_catg_relac,
+												cd_catg_vl_relac,
+												cd_usuario_criacao,
+												dt_usuario_criacao,
+												cd_usuario_atualiza,
+												dt_usuario_atualiza)
+	
+					VALUES
+					(p_pf2,p_pf1,4,v_cd_catg_relac_2,user::INTEGER, now(),user::INTEGER, now());
+			
+					RETURN 'Relacionamento inserido com sucesso!';
+		
+				ELSE 
+			
+					UPDATE tb_relacionados SET
+						cd_catg_vl_relac = p_cd_catg_relac,
+						cd_usuario_atualiza=user::INTEGER,
+						dt_usuario_atualiza=now()
+					WHERE cd_pessoa_fisica_1 = p_pf1; 
+			
+					UPDATE tb_relacionados SET
+						cd_catg_vl_relac = v_cd_catg_relac_2,
+						cd_usuario_atualiza=user::INTEGER,
+						dt_usuario_atualiza=now()
+					WHERE cd_pessoa_fisica_1 = p_pf2;
+			
+					RETURN 'Relacionamento atualizado com sucesso!';
+			
+				END IF;
+				
+			END IF;
+		
+		END IF;
+		
+		RETURN 'Nao existe esta categoria ou ainda nao foi parametrizada na tabela tb_relac_parametro!';
+END;
+$$
+LANGUAGE plpgsql;
+
+
 INSERT INTO TB_CATEGORIA(
 DESC_CATEGORIA)
 VALUES
 ('Unidade Federativa'),
 ('Estado'),
 ('Estagio ordem de serviço e ocorrência'),
-('Parentesco'),
+('Relacionados'),
 ('Fone pessoa física'),
 ('Fone pessoa juridica'),
 ('Grau de escolaridade'),
@@ -2117,133 +2340,138 @@ VALUES
 
 INSERT INTO TB_CATEGORIA_VALOR(
  CD_CATEGORIA,
- DESC_VL_CATG) 
+ DESC_VL_CATG,
+ GENERO) 
 VALUES
-(1,'AC'),
-(1,'AL'),
-(1,'AP'),
-(1,'AM'),
-(1,'BA'),
-(1,'CE'),
-(1,'DF'),
-(1,'ES'),
-(1,'GO'),
-(1,'MA'),
-(1,'MT'),
-(1,'MS'),
-(1,'MG'),
-(1,'PA'),
-(1,'PB'),
-(1,'PR'),
-(1,'PE'),
-(1,'PI'),
-(1,'RJ'),
-(1,'RN'),
-(1,'RS'),
-(1,'RO'),
-(1,'RR'),
-(1,'SC'),
-(1,'SP'),
-(1,'SE'),
-(1,'TO'),
-(2,'Acre'),
-(2,'Alagoas'),
-(2,'Amapá'),
-(2,'Amazonas'),
-(2,'Bahia'),
-(2,'Ceará'),
-(2,'Distrito Federal'),
-(2,'Espírito Santo'),
-(2,'Goiás'),
-(2,'Maranhão'),
-(2,'Mato Grosso'),
-(2,'Mato Grosso do Sul'),
-(2,'Minas Gerais'),
-(2,'Pará'),
-(2,'Paraíba'),
-(2,'Paraná'),
-(2,'Pernambuco'),
-(2,'Piuaí'),
-(2,'Rio de Janeiro'),
-(2,'Rio Grande do Norte'),
-(2,'Rio Grande do Sul'),
-(2,'Rondônia'),
-(2,'Roraima'),
-(2,'Santa Catarina'),
-(2,'São Paulo'),
-(2,'Sergipe'),
-(2,'Tocantins'),
-(3,'A Iniciar'),
-(3,'Execução'),
-(3,'Análise'),
-(3,'Finalizado'),
-(4,'Pai'),
-(4,'Mãe'),
-(4,'Filho'),
-(4,'Filha'),
-(4,'Nora'),
-(4,'Genro'),
-(4,'Cunhado'),
-(4,'Vô'),
-(4,'Vó'),
-(4,'Neto'),
-(4,'Neta'),
-(4,'Esposa'),
-(4,'Marido'),
-(4,'Namorado'),
-(4,'Namorada'),
-(4,'Noivo'),
-(4,'Noiva'),
-(4,'Amigo'),
-(4,'Amiga'),
-(5,'Residencial'),
-(5,'Comercial'),
-(5,'Celular'),
-(5,'Contato Extra'),
-(6,'Central'),
-(6,'Fax'),
-(6,'Ramal Direto'),
-(6,'Celular'),
-(7,'Primario'),
-(7,'Ensino Fundamental'),
-(7,'Ensino Médio'),
-(7,'Curso Técnico'),
-(7,'Ensino Superior'),
-(7,'Pós-Graduação'),
-(7,'Mestrado'),
-(7,'Doutorado'),
-(8,'Escola Municipal'),
-(8,'Escola Estadual'),
-(8,'Escola Particular'),
-(8,'Universidade Particula'),
-(8,'Universidade Federal'),
-(8,'Universidade Estadual'),
-(8,'Universidade Municipal'),
-(8,'Cursos Tecnológicos'),
-(8,'Cursos Técnicos'),
-(9,'Residencial'),
-(9,'Comercial'),
-(9,'Condominio'),
-(9,'Predio'),
-(9,'Outros'),
-(10,'Claro'),
-(10,'Oi'),
-(10,'Tim'),
-(10,'CTBC'),
-(10,'Telefonica'),
-(10,'Embratel'),
-(10,'Net'),
-(11,'Internet'),
-(11,'Vaga de Garagem'),
-(12,'Barulho no apartamento'),
-(12,'Problema com visitante'),
-(12,'Ácesso sem chip'),
-(12,'Estacionamento em vaga errada'),
-(12,'Danos ao patrimônio'),
-(12,'Outros'),
-(13,'Zeladoria'),
-(13,'Tecnologia'),
-(13,'Outros');
+(1,'AC',NULL),
+(1,'AL',NULL),
+(1,'AP',NULL),
+(1,'AM',NULL),
+(1,'BA',NULL),
+(1,'CE',NULL),
+(1,'DF',NULL),
+(1,'ES',NULL),
+(1,'GO',NULL),
+(1,'MA',NULL),
+(1,'MT',NULL),
+(1,'MS',NULL),
+(1,'MG',NULL),
+(1,'PA',NULL),
+(1,'PB',NULL),
+(1,'PR',NULL),
+(1,'PE',NULL),
+(1,'PI',NULL),
+(1,'RJ',NULL),
+(1,'RN',NULL),
+(1,'RS',NULL),
+(1,'RO',NULL),
+(1,'RR',NULL),
+(1,'SC',NULL),
+(1,'SP',NULL),
+(1,'SE',NULL),
+(1,'TO',NULL),
+(2,'Acre',NULL),
+(2,'Alagoas',NULL),
+(2,'Amapá',NULL),
+(2,'Amazonas',NULL),
+(2,'Bahia',NULL),
+(2,'Ceará',NULL),
+(2,'Distrito Federal',NULL),
+(2,'Espírito Santo',NULL),
+(2,'Goiás',NULL),
+(2,'Maranhão',NULL),
+(2,'Mato Grosso',NULL),
+(2,'Mato Grosso do Sul',NULL),
+(2,'Minas Gerais',NULL),
+(2,'Pará',NULL),
+(2,'Paraíba',NULL),
+(2,'Paraná',NULL),
+(2,'Pernambuco',NULL),
+(2,'Piuaí',NULL),
+(2,'Rio de Janeiro',NULL),
+(2,'Rio Grande do Norte',NULL),
+(2,'Rio Grande do Sul',NULL),
+(2,'Rondônia',NULL),
+(2,'Roraima',NULL),
+(2,'Santa Catarina',NULL),
+(2,'São Paulo',NULL),
+(2,'Sergipe',NULL),
+(2,'Tocantins',NULL),
+(3,'A Iniciar',NULL),
+(3,'Execução',NULL),
+(3,'Análise',NULL),
+(3,'Finalizado',NULL),
+(4,'Pai','M'),
+(4,'Mãe','F'),
+(4,'Filho','M'),
+(4,'Filha','F'),
+(4,'Nora','F'),
+(4,'Genro','M'),
+(4,'Cunhado','M'),
+(4,'Vô','M'),
+(4,'Vó','F'),
+(4,'Neto','M'),
+(4,'Neta','F'),
+(4,'Esposa','F'),
+(4,'Marido','M'),
+(4,'Namorado','M'),
+(4,'Namorada','F'),
+(4,'Noivo','M'),
+(4,'Noiva','F'),
+(4,'Amigo','M'),
+(4,'Amiga','F'),
+(4,'Sogro','M'),
+(4,'Sogra','F'),
+(4,'Irmão','M'),
+(4,'Irmã','F'),
+(5,'Residencial',NULL),
+(5,'Comercial',NULL),
+(5,'Celular',NULL),
+(5,'Contato Extra',NULL),
+(6,'Central',NULL),
+(6,'Fax',NULL),
+(6,'Ramal Direto',NULL),
+(6,'Celular',NULL),
+(7,'Primario',NULL),
+(7,'Ensino Fundamental',NULL),
+(7,'Ensino Médio',NULL),
+(7,'Curso Técnico',NULL),
+(7,'Ensino Superior',NULL),
+(7,'Pós-Graduação',NULL),
+(7,'Mestrado',NULL),
+(7,'Doutorado',NULL),
+(8,'Escola Municipal',NULL),
+(8,'Escola Estadual',NULL),
+(8,'Escola Particular',NULL),
+(8,'Universidade Particula',NULL),
+(8,'Universidade Federal',NULL),
+(8,'Universidade Estadual',NULL),
+(8,'Universidade Municipal',NULL),
+(8,'Cursos Tecnológicos',NULL),
+(8,'Cursos Técnicos',NULL),
+(9,'Residencial',NULL),
+(9,'Comercial',NULL),
+(9,'Condominio',NULL),
+(9,'Predio',NULL),
+(9,'Outros',NULL),
+(10,'Claro',NULL),
+(10,'Oi',NULL),
+(10,'Tim',NULL),
+(10,'CTBC',NULL),
+(10,'Telefonica',NULL),
+(10,'Embratel',NULL),
+(10,'Net',NULL),
+(11,'Internet',NULL),
+(11,'Vaga de Garagem',NULL),
+(12,'Barulho no apartamento',NULL),
+(12,'Problema com visitante',NULL),
+(12,'Ácesso sem chip',NULL),
+(12,'Estacionamento em vaga errada',NULL),
+(12,'Danos ao patrimônio',NULL),
+(12,'Outros',NULL),
+(13,'Zeladoria',NULL),
+(13,'Tecnologia',NULL),
+(13,'Outros',NULL);
 
 INSERT INTO TB_PROFISSAO(
 NM_PROFISSAO,
@@ -2442,7 +2670,7 @@ dt_usuario_criacao,
 cd_usuario_atualiza,
 dt_usuario_atualiza)
 VALUES
-(5,78,1,
+(9,107,1,
 '00000-00',
 'Presidente Vargas',
 14,
@@ -2481,7 +2709,7 @@ dt_usuario_criacao,
 cd_usuario_atualiza,
 dt_usuario_atualiza)
 VALUES
-(5,79,1,
+(9,107,1,
 '00000-00',
 'Presidente Vargas',
 10,
@@ -2542,23 +2770,6 @@ VALUES
 (2,1,now(),1,now(),1,now());
 
 
-INSERT INTO tb_relacionados(
-cd_pessoa_fisica_1,
-cd_pessoa_fisica_2,
-cd_catg_relac_pf_1,
-cd_vl_catg_relac_pf_1,
-cd_catg_relac_pf_2,
-cd_vl_catg_relac_pf_2,
-cd_usuario_criacao,
-dt_usuario_criacao,
-cd_usuario_atualiza,
-dt_usuario_atualiza)
-VALUES
-(1,2,
-4,72,
-4,73,
-1,now(),1,now());
-
 INSERT INTO tb_vaga_garagem(
 ds_vaga,
 cd_setor,
@@ -2582,7 +2793,7 @@ cd_usuario_atualiza,
 dt_usuario_atualiza)
 VALUES
 (2,'(16)99222-1212',
-5,80,10,106,1,now(),1,now());
+5,82,10,115,1,now(),1,now());
 
 INSERT INTO tb_pj_telefone(
 cd_pessoa_juridica,
@@ -2597,7 +2808,7 @@ cd_usuario_atualiza,
 dt_usuario_atualiza)
 VALUES
 (1,'(16) 2177-5000',
-6,84,10,109,1,now(),1,now());
+6,86,10,115,1,now(),1,now());
 
 INSERT INTO tb_instituicao_ensino(
 ds_instituicao,
@@ -2608,7 +2819,7 @@ dt_usuario_criacao,
 cd_usuario_atualiza,
 dt_usuario_atualiza)
 VALUES
-('Laura de Mello',8,97,
+('Laura de Mello',8,99,
 1,now(),1,now());
 
 
@@ -2629,7 +2840,7 @@ dt_usuario_atualiza)
 VALUES
 (1,'vidro quebrado',
 'O administrador quebrou o vidro',
-now(), 3, 55, 12, 122,
+now(), 3, 56, 12, 125,
 1,now(),1,now());
 
 INSERT INTO tb_orcamento(
@@ -2675,7 +2886,33 @@ cd_usuario_atualiza,
 dt_usuario_atualiza)
 VALUES
 (1,2,'Internet','solicito a instalação de internet',
-now(),2,52,13,124,1,now(),1,now());
+now(),2,52,13,128,1,now(),1,now());
+
+INSERT INTO tb_relac_parametro
+VALUES
+(4,59,4,61,1, now(),1, now()),
+(4,59,4,62,1, now(),1, now()),
+(4,60,4,61,1, now(),1, now()),
+(4,60,4,62,1, now(),1, now()),
+(4,78,4,63,1, now(),1, now()),
+(4,78,4,64,1, now(),1, now()),
+(4,79,4,63,1, now(),1, now()),
+(4,79,4,64,1, now(),1, now()),
+(4,65,4,65,1, now(),1, now()),
+(4,66,4,68,1, now(),1, now()),
+(4,66,4,69,1, now(),1, now()),
+(4,67,4,68,1, now(),1, now()),
+(4,67,4,69,1, now(),1, now()),
+(4,70,4,71,1, now(),1, now()),
+(4,72,4,73,1, now(),1, now()),
+(4,74,4,75,1, now(),1, now()),
+(4,76,4,76,1, now(),1, now()),
+(4,76,4,77,1, now(),1, now()),
+(4,77,4,76,1, now(),1, now()),
+(4,76,4,76,1, now(),1, now()),
+(4,77,4,77,1, now(),1, now()),
+(4,80,4,81,1, now(),1, now());
+ 
 
 --triggers
 
