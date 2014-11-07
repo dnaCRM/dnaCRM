@@ -97,6 +97,9 @@ $(document).ready(function () {
 
 });
 
+/* Ativar tooltips */
+$(function () { $("[data-toggle='tooltip']").tooltip(); });
+
 /* DataTables */
 $('#perfillist').dataTable({
     "language": {
@@ -275,6 +278,20 @@ $('#cadastro_usuario').bootstrapValidator({
                 identical: {
                     field: 'senha',
                     message: 'O valor informado deve ser igual a senha informada.'
+                }
+            }
+        },
+        nivel: {
+            validators: {
+                notEmpty: {
+                    message: 'Escolha um nível de acesso.'
+                }
+            }
+        },
+        ie_status: {
+            validators: {
+                notEmpty: {
+                    message: 'Defina um status.'
                 }
             }
         }
@@ -1855,7 +1872,7 @@ $(document).ready(function () {
                         '<td><img class="img-circle" src="' + data.im_perfil + '"></td>' +
                         '<td><h6><a href="PessoaFisica/visualizar/' + data.cd_pessoa_fisica + '">' + data.nm_pessoa_fisica + '</a></h6></td>' +
                         '<td>' +
-                        '<a href=\"#\" data-id-ocorrencia="' + data.cd_ocorrencia + '" data-id-pessoa="' + data.cd_pessoa_fisica + '" class="btn btn-danger btn-xs btn-circle remove-ocorr-pessoa" data-toggle="modal" data-target="#apagaOPModal"><i class="fa fa-minus-circle"></i></i></a>' +
+                        '<a href=\"#\" data-id-ocorrencia="' + data.cd_ocorrencia + '" data-id-pessoa="' + data.cd_pessoa_fisica + '" class="btn btn-danger btn-xs btn-circle remove-ocorr-pessoa" data-toggle="modal" data-target="#apagaOPModal"><i class="fa fa-minus"></i></i></a>' +
                         '</button>' +
                         '</td></tr>';
 

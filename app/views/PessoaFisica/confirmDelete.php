@@ -1,17 +1,10 @@
 <div class="row">
-    <div class="col-md-6">
-        <h1><?php echo $data['pagetitle']; ?></h1>
-
-        <p class="lead">
-            <?php echo (isset($data['pagesubtitle'])) ? $data['pagesubtitle'] : ""; ?>
-        </p>
-    </div>
-    <div class="col-md-6" style="padding: 15px 15px 0 15px;">
-        <div class="well">
-
-            Well...
-
-        </div>
+    <div class="col-md-12">
+        <h3 class="page-header"><?php echo $data['pagetitle']; ?>
+            <small>
+                <?php echo (isset($data['pagesubtitle'])) ? $data['pagesubtitle'] : ""; ?>
+            </small>
+        </h3>
     </div>
 </div>
 

@@ -67,6 +67,22 @@ class OcorrenciaPessoaFisicaEnvolvidaModel extends Model
     }
 
     /**
+     * @param OcorrenciaModel $ocorrenciaModel
+     * @param $id_pessoa_fisica
+     * @return array
+     */
+    public function getOcorrenciasPorInformante(OcorrenciaModel $ocorrenciaModel, $id_pessoa_fisica)
+    {
+        $ocorrencias = $ocorrenciaModel->getDao()->get("cd_pf_informante = {$id_pessoa_fisica}");
+        $lista = array();
+        foreach($ocorrencias as $ocorrencia) {
+            $ocorrencia = $ocorrenciaModel->getDAO()->getById($ocorrencia->getCdOcorrencia());
+            $lista[] = $ocorrenciaModel->setDTO($ocorrencia)->getArrayDados();
+        }
+        return $lista;
+    }
+
+    /**
      * @return OcorrenciaPessoaFisicaEnvolvidaDAO
      */
     public function getDAO()

@@ -34,10 +34,10 @@ $apartamento = $data['apartamento'];
                     <div class=\"profile-card-foto-container\">
                         <img src=\"{$apartamento['condo_foto']}\" class=\"img-circle profilefoto foto-md\">
                     </div>
-                    <div class=\"pcard-name\">Condomínio
-                    {$apartamento['condominio']}
-                     <div class=\"pcard-info\">
-                    {$apartamento['setor']}
+                    <div class=\"pcard-name\"><a href=\"Condominio/visualizar/{$apartamento['cd_condominio']}\">Condomínio
+                    {$apartamento['condominio']}</a>
+                     <div class=\"pcard-info\"><a href=\"Setor/visualizar/{$apartamento['cd_setor']}\">
+                    {$apartamento['setor']}</a>
                     </div>
                     </div>
                     ";
@@ -49,7 +49,7 @@ $apartamento = $data['apartamento'];
     </div>
 
     <div class="col-sm-6">
-
+        <?php if ($data['moradores']): ?>
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title">Moradores</h3>
@@ -78,7 +78,9 @@ $apartamento = $data['apartamento'];
 
             </div>
         </div>
+        <?php endif; ?>
 
+        <?php if ($data['ex_moradores']): ?>
         <div class="panel panel-info">
             <div class="panel-heading">
                 <h3 class="panel-title">Ex-Moradores</h3>
@@ -109,6 +111,7 @@ $apartamento = $data['apartamento'];
 
             </div>
         </div>
+        <?php endif; ?>
     </div>
 
 </div>

@@ -8,7 +8,9 @@
  */
 class PessoaFisica extends Controller
 {
+    /** @var \PessoaFisicaModel  */
     private $pessoaFisicaModel;
+
     public function __construct()
     { //o método é herdado da classe pai 'Controller'
         $this->setModel(new PessoaFisicaDAO());
@@ -124,7 +126,9 @@ class PessoaFisica extends Controller
         $enderecos = $this->pessoaFisicaModel->getEnderecos(new PessoaFisicaEnderecoModel());
         $moradorEnderecos = $this->pessoaFisicaModel->getMoradorEnderecos(new MoradorEnderecoModel());
         $ordensSolicitadas = $this->pessoaFisicaModel->getOsSolicitadas(new OrdemServicoModel());
+        $ordensExecutadas = $this->pessoaFisicaModel->getOsExecutadas(new OrdemServicoModel());
         $ocorrencias = $this->pessoaFisicaModel->getOcorrenciasEnvolvidas(new OcorrenciaPessoaFisicaEnvolvidaModel());
+        $oc_informadas = $this->pessoaFisicaModel->getOcorrenciasInformadas(new OcorrenciaPessoaFisicaEnvolvidaModel());
         // Exporta imagem de perfil
         $this->exportaImagens($pessoa);
 
@@ -139,7 +143,9 @@ class PessoaFisica extends Controller
             'enderecos' => $enderecos,
             'morador_enderecos' => $moradorEnderecos,
             'os_solicitadas' => $ordensSolicitadas,
-            'ocorrencias' => $ocorrencias
+            'os_executadas' => $ordensExecutadas,
+            'ocorrencias' => $ocorrencias,
+            'oc_informadas' => $oc_informadas
         );
 
         $this->view = new View('PessoaFisica', 'visualizar');

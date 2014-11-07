@@ -134,6 +134,11 @@ class PessoaFisicaModel extends Model
         return $ocorrencias->getOcorrenciasPorPessoa(new OcorrenciaModel(), $this->dto->getCdPessoaFisica());
     }
 
+    public function getOcorrenciasInformadas(OcorrenciaPessoaFisicaEnvolvidaModel $ocorrencias)
+    {
+        return $ocorrencias->getOcorrenciasPorInformante(new OcorrenciaModel(), $this->dto->getCdPessoaFisica());
+    }
+
     public function getDAO()
     {
         return $this->dao;

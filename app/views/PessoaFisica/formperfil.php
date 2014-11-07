@@ -7,10 +7,23 @@ $id_check = $data['id'];
 
 $token = Token::generate();
 ?>
+
 <div class="row">
     <div class="col-sm-12">
         <h3 class="page-header"><?php echo $data['pagetitle']; ?>
             <small><?php echo $data['pagesubtitle']; ?></small>
+            <?php if ($id_check): ?>
+                <span class="btn-panel pull-right">
+                <a href="PessoaFisica/visualizar/<?php echo $id_check; ?>" data-toggle="tooltip" data-placement="top" title="Ver Perfil!"
+                   class="btn btn-circle btn-lg">
+                    <i class="fa fa-eye"></i>
+                </a>
+                <a href="PessoaFisica/" data-toggle="tooltip" data-placement="top" title="Ver Lista!"
+                   class="btn btn-circle btn-lg">
+                    <i class="fa fa-list"></i>
+                </a>
+            </span>
+            <?php endif; ?>
         </h3>
     </div>
 </div>
@@ -317,7 +330,8 @@ $token = Token::generate();
 
         <div class="form-group">
             <div class="col-sm-12 clearfix">
-                <a href="PessoaFisica<?php echo $data['id'] ? '/visualizar/'.$data['id']:'';?>" id="cancel" class="btn btn-default"><span
+                <a href="PessoaFisica" id="cancel"
+                   class="btn btn-default"><span
                         class="fa fa-undo"></span> Cancelar</a>
                 <a href="PessoaFisica/formperfil" id="novo" class="btn btn-success"><span class="fa fa-file"></span>
                     Novo</a>
@@ -765,8 +779,10 @@ $token = Token::generate();
             <div class="col-md-4">
                 <div class="legend">Pesquisa</div>
                 <div class="input-group">
-                    <input type="text" id="pessoa_1" class="form-control" name="pessoa_1" placeholder="Nome" autocomplete="off">
-                    <span class="input-group-btn"><input type="submit" name="botao-pesquisar-pessoa" class="btn btn-info"
+                    <input type="text" id="pessoa_1" class="form-control" name="pessoa_1" placeholder="Nome"
+                           autocomplete="off">
+                    <span class="input-group-btn"><input type="submit" name="botao-pesquisar-pessoa"
+                                                         class="btn btn-info"
                                                          id="botao-pesquisar-pessoa" value="ok"></span>
                 </div>
                 <div id="area-do-resultado-pf-form" class="center-block"></div>

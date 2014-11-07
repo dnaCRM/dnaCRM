@@ -28,7 +28,7 @@ $apartamentos = $data['apartamentos'];
                         <dt>Observação</dt>
                         <dd><?php echo $setor['observacao']; ?></dd>
                         <dt>Localização</dt>
-                        <dd><?php echo $setor['condominio']; ?></dd>
+                        <dd><a href="Condominio/visualizar/<?php echo $setor['cd_condominio']; ?>"><?php echo $setor['condominio']; ?></a></dd>
                     </dl>
                 </div>
 
