@@ -90,9 +90,9 @@ $token = Token::generate();
                         <div class="form-group">
 
                             <div class="col-sm-12">
-                                <label for="descricao" class="control-label">Descrição</label>
+                                <label for="descricao_ocorr" class="control-label">Descrição</label>
 
-                                <textarea id="descricao" class="form-control" name="descricao"
+                                <textarea id="descricao_ocorr" class="form-control" name="descricao"
                                           placeholder="Ocorrência"
                                           rows="5"><?php echo $ocorrencia->getDescOcorrencia() == '' ? Input::get('descricao') : $ocorrencia->getDescOcorrencia(); ?></textarea>
                             </div>
@@ -101,9 +101,9 @@ $token = Token::generate();
 
                         <div class="form-group">
                             <div class="col-sm-12">
-                                <label for="desc_conclusao" class="control-label">Conclusão</label>
+                                <label for="desc_conclusao_ocorr" class="control-label">Conclusão</label>
 
-                                <textarea id="desc_conclusao" class="form-control" name="desc_conclusao"
+                                <textarea id="desc_conclusao_ocorr" class="form-control" name="desc_conclusao"
                                           placeholder="Como a ocorrência foi concluída"
                                           rows="5"><?php echo $ocorrencia->getDescConclusao() == '' ? Input::get('desc_conclusao') : $ocorrencia->getDescConclusao(); ?></textarea>
                             </div>

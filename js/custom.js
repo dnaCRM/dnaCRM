@@ -78,31 +78,6 @@ $(".sidebar-menu .treeview").tree();
     });
 })();
 
-//CKEditores
-CKEDITOR.replace('descricao', {
-    toolbar: [
-        //{ name: 'document', items: [ 'Source', '-', 'NewPage', 'Preview', '-', 'Templates' ] },	// Defines toolbar group with name (used to create voice label) and items in 3 subgroups.
-        [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ],			// Defines toolbar group without name.
-        //'/',																					// Line break - next group will be placed in new line.
-        { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', '-', 'RemoveFormat'] },
-        { name: 'others', items: [ '-' ] },
-        { name: 'insert', items: [ 'Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ] },
-        { name: 'tools', items: [ 'Maximize', 'ShowBlocks' ] }
-    ]
-});
-
-CKEDITOR.replace('desc_conclusao', {
-    toolbar: [
-        //{ name: 'document', items: [ 'Source', '-', 'NewPage', 'Preview', '-', 'Templates' ] },	// Defines toolbar group with name (used to create voice label) and items in 3 subgroups.
-        [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ],			// Defines toolbar group without name.
-        //'/',																					// Line break - next group will be placed in new line.
-        { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', '-', 'RemoveFormat'] },
-        { name: 'others', items: [ '-' ] },
-        { name: 'insert', items: [ 'Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ] },
-        { name: 'tools', items: [ 'Maximize', 'ShowBlocks' ] }
-    ]
-});
-
 /** Collapsible panel */
 jQuery(function ($) {
     $('.panel-heading span.clickable').on("click", function (e) {

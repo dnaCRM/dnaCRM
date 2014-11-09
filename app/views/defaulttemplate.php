@@ -279,7 +279,6 @@ if (Session::exists('usuario')) {
 <script src="js/datatables/js/jquery.dataTables.js"></script>
 <script src="js/datatables/js/dataTables.bootstrap.js"></script>
 <script src="js/datatables/js/dataTables.responsive.min.js"></script>
-<script src="js/ckeditor/ckeditor.js"></script>
 <script src="js/custom.js"></script>
 
 <a id="toTop" href="#"><span id="toTopHover"></span><img width="45" height="45" alt="" src="img/to-top.png"></a>

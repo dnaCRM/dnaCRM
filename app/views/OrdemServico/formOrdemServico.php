@@ -82,7 +82,7 @@ $token = Token::generate();
                         <div class="form-group">
 
                             <div class="col-sm-12">
-                                <label for="descricao" class="control-label">Descrição</label>
+                                <label for="descricao_os" class="control-label">Descrição</label>
 
                                 <textarea id="descricao" class="form-control" name="descricao"
                                           placeholder="Ocorrência"
@@ -93,7 +93,7 @@ $token = Token::generate();
 
                         <div class="form-group">
                             <div class="col-sm-12">
-                                <label for="desc_conclusao" class="control-label">Conclusão</label>
+                                <label for="desc_conclusao_os" class="control-label">Conclusão</label>
 
                                 <textarea id="desc_conclusao" class="form-control" name="desc_conclusao"
                                           placeholder="Como a OS foi concluída"
