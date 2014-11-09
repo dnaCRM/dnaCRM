@@ -37,6 +37,37 @@ class RelacionadosDAO extends DataAccessObject
     }
 
     /**
+     * Uso: RelacionadosDAO::save($cd_pessoa_1, $cd_pessoa_2, $cd_catg_vl_relac, $del);
+     * Atribuir 'D' para $del, caso queira deletar
+     * Exemplo: $dto = $this->model->save($cd_pessoa_1, $cd_pessoa_2, $cd_catg_vl_relac, $del);
+     * @param RelacionadosDTO $dto
+     * @param null $del
+     * @return bool|mixed
+     */
+    public function save(RelacionadosDTO $dto, $del = null)
+    {
+        $sql = "SELECT fn_relacionados(:pessoa1, :pessoa2, :relacionamento, :deletar)";
+//        var_dump($dto); die;
+        try {
+            $stmt = $this->con->prepare($sql);
+            $stmt->bindValue(':pessoa1', $dto->getCdPessoaFisica1());
+            $stmt->bindValue(':pessoa2', $dto->getCdPessoaFisica2());
+            $stmt->bindValue(':relacionamento', $dto->getCdCatgVlRelac());
+            $stmt->bindValue(':deletar', $del);
+
+            $stmt->execute();
+
+            return $stmt->fetch();
+
+        } catch (PDOException $e) {
+            $this->success = false;
+            CodeFail((int)$e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
+            return false;
+        }
+
+    }
+
+    /**
      * @param DataTransferObject $dto
      * @return bool|DataTransferObject
      */
@@ -112,13 +143,9 @@ class RelacionadosDAO extends DataAccessObject
     }
 
     /**
-     * Informar código de acordo com o critério de pesquisa
-     * $pf1 para pesquisar pela Pessoa Física 1 (informar null para não usar)
-     * $pf2 para pesquisar pela Pessoa Física 2 (informar null para não usar)
-     * Informar os dois parâmetros para pesquisar a chave primária inteira
-     * @param null $pf1
-     * @param null $pf2
-     * @return bool|DataTransferObject
+     * @param $pf1
+     * @param $pf2
+     * @return bool
      */
     public function getBy2Ids($pf1, $pf2)
     {

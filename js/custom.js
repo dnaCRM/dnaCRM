@@ -78,6 +78,24 @@ $(".sidebar-menu .treeview").tree();
     });
 })();
 
+/** Collapsible panel */
+jQuery(function ($) {
+    $('.panel-heading span.clickable').on("click", function (e) {
+        if ($(this).hasClass('panel-collapsed')) {
+            // expand the panel
+            $(this).parents('.panel').find('.panel-body').slideDown();
+            $(this).removeClass('panel-collapsed');
+            $(this).find('i').removeClass('glyphicon-plus').addClass('glyphicon-minus');
+        }
+        else {
+            // collapse the panel
+            $(this).parents('.panel').find('.panel-body').slideUp();
+            $(this).addClass('panel-collapsed');
+            $(this).find('i').removeClass('glyphicon-minus').addClass('glyphicon-plus');
+        }
+    });
+});
+
 $(document).ready(function () {
 
     //Check to see if the window is top if not then display button
@@ -98,7 +116,9 @@ $(document).ready(function () {
 });
 
 /* Ativar tooltips */
-$(function () { $("[data-toggle='tooltip']").tooltip(); });
+$(function () {
+    $("[data-toggle='tooltip']").tooltip();
+});
 
 /* DataTables */
 $('#perfillist').dataTable({
@@ -1325,7 +1345,7 @@ $('#tb_m_enderecos').delegate('.delete_m_end', 'click', function () {
 
 $('#form_m_end_reset').click(function () {
     $('#form_end_morador input[name=id_m_end]').val('');
-    $('#legend_form_enderecos').html('Cadastrar Endereço').removeClass('text-primary');
+    $('#legend_form_end_morador').html('Cadastrar Endereço').removeClass('text-primary');
 
 });
 /** Fim - Botões Atualizar e Apagar PF Telefone*/
@@ -1841,8 +1861,7 @@ $(document).ready(function () {
 
     $('#ocorr_pessoa').keyup(function (e) {
         buscaPessoaOcorrencia();
-    });
-    $('#ocorr_pessoa').focusout(function () {
+    }).focusout(function () {
         $('#busca-ocorr-pessoa-resultado').fadeOut();
     });
 
@@ -1943,4 +1962,162 @@ $(document).ready(function () {
             });
             return false;
         });
+});
+
+/** Busca Pessoa Física para Relacionamento*/
+$(document).ready(function () {
+    function buscaPessoaRelacionada() {
+        var nome = $('#relac_busca').val();
+
+        if (nome != '') {
+            $('#busca-relac-pessoa-resultado').html('<i class="fa fa-spinner fa-spin"></i>');
+            $.ajax({
+                type: 'post',
+                url: 'PessoaFisica/buscaAjax/',
+                data: 'nome=' + nome,
+                dataType: 'json',
+                success: function (data) {
+
+                    var html = '';
+                    for (var i = 0; i < data.length; i++) {
+                        html += '<div data-pessoa-relac="' + data[i].id + '" class="list-group-item"><div><img src="' + data[i].foto + '" class="img-circle img-thumb-panel pull-left">' +
+                            '<p class="list-group-item-heading"><a title="Visualizar perfil" href="PessoaFisica/visualizar/' + data[i].id + '">' + data[i].nome + '</a></p>' +
+                            '<p class="list-group-item-text text-right">' +
+                            '<button data-id-pessoa="' + data[i].id + '" title="Adicionar" class="btn btn-info btn-xs btn-circle add-relac-pessoa">' +
+                            '<i class="fa fa-plus"></i></button></p></div></div>';
+                    }
+
+                    var resultBody = '<div class="row"><div class="col-md-12">' + html + '</div></div>';
+                    $('#busca-relac-pessoa-resultado').html(resultBody).hide().fadeIn();
+                },
+                error: function (data) {
+                    $(data.responseText).appendTo('#busca-relac-pessoa-resultado');
+                }
+            });
+        } else {
+            $('#busca-relac-pessoa-resultado').fadeOut();
+        }
+    }
+
+    $('#form_pf_relacionamento').bootstrapValidator({
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            catg_relac: {
+                validators: {
+                    notEmpty: {
+                        message: 'Informe o relacionamento.'
+                    }
+                }
+            }
+        }
+    }).on('success.form.bv', function (e) {
+        e.preventDefault();
+
+        var $form = $(e.target);
+
+        var bv = $form.data('bootstrapValidator');
+
+        var dados = $(this).serialize();
+
+        $.ajax({
+            type: "POST",
+            url: "Relacionados/cadastra",
+            data: dados,
+            dataType: 'json',
+            success: function (data) {
+
+                var celulas = '<td><img src="' + data.pessoa2_foto + '" class="img-circle profilefoto"></td>' +
+                    '<td><a href="PessoaFisica/visualizar/' + data.cd_pessoa_fisica_2 + '">' + data.pessoa2_nome + '</a></td>' +
+                    '<td>' + data.relac + '</td>' +
+                    '<td><button ' +
+                        'data-img-pessoa="' + data.pessoa2_foto + '" ' +
+                        'data-nome-pessoa="' + data.pessoa2_nome + '" ' +
+                        'data-id-pessoa="' + data.cd_pessoa_fisica_2 + '" ' +
+                        'data-toggle="tooltip" ' +
+                        'data-placement="top" ' +
+                        'title="Editar relacionamento" class="btn btn-primary btn-xs btn-circle add-relac-pessoa">' +
+                    '<i class="fa fa-arrow-left"></i></button></td>';
+
+                var linha = '<tr data-pessoa-relac="' + data.cd_pessoa_fisica_2 + '">' + celulas + '</tr>';
+
+                $('#tb_lista-relacionados tr[data-pessoa-relac=' + data.cd_pessoa_fisica_2 + ']').remove();
+
+                $(linha).appendTo('#tb_lista-relacionados').hide().fadeIn();
+
+                var msg = '<div class="alert alert-dismissable alert-success">' +
+                    '<a href="#" class="close" data-dismiss="alert">×</a><h4>' + data.fn_relacionados + '</h4></div>';
+
+                $('#form_pf_relacionamento input[name=cd_pessoa_fisica_2]').val('');
+                $('#legend_form_relacionamento').html('Relacionamentos').removeClass('text-primary');
+                $('#pessoa_relac').html(msg);
+
+                bv.resetForm(true);
+            },
+            error: function (data) {
+                console.log(data);
+                $(data.responseText).appendTo('#responseAjaxError');
+            }
+        });
+        return false;
+    });
+
+
+    $('#relac_busca').keyup(function (e) {
+        buscaPessoaRelacionada();
+    }).focusout(function () {
+        $('#busca-relac-pessoa-resultado').fadeOut();
+    });
+
+    // Adiciona Pessoa ao formulário #form_pf_relacionamento
+    $('#busca-relac-pessoa-resultado').delegate('.add-relac-pessoa', 'click', function () {
+
+        var id_pessoa = $(this).attr('data-id-pessoa');
+        var nome_pessoa = $(this).attr('data-nome-pessoa');
+
+        var p = $('div[data-pessoa-relac=' + id_pessoa + ']');
+
+        $('#pessoa_relac').html(p).hide().fadeIn();
+        $('#form_pf_relacionamento input[name=cd_pessoa_fisica_2]').val(id_pessoa);
+
+
+        return false;
+    });
+    $('#tb_lista-relacionados').delegate('.add-relac-pessoa', 'click', function () {
+
+        var id_pessoa = $(this).attr('data-id-pessoa');
+        var nome_pessoa = $(this).attr('data-nome-pessoa');
+        var img_pessoa = $(this).attr('data-img-pessoa');
+
+        var p = '<div data-pessoa-relac="1" class="list-group-item">' +
+            '<div>' +
+            '<img src="'+img_pessoa+'" class="img-circle img-thumb-panel pull-left">' +
+            '<p class="list-group-item-heading">' +
+            '<a title="Visualizar perfil" href="PessoaFisica/visualizar/'+id_pessoa+'">'+nome_pessoa+'</a>' +
+            '</p>' +
+            '<p class="list-group-item-text text-right">' +
+            '</p></div></div>';
+
+        $('#pessoa_relac').html(p).hide().fadeIn();
+        $('#form_pf_relacionamento input[name=cd_pessoa_fisica_2]').val(id_pessoa);
+
+
+        return false;
+    });
+
+    $('#deletar_relac').on('click', function () {
+
+        $('#del_button_txt').html($('#checkbox_del_relac').is(':checked') ? 'Deletar?' : 'Será deletado.');
+
+    });
+
+    $('#form_pf_r_reset').click(function () {
+        $('#form_pf_relacionamento input[name=cd_pessoa_fisica_2]').val('');
+        $('#legend_form_relacionamento').html('Cadastrar Relacionamento').removeClass('text-primary');
+        $('#pessoa_relac .list-group-item').remove();
+
+    });
 });

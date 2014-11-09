@@ -14,7 +14,8 @@ $token = Token::generate();
             <small><?php echo $data['pagesubtitle']; ?></small>
             <?php if ($id_check): ?>
                 <span class="btn-panel pull-right">
-                <a href="PessoaFisica/visualizar/<?php echo $id_check; ?>" data-toggle="tooltip" data-placement="top" title="Ver Perfil!"
+                <a href="PessoaFisica/visualizar/<?php echo $id_check; ?>" data-toggle="tooltip" data-placement="top"
+                   title="Ver Perfil!"
                    class="btn btn-circle btn-lg">
                     <i class="fa fa-eye"></i>
                 </a>
@@ -171,15 +172,15 @@ $token = Token::generate();
                 <div class="col-sm-12">
                     <div class="btn-group" data-toggle="buttons">
                         <label
-                            class="btn btn-default<?php echo (($perfil->getIeSexo()) == 'm' || Input::get('ie_sexo') == 'm') ? ' active' : ''; ?>">
+                            class="btn btn-default<?php echo (($perfil->getIeSexo()) == 'M' || Input::get('ie_sexo') == 'M') ? ' active' : ''; ?>">
                             <input type="radio" name="ie_sexo"
-                                   value="m" <?php echo (($perfil->getIeSexo()) == 'm' || Input::get('ie_sexo') == 'm') ? 'checked' : ''; ?>/>
+                                   value="M" <?php echo (($perfil->getIeSexo()) == 'M' || Input::get('ie_sexo') == 'M') ? 'checked' : ''; ?>/>
                             Masculino
                         </label>
                         <label
-                            class="btn btn-default<?php echo (($perfil->getIeSexo()) == 'f' || Input::get('ie_sexo') == 'f') ? ' active' : ''; ?>">
+                            class="btn btn-default<?php echo (($perfil->getIeSexo()) == 'F' || Input::get('ie_sexo') == 'F') ? ' active' : ''; ?>">
                             <input type="radio" name="ie_sexo"
-                                   value="f" <?php echo (($perfil->getIeSexo()) == 'f' || Input::get('ie_sexo') == 'f') ? 'checked' : ''; ?>/>
+                                   value="F" <?php echo (($perfil->getIeSexo()) == 'F' || Input::get('ie_sexo') == 'F') ? 'checked' : ''; ?>/>
                             Feminino
                         </label>
                     </div>
@@ -724,68 +725,90 @@ $token = Token::generate();
 
     <div class="tab-pane fade" id="relacionamentos">
         <div class="row">
-            <div class="col-md-8">
-                <form id="form_pf_relacionamentos" class="form-horizontal">
-                    <legend>Relacionamentos</legend>
+            <div class="col-md-6">
+                <div id="legend_form_relacionamento" class="legend">Relacionamentos</div>
+                <form id="form_pf_relacionamento" class="form-horizontal">
                     <fieldset class="well">
-                        <div class="row">
-                            <div class="form-group">
-                                <div class="col-md-6">
-                                    <label for="pessoa_1" class="control-label">Nome</label>
+                        <div class="form-group col-md-12">
+                            <div id="pessoa_relac" class="clearfix"></div>
+                            <div class="selectContainer">
+                                <label for="catg_relac" class="control-label">Relacionamento</label>
 
-
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="catg_relacionameto_1" class="control-label">Relacionamento</label>
-
-                                    <select name="catg_relacionameto_1" class="form-control" id="catg_relacionameto_1">
-                                        <option value="">Agregado</option>
-                                        <option value="">Pai</option>
-                                    </select>
-                                </div>
+                                <select class="form-control" id="catg_relac" name="catg_relac">
+                                    <option value="">--</option>
+                                    <?php
+                                    foreach ($data['catg_relacionados'] as $catg_rel) {
+                                        echo '<option value="' . $catg_rel->getCdVlCategoria() . ' ">' . $catg_rel->getDescVlCatg() . '</option>';
+                                    }
+                                    ?>
+                                </select>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="form-group">
-                                <div class="col-md-6">
-                                    <label for="pessoa_2" class="control-label">Nome</label>
 
-                                    <input type="text" id="pessoa_2" class="form-control" name="pessoa_2">
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="catg_relacionameto_2" class="control-label">Relacionamento</label>
-
-                                    <select name="catg_relacionameto_2" class="form-control" id="catg_relacionameto_1">
-                                        <option value="">--</option>
-                                        <option value="">Pai</option>
-                                    </select>
-                                </div>
-                            </div>
+                        <div class="form-group btn-group col-md-12" data-toggle="buttons">
+                            <label class="btn btn-danger" id="deletar_relac">
+                                <input id="checkbox_del_relac" type="checkbox" name="delete" value="D" autocomplete="off">
+                                <span id="del_button_txt">Deletar?</span>
+                            </label>
                         </div>
-                        <p>
-                            <input type="reset" name="reset" class="btn btn-success" id="form_pf_r_reset" value="Novo">
+
+                        <div class="form-group col-md-12">
+                            <input type="reset" name="reset" class="btn btn-success" id="form_pf_r_reset"
+                                   value="Cancelar">
                             <input type="submit" name="cadastrar" class="btn btn-primary"
                                    id="cadastrar_pf_relacionamento" value="Cadastrar">
 
-                            <input type="hidden" name="cd_pessoa_fisica"
+                            <input type="hidden" name="cd_pessoa_fisica_1" id="cd_pessoa_fisica_1"
                                    value="<?php echo $perfil->getCdPessoaFisica(); ?>">
-                            <input type="hidden" name="id_relacinamento" id="id_relacinamento" value="">
+                            <input type="hidden" name="cd_pessoa_fisica_2" id="cd_pessoa_fisica_2" value="">
                             <input type="hidden" name="token" value="<?php echo $token; ?>">
-                        </p>
+                        </div>
+
                     </fieldset>
                 </form>
             </div>
 
-            <div class="col-md-4">
-                <div class="legend">Pesquisa</div>
-                <div class="input-group">
-                    <input type="text" id="pessoa_1" class="form-control" name="pessoa_1" placeholder="Nome"
-                           autocomplete="off">
-                    <span class="input-group-btn"><input type="submit" name="botao-pesquisar-pessoa"
-                                                         class="btn btn-info"
-                                                         id="botao-pesquisar-pessoa" value="ok"></span>
+            <div class="col-md-6">
+                <div class="legend">Relacionados</div>
+                <div class="dropdown" id="form-relac-pessoa">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="relac_busca"
+                               name="relac_busca" placeholder="Buscar Pessoa" autocomplete="off"
+                               data-toggle="busca-pessoa-relac">
+
+                        <div id="busca-relac-pessoa-resultado" class="dropdown-busca list-group"
+                             aria-labelledby="busca-pessoa-relac"></div>
+                    </div>
                 </div>
-                <div id="area-do-resultado-pf-form" class="center-block"></div>
+                <div id="relac-error-msg" class="center-block"></div>
+                <table id="tb_lista-relacionados" class="table">
+                    <thead>
+                    <tr>
+                        <th>Foto</th>
+                        <th>Nome</th>
+                        <th>Relação</th>
+                        <th>Acão</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach($data['relacionados'] as $relacionado):?>
+                    <tr data-pessoa-relac="<?php echo $relacionado['cd_pessoa_fisica_2'];?>">
+                        <td><img src="<?php echo $relacionado['pessoa2_foto'];?>" class="img-circle profilefoto"></td>
+                        <td><a href="PessoaFisica/visualizar/<?php echo $relacionado['cd_pessoa_fisica_2'];?>"><?php echo $relacionado['pessoa2_nome'];?></a></td>
+                        <td><?php echo $relacionado['relac'];?></td>
+                        <td>
+                            <button
+                                data-img-pessoa="<?php echo $relacionado['pessoa2_foto'];?>"
+                                data-nome-pessoa="<?php echo $relacionado['pessoa2_nome'];?>"
+                                data-id-pessoa="<?php echo $relacionado['cd_pessoa_fisica_2'];?>"
+                                data-toggle="tooltip" data-placement="top"
+                                title="Editar relacionamento" class="btn btn-primary btn-xs btn-circle add-relac-pessoa">
+                                <i class="fa fa-arrow-left"></i></button>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

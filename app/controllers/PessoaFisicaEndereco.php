@@ -38,7 +38,7 @@ class PessoaFisicaEndereco extends Controller
                 'bairro' => $endereco->getBairro(),
                 'cidade' => $endereco->getCidade(),
                 'cep' => $endereco->getCep(),
-                'observacao' => $endereco->getObservacao()
+                'observacao' => ($endereco->getObservacao() ? $endereco->getObservacao() : '')
             );
 
 

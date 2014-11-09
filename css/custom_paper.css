@@ -340,7 +340,8 @@ table.dataTable.no-footer {
 }
 */
 #pessoafisicaform .btn-group .form-control-feedback,
-#cadastro_usuario .btn-group .form-control-feedback {
+#cadastro_usuario .btn-group .form-control-feedback,
+#form_pf_relacionamento .btn-group .form-control-feedback {
     top: 0;
     right: -30px;
 }
@@ -458,4 +459,36 @@ table.dataTable.no-footer {
 }
 table.dataTable tbody td, table.table tbody td{
     vertical-align: middle;
+
+}/** Collapsible Panel */
+.panel-heading span {
+    margin-top: -20px;
+    font-size: 15px;
+}
+
+.clickable {
+    cursor: pointer;
+    color: #fff;
+}
+
+.panel-default .clickable {
+    cursor: pointer;
+    color: #5a5a5a;
+}
+
+#pessoa_relac button {
+    display: none;
+}
+
+#pessoa_relac p {
+    font-size: 18px;
+    line-height: 50px;
+}
+
+#pessoa_relac img {
+    width: 70px;
+    height: 70px;
+}
+#pessoa_relac h4 {
+    font-size: 16px;
 }

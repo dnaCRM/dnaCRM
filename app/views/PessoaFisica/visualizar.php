@@ -4,8 +4,11 @@
             <small>
                 <?php echo (isset($data['pagesubtitle'])) ? $data['pagesubtitle'] : ""; ?>
             </small>
+
+            <!-- Botões de administração -->
                 <span class="btn-panel pull-right">
-                <a href="PessoaFisica/formperfil/<?php echo $data['dados_pessoais']['cd_pessoa_fisica']; ?>" data-toggle="tooltip" data-placement="top" title="Editar Perfil!"
+                <a href="PessoaFisica/formperfil/<?php echo $data['dados_pessoais']['cd_pessoa_fisica']; ?>"
+                   data-toggle="tooltip" data-placement="top" title="Editar Perfil!"
                    class="btn btn-primary btn-circle btn-lg">
                     <i class="fa fa-pencil"></i>
                 </a>
@@ -13,15 +16,19 @@
                    class="btn btn-default btn-circle btn-lg">
                     <i class="fa fa-list"></i>
                 </a>
-                <a href="PessoaFisica/confirmDelete/<?php echo $data['dados_pessoais']['cd_pessoa_fisica']; ?>" data-toggle="tooltip" data-placement="top" title="Deletar!"
+                <a href="PessoaFisica/confirmDelete/<?php echo $data['dados_pessoais']['cd_pessoa_fisica']; ?>"
+                   data-toggle="tooltip" data-placement="top" title="Deletar!"
                    class="btn btn-warning btn-circle btn-lg">
                     <i class="fa fa-trash-o"></i>
                 </a>
-                <a href="Usuario/formuser/<?php echo $data['dados_pessoais']['cd_pessoa_fisica']; ?>" data-toggle="tooltip" data-placement="top" title="Cadastrar Usuário!"
+                <a href="Usuario/formuser/<?php echo $data['dados_pessoais']['cd_pessoa_fisica']; ?>"
+                   data-toggle="tooltip" data-placement="top" title="Cadastrar Usuário!"
                    class="btn btn-info btn-circle btn-lg">
                     <i class="fa fa-user"></i>
                 </a>
             </span>
+            <!-- Fim Botões de administração -->
+
         </h3>
 
 
@@ -49,7 +56,9 @@
                     <dd><?php echo $data['dados_pessoais']['rg'] . "-" . $data['dados_pessoais']['uf']; ?></dd>
                     <dt>Data de Nascimento</dt>
                     <dd><?php echo $data['dados_pessoais']['dt_nascimento']; ?></dd>
-                    <dt>Data de Sexo</dt>
+                    <dt>Idade</dt>
+                    <dd><?php echo $data['dados_pessoais']['idade']; ?></dd>
+                    <dt>Gênero</dt>
                     <dd><?php echo $data['dados_pessoais']['ie_sexo']; ?></dd>
                     <dt>Onde Trabalha</dt>
                     <dd>
@@ -70,28 +79,15 @@
         </div>
     </div>
 
-    <!-- Botões de administração -->
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <a class="btn btn-primary btn-sm"
-               href="PessoaFisica/formperfil/<?php echo $data['dados_pessoais']['cd_pessoa_fisica']; ?>">
-                <span class="fa fa-edit"></span> Editar</a>
-
-            <a class="btn btn-warning btn-sm"
-               href="PessoaFisica/confirmDelete/<?php echo $data['dados_pessoais']['cd_pessoa_fisica']; ?>">
-                <span class="fa fa-trash-o"></span> Deletar</a>
-            <a class="btn btn-info btn-sm"
-               href="Usuario/formuser/<?php echo $data['dados_pessoais']['cd_pessoa_fisica']; ?>">
-                <span class="fa fa-user"></span> Cadastrar Usuário</a>
-        </div>
-    </div>
-    <!-- Fim Botões de administração -->
     <?php if ($data['os_solicitadas']): ?>
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <h3 class="panel-title">Ordens de Serviço Solicitadas</h3></div>
-
+        <div class="panel">
             <div class="panel-body">
+                <div class="legend"><i class="fa fa-wrench"></i> Ordens de Serviço Solicitadas</div>
+                <!--            <div class="panel-heading">
+                                <h3 class="panel-title">Ordens de Serviço Solicitadas</h3>
+                            </div>
+                -->
+                <!--<div class="panel-body">-->
                 <table class="table">
                     <thead>
                     <tr>
@@ -118,14 +114,17 @@
                     ?>
                     </tbody>
                 </table>
+                <!-- </div>-->
             </div>
         </div>
     <?php endif; ?>
 
     <?php if ($data['os_executadas']): ?>
-        <div class="panel panel-success">
+        <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Ordens de Serviço Executadas</h3></div>
+                <h3 class="panel-title"><i class="fa fa-wrench"></i> Ordens de Serviço Executadas</h3>
+                <span class="pull-right clickable"><i class="glyphicon glyphicon-minus"></i></span>
+            </div>
 
             <div class="panel-body">
                 <table class="table">
@@ -161,8 +160,9 @@
     <?php if ($data['ocorrencias']): ?>
         <div class="panel panel-warning">
             <div class="panel-heading">
-                <h3 class="panel-title">Ocorrências envolvidas</h3></div>
-
+                <h3 class="panel-title"><i class="fa fa-asterisk"></i> Ocorrências envolvidas</h3>
+                <span class="pull-right clickable"><i class="glyphicon glyphicon-minus"></i></span>
+            </div>
             <div class="panel-body">
                 <table class="table">
                     <thead>
@@ -195,8 +195,9 @@
     <?php if ($data['oc_informadas']): ?>
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title">Ocorrências Informadas</h3></div>
-
+                <h3 class="panel-title"><i class="fa fa-asterisk"></i> Ocorrências Informadas</h3>
+                <span class="pull-right clickable"><i class="glyphicon glyphicon-minus"></i></span>
+            </div>
             <div class="panel-body">
                 <table class="table">
                     <thead>
@@ -229,11 +230,44 @@
 
 <div class="col-sm-6">
 
+    <?php if ($data['relacionados']): ?>
+        <div class="panel panel-info">
+
+            <div class="panel-heading">
+                <h6 class="panel-title">Perfis Relacionados</h6>
+            </div>
+            <div class="panel-body">
+                <?php
+                foreach ($data['relacionados'] as $relacionado) {
+
+                    echo "
+                    <div class=\"profile-card pcard-md\">
+                        <div class=\"panel-body\">
+                        <div class=\"profile-card-foto-container\">
+                            <img class=\"img-circle profilefoto\" src=\"{$relacionado['pessoa2_foto']}\">
+                        </div>
+                            <div class=\"pcard-name\"><a href=\"PessoaFisica/visualizar/{$relacionado['cd_pessoa_fisica_2']}\">{$relacionado['pessoa2_nome']}</a>
+                            <div class=\"pcard-info\">
+                                {$relacionado['relac']}<br>
+                                    <span class=\"fa fa-envelope\"></span> <span class=\"text-info\">{$relacionado['pessoa2_email']}</span>.
+                            </div>
+                            </div>
+                        </div>
+                    </div>";
+                }
+                ?>
+            </div>
+        </div>
+    <?php endif; ?>
+
     <?php if ($data['telefones']): ?>
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title">Telefones</h3>
+                <h3 class="panel-title"><i class="fa fa-phone-square"></i> Telefones</h3>
+                <!-- classe 'panel-collapsed' para inicializar fechado -->
+                <span class="pull-right clickable"><i class="glyphicon glyphicon-minus"></i></span>
             </div>
+            <!-- style="display: none;" para inicializar fechado -->
             <div class="panel-body">
                 <table class="table">
                     <thead>
@@ -264,26 +298,32 @@
     <?php endif; ?>
 
     <?php if ($data['enderecos']): ?>
-        <div class="list-group">
-            <h6 class="list-group-item active">Endereços</h6>
-            <?php
-            foreach ($data['enderecos'] as $endereco) {
-                echo "<div class=\"list-group-item\">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-pencil-square"></i> Endereços</h3>
+                <span class="pull-right clickable"><i class="glyphicon glyphicon-minus"></i></span>
+            </div>
+            <div class="list-group panel-body">
+                <?php
+                foreach ($data['enderecos'] as $endereco) {
+                    echo "<div class=\"list-group-item\">
                         <h5 class=\"list-group-heading\">{$endereco['categoria']}</h5>
                         <p class=\"\">
                             {$endereco['rua']}, nº {$endereco['numero']}, {$endereco['bairro']}, {$endereco['cidade']}, {$endereco['estado']}, CEP: {$endereco['cep']}.
                                     <br><span class=\"badge\">Obs:</span> <span class=\"text-info\">{$endereco['observacao']}</span>.
                         </p>
                     </div>";
-            }
-            ?>
+                }
+                ?>
+            </div>
         </div>
     <?php endif; ?>
 
     <?php if ($data['morador_enderecos']): ?>
-        <div class="panel panel-info">
+        <div class="panel panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title">Moradias</h3>
+                <h3 class="panel-title"><i class="fa fa-building-o"></i> Moradias</h3>
+                <span class="pull-right clickable"><i class="glyphicon glyphicon-minus"></i></span>
             </div>
             <div class="panel-body">
                 <table class="table">

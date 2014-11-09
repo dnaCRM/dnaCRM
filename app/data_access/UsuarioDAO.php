@@ -37,8 +37,6 @@ class UsuarioDAO extends DataAccessObject
 
             return $stmt->fetch();
 
-            //Session::flash('usuario_cadastrado', 'Usuário registrado.', 'success');
-            //return true;
         } catch (PDOException $e) {
             $this->success = false;
             CodeFail((int)$e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());

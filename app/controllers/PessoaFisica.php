@@ -49,7 +49,6 @@ class PessoaFisica extends Controller
         $inst_ensino = (new InstituicaoEnsinoDAO())->fullList();
         $grau_ensino = (new CategoriaValorDAO())->get('cd_categoria = 8');
 
-
         if ($id) {
             /** @var PessoaFisicaDTO */
             $perfilarr = $this->findById($id);
@@ -65,14 +64,26 @@ class PessoaFisica extends Controller
             $enderecos = (new PessoaFisicaEnderecoDAO())->get("cd_pessoa_fisica = {$id}");
             $estados = (new CategoriaValorDAO())->get('cd_categoria = 2');
             $catg_enderecos = (new CategoriaValorDAO())->get('cd_categoria = 9');
+            $catg_relacionados = (new CategoriaValorDAO())->get("cd_categoria = 4 and genero = '{$perfilarr->getIeSexo()}'");
+
+            $relacionadosModel = new RelacionadosModel();
+            $relacionados = $relacionadosModel->getRelacionados($id);
 
             //Formatação de datas
             $nasc = new DateTime($perfilarr->getDtNascimento());
             $perfilarr->setDtNascimento($nasc->format('d/m/Y'));
-            $dt_inicio_curso = new DateTime($perfilarr->getDtInicioCurso());
-            $perfilarr->setDtInicioCurso($dt_inicio_curso->format('d/m/Y'));
-            $dt_fim_curso = new DateTime($perfilarr->getDtFimCurso());
-            $perfilarr->setDtFimCurso($dt_fim_curso->format('d/m/Y'));
+
+            $dt_inicio_curso = '';
+            if ($perfilarr->getDtInicioCurso()) {
+                $dt_inicio_curso = (new DateTime($perfilarr->getDtInicioCurso()))->format('d/m/Y');
+            }
+            $perfilarr->setDtInicioCurso($dt_inicio_curso);
+
+            $dt_fim_curso = '';
+            if ($perfilarr->getDtFimCurso()) {
+                $dt_fim_curso = (new DateTime($perfilarr->getDtFimCurso()))->format('d/m/Y');
+            }
+            $perfilarr->setDtFimCurso($dt_fim_curso);
 
             $dados = array(
                 'pagetitle' => $perfilarr->getNmPessoaFisica(),
@@ -90,6 +101,8 @@ class PessoaFisica extends Controller
                 'catg_enderecos' => $catg_enderecos,
                 'condominios' => $condominios,
                 'morador_endereco' => $moradorEnderecos,
+                'catg_relacionados' => $catg_relacionados,
+                'relacionados' => $relacionados,
                 'id' => $id,
                 'perfil' => $perfilarr
             );
@@ -129,12 +142,16 @@ class PessoaFisica extends Controller
         $ordensExecutadas = $this->pessoaFisicaModel->getOsExecutadas(new OrdemServicoModel());
         $ocorrencias = $this->pessoaFisicaModel->getOcorrenciasEnvolvidas(new OcorrenciaPessoaFisicaEnvolvidaModel());
         $oc_informadas = $this->pessoaFisicaModel->getOcorrenciasInformadas(new OcorrenciaPessoaFisicaEnvolvidaModel());
+
+        $relacionadosModel = new RelacionadosModel();
+        $relacionados = $relacionadosModel->getRelacionados($id);
+
         // Exporta imagem de perfil
         $this->exportaImagens($pessoa);
 
         $dados = array(
             //o campo 'obs' vai ser o subtítulo
-            'pagesubtitle' => $dadosPessoais['email'],
+            'pagesubtitle' => $dadosPessoais['idade'],
             //o campo 'nome' vai ser o título da página
             'pagetitle' => $dadosPessoais['nm_pessoa_fisica'],
             //todos os atributos do perfil
@@ -145,7 +162,8 @@ class PessoaFisica extends Controller
             'os_solicitadas' => $ordensSolicitadas,
             'os_executadas' => $ordensExecutadas,
             'ocorrencias' => $ocorrencias,
-            'oc_informadas' => $oc_informadas
+            'oc_informadas' => $oc_informadas,
+            'relacionados' => $relacionados
         );
 
         $this->view = new View('PessoaFisica', 'visualizar');

@@ -10,10 +10,8 @@ class RelacionadosDTO extends DataTransferObject
 {
     private $cd_pessoa_fisica_1;
     private $cd_pessoa_fisica_2;
-    private $cd_catg_relac_pf_1;
-    private $cd_vl_catg_relac_pf_1;
-    private $cd_catg_relac_pf_2;
-    private $cd_vl_catg_relac_pf_2;
+    private $cd_catg_relac;
+    private $cd_catg_vl_relac;
     private $cd_usuario_criacao;
     private $dt_usuario_criacao;
     private $cd_usuario_atualiza;
@@ -27,10 +25,8 @@ class RelacionadosDTO extends DataTransferObject
         $this->reflex = array(
             'cd_pessoa_fisica_1' => 'getCdPessoaFisica1',
             'cd_pessoa_fisica_2' => 'getCdPessoaFisica2',
-            'cd_catg_relac_pf_1' => 'getCdCatgRelacPf1',
-            'cd_vl_catg_relac_pf_1' => 'getCdVlCatgRelacPf1',
-            'cd_catg_relac_pf_2' => 'getCdCatgRelacPf2',
-            'cd_vl_catg_relac_pf_2' => 'getCdVlCatgRelacPf2',
+            'cd_catg_relac' => 'getCdCatgRelac',
+            'cd_catg_vl_relac' => 'getCdCatgVlRelac',
             'cd_usuario_criacao' => 'getCdUsuarioCriacao',
             'dt_usuario_criacao' => 'getDtUsuarioCriacao',
             'cd_usuario_atualiza' => 'getCdUsuarioAtualiza',
@@ -50,17 +46,9 @@ class RelacionadosDTO extends DataTransferObject
     /**
      * @return mixed
      */
-    public function getCdCatgRelacPf1()
+    public function getCdCatgRelac()
     {
-        return $this->cd_catg_relac_pf_1;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCdCatgRelacPf2()
-    {
-        return $this->cd_catg_relac_pf_2;
+        return $this->cd_catg_relac;
     }
 
     /**
@@ -98,17 +86,9 @@ class RelacionadosDTO extends DataTransferObject
     /**
      * @return mixed
      */
-    public function getCdVlCatgRelacPf1()
+    public function getCdCatgVlRelac()
     {
-        return $this->cd_vl_catg_relac_pf_1;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCdVlCatgRelacPf2()
-    {
-        return $this->cd_vl_catg_relac_pf_2;
+        return $this->cd_catg_vl_relac;
     }
 
     /**
@@ -128,15 +108,10 @@ class RelacionadosDTO extends DataTransferObject
     }
 
     ################## SETTERS
-    public function setCdCatgRelacPf1($cd_catg_relac_pf_1)
-    {
-        $this->cd_catg_relac_pf_1 = $cd_catg_relac_pf_1;
-        return $this;
-    }
 
-    public function setCdCatgRelacPf2($cd_catg_relac_pf_2)
+    public function setCdCatgRelac($cd_catg_relac)
     {
-        $this->cd_catg_relac_pf_2 = $cd_catg_relac_pf_2;
+        $this->cd_catg_relac = $cd_catg_relac;
         return $this;
     }
 
@@ -164,15 +139,9 @@ class RelacionadosDTO extends DataTransferObject
         return $this;
     }
 
-    public function setCdVlCatgRelacPf1($cd_vl_catg_relac_pf_1)
+    public function setCdCatgVlRelac($cd_vl_catg_relac)
     {
-        $this->cd_vl_catg_relac_pf_1 = $cd_vl_catg_relac_pf_1;
-        return $this;
-    }
-
-    public function setCdVlCatgRelacPf2($cd_vl_catg_relac_pf_2)
-    {
-        $this->cd_vl_catg_relac_pf_2 = $cd_vl_catg_relac_pf_2;
+        $this->cd_catg_vl_relac = $cd_vl_catg_relac;
         return $this;
     }
 

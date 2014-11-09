@@ -52,6 +52,16 @@ class PessoaFisicaModel extends Model
             $profissao = (new ProfissaoDAO())->getById($this->dto->getCdProfissao())
                 ->getNmProfissao();
         }
+
+        $sexo = ($this->dto->getIeSexo() == 'F' ? 'Feminino' : 'Masculino');
+
+        // Calculando a idade
+        $date = new DateTime($this->dto->getDtNascimento()); // data de nascimento
+        $interval = $date->diff( new DateTime() ); // data atual
+        $idade = $interval->format('%Y anos');
+        //  '%Y Anos, %m Meses e %d Dias'  110 Anos, 2 Meses e 2 Dias
+        // '%Y Anos, %m Meses, %d Dias, %H Horas, %i Minutos e %s Segundos'
+
         return array(
             'cd_pessoa_fisica' => $this->dto->getCdPessoaFisica(),
             'cd_pessoa_juridica' => $this->dto->getCdPessoaJuridica(),
@@ -66,8 +76,9 @@ class PessoaFisicaModel extends Model
             'cd_catg_org_rg' => $this->dto->getCdCatgOrgRg(),
             'cd_vl_catg_org_rg' => $this->dto->getCdVlCatgOrgRg(),
             'email' => $this->dto->getEmail(),
+            'idade' => $idade,
             'dt_nascimento' => (new DateTime($this->dto->getDtNascimento()))->format('d/m/Y'),
-            'ie_sexo' => $this->dto->getIeSexo(),
+            'ie_sexo' => $sexo,
             'ie_estuda' => $this->dto->getIeEstuda(),
             'cd_instituicao' => $this->dto->getCdInstituicao(),
             'instituicao' => $instituicao,
