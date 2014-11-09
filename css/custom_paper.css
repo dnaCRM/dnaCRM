@@ -407,7 +407,7 @@ table.dataTable.no-footer {
 #nav-top-form-busca .list-group-item,
 .dropdown-busca .list-group-item {
     border: 0;
-    border-top: 1px solid #d0d0d0;
+    border-top: 1px solid #e2e2e2;
     line-height: 10px;
 }
 

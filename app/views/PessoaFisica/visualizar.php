@@ -249,7 +249,7 @@
                             <div class=\"pcard-name\"><a href=\"PessoaFisica/visualizar/{$relacionado['cd_pessoa_fisica_2']}\">{$relacionado['pessoa2_nome']}</a>
                             <div class=\"pcard-info\">
                                 {$relacionado['relac']}<br>
-                                    <span class=\"fa fa-envelope\"></span> <span class=\"text-info\">{$relacionado['pessoa2_email']}</span>.
+                                    <span class=\"fa fa-envelope\"></span> <span class=\"text-info\">{$relacionado['pessoa2_email']}</span>
                             </div>
                             </div>
                         </div>
@@ -340,9 +340,9 @@
                     <?php
                     foreach ($data['morador_enderecos'] as $me) {
                         echo '<tr>';
-                        echo "<td>{$me['apartamento']}</td>
-                              <td>{$me['setor']}</td>
-                              <td>{$me['condominio']}</td>
+                        echo "<td><a href=\"Apartamento/visualizar/{$me['cd_apartamento']}\">{$me['apartamento']}</a></td>
+                              <td><a href=\"Setor/visualizar/{$me['cd_setor']}\">{$me['setor']}</a></td>
+                              <td><a href=\"Condominio/visualizar/{$me['cd_condominio']}\">{$me['condominio']}</a></td>
                               <td>{$me['m_end_dt_entrada']}</td>
                               <td>{$me['m_end_dt_saida']}</td>";
                         echo '</tr>';

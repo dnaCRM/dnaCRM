@@ -47,15 +47,20 @@ $pessoas = $data['pessoas'];
             <div class="panel-body">
                 <div class="list-group">
                     <?php
+
+                    if ($ocorrencia['cd_setor']){
+                        echo "<div class=\"col-md-6\"><span class=\"lead\">Setor: </span>
+                                <a href=\"Setor/visualizar/{$ocorrencia['cd_setor']}\">{$ocorrencia['setor']}</a></div>";
+                    }
+                    if ($ocorrencia['cd_condominio']){
+                        echo "<div class=\"col-md-6\"><span class=\"lead\">Condomínio: </span>
+                                <a href=\"Condominio/visualizar/{$ocorrencia['cd_condominio']}\">{$ocorrencia['condominio']}</a></div>";
+                    }
                     echo "
-                    <div class=\"list-group-item col-md-6\"><span class=\"lead\">Setor: </span>
-                    <a href=\"Setor/visualizar/{$ocorrencia['cd_setor']}\">{$ocorrencia['setor']}</a></div>
-                    <div class=\"list-group-item col-md-6\"><span class=\"lead\">Condomínio: </span>
-                    <a href=\"Condominio/visualizar/{$ocorrencia['cd_condominio']}\">{$ocorrencia['condominio']}</a></div>
-                    <div class=\"list-group-item col-md-6\"><span class=\"lead\">Status: </span>{$ocorrencia['estagio']}</div>
-                    <div class=\"list-group-item col-md-6\"><span class=\"lead\">Tipo: </span>{$ocorrencia['tipo']}</div>
-                    <div class=\"list-group-item col-md-6\"><span class=\"lead\">Inicio: </span>{$ocorrencia['dt_ocorrencia']}</div>
-                    <div class=\"list-group-item col-md-6\"><span class=\"lead\">Fim: </span>{$ocorrencia['dt_fim']}</div>
+                    <div class=\"col-md-6\"><span class=\"lead\">Status: </span>{$ocorrencia['estagio']}</div>
+                    <div class=\"col-md-6\"><span class=\"lead\">Tipo: </span>{$ocorrencia['tipo']}</div>
+                    <div class=\"col-md-6\"><span class=\"lead\">Inicio: </span>{$ocorrencia['dt_ocorrencia']}</div>
+                    <div class=\"col-md-6\"><span class=\"lead\">Fim: </span>{$ocorrencia['dt_fim']}</div>
                 ";
                     ?>
                 </div>

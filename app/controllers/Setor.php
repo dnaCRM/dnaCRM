@@ -18,7 +18,12 @@ class Setor extends Controller
 
     public function start()
     { //Pega a lista completa de perfis
-        $setor_list = (array)$this->model->fullList();
+        $setor_list = $this->model->fullList();
+
+        $lista = array();
+        foreach ($setor_list as $setor) {
+            $lista[] = $this->setorModel->setDTO($setor)->getArrayDados();
+        }
 
         // Exporta imagens de perfil
         $this->exportaImagens($setor_list);
@@ -26,7 +31,7 @@ class Setor extends Controller
         $dados = array(
             'pagesubtitle' => '',
             'pagetitle' => 'Setor',
-            'list' => $setor_list
+            'list' => $lista
         );
 
         $this->view = new View('Setor', 'start');

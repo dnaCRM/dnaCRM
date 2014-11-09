@@ -1,3 +1,6 @@
+<?php
+$setores = $data['list'];
+?>
 <div class="row">
     <div class="col-lg-6">
         <h3 class="page-header"><?php echo $data['pagetitle']; ?></h3>
@@ -31,7 +34,7 @@
             <tr>
                 <th>Foto</th>
                 <th>Nome</th>
-                <th>Observação</th>
+                <th>Condomínio</th>
                 <th>Editar</th>
             </tr>
             </thead>
@@ -39,13 +42,13 @@
 
             <?php
 
-            foreach ($data['list'] as $setor) {
+            foreach ($setores as $setor) {
 
                 echo '<tr>';
-                echo '<td><img src="' . $setor->getImPerfil() . '" class="img-circle" title="' . $setor->getCdSetor() . '"></td>';
-                echo '<td><a href="Setor/visualizar/' . $setor->getCdSetor() . '">' . $setor->getNmSetor() . '</a></td>';
-                echo '<td>' . $setor->getObservacao()  . '</td>';
-                echo "<td><a href=\"Setor/formsetor/{$setor->getCdSetor()}\" class=\"btn btn-primary btn-circle btn-md\" role=\"button\">
+                echo '<td><img src="' . $setor['im_perfil'] . '" class="img-circle" title="' . $setor['cd_setor'] . '"></td>';
+                echo '<td><a href="Setor/visualizar/' . $setor['cd_setor'] . '">' . $setor['nm_setor'] . '</a></td>';
+                echo '<td><a href="Condominio/visualizar/'.$setor['cd_condominio'] . '">' . $setor['condominio']  . '</a></td>';
+                echo "<td><a href=\"Setor/formsetor/{$setor['cd_setor']}\" class=\"btn btn-primary btn-circle btn-md\" role=\"button\">
                     <i class=\"fa fa-edit\"></i></a></td>";
                 echo '</tr>';
 

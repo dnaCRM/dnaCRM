@@ -188,7 +188,8 @@ $('#pessoafisicaform').bootstrapValidator({
                 },
                 stringLength: {
                     min: 5,
-                    message: 'Quantidade de caracteres invalida.'
+                    max: 50,
+                    message: 'Deve ter entre 5 e 50 caracteres.'
                 }
             }
         },
@@ -199,6 +200,11 @@ $('#pessoafisicaform').bootstrapValidator({
                 },
                 emailAddress: {
                     message: 'E-mail inválido'
+                },
+                stringLength: {
+                    min: 5,
+                    max: 60,
+                    message: 'Deve ter entre 5 e 50 caracteres.'
                 }
             }
         },
@@ -333,7 +339,8 @@ $('#pessoajuridicaform').bootstrapValidator({
                 },
                 stringLength: {
                     min: 2,
-                    message: 'Mínimo 2 caracteres.'
+                    max: 50,
+                    message: 'Deve ter entre 5 e 50 caracteres.'
                 }
             }
         },
@@ -342,17 +349,23 @@ $('#pessoajuridicaform').bootstrapValidator({
             validators: {
                 notEmpty: {
                     message: 'Campo obrigatório'
+                },
+                stringLength: {
+                    min: 5,
+                    max: 50,
+                    message: 'Deve ter entre 5 e 50 caracteres.'
                 }
-            },
-            stringLength: {
-                min: 5,
-                message: 'Mínimo 5 caracteres.'
             }
         },
         email: {
             validators: {
                 emailAddress: {
                     message: 'E-mail inválido'
+                },
+                stringLength: {
+                    min: 5,
+                    max: 50,
+                    message: 'Deve ter entre 5 e 50 caracteres.'
                 }
             }
         },

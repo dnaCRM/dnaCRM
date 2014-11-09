@@ -77,15 +77,15 @@ $ordem_servico = $data['ordem_servico'];
                 <div class="list-group">
                     <?php
                     if ($ordem_servico['cd_ocorrencia']) {
-                    echo "<div class=\"list-group-item col-md-12\">
+                    echo "<div class=\"col-md-12\">
                             <span class=\"lead\">Ocorrência Relacionada: </span>
                             <a href=\"Ocorrencia/visualizar/{$ordem_servico['cd_ocorrencia']}\">{$ordem_servico['desc_ocorrencia']}</a></div>";
                     }
                     echo "
-                <div class=\"list-group-item col-md-6\"><span class=\"lead\">Status: </span>{$ordem_servico['estagio']}</div>
-                <div class=\"list-group-item col-md-6\"><span class=\"lead\">Tipo: </span>{$ordem_servico['tipo']}</div>
-                <div class=\"list-group-item col-md-6\"><span class=\"lead\">Inicio: </span>{$ordem_servico['dt_inicio']}</div>
-                <div class=\"list-group-item col-md-6\"><span class=\"lead\">Fim: </span>{$ordem_servico['dt_fim']}</div>
+                <div class=\"col-md-6\"><span class=\"lead\">Status: </span>{$ordem_servico['estagio']}</div>
+                <div class=\"col-md-6\"><span class=\"lead\">Tipo: </span>{$ordem_servico['tipo']}</div>
+                <div class=\"col-md-6\"><span class=\"lead\">Inicio: </span>{$ordem_servico['dt_inicio']}</div>
+                <div class=\"col-md-6\"><span class=\"lead\">Fim: </span>{$ordem_servico['dt_fim']}</div>
             ";
                     ?>
                 </div>

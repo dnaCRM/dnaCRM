@@ -4,6 +4,26 @@
             <small>
                 <?php echo (isset($data['pagesubtitle'])) ? $data['pagesubtitle'] : ""; ?>
             </small>
+
+            <!-- Botões de administração -->
+                <span class="btn-panel pull-right">
+                <a href="PessoaJuridica/formperfil/<?php echo $data['dados_cadastrais']['cd_pessoa_juridica']; ?>"
+                   data-toggle="tooltip" data-placement="top" title="Editar Pessoa Jurídica!"
+                   class="btn btn-primary btn-circle btn-lg">
+                    <i class="fa fa-pencil"></i>
+                </a>
+                <a href="PessoaJuridica/" data-toggle="tooltip" data-placement="top" title="Ver Lista!"
+                   class="btn btn-default btn-circle btn-lg">
+                    <i class="fa fa-list"></i>
+                </a>
+                <a href="PessoaJuridica/confirmDelete/<?php echo $data['dados_cadastrais']['cd_pessoa_juridica']; ?>"
+                   data-toggle="tooltip" data-placement="top" title="Deletar!"
+                   class="btn btn-warning btn-circle btn-lg">
+                    <i class="fa fa-trash-o"></i>
+                </a>
+            </span>
+            <!-- Fim Botões de administração -->
+
         </h3>
     </div>
 </div>
@@ -30,18 +50,6 @@
                         <dd><?php echo $data['dados_cadastrais']['desc_atividade']; ?></dd>
                     </dl>
                 </div>
-            </div>
-        </div>
-
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <a class="btn btn-primary btn-sm"
-                   href="PessoaJuridica/formperfil/<?php echo $data['dados_cadastrais']['cd_pessoa_juridica']; ?>">
-                    <span class="fa fa-edit"></span> Editar</a>
-
-                <a class="btn btn-warning btn-sm"
-                   href="PessoaJuridica/confirmDelete/<?php echo $data['dados_cadastrais']['cd_pessoa_juridica']; ?>">
-                    <span class="fa fa-trash-o"></span> Deletar</a>
             </div>
         </div>
     </div>
@@ -126,81 +134,6 @@
             ?>
         </div>
         <?php endif; ?>
-
-        <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                            $_POST
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseOne" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <?php
-
-                        var_dump($_POST);
-
-                        ?>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                            $_SESSION
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseTwo" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <?php
-
-                        var_dump($_SESSION);
-
-                        ?>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                            <i class="glyphicon glyphicon-leaf"></i> $data
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseThree" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <?php
-
-                        var_dump($data);
-
-                        ?>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
-                            <i class="glyphicon glyphicon-user"></i> $dadosCadastrais
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseFour" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <?php
-
-                        var_dump($data['dados_cadastrais']);
-
-                        ?>
-                    </div>
-                </div>
-            </div>
-        </div>
 
     </div>
 </div>
