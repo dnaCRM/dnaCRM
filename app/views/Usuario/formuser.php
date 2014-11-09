@@ -14,6 +14,12 @@ $usuario = $data['usuario'];
             <small>
                 <?php echo (isset($data['pagesubtitle'])) ? $data['pagesubtitle'] : ""; ?>
             </small>
+                <span class="btn-panel pull-right">
+                <a href="Usuario/" data-toggle="tooltip" data-placement="top" title="Ver Lista!"
+                   class="btn btn-circle btn-lg">
+                    <i class="fa fa-list"></i>
+                </a>
+            </span>
         </h3>
     </div>
 </div>

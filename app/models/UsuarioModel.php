@@ -58,6 +58,36 @@ class UsuarioModel extends Model
         Session::delete('usuario');
     }
 
+    public function getArrayDados()
+    {
+        $pessoaDAO = new PessoaFisicaDAO();
+        $pessoa = $pessoaDAO->getById($this->dto->getCdUsuario());
+        $pessoaFisicaModel = new PessoaFisicaModel();
+        $pessoaDados = $pessoaFisicaModel->setDTO($pessoa)->getBasicInfo();
+
+        $nivel = ($this->dto->getNivel() == 1 ? 'Administrador' : ($this->dto->getNivel() == 2 ? 'Atendente' : 'Usuário' ));
+
+        $usuarioDados = array(
+            'cd_usuario' => $this->dto->getCdUsuario(),
+            'login' => $this->dto->getLogin(),
+            'nivel' => $nivel,
+            'senha' => $this->dto->getSenha(),
+            'ie_status' => $this->dto->getIeStatus(),
+            'cd_usuario_criacao' => $this->dto->getCdUsuarioCriacao(),
+            'dt_usuario_criacao' => (new DateTime($this->dto->getDtUsuarioCriacao()))->format('d/m/Y'),
+            'cd_usuario_atualiza' => $this->dto->getCdUsuarioAtualiza(),
+            'dt_usuario_atualiza' => (new DateTime($this->dto->getDtUsuarioAtualiza()))->format('d/m/Y'),
+        );
+
+        return array_merge($usuarioDados, $pessoaDados);
+    }
+
+    public function getUserDados($id)
+    {
+        $usuario = $this->dao->getById($id);
+        return $this->setDTO($usuario)->getArrayDados();
+    }
+
     public function getDAO()
     {
         return $this->dao;

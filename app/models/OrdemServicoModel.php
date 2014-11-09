@@ -41,7 +41,7 @@ class OrdemServicoModel extends Model
         $ocorrencia = '';
         if ($this->dto->getCdOcorrencia()) {
             $ocorrencia = (new OcorrenciaDAO())->getById($this->dto->getCdOcorrencia())
-                ->getDescOcorrencia();
+                ->getDescAssunto();
         }
 
         $categoria = new CategoriaValorDAO();
@@ -65,6 +65,7 @@ class OrdemServicoModel extends Model
             'desc_assunto' => $this->dto->getDescAssunto(),
             'desc_ordem_servico' => $this->dto->getDescOrdemServico(),
             'desc_ocorrencia' => $ocorrencia,
+            'desc_conclusao' => ($this->dto->getDescConclusao() ? $this->dto->getDescConclusao() : 'Não informada.'),
             'cd_pf_executor' => $this->dto->getCdPfExecutor(),
             'executor' => $executor,
             'executor_foto' => $executor_foto,
@@ -77,7 +78,6 @@ class OrdemServicoModel extends Model
             'cd_catg_tipo' => $this->dto->getCdCatgTipo(),
             'cd_vl_catg_tipo' => $this->dto->getCdVlCatgTipo(),
             'tipo' => $tipo,
-            'desc_conclusao' => $this->dto->getDescConclusao(),
             'dt_inicio' => (new DateTime($this->dto->getDtInicio()))->format('d/m/Y'),
             'dt_fim' => ($this->dto->getDtFim() ? (new DateTime($this->dto->getDtFim()))->format('d/m/Y') : 'em aberto')
         );

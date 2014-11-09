@@ -112,9 +112,9 @@ class Setor extends Controller
 
         $dados = array(
              //o campo 'obs' vai ser o subtítulo
-            'pagesubtitle' => $setorarr->getObservacao(),
+            'pagesubtitle' => $setorarr->getNmSetor(),
              //o campo 'nome' vai ser o título da página
-            'pagetitle' => $setorarr->getNmSetor(),
+            'pagetitle' => 'Setor',
             'setor' => $setorarr
         );
 

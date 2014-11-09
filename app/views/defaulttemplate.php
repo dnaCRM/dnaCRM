@@ -1,3 +1,10 @@
+<?php
+
+if (Session::exists('usuario')) {
+    $userDados = (new UsuarioModel())->getUserDados(Session::get('user'));
+}
+
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -26,6 +33,9 @@
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
     <![endif]-->
+
+    <script>CKEDITOR.dtd.$removeEmpty['span'] = false;</script>
+
 </head>
 <body class="menu">
 <!-- top-bar start -->
@@ -97,8 +107,8 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a><i class="glyphicon glyphicon-user"></i>
-                        <span><?php echo(Session::exists('usuario') ? Session::get('usuario') : 'Usuário'); ?></span></a>
+                    <a href="PessoaFisica/visualizar/<?php echo $userDados['cd_usuario'];?>"><i class="glyphicon glyphicon-user"></i>
+                        <span><?php echo $userDados['login']; ?></span></a>
 
                 </li>
             </ul>
@@ -118,10 +128,10 @@
 
     <div class="usuario-panel clearfix">
         <div class="pull-left image">
-            <img src="img/uploads/tb_pessoa_fisica/<?php echo Session::get('user'); ?>.jpg" class="img-circle">
+            <img src="<?php echo $userDados['foto']; ?>" class="img-circle">
         </div>
         <div class="pull-left info">
-            <p><?php echo Session::get('usuario'); ?></p>
+            <p><a href="PessoaFisica/visualizar/<?php echo $userDados['cd_usuario'];?>"><?php echo $userDados['login']; ?></a></p>
 
             <a href="Usuario/logoff"><i class="fa fa-circle text-danger"></i> Sair</a>
         </div>
@@ -271,6 +281,7 @@
 <script src="js/datatables/js/jquery.dataTables.js"></script>
 <script src="js/datatables/js/dataTables.bootstrap.js"></script>
 <script src="js/datatables/js/dataTables.responsive.min.js"></script>
+<script src="js/ckeditor/ckeditor.js"></script>
 <script src="js/custom.js"></script>
 
 <a id="toTop" href="#"><span id="toTopHover"></span><img width="45" height="45" alt="" src="img/to-top.png"></a>

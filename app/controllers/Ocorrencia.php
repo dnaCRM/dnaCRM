@@ -104,9 +104,9 @@ Class Ocorrencia extends Controller
 
     $dados = array(
         //o campo 'obs' vai ser o subtítulo
-        'pagesubtitle' => '',
+        'pagesubtitle' => $ocorrencia['desc_assunto'],
         //o campo 'nome' vai ser o título da página
-        'pagetitle' => $ocorrencia['desc_assunto'],
+        'pagetitle' => 'Ocorrência',
         //todos os atributos do perfil
         'ocorrencia' => $ocorrencia,
         'pessoas' => $pessoas,

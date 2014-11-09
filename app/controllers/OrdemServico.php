@@ -103,9 +103,9 @@ class OrdemServico extends Controller
 
         $dados = array(
             //o campo 'obs' vai ser o subtítulo
-            'pagesubtitle' => '',
+            'pagesubtitle' => $ordemServico['desc_assunto'],
             //o campo 'nome' vai ser o título da página
-            'pagetitle' => $ordemServico['desc_assunto'],
+            'pagetitle' => 'Ordem de Serviço',
             //todos os atributos do perfil
             'ordem_servico' => $ordemServico
         );
@@ -129,7 +129,7 @@ class OrdemServico extends Controller
             //o campo 'obs' vai ser o subtítulo
             'pagetitle' => $perfilarr->getDescAssunto(),
             //o campo 'nome' vai ser o título da página
-            'pagesubtitle' => $perfilarr->getDescOrdemServico(),
+            'pagesubtitle' => '',
             'perfil' => $perfilarr
         );
 

@@ -8,6 +8,24 @@ $pessoas = $data['pessoas'];
             <small>
                 <?php echo (isset($data['pagesubtitle'])) ? $data['pagesubtitle'] : ""; ?>
             </small>
+            <!-- Botões de administração -->
+                <span class="btn-panel pull-right">
+                <a href="Ocorrencia/formOcorrencia/<?php echo $ocorrencia['cd_ocorrencia']; ?>"
+                   data-toggle="tooltip" data-placement="top" title="Editar Ocorrência!"
+                   class="btn btn-primary btn-circle btn-lg">
+                    <i class="fa fa-pencil"></i>
+                </a>
+                <a href="Ocorrencia/" data-toggle="tooltip" data-placement="top" title="Ver Lista!"
+                   class="btn btn-default btn-circle btn-lg">
+                    <i class="fa fa-list"></i>
+                </a>
+                <a href="Ocorrencia/confirmDelete/<?php echo $ocorrencia['cd_ocorrencia']; ?>"
+                   data-toggle="tooltip" data-placement="top" title="Deletar!"
+                   class="btn btn-warning btn-circle btn-lg">
+                    <i class="fa fa-trash-o"></i>
+                </a>
+            </span>
+            <!-- Fim Botões de administração -->
         </h3>
     </div>
 </div>
@@ -15,45 +33,84 @@ $pessoas = $data['pessoas'];
 <!--Teste de Perfil-->
 <div class="row">
     <div class="col-sm-6">
+        <div class="legend">Assunto:</div>
+        <p><?php echo $ocorrencia['desc_assunto']; ?></p>
+
+        <div class="legend">Descrição:</div>
+        <p><?php echo $ocorrencia['desc_ocorrencia']; ?></p>
+
+        <div class="legend">Conclusão:</div>
+        <p><?php echo $ocorrencia['desc_conclusao']; ?></p>
+
+
         <div class="panel">
             <div class="panel-body">
-                <ul class="list-group">
+                <div class="list-group">
                     <?php
                     echo "
-                    <li class=\"list-group-item\"><span class=\"lead\">Assunto: </span>{$ocorrencia['desc_assunto']}</li>
-                    <li class=\"list-group-item\"><span class=\"lead\">Descricao: </span>{$ocorrencia['desc_ocorrencia']}</li>
-                    <li class=\"list-group-item\"><span class=\"lead\">Status: </span>{$ocorrencia['estagio']}</li>
-                    <li class=\"list-group-item\"><span class=\"lead\">Inicio: </span>{$ocorrencia['dt_ocorrencia']}</li>
-                    <li class=\"list-group-item\"><span class=\"lead\">Fim: </span>{$ocorrencia['dt_fim']}</li>
-                    <li class=\"list-group-item\"><span class=\"lead\">Conclusão: </span>{$ocorrencia['desc_conclusao']}</li>
-                    <li class=\"list-group-item\"><span class=\"lead\">Setor: </span>
-                    <a href=\"Setor/visualizar/{$ocorrencia['cd_setor']}\">{$ocorrencia['setor']}</a></li>
-                    <li class=\"list-group-item\"><span class=\"lead\">Condomínio: </span>
-                    <a href=\"Condominio/visualizar/{$ocorrencia['cd_condominio']}\">{$ocorrencia['condominio']}</a></li>
-                    <li class=\"list-group-item\"><span class=\"lead\">Informante: </span>
-                    <a href=\"PessoaFisica/visualizar/{$ocorrencia['cd_pf_informante']}\">{$ocorrencia['informante']}</a></li>
+                    <div class=\"list-group-item col-md-6\"><span class=\"lead\">Setor: </span>
+                    <a href=\"Setor/visualizar/{$ocorrencia['cd_setor']}\">{$ocorrencia['setor']}</a></div>
+                    <div class=\"list-group-item col-md-6\"><span class=\"lead\">Condomínio: </span>
+                    <a href=\"Condominio/visualizar/{$ocorrencia['cd_condominio']}\">{$ocorrencia['condominio']}</a></div>
+                    <div class=\"list-group-item col-md-6\"><span class=\"lead\">Status: </span>{$ocorrencia['estagio']}</div>
+                    <div class=\"list-group-item col-md-6\"><span class=\"lead\">Tipo: </span>{$ocorrencia['tipo']}</div>
+                    <div class=\"list-group-item col-md-6\"><span class=\"lead\">Inicio: </span>{$ocorrencia['dt_ocorrencia']}</div>
+                    <div class=\"list-group-item col-md-6\"><span class=\"lead\">Fim: </span>{$ocorrencia['dt_fim']}</div>
                 ";
                     ?>
-                </ul>
-            </div>
-            <div class="well">
-
-                <a class="btn btn-primary btn-sm"
-                   href="Ocorrencia/formOcorrencia/<?php echo $ocorrencia['cd_ocorrencia']; ?>">
-                    <span class="fa fa-edit"></span> Editar</a>
-
-                <a class="btn btn-warning btn-sm"
-                   href="Ocorrencia/confirmDelete/<?php echo $ocorrencia['cd_ocorrencia']; ?>">
-                    <span class="fa fa-trash-o"></span> Deletar</a>
-
+                </div>
             </div>
 
         </div>
     </div>
 
     <div class="col-sm-6">
-        <?php
-        var_dump($pessoas, $ocorrencia);
-        ?>
+        <div class="panel profile-card pcard-lg">
+            <div class="panel-body">
+                <?php
+                echo "
+                    <div class=\"profile-card-foto-container\">
+                        <img src=\"{$ocorrencia['informante_foto']}\" class=\"img-circle profilefoto foto-md\">
+                    </div>
+                    <div class=\"pcard-name\">
+                    <a href=\"PessoaFisica/visualizar/{$ocorrencia['cd_pf_informante']}\">{$ocorrencia['informante']}</a>
+                     <div class=\"pcard-info\">
+                    Informante
+                    </div>
+                    </div>
+                    ";
+
+                ?>
+            </div>
+        </div>
+
+        <?php if ($data['pessoas']): ?>
+            <div class="panel panel-warning">
+
+                <div class="panel-heading">
+                    <h6 class="panel-title"><i class="fa fa-group"></i> Pessoas Envolvidas</h6>
+                </div>
+                <div class="panel-body">
+                    <?php
+                    foreach ($data['pessoas'] as $pessoa) {
+
+                        echo "
+                    <div class=\"profile-card pcard-md\">
+                        <div class=\"panel-body\">
+                        <div class=\"profile-card-foto-container\">
+                            <img class=\"img-circle profilefoto\" src=\"{$pessoa['foto']}\">
+                        </div>
+                            <div class=\"pcard-name\"><a href=\"PessoaFisica/visualizar/{$pessoa['id']}\">{$pessoa['nome']}</a>
+                            <div class=\"pcard-info\">
+                                    <span class=\"fa fa-envelope\"></span> <span class=\"text-info\">{$pessoa['email']}</span>.
+                            </div>
+                            </div>
+                        </div>
+                    </div>";
+                    }
+                    ?>
+                </div>
+            </div>
+        <?php endif; ?>
     </div>
 </div>

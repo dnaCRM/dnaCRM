@@ -78,6 +78,30 @@ $(".sidebar-menu .treeview").tree();
     });
 })();
 
+//CKEditores
+CKEDITOR.replace('descricao', {
+    toolbar: [
+        //{ name: 'document', items: [ 'Source', '-', 'NewPage', 'Preview', '-', 'Templates' ] },	// Defines toolbar group with name (used to create voice label) and items in 3 subgroups.
+        [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ],			// Defines toolbar group without name.
+        //'/',																					// Line break - next group will be placed in new line.
+        { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', '-', 'RemoveFormat'] },
+        { name: 'others', items: [ '-' ] },
+        { name: 'insert', items: [ 'Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ] },
+        { name: 'tools', items: [ 'Maximize', 'ShowBlocks' ] },
+    ]
+});
+CKEDITOR.replace('desc_conclusao', {
+    toolbar: [
+        //{ name: 'document', items: [ 'Source', '-', 'NewPage', 'Preview', '-', 'Templates' ] },	// Defines toolbar group with name (used to create voice label) and items in 3 subgroups.
+        [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ],			// Defines toolbar group without name.
+        //'/',																					// Line break - next group will be placed in new line.
+        { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', '-', 'RemoveFormat'] },
+        { name: 'others', items: [ '-' ] },
+        { name: 'insert', items: [ 'Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ] },
+        { name: 'tools', items: [ 'Maximize', 'ShowBlocks' ] },
+    ]
+}););
+
 /** Collapsible panel */
 jQuery(function ($) {
     $('.panel-heading span.clickable').on("click", function (e) {
@@ -2034,12 +2058,12 @@ $(document).ready(function () {
                     '<td><a href="PessoaFisica/visualizar/' + data.cd_pessoa_fisica_2 + '">' + data.pessoa2_nome + '</a></td>' +
                     '<td>' + data.relac + '</td>' +
                     '<td><button ' +
-                        'data-img-pessoa="' + data.pessoa2_foto + '" ' +
-                        'data-nome-pessoa="' + data.pessoa2_nome + '" ' +
-                        'data-id-pessoa="' + data.cd_pessoa_fisica_2 + '" ' +
-                        'data-toggle="tooltip" ' +
-                        'data-placement="top" ' +
-                        'title="Editar relacionamento" class="btn btn-primary btn-xs btn-circle add-relac-pessoa">' +
+                    'data-img-pessoa="' + data.pessoa2_foto + '" ' +
+                    'data-nome-pessoa="' + data.pessoa2_nome + '" ' +
+                    'data-id-pessoa="' + data.cd_pessoa_fisica_2 + '" ' +
+                    'data-toggle="tooltip" ' +
+                    'data-placement="top" ' +
+                    'title="Editar relacionamento" class="btn btn-primary btn-xs btn-circle add-relac-pessoa">' +
                     '<i class="fa fa-arrow-left"></i></button></td>';
 
                 var linha = '<tr data-pessoa-relac="' + data.cd_pessoa_fisica_2 + '">' + celulas + '</tr>';
@@ -2094,9 +2118,9 @@ $(document).ready(function () {
 
         var p = '<div data-pessoa-relac="1" class="list-group-item">' +
             '<div>' +
-            '<img src="'+img_pessoa+'" class="img-circle img-thumb-panel pull-left">' +
+            '<img src="' + img_pessoa + '" class="img-circle img-thumb-panel pull-left">' +
             '<p class="list-group-item-heading">' +
-            '<a title="Visualizar perfil" href="PessoaFisica/visualizar/'+id_pessoa+'">'+nome_pessoa+'</a>' +
+            '<a title="Visualizar perfil" href="PessoaFisica/visualizar/' + id_pessoa + '">' + nome_pessoa + '</a>' +
             '</p>' +
             '<p class="list-group-item-text text-right">' +
             '</p></div></div>';

@@ -7,6 +7,24 @@ $apartamento = $data['apartamento'];
             <small>
                 <?php echo (isset($data['pagesubtitle'])) ? $data['pagesubtitle'] : ""; ?>
             </small>
+            <!-- Botões de administração -->
+                <span class="btn-panel pull-right">
+                <a href="Apartamento/formapartamento/<?php echo $apartamento['cd_apartamento']; ?>"
+                   data-toggle="tooltip" data-placement="top" title="Editar Apartamento!"
+                   class="btn btn-primary btn-circle btn-lg">
+                    <i class="fa fa-pencil"></i>
+                </a>
+                <a href="Apartamento/" data-toggle="tooltip" data-placement="top" title="Ver Lista!"
+                   class="btn btn-default btn-circle btn-lg">
+                    <i class="fa fa-list"></i>
+                </a>
+                <a href="Apartamento/confirmDelete/<?php echo $apartamento['cd_apartamento']; ?>"
+                   data-toggle="tooltip" data-placement="top" title="Deletar!"
+                   class="btn btn-warning btn-circle btn-lg">
+                    <i class="fa fa-trash-o"></i>
+                </a>
+            </span>
+            <!-- Fim Botões de administração -->
         </h3>
     </div>
 </div>
@@ -14,18 +32,7 @@ $apartamento = $data['apartamento'];
 <!--Teste de Perfil-->
 <div class="row">
     <div class="col-md-6">
-        <div class="well">
 
-            <a class="btn btn-primary btn-sm"
-               href="Apartamento/formapartamento/<?php echo $apartamento['cd_apartamento']; ?>">
-                <span class="fa fa-edit"></span> Editar</a>
-
-            <a class="btn btn-warning btn-sm"
-               href="Apartamento/confirmDelete/<?php echo $apartamento['cd_apartamento']; ?>">
-                <span class="fa fa-trash-o"></span> Deletar</a>
-
-
-        </div>
         <div class="legend">Localização</div>
         <div class="panel profile-card pcard-lg">
             <div class="panel-body">

@@ -9,10 +9,13 @@
 class Usuario extends Controller
 {
     private $atualizar = false;
+    /** @var  UsuarioModel */
+    private $usuarioModel;
 
     public function __construct()
     {
         $this->setModel(new UsuarioDAO());
+        $this->usuarioModel = new UsuarioModel();
     }
 
     public function processLogin()
@@ -24,13 +27,12 @@ class Usuario extends Controller
             //if (Token::check(Input::get('token'))) {
 
                 $usuarioDTO = new UsuarioDTO();
-                $usuarioModel = new UsuarioModel();
-                $usuarioModel->setDTO($usuarioDTO);
+                $this->usuarioModel->setDTO($usuarioDTO);
 
                 $usuario = filter_var(Input::get('usuario'), FILTER_SANITIZE_STRING);
                 $senha = filter_var(Input::get('senha'), FILTER_SANITIZE_STRING);
 
-                if ($usuarioModel->login($usuario, $senha)) {
+                if ($this->usuarioModel->login($usuario, $senha)) {
                     Redirect::to(SITE_URL);
                 } else {
                     Session::flash('msg', 'Falha no login!', 'danger');
@@ -83,11 +85,16 @@ class Usuario extends Controller
     function start()
     {
         $userlist = $this->getModel()->fullList();
+        $lista = array();
+
+        foreach($userlist as $user) {
+            $lista[] = $this->usuarioModel->setDTO($user)->getArrayDados();
+        }
 
         $dados = [
             'pagesubtitle' => 'Lista',
             'pagetitle' => 'Usuários',
-            'list' => $userlist
+            'list' => $lista
         ];
 
         $this->view = new View('Usuario', 'start');

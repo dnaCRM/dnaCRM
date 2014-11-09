@@ -8,6 +8,24 @@ $setores = $data['setores'];
             <small>
                 <?php echo (isset($data['pagesubtitle'])) ? $data['pagesubtitle'] : ""; ?>
             </small>
+            <!-- Botões de administração -->
+                <span class="btn-panel pull-right">
+                <a href="Condominio/formcondominio/<?php echo $condominio['cd_condominio']; ?>"
+                   data-toggle="tooltip" data-placement="top" title="Editar Condominio!"
+                   class="btn btn-primary btn-circle btn-lg">
+                    <i class="fa fa-pencil"></i>
+                </a>
+                <a href="Condominio/" data-toggle="tooltip" data-placement="top" title="Ver Lista!"
+                   class="btn btn-default btn-circle btn-lg">
+                    <i class="fa fa-list"></i>
+                </a>
+                <a href="Condominio/confirmDelete/<?php echo $condominio['cd_condominio']; ?>"
+                   data-toggle="tooltip" data-placement="top" title="Deletar!"
+                   class="btn btn-warning btn-circle btn-lg">
+                    <i class="fa fa-trash-o"></i>
+                </a>
+            </span>
+            <!-- Fim Botões de administração -->
         </h3>
     </div>
 </div>
@@ -40,15 +58,6 @@ $setores = $data['setores'];
                 </div>
 
             </div>
-        </div>
-        <div class="well">
-            <a class="btn btn-primary btn-sm"
-               href="Condominio/formcondominio/<?php echo $condominio['cd_condominio']; ?>">
-                <span class="fa fa-edit"></span> Editar</a>
-
-            <a class="btn btn-warning btn-sm"
-               href="Condominio/confirmDelete/<?php echo $condominio['cd_condominio']; ?>">
-                <span class="fa fa-trash-o"></span> Deletar</a>
         </div>
     </div>
 

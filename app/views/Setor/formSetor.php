@@ -11,6 +11,19 @@ $token = Token::generate();
     <div class="col-sm-12">
         <h3 class="page-header"><?php echo $data['pagetitle']; ?>
             <small><?php echo $data['pagesubtitle']; ?></small>
+            <?php if ($id_check): ?>
+                <span class="btn-panel pull-right">
+                <a href="Setor/visualizar/<?php echo $id_check; ?>" data-toggle="tooltip" data-placement="top"
+                   title="Ver Perfil!"
+                   class="btn btn-circle btn-lg">
+                    <i class="fa fa-eye"></i>
+                </a>
+                <a href="Setor/" data-toggle="tooltip" data-placement="top" title="Ver Lista!"
+                   class="btn btn-circle btn-lg">
+                    <i class="fa fa-list"></i>
+                </a>
+            </span>
+            <?php endif; ?>
         </h3>
     </div>
 </div>

@@ -234,7 +234,7 @@
         <div class="panel panel-info">
 
             <div class="panel-heading">
-                <h6 class="panel-title">Perfis Relacionados</h6>
+                <h6 class="panel-title"><i class="fa fa-group"></i> Perfis Relacionados</h6>
             </div>
             <div class="panel-body">
                 <?php

@@ -1,17 +1,10 @@
 <div class="row">
-    <div class="col-md-6">
-        <h1><?php echo $data['pagetitle']; ?></h1>
-
-        <p class="lead">
-            <?php echo (isset($data['pagesubtitle'])) ? $data['pagesubtitle'] : ""; ?>
-        </p>
-    </div>
-    <div class="col-md-6" style="padding: 15px 15px 0 15px;">
-        <div class="well">
-
-            Well...
-
-        </div>
+    <div class="col-md-12">
+        <h3 class="page-header"><?php echo $data['pagetitle']; ?>
+            <small>
+                <?php echo (isset($data['pagesubtitle'])) ? $data['pagesubtitle'] : ""; ?>
+            </small>
+        </h3>
     </div>
 </div>
 
@@ -63,75 +56,16 @@
                 <?php
                 } else {
                     ?>
-                    <div class="col-md-8">
-                        <h3>Setor Deletado!</h3>
-                        <a href="Setor"
-                           class="btn btn-success" role="button">
-                            <span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar</a>
-                    </div>
+                    <h3>Setor Deletado!</h3>
+                    <a href="Setor"
+                       class="btn btn-success" role="button">
+                        <span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar</a>
 
                 <?php
                 }
                 ?>
             </div>
 
-        </div>
-
-        <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                            $_POST
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseOne" class="panel-collapse collapse in">
-                    <div class="panel-body">
-                        <?php
-
-                        var_dump($_POST);
-
-                        ?>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                            $_SESSION
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseTwo" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <?php
-
-                        var_dump($_SESSION);
-
-                        ?>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                            <i class="glyphicon glyphicon-leaf"></i> $_FILES
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseThree" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <?php
-
-                        var_dump($_FILES);
-
-                        ?>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>

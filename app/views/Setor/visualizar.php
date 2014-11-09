@@ -8,6 +8,25 @@ $apartamentos = $data['apartamentos'];
             <small>
                 <?php echo (isset($data['pagesubtitle'])) ? $data['pagesubtitle'] : ""; ?>
             </small>
+            <!-- Botões de administração -->
+                <span class="btn-panel pull-right">
+                <a href="Setor/formsetor/<?php echo $setor['cd_setor']; ?>"
+                   data-toggle="tooltip" data-placement="top" title="Editar Setor!"
+                   class="btn btn-primary btn-circle btn-lg">
+                    <i class="fa fa-pencil"></i>
+                </a>
+                <a href="Setor/" data-toggle="tooltip" data-placement="top" title="Ver Lista!"
+                   class="btn btn-default btn-circle btn-lg">
+                    <i class="fa fa-list"></i>
+                </a>
+                <a href="Setor/confirmDelete/<?php echo $setor['cd_setor']; ?>"
+                   data-toggle="tooltip" data-placement="top" title="Deletar!"
+                   class="btn btn-warning btn-circle btn-lg">
+                    <i class="fa fa-trash-o"></i>
+                </a>
+            </span>
+            <!-- Fim Botões de administração -->
+
         </h3>
     </div>
 </div>
@@ -33,14 +52,6 @@ $apartamentos = $data['apartamentos'];
                 </div>
 
             </div>
-        </div>
-        <div class="well">
-            <a class="btn btn-primary btn-sm"
-               href="Setor/formsetor/<?php echo $setor['cd_setor']; ?>">
-                <span class="fa fa-edit"></span> Editar</a>
-            <a class="btn btn-warning btn-sm"
-               href="Setor/confirmDelete/<?php echo $setor['cd_setor']; ?>">
-                <span class="fa fa-trash-o"></span> Deletar</a>
         </div>
     </div>
 

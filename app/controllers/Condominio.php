@@ -121,7 +121,7 @@ class Condominio extends Controller
             //o campo 'obs' vai ser o subtítulo
             'pagesubtitle' => $condominioarr->getNmCondominio(),
             //o campo 'nome' vai ser o título da página
-            'pagetitle' => '',
+            'pagetitle' => 'Condomínio',
             'condominio' => $condominioarr
         );
 
