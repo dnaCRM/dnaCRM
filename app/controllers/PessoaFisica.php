@@ -64,7 +64,7 @@ class PessoaFisica extends Controller
             $enderecos = (new PessoaFisicaEnderecoDAO())->get("cd_pessoa_fisica = {$id}");
             $estados = (new CategoriaValorDAO())->get('cd_categoria = 2');
             $catg_enderecos = (new CategoriaValorDAO())->get('cd_categoria = 9');
-            $catg_relacionados = (new CategoriaValorDAO())->get("cd_categoria = 4 and genero = '{$perfilarr->getIeSexo()}'");
+            $catg_relacionados = (new CategoriaValorDAO())->get("cd_categoria = 4"); //and genero = '{$perfilarr->getIeSexo()}'
 
             $relacionadosModel = new RelacionadosModel();
             $relacionados = $relacionadosModel->getRelacionados($id);
