@@ -2149,10 +2149,11 @@ v_categoria_1_coluna INTEGER;
 v_genero CHAR(1);
 BEGIN 
 
-		SELECT COUNT(cd_pessoa_fisica_1)
+		SELECT COUNT(*)
 			INTO v_cadastrado
 		FROM tb_relacionados 
-		WHERE cd_pessoa_fisica_1 = p_pf1;
+		WHERE cd_pessoa_fisica_1 = p_pf1
+		AND cd_pessoa_fisica_2 = p_pf2;
 		
 		SELECT COUNT(*)
 		INTO v_exist_parametro
@@ -2193,8 +2194,10 @@ BEGIN
 					WHERE p.cd_catg_vl_relac_2 = c.cd_vl_categoria
 					AND p.cd_catg_vl_relac_1 = p_cd_catg_relac
 					AND c.genero = 'F';
+
+				END IF;
 					
-				ELSE
+				IF v_cd_catg_relac_2 IS NULL THEN
 
 					SELECT cd_catg_vl_relac_2
 						INTO v_cd_catg_relac_2
@@ -2225,12 +2228,14 @@ BEGIN
 					AND p.cd_catg_vl_relac_2 = p_cd_catg_relac
 					AND c.genero = 'F';
 
-				ELSE 
+				END IF;
+
+				IF v_cd_catg_relac_2 IS NULL THEN
 
 					SELECT cd_catg_vl_relac_1
 						INTO v_cd_catg_relac_2
 					FROM tb_relac_parametro 
-					WHERE cd_catg_vl_relac_1 = p_cd_catg_relac;			
+					WHERE cd_catg_vl_relac_2 = p_cd_catg_relac;			
 
 				END IF;
 				
@@ -2266,7 +2271,7 @@ BEGIN
 			
 				IF v_cadastrado = 0 THEN
 	
-					INSERT INTO tb_relacionados(cd_pessoa_fisica_1,
+					 INSERT INTO tb_relacionados(cd_pessoa_fisica_1,
 												cd_pessoa_fisica_2,
 												cd_catg_relac,
 												cd_catg_vl_relac,
@@ -2290,7 +2295,7 @@ BEGIN
 					VALUES
 					(p_pf2,p_pf1,4,v_cd_catg_relac_2,user::INTEGER, now(),user::INTEGER, now());
 			
-					RETURN 'Relacionamento inserido com sucesso!';
+					RETURN 'Relacionamento inserido com sucesso! ';
 		
 				ELSE 
 			
@@ -2298,13 +2303,15 @@ BEGIN
 						cd_catg_vl_relac = p_cd_catg_relac,
 						cd_usuario_atualiza=user::INTEGER,
 						dt_usuario_atualiza=now()
-					WHERE cd_pessoa_fisica_1 = p_pf1; 
+					WHERE cd_pessoa_fisica_1 = p_pf1
+					AND cd_pessoa_fisica_2 = p_pf2; 
 			
 					UPDATE tb_relacionados SET
 						cd_catg_vl_relac = v_cd_catg_relac_2,
 						cd_usuario_atualiza=user::INTEGER,
 						dt_usuario_atualiza=now()
-					WHERE cd_pessoa_fisica_1 = p_pf2;
+					WHERE cd_pessoa_fisica_1 = p_pf2
+					AND cd_pessoa_fisica_2 = p_pf1;
 			
 					RETURN 'Relacionamento atualizado com sucesso!';
 			
