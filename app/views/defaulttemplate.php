@@ -34,8 +34,6 @@ if (Session::exists('usuario')) {
     <script src="js/respond.min.js"></script>
     <![endif]-->
 
-    <script>CKEDITOR.dtd.$removeEmpty['span'] = false;</script>
-
 </head>
 <body class="menu">
 <!-- top-bar start -->

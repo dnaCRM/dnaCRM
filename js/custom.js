@@ -87,9 +87,10 @@ CKEDITOR.replace('descricao', {
         { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', '-', 'RemoveFormat'] },
         { name: 'others', items: [ '-' ] },
         { name: 'insert', items: [ 'Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ] },
-        { name: 'tools', items: [ 'Maximize', 'ShowBlocks' ] },
+        { name: 'tools', items: [ 'Maximize', 'ShowBlocks' ] }
     ]
 });
+
 CKEDITOR.replace('desc_conclusao', {
     toolbar: [
         //{ name: 'document', items: [ 'Source', '-', 'NewPage', 'Preview', '-', 'Templates' ] },	// Defines toolbar group with name (used to create voice label) and items in 3 subgroups.
@@ -98,9 +99,9 @@ CKEDITOR.replace('desc_conclusao', {
         { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', '-', 'RemoveFormat'] },
         { name: 'others', items: [ '-' ] },
         { name: 'insert', items: [ 'Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ] },
-        { name: 'tools', items: [ 'Maximize', 'ShowBlocks' ] },
+        { name: 'tools', items: [ 'Maximize', 'ShowBlocks' ] }
     ]
-}););
+});
 
 /** Collapsible panel */
 jQuery(function ($) {
