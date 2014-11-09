@@ -2138,6 +2138,8 @@ BEGIN
 END;
 $$ LANGUAGE 'plpgsql'; 
 
+
+
 CREATE OR REPLACE FUNCTION fn_relacionados(p_pf1 INTEGER, p_pf2 INTEGER, p_cd_catg_relac INTEGER, p_deleta VARCHAR DEFAULT NULL)
 RETURNS VARCHAR AS 
 $$
@@ -2166,7 +2168,7 @@ BEGIN
 			SELECT ie_sexo
 				INTO v_genero
 			FROM tb_pessoa_fisica 
-			WHERE cd_pessoa_fisica = p_pf2;
+			WHERE cd_pessoa_fisica = p_pf1;
 		
 			SELECT COUNT(*)
 				INTO v_categoria_1_coluna
@@ -2325,7 +2327,6 @@ BEGIN
 END;
 $$
 LANGUAGE plpgsql;
-
 
 INSERT INTO TB_CATEGORIA(
 DESC_CATEGORIA)
