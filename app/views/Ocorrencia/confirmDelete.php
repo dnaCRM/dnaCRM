@@ -1,28 +1,30 @@
-<div class="row">
-    <div class="col-md-12">
-        <h3 class="page-header"><?php echo $data['pagetitle']; ?></h3>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="page-header"><?php echo $data['pagetitle']; ?></h3>
+        </div>
     </div>
-</div>
 
-<!--Teste de Perfil-->
-<div class="row">
-    <div class="col-md-12">
-        <div class="jumbotron">
-            <?php
-            $ocorrencia = $data['perfil'];
-
-            $action = new Ocorrencia();
-            $action->removerOcorrencia($ocorrencia);
-
-            ?>
-
-            <div class="container">
+    <!--Teste de Perfil-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron">
                 <?php
-                if (!Input::exists()) {
-                    ?>
+                $ocorrencia = $data['perfil'];
+
+                $action = new Ocorrencia();
+                $action->removerOcorrencia($ocorrencia);
+
+                ?>
+
+                <div class="container">
+                    <?php
+                    if (!Input::exists()) {
+                        ?>
                         <h1><span class="glyphicon glyphicon-arrow-right"></span> Atenção!</h1>
 
-                        <p>Deseja deletar a ocorrência <strong><?php echo $ocorrencia->getDescAssunto(); ?></strong>?</p>
+                        <p>Deseja deletar a ocorrência <strong><?php echo $ocorrencia->getDescAssunto(); ?></strong>?
+                        </p>
 
                         <!-- form -->
                         <form action="" method="post">
@@ -43,20 +45,21 @@
                         </form>
                         <!-- end form -->
 
-                <?php
-                } else {
-                    ?>
+                    <?php
+                    } else {
+                        ?>
                         <h3>Ocorrencia Deletada!</h3>
                         <a href="Ocorrencia"
                            class="btn btn-success" role="button">
                             <span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar</a>
 
-                <?php
-                }
-                ?>
+                    <?php
+                    }
+                    ?>
+                </div>
+
             </div>
 
         </div>
-
     </div>
 </div>

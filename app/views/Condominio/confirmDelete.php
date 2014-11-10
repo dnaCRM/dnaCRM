@@ -1,29 +1,30 @@
-<div class="row">
-    <div class="col-md-6">
-        <h3 class="page-header"><?php echo $data['pagetitle']; ?>
-            <small>
-                <?php echo (isset($data['pagesubtitle'])) ? $data['pagesubtitle'] : ""; ?>
-            </small>
-        </h3>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h3 class="page-header"><?php echo $data['pagetitle']; ?>
+                <small>
+                    <?php echo (isset($data['pagesubtitle'])) ? $data['pagesubtitle'] : ""; ?>
+                </small>
+            </h3>
 
+        </div>
     </div>
-</div>
 
-<!--Teste de Perfil-->
-<div class="row">
-    <div class="col-md-12">
-        <div class="jumbotron">
-            <?php
-            $condominio = $data['condominio'];
-
-            $action = new Condominio();
-            $action->removerCondominio($condominio);
-
-            ?>
-
-            <div class="container">
+    <!--Teste de Perfil-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron">
                 <?php
-                if (!Input::exists()) {
+                $condominio = $data['condominio'];
+
+                $action = new Condominio();
+                $action->removerCondominio($condominio);
+
+                ?>
+
+                <div class="container">
+                    <?php
+                    if (!Input::exists()) {
                     ?>
                     <div class="col-md-4">
                         <img class="img-circle profilefoto left"
@@ -52,19 +53,21 @@
 
                         </form>
                         <!-- end form -->
-                <?php
-                } else {
-                    ?>
-                        <h3>Condominio Deletado!</h3>
-                        <a href="Condominio"
-                           class="btn btn-success" role="button">
-                            <span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar</a>
-                <?php
-                }
-                ?>
+                        <?php
+                        } else {
+                            ?>
+                            <h3>Condominio Deletado!</h3>
+                            <a href="Condominio"
+                               class="btn btn-success" role="button">
+                                <span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar</a>
+                        <?php
+                        }
+                        ?>
+                    </div>
+
+                </div>
+
             </div>
-
         </div>
-
     </div>
 </div>

@@ -7,6 +7,7 @@ $id_check = $data['id'];
 
 $token = Token::generate();
 ?>
+<div class="container">
 <div class="row">
     <div class="col-sm-12">
         <h3 class="page-header"><?php echo $data['pagetitle']; ?>
@@ -334,3 +335,4 @@ $token = Token::generate();
     </div>
 </div>
 <div id="responseAjaxError"></div>
+</div>

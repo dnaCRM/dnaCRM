@@ -9,6 +9,7 @@ $pj_telefones = $data['pj_telefone'];
 
 $token = Token::generate();
 ?>
+<div class="container">
 <div class="row">
     <div class="col-sm-12">
         <h3 class="page-header"><?php echo $data['pagetitle']; ?>
@@ -45,142 +46,145 @@ $token = Token::generate();
 <div id="TabAdicionais" class="tab-content">
 <div class="tab-pane fade active in" id="principal">
 
-<div class="row">
-<?php if ($cadastrado): ?>
+    <div class="row">
+        <?php if ($cadastrado): ?>
 
-    <div class="jumbotron">
-        <div class="container">
-            <div class="col-md-4">
+            <div class="jumbotron">
+                <div class="container">
+                    <div class="col-md-4">
 
-                <?php
+                        <?php
 
-                if (file_exists("img/uploads/tb_pessoa_juridica/{$cadastrado->getCdPessoaJuridica()}.jpg")) {
-                    $cadastrado->setImPerfil("img/uploads/tb_pessoa_juridica/{$cadastrado->getCdPessoaJuridica()}.jpg");
-                } else {
-                    $cadastrado->setImPerfil(ICON_USER);
-                }
+                        if (file_exists("img/uploads/tb_pessoa_juridica/{$cadastrado->getCdPessoaJuridica()}.jpg")) {
+                            $cadastrado->setImPerfil("img/uploads/tb_pessoa_juridica/{$cadastrado->getCdPessoaJuridica()}.jpg");
+                        } else {
+                            $cadastrado->setImPerfil(ICON_USER);
+                        }
 
-                ?>
+                        ?>
 
-                <img class="img-circle profilefoto left" src="<?php
-                echo $cadastrado->getImPerfil();?>">
+                        <img class="img-circle profilefoto left" src="<?php
+                        echo $cadastrado->getImPerfil();?>">
+                    </div>
+                    <div class="col-md-8">
+                        <h1 class="text-success"><span class="glyphicon glyphicon-arrow-right"></span> Sucesso!</h1>
+
+                        <p>Deseja adicionar mais informações ao perfil
+                            <strong><?php echo $cadastrado->getNmFantasia(); ?></strong>?
+                        </p>
+
+                        <a href="PessoaJuridica/" class="btn btn-info" role="button">
+                            <i class="fa fa-arrow-circle-o-left"></i> Voltar
+                        </a>
+
+                        <a href="PessoaJuridica/formperfil/" class="btn btn-success" role="button">
+                            <i class="fa fa-arrow-circle-o-up"></i> Novo
+                        </a>
+
+                        <a href="PessoaJuridica/formperfil/<?php echo $cadastrado->getCdPessoaJuridica(); ?>"
+                           class="btn btn-primary">
+                            Avançar <i class="fa fa-arrow-circle-o-right"></i>
+                        </a>
+
+                    </div>
+                </div>
             </div>
-            <div class="col-md-8">
-                <h1 class="text-success"><span class="glyphicon glyphicon-arrow-right"></span> Sucesso!</h1>
+        <?php else: ?>
+            <form id="pessoajuridicaform" class="form-horizontal" method="post" action="" enctype="multipart/form-data">
+                <fieldset>
 
-                <p>Deseja adicionar mais informações ao perfil
-                    <strong><?php echo $cadastrado->getNmFantasia(); ?></strong>?
-                </p>
+                    <div class="col-md-2">
 
-                <a href="PessoaJuridica/" class="btn btn-info" role="button">
-                    <i class="fa fa-arrow-circle-o-left"></i> Voltar
-                </a>
 
-                <a href="PessoaJuridica/formperfil/" class="btn btn-success" role="button">
-                    <i class="fa fa-arrow-circle-o-up"></i> Novo
-                </a>
+                        <img class="img-circle img-responsive" src="<?php echo $perfil->getImPerfil(); ?>"><br>
 
-                <a href="PessoaJuridica/formperfil/<?php echo $cadastrado->getCdPessoaJuridica(); ?>"
-                   class="btn btn-primary">
-                    Avançar <i class="fa fa-arrow-circle-o-right"></i>
-                </a>
+                        <div class="form-group col-sm-10">
+                            <div>
+                                <label for="im_perfil" class="btn btn-default">Foto</label>
 
-            </div>
-        </div>
+                                <input type="file" class="hidden" id="im_perfil" name="im_perfil">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <div class="form-group">
+                            <div class="col-sm-12 inputGroupContainer">
+                                <label for="cnpj" class="control-label">Cnpj</label>
+
+
+                                <input type="text" class="form-control" id="cnpj" name="cnpj"
+                                       value="<?php echo $perfil->getCnpj() == '' ? Input::get('cnpj') : $perfil->getCnpj(); ?>"
+                                       placeholder="00.000.000/0000-00"
+                                       maxlength="18">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12 inputGroupContainer">
+                                <label for="nm_fantasia" class="control-label">Nome Fantasia</label>
+
+
+                                <input type="text" class="form-control" id="nm_fantasia" name="nm_fantasia"
+                                       value="<?php echo $perfil->getNmFantasia() == '' ? Input::get('nm_fantasia') : $perfil->getNmfantasia(); ?>"
+                                       placeholder="Nome Fantasia">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-4 inputGroupContainer">
+                                <label for="desc_razao" class="control-label">Razão Social</label>
+
+                                <input type="text" class="form-control" id="desc_razao" name="desc_razao"
+                                       value="<?php echo $perfil->getDescRazao() == '' ? Input::get('desc_razao') : $perfil->getDescRazao(); ?>"
+                                       placeholder="Razão Social">
+                            </div>
+                            <div class="col-sm-4 inputGroupContainer">
+                                <label for="desc_atividade" class="control-label">Ramo de Atividade</label>
+
+                                <input type="text" class="form-control" id="desc_atividade" name="desc_atividade"
+                                       value="<?php echo $perfil->getDescAtividade() == '' ? Input::get('desc_atividade') : $perfil->getDescAtividade(); ?>"
+                                       placeholder="Ramo de Atividade">
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label for="email" class="control-label">Email</label>
+
+
+                                <input type="text" class="form-control" id="email" name="email"
+                                       value="<?php echo $perfil->getEmail() == '' ? Input::get('email') : $perfil->getEmail(); ?>"
+                                       placeholder="Email">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-offset-4">
+
+                        <input type="hidden" name="cd_pessoa_juridica" value="<?php echo $data['id']; ?>">
+                        <input type="hidden" name="token" value="<?php echo $token; ?>">
+
+                        <div class="form-group">
+                            <div class="col-sm-12 clearfix">
+                                <a href="PessoaJuridica<?php echo $data['id'] ? '/visualizar/' . $data['id'] : ''; ?>"
+                                   id="cancel" class="btn btn-default"><span
+                                        class="fa fa-undo"></span> Cancelar</a>
+                                <a href="PessoaJuridica/formperfil" id="novo" class="btn btn-success"><span
+                                        class="fa fa-file"></span>
+                                    Novo</a>
+                                <button type="submit" name="cadastrar" class="btn btn-primary"><span
+                                        class="fa fa-check"></span>
+                                    Salvar
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </fieldset>
+            </form>
+        <?php endif; ?>
     </div>
-<?php else: ?>
-    <form id="pessoajuridicaform" class="form-horizontal" method="post" action="" enctype="multipart/form-data">
-    <fieldset>
-
-    <div class="col-md-2">
-
-
-        <img class="img-circle img-responsive" src="<?php echo $perfil->getImPerfil(); ?>"><br>
-
-        <div class="form-group col-sm-10">
-            <div>
-                <label for="im_perfil" class="btn btn-default">Foto</label>
-
-                <input type="file" class="hidden" id="im_perfil" name="im_perfil">
-            </div>
-        </div>
-
-    </div>
-
-    <div class="col-md-6">
-
-        <div class="form-group">
-            <div class="col-sm-12 inputGroupContainer">
-                <label for="cnpj" class="control-label">Cnpj</label>
-
-
-                <input type="text" class="form-control" id="cnpj" name="cnpj"
-                       value="<?php echo $perfil->getCnpj() == '' ? Input::get('cnpj') : $perfil->getCnpj(); ?>"
-                       placeholder="00.000.000/0000-00"
-                       maxlength="18">
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-12 inputGroupContainer">
-                <label for="nm_fantasia" class="control-label">Nome Fantasia</label>
-
-
-                <input type="text" class="form-control" id="nm_fantasia" name="nm_fantasia"
-                       value="<?php echo $perfil->getNmFantasia() == '' ? Input::get('nm_fantasia') : $perfil->getNmfantasia(); ?>"
-                       placeholder="Nome Fantasia">
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-sm-4 inputGroupContainer">
-                <label for="desc_razao" class="control-label">Razão Social</label>
-
-                <input type="text" class="form-control" id="desc_razao" name="desc_razao"
-                       value="<?php echo $perfil->getDescRazao() == '' ? Input::get('desc_razao') : $perfil->getDescRazao(); ?>"
-                       placeholder="Razão Social">
-            </div>
-            <div class="col-sm-4 inputGroupContainer">
-                <label for="desc_atividade" class="control-label">Ramo de Atividade</label>
-
-                <input type="text" class="form-control" id="desc_atividade" name="desc_atividade"
-                       value="<?php echo $perfil->getDescAtividade() == '' ? Input::get('desc_atividade') : $perfil->getDescAtividade(); ?>"
-                       placeholder="Ramo de Atividade">
-            </div>
-
-        </div>
-        <div class="form-group">
-            <div class="col-sm-12">
-                <label for="email" class="control-label">Email</label>
-
-
-                <input type="text" class="form-control" id="email" name="email"
-                       value="<?php echo $perfil->getEmail() == '' ? Input::get('email') : $perfil->getEmail(); ?>"
-                       placeholder="Email">
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-offset-4">
-
-        <input type="hidden" name="cd_pessoa_juridica" value="<?php echo $data['id']; ?>">
-        <input type="hidden" name="token" value="<?php echo $token; ?>">
-
-        <div class="form-group">
-            <div class="col-sm-12 clearfix">
-                <a href="PessoaJuridica<?php echo $data['id'] ? '/visualizar/'.$data['id']:'';?>" id="cancel" class="btn btn-default"><span
-                        class="fa fa-undo"></span> Cancelar</a>
-                <a href="PessoaJuridica/formperfil" id="novo" class="btn btn-success"><span class="fa fa-file"></span>
-                    Novo</a>
-                <button type="submit" name="cadastrar" class="btn btn-primary"><span class="fa fa-check"></span>
-                    Salvar
-                </button>
-            </div>
-        </div>
-
-    </div>
-    </fieldset>
-    </form>
-<?php endif; ?>
-</div>
 
 </div>
 <?php if ($id_check): ?>
@@ -633,3 +637,4 @@ $token = Token::generate();
     </div>
 </div>
 <div id="responseAjaxError"></div>
+</div>

@@ -7,7 +7,7 @@ $id_check = $data['id'];
 
 $token = Token::generate();
 ?>
-
+<div class="container">
 <div class="row">
     <div class="col-sm-12">
         <h3 class="page-header"><?php echo $data['pagetitle']; ?>
@@ -747,7 +747,8 @@ $token = Token::generate();
 
                         <div class="form-group btn-group col-md-12" data-toggle="buttons">
                             <label class="btn btn-danger" id="deletar_relac">
-                                <input id="checkbox_del_relac" type="checkbox" name="delete" value="D" autocomplete="off">
+                                <input id="checkbox_del_relac" type="checkbox" name="delete" value="D"
+                                       autocomplete="off">
                                 <span id="del_button_txt">Deletar?</span>
                             </label>
                         </div>
@@ -791,21 +792,25 @@ $token = Token::generate();
                     </tr>
                     </thead>
                     <tbody>
-                    <?php foreach($data['relacionados'] as $relacionado):?>
-                    <tr data-pessoa-relac="<?php echo $relacionado['cd_pessoa_fisica_2'];?>">
-                        <td><img src="<?php echo $relacionado['pessoa2_foto'];?>" class="img-circle profilefoto"></td>
-                        <td><a href="PessoaFisica/visualizar/<?php echo $relacionado['cd_pessoa_fisica_2'];?>"><?php echo $relacionado['pessoa2_nome'];?></a></td>
-                        <td><?php echo $relacionado['relac'];?></td>
-                        <td>
-                            <button
-                                data-img-pessoa="<?php echo $relacionado['pessoa2_foto'];?>"
-                                data-nome-pessoa="<?php echo $relacionado['pessoa2_nome'];?>"
-                                data-id-pessoa="<?php echo $relacionado['cd_pessoa_fisica_2'];?>"
-                                data-toggle="tooltip" data-placement="top"
-                                title="Editar relacionamento" class="btn btn-primary btn-xs btn-circle add-relac-pessoa">
-                                <i class="fa fa-arrow-left"></i></button>
-                        </td>
-                    </tr>
+                    <?php foreach ($data['relacionados'] as $relacionado): ?>
+                        <tr data-pessoa-relac="<?php echo $relacionado['cd_pessoa_fisica_2']; ?>">
+                            <td><img src="<?php echo $relacionado['pessoa2_foto']; ?>" class="img-circle profilefoto">
+                            </td>
+                            <td>
+                                <a href="PessoaFisica/visualizar/<?php echo $relacionado['cd_pessoa_fisica_2']; ?>"><?php echo $relacionado['pessoa2_nome']; ?></a>
+                            </td>
+                            <td><?php echo $relacionado['relac']; ?></td>
+                            <td>
+                                <button
+                                    data-img-pessoa="<?php echo $relacionado['pessoa2_foto']; ?>"
+                                    data-nome-pessoa="<?php echo $relacionado['pessoa2_nome']; ?>"
+                                    data-id-pessoa="<?php echo $relacionado['cd_pessoa_fisica_2']; ?>"
+                                    data-toggle="tooltip" data-placement="top"
+                                    title="Editar relacionamento"
+                                    class="btn btn-primary btn-xs btn-circle add-relac-pessoa">
+                                    <i class="fa fa-arrow-left"></i></button>
+                            </td>
+                        </tr>
                     <?php endforeach; ?>
                     </tbody>
                 </table>
@@ -1017,3 +1022,4 @@ $token = Token::generate();
     </div>
 </div>
 <div id="responseAjaxError"></div>
+</div>

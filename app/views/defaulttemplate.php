@@ -230,11 +230,11 @@ if (Session::exists('usuario')) {
 <!-- side-bar end -->
 
 <!-- container start -->
-<div class="container">
+
 
     <?php require_once($this->viewfile); ?>
 
-</div>
+
 <!-- container end -->
 
 <div class="container">

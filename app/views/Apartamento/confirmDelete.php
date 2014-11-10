@@ -1,27 +1,28 @@
-<div class="row">
-    <div class="col-md-12">
-        <h3 class="page-header"><?php echo $data['pagetitle']; ?>
-            <small><?php echo $data['pagesubtitle']; ?></small>
-        </h3>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="page-header"><?php echo $data['pagetitle']; ?>
+                <small><?php echo $data['pagesubtitle']; ?></small>
+            </h3>
+        </div>
     </div>
-</div>
 
-<!--Teste de Apartamento-->
-<div class="row">
-    <div class="col-md-12">
-        <div class="jumbotron">
-            <?php
-            $apartamento = $data['apartamento'];
-
-            $action = new Apartamento();
-            $action->removerApartamento($apartamento);
-
-            ?>
-
-            <div class="container">
+    <!--Teste de Apartamento-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron">
                 <?php
-                if (!Input::exists()) {
-                    ?>
+                $apartamento = $data['apartamento'];
+
+                $action = new Apartamento();
+                $action->removerApartamento($apartamento);
+
+                ?>
+
+                <div class="container">
+                    <?php
+                    if (!Input::exists()) {
+                        ?>
                         <h1><span class="glyphicon glyphicon-arrow-right"></span> Atenção!</h1>
 
                         <p>Deseja deletar o apartamento <strong><?php echo $apartamento->getCdApartamento(); ?></strong>?
@@ -46,16 +47,17 @@
 
                         </form>
                         <!-- end form -->
-                <?php
-                } else {
+                    <?php
+                    } else {
+                        ?>
+                        <h3>Apartamento Deletado!</h3>
+                        <a href="Apartamento"
+                           class="btn btn-success" role="button">
+                            <span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar</a>
+                    <?php
+                    }
                     ?>
-                    <h3>Apartamento Deletado!</h3>
-                    <a href="Apartamento"
-                       class="btn btn-success" role="button">
-                        <span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar</a>
-                <?php
-                }
-                ?>
+                </div>
             </div>
         </div>
     </div>

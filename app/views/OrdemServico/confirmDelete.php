@@ -1,24 +1,25 @@
-<div class="row">
-    <div class="col-md-12">
-        <h3 class="page-header"><?php echo $data['pagetitle']; ?></h3>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="page-header"><?php echo $data['pagetitle']; ?></h3>
+        </div>
     </div>
-</div>
 
-<!--Teste de Perfil-->
-<div class="row">
-    <div class="col-md-12">
-        <div class="jumbotron">
-            <?php
-            $perfil = $data['perfil'];
+    <!--Teste de Perfil-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron">
+                <?php
+                $perfil = $data['perfil'];
 
-            $action = new OrdemServico();
-            $action->removerOrdemServico($perfil);
+                $action = new OrdemServico();
+                $action->removerOrdemServico($perfil);
 
-            ?>
-
-            <?php
-            if (!Input::exists()) {
                 ?>
+
+                <?php
+                if (!Input::exists()) {
+                    ?>
                     <h1><span class="glyphicon glyphicon-arrow-right"></span> Atenção!</h1>
 
                     <p>Deseja deletar a Ordem de Servico <strong><?php echo $perfil->getDescAssunto(); ?></strong>?</p>
@@ -40,17 +41,18 @@
                         </div>
                     </form>
                     <!-- end form -->
-            <?php
-            } else {
-                ?>
+                <?php
+                } else {
+                    ?>
                     <h3>Cadastro Deletado!</h3>
                     <a href="OrdemServico"
                        class="btn btn-success" role="button">
                         <span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar</a>
 
-            <?php
-            }
-            ?>
+                <?php
+                }
+                ?>
+            </div>
         </div>
     </div>
 </div>

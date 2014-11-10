@@ -1,13 +1,14 @@
 <?php
 $ordem_servico = $data['ordem_servico'];
 ?>
-<div class="row">
-    <div class="col-md-12">
-        <h3 class="page-header"><?php echo $data['pagetitle']; ?>
-            <small>
-                <?php echo (isset($data['pagesubtitle'])) ? $data['pagesubtitle'] : ""; ?>
-            </small>
-            <!-- Botões de administração -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="page-header"><?php echo $data['pagetitle']; ?>
+                <small>
+                    <?php echo (isset($data['pagesubtitle'])) ? $data['pagesubtitle'] : ""; ?>
+                </small>
+                <!-- Botões de administração -->
                 <span class="btn-panel pull-right">
                 <a href="OrdemServico/formOrdemServico/<?php echo $ordem_servico['cd_ordem_servico']; ?>"
                    data-toggle="tooltip" data-placement="top" title="Editar Ordem de Serviço!"
@@ -24,19 +25,19 @@ $ordem_servico = $data['ordem_servico'];
                     <i class="fa fa-trash-o"></i>
                 </a>
             </span>
-            <!-- Fim Botões de administração -->
-        </h3>
+                <!-- Fim Botões de administração -->
+            </h3>
+        </div>
     </div>
-</div>
 
-<!--Teste de Perfil-->
-<div class="row">
+    <!--Teste de Perfil-->
+    <div class="row">
 
-    <div class="col-sm-6">
-        <div class="panel profile-card pcard-md">
-            <div class="panel-body">
-                <?php
-                echo "
+        <div class="col-sm-6">
+            <div class="panel profile-card pcard-md">
+                <div class="panel-body">
+                    <?php
+                    echo "
                     <div class=\"profile-card-foto-container\">
                         <img src=\"{$ordem_servico['solicitante_foto']}\" class=\"img-circle profilefoto foto-md\">
                     </div>
@@ -48,13 +49,14 @@ $ordem_servico = $data['ordem_servico'];
                     </div>
                     ";
 
-                ?>
+                    ?>
+                </div>
             </div>
-        </div>
-        <div class="panel profile-card pcard-sm">
-            <div class="panel-body">
-                <?php
-                echo "
+            <?php if ($ordem_servico['cd_pf_executor']): ?>
+            <div class="panel profile-card pcard-sm">
+                <div class="panel-body">
+                    <?php
+                    echo "
                     <div class=\"profile-card-foto-container\">
                         <img src=\"{$ordem_servico['executor_foto']}\" class=\"img-circle profilefoto foto-md\">
                     </div>
@@ -65,47 +67,47 @@ $ordem_servico = $data['ordem_servico'];
                     </div>
                     </div>
                     ";
-
-                ?>
+                    ?>
+                </div>
             </div>
-        </div>
+            <?php endif; ?>
 
+            <div class="panel">
+                <div class="panel-body">
 
-        <div class="panel">
-            <div class="panel-body">
-
-                <div class="list-group">
-                    <?php
-                    if ($ordem_servico['cd_ocorrencia']) {
-                    echo "<div class=\"col-md-12\">
+                    <div class="list-group">
+                        <?php
+                        if ($ordem_servico['cd_ocorrencia']) {
+                            echo "<div class=\"col-md-12\">
                             <span class=\"lead\">Ocorrência Relacionada: </span>
                             <a href=\"Ocorrencia/visualizar/{$ordem_servico['cd_ocorrencia']}\">{$ordem_servico['desc_ocorrencia']}</a></div>";
-                    }
-                    echo "
+                        }
+                        echo "
                 <div class=\"col-md-6\"><span class=\"lead\">Status: </span>{$ordem_servico['estagio']}</div>
                 <div class=\"col-md-6\"><span class=\"lead\">Tipo: </span>{$ordem_servico['tipo']}</div>
                 <div class=\"col-md-6\"><span class=\"lead\">Inicio: </span>{$ordem_servico['dt_inicio']}</div>
                 <div class=\"col-md-6\"><span class=\"lead\">Fim: </span>{$ordem_servico['dt_fim']}</div>
             ";
-                    ?>
-                </div>
+                        ?>
+                    </div>
 
+
+                </div>
 
             </div>
 
         </div>
 
-    </div>
+        <div class="col-sm-6">
+            <div class="legend">Assunto:</div>
+            <p><?php echo $ordem_servico['desc_assunto']; ?></p>
 
-    <div class="col-sm-6">
-        <div class="legend">Assunto:</div>
-        <p><?php echo $ordem_servico['desc_assunto']; ?></p>
+            <div class="legend">Descrição:</div>
+            <p><?php echo $ordem_servico['desc_ordem_servico']; ?></p>
 
-        <div class="legend">Descrição:</div>
-        <p><?php echo $ordem_servico['desc_ordem_servico']; ?></p>
+            <div class="legend">Conclusão:</div>
+            <p><?php echo $ordem_servico['desc_conclusao']; ?></p>
 
-        <div class="legend">Conclusão:</div>
-        <p><?php echo $ordem_servico['desc_conclusao']; ?></p>
-
+        </div>
     </div>
 </div>

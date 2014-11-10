@@ -26,14 +26,12 @@
         <![endif]-->
     </head>
     <body>
-    <div class="container">
 
+    <!-- /container -->
 
         <?php require_once($this->viewfile); ?>
 
-
-
-    </div> <!-- /container -->
+    <!-- /container -->
 
 
     <script src="js/jquery-1.10.2.min.js"></script>

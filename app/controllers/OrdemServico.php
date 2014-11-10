@@ -17,7 +17,6 @@ class OrdemServico extends Controller
         $this->ordemServicoModel = new OrdemServicoModel();
     }
 
-
     public function start()
     { //Pega a lista completa de perfis
         $perfil_list = (array)$this->model->fullList();
