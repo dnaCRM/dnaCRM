@@ -59,7 +59,7 @@ $apartamento = $data['apartamento'];
         <?php if ($data['moradores']): ?>
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title">Moradores</h3>
+                <h3 class="panel-title"><i class="fa fa-group"></i> Moradores</h3>
             </div>
             <div class="panel-body">
                 <table class="table">

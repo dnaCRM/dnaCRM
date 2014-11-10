@@ -1,34 +1,36 @@
-<?php
-//var_dump((new PessoaJuridicaEnderecoDAO())->fullList());die;
-$class = 'PessoaFisica';
-
-$classModel = $class.'Model';
-$model = new $classModel;
-//$dto = $model->getDAO()->fullList();var_dump($dto);die;
-
-$dto = $model->getDAO()->getById(205);
-//var_dump($model->getEnderecosMorador(2));die;
-$obj = $model
-    ->setDTO($dto)
-    ->getArrayDados();
-;
-
-var_dump($obj);
-
-/*
-      private 'cd_condominio' => int 8
-      private 'nm_condominio' => string 'Spazio Florian' (length=14)
-      private 'im_perfil' => string 'img/icon-user.jpg' (length=17)
-      private 'cep' => string '14000-123' (length=9)
-      private 'rua' => string 'Rua Jurema' (length=10)
-      private 'numero' => int 100
-      private 'bairro' => string 'Santa Terezinha' (length=15)
-      private 'cidade' => string 'Franca' (length=6)
-      private 'cd_catg_estado' => int 1
-      private 'cd_vl_catg_estado' => int 2
- */
-?>
 <!-- NAO DELETAR DESTA LINHA PRA BAIXO -->
+
+<div class="perfil-header" id="content">
+    <div class="container">
+        <h1>Components</h1>
+
+        <p>Over a dozen reusable components built to provide iconography, dropdowns, input groups, navigation, alerts,
+            and much more.</p>
+
+        <div id="carbonads-container">
+            <div class="carbonad">
+                <div id="azcarbon"><span><span class="carbonad-image"><a
+                                href="http://www.launchbit.com/taz/9533-5456-111/" target="_blank"><img width="130"
+                                                                                                        height="100"
+                                                                                                        border="0"
+                                                                                                        src="https://launchbit.com/taz-i/5456-sendinblue.png"
+                                                                                                        class="carbonad-image carbonad-img"></a></span><span
+                            class="carbonad-text"><a href="http://www.launchbit.com/taz/9533-5456-111/">Free Email
+                                Marketing Unlimited Contacts, Tracking &amp; Custom Segmentation.</a></span><span
+                            class="carbonad-tag">ads via <a href="http://carbonads.com">Carbon</a></span><img
+                            src="https://www.launchbit.com/taz-pixel/9533-5456-111/" border="0" height="1" width="1"
+                            style="display: none;"></span></div>
+                <script>var z = document.createElement("script");
+                    z.async = true;
+                    z.src = "http://engine.carbonads.com/z/32341/azcarbon_2_1_0_HORIZ";
+                    var s = document.getElementsByTagName("script")[0];
+                    s.parentNode.insertBefore(z, s);</script>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 <div class="panel-group" id="accordion">
     <div class="panel panel-default">
         <div class="panel-heading">

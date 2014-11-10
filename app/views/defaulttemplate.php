@@ -229,7 +229,8 @@ if (Session::exists('usuario')) {
 </nav>
 <!-- side-bar end -->
 
-<div class="container"><!-- container start -->
+<!-- container start -->
+<div class="container">
 
     <?php require_once($this->viewfile); ?>
 

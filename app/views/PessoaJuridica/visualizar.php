@@ -55,16 +55,16 @@
     </div>
     <div class="col-md-6">
         <?php if ($data['empregados']): ?>
-        <div class="panel panel-info">
+            <div class="panel panel-info">
 
-            <div class="panel-heading">
-                <h6 class="panel-title">Funcionários</h6>
-            </div>
-            <div class="panel-body">
-                <?php
-                foreach ($data['empregados'] as $empregado) {
+                <div class="panel-heading">
+                    <h6 class="panel-title"><i class="fa fa-group"></i> Funcionários</h6>
+                </div>
+                <div class="panel-body">
+                    <?php
+                    foreach ($data['empregados'] as $empregado) {
 
-                    echo "
+                        echo "
                     <div class=\"profile-card pcard-md\">
                         <div class=\"panel-body\">
                         <div class=\"profile-card-foto-container\">
@@ -78,61 +78,67 @@
                             </div>
                         </div>
                     </div>";
-                }
-                ?>
+                    }
+                    ?>
+                </div>
             </div>
-        </div>
         <?php endif; ?>
 
         <?php if ($data['telefones']): ?>
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h3 class="panel-title">Telefones</h3>
-            </div>
-            <div class="panel-body">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>Número</th>
-                        <th>Operadora</th>
-                        <th>Categoria</th>
-                        <th>Observacao</th>
-                    </tr>
-                    </thead>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fa fa-phone-square"></i> Telefones</h3>
+                    <span class="pull-right clickable"><i class="glyphicon glyphicon-minus"></i></span>
+                </div>
+                <div class="panel-body">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Número</th>
+                            <th>Operadora</th>
+                            <th>Categoria</th>
+                            <th>Observacao</th>
+                        </tr>
+                        </thead>
 
-                    <tbody>
-                    <?php
-                    foreach ($data['telefones'] as $telefone) {
-                        echo '<tr>';
-                        echo "<td>{$telefone['fone']}</td>
+                        <tbody>
+                        <?php
+                        foreach ($data['telefones'] as $telefone) {
+                            echo '<tr>';
+                            echo "<td>{$telefone['fone']}</td>
                               <td>{$telefone['operadora']}</td>
                               <td>{$telefone['categoria']}</td>
                               <td>{$telefone['observacao']}</td>";
-                        echo '</tr>';
-                    }
-                    ?>
-                    </tbody>
-                </table>
+                            echo '</tr>';
+                        }
+                        ?>
+                        </tbody>
+                    </table>
 
+                </div>
             </div>
-        </div>
         <?php endif; ?>
 
         <?php if ($data['enderecos']): ?>
-        <div class="list-group">
-            <h6 class="list-group-item active">Endereços</h6>
-            <?php
-            foreach ($data['enderecos'] as $endereco) {
-                echo "<div class=\"list-group-item\">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fa fa-pencil-square"></i> Endereços</h3>
+                    <span class="pull-right clickable"><i class="glyphicon glyphicon-minus"></i></span>
+                </div>
+                <div class="list-group panel-body">
+                    <?php
+                    foreach ($data['enderecos'] as $endereco) {
+                        echo "<div class=\"list-group-item\">
                         <h5 class=\"list-group-heading\">{$endereco['categoria']}</h5>
                         <p class=\"\">
                             {$endereco['rua']}, nº {$endereco['numero']}, {$endereco['bairro']}, {$endereco['cidade']}, {$endereco['estado']}, CEP: {$endereco['cep']}.
                                     <br><span class=\"badge\">Obs:</span> <span class=\"text-info\">{$endereco['observacao']}</span>.
                         </p>
                     </div>";
-            }
-            ?>
-        </div>
+                    }
+                    ?>
+                </div>
+            </div>
         <?php endif; ?>
 
     </div>
