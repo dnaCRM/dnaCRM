@@ -1,5 +1,4 @@
 .idea
 .idea/*
-img/uploads/**/*.jpg
-img/uploads/*.tmp
+img/uploads/**
 desktop.ini
