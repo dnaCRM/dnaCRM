@@ -61,18 +61,24 @@
                     <dd><?php echo $data['dados_pessoais']['idade']; ?></dd>
                     <dt>Gênero</dt>
                     <dd><?php echo $data['dados_pessoais']['ie_sexo']; ?></dd>
-                    <dt>Onde Trabalha</dt>
-                    <dd>
-                        <a href="PessoaJuridica/visualizar/<?php echo $data['dados_pessoais']['cd_pessoa_juridica']; ?>"><?php echo $data['dados_pessoais']['empresa']; ?></a>
-                    </dd>
-                    <dt>Profissão</dt>
-                    <dd><?php echo $data['dados_pessoais']['profissao']; ?></dd>
-                    <dt>Estuda</dt>
-                    <dd><?php echo $data['dados_pessoais']['ie_estuda']; ?></dd>
-                    <dt>Instituicao</dt>
-                    <dd><?php echo $data['dados_pessoais']['instituicao']; ?></dd>
-                    <dt>Nível escolar</dt>
-                    <dd><?php echo $data['dados_pessoais']['grau']; ?></dd>
+                    <?php if ($data['dados_pessoais']['cd_pessoa_juridica']): ?>
+                        <dt>Onde Trabalha</dt>
+                        <dd>
+                            <a href="PessoaJuridica/visualizar/<?php echo $data['dados_pessoais']['cd_pessoa_juridica']; ?>"><?php echo $data['dados_pessoais']['empresa']; ?></a>
+                        </dd>
+                    <?php endif; ?>
+                    <?php if ($data['dados_pessoais']['profissao']): ?>
+                        <dt>Profissão</dt>
+                        <dd><?php echo $data['dados_pessoais']['profissao']; ?></dd>
+                    <?php endif; ?>
+                    <?php if ($data['dados_pessoais']['ie_estuda'] == 's'): ?>
+                        <dt>Estuda</dt>
+                        <dd><?php echo $data['dados_pessoais']['ie_estuda']; ?></dd>
+                        <dt>Instituicao</dt>
+                        <dd><?php echo $data['dados_pessoais']['instituicao']; ?></dd>
+                        <dt>Nível escolar</dt>
+                        <dd><?php echo $data['dados_pessoais']['grau']; ?></dd>
+                    <?php endif; ?>
 
                 </dl>
             </div>
@@ -276,7 +282,7 @@
                         <th>Número</th>
                         <th>Operadora</th>
                         <th>Categoria</th>
-                        <th>Observacao</th>
+                        <th>Observação</th>
                     </tr>
                     </thead>
 

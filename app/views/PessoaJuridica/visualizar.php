@@ -98,7 +98,7 @@
                                 <th>Número</th>
                                 <th>Operadora</th>
                                 <th>Categoria</th>
-                                <th>Observacao</th>
+                                <th>Observação</th>
                             </tr>
                             </thead>
 

@@ -29,7 +29,7 @@ abstract class DataAccessObject
 
     public function __construct()
     {
-        $this->con = DataBase::getConnection();
+        $this->con = Database::getConnection();
         $this->arquivoTemp = session_id() . '.tmp';
     }
 
@@ -180,7 +180,6 @@ abstract class DataAccessObject
             $this->resultado = $this->statement->fetchAll(PDO::FETCH_CLASS, $this->dataTransfer);
             $this->numRegistros = $this->statement->rowCount();
             $this->success = true;
-            //var_dump($this->statement, $parametros);
         } catch (PDOException $e) {
             $this->success = false;
             CodeFail((int)$e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());

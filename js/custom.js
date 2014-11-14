@@ -563,7 +563,7 @@ $('#ocorrenciaform').bootstrapValidator({
 });
 
 $('#setorform').bootstrapValidator({
-    message: 'This value is not valid',
+    excluded: ':disabled',
     feedbackIcons: {
         valid: 'glyphicon glyphicon-ok',
         invalid: 'glyphicon glyphicon-remove',
@@ -2068,6 +2068,10 @@ $(document).ready(function () {
                 $('#legend_form_relacionamento').html('Relacionamentos').removeClass('text-primary');
                 $('#pessoa_relac').html(msg);
 
+                if ($('#checkbox_del_relac').is(':checked')) {
+                    $('#tb_lista-relacionados tr[data-pessoa-relac=' + data.cd_pessoa_fisica_2 + ']').remove();
+                }
+
                 bv.resetForm(true);
             },
             error: function (data) {
@@ -2122,9 +2126,7 @@ $(document).ready(function () {
     });
 
     $('#deletar_relac').on('click', function () {
-
         $('#del_button_txt').html($('#checkbox_del_relac').is(':checked') ? 'Deletar?' : 'Será deletado.');
-
     });
 
     $('#form_pf_r_reset').click(function () {

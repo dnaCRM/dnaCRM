@@ -259,16 +259,6 @@ if (Session::exists('usuario')) {
 
     </footer>
 
-    <div class="well-lg">
-        <?php
-        echo "Tempo de execução = " . xdebug_time_index() ;
-        echo " // ";
-        echo "Máximo de Memória usada: ". xdebug_peak_memory_usage() . " bytes\n";
-        echo " // ";
-        echo xdebug_get_function_count() . " funções executadas.";
-        ?>
-    </div>
-
 </div>
 
 <script src="js/jquery-1.10.2.min.js"></script>

@@ -1,5 +1,5 @@
 body{
-    padding-top:54px;
+    padding-top:45px;
 }
 a:hover, a:active, a:focus {
     outline: none;
@@ -510,7 +510,7 @@ table.dataTable tbody td, table.table tbody td{
 }
 
 .perfil-header {
-    margin-bottom: 40px;
+    margin-bottom: 0px;
     font-size: 20px
 }
 

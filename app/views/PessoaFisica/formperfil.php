@@ -757,7 +757,7 @@ $token = Token::generate();
                             <input type="reset" name="reset" class="btn btn-success" id="form_pf_r_reset"
                                    value="Cancelar">
                             <input type="submit" name="cadastrar" class="btn btn-primary"
-                                   id="cadastrar_pf_relacionamento" value="Cadastrar">
+                                   id="cadastrar_pf_relacionamento" value="Ok">
 
                             <input type="hidden" name="cd_pessoa_fisica_1" id="cd_pessoa_fisica_1"
                                    value="<?php echo $perfil->getCdPessoaFisica(); ?>">

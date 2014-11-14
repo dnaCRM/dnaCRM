@@ -92,7 +92,6 @@ $token = Token::generate();
                                         <div class="form-group col-sm-10">
                                             <div>
                                                 <label for="im_perfil" class="btn btn-default">Foto</label>
-
                                                 <input type="file" class="hidden" id="im_perfil" name="im_perfil">
                                             </div>
                                         </div>

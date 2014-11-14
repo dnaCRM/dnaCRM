@@ -73,7 +73,7 @@ class Setor extends Controller
             );
         }
 
-        $this->view = new View('Setor', 'formsetor');
+        $this->view = new View('Setor', 'formSetor');
         $this->view->output($dados);
     }
 
