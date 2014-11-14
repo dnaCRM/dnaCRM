@@ -24,7 +24,7 @@
     <div class="row">
         <div class="col-sm-6">
 
-            <div class="panel profile-card pcard-lg">
+            <div class="panel profile-card">
                 <div class="panel-body">
                     <?php
 
