@@ -6,18 +6,6 @@
                     Olá, <?php echo (Session::exists('usuario')) ? Session::get('usuario') : ""; ?>!
                 </small>
             </h3>
-
-
-            <?php
-
-            if (Session::exists('fail')) {
-                Session::flash('fail');
-            }
-            if (Session::exists('msg')) {
-                Session::flash('msg');
-            }
-
-            ?>
         </div>
     </div>
 
