@@ -1,21 +1,4 @@
 
------------------------------ Criar o Banco -----------------------------
-
-CREATE DATABASE DNACRM
-TEMPLATE = TEMPLATE0
-ENCODING 'UTF-8'
-CONNECTION LIMIT 40;
-
-/*
-
-Instrções
-
- Apos criarem o banco com o comando acima, 
- vão sair e entrar do pgAdmin, ir no banco SISCON e executar os 
- comandos abaixo ou conectar na sessao do banco SISCON e excutar os comandos.
-
-*/
-
 ----------------------------- Tabelas do Banco -----------------------------
 
 
