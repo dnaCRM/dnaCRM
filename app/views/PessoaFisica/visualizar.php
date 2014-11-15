@@ -71,13 +71,17 @@
                         <dt>Profissão</dt>
                         <dd><?php echo $data['dados_pessoais']['profissao']; ?></dd>
                     <?php endif; ?>
-                    <?php if ($data['dados_pessoais']['ie_estuda'] == 's'): ?>
+                    <?php if ($data['dados_pessoais']['ie_estuda'] == 'Sim'): ?>
                         <dt>Estuda</dt>
                         <dd><?php echo $data['dados_pessoais']['ie_estuda']; ?></dd>
                         <dt>Instituicao</dt>
                         <dd><?php echo $data['dados_pessoais']['instituicao']; ?></dd>
-                        <dt>Nível escolar</dt>
+                        <dt>Curso</dt>
                         <dd><?php echo $data['dados_pessoais']['grau']; ?></dd>
+                        <dt>Início</dt>
+                        <dd><?php echo $data['dados_pessoais']['dt_inicio_curso']; ?></dd>
+                        <dt>Término</dt>
+                        <dd><?php echo $data['dados_pessoais']['dt_fim_curso']; ?></dd>
                     <?php endif; ?>
 
                 </dl>

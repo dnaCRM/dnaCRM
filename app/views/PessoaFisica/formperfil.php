@@ -308,7 +308,7 @@ $token = Token::generate();
 
         <div class="form-group">
             <div class="col-sm-12 selectContainer">
-                <label for="org_rg" class="control-label">Grau de Ensino</label>
+                <label for="org_rg" class="control-label">Curso</label>
 
                 <select class="form-control" id="cd_grau_ensino" name="cd_grau_ensino">
                     <option value="">--</option>

@@ -62,6 +62,12 @@ class PessoaFisicaModel extends Model
         //  '%Y Anos, %m Meses e %d Dias'  110 Anos, 2 Meses e 2 Dias
         // '%Y Anos, %m Meses, %d Dias, %H Horas, %i Minutos e %s Segundos'
 
+        $dt_inicio_curso = ($this->dto->getDtInicioCurso() ?
+            (new DateTime($this->dto->getDtInicioCurso()))->format('d/m/Y') : '');
+
+        $dt_fim_curso = ($this->dto->getDtFimCurso() ?
+            (new DateTime($this->dto->getDtFimCurso()))->format('d/m/Y') : '');
+
         return array(
             'cd_pessoa_fisica' => $this->dto->getCdPessoaFisica(),
             'cd_pessoa_juridica' => $this->dto->getCdPessoaJuridica(),
@@ -79,11 +85,11 @@ class PessoaFisicaModel extends Model
             'idade' => $idade,
             'dt_nascimento' => (new DateTime($this->dto->getDtNascimento()))->format('d/m/Y'),
             'ie_sexo' => $sexo,
-            'ie_estuda' => $this->dto->getIeEstuda(),
+            'ie_estuda' => ($this->dto->getIeEstuda() == 's' ? 'Sim' : 'Não'),
             'cd_instituicao' => $this->dto->getCdInstituicao(),
             'instituicao' => $instituicao,
-            'dt_inicio_curso' => $this->dto->getDtInicioCurso(),
-            'dt_fim_curso' => $this->dto->getDtFimCurso(),
+            'dt_inicio_curso' => $dt_inicio_curso,
+            'dt_fim_curso' => $dt_fim_curso,
             'grau' => $grau,
             'cd_catg_grau_ensino' => $this->dto->getCdCatgGrauEnsino(),
             'cd_vl_catg_grau_ensino' => $this->dto->getCdVlCatgGrauEnsino()

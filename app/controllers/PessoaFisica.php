@@ -47,7 +47,7 @@ class PessoaFisica extends Controller
         $profissoes = (new ProfissaoDAO())->fullList();
         $org_rg = (new CategoriaValorDAO())->get('cd_categoria = 1');
         $inst_ensino = (new InstituicaoEnsinoDAO())->fullList();
-        $grau_ensino = (new CategoriaValorDAO())->get('cd_categoria = 8');
+        $grau_ensino = (new CategoriaValorDAO())->get('cd_categoria = 14');
 
         if ($id) {
             /** @var PessoaFisicaDTO */
@@ -233,7 +233,7 @@ class PessoaFisica extends Controller
         ->setCdInstituicao(Input::get('cd_instituicao'))
         ->setDtInicioCurso(Input::get('dt_inicio_curso'))
         ->setDtFimCurso(Input::get('dt_fim_curso'))
-        ->setCdCatgGrauEnsino(8)
+        ->setCdCatgGrauEnsino(14)
         ->setCdVlCatgGrauEnsino(Input::get('cd_grau_ensino'))
         ->setCdUsuarioCriacao(Session::get('user'))
         ->setDtUsuarioCriacao('now()')
