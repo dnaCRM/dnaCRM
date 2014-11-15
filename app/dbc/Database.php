@@ -6,7 +6,7 @@
  * Time: 00:14
  */
 
-abstract class DataBase {
+abstract class Database {
     /** @var PDO */
     private static $pdo;
 

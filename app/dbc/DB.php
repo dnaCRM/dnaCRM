@@ -26,7 +26,7 @@ class DB
      */
     private function __construct()
     {
-        $this->pdo = DataBase::getConnection();
+        $this->pdo = Database::getConnection();
     }
 
     /**
