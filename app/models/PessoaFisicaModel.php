@@ -117,7 +117,8 @@ class PessoaFisicaModel extends Model
             'id' => $this->dto->getCdPessoaFisica(),
             'nome' => $this->dto->getNmPessoaFisica(),
             'foto' => $this->dto->getImPerfil(),
-            'email' => $this->dto->getEmail()
+            'email' => $this->dto->getEmail(),
+            'nascimento' => (new DateTime($this->dto->getDtNascimento()))->format('d/m/Y')
         );
     }
 

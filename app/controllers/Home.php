@@ -10,33 +10,29 @@
  */
 class Home extends Controller
 {
-    private $name;
+    /** @var  HomeModel */
+    private $homeModel;
 
-    /**
-     * O construtor apenas instancia um objeto da camada de Modelo (dados)
-     */
-    public
-    function __construct()
+    public function __construct()
     {
-        $this->setModel(new HomeModel);
+        $this->homeModel = new HomeModel();
     }
 
-    /**
-     *
-     * @param string $param = um parâmetro que o método pode receber
-     * e enviar para a view ou para o model se for o caso
-     */
-    public
-    function start($param = 'Alex') // Só um exemplo de parâmetro recebido pelo método
-    {
+    public function start() {
 
-        $this->name = $param;
+        $pessoaModel = new PessoaFisicaModel();
+        $ultimasPessoasCadastradas = $this->homeModel->getUltimasPessoas($pessoaModel, 'dt_usuario_criacao', 4);
+        $aniversariantesDoMes = $this->homeModel->getAniversariantesDoMes($pessoaModel);
 
-        /** $dados é um array que o método envia para a view usando o método output() */
+        $ultimasOcorrencias =$this->homeModel->getUltimasOcorrencias(new OcorrenciaModel(), 'dt_usuario_atualiza', 5);
+        $ultimasOrdensServico =$this->homeModel->getUltimasOrdensServico(new OrdemServicoModel(), 'dt_usuario_atualiza', 5);
         $dados = [
-            'pagesubtitle' => 'Olá mundo',
-            'pagetitle' => 'Página',
-            'name' => $this->name
+            'pagesubtitle' => Session::get('usuario'),
+            'pagetitle' => 'Home',
+            'utimas_pessoas_cadastradas' => $ultimasPessoasCadastradas,
+            'utimas_ocorrencias' => $ultimasOcorrencias,
+            'utimas_ordens_servico' => $ultimasOrdensServico,
+            'aniversariantes_do_mes' => $aniversariantesDoMes
         ];
 
         /** O parâmetros 'Home' define o Controller e 'start' define o método que será executado*/

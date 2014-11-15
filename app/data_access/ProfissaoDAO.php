@@ -27,4 +27,13 @@ class ProfissaoDAO extends DataAccessObject
         }
         return $obj;
     }
+
+    /**
+     * @return bool| DataTransferObject
+     */
+    public function fullList()
+    {
+        return $this->select(null, null, null, "nm_profissao");
+
+    }
 } 

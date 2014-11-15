@@ -57,4 +57,15 @@ class PessoaJuridicaDAO extends DataAccessObject
     {
         return $this->fotoDefault;
     }
+
+
+    /**
+     * @param $where
+     * @return bool | DataTransferObject
+     */
+    public function get($where)
+    {
+        return $this->select($where, null, null, null);
+    }
+
 } 

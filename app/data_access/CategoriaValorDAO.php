@@ -135,4 +135,15 @@ class CategoriaValorDAO extends DataAccessObject
 
         return false;
     }
+
+
+    /**
+     * @param $where
+     * @return bool | DataTransferObject
+     */
+    public function get($where)
+    {
+        return $this->select($where, null, null, "desc_vl_catg");
+    }
+
 }
