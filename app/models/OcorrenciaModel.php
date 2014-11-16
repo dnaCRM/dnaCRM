@@ -78,6 +78,18 @@ class OcorrenciaModel extends Model
         return $pessoas->getPessoasPorOcorrencia(new PessoaFisicaModel(), $this->dto->getCdOcorrencia());
     }
 
+    public function getPorSetor($id)
+    {
+        $ocorrencias = $this->getDAO()->get("cd_setor = {$id}");
+        $lista = array();
+
+        foreach ($ocorrencias as $ocorrencia) {
+            $lista[] = $this->setDTO($ocorrencia)->getArrayDados();
+        }
+
+        return $lista;
+    }
+
     public function getDAO()
     {
         return $this->dao;

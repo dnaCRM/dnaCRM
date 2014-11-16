@@ -86,6 +86,41 @@ $apartamentos = $data['apartamentos'];
                     </div>
                 </div>
             <?php endif; ?>
+
+            <?php if ($data['ocorrencias']): ?>
+                <div class="panel panel-warning">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-asterisk"></i> Ocorrências neste Setor</h3>
+                        <span class="pull-right clickable"><i class="glyphicon glyphicon-minus"></i></span>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Assunto</th>
+                                <th>Informante</th>
+                                <th>Fim</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+
+                            foreach ($data['ocorrencias'] as $oc) {
+                                echo "
+                    <tr>
+                        <td>{$oc['dt_ocorrencia']}</td>
+                        <td><a href=\"Ocorrencia/visualizar/{$oc['cd_ocorrencia']}\">{$oc['desc_assunto']}</a></td>
+                        <td>{$oc['informante']}</td>
+                        <td>{$oc['dt_fim']}</td>
+                    </tr>";
+                            }
+                            ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 </div>

@@ -24,8 +24,8 @@ class Home extends Controller
         $ultimasPessoasCadastradas = $this->homeModel->getUltimasPessoas($pessoaModel, 'dt_usuario_criacao', 4);
         $aniversariantesDoMes = $this->homeModel->getAniversariantesDoMes($pessoaModel);
 
-        $ultimasOcorrencias =$this->homeModel->getUltimasOcorrencias(new OcorrenciaModel(), 'dt_usuario_atualiza', 5);
-        $ultimasOrdensServico =$this->homeModel->getUltimasOrdensServico(new OrdemServicoModel(), 'dt_usuario_atualiza', 5);
+        $ultimasOcorrencias =$this->homeModel->getUltimasOcorrencias(new OcorrenciaModel(), 'dt_ocorrencia', 5);
+        $ultimasOrdensServico =$this->homeModel->getUltimasOrdensServico(new OrdemServicoModel(), 'dt_inicio', 5);
         $dados = [
             'pagesubtitle' => Session::get('usuario'),
             'pagetitle' => 'Home',

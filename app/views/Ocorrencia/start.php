@@ -31,7 +31,7 @@
                 <thead>
                 <tr>
                     <th>Assunto</th>
-                    <th>Descrição</th>
+                    <th>Resumo da Descrição</th>
                     <th>Data</th>
                     <th>Editar</th>
                 </tr>
@@ -45,7 +45,7 @@
                     $ocorrencia->setDtOcorrencia($dat->format('d/m/Y'));
                     echo '<tr>';
                     echo '<td><a href="Ocorrencia/visualizar/' . $ocorrencia->getCdOcorrencia() . '">' . $ocorrencia->getDescAssunto() . '</a></td>';
-                    echo '<td>' . $ocorrencia->getDescOcorrencia() . '</td>';
+                    echo '<td>' . substr($ocorrencia->getDescOcorrencia(),0,100) . '...</td>';
                     echo '<td>' . $dat->format('d/m/Y') . '</td>';
                     echo "<td><a href=\"Ocorrencia/formOcorrencia/{$ocorrencia->getCdOcorrencia()}\" class=\"btn btn-primary btn-circle btn-md\" role=\"button\">
                     <i class=\"fa fa-edit\"></i></a></td>";

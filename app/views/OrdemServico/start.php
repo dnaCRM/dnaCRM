@@ -31,7 +31,7 @@
                 <thead>
                 <tr>
                     <th>Assunto</th>
-                    <th>Descriçao</th>
+                    <th>Resumo da Descriçao</th>
                     <th>Data</th>
                     <th>Editar</th>
                 </tr>
@@ -45,7 +45,7 @@
                     $perfil->setDtInicio($dt_inicio->format('d/m/Y'));
                     echo '<tr>';
                     echo '<td><a href="OrdemServico/visualizar/' . $perfil->getCdOrdemServico() . '">' . $perfil->getDescAssunto() . '</a></td>';
-                    echo '<td>' . $perfil->getDescOrdemServico() . '</td>';
+                    echo '<td>' . substr($perfil->getDescOrdemServico(),0,100) . '...</td>';
                     echo '<td>' . $perfil->getDtInicio() . '</td>';
                     echo "<td><a href=\"OrdemServico/formOrdemServico/{$perfil->getCdOrdemServico()}\" class=\"btn btn-primary btn-circle btn-md\" role=\"button\">
                     <i class=\"fa fa-edit\"></i></a></td>";
