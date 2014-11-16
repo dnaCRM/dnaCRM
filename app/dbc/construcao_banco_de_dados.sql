@@ -2326,7 +2326,8 @@ VALUES
 ('Operadora'),
 ('Serviço Adicional'),
 ('Tipo Ocorrência'),
-('Tipo Ordem de Serviço');
+('Tipo Ordem de Serviço'),
+('Curso');
 
 
 INSERT INTO TB_CATEGORIA_VALOR(
@@ -2462,7 +2463,30 @@ VALUES
 (12,'Outros',NULL),
 (13,'Zeladoria',NULL),
 (13,'Tecnologia',NULL),
-(13,'Outros',NULL);
+(13,'Outros',NULL),
+(14, 'Medicina',NULL),
+(14, 'Psicologia',NULL),
+(14, 'Veterinária',NULL),
+(14, 'Matemática',NULL),
+(14, 'Letras Inglês',NULL),
+(14, 'Publicidade',NULL),
+(14, 'Direito',NULL),
+(14, 'Sistemas de Informação',NULL),
+(14, 'Ciência da Computação',NULL),
+(14, 'Engenharia Civil',NULL),
+(14, 'Engenharia de Produção',NULL),
+(14, 'Economia',NULL),
+(14, 'Administração',NULL),
+(14, 'Estética e Cosmética',NULL),
+(14, 'Moda',NULL),
+(14, 'Gastronomia',NULL),
+(14, 'Ciências Contábeis',NULL),
+(14, 'Turismo',NULL),
+(14, 'Análise e Desenvolvimento',NULL),
+(14, 'Biomedicina',NULL),
+(14, 'Arquitetura',NULL),
+(14, 'Nutricão',NULL),
+(14, 'Psicologia',NULL);
 
 INSERT INTO TB_PROFISSAO(
 NM_PROFISSAO,
@@ -2902,8 +2926,27 @@ VALUES
 (4,77,4,76,1, now(),1, now()),
 (4,76,4,76,1, now(),1, now()),
 (4,77,4,77,1, now(),1, now()),
-(4,80,4,81,1, now(),1, now());
+(4,80,4,81,1, now(),1, now()),
+(4,81,4,80,1, now(),1, now()),
+(4,80,4,80,1, now(),1, now()),
+(4,81,4,81,1, now(),1, now());
+
  
+ 
+INSERT INTO tb_instituicao_ensino
+(ds_instituicao,
+ cd_catg_instituicao, 
+ cd_vl_catg_instituicao, 
+ cd_usuario_criacao, 
+ dt_usuario_criacao, 
+ cd_usuario_atualiza, 
+ dt_usuario_atualiza)
+VALUES
+('Unifran',8,101,1, now(),1, now()),
+('Uni-FACEF',8,104,1, now(),1, now()),
+('UNSESP',8,103,1, now(),1, now()),
+('FATEC',8,105,1, now(),1, now()),
+('FDF',8,104,1, now(),1, now());
 
 --triggers
 
