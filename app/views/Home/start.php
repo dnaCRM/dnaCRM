@@ -56,7 +56,7 @@
             </div>
         </div>
 
-        <div class="col-sm-6">
+        <div class="col-md-6">
             <div class="panel">
                 <div class="panel-body">
                     <div class="legend"><i class="fa fa-hand-o-right"></i> Últimas Ocorrências</div>

@@ -33,7 +33,7 @@ $apartamentos = $data['apartamentos'];
     </div>
 
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="panel-body">
@@ -58,7 +58,7 @@ $apartamentos = $data['apartamentos'];
             </div>
         </div>
 
-        <div class="col-sm-6">
+        <div class="col-md-6">
             <?php if ($apartamentos): ?>
                 <div class="panel panel-primary">
                     <div class="panel-heading">

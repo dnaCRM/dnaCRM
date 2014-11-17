@@ -239,7 +239,7 @@
     <?php endif; ?>
 </div>
 
-<div class="col-sm-6">
+<div class="col-md-6">
 
     <?php if ($data['relacionados']): ?>
         <div class="panel panel-info">

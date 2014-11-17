@@ -56,7 +56,7 @@ $apartamento = $data['apartamento'];
 
         </div>
 
-        <div class="col-sm-6">
+        <div class="col-md-6">
             <?php if ($data['moradores']): ?>
                 <div class="panel panel-primary">
                     <div class="panel-heading">

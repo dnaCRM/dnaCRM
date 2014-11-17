@@ -33,7 +33,7 @@ $setores = $data['setores'];
 
     <!--Teste de Perfil-->
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="panel-body">
@@ -62,7 +62,7 @@ $setores = $data['setores'];
             </div>
         </div>
 
-        <div class="col-sm-6">
+        <div class="col-md-6">
             <?php if ($setores): ?>
                 <div class="panel panel-primary">
                     <div class="panel-heading">
