@@ -2,6 +2,11 @@
 
 ###Projeto de um sistema CRM para administradoras de condomínios.
 
+### Demo
+* http://dnacrm-tisi.rhcloud.com/
+* usuário: convidado
+* senha: 123456
+
 #### Desenvolvedores
 * Gabriel Borges Chiarelo
 * Raul Ramos Martinez
