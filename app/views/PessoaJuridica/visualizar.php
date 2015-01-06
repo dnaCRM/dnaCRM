@@ -17,11 +17,13 @@
                    class="btn btn-default btn-circle btn-lg">
                     <i class="fa fa-list"></i>
                 </a>
+                    <?php if ($userDados['nivel'] == 1): ?>
                 <a href="PessoaJuridica/confirmDelete/<?php echo $data['dados_cadastrais']['cd_pessoa_juridica']; ?>"
                    data-toggle="tooltip" data-placement="top" title="Deletar!"
                    class="btn btn-warning btn-circle btn-lg">
                     <i class="fa fa-trash-o"></i>
                 </a>
+                    <?php endif; ?>
             </span>
                 <!-- Fim Botões de administração -->
 

@@ -41,7 +41,7 @@ class UsuarioModel extends Model
                 Session::put('user', $login);
                 Session::put('pass', $senha);
                 Session::put('usuario', $usuario->getLogin());
-                Session::flash('msg', 'Logado!', 'success');
+                Session::put('nivel', $usuario->getNivel());
                 return true;
             } catch (PDOException $e) {
                 CodeFail((int)$e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
@@ -70,7 +70,8 @@ class UsuarioModel extends Model
         $usuarioDados = array(
             'cd_usuario' => $this->dto->getCdUsuario(),
             'login' => $this->dto->getLogin(),
-            'nivel' => $nivel,
+            'nivel_desc' => $nivel,
+            'nivel' => $this->dto->getNivel(),
             'senha' => $this->dto->getSenha(),
             'ie_status' => $this->dto->getIeStatus(),
             'cd_usuario_criacao' => $this->dto->getCdUsuarioCriacao(),

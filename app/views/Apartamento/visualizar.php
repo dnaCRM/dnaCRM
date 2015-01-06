@@ -19,11 +19,13 @@ $apartamento = $data['apartamento'];
                    class="btn btn-default btn-circle btn-lg">
                     <i class="fa fa-list"></i>
                 </a>
-                <a href="Apartamento/confirmDelete/<?php echo $apartamento['cd_apartamento']; ?>"
-                   data-toggle="tooltip" data-placement="top" title="Deletar!"
-                   class="btn btn-warning btn-circle btn-lg">
-                    <i class="fa fa-trash-o"></i>
-                </a>
+                    <?php if ($userDados['nivel'] == 1): ?>
+                        <a href="Apartamento/confirmDelete/<?php echo $apartamento['cd_apartamento']; ?>"
+                           data-toggle="tooltip" data-placement="top" title="Deletar!"
+                           class="btn btn-warning btn-circle btn-lg">
+                            <i class="fa fa-trash-o"></i>
+                        </a>
+                    <?php endif; ?>
             </span>
                 <!-- Fim Botões de administração -->
             </h3>

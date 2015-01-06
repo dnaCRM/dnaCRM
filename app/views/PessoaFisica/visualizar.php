@@ -17,16 +17,23 @@
                    class="btn btn-default btn-circle btn-lg">
                     <i class="fa fa-list"></i>
                 </a>
-                <a href="PessoaFisica/confirmDelete/<?php echo $data['dados_pessoais']['cd_pessoa_fisica']; ?>"
-                   data-toggle="tooltip" data-placement="top" title="Deletar!"
-                   class="btn btn-warning btn-circle btn-lg">
-                    <i class="fa fa-trash-o"></i>
-                </a>
-                <a href="Usuario/formuser/<?php echo $data['dados_pessoais']['cd_pessoa_fisica']; ?>"
-                   data-toggle="tooltip" data-placement="top" title="Cadastrar Usuário!"
-                   class="btn btn-info btn-circle btn-lg">
-                    <i class="fa fa-user"></i>
-                </a>
+
+                    <?php if ($userDados['nivel'] == 1): ?>
+                        <!-- Controle de acesso para criação de usuário -->
+                        <a href="PessoaFisica/confirmDelete/<?php echo $data['dados_pessoais']['cd_pessoa_fisica']; ?>"
+                           data-toggle="tooltip" data-placement="top" title="Deletar!"
+                           class="btn btn-warning btn-circle btn-lg">
+                            <i class="fa fa-trash-o"></i>
+                        </a>
+                    <?php endif; ?>
+                    <?php if (($userDados['nivel'] == 1) || ($userDados['cd_usuario'] == $data['dados_pessoais']['cd_pessoa_fisica'])): ?>
+                        <a href="Usuario/formuser/<?php echo $data['dados_pessoais']['cd_pessoa_fisica']; ?>"
+                           data-toggle="tooltip" data-placement="top" title="Cadastrar Usuário!"
+                           class="btn btn-info btn-circle btn-lg">
+                            <i class="fa fa-user"></i>
+                        </a>
+
+                    <?php endif; ?>
             </span>
             <!-- Fim Botões de administração -->
 

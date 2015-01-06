@@ -19,11 +19,13 @@ $ordem_servico = $data['ordem_servico'];
                    class="btn btn-default btn-circle btn-lg">
                     <i class="fa fa-list"></i>
                 </a>
-                <a href="OrdemServico/confirmDelete/<?php echo $ordem_servico['cd_ordem_servico']; ?>"
-                   data-toggle="tooltip" data-placement="top" title="Deletar!"
-                   class="btn btn-warning btn-circle btn-lg">
-                    <i class="fa fa-trash-o"></i>
-                </a>
+                    <?php if ($userDados['nivel'] == 1): ?>
+                        <a href="OrdemServico/confirmDelete/<?php echo $ordem_servico['cd_ordem_servico']; ?>"
+                           data-toggle="tooltip" data-placement="top" title="Deletar!"
+                           class="btn btn-warning btn-circle btn-lg">
+                            <i class="fa fa-trash-o"></i>
+                        </a>
+                    <?php endif; ?>
             </span>
                 <!-- Fim Botões de administração -->
             </h3>
@@ -53,10 +55,10 @@ $ordem_servico = $data['ordem_servico'];
                 </div>
             </div>
             <?php if ($ordem_servico['cd_pf_executor']): ?>
-            <div class="panel profile-card pcard-sm">
-                <div class="panel-body">
-                    <?php
-                    echo "
+                <div class="panel profile-card pcard-sm">
+                    <div class="panel-body">
+                        <?php
+                        echo "
                     <div class=\"profile-card-foto-container\">
                         <img src=\"{$ordem_servico['executor_foto']}\" class=\"img-circle profilefoto foto-md\">
                     </div>
@@ -67,9 +69,9 @@ $ordem_servico = $data['ordem_servico'];
                     </div>
                     </div>
                     ";
-                    ?>
+                        ?>
+                    </div>
                 </div>
-            </div>
             <?php endif; ?>
 
             <div class="panel">

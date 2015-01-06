@@ -273,6 +273,8 @@ if (Session::exists('usuario')) {
 <script src="js/custom.js"></script>
 
 <a id="toTop" href="#"><span id="toTopHover"></span><img width="45" height="45" alt="" src="img/to-top.png"></a>
-
+<?php
+var_dump($userDados);
+?>
 </body>
 </html>

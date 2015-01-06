@@ -65,7 +65,7 @@ a:hover {
     margin-top: 4px;
 }
 .navbar-toggle {
-    border: 0px;
+    border: none;
     padding: 5px 10px 0px 10px;
 }
 @media screen {
@@ -355,7 +355,7 @@ table.dataTable.no-footer {
     width: 100%;
     padding: 0;
     margin-bottom: 23px;
-    border: 0;
+    border: none;
     border-bottom: 1px solid #cdcdcd;
 }
 
@@ -364,6 +364,11 @@ table.dataTable.no-footer {
 .nav-tabs > li > a {
     box-shadow: inset 0 0px 0 #dddddd;
 }
+
+.nav-tabs > li > a:hover {
+    box-shadow: inset 0 -2px 0 #2196f3;
+}
+
 .img-thumb-panel {
     height: 45px;
     width: 45px;

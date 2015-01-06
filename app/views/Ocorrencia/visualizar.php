@@ -10,7 +10,7 @@ $pessoas = $data['pessoas'];
                     <?php echo (isset($data['pagesubtitle'])) ? $data['pagesubtitle'] : ""; ?>
                 </small>
                 <!-- Botões de administração -->
-                <span class="btn-panel pull-right">
+            <span class="btn-panel pull-right">
                 <a href="Ocorrencia/formOcorrencia/<?php echo $ocorrencia['cd_ocorrencia']; ?>"
                    data-toggle="tooltip" data-placement="top" title="Editar Ocorrência!"
                    class="btn btn-primary btn-circle btn-lg">
@@ -20,11 +20,13 @@ $pessoas = $data['pessoas'];
                    class="btn btn-default btn-circle btn-lg">
                     <i class="fa fa-list"></i>
                 </a>
-                <a href="Ocorrencia/confirmDelete/<?php echo $ocorrencia['cd_ocorrencia']; ?>"
-                   data-toggle="tooltip" data-placement="top" title="Deletar!"
-                   class="btn btn-warning btn-circle btn-lg">
-                    <i class="fa fa-trash-o"></i>
-                </a>
+                    <?php if ($userDados['nivel'] == 1): ?>
+                        <a href="Ocorrencia/confirmDelete/<?php echo $ocorrencia['cd_ocorrencia']; ?>"
+                           data-toggle="tooltip" data-placement="top" title="Deletar!"
+                           class="btn btn-warning btn-circle btn-lg">
+                            <i class="fa fa-trash-o"></i>
+                        </a>
+                    <?php endif; ?>
             </span>
                 <!-- Fim Botões de administração -->
             </h3>

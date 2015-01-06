@@ -24,8 +24,9 @@ $usuario = $data['usuario'];
         </div>
     </div>
 
-    <!--Teste de Form-->
     <div class="row">
+
+        <?php if (($userDados['nivel'] == 1) || ($userDados['cd_usuario'] == $perfil->getCdPessoaFisica())): ?>
         <!--Formulário de Cadastro-->
         <form id="cadastro_usuario" class="form-horizontal" method="post" action="">
             <fieldset>
@@ -57,7 +58,8 @@ $usuario = $data['usuario'];
 
                     <input type="hidden" name="id_perfil" value="<?php echo $perfil->getCdPessoaFisica(); ?>">
 
-
+                    <?php if ($userDados['nivel'] == 1): ?>
+                        <!-- Somente administradores podem alterar status e nível de acesso -->
                     <div class="form-group">
                         <div class="col-sm-12">
                             <select class="form-control" name="nivel">
@@ -94,6 +96,7 @@ $usuario = $data['usuario'];
                             </div>
                         </div>
                     </div>
+                    <?php endif; ?>
 
                     <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
 
@@ -128,4 +131,7 @@ $usuario = $data['usuario'];
         </form>
 
     </div>
+    <?php else: ?>
+            <h1>FUDEU!</h1>
+    <?php endif; ?>
 </div>
