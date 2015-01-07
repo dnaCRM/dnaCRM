@@ -60,42 +60,42 @@ $usuario = $data['usuario'];
 
                     <?php if ($userDados['nivel'] == 1): ?>
                         <!-- Somente administradores podem alterar status e nível de acesso -->
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <select class="form-control" name="nivel">
-                                <option value="">Escolha um nível</option>
-                                <?php
-                                $usuario->setNivel($usuario->getNivel() == '' ? Input::get('nivel') : $usuario->getNivel());
-                                foreach ($data['niveis'] as $chave => $descricao) {
-                                    if ($chave == $usuario->getNivel()) {
-                                        echo '<option value="' . $chave . '" selected>' . $descricao . '</option>';
-                                    } else {
-                                        echo '<option value="' . $chave . ' ">' . $descricao . '</option>';
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <select class="form-control" name="nivel">
+                                    <option value="">Escolha um nível</option>
+                                    <?php
+                                    $usuario->setNivel($usuario->getNivel() == '' ? Input::get('nivel') : $usuario->getNivel());
+                                    foreach ($data['niveis'] as $chave => $descricao) {
+                                        if ($chave == $usuario->getNivel()) {
+                                            echo '<option value="' . $chave . '" selected>' . $descricao . '</option>';
+                                        } else {
+                                            echo '<option value="' . $chave . ' ">' . $descricao . '</option>';
+                                        }
                                     }
-                                }
-                                ?>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <div class="btn-group" data-toggle="buttons">
-                                <label
-                                    class="btn btn-default control-label<?php echo (($usuario->getIeStatus()) == 'A' || Input::get('ie_status') == 'A') ? ' active' : ''; ?>">
-                                    <input type="radio" name="ie_status"
-                                           value="A" <?php echo (($usuario->getIeStatus()) == 'A' || Input::get('ie_status') == 'A') ? 'checked' : ''; ?>/>
-                                    Ativo
-                                </label>
-                                <label
-                                    class="btn btn-default control-label<?php echo (($usuario->getIeStatus()) == 'I' || Input::get('ie_status') == 'I') ? ' active' : ''; ?>">
-                                    <input type="radio" name="ie_status"
-                                           value="I" <?php echo (($usuario->getIeStatus()) == 'I' || Input::get('ie_status') == 'I') ? 'checked' : ''; ?>/>
-                                    Inativo
-                                </label>
+                                    ?>
+                                </select>
                             </div>
                         </div>
-                    </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <div class="btn-group" data-toggle="buttons">
+                                    <label
+                                        class="btn btn-default control-label<?php echo (($usuario->getIeStatus()) == 'A' || Input::get('ie_status') == 'A') ? ' active' : ''; ?>">
+                                        <input type="radio" name="ie_status"
+                                               value="A" <?php echo (($usuario->getIeStatus()) == 'A' || Input::get('ie_status') == 'A') ? 'checked' : ''; ?>/>
+                                        Ativo
+                                    </label>
+                                    <label
+                                        class="btn btn-default control-label<?php echo (($usuario->getIeStatus()) == 'I' || Input::get('ie_status') == 'I') ? ' active' : ''; ?>">
+                                        <input type="radio" name="ie_status"
+                                               value="I" <?php echo (($usuario->getIeStatus()) == 'I' || Input::get('ie_status') == 'I') ? 'checked' : ''; ?>/>
+                                        Inativo
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                     <?php endif; ?>
 
                     <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
@@ -132,6 +132,17 @@ $usuario = $data['usuario'];
 
     </div>
     <?php else: ?>
-            <h1>FUDEU!</h1>
-    <?php endif; ?>
+        <div class="row">
+            <div class="col-md-10">
+                <div class="alert  alert-danger">
+                    <h4>Aviso!</h4>
+
+                    <p>Você não tem permissão para alterar informações deste usuário.<br><a href="/" class="alert-link">Voltar
+                            para o início</a>.</p>
+                </div>
+            </div>
+        </div>
+
+    <?php
+    endif; ?>
 </div>

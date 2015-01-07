@@ -34,6 +34,15 @@ class App
         $this->controller = new $this->controller;
 
         if (isset($url[1])) {
+            /**
+             * @todo Melhorar teste de permissão de rota
+             */
+            //Testa se o usuário tem permissão para a rota 'confirmDelete'
+            if ((Session::get('nivel') > 1) && ($url[1] == 'confirmDelete' )) {
+                require_once 'app/controllers/Home.php';
+                return (new Home)->start();
+            }
+
             if (method_exists($this->controller, $url[1])) {
                 $this->method = $url[1];
                 unset($url[1]);
@@ -50,7 +59,7 @@ class App
     /**
      * @return array
      */
-    public function parseUrl()
+    private function parseUrl()
     {
         if (isset($_GET['url'])) {
             return explode('/', filter_var(rtrim($_GET['url'], '/'), FILTER_SANITIZE_URL));

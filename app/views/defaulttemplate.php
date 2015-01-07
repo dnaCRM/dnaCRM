@@ -1,6 +1,6 @@
 <?php
 
-if (Session::exists('usuario')) {
+if (Session::exists('user')) {
     $userDados = (new UsuarioModel())->getUserDados(Session::get('user'));
 }
 
@@ -136,6 +136,17 @@ if (Session::exists('usuario')) {
     </div>
 
     <ul class="sidebar-menu">
+        <?php if ($userDados['nivel'] == 1): ?>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-eye"></i> <span>Admin</span>
+                <i class="fa pull-right fa-angle-left"></i>
+            </a>
+            <ul class="treeview-menu" style="display: none;">
+                <li><a href="Usuario"><i class="fa fa-angle-double-right"></i> Usuários</a></li>
+            </ul>
+        </li>
+        <?php endif; ?>
         <li>
             <a href="/dnacrm">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
@@ -211,18 +222,6 @@ if (Session::exists('usuario')) {
                 <i class="fa fa-envelope"></i> <span>Mailbox</span>
                 <small class="badge pull-right bg-yellow">12</small>
             </a>
-        </li>
-        <li class="treeview">
-            <a href="#">
-                <i class="fa fa-eye"></i> <span>Admin</span>
-                <i class="fa pull-right fa-angle-left"></i>
-            </a>
-            <ul class="treeview-menu" style="display: none;">
-                <li><a href="Usuario"><i class="fa fa-angle-double-right"></i> Usuários</a></li>
-                <!--<li><a href="User/updateUser/<?php /*echo Session::get('user'); */ ?>"><i class="fa fa-angle-double-right"></i> Atualzar dados</a></li>-->
-
-                <li><a href="Usuario/logoff"><i class="fa fa-angle-double-right"></i> Logoff</a></li>
-            </ul>
         </li>
     </ul>
 

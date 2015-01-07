@@ -2485,8 +2485,7 @@ VALUES
 (14, 'Análise e Desenvolvimento',NULL),
 (14, 'Biomedicina',NULL),
 (14, 'Arquitetura',NULL),
-(14, 'Nutricão',NULL),
-(14, 'Psicologia',NULL);
+(14, 'Nutricão',NULL);
 
 INSERT INTO TB_PROFISSAO(
 NM_PROFISSAO,
