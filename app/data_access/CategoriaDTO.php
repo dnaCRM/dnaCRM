@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Gabriel
- * Date: 11/10/14
- * Time: 21:39
- */
 
 class CategoriaDTO extends DataTransferObject {
 
@@ -92,9 +86,9 @@ class CategoriaDTO extends DataTransferObject {
 
 
     /**
-     * @param mixed $cd_categoria
+     * @param $cd_categoria
+     * @return $this
      */
-
     public function setCdCategoria($cd_categoria)
     {
         $this->cd_categoria = $cd_categoria;
@@ -129,15 +123,6 @@ class CategoriaDTO extends DataTransferObject {
     {
         $this->dt_usuario_criacao = $dt_usuario_criacao;
         return $this;
-    }
-
-
-    /**
-     * @param array $reflex
-     */
-    public function setReflex($reflex)
-    {
-        $this->reflex = $reflex;
     }
 
 }

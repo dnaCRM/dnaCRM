@@ -17,7 +17,6 @@ class CategoriaValorDTO extends DataTransferObject
     private $cd_usuario_atualiza;
     private $dt_usuario_atualiza;
 
-
     /** @var  array */
     private $reflex;
 

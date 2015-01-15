@@ -1,12 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Gabriel
- * Date: 11/10/14
- * Time: 21:53
- */
 
-class CategoriaDAO extends DataAccessObject {
+class CategoriaDAO extends DataAccessObject
+{
 
     public function __construct(){
         parent::__construct();

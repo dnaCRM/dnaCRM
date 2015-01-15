@@ -9,7 +9,7 @@ $token = Token::generate();
 ?>
 <div class="container">
 <div class="row">
-    <div class="col-sm-12">
+    <div class="col-md-12">
         <h3 class="page-header"><?php echo $data['pagetitle']; ?>
             <small><?php echo $data['pagesubtitle']; ?></small>
             <?php if ($id_check): ?>

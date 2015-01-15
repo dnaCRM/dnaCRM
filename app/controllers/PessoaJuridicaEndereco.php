@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Raul
- * Date: 28/10/14
- * Time: 00:04
- */
 
 class PessoaJuridicaEndereco extends Controller
 {
