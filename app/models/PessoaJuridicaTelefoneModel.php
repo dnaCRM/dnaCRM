@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Vinicius
- * Date: 29/10/14
- * Time: 18:25
- */
+
 
 class PessoaJuridicaTelefoneModel extends Model
 {

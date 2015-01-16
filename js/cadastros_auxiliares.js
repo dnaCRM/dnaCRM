@@ -241,7 +241,6 @@ formCategorias.bootstrapValidator({
 
             if (data.delete == 's') {
                 $('tr[data-id-categoria='+data.id_categoria+']').remove();
-                console.log(data);
             } else {
                 var celulas = '<td>' + data.id_categoria + '</td><td>' + data.nome_categoria + '</td>' +
                     '<td><a href="#" class="btn btn-primary btn-sm btn-circle update_categ" data-update-categ-id="' + data.id_categoria + '"><i class="fa fa-edit"></i></a> ' +

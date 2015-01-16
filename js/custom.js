@@ -2138,7 +2138,7 @@ $(document).ready(function () {
     });
 });
 
-//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////- Cadastro de Categorias -////////////////////////////
 var formCategorias = $('#form_categorias');
 var tableCategorias = $('#tb_categorias');
 var inputIdCategoria = $('input[name=id_categoria]');
@@ -2202,7 +2202,7 @@ formCategorias.bootstrapValidator({
                     $(linha).prependTo(tableCategorias).hide().fadeIn();
                 }
             }
-            inputIdCategoria.val('');
+
             $('#legend_form_categorias')
                 .html('Cadastrar Categoria')
                 .removeClass('text-primary')
@@ -2212,6 +2212,8 @@ formCategorias.bootstrapValidator({
                 .removeClass('btn-danger')
                 .addClass('btn-primary');
             $('#del_categ').val('n');
+            formCategorias.hide().fadeIn();
+            inputIdCategoria.val('');
             bv.resetForm(true);
         },
         error: function (data) {
@@ -2238,6 +2240,7 @@ tableCategorias.delegate('.update_categ', 'click', function (e) {
 
             $('#cadastrar_categ').val('Cadastrar').removeClass('btn-danger').addClass('btn-primary');
             $('#del_categ').val('n');
+            formCategorias.hide().fadeIn();
         },
         error: function (data) {
             console.log(data);
@@ -2263,6 +2266,7 @@ tableCategorias.delegate('.delete_categ', 'click', function (e) {
 
             $('#cadastrar_categ').val('Confirmar').removeClass('btn-primary').addClass('btn-danger');
             $('#del_categ').val('s');
+            formCategorias.hide().fadeIn();
         },
         error: function (data) {
             console.log(data);
@@ -2278,4 +2282,185 @@ $('#categ_reset').click(function () {
 
     $('#cadastrar_categ').val('Cadastrar').removeClass('btn-danger').addClass('btn-primary');
     $('#del_categ').val('n');
+    formCategorias.hide().fadeIn();
+    inputIdCategoria.val('');
+});
+//////////////////- Fim do Cadastro de Sub-Categorias -////////////////////////////
+
+//////////////////- Cadastro de Categorias -////////////////////////////
+var formSubCategorias = $('#form_sub_categorias');
+var tableSubCategorias = $('#tb_sub_categorias');
+var inputIdSubCategoria = $('input[name=id_sub_categoria]');
+var inputNomeSubCategoria = $('input[name=nome_sub_categoria]');
+
+tableSubCategorias.dataTable({
+    "language": {
+        "url": "js/datatables/js/dataTables.pt-br.lang"
+    },
+    scrollY: 200,
+    paging: false,
+    "searching": true
+});
+
+formSubCategorias.bootstrapValidator({
+    feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+    },
+    fields: {
+        nome_sub_categoria: {
+            validators: {
+                notEmpty: {
+                    message: 'Informe o nome da sub-categoria.'
+                }
+            }
+        },
+        select_cat: {
+            validators: {
+                notEmpty: 'Selecione uma categoria.'
+            }
+        }
+    }
+}).on('success.form.bv', function (e) {
+    e.preventDefault();
+    var $form = $(e.target);
+    var bv = $form.data('bootstrapValidator');
+    var dados = $(this).serialize();
+
+    $.ajax({
+        type: "POST",
+        url: "CategoriaValor/request",
+        data: dados,
+        dataType: 'json',
+        success: function (data) {
+
+            if (data.delete == 's') {
+                $('tr[data-id-sub-categoria='+data.cd_vl_categoria+']').remove();
+            } else {
+
+                var celulas =
+                    '<td>'+data.cd_vl_categoria+'</td>'+
+                    '<td>'+data.desc_vl_categoria+'</td>'+
+                    '<td>'+data.desc_categoria+'</td>'+
+                    '<td>'+
+                        '<a href="#" class="btn btn-primary btn-sm btn-circle update_sub_categ" data-update-sub-categ-id="'+data.cd_vl_categoria+'"><i class="fa fa-edit"></i></a> '+
+                            '<a href="#" class="btn btn-warning btn-sm btn-circle delete_sub_categ" data-del-sub-categ-id="'+data.cd_vl_categoria+'"><i class="fa fa-trash-o"></i></a>'+
+                            '</td>';
+                var linha = '<tr data-id-sub-categoria="'+data.cd_vl_categoria+'">' + celulas + '</tr>';
+                var id = $('#id_sub_categoria').attr('value');
+
+                if (id) {
+                    var registro = $('tr[data-id-sub-categoria='+id+']');
+                    registro.html(celulas);
+                    registro.addClass('active');
+                } else {
+                    $(linha).prependTo(tableSubCategorias).hide().fadeIn();
+                }
+            }
+
+            $('#legend_form_sub_categorias')
+                .html('Cadastrar Sub-Categoria')
+                .removeClass('text-primary')
+                .removeClass('text-danger');
+            $('#cadastrar_sub_categ')
+                .val('Cadastrar')
+                .removeClass('btn-danger')
+                .addClass('btn-primary');
+            $('#del_sub_categ').val('n');
+            inputIdSubCategoria.val('');
+            bv.resetForm(true);
+        },
+        error: function (data) {
+            console.log(data);
+            $(data.responseText).appendTo('#responseAjaxError');
+        }
+    });
+    return false;
+});
+
+tableSubCategorias.delegate('.update_sub_categ', 'click', function (e) {
+    e.preventDefault();
+    var id = $(this).attr('data-update-sub-categ-id');
+
+    $.ajax({
+        type: "GET",
+        url: "CategoriaValor/findById/" + id,
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function (data) {
+            inputIdSubCategoria.val(data.cd_vl_categoria);
+            inputNomeSubCategoria.val(data.desc_vl_categoria);
+            $('#legend_form_sub_categorias')
+                .html('Atualizar Sub-Categoria ' + data.desc_vl_categoria)
+                .addClass('text-primary')
+                .removeClass('text-danger');
+            $('#cadastrar_sub_categ')
+                .val('Cadastrar')
+                .removeClass('btn-danger')
+                .addClass('btn-primary');
+            $('#del_sub_categ')
+                .val('n');
+            $('option[value='+data.cd_categoria+']').prop('selected', 'selected');
+
+            formSubCategorias.hide().fadeIn();
+        },
+        error: function (data) {
+            console.log(data);
+            $(data.responseText).appendTo('#responseAjaxError');
+        }
+    });
+});
+
+tableSubCategorias.delegate('.delete_sub_categ', 'click', function (e) {
+    e.preventDefault();
+    var id = $(this).attr('data-del-sub-categ-id');
+
+    $.ajax({
+        type: "GET",
+        url: "CategoriaValor/findById/" + id,
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function (data) {
+            inputIdSubCategoria.val(data.cd_vl_categoria);
+            inputNomeSubCategoria.val(data.desc_vl_categoria);
+
+            $('#legend_form_sub_categorias')
+                .html('Apagar Sub-Categoria ' + data.desc_vl_categoria)
+                .removeClass('text-primary')
+                .addClass('text-danger');
+            $('#cadastrar_sub_categ')
+                .val('Confirmar')
+                .addClass('btn-danger')
+                .removeClass('btn-primary');
+            $('#del_sub_categ')
+                .val('s');
+            $('option[value='+data.cd_categoria+']').prop('selected', 'selected');
+
+            formSubCategorias.hide().fadeIn();
+        },
+        error: function (data) {
+            console.log(data);
+            $(data.responseText).appendTo('#responseAjaxError');
+        }
+    });
+});
+
+$('#sub_categ_reset').click(function () {
+    formSubCategorias.data('bootstrapValidator').resetForm(true);
+    $('#legend_form_sub_categorias')
+        .html('Sub-Categoria')
+        .removeClass('text-primary')
+        .removeClass('text-danger');
+
+    $('#cadastrar_sub_categ')
+        .val('Cadastrar')
+        .removeClass('btn-danger')
+        .addClass('btn-primary');
+    $('#del_sub_categ')
+        .val('n');
+
+    formSubCategorias.hide().fadeIn();
+    inputIdSubCategoria.val('');
+    bv.resetForm(true);
 });

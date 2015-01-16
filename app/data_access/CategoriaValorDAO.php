@@ -12,7 +12,7 @@ class CategoriaValorDAO extends DataAccessObject
     {
         parent::__construct();
         $this->tabela = 'tb_categoria_valor';
-        $this->primaryKey = 'cd_vl_categoria, cd_categoria'; //Chave composta
+        $this->primaryKey = 'cd_vl_categoria';
         $this->dataTransfer = 'CategoriaValorDTO';
     }
 
@@ -103,12 +103,12 @@ class CategoriaValorDAO extends DataAccessObject
                  AND cd_categoria = :cd_categoria returning *";
 
         $array_info = array(
-            'cd_ocorrencia' => $dto->getCdOcorrencia(),
-            'cd_pessoa_fisica' => $dto->getCdPessoaFisica()
+            'cd_vl_categoria' => $dto->getCdVlCategoria(),
+            'cd_categoria' => $dto->getCdCategoria()
         );
 
         if ($this->query($sql, $this->dataTransfer, $array_info)->success()) {
-            return $this->getResultado();
+            return $this->first();
         }
         return false;
     }

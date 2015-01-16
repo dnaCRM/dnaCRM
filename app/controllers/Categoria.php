@@ -33,7 +33,7 @@ class Categoria extends Controller
         $return = array(
             'id_categoria' => $cat->getCdCategoria(),
             'nome_categoria' => $cat->getDescCategoria(),
-            'delete' => null
+            'delete' => 'n'
         );
 
         echo json_encode($return);

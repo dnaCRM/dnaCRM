@@ -12,6 +12,7 @@ class CategoriaValorDTO extends DataTransferObject
     private $cd_vl_categoria;
     private $cd_categoria;
     private $desc_vl_catg;
+    private $genero;
     private $cd_usuario_criacao;
     private $dt_usuario_criacao;
     private $cd_usuario_atualiza;
@@ -27,6 +28,7 @@ class CategoriaValorDTO extends DataTransferObject
             'cd_vl_categoria' => 'getCdVlCategoria',
             'cd_categoria' => 'getCdCategoria',
             'desc_vl_catg' => 'getDescVlCatg',
+            'genero' => 'getGenero',
             'cd_usuario_criacao' => 'getCdUsuarioCriacao',
             'dt_usuario_criacao' => 'getDtUsuarioCriacao',
             'cd_usuario_atualiza' => 'getCdUsuarioAtualiza',
@@ -50,6 +52,15 @@ class CategoriaValorDTO extends DataTransferObject
     public function getCdCategoria()
     {
         return $this->cd_categoria;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getGenero()
+    {
+        return $this->genero;
     }
 
     /**
@@ -104,7 +115,8 @@ class CategoriaValorDTO extends DataTransferObject
     ################## SETTERS #######################
 
     /**
-     * @param mixed $cd_categoria
+     * @param $cd_categoria
+     * @return $this
      */
     public function setCdCategoria($cd_categoria)
     {
@@ -113,7 +125,8 @@ class CategoriaValorDTO extends DataTransferObject
     }
 
     /**
-     * @param mixed $cd_usuario_atualizacao
+     * @param $cd_usuario_atualiza
+     * @return $this
      */
     public function setCdUsuarioAtualiza($cd_usuario_atualiza)
     {
@@ -122,7 +135,8 @@ class CategoriaValorDTO extends DataTransferObject
     }
 
     /**
-     * @param mixed $cd_usuario_criacao
+     * @param $cd_usuario_criacao
+     * @return $this
      */
     public function setCdUsuarioCriacao($cd_usuario_criacao)
     {
@@ -131,7 +145,8 @@ class CategoriaValorDTO extends DataTransferObject
     }
 
     /**
-     * @param mixed $cd_vl_categoria
+     * @param $cd_vl_categoria
+     * @return $this
      */
     public function setCdVlCategoria($cd_vl_categoria)
     {
@@ -140,15 +155,18 @@ class CategoriaValorDTO extends DataTransferObject
     }
 
     /**
-     * @param mixed $desc_vl_catg
+     * @param $desc_vl_catg
+     * @return $this
      */
     public function setDescVlCatg($desc_vl_catg)
     {
         $this->desc_vl_catg = $desc_vl_catg;
+        return $this;
     }
 
     /**
-     * @param mixed $dt_usuario_atualizacao
+     * @param $dt_usuario_atualiza
+     * @return $this
      */
     public function setDtUsuarioAtualiza($dt_usuario_atualiza)
     {
@@ -157,11 +175,22 @@ class CategoriaValorDTO extends DataTransferObject
     }
 
     /**
-     * @param mixed $dt_usuario_criacao
+     * @param $dt_usuario_criacao
+     * @return $this
      */
     public function setDtUsuarioCriacao($dt_usuario_criacao)
     {
         $this->dt_usuario_criacao = $dt_usuario_criacao;
+        return $this;
+    }
+
+    /**
+     * @param $genero
+     * @return $this
+     */
+    public function setGenero($genero)
+    {
+        $this->genero = $genero;
         return $this;
     }
 
