@@ -187,6 +187,7 @@ if (Session::exists('user')) {
                 <li><a href="Setor/formSetor"><i class="fa fa-angle-double-right"></i> Setores</a></li>
                 <li><a href="Condominio/formcondominio"><i class="fa fa-angle-double-right"></i> Condomínio</a></li>
                 <li><a href="Apartamento/formapartamento"><i class="fa fa-angle-double-right"></i> Apartamento</a></li>
+                <li><a href="CadastrosAuxiliares"><i class="fa fa-angle-double-right"></i> Cadastros Auxiliares</a></li>
             </ul>
         </li>
         <li class="treeview">

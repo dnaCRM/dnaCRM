@@ -44,8 +44,8 @@ class RelacionamentoParametro extends Controller
 
     private function apagar()
     {
-        $id_relac_1 = Input::get('id_relac_1');
-        $id_relac_2 = Input::get('id_relac_1');
+        $id_relac_1 = Input::get('relac_1');
+        $id_relac_2 = Input::get('relac_2');
 
         $dto = $this->model->getBy2Ids($id_relac_1, $id_relac_2);
         $relacao = $this->model->delete($dto);

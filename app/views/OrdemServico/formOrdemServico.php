@@ -223,11 +223,67 @@ $token = Token::generate();
                                name="dt_fim" placeholder="___/___/____">
                     </div>
                 </div>
+                <div class="row form-group">
+                    <div class="legend">Avaliação</div>
+                    <div class="col-md-6">
+                        <label class="control-label">Atendimento</label><br>
+
+                        <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-default
+                            <?php echo (($perfil->getCdVlCatgAvalAtendimento()) == 152 || Input::get('aval_atend') == 152) ? 'active' : ''; ?>"
+                                   id="aval_quali_bom" data-toggle="tooltip" data-placement="top" title="Bom">
+                                <input type="radio" name="aval_atend" value="152"
+                                    <?php echo (($perfil->getCdVlCatgAvalAtendimento()) == 152 || Input::get('aval_atend') == 152) ? 'checked' : ''; ?>>
+                                <i class="fa fa-smile-o fa-2x"></i>
+                            </label>
+                            <label class="btn btn-default
+                            <?php echo (($perfil->getCdVlCatgAvalAtendimento()) == 153 || Input::get('aval_atend') == 153) ? 'active' : ''; ?>"
+                                   id="aval_quali_regular" data-toggle="tooltip" data-placement="top" title="Regular">
+                                <input type="radio" name="aval_atend" value="153"
+                                    <?php echo (($perfil->getCdVlCatgAvalAtendimento()) == 153 || Input::get('aval_atend') == 153) ? 'checked' : ''; ?>>
+                                <i class="fa fa-meh-o fa-2x"></i>
+                            </label>
+                            <label class="btn btn-default <?php echo (($perfil->getCdVlCatgAvalAtendimento()) == 154 || Input::get('aval_atend') == 154) ? 'active' : ''; ?>"
+                                   id="aval_quali_ruim" data-toggle="tooltip" data-placement="top" title="Ruim">
+                                <input type="radio" name="aval_atend" value="154"
+                                    <?php echo (($perfil->getCdVlCatgAvalAtendimento()) == 154 || Input::get('aval_atend') == 154) ? 'checked' : ''; ?>>
+                                <i class="fa fa-frown-o fa-2x"></i>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="control-label">Qualidade</label><br>
+
+                        <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-default
+                            <?php echo (($perfil->getCdVlCatgAvalQualidade()) == 152 || Input::get('aval_quali') == 152) ? 'active' : ''; ?>"
+                                   id="aval_quali_bom" data-toggle="tooltip" data-placement="top" title="Bom">
+                                <input type="radio" name="aval_quali" value="152"
+                                    <?php echo (($perfil->getCdVlCatgAvalQualidade()) == 152 || Input::get('aval_quali') == 152) ? 'checked' : ''; ?>>
+                                <i class="fa fa-smile-o fa-2x"></i>
+                            </label>
+                            <label class="btn btn-default
+                            <?php echo (($perfil->getCdVlCatgAvalQualidade()) == 153 || Input::get('aval_quali') == 153) ? 'active' : ''; ?>"
+                                   id="aval_quali_regular" data-toggle="tooltip" data-placement="top" title="Regular">
+                                <input type="radio" name="aval_quali" value="153"
+                                    <?php echo (($perfil->getCdVlCatgAvalQualidade()) == 153 || Input::get('aval_quali') == 153) ? 'checked' : ''; ?>>
+                                <i class="fa fa-meh-o fa-2x"></i>
+                            </label>
+                            <label class="btn btn-default
+                            <?php echo (($perfil->getCdVlCatgAvalQualidade()) == 154 || Input::get('aval_quali') == 154) ? 'active' : ''; ?>"
+                                   id="aval_quali_ruim" data-toggle="tooltip" data-placement="top" title="Ruim">
+                                <input type="radio" name="aval_quali" value="154"
+                                    <?php echo (($perfil->getCdVlCatgAvalQualidade()) == 154 || Input::get('aval_quali') == 154) ? 'checked' : ''; ?>>
+                                <i class="fa fa-frown-o fa-2x"></i>
+                            </label>
+                        </div>
+                    </div>
+                </div>
 
                 <input type="hidden" name="ordemservico" value="<?php echo $data['id']; ?>">
                 <input type="hidden" name="token" value="<?php echo $token; ?>">
-
-                <div class="">
+                <br>
+                <p>
                     <a href="OrdemServico<?php echo $data['id'] ? '/visualizar/' . $data['id'] : ''; ?>" id="cancel"
                        class="btn btn-default">
                         <span class="fa fa-undo"></span> Cancelar</a>
@@ -236,7 +292,7 @@ $token = Token::generate();
                     <button type="submit" name="cadastrar" class="btn btn-primary">
                         <span class="fa fa-check"></span> Salvar
                     </button>
-                </div>
+                </p>
 
             </div>
         </fieldset>

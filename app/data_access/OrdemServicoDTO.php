@@ -44,7 +44,7 @@ class OrdemServicoDTO extends DataTransferObject
             'cd_catg_aval_atendimento' => 'getCdCatgAvalAtendimento',
             'cd_vl_catg_aval_atendimento' => 'getCdVlCatgAvalAtendimento',
             'cd_catg_aval_qualidade' => 'getCdCatgAvalQualidade',
-            'cd_vl_catg_aval_qualidade' => 'getCdVlCatgQualidade',
+            'cd_vl_catg_aval_qualidade' => 'getCdVlCatgAvalQualidade',
             'desc_conclusao' => 'getDescConclusao',
             'cd_usuario_criacao' => 'getCdUsuarioCriacao',
             'dt_usuario_criacao' => 'getDtUsuarioCriacao',

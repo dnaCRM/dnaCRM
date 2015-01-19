@@ -91,8 +91,8 @@ class RelacionamentoParametroDAO extends DataAccessObject
                  AND cd_catg_vl_relac_2 = :cd_catg_vl_relac_2 returning *";
 
         $array_info = array(
-            'cd_vl_categoria' => $dto->getCdCatgVlRelac1(),
-            'cd_categoria' => $dto->getCdCatgVlRelac2()
+            'cd_catg_vl_relac_1' => $dto->getCdCatgVlRelac1(),
+            'cd_catg_vl_relac_2' => $dto->getCdCatgVlRelac2()
         );
 
         if ($this->query($sql, $this->dataTransfer, $array_info)->success()) {
@@ -120,7 +120,7 @@ class RelacionamentoParametroDAO extends DataAccessObject
         $this->resultado = $this->get($where);
 
         if ($this->resultado) {
-            return $this->resultado[0];
+            return $this->first();
         }
 
         return false;

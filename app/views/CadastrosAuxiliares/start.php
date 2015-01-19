@@ -383,7 +383,7 @@
     <div class="row">
         <div class="col-md-12">
             <form class="form-horizontal" id="form_relacoes">
-                <legend class="legend">Relações</legend>
+                <legend id="legend_form_relacoes">Relações</legend>
                 <fieldset>
                     <div class="row text-center">
                         <div class="col-md-12">
@@ -430,10 +430,10 @@
                 <thead>
                 <tr>
                     <th>#1</th>
-                    <th>Ralacionamento 1</th>
+                    <th>Relacionamento 1</th>
                     <th>Gênero 1</th>
                     <th>#2</th>
-                    <th>Ralacionamento 2</th>
+                    <th>Relacionamento 2</th>
                     <th>Gênero 2</th>
                     <th>Ação</th>
                 </tr>

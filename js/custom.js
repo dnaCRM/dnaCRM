@@ -2997,11 +2997,14 @@ function successButtonRelac() {
         .removeClass('btn-primary')
         .removeClass('btn-danger')
         .removeClass('disabled')
+        .removeClass('btn-warning')
         .addClass('btn-success')
         .hide()
         .fadeIn();
     buttonRelacContent
         .removeClass('glyphicon-chevron-right')
+        .removeClass('glyphicon-trash')
+        .removeClass('glyphicon-remove')
         .addClass('glyphicon-ok');
 }
 
@@ -3012,17 +3015,28 @@ function resetButtonRelac() {
         .removeClass('btn-success')
         .removeClass('btn-danger')
         .removeClass('disabled')
+        .removeClass('btn-warning')
         .hide()
         .fadeIn();
     buttonRelacContent
         .addClass('glyphicon-chevron-right')
+        .removeClass('glyphicon-trash')
+        .removeClass('glyphicon-remove')
         .removeClass('glyphicon-ok');
+
+    $('#legend_form_relacoes')
+        .html('Relações.')
+        .removeClass('text-danger')
+        .removeClass('text-primary')
+        .removeClass('text-success');
+    $('#del_relacao').val('n');
 }
 
 function dangerButtonRelac() {
     buttonRelac
         .removeClass('btn-primary')
         .removeClass('btn-success')
+        .removeClass('btn-warning')
         .addClass('btn-danger')
         .addClass('disabled')
         .hide()
@@ -3030,7 +3044,24 @@ function dangerButtonRelac() {
     buttonRelacContent
         .removeClass('glyphicon-chevron-right')
         .removeClass('glyphicon-ok')
+        .removeClass('glyphicon-trash')
         .addClass('glyphicon-remove');
+}
+
+function deleteButtonRelac() {
+    buttonRelac
+        .removeClass('btn-primary')
+        .removeClass('btn-success')
+        .removeClass('btn-danger')
+        .removeClass('disabled')
+        .addClass('btn-warning')
+        .hide()
+        .fadeIn();
+    buttonRelacContent
+        .removeClass('glyphicon-chevron-right')
+        .removeClass('glyphicon-ok')
+        .removeClass('glyphicon-remove')
+        .addClass('glyphicon-trash');
 }
 
 tableRelacoes.dataTable({
@@ -3044,9 +3075,11 @@ tableRelacoes.dataTable({
 
 selectRelac1.change(function(){
     resetButtonRelac();
+    $('#del_relacao').val('n');
 });
 selectRelac2.change(function(){
     resetButtonRelac();
+    $('#del_relacao').val('n');
 });
 formRelacoes.bootstrapValidator({
     onError: function(e) {
@@ -3092,8 +3125,15 @@ formRelacoes.bootstrapValidator({
         success: function (data) {
             if (data.exist) {
                 successButtonRelac();
+                $('#legend_form_relacoes')
+                    .html('Esta relação já existe.')
+                    .removeClass('text-danger')
+                    .removeClass('text-primary')
+                    .addClass('text-success');
+                $('#del_relacao').val('n');
                 return false;
             }
+
             var id = data.cd_catg_vl_relac_1 + '' + data.cd_catg_vl_relac_2;
 
             if (data.delete == 's') {
@@ -3112,9 +3152,10 @@ formRelacoes.bootstrapValidator({
                         '<i class="fa fa-trash-o"></i></a>' +
                     '</td>';
 
-                var linha = '<tr data-id-relacao="' + id + '">' + celulas + '</tr>';
+                var linha = '<tr class="active" data-id-relacao="' + id + '">' + celulas + '</tr>';
                 $(linha).prependTo(tableRelacoes).hide().fadeIn();
             }
+            resetButtonRelac();
             bv.resetForm(true);
         },
         error: function (data) {
@@ -3122,4 +3163,25 @@ formRelacoes.bootstrapValidator({
             $(data.responseText).appendTo('#responseAjaxError');
         }
     });
+});
+
+tableRelacoes.delegate('.delete_relacao', 'click', function(e) {
+    e.preventDefault();
+    var id_relac_1 = $(this).attr('data-del-relac-1');
+    var id_relac_2 = $(this).attr('data-del-relac-2');
+
+    var full_id =  id_relac_1+''+id_relac_2;
+
+    $('#legend_form_relacoes')
+        .html('Apagar Relacão ' + full_id)
+        .removeClass('text-primary')
+        .addClass('text-danger');
+
+    $('#del_relacao').val('s');
+    $('#relac_1 option[value=' + id_relac_1 + ']').prop('selected', 'selected');
+    $('#relac_2 option[value=' + id_relac_2 + ']').prop('selected', 'selected');
+
+    //$('#' + data.genero + '').addClass('active');
+
+    deleteButtonRelac();
 });
