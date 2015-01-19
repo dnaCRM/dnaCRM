@@ -341,6 +341,7 @@ table.dataTable.no-footer {
 */
 #pessoafisicaform .btn-group .form-control-feedback,
 #cadastro_usuario .btn-group .form-control-feedback,
+#form_relacionamentos .btn-group .form-control-feedback,
 #form_pf_relacionamento .btn-group .form-control-feedback {
     top: 0;
     right: -30px;
@@ -434,8 +435,8 @@ table.dataTable.no-footer {
     width: 40px;
     height: 40px;
     text-align: center;
-    padding: 12px;
-    font-size: 12px;
+    padding: 8px;
+    font-size: 18px;
     line-height: 1.428571429;
     border-radius: 25px;
 }

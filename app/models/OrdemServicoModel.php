@@ -59,6 +59,20 @@ class OrdemServicoModel extends Model
             $tipo = $catg->getDescVlCatg();
         }
 
+        $atendimento = '';
+
+        if ($this->dto->getCdCatgAvalAtendimento()) {
+            $catg = $categoria->getBy2Ids($this->dto->getCdVlCatgAvalAtendimento(), $this->dto->getCdCatgAvalAtendimento());
+            $atendimento = $catg->getDescVlCatg();
+        }
+
+        $qualidade = '';
+
+        if ($this->dto->getCdCatgAvalQualidade()) {
+            $catg = $categoria->getBy2Ids($this->dto->getCdVlCatgAvalQualidade(), $this->dto->getCdCatgAvalQualidade());
+            $qualidade = $catg->getDescVlCatg();
+        }
+
         return array(
             'cd_ordem_servico' => $this->dto->getCdOrdemServico(),
             'cd_ocorrencia' => $this->dto->getCdOcorrencia(),
@@ -74,9 +88,15 @@ class OrdemServicoModel extends Model
             'solicitante_foto' => $solicitante_foto,
             'cd_catg_estagio' => $this->dto->getCdCatgEstagio(),
             'cd_vl_catg_estagio' => $this->dto->getCdVlCatgEstagio(),
-            'estagio' => $estagio,
             'cd_catg_tipo' => $this->dto->getCdCatgTipo(),
             'cd_vl_catg_tipo' => $this->dto->getCdVlCatgTipo(),
+            'cd_catg_aval_atendimento' => $this->dto->getCdCatgAvalAtendimento(),
+            'cd_vl_catg_aval_atendimento' => $this->dto->getCdVlCatgAvalAtendimento(),
+            'desc_aval_atendimento' => $atendimento,
+            'cd_catg_aval_qualidade' => $this->dto->getCdCatgAvalQualidade(),
+            'cd_vl_catg_aval_qualidade' => $this->dto->getCdVlCatgAvalQualidade(),
+            'desc_aval_qualidade' => $qualidade,
+            'estagio' => $estagio,
             'tipo' => $tipo,
             'dt_inicio' => (new DateTime($this->dto->getDtInicio()))->format('d/m/Y'),
             'dt_fim' => ($this->dto->getDtFim() ? (new DateTime($this->dto->getDtFim()))->format('d/m/Y') : 'em aberto')

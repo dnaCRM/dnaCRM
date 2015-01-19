@@ -17,18 +17,19 @@ class CategoriaValorModel extends Model
     {
         $categoria = (new CategoriaDAO())->getById($this->dto->getCdCategoria());
         $desc_categoria = $categoria->getDescCategoria();
+
          return array(
              'cd_categoria' => $this->dto->getCdCategoria(),
              'desc_categoria' => $desc_categoria,
              'cd_vl_categoria' => $this->dto->getCdVlCategoria(),
              'desc_vl_categoria' => $this->dto->getDescVlCatg(),
-             'genero' => $this->dto->getGenero()
+             'genero' => ($this->dto->getGenero() ? $this->dto->getGenero() : '--')
          );
     }
 
     public function getPorCategoria($id)
     {
-        $sub_categorias = $this->dto->get("cd_categoria = {$id}");
+        $sub_categorias = $this->getDAO()->get("cd_categoria = {$id}");
         $lista = array();
         foreach($sub_categorias as $sc){
             $lista[] = $this->setDTO($sc)->getArrayDados();

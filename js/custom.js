@@ -279,6 +279,10 @@ $('#cadastro_usuario').bootstrapValidator({
                     min: 5,
                     max: 14,
                     message: 'Nome de usuário deve ter entre 5 em 14 caracteres.'
+                },
+                regexp: {
+                    regexp: /^[a-zA-Z0-9_]+$/,
+                    message: 'Só pode conter letras, números e sublinhado.'
                 }
             }
         },
@@ -2182,7 +2186,7 @@ formCategorias.bootstrapValidator({
         success: function (data) {
 
             if (data.delete == 's') {
-                $('tr[data-id-categoria='+data.id_categoria+']').remove();
+                $('tr[data-id-categoria=' + data.id_categoria + ']').remove();
                 console.log(data);
             } else {
                 var celulas = '<td>' + data.id_categoria + '</td><td>' + data.nome_categoria + '</td>' +
@@ -2285,13 +2289,13 @@ $('#categ_reset').click(function () {
     formCategorias.hide().fadeIn();
     inputIdCategoria.val('');
 });
-//////////////////- Fim do Cadastro de Sub-Categorias -////////////////////////////
+//////////////////- Fim do Cadastro de Categorias -////////////////////////////
 
-//////////////////- Cadastro de Categorias -////////////////////////////
+//////////////////- Cadastro de Sub-Categorias -////////////////////////////
 var formSubCategorias = $('#form_sub_categorias');
 var tableSubCategorias = $('#tb_sub_categorias');
-var inputIdSubCategoria = $('input[name=id_sub_categoria]');
-var inputNomeSubCategoria = $('input[name=nome_sub_categoria]');
+var inputIdSubCategoria = $('#id_sub_categoria');
+var inputNomeSubCategoria = $('#nome_sub_categoria');
 
 tableSubCategorias.dataTable({
     "language": {
@@ -2336,22 +2340,22 @@ formSubCategorias.bootstrapValidator({
         success: function (data) {
 
             if (data.delete == 's') {
-                $('tr[data-id-sub-categoria='+data.cd_vl_categoria+']').remove();
+                $('tr[data-id-sub-categoria=' + data.cd_vl_categoria + ']').remove();
             } else {
 
                 var celulas =
-                    '<td>'+data.cd_vl_categoria+'</td>'+
-                    '<td>'+data.desc_vl_categoria+'</td>'+
-                    '<td>'+data.desc_categoria+'</td>'+
-                    '<td>'+
-                        '<a href="#" class="btn btn-primary btn-sm btn-circle update_sub_categ" data-update-sub-categ-id="'+data.cd_vl_categoria+'"><i class="fa fa-edit"></i></a> '+
-                            '<a href="#" class="btn btn-warning btn-sm btn-circle delete_sub_categ" data-del-sub-categ-id="'+data.cd_vl_categoria+'"><i class="fa fa-trash-o"></i></a>'+
-                            '</td>';
-                var linha = '<tr data-id-sub-categoria="'+data.cd_vl_categoria+'">' + celulas + '</tr>';
+                    '<td>' + data.cd_vl_categoria + '</td>' +
+                        '<td>' + data.desc_vl_categoria + '</td>' +
+                        '<td>' + data.desc_categoria + '</td>' +
+                        '<td>' +
+                        '<a href="#" class="btn btn-primary btn-sm btn-circle update_sub_categ" data-update-sub-categ-id="' + data.cd_vl_categoria + '"><i class="fa fa-edit"></i></a> ' +
+                        '<a href="#" class="btn btn-warning btn-sm btn-circle delete_sub_categ" data-del-sub-categ-id="' + data.cd_vl_categoria + '"><i class="fa fa-trash-o"></i></a>' +
+                        '</td>';
+                var linha = '<tr data-id-sub-categoria="' + data.cd_vl_categoria + '">' + celulas + '</tr>';
                 var id = $('#id_sub_categoria').attr('value');
 
                 if (id) {
-                    var registro = $('tr[data-id-sub-categoria='+id+']');
+                    var registro = $('tr[data-id-sub-categoria=' + id + ']');
                     registro.html(celulas);
                     registro.addClass('active');
                 } else {
@@ -2401,7 +2405,7 @@ tableSubCategorias.delegate('.update_sub_categ', 'click', function (e) {
                 .addClass('btn-primary');
             $('#del_sub_categ')
                 .val('n');
-            $('option[value='+data.cd_categoria+']').prop('selected', 'selected');
+            $('option[value=' + data.cd_categoria + ']').prop('selected', 'selected');
 
             formSubCategorias.hide().fadeIn();
         },
@@ -2435,7 +2439,7 @@ tableSubCategorias.delegate('.delete_sub_categ', 'click', function (e) {
                 .removeClass('btn-primary');
             $('#del_sub_categ')
                 .val('s');
-            $('option[value='+data.cd_categoria+']').prop('selected', 'selected');
+            $('option[value=' + data.cd_categoria + ']').prop('selected', 'selected');
 
             formSubCategorias.hide().fadeIn();
         },
@@ -2462,5 +2466,660 @@ $('#sub_categ_reset').click(function () {
 
     formSubCategorias.hide().fadeIn();
     inputIdSubCategoria.val('');
-    bv.resetForm(true);
+});
+
+//////////////////- Fim do Cadastro de Sub-Categorias -////////////////////////////
+
+//////////////////- Cadastro de Profissao -////////////////////////////
+var formProfissao = $('#form_profissao');
+var tableProfissao = $('#tb_profissao');
+var inputIdProfissao = $('input[name=id_profissao]');
+var inputNomeProfissao = $('input[name=nome_profissao]');
+
+tableProfissao.dataTable({
+    "language": {
+        "url": "js/datatables/js/dataTables.pt-br.lang"
+    },
+    scrollY: 200,
+    paging: false,
+    "searching": true
+});
+
+formProfissao.bootstrapValidator({
+    feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+    },
+    fields: {
+        nome_profissao: {
+            validators: {
+                notEmpty: {
+                    message: 'Informe o nome da Profissão.'
+                }
+            }
+        }
+    }
+}).on('success.form.bv', function (e) {
+    e.preventDefault();
+    var $form = $(e.target);
+    var bv = $form.data('bootstrapValidator');
+    var dados = $(this).serialize();
+
+    $.ajax({
+        type: "POST",
+        url: "Profissao/request",
+        data: dados,
+        dataType: 'json',
+        success: function (data) {
+
+            if (data.delete == 's') {
+                $('tr[data-id-profissao=' + data.id_profissao + ']').remove();
+                console.log(data);
+            } else {
+                var celulas = '<td>' + data.id_profissao + '</td><td>' + data.nome_profissao + '</td>' +
+                    '<td><a href="#" class="btn btn-primary btn-sm btn-circle update_prof" data-update-prof-id="' + data.id_profissao + '"><i class="fa fa-edit"></i></a> ' +
+                    '<a href="#" class="btn btn-warning btn-sm btn-circle delete_prof" data-del-prof-id="' + data.id_profissao + '"><i class="fa fa-trash-o"></i></a>' +
+                    '</td>';
+
+                var linha = '<tr data-id-profissao="' + data.id_profissao + '">' + celulas + '</tr>';
+
+                var id = $('#id_profissao').attr('value');
+
+                if (id) {
+                    var registro = $('tr[data-id-profissao=' + id + ']');
+                    registro.html(celulas);
+                    registro.addClass('active');
+                } else {
+                    $(linha).prependTo(tableProfissao).hide().fadeIn();
+                }
+            }
+
+            $('#legend_form_profissao')
+                .html('Cadastrar Profissao')
+                .removeClass('text-primary')
+                .removeClass('text-danger');
+            $('#cadastrar_prof')
+                .val('Cadastrar')
+                .removeClass('btn-danger')
+                .addClass('btn-primary');
+            $('#del_prof').val('n');
+            formProfissao.hide().fadeIn();
+            inputIdProfissao.val('');
+            bv.resetForm(true);
+        },
+        error: function (data) {
+            console.log(data);
+            $(data.responseText).appendTo('#responseAjaxError');
+        }
+    });
+    return false;
+});
+
+tableProfissao.delegate('.update_prof', 'click', function (e) {
+    e.preventDefault();
+    var id = $(this).attr('data-update-prof-id');
+
+    $.ajax({
+        type: "GET",
+        url: "Profissao/findById/" + id,
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function (data) {
+            inputIdProfissao.val(data.id_profissao);
+            inputNomeProfissao.val(data.nome_profissao);
+            $('#legend_form_profissao').html('Atualizar Profissao ' + data.nome_profissao).addClass('text-primary').removeClass('text-danger');
+
+            $('#cadastrar_prof').val('Cadastrar').removeClass('btn-danger').addClass('btn-primary');
+            $('#del_prof').val('n');
+            formProfissao.hide().fadeIn();
+        },
+        error: function (data) {
+            console.log(data);
+            $(data.responseText).appendTo('#responseAjaxError');
+        }
+    });
+
+});
+
+tableProfissao.delegate('.delete_prof', 'click', function (e) {
+    e.preventDefault();
+    var id = $(this).attr('data-del-prof-id');
+
+    $.ajax({
+        type: "GET",
+        url: "Profissao/findById/" + id,
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function (data) {
+            inputIdProfissao.val(data.id_profissao);
+            inputNomeProfissao.val(data.nome_profissao);
+            $('#legend_form_profissao').html('Apagar Profissao ' + data.nome_profissao).addClass('text-danger');
+
+            $('#cadastrar_prof').val('Confirmar').removeClass('btn-primary').addClass('btn-danger');
+            $('#del_prof').val('s');
+            formProfissao.hide().fadeIn();
+        },
+        error: function (data) {
+            console.log(data);
+            $(data.responseText).appendTo('#responseAjaxError');
+        }
+    });
+
+});
+
+$('#prof_reset').click(function () {
+    $('#form_profissao').data('bootstrapValidator').resetForm(true);
+    $('#legend_form_profissao').html('Cadastrar Profissao').removeClass('text-primary').removeClass('text-danger');
+
+    $('#cadastrar_prof').val('Cadastrar').removeClass('btn-danger').addClass('btn-primary');
+    $('#del_prof').val('n');
+    formProfissao.hide().fadeIn();
+    inputIdProfissao.val('');
+});
+//////////////////- Fim do Cadastro de Profissao -////////////////////////////
+
+//////////////////- Cadastro de Instituição de Ensino -////////////////////////////
+var formInstEnsino = $('#form_inst_ensino');
+var tableInstEnsino = $('#tb_inst_ensino');
+var inputIdInstEnsino = $('input[name=id_inst_ensino]');
+var inputNomeInstEnsino = $('input[name=nome_inst_ensino]');
+
+tableInstEnsino.dataTable({
+    "language": {
+        "url": "js/datatables/js/dataTables.pt-br.lang"
+    },
+    scrollY: 200,
+    paging: false,
+    "searching": true
+});
+
+formInstEnsino.bootstrapValidator({
+    feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+    },
+    fields: {
+        nome_inst_ensino: {
+            validators: {
+                notEmpty: {
+                    message: 'Informe o nome da Intituição.'
+                }
+            }
+        },
+        select_cat_ens: {
+            validators: {
+                notEmpty: 'Selecione uma categoria.'
+            }
+        }
+    }
+}).on('success.form.bv', function (e) {
+    e.preventDefault();
+    var $form = $(e.target);
+    var bv = $form.data('bootstrapValidator');
+    var dados = $(this).serialize();
+
+    $.ajax({
+        type: "POST",
+        url: "InstituicaoEnsino/request",
+        data: dados,
+        dataType: 'json',
+        success: function (data) {
+
+            if (data.delete == 's') {
+                $('tr[data-id-inst-ensino=' + data.cd_instituicao + ']').remove();
+            } else {
+
+                var celulas =
+                    '<td>' + data.cd_instituicao + '</td>' +
+                        '<td>' + data.ds_instituicao + '</td>' +
+                        '<td>' + data.desc_catg_instuicao + '</td>' +
+                        '<td>' +
+                        '<a href="#" class="btn btn-primary btn-sm btn-circle update_inst_ens" data-update-inst-ens-id="' + data.cd_instituicao + '"><i class="fa fa-edit"></i></a> ' +
+                        '<a href="#" class="btn btn-warning btn-sm btn-circle delete_inst_ens" data-del-inst-ens-id="' + data.cd_instituicao + '"><i class="fa fa-trash-o"></i></a>' +
+                        '</td>';
+                var linha = '<tr data-id-inst-ensino="' + data.cd_instituicao + '">' + celulas + '</tr>';
+                var id = $('#id_inst_ensino').attr('value');
+
+                if (id) {
+                    var registro = $('tr[data-id-inst-ensino=' + id + ']');
+                    registro.html(celulas);
+                    registro.addClass('active');
+                } else {
+                    $(linha).prependTo(tableInstEnsino).hide().fadeIn();
+                }
+            }
+
+            $('#legend_form_inst_ensino')
+                .html('Cadastrar Instituição')
+                .removeClass('text-primary')
+                .removeClass('text-danger');
+            $('#cadastrar_inst_ens')
+                .val('Cadastrar')
+                .removeClass('btn-danger')
+                .addClass('btn-primary');
+            $('#del_inst_ens').val('n');
+            inputIdInstEnsino.val('');
+            bv.resetForm(true);
+        },
+        error: function (data) {
+            console.log(data);
+            $(data.responseText).appendTo('#responseAjaxError');
+        }
+    });
+    return false;
+});
+
+tableInstEnsino.delegate('.update_inst_ens', 'click', function (e) {
+    e.preventDefault();
+    var id = $(this).attr('data-update-inst-ens-id');
+
+    $.ajax({
+        type: "GET",
+        url: "InstituicaoEnsino/findById/" + id,
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function (data) {
+            inputIdInstEnsino.val(data.cd_instituicao);
+            inputNomeInstEnsino.val(data.ds_instituicao);
+            $('#legend_form_inst_ensino')
+                .html('Atualizar Instituição ' + data.ds_instituicao)
+                .addClass('text-primary')
+                .removeClass('text-danger');
+            $('#cadastrar_inst_ens')
+                .val('Cadastrar')
+                .removeClass('btn-danger')
+                .addClass('btn-primary');
+            $('#del_inst_ens')
+                .val('n');
+            $('option[value=' + data.cd_vl_catg_instituicao + ']').prop('selected', 'selected');
+            console.log(data);
+            formInstEnsino.hide().fadeIn();
+        },
+        error: function (data) {
+            console.log(data);
+            $(data.responseText).appendTo('#responseAjaxError');
+        }
+    });
+});
+
+tableInstEnsino.delegate('.delete_inst_ens', 'click', function (e) {
+    e.preventDefault();
+    var id = $(this).attr('data-del-inst-ens-id');
+
+    $.ajax({
+        type: "GET",
+        url: "InstituicaoEnsino/findById/" + id,
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function (data) {
+            inputIdInstEnsino.val(data.cd_instituicao);
+            inputNomeInstEnsino.val(data.ds_instituicao);
+
+            $('#legend_form_inst_ensino')
+                .html('Apagar Instituicao ' + data.ds_instituicao)
+                .removeClass('text-primary')
+                .addClass('text-danger');
+            $('#cadastrar_inst_ens')
+                .val('Confirmar')
+                .addClass('btn-danger')
+                .removeClass('btn-primary');
+            $('#del_inst_ens')
+                .val('s');
+            $('option[value=' + data.cd_vl_catg_instituicao + ']').prop('selected', 'selected');
+
+            formInstEnsino.hide().fadeIn();
+        },
+        error: function (data) {
+            console.log(data);
+            $(data.responseText).appendTo('#responseAjaxError');
+        }
+    });
+});
+
+$('#inst_ens_reset').click(function () {
+    formInstEnsino.data('bootstrapValidator').resetForm(true);
+    $('#legend_form_inst_ensino')
+        .html('Instituição')
+        .removeClass('text-primary')
+        .removeClass('text-danger');
+
+    $('#cadastrar_inst_ens')
+        .val('Cadastrar')
+        .removeClass('btn-danger')
+        .addClass('btn-primary');
+    $('#del_inst_ens')
+        .val('n');
+
+    formInstEnsino.hide().fadeIn();
+    inputIdInstEnsino.val('');
+});
+
+//////////////////- Fim do Cadastro de Instituições de Ensino -////////////////////////////
+
+//////////////////- Cadastro de Relacionamentos -////////////////////////////
+var formRelacionamentos = $('#form_relacionamentos');
+var tableRelacionamentos = $('#tb_relacionamentos');
+var inputIdRelacionamento = $('#id_relacionamento');
+var inputNomeRelacionamento = $('#nome_relacionamento');
+
+tableRelacionamentos.dataTable({
+    "language": {
+        "url": "js/datatables/js/dataTables.pt-br.lang"
+    },
+    scrollY: 200,
+    paging: false,
+    "searching": true
+});
+
+formRelacionamentos.bootstrapValidator({
+    feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+    },
+    fields: {
+        nome_sub_categoria: {
+            validators: {
+                notEmpty: {
+                    message: 'Informe o nome da Relacionamento.'
+                }
+            }
+        },
+        genero: {
+            validators: {
+                notEmpty: {
+                    message: 'Obrigatório'
+                }
+            }
+        }
+    }
+}).on('success.form.bv', function (e) {
+    e.preventDefault();
+    var $form = $(e.target);
+    var bv = $form.data('bootstrapValidator');
+    var dados = $(this).serialize();
+
+    $.ajax({
+        type: "POST",
+        url: "CategoriaValor/request",
+        data: dados,
+        dataType: 'json',
+        success: function (data) {
+
+            if (data.delete == 's') {
+                $('tr[data-id-Relacionamento=' + data.cd_vl_categoria + ']').remove();
+            } else {
+
+                var celulas =
+                    '<td>' + data.cd_vl_categoria + '</td>' +
+                        '<td>' + data.desc_vl_categoria + '</td>' +
+                        '<td>' + data.genero + '</td>' +
+                        '<td>' +
+                        '<a href="#" class="btn btn-primary btn-sm btn-circle update_relacionamento" data-update-relacionamento-id="' + data.cd_vl_categoria + '"><i class="fa fa-edit"></i></a> ' +
+                        '<a href="#" class="btn btn-warning btn-sm btn-circle delete_relacionamento" data-del-relacionamento-id="' + data.cd_vl_categoria + '"><i class="fa fa-trash-o"></i></a>' +
+                        '</td>';
+                var linha = '<tr data-id-Relacionamento="' + data.cd_vl_categoria + '">' + celulas + '</tr>';
+                var id = $('#id_relacionamento').attr('value');
+
+                if (id) {
+                    var registro = $('tr[data-id-relacionamento=' + id + ']');
+                    registro.html(celulas);
+                    registro.addClass('active');
+                } else {
+                    $(linha).prependTo(tableRelacionamentos).hide().fadeIn();
+                }
+            }
+
+            $('#legend_form_relacionamentos')
+                .html('Cadastrar Relacionamento')
+                .removeClass('text-primary')
+                .removeClass('text-danger');
+            $('#cadastrar_relacionamento')
+                .val('Cadastrar')
+                .removeClass('btn-danger')
+                .addClass('btn-primary');
+            $('#del_relac').val('n');
+            inputIdRelacionamento.val('');
+            bv.resetForm(true);
+        },
+        error: function (data) {
+            console.log(data);
+            $(data.responseText).appendTo('#responseAjaxError');
+        }
+    });
+    return false;
+});
+
+tableRelacionamentos.delegate('.update_relacionamento', 'click', function (e) {
+    e.preventDefault();
+    var id = $(this).attr('data-update-relacionamento-id');
+    $('#M, #F').removeClass('active');
+
+    $.ajax({
+        type: "GET",
+        url: "CategoriaValor/findById/" + id,
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function (data) {
+            inputIdRelacionamento.val(data.cd_vl_categoria);
+            inputNomeRelacionamento.val(data.desc_vl_categoria);
+            $('#legend_form_relacionamentos')
+                .html('Atualizar Relacionamento ' + data.desc_vl_categoria)
+                .addClass('text-primary')
+                .removeClass('text-danger');
+            $('#cadastrar_relacionamento')
+                .val('Cadastrar')
+                .removeClass('btn-danger')
+                .addClass('btn-primary');
+            $('#del_relacionamento')
+                .val('n');
+            $('input[value=' + data.genero + ']').prop('checked', 'checked');
+            $('#' + data.genero + '').addClass('active');
+
+            formRelacionamentos.hide().fadeIn();
+        },
+        error: function (data) {
+            console.log(data);
+            $(data.responseText).appendTo('#responseAjaxError');
+        }
+    });
+});
+
+tableRelacionamentos.delegate('.delete_relacionamento', 'click', function (e) {
+    e.preventDefault();
+    var id = $(this).attr('data-del-relacionamento-id');
+
+    $.ajax({
+        type: "GET",
+        url: "CategoriaValor/findById/" + id,
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function (data) {
+            inputIdRelacionamento.val(data.cd_vl_categoria);
+            inputNomeRelacionamento.val(data.desc_vl_categoria);
+
+            $('#legend_form_relacionamentos')
+                .html('Apagar Relacionamento ' + data.desc_vl_categoria)
+                .removeClass('text-primary')
+                .addClass('text-danger');
+            $('#cadastrar_relacionamento')
+                .val('Confirmar')
+                .addClass('btn-danger')
+                .removeClass('btn-primary');
+            $('#del_relacionamento')
+                .val('s');
+            $('input[value=' + data.genero + ']').prop('checked', 'checked');
+            $('#' + data.genero + '').addClass('active');
+
+            formRelacionamentos.hide().fadeIn();
+        },
+        error: function (data) {
+            console.log(data);
+            $(data.responseText).appendTo('#responseAjaxError');
+        }
+    });
+});
+
+$('#relac_reset').click(function () {
+    formRelacionamentos.data('bootstrapValidator').resetForm(true);
+    $('#legend_form_relacionamentos')
+        .html('Relacionamento')
+        .removeClass('text-primary')
+        .removeClass('text-danger');
+
+    $('#cadastrar_relacionamento')
+        .val('Cadastrar')
+        .removeClass('btn-danger')
+        .addClass('btn-primary');
+    $('#del_relacionamento')
+        .val('n');
+    $('#M, #F').removeClass('active');
+    formRelacionamentos.hide().fadeIn();
+    inputIdRelacionamento.val('');
+});
+
+//////////////////- Fim do Cadastro de Relacionamentos -////////////////////////////
+
+/////////////////- Cadastro de Relacionamento Parâmetro -//////////////////////////
+var formRelacoes = $('#form_relacoes');
+var selectRelac1 = $('#relac_1');
+var selectRelac2 = $('#relac_2');
+var tableRelacoes = $('#tb_relacoes');
+var buttonRelac = $('#button_relac');
+var buttonRelacContent = $('#buttonRelacContent');
+
+
+function successButtonRelac() {
+
+    buttonRelac
+        .removeClass('btn-primary')
+        .removeClass('btn-danger')
+        .removeClass('disabled')
+        .addClass('btn-success')
+        .hide()
+        .fadeIn();
+    buttonRelacContent
+        .removeClass('glyphicon-chevron-right')
+        .addClass('glyphicon-ok');
+}
+
+function resetButtonRelac() {
+
+    buttonRelac
+        .addClass('btn-primary')
+        .removeClass('btn-success')
+        .removeClass('btn-danger')
+        .removeClass('disabled')
+        .hide()
+        .fadeIn();
+    buttonRelacContent
+        .addClass('glyphicon-chevron-right')
+        .removeClass('glyphicon-ok');
+}
+
+function dangerButtonRelac() {
+    buttonRelac
+        .removeClass('btn-primary')
+        .removeClass('btn-success')
+        .addClass('btn-danger')
+        .addClass('disabled')
+        .hide()
+        .fadeIn();
+    buttonRelacContent
+        .removeClass('glyphicon-chevron-right')
+        .removeClass('glyphicon-ok')
+        .addClass('glyphicon-remove');
+}
+
+tableRelacoes.dataTable({
+    "language": {
+        "url": "js/datatables/js/dataTables.pt-br.lang"
+    },
+    "pageLength": 5,
+    paging: true,
+    "searching": true
+});
+
+selectRelac1.change(function(){
+    resetButtonRelac();
+});
+selectRelac2.change(function(){
+    resetButtonRelac();
+});
+formRelacoes.bootstrapValidator({
+    onError: function(e) {
+        if (selectRelac1.val() == '' || selectRelac2.val() == '') {
+            dangerButtonRelac();
+        }
+    },
+    onSuccess: function(e) {
+        console.log('Baum demais!!');
+    },
+    feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+    },
+    fields: {
+        relac_1: {
+            validators: {
+                notEmpty: {
+                    message: 'Informe o  Relacionamento 1.'
+                }
+            }
+        },
+        relac_2: {
+            validators: {
+                notEmpty: {
+                    message: 'Informe o  Relacionamento 2.'
+                }
+            }
+        }
+    }
+}).on('success.form.bv', function (e) {
+    e.preventDefault();
+    var $form = $(e.target);
+    var bv = $form.data('bootstrapValidator');
+    var dados = $(this).serialize();
+
+    $.ajax({
+        type: "POST",
+        url: "RelacionamentoParametro/request",
+        data: dados,
+        dataType: 'json',
+        success: function (data) {
+            if (data.exist) {
+                successButtonRelac();
+                return false;
+            }
+            var id = data.cd_catg_vl_relac_1 + '' + data.cd_catg_vl_relac_2;
+
+            if (data.delete == 's') {
+                $('tr[data-id-relacao='+id+']').remove();
+            } else {
+                var celulas = '<td>' + data.cd_catg_vl_relac_1 + '</td>' +
+                    '<td>' + data.desc_vl_relac_1 + '</td>' +
+                    '<td>' + data.genero_relac_1 + '</td>' +
+                    '<td>' + data.cd_catg_vl_relac_2 + '</td>' +
+                    '<td>' + data.desc_vl_relac_2 + '</td>' +
+                    '<td>' + data.genero_relac_2 + '</td>' +
+                    '<td>' +
+                    '<a href="#" class="btn btn-warning btn-sm btn-circle delete_relacao" ' +
+                        'data-del-relac-1="'+data.cd_catg_vl_relac_1+'" ' +
+                        'data-del-relac-2="'+data.cd_catg_vl_relac_2+'">' +
+                        '<i class="fa fa-trash-o"></i></a>' +
+                    '</td>';
+
+                var linha = '<tr data-id-relacao="' + id + '">' + celulas + '</tr>';
+                $(linha).prependTo(tableRelacoes).hide().fadeIn();
+            }
+            bv.resetForm(true);
+        },
+        error: function (data) {
+            console.log(data);
+            $(data.responseText).appendTo('#responseAjaxError');
+        }
+    });
 });

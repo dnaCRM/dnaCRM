@@ -13,6 +13,10 @@ class OrdemServicoDTO extends DataTransferObject
     private $cd_vl_catg_estagio;
     private $cd_catg_tipo;
     private $cd_vl_catg_tipo;
+    private $cd_catg_aval_atendimento;
+    private $cd_vl_catg_aval_atendimento;
+    private $cd_catg_aval_qualidade;
+    private $cd_vl_catg_aval_qualidade;
     private $desc_conclusao;
     private $cd_usuario_criacao;
     private $dt_usuario_criacao;
@@ -37,6 +41,10 @@ class OrdemServicoDTO extends DataTransferObject
             'cd_vl_catg_estagio' => 'getCdVlCatgEstagio',
             'cd_catg_tipo' => 'getCdCatgTipo',
             'cd_vl_catg_tipo' => 'getCdVlCatgTipo',
+            'cd_catg_aval_atendimento' => 'getCdCatgAvalAtendimento',
+            'cd_vl_catg_aval_atendimento' => 'getCdVlCatgAvalAtendimento',
+            'cd_catg_aval_qualidade' => 'getCdCatgAvalQualidade',
+            'cd_vl_catg_aval_qualidade' => 'getCdVlCatgQualidade',
             'desc_conclusao' => 'getDescConclusao',
             'cd_usuario_criacao' => 'getCdUsuarioCriacao',
             'dt_usuario_criacao' => 'getDtUsuarioCriacao',
@@ -53,6 +61,38 @@ class OrdemServicoDTO extends DataTransferObject
     public function getReflex()
     {
         return $this->reflex;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCdCatgAvalAtendimento()
+    {
+        return $this->cd_catg_aval_atendimento;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCdCatgAvalQualidade()
+    {
+        return $this->cd_catg_aval_qualidade;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCdVlCatgAvalAtendimento()
+    {
+        return $this->cd_vl_catg_aval_atendimento;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCdVlCatgAvalQualidade()
+    {
+        return $this->cd_vl_catg_aval_qualidade;
     }
 
     /**
@@ -193,6 +233,46 @@ class OrdemServicoDTO extends DataTransferObject
     }
 
     ################## SETTERS #######################
+
+    /**
+     * @param $cd_catg_aval_atendimento
+     * @return $this
+     */
+    public function setCdCatgAvalAtendimento($cd_catg_aval_atendimento)
+    {
+        $this->cd_catg_aval_atendimento = $cd_catg_aval_atendimento;
+        return $this;
+    }
+
+    /**
+     * @param $cd_catg_aval_qualidade
+     * @return $this
+     */
+    public function setCdCatgAvalQualidade($cd_catg_aval_qualidade)
+    {
+        $this->cd_catg_aval_qualidade = $cd_catg_aval_qualidade;
+        return $this;
+    }
+
+    /**
+     * @param $cd_vl_catg_aval_atendimento
+     * @return $this
+     */
+    public function setCdVlCatgAvalAtendimento($cd_vl_catg_aval_atendimento)
+    {
+        $this->cd_vl_catg_aval_atendimento = $cd_vl_catg_aval_atendimento;
+        return $this;
+    }
+
+    /**
+     * @param $cd_vl_catg_aval_qualidade
+     * @return $this
+     */
+    public function setCdVlCatgAvalQualidade($cd_vl_catg_aval_qualidade)
+    {
+        $this->cd_vl_catg_aval_qualidade = $cd_vl_catg_aval_qualidade;
+        return $this;
+    }
 
     /**
      * @param $cd_catg_estagio
