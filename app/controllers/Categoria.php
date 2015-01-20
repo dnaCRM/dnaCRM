@@ -82,4 +82,25 @@ class Categoria extends Controller
 
         return $dto;
     }
+
+    public function checkExisteNome()
+    {
+        $nome = Input::get('nome_categoria');
+        $id = Input::get('id_categoria');
+
+        $queryString = "desc_categoria = '{$nome}'";
+
+        if ($id) {
+            $queryString .= " AND cd_categoria != {$id}";
+        }
+
+        $return = $this->model->get($queryString);
+
+
+        $return = array(
+            'valid' => (count($return) > 0 ? false : true)
+        );
+
+        echo json_encode($return);
+    }
 } 

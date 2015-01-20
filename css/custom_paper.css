@@ -512,3 +512,7 @@ table.dataTable tbody td, table.table tbody td{
     line-height: 15px;
     font-size: 12px;
 }
+/* Controle exibição das opções de Estudo do formulário de Pessoa Física*/
+.field_estuda{
+    display: none;
+}

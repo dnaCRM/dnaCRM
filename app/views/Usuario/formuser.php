@@ -56,7 +56,7 @@ $usuario = $data['usuario'];
                         </div>
                     </div>
 
-                    <input type="hidden" name="id_perfil" value="<?php echo $perfil->getCdPessoaFisica(); ?>">
+                    <input type="hidden" id="user_perfil_id" name="id_perfil" value="<?php echo $perfil->getCdPessoaFisica(); ?>">
 
                     <?php if ($userDados['nivel'] == 1): ?>
                         <!-- Somente administradores podem alterar status e nível de acesso -->
@@ -112,7 +112,7 @@ $usuario = $data['usuario'];
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="panel panel-default">
+                    <div class="panel panel-warning">
 
                         <div class="panel-heading">
                             <h5 class="panel-title"><i class="fa fa-arrow-right"></i> Algumas instruções</h5>
@@ -146,3 +146,4 @@ $usuario = $data['usuario'];
     <?php
     endif; ?>
 </div>
+<div id="responseAjaxError"></div>

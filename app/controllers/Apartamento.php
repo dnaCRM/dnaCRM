@@ -163,7 +163,7 @@ class Apartamento extends Controller
 
         $dto->setCdApartamento(Input::get('cd_apartamento'))
             ->setCdSetor(Input::get('setor'))
-            ->setDescApartamento(Input::get('desc_apartamento'))
+            ->setDescApartamento(strtoupper(Input::get('desc_apartamento')))
             ->setCdUsuarioCriacao(Session::get('user'))
             ->setDtUsuarioCriacao('now()')
             ->setCdUsuarioAtualiza(Session::get('user'))
@@ -206,5 +206,17 @@ class Apartamento extends Controller
             Redirect::to(SITE_URL . get_called_class());
         }
         return $obj;
+    }
+
+    public function checkExisteNome()
+    {
+        $nome = strtoupper(Input::get('desc_apartamento'));
+        $id = Input::get('cd_apartamento');
+
+        $return = array(
+            'valid' => $this->apartamentoModel->existeNome($nome, $id)
+        );
+
+        echo json_encode($return);
     }
 } 

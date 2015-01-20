@@ -142,9 +142,6 @@ $token = Token::generate();
                                                               rows="5"><?php echo $setor->getObservacao() == '' ? Input::get('observacao') : $setor->getObservacao(); ?></textarea>
                                                 </div>
                                             </div>
-                                        </div>
-
-                                        <div class="col-sm-offset-4">
 
                                             <input type="hidden" name="cd_setor" value="<?php echo $data['id']; ?>">
                                             <input type="hidden" name="token" value="<?php echo $token; ?>">
@@ -163,6 +160,25 @@ $token = Token::generate();
                                                     </button>
                                                 </div>
                                             </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+
+                                            <div class="panel panel-warning">
+
+                                                <div class="panel-heading">
+                                                    <h5 class="panel-title"><i class="fa fa-arrow-right"></i> Algumas instruções</h5>
+                                                </div>
+
+                                                <div class="panel-body">
+                                                    Algumas instruções e recomendações para o correto preenchimento do formulário
+                                                </div>
+
+                                                <div class="panel-footer">
+
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </fieldset>
                                 </form>

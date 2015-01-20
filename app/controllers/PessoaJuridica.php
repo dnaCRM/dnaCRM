@@ -228,4 +228,28 @@ class PessoaJuridica extends Controller
             }
         }
     }
+
+    public function checkExisteCNPJ()
+    {
+        $cnpj = Input::get('cnpj');
+        $id = Input::get('cd_pessoa_juridica');
+
+        $return = array(
+            'valid' => $this->pessoaJuridicaModel->existeCNPJ($cnpj, $id)
+        );
+
+        echo json_encode($return);
+    }
+
+    public function checkExisteEmail()
+    {
+        $email = Input::get('email');
+        $id = Input::get('cd_pessoa_juridica');
+
+        $return = array(
+            'valid' => $this->pessoaJuridicaModel->existeEmail($email, $id)
+        );
+
+        echo json_encode($return);
+    }
 } 

@@ -186,4 +186,43 @@ class PessoaFisicaModel extends Model
         return false;
     }
 
+    public function existeCPF($cpf, $id)
+    {
+        $queryString = "cpf = '{$cpf}'";
+
+        if ($id) {
+            $queryString .= " AND cd_pessoa_fisica != {$id}";
+        }
+
+        $return = $this->dao->get($queryString);
+
+        return (count($return) > 0 ? false : true);
+    }
+
+    public function existeRG($rg, $id)
+    {
+        $queryString = "rg = '{$rg}'";
+
+        if ($id) {
+            $queryString .= " AND cd_pessoa_fisica != {$id}";
+        }
+
+        $return = $this->dao->get($queryString);
+
+        return (count($return) > 0 ? false : true);
+    }
+
+    public function existeEmail($email, $id)
+    {
+        $queryString = "email = '{$email}'";
+
+        if ($id) {
+            $queryString .= " AND cd_pessoa_fisica != {$id}";
+        }
+
+        $return = $this->dao->get($queryString);
+
+        return (count($return) > 0 ? false : true);
+    }
+
 } 

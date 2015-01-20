@@ -52,7 +52,7 @@ $token = Token::generate();
                                             <h1 class="text-success"><span
                                                     class="glyphicon glyphicon-arrow-right"></span> Sucesso!</h1>
 
-                                            <p>Deseja adicionar outro setor?
+                                            <p>Deseja adicionar outro apartamento?
                                             </p>
 
                                             <a href="Apartamento/" class="btn btn-info" role="button">
@@ -112,15 +112,12 @@ $token = Token::generate();
                                                            maxlength="10">
                                                 </div>
                                             </div>
-                                        </div>
-
-                                        <div class="col-sm-12">
-
-                                            <input type="hidden" name="cd_apartamento"
-                                                   value="<?php echo $data['id']; ?>">
-                                            <input type="hidden" name="token" value="<?php echo $token; ?>">
-
                                             <div class="form-group">
+
+                                                <input type="hidden" name="cd_apartamento"
+                                                       value="<?php echo $data['id']; ?>">
+                                                <input type="hidden" name="token" value="<?php echo $token; ?>">
+
                                                 <div class="col-sm-12 clearfix">
                                                     <a href="Apartamento<?php echo $data['id'] ? '/visualizar/' . $data['id'] : ''; ?>"
                                                        id="cancel" class="btn btn-default"><span
@@ -134,6 +131,25 @@ $token = Token::generate();
                                                     </button>
                                                 </div>
                                             </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+
+                                            <div class="panel panel-warning">
+
+                                                <div class="panel-heading">
+                                                    <h5 class="panel-title"><i class="fa fa-arrow-right"></i> Algumas instruções</h5>
+                                                </div>
+
+                                                <div class="panel-body">
+                                                    Algumas instruções e recomendações para o correto preenchimento do formulário
+                                                </div>
+
+                                                <div class="panel-footer">
+
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </fieldset>
                                 </form>

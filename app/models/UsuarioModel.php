@@ -99,4 +99,10 @@ class UsuarioModel extends Model
         $this->dto = $dto;
         return $this;
     }
+
+    public function exists($login, $id)
+    {
+        $return = $this->dao->get("login = '{$login}' AND cd_usuario != {$id}");
+        return (count($return) > 0 ? false : true);
+    }
 }

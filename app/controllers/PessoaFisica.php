@@ -295,4 +295,40 @@ class PessoaFisica extends Controller
             }
         }
     }
+
+    public function checkExisteCPF()
+    {
+        $cpf = Input::get('cpf');
+        $id = Input::get('cd_pessoa_fisica');
+
+        $return = array(
+            'valid' => $this->pessoaFisicaModel->existeCPF($cpf, $id)
+        );
+
+        echo json_encode($return);
+    }
+
+    public function checkExisteRG()
+    {
+        $rg = Input::get('rg');
+        $id = Input::get('cd_pessoa_fisica');
+
+        $return = array(
+            'valid' => $this->pessoaFisicaModel->existeRG($rg, $id)
+        );
+
+        echo json_encode($return);
+    }
+
+    public function checkExisteEmail()
+    {
+        $email = Input::get('email');
+        $id = Input::get('cd_pessoa_fisica');
+
+        $return = array(
+            'valid' => $this->pessoaFisicaModel->existeEmail($email, $id)
+        );
+
+        echo json_encode($return);
+    }
 }

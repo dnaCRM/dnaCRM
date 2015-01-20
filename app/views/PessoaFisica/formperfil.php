@@ -250,14 +250,14 @@ $token = Token::generate();
 
                 <div>
                     <div class="btn-group" data-toggle="buttons">
-                        <label
-                            class="btn btn-default <?php echo (($perfil->getIeEstuda()) == 's' || Input::get('ie_estuda') == 's') ? ' active' : ''; ?>">
+                        <label id="ie_estuda_sim"
+                               class="btn btn-default <?php echo (($perfil->getIeEstuda()) == 's' || Input::get('ie_estuda') == 's') ? ' active' : ''; ?>">
                             <input type="radio" name="ie_estuda"
                                    value="s" <?php echo (($perfil->getIeEstuda()) == 's' || Input::get('ie_estuda') == 's') ? 'checked' : ''; ?>/>
                             S
                         </label>
-                        <label
-                            class="btn btn-default <?php echo (($perfil->getIeEstuda()) == 'n' || Input::get('ie_estuda') == 'n') ? ' active' : ''; ?>">
+                        <label id="ie_estuda_nao"
+                               class="btn btn-default <?php echo (($perfil->getIeEstuda()) == 'n' || Input::get('ie_estuda') == 'n') ? ' active' : ''; ?>">
                             <input type="radio" name="ie_estuda"
                                    value="n" <?php echo (($perfil->getIeEstuda()) == 'n' || Input::get('ie_estuda') == 'n') ? 'checked' : ''; ?>/>
                             N
@@ -265,7 +265,8 @@ $token = Token::generate();
                     </div>
                 </div>
             </div>
-            <div class="col-sm-4" id="dt_inicio_curso_picker">
+
+            <div class="col-sm-4 field_estuda">
                 <label for="dt_inicio_curso" class="control-label">Início do Curso</label>
 
 
@@ -274,7 +275,7 @@ $token = Token::generate();
                        id="dt_inicio_curso"
                        name="dt_inicio_curso" placeholder="___/___/____">
             </div>
-            <div class="col-sm-4" id="dt_fim_curso_picker">
+            <div class="col-sm-4 field_estuda">
                 <label for="dt_fim_curso" class="control-label">Fim do Curso</label>
 
 
@@ -285,7 +286,7 @@ $token = Token::generate();
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group field_estuda">
             <div class="col-sm-12 selectContainer">
                 <label for="cd_pessoa_juridica" class="control-label">Instituição de Ensino</label>
 
@@ -306,7 +307,7 @@ $token = Token::generate();
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group field_estuda">
             <div class="col-sm-12 selectContainer">
                 <label for="org_rg" class="control-label">Curso</label>
 
@@ -326,7 +327,7 @@ $token = Token::generate();
             </div>
         </div>
 
-        <input type="hidden" name="cd_pessoa_fisica" value="<?php echo $data['id']; ?>">
+        <input type="hidden" name="cd_pessoa_fisica" value="<?php echo $data['id'] ; ?>">
         <input type="hidden" name="token" value="<?php echo $token; ?>">
 
         <div class="form-group">

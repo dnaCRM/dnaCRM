@@ -82,4 +82,26 @@ class Profissao extends Controller
 
         return $dto;
     }
+
+
+    public function checkExisteNome()
+    {
+        $nome = Input::get('nome_profissao');
+        $id = Input::get('id_profissao');
+
+        $queryString = "nm_profissao = '{$nome}'";
+
+        if ($id) {
+            $queryString .= " AND cd_profissao != {$id}";
+        }
+
+        $return = $this->model->get($queryString);
+
+
+        $return = array(
+            'valid' => (count($return) > 0 ? false : true)
+        );
+
+        echo json_encode($return);
+    }
 } 

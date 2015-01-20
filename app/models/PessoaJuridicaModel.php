@@ -65,4 +65,30 @@ class PessoaJuridicaModel extends Model
         $this->dto = $dto;
         return $this;
     }
+
+    public function existeCNPJ($cnpj, $id)
+    {
+        $queryString = "cnpj = '{$cnpj}'";
+
+        if ($id) {
+            $queryString .= " AND cd_pessoa_juridica != {$id}";
+        }
+
+        $return = $this->dao->get($queryString);
+
+        return (count($return) > 0 ? false : true);
+    }
+
+    public function existeEmail($email, $id)
+    {
+        $queryString = "email = '{$email}'";
+
+        if ($id) {
+            $queryString .= " AND cd_pessoa_juridica != {$id}";
+        }
+
+        $return = $this->dao->get($queryString);
+
+        return (count($return) > 0 ? false : true);
+    }
 } 

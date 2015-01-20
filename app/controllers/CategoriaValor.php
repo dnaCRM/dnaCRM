@@ -77,4 +77,16 @@ class CategoriaValor extends Controller
 
         return $dto;
     }
+
+    public function checkExisteNome()
+    {
+        $nome = Input::get('nome_sub_categoria');
+        $id = Input::get('id_sub_categoria');
+
+        $return = array(
+            'valid' => $this->categoriaValorModel->existeNome($nome, $id)
+        );
+
+        echo json_encode($return);
+    }
 } 

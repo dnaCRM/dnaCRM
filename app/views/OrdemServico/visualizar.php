@@ -126,5 +126,3 @@ $ordem_servico = $data['ordem_servico'];
             </div>
         </div>
     </div>
-
-<?php var_dump($ordem_servico);

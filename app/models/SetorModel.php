@@ -53,4 +53,17 @@ class SetorModel extends Model
         $this->dto = $dto;
         return $this;
     }
+
+    public function existeNome($nome, $id)
+    {
+        $queryString = "nm_setor = '{$nome}'";
+
+        if ($id) {
+            $queryString .= " AND cd_setor != {$id}";
+        }
+
+        $return = $this->dao->get($queryString);
+
+        return (count($return) > 0 ? false : true);
+    }
 }

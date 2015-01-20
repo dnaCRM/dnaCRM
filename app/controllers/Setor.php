@@ -226,4 +226,16 @@ class Setor extends Controller
             }
         }
     }
+
+    public function checkExisteNome()
+    {
+        $nome = Input::get('nm_setor');
+        $id = Input::get('cd_setor');
+
+        $return = array(
+            'valid' => $this->setorModel->existeNome($nome, $id)
+        );
+
+        echo json_encode($return);
+    }
 }

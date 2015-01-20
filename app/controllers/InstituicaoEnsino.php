@@ -76,4 +76,16 @@ class InstituicaoEnsino extends Controller
 
         return $dto;
     }
+
+    public function checkExisteNome()
+    {
+        $nome = Input::get('nome_inst_ensino');
+        $id = Input::get('id_inst_ensino');
+
+        $return = array(
+            'valid' => $this->instituicaoEnsinoModel->existeNome($nome, $id)
+        );
+
+        echo json_encode($return);
+    }
 } 

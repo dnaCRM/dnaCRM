@@ -61,4 +61,17 @@ class CondominioModel extends Model
         $this->dto = $dto;
         return $this;
     }
+
+    public function existeNome($nome, $id)
+    {
+        $queryString = "nm_condominio = '{$nome}'";
+
+        if ($id) {
+            $queryString .= " AND cd_condominio != {$id}";
+        }
+
+        $return = $this->dao->get($queryString);
+
+        return (count($return) > 0 ? false : true);
+    }
 }

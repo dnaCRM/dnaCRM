@@ -166,13 +166,31 @@ $(document).ready(function () {
     $('#numero').mask("99999999");
 });
 
+/////////////////////////// Manipula formulário de Pessoa Física ///////////////////////
+
+var pfButtonIeEstuda = $('#ie_estuda_sim');
+var pfButtonNaoIeEstuda = $('#ie_estuda_nao');
+
+pfButtonIeEstuda.on('click', function () {
+    $('.field_estuda').fadeIn();
+});
+
+pfButtonNaoIeEstuda.on('click', function () {
+    $('.field_estuda').fadeOut();
+});
+
+$(function () {
+    if (pfButtonIeEstuda.hasClass('active')) {
+        $('.field_estuda').fadeIn();
+    }
+});
 
 $('#pessoafisicaform').bootstrapValidator({
     excluded: ':disabled',
     feedbackIcons: {
         valid: 'glyphicon glyphicon-ok',
         invalid: 'glyphicon glyphicon-remove',
-        validating: 'glyphicon glyphicon-refresh'
+        validating: 'glyphicon glyphicon-refresh fa-spin'
     },
     fields: {
         ie_sexo: {
@@ -206,6 +224,16 @@ $('#pessoafisicaform').bootstrapValidator({
                     min: 5,
                     max: 60,
                     message: 'Deve ter entre 5 e 50 caracteres.'
+                },
+                remote: {
+                    message: 'Este e-mail já existe em outro cadastro.',
+                    data: function(validator) {
+                        return {
+                            cd_pessoa_fisica: validator.getFieldElements('cd_pessoa_fisica').val()
+                        };
+                    },
+                    type: 'POST',
+                    url: "PessoaFisica/checkExisteEmail/"
                 }
             }
         },
@@ -219,6 +247,16 @@ $('#pessoafisicaform').bootstrapValidator({
                     min: 14,
                     max: 14,
                     message: 'Quantidade de caracteres invalida.'
+                },
+                remote: {
+                    message: 'Este CPF já existe em outro cadastro.',
+                    data: function(validator) {
+                        return {
+                            cd_pessoa_fisica: validator.getFieldElements('cd_pessoa_fisica').val()
+                        };
+                    },
+                    type: 'POST',
+                    url: "PessoaFisica/checkExisteCPF/"
                 }
             }
         },
@@ -231,6 +269,20 @@ $('#pessoafisicaform').bootstrapValidator({
                 stringLength: {
                     min: 5,
                     message: 'Quantidade de caracteres invalida.'
+                },
+                regexp: {
+                    regexp: /^[a-zA-Z0-9]+$/,
+                    message: 'Só pode conter letras e números.'
+                },
+                remote: {
+                    message: 'Este RG ja existe em outro cadastro.',
+                    data: function(validator) {
+                        return {
+                            cd_pessoa_fisica: validator.getFieldElements('cd_pessoa_fisica').val()
+                        };
+                    },
+                    type: 'POST',
+                    url: "PessoaFisica/checkExisteRG/"
                 }
             }
         },
@@ -259,15 +311,24 @@ $('#pessoafisicaform').bootstrapValidator({
 });
 
 $('#cadastro_usuario').bootstrapValidator({
-    message: 'This value is not valid',
     feedbackIcons: {
         valid: 'glyphicon glyphicon-ok',
         invalid: 'glyphicon glyphicon-remove',
-        validating: 'glyphicon glyphicon-refresh'
+        validating: 'glyphicon glyphicon-refresh fa-spin'
     },
     fields: {
         usuario: {
             validators: {
+                remote: {
+                    message: 'Este login não está disponível.',
+                    data: function(validator) {
+                        return {
+                            id_perfil: validator.getFieldElements('id_perfil').val()
+                        };
+                    },
+                    type: 'POST',
+                    url: "Usuario/checkExists/"
+                },
                 notEmpty: {
                     message: 'Nome de usuário é obrigatório.'
                 },
@@ -281,8 +342,8 @@ $('#cadastro_usuario').bootstrapValidator({
                     message: 'Nome de usuário deve ter entre 5 em 14 caracteres.'
                 },
                 regexp: {
-                    regexp: /^[a-zA-Z0-9_]+$/,
-                    message: 'Só pode conter letras, números e sublinhado.'
+                    regexp: /^[a-zA-Z0-9]+$/,
+                    message: 'Só pode conter letras e números.'
                 }
             }
         },
@@ -334,7 +395,7 @@ $('#pessoajuridicaform').bootstrapValidator({
     feedbackIcons: {
         valid: 'glyphicon glyphicon-ok',
         invalid: 'glyphicon glyphicon-remove',
-        validating: 'glyphicon glyphicon-refresh'
+        validating: 'glyphicon glyphicon-refresh fa-spin'
     },
     fields: {
         nm_fantasia: {
@@ -371,6 +432,16 @@ $('#pessoajuridicaform').bootstrapValidator({
                     min: 5,
                     max: 50,
                     message: 'Deve ter entre 5 e 50 caracteres.'
+                },
+                remote: {
+                    message: 'Este e-mail já existe em outro cadastro.',
+                    data: function(validator) {
+                        return {
+                            cd_pessoa_juridica: validator.getFieldElements('cd_pessoa_juridica').val()
+                        };
+                    },
+                    type: 'POST',
+                    url: "PessoaJuridica/checkExisteEmail/"
                 }
             }
         },
@@ -383,6 +454,16 @@ $('#pessoajuridicaform').bootstrapValidator({
                     min: 18,
                     max: 18,
                     message: 'Quantidade de caracteres invalida.'
+                },
+                remote: {
+                    message: 'Este CNPJ já existe em outro cadastro.',
+                    data: function(validator) {
+                        return {
+                            cd_pessoa_juridica: validator.getFieldElements('cd_pessoa_juridica').val()
+                        };
+                    },
+                    type: 'POST',
+                    url: "PessoaJuridica/checkExisteCNPJ/"
                 }
             }
         },
@@ -404,7 +485,7 @@ $('#login').bootstrapValidator({
     feedbackIcons: {
         valid: 'glyphicon glyphicon-ok',
         invalid: 'glyphicon glyphicon-remove',
-        validating: 'glyphicon glyphicon-refresh'
+        validating: 'glyphicon glyphicon-refresh fa-spin'
     },
     fields: {
         usuario: {
@@ -437,7 +518,7 @@ $('#ordemservicoform').bootstrapValidator({
     feedbackIcons: {
         valid: 'glyphicon glyphicon-ok',
         invalid: 'glyphicon glyphicon-remove',
-        validating: 'glyphicon glyphicon-refresh'
+        validating: 'glyphicon glyphicon-refresh fa-spin'
     },
     fields: {
         solicitante: {
@@ -507,7 +588,7 @@ $('#ocorrenciaform').bootstrapValidator({
     feedbackIcons: {
         valid: 'glyphicon glyphicon-ok',
         invalid: 'glyphicon glyphicon-remove',
-        validating: 'glyphicon glyphicon-refresh'
+        validating: 'glyphicon glyphicon-refresh fa-spin'
     },
     fields: {
         informante: {
@@ -572,7 +653,7 @@ $('#setorform').bootstrapValidator({
     feedbackIcons: {
         valid: 'glyphicon glyphicon-ok',
         invalid: 'glyphicon glyphicon-remove',
-        validating: 'glyphicon glyphicon-refresh'
+        validating: 'glyphicon glyphicon-refresh fa-spin'
     },
     fields: {
         cd_condominio: {
@@ -590,6 +671,16 @@ $('#setorform').bootstrapValidator({
                 stringLength: {
                     min: 5,
                     message: 'No mínimo 5 caracteres.'
+                },
+                remote: {
+                    message: 'Existe outro setor com esse nome.',
+                    data: function(validator) {
+                        return {
+                            cd_setor: validator.getFieldElements('cd_setor').val()
+                        };
+                    },
+                    type: 'POST',
+                    url: "Setor/checkExisteNome/"
                 }
             }
         },
@@ -611,7 +702,7 @@ $('#apartamentoform').bootstrapValidator({
     feedbackIcons: {
         valid: 'glyphicon glyphicon-ok',
         invalid: 'glyphicon glyphicon-remove',
-        validating: 'glyphicon glyphicon-refresh'
+        validating: 'glyphicon glyphicon-refresh fa-spin'
     },
     fields: {
         cd_condominio: {
@@ -632,6 +723,20 @@ $('#apartamentoform').bootstrapValidator({
             validators: {
                 notEmpty: {
                     message: 'Informar descrição é obrigatório.'
+                },
+                regexp: {
+                    regexp: /^[A-Z0-9\-]+$/,
+                    message: 'Só pode conter letras maiúsculas, números e "-".'
+                },
+                remote: {
+                    message: 'Existe outro apartamento com esse nome.',
+                    data: function(validator) {
+                        return {
+                            cd_apartamento: validator.getFieldElements('cd_apartamento').val()
+                        };
+                    },
+                    type: 'POST',
+                    url: "Apartamento/checkExisteNome/"
                 }
             }
         }
@@ -642,7 +747,7 @@ $('#condominioform').bootstrapValidator({
     feedbackIcons: {
         valid: 'glyphicon glyphicon-ok',
         invalid: 'glyphicon glyphicon-remove',
-        validating: 'glyphicon glyphicon-refresh'
+        validating: 'glyphicon glyphicon-refresh fa-spin'
     },
     fields: {
         nm_condominio: {
@@ -653,6 +758,16 @@ $('#condominioform').bootstrapValidator({
                 stringLength: {
                     min: 5,
                     message: 'No mínimo 5 caracteres.'
+                },
+                remote: {
+                    message: 'Existe outro condomínio com esse nome.',
+                    data: function(validator) {
+                        return {
+                            cd_condominio: validator.getFieldElements('cd_condominio').val()
+                        };
+                    },
+                    type: 'POST',
+                    url: "Condominio/checkExisteNome/"
                 }
             }
         },
@@ -737,7 +852,7 @@ $('#form_pf_telefones').bootstrapValidator({
     feedbackIcons: {
         valid: 'glyphicon glyphicon-ok',
         invalid: 'glyphicon glyphicon-remove',
-        validating: 'glyphicon glyphicon-refresh'
+        validating: 'glyphicon glyphicon-refresh fa-spin'
     },
     fields: {
         fone: {
@@ -748,13 +863,6 @@ $('#form_pf_telefones').bootstrapValidator({
                 stringLength: {
                     min: 14,
                     message: 'Informe o número com o código de área'
-                }
-            }
-        },
-        observacao: {
-            validators: {
-                notEmpty: {
-                    message: 'Observação obrigatória.'
                 }
             }
         },
@@ -803,7 +911,7 @@ $('#form_atualiza_pf_tel').bootstrapValidator({
     feedbackIcons: {
         valid: 'glyphicon glyphicon-ok',
         invalid: 'glyphicon glyphicon-remove',
-        validating: 'glyphicon glyphicon-refresh'
+        validating: 'glyphicon glyphicon-refresh fa-spin'
     },
     fields: {
         fone: {
@@ -814,13 +922,6 @@ $('#form_atualiza_pf_tel').bootstrapValidator({
                 stringLength: {
                     min: 14,
                     message: 'Informe o número com o código de área'
-                }
-            }
-        },
-        observacao: {
-            validators: {
-                notEmpty: {
-                    message: 'Observação obrigatória.'
                 }
             }
         },
@@ -955,7 +1056,7 @@ $('#form_pf_enderecos').bootstrapValidator({
     feedbackIcons: {
         valid: 'glyphicon glyphicon-ok',
         invalid: 'glyphicon glyphicon-remove',
-        validating: 'glyphicon glyphicon-refresh'
+        validating: 'glyphicon glyphicon-refresh fa-spin'
     },
     fields: {
         rua: {
@@ -1190,7 +1291,7 @@ $('#form_end_morador').bootstrapValidator({
     feedbackIcons: {
         valid: 'glyphicon glyphicon-ok',
         invalid: 'glyphicon glyphicon-remove',
-        validating: 'glyphicon glyphicon-refresh'
+        validating: 'glyphicon glyphicon-refresh fa-spin'
     },
     fields: {
         m_end_condominio: {
@@ -1375,7 +1476,7 @@ $('#form_pj_telefones').bootstrapValidator({
     feedbackIcons: {
         valid: 'glyphicon glyphicon-ok',
         invalid: 'glyphicon glyphicon-remove',
-        validating: 'glyphicon glyphicon-refresh'
+        validating: 'glyphicon glyphicon-refresh fa-spin'
     },
     fields: {
         fone: {
@@ -1386,13 +1487,6 @@ $('#form_pj_telefones').bootstrapValidator({
                 stringLength: {
                     min: 14,
                     message: 'Informe o número com o código de área'
-                }
-            }
-        },
-        observacao: {
-            validators: {
-                notEmpty: {
-                    message: 'Observação obrigatória.'
                 }
             }
         },
@@ -1444,7 +1538,7 @@ $('#form_atualiza_pj_tel').bootstrapValidator({
     feedbackIcons: {
         valid: 'glyphicon glyphicon-ok',
         invalid: 'glyphicon glyphicon-remove',
-        validating: 'glyphicon glyphicon-refresh'
+        validating: 'glyphicon glyphicon-refresh fa-spin'
     },
     fields: {
         fone: {
@@ -1455,13 +1549,6 @@ $('#form_atualiza_pj_tel').bootstrapValidator({
                 stringLength: {
                     min: 14,
                     message: 'Informe o número com o código de área'
-                }
-            }
-        },
-        observacao: {
-            validators: {
-                notEmpty: {
-                    message: 'Observação obrigatória.'
                 }
             }
         },
@@ -1596,7 +1683,7 @@ $('#form_pj_enderecos').bootstrapValidator({
     feedbackIcons: {
         valid: 'glyphicon glyphicon-ok',
         invalid: 'glyphicon glyphicon-remove',
-        validating: 'glyphicon glyphicon-refresh'
+        validating: 'glyphicon glyphicon-refresh fa-spin'
     },
     fields: {
         rua: {
@@ -2021,7 +2108,7 @@ $(document).ready(function () {
         feedbackIcons: {
             valid: 'glyphicon glyphicon-ok',
             invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
+            validating: 'glyphicon glyphicon-refresh fa-spin'
         },
         fields: {
             catg_relac: {
@@ -2142,6 +2229,7 @@ $(document).ready(function () {
     });
 });
 
+/* BLOCO DE CÓDIGO PARA CADASTROS AUXILIARES */
 //////////////////- Cadastro de Categorias -////////////////////////////
 var formCategorias = $('#form_categorias');
 var tableCategorias = $('#tb_categorias');
@@ -2161,13 +2249,23 @@ formCategorias.bootstrapValidator({
     feedbackIcons: {
         valid: 'glyphicon glyphicon-ok',
         invalid: 'glyphicon glyphicon-remove',
-        validating: 'glyphicon glyphicon-refresh'
+        validating: 'glyphicon glyphicon-refresh fa-spin'
     },
     fields: {
         nome_categoria: {
             validators: {
                 notEmpty: {
                     message: 'Informe o nome da categoria.'
+                },
+                remote: {
+                    message: 'Esta categoria já existe.',
+                    data: function(validator) {
+                        return {
+                            id_categoria: validator.getFieldElements('id_categoria').val()
+                        };
+                    },
+                    type: 'POST',
+                    url: "Categoria/checkExisteNome/"
                 }
             }
         }
@@ -2310,13 +2408,23 @@ formSubCategorias.bootstrapValidator({
     feedbackIcons: {
         valid: 'glyphicon glyphicon-ok',
         invalid: 'glyphicon glyphicon-remove',
-        validating: 'glyphicon glyphicon-refresh'
+        validating: 'glyphicon glyphicon-refresh fa-spin'
     },
     fields: {
         nome_sub_categoria: {
             validators: {
                 notEmpty: {
                     message: 'Informe o nome da sub-categoria.'
+                },
+                remote: {
+                    message: 'Esta sub-categoria já existe.',
+                    data: function(validator) {
+                        return {
+                            id_sub_categoria: validator.getFieldElements('id_sub_categoria').val()
+                        };
+                    },
+                    type: 'POST',
+                    url: "CategoriaValor/checkExisteNome/"
                 }
             }
         },
@@ -2489,13 +2597,23 @@ formProfissao.bootstrapValidator({
     feedbackIcons: {
         valid: 'glyphicon glyphicon-ok',
         invalid: 'glyphicon glyphicon-remove',
-        validating: 'glyphicon glyphicon-refresh'
+        validating: 'glyphicon glyphicon-refresh fa-spin'
     },
     fields: {
         nome_profissao: {
             validators: {
                 notEmpty: {
                     message: 'Informe o nome da Profissão.'
+                },
+                remote: {
+                    message: 'Esta profissão já existe.',
+                    data: function(validator) {
+                        return {
+                            id_profissao: validator.getFieldElements('id_profissao').val()
+                        };
+                    },
+                    type: 'POST',
+                    url: "Profissao/checkExisteNome/"
                 }
             }
         }
@@ -2638,13 +2756,23 @@ formInstEnsino.bootstrapValidator({
     feedbackIcons: {
         valid: 'glyphicon glyphicon-ok',
         invalid: 'glyphicon glyphicon-remove',
-        validating: 'glyphicon glyphicon-refresh'
+        validating: 'glyphicon glyphicon-refresh fa-spin'
     },
     fields: {
         nome_inst_ensino: {
             validators: {
                 notEmpty: {
                     message: 'Informe o nome da Intituição.'
+                },
+                remote: {
+                    message: 'Esta Instituicao de Ensino já existe.',
+                    data: function(validator) {
+                        return {
+                            id_inst_ensino: validator.getFieldElements('id_inst_ensino').val()
+                        };
+                    },
+                    type: 'POST',
+                    url: "InstituicaoEnsino/checkExisteNome/"
                 }
             }
         },
@@ -2817,13 +2945,23 @@ formRelacionamentos.bootstrapValidator({
     feedbackIcons: {
         valid: 'glyphicon glyphicon-ok',
         invalid: 'glyphicon glyphicon-remove',
-        validating: 'glyphicon glyphicon-refresh'
+        validating: 'glyphicon glyphicon-refresh fa-spin'
     },
     fields: {
         nome_sub_categoria: {
             validators: {
                 notEmpty: {
                     message: 'Informe o nome da Relacionamento.'
+                },
+                remote: {
+                    message: 'Esta Categoria já existe.',
+                    data: function(validator) {
+                        return {
+                            id_sub_categoria: validator.getFieldElements('id_sub_categoria').val()
+                        };
+                    },
+                    type: 'POST',
+                    url: "CategoriaValor/checkExisteNome/"
                 }
             }
         },
@@ -3073,27 +3211,27 @@ tableRelacoes.dataTable({
     "searching": true
 });
 
-selectRelac1.change(function(){
+selectRelac1.change(function () {
     resetButtonRelac();
     $('#del_relacao').val('n');
 });
-selectRelac2.change(function(){
+selectRelac2.change(function () {
     resetButtonRelac();
     $('#del_relacao').val('n');
 });
 formRelacoes.bootstrapValidator({
-    onError: function(e) {
+    onError: function (e) {
         if (selectRelac1.val() == '' || selectRelac2.val() == '') {
             dangerButtonRelac();
         }
     },
-    onSuccess: function(e) {
+    onSuccess: function (e) {
         console.log('Baum demais!!');
     },
     feedbackIcons: {
         valid: 'glyphicon glyphicon-ok',
         invalid: 'glyphicon glyphicon-remove',
-        validating: 'glyphicon glyphicon-refresh'
+        validating: 'glyphicon glyphicon-refresh fa-spin'
     },
     fields: {
         relac_1: {
@@ -3137,7 +3275,7 @@ formRelacoes.bootstrapValidator({
             var id = data.cd_catg_vl_relac_1 + '' + data.cd_catg_vl_relac_2;
 
             if (data.delete == 's') {
-                $('tr[data-id-relacao='+id+']').remove();
+                $('tr[data-id-relacao=' + id + ']').remove();
             } else {
                 var celulas = '<td>' + data.cd_catg_vl_relac_1 + '</td>' +
                     '<td>' + data.desc_vl_relac_1 + '</td>' +
@@ -3147,9 +3285,9 @@ formRelacoes.bootstrapValidator({
                     '<td>' + data.genero_relac_2 + '</td>' +
                     '<td>' +
                     '<a href="#" class="btn btn-warning btn-sm btn-circle delete_relacao" ' +
-                        'data-del-relac-1="'+data.cd_catg_vl_relac_1+'" ' +
-                        'data-del-relac-2="'+data.cd_catg_vl_relac_2+'">' +
-                        '<i class="fa fa-trash-o"></i></a>' +
+                    'data-del-relac-1="' + data.cd_catg_vl_relac_1 + '" ' +
+                    'data-del-relac-2="' + data.cd_catg_vl_relac_2 + '">' +
+                    '<i class="fa fa-trash-o"></i></a>' +
                     '</td>';
 
                 var linha = '<tr class="active" data-id-relacao="' + id + '">' + celulas + '</tr>';
@@ -3165,12 +3303,12 @@ formRelacoes.bootstrapValidator({
     });
 });
 
-tableRelacoes.delegate('.delete_relacao', 'click', function(e) {
+tableRelacoes.delegate('.delete_relacao', 'click', function (e) {
     e.preventDefault();
     var id_relac_1 = $(this).attr('data-del-relac-1');
     var id_relac_2 = $(this).attr('data-del-relac-2');
 
-    var full_id =  id_relac_1+''+id_relac_2;
+    var full_id = id_relac_1 + '' + id_relac_2;
 
     $('#legend_form_relacoes')
         .html('Apagar Relacão ' + full_id)
@@ -3185,3 +3323,5 @@ tableRelacoes.delegate('.delete_relacao', 'click', function(e) {
 
     deleteButtonRelac();
 });
+
+/* FIM DO BLOCO DE CÓDIGO PARA CADASTROS AUXILIARES */

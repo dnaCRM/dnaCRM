@@ -65,7 +65,7 @@ class Usuario extends Controller
     private function setDados()
     {
         $usuario = new UsuarioDTO();
-        $usuario->setLogin(Input::get('usuario'))
+        $usuario->setLogin(strtolower(Input::get('usuario')))
             ->setSenha(Input::get('senha'))
             ->setCdUsuario(Input::get('id_perfil'))
             ->setNivel(Input::get('nivel'))
@@ -185,5 +185,16 @@ class Usuario extends Controller
     {
         UsuarioModel::logout();
         Redirect::to(SITE_URL);
+    }
+
+    public function checkExists()
+    {
+        $login = strtolower(filter_var(Input::get('usuario'), FILTER_SANITIZE_STRING));
+        $id = (int)Input::get('id_perfil');
+
+        $return = array(
+            'valid' => $this->usuarioModel->exists($login, $id)
+        );
+        echo json_encode($return);
     }
 } 

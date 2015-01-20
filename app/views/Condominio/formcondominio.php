@@ -181,28 +181,43 @@ $token = Token::generate();
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-offset-4">
-
+                                        <div class="form-group">
                                             <input type="hidden" name="cd_condominio"
                                                    value="<?php echo $data['id']; ?>">
                                             <input type="hidden" name="token" value="<?php echo $token; ?>">
 
-                                            <div class="form-group">
-                                                <div class="col-sm-12 clearfix">
-                                                    <a href="Condominio<?php echo $data['id'] ? '/visualizar/' . $data['id'] : ''; ?>"
-                                                       id="cancel" class="btn btn-default"><span
-                                                            class="fa fa-undo"></span> Cancelar</a>
-                                                    <a href="Condominio/formcondominio" id="novo"
-                                                       class="btn btn-success"><span class="fa fa-file"></span>
-                                                        Novo</a>
-                                                    <button type="submit" name="cadastrar" class="btn btn-primary">
-                                                        <span class="fa fa-check"></span>
-                                                        Salvar
-                                                    </button>
-                                                </div>
+                                            <div class="col-sm-12 clearfix">
+                                                <a href="Condominio<?php echo $data['id'] ? '/visualizar/' . $data['id'] : ''; ?>"
+                                                   id="cancel" class="btn btn-default"><span
+                                                        class="fa fa-undo"></span> Cancelar</a>
+                                                <a href="Condominio/formcondominio" id="novo"
+                                                   class="btn btn-success"><span class="fa fa-file"></span>
+                                                    Novo</a>
+                                                <button type="submit" name="cadastrar" class="btn btn-primary">
+                                                    <span class="fa fa-check"></span>
+                                                    Salvar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+
+                                        <div class="panel panel-warning">
+
+                                            <div class="panel-heading">
+                                                <h5 class="panel-title"><i class="fa fa-arrow-right"></i> Algumas instruções</h5>
                                             </div>
 
+                                            <div class="panel-body">
+                                                Algumas instruções e recomendações para o correto preenchimento do formulário
+                                            </div>
+
+                                            <div class="panel-footer">
+
+                                            </div>
                                         </div>
+
+                                    </div>
                                 </fieldset>
                             </form>
                         <?php endif; ?>

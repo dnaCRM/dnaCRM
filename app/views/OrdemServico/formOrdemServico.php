@@ -61,241 +61,245 @@ $token = Token::generate();
 <?php else: ?>
     <form id="ordemservicoform" class="form-horizontal" method="post" action=""
           enctype="multipart/form-data">
-        <fieldset>
-            <!-- Lado Esquerdo -->
-            <div class="col-md-6">
+    <fieldset>
+    <!-- Lado Esquerdo -->
+    <div class="col-md-6">
 
-                <div class="form-group">
-                    <div class="col-sm-12">
-                        <label for="assunto" class="control-label">Assunto</label>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <label for="assunto" class="control-label">Assunto</label>
 
-                        <input type="text" class="form-control" id="assunto" name="assunto"
-                               value="<?php echo $perfil->getDescAssunto() == '' ? Input::get('assunto') : $perfil->getDescAssunto(); ?>"
-                               placeholder="Assunto">
-                    </div>
-                </div>
-
-
-                <div class="form-group">
-
-                    <div class="col-sm-12">
-                        <label for="descricao_os" class="control-label">Descrição</label>
-
-                        <textarea id="descricao" class="form-control" name="descricao"
-                                  placeholder="Ocorrência"
-                                  rows="5"><?php echo $perfil->getDescOrdemServico() == '' ? Input::get('descricao') : $perfil->getDescOrdemServico(); ?></textarea>
-                    </div>
-                </div>
+                <input type="text" class="form-control" id="assunto" name="assunto"
+                       value="<?php echo $perfil->getDescAssunto() == '' ? Input::get('assunto') : $perfil->getDescAssunto(); ?>"
+                       placeholder="Assunto">
+            </div>
+        </div>
 
 
-                <div class="form-group">
-                    <div class="col-sm-12">
-                        <label for="desc_conclusao_os" class="control-label">Conclusão</label>
+        <div class="form-group">
 
-                        <textarea id="desc_conclusao" class="form-control" name="desc_conclusao"
-                                  placeholder="Como a OS foi concluída"
-                                  rows="5"><?php echo $perfil->getDescConclusao() == '' ? Input::get('desc_conclusao') : $perfil->getDescConclusao(); ?></textarea>
-                    </div>
-                </div>
+            <div class="col-sm-12">
+                <label for="descricao_os" class="control-label">Descrição</label>
 
+                <textarea id="descricao" class="form-control" name="descricao"
+                          placeholder="Ocorrência"
+                          rows="5"><?php echo $perfil->getDescOrdemServico() == '' ? Input::get('descricao') : $perfil->getDescOrdemServico(); ?></textarea>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-sm-12">
+                <label for="desc_conclusao_os" class="control-label">Conclusão</label>
+
+                <textarea id="desc_conclusao" class="form-control" name="desc_conclusao"
+                          placeholder="Como a OS foi concluída"
+                          rows="5"><?php echo $perfil->getDescConclusao() == '' ? Input::get('desc_conclusao') : $perfil->getDescConclusao(); ?></textarea>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Lado Direito -->
+    <div class="col-md-6">
+
+        <div class="form-group">
+            <div class="col-sm-6">
+                <label for="ocorrencia" class="control-label">Ocorrência Relacionada</label>
+
+                <select class="form-control" id="ocorrencia" name="ocorrencia">
+                    <option value="">Nenhuma</option>
+                    <?php
+                    $perfil->setCdOcorrencia($perfil->getCdOcorrencia() == '' ? Input::get('ocorrencia') : $perfil->getCdOcorrencia());
+                    foreach ($data['ocorrencia'] as $ocorrencia) {
+                        if ($ocorrencia->getCdOcorrencia() == $perfil->getCdOcorrencia()) {
+                            echo '<option value="' . $ocorrencia->getCdOcorrencia() . '" selected>' . $ocorrencia->getDescAssunto() . '</option>';
+                        } else {
+                            echo '<option value="' . $ocorrencia->getCdOcorrencia() . ' ">' . $ocorrencia->getDescAssunto() . '</option>';
+                        }
+                    }
+                    ?>
+                </select>
             </div>
 
-            <!-- Lado Direito -->
+
+            <div class="col-sm-6">
+                <label for="estagio" class="control-label">Estágio</label>
+
+                <select class="form-control" id="estagio" name="estagio">
+                    <option value="">--</option>
+                    <?php
+                    $perfil->setCdVlCatgEstagio($perfil->getCdVlCatgEstagio() == '' ? Input::get('estagio') : $perfil->getCdVlCatgEstagio());
+                    foreach ($data['estagio'] as $estagio) {
+                        if ($estagio->getCdVlCategoria() == $perfil->getCdVlCatgEstagio()) {
+                            echo '<option value="' . $estagio->getCdVlCategoria() . '" selected>' . $estagio->getDescVlCatg() . '</option>';
+                        } else {
+                            echo '<option value="' . $estagio->getCdVlCategoria() . ' ">' . $estagio->getDescVlCatg() . '</option>';
+                        }
+                    }
+                    ?>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <div class="col-sm-6">
+                <label for="tipo" class="control-label">Tipo</label>
+
+                <select class="form-control" id="tipo" name="tipo">
+                    <option value="">--</option>
+                    <?php
+                    $perfil->setCdVlCatgTipo($perfil->getCdVlCatgTipo() == '' ? Input::get('tipo') : $perfil->getCdVlCatgTipo());
+                    foreach ($data['tipo'] as $tipo) {
+                        if ($tipo->getCdVlCategoria() == $perfil->getCdVlCatgTipo()) {
+                            echo '<option value="' . $tipo->getCdVlCategoria() . '" selected>' . $tipo->getDescVlCatg() . '</option>';
+                        } else {
+                            echo '<option value="' . $tipo->getCdVlCategoria() . ' ">' . $tipo->getDescVlCatg() . '</option>';
+                        }
+                    }
+                    ?>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-sm-6">
+                <label for="executor" class="control-label">Executor</label>
+
+                <select class="form-control" id="executor" name="executor">
+                    <option value="">--</option>
+                    <?php
+                    $perfil->setCdPfExecutor($perfil->getCdPfExecutor() == '' ? Input::get('executor') : $perfil->getCdPfExecutor());
+                    foreach ($data['executor'] as $executor) {
+                        if ($executor->getCdPessoaFisica() == $perfil->getCdPfExecutor()) {
+                            echo '<option value="' . $executor->getCdPessoaFisica() . '" selected>' . $executor->getNmPessoaFisica() . '</option>';
+                        } else {
+                            echo '<option value="' . $executor->getCdPessoaFisica() . ' ">' . $executor->getNmPessoaFisica() . '</option>';
+                        }
+                    }
+                    ?>
+                </select>
+            </div>
+
+            <div class="col-sm-6">
+                <label for="solicitante" class="control-label">Solicitante</label>
+
+                <select class="form-control" id="solicitante" name="solicitante">
+                    <option value="">--</option>
+                    <?php
+                    $perfil->setCdPfSolicitante($perfil->getCdPfSolicitante() == '' ? Input::get('solicitante') : $perfil->getCdPfSolicitante());
+                    foreach ($data['solicitante'] as $solicitante) {
+                        if ($solicitante->getCdPessoaFisica() == $perfil->getCdPfSolicitante()) {
+                            echo '<option value="' . $solicitante->getCdPessoaFisica() . '" selected>' . $solicitante->getNmPessoaFisica() . '</option>';
+                        } else {
+                            echo '<option value="' . $solicitante->getCdPessoaFisica() . ' ">' . $solicitante->getNmPessoaFisica() . '</option>';
+                        }
+                    }
+                    ?>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-6">
+                <label for="dt_inicio" class="control-label">Início</label>
+
+
+                <input type="text" class="form-control data-input"
+                       value="<?php echo $perfil->getDtInicio() == '' ? Input::get('dt_inicio') : $perfil->getDtInicio(); ?>"
+                       id="dt_inicio"
+                       name="dt_inicio" placeholder="___/___/____">
+            </div>
+
+
+            <div class="col-sm-6">
+                <label for="dt_fim" class="control-label">Fim</label>
+
+
+                <input type="text" class="form-control data-input"
+                       value="<?php echo $perfil->getDtFim() == '' ? Input::get('dt_fim') : $perfil->getDtFim(); ?>"
+                       id="dt_fim"
+                       name="dt_fim" placeholder="___/___/____">
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-12">
+                <div class="legend">Avaliação</div>
+            </div>
             <div class="col-md-6">
+                <label class="control-label">Atendimento</label><br>
 
-                <div class="form-group">
-                    <div class="col-sm-6">
-                        <label for="ocorrencia" class="control-label">Ocorrência Relacionada</label>
-
-                        <select class="form-control" id="ocorrencia" name="ocorrencia">
-                            <option value="">Nenhuma</option>
-                            <?php
-                            $perfil->setCdOcorrencia($perfil->getCdOcorrencia() == '' ? Input::get('ocorrencia') : $perfil->getCdOcorrencia());
-                            foreach ($data['ocorrencia'] as $ocorrencia) {
-                                if ($ocorrencia->getCdOcorrencia() == $perfil->getCdOcorrencia()) {
-                                    echo '<option value="' . $ocorrencia->getCdOcorrencia() . '" selected>' . $ocorrencia->getDescAssunto() . '</option>';
-                                } else {
-                                    echo '<option value="' . $ocorrencia->getCdOcorrencia() . ' ">' . $ocorrencia->getDescAssunto() . '</option>';
-                                }
-                            }
-                            ?>
-                        </select>
-                    </div>
-
-
-                    <div class="col-sm-6">
-                        <label for="estagio" class="control-label">Estágio</label>
-
-                        <select class="form-control" id="estagio" name="estagio">
-                            <option value="">--</option>
-                            <?php
-                            $perfil->setCdVlCatgEstagio($perfil->getCdVlCatgEstagio() == '' ? Input::get('estagio') : $perfil->getCdVlCatgEstagio());
-                            foreach ($data['estagio'] as $estagio) {
-                                if ($estagio->getCdVlCategoria() == $perfil->getCdVlCatgEstagio()) {
-                                    echo '<option value="' . $estagio->getCdVlCategoria() . '" selected>' . $estagio->getDescVlCatg() . '</option>';
-                                } else {
-                                    echo '<option value="' . $estagio->getCdVlCategoria() . ' ">' . $estagio->getDescVlCatg() . '</option>';
-                                }
-                            }
-                            ?>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-
-                    <div class="col-sm-6">
-                        <label for="tipo" class="control-label">Tipo</label>
-
-                        <select class="form-control" id="tipo" name="tipo">
-                            <option value="">--</option>
-                            <?php
-                            $perfil->setCdVlCatgTipo($perfil->getCdVlCatgTipo() == '' ? Input::get('tipo') : $perfil->getCdVlCatgTipo());
-                            foreach ($data['tipo'] as $tipo) {
-                                if ($tipo->getCdVlCategoria() == $perfil->getCdVlCatgTipo()) {
-                                    echo '<option value="' . $tipo->getCdVlCategoria() . '" selected>' . $tipo->getDescVlCatg() . '</option>';
-                                } else {
-                                    echo '<option value="' . $tipo->getCdVlCategoria() . ' ">' . $tipo->getDescVlCatg() . '</option>';
-                                }
-                            }
-                            ?>
-                        </select>
-                    </div>
-                </div>
-
-
-                <div class="form-group">
-                    <div class="col-sm-6">
-                        <label for="executor" class="control-label">Executor</label>
-
-                        <select class="form-control" id="executor" name="executor">
-                            <option value="">--</option>
-                            <?php
-                            $perfil->setCdPfExecutor($perfil->getCdPfExecutor() == '' ? Input::get('executor') : $perfil->getCdPfExecutor());
-                            foreach ($data['executor'] as $executor) {
-                                if ($executor->getCdPessoaFisica() == $perfil->getCdPfExecutor()) {
-                                    echo '<option value="' . $executor->getCdPessoaFisica() . '" selected>' . $executor->getNmPessoaFisica() . '</option>';
-                                } else {
-                                    echo '<option value="' . $executor->getCdPessoaFisica() . ' ">' . $executor->getNmPessoaFisica() . '</option>';
-                                }
-                            }
-                            ?>
-                        </select>
-                    </div>
-
-                    <div class="col-sm-6">
-                        <label for="solicitante" class="control-label">Solicitante</label>
-
-                        <select class="form-control" id="solicitante" name="solicitante">
-                            <option value="">--</option>
-                            <?php
-                            $perfil->setCdPfSolicitante($perfil->getCdPfSolicitante() == '' ? Input::get('solicitante') : $perfil->getCdPfSolicitante());
-                            foreach ($data['solicitante'] as $solicitante) {
-                                if ($solicitante->getCdPessoaFisica() == $perfil->getCdPfSolicitante()) {
-                                    echo '<option value="' . $solicitante->getCdPessoaFisica() . '" selected>' . $solicitante->getNmPessoaFisica() . '</option>';
-                                } else {
-                                    echo '<option value="' . $solicitante->getCdPessoaFisica() . ' ">' . $solicitante->getNmPessoaFisica() . '</option>';
-                                }
-                            }
-                            ?>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-6">
-                        <label for="dt_inicio" class="control-label">Início</label>
-
-
-                        <input type="text" class="form-control data-input"
-                               value="<?php echo $perfil->getDtInicio() == '' ? Input::get('dt_inicio') : $perfil->getDtInicio(); ?>"
-                               id="dt_inicio"
-                               name="dt_inicio" placeholder="___/___/____">
-                    </div>
-
-
-                    <div class="col-sm-6">
-                        <label for="dt_fim" class="control-label">Fim</label>
-
-
-                        <input type="text" class="form-control data-input"
-                               value="<?php echo $perfil->getDtFim() == '' ? Input::get('dt_fim') : $perfil->getDtFim(); ?>"
-                               id="dt_fim"
-                               name="dt_fim" placeholder="___/___/____">
-                    </div>
-                </div>
-                <div class="row form-group">
-                    <div class="legend">Avaliação</div>
-                    <div class="col-md-6">
-                        <label class="control-label">Atendimento</label><br>
-
-                        <div class="btn-group" data-toggle="buttons">
-                            <label class="btn btn-default
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-default
                             <?php echo (($perfil->getCdVlCatgAvalAtendimento()) == 152 || Input::get('aval_atend') == 152) ? 'active' : ''; ?>"
-                                   id="aval_quali_bom" data-toggle="tooltip" data-placement="top" title="Bom">
-                                <input type="radio" name="aval_atend" value="152"
-                                    <?php echo (($perfil->getCdVlCatgAvalAtendimento()) == 152 || Input::get('aval_atend') == 152) ? 'checked' : ''; ?>>
-                                <i class="fa fa-smile-o fa-2x"></i>
-                            </label>
-                            <label class="btn btn-default
+                           id="aval_quali_bom" data-toggle="tooltip" data-placement="top" title="Bom">
+                        <input type="radio" name="aval_atend" value="152"
+                            <?php echo (($perfil->getCdVlCatgAvalAtendimento()) == 152 || Input::get('aval_atend') == 152) ? 'checked' : ''; ?>>
+                        <i class="fa fa-smile-o fa-2x"></i>
+                    </label>
+                    <label class="btn btn-default
                             <?php echo (($perfil->getCdVlCatgAvalAtendimento()) == 153 || Input::get('aval_atend') == 153) ? 'active' : ''; ?>"
-                                   id="aval_quali_regular" data-toggle="tooltip" data-placement="top" title="Regular">
-                                <input type="radio" name="aval_atend" value="153"
-                                    <?php echo (($perfil->getCdVlCatgAvalAtendimento()) == 153 || Input::get('aval_atend') == 153) ? 'checked' : ''; ?>>
-                                <i class="fa fa-meh-o fa-2x"></i>
-                            </label>
-                            <label class="btn btn-default <?php echo (($perfil->getCdVlCatgAvalAtendimento()) == 154 || Input::get('aval_atend') == 154) ? 'active' : ''; ?>"
-                                   id="aval_quali_ruim" data-toggle="tooltip" data-placement="top" title="Ruim">
-                                <input type="radio" name="aval_atend" value="154"
-                                    <?php echo (($perfil->getCdVlCatgAvalAtendimento()) == 154 || Input::get('aval_atend') == 154) ? 'checked' : ''; ?>>
-                                <i class="fa fa-frown-o fa-2x"></i>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="control-label">Qualidade</label><br>
-
-                        <div class="btn-group" data-toggle="buttons">
-                            <label class="btn btn-default
-                            <?php echo (($perfil->getCdVlCatgAvalQualidade()) == 152 || Input::get('aval_quali') == 152) ? 'active' : ''; ?>"
-                                   id="aval_quali_bom" data-toggle="tooltip" data-placement="top" title="Bom">
-                                <input type="radio" name="aval_quali" value="152"
-                                    <?php echo (($perfil->getCdVlCatgAvalQualidade()) == 152 || Input::get('aval_quali') == 152) ? 'checked' : ''; ?>>
-                                <i class="fa fa-smile-o fa-2x"></i>
-                            </label>
-                            <label class="btn btn-default
-                            <?php echo (($perfil->getCdVlCatgAvalQualidade()) == 153 || Input::get('aval_quali') == 153) ? 'active' : ''; ?>"
-                                   id="aval_quali_regular" data-toggle="tooltip" data-placement="top" title="Regular">
-                                <input type="radio" name="aval_quali" value="153"
-                                    <?php echo (($perfil->getCdVlCatgAvalQualidade()) == 153 || Input::get('aval_quali') == 153) ? 'checked' : ''; ?>>
-                                <i class="fa fa-meh-o fa-2x"></i>
-                            </label>
-                            <label class="btn btn-default
-                            <?php echo (($perfil->getCdVlCatgAvalQualidade()) == 154 || Input::get('aval_quali') == 154) ? 'active' : ''; ?>"
-                                   id="aval_quali_ruim" data-toggle="tooltip" data-placement="top" title="Ruim">
-                                <input type="radio" name="aval_quali" value="154"
-                                    <?php echo (($perfil->getCdVlCatgAvalQualidade()) == 154 || Input::get('aval_quali') == 154) ? 'checked' : ''; ?>>
-                                <i class="fa fa-frown-o fa-2x"></i>
-                            </label>
-                        </div>
-                    </div>
+                           id="aval_quali_regular" data-toggle="tooltip" data-placement="top" title="Regular">
+                        <input type="radio" name="aval_atend" value="153"
+                            <?php echo (($perfil->getCdVlCatgAvalAtendimento()) == 153 || Input::get('aval_atend') == 153) ? 'checked' : ''; ?>>
+                        <i class="fa fa-meh-o fa-2x"></i>
+                    </label>
+                    <label
+                        class="btn btn-default <?php echo (($perfil->getCdVlCatgAvalAtendimento()) == 154 || Input::get('aval_atend') == 154) ? 'active' : ''; ?>"
+                        id="aval_quali_ruim" data-toggle="tooltip" data-placement="top" title="Ruim">
+                        <input type="radio" name="aval_atend" value="154"
+                            <?php echo (($perfil->getCdVlCatgAvalAtendimento()) == 154 || Input::get('aval_atend') == 154) ? 'checked' : ''; ?>>
+                        <i class="fa fa-frown-o fa-2x"></i>
+                    </label>
                 </div>
-
-                <input type="hidden" name="ordemservico" value="<?php echo $data['id']; ?>">
-                <input type="hidden" name="token" value="<?php echo $token; ?>">
-                <br>
-                <p>
-                    <a href="OrdemServico<?php echo $data['id'] ? '/visualizar/' . $data['id'] : ''; ?>" id="cancel"
-                       class="btn btn-default">
-                        <span class="fa fa-undo"></span> Cancelar</a>
-                    <a href="OrdemServico/formOrdemServico" id="novo" class="btn btn-success">
-                        <span class="fa fa-file"></span> Novo</a>
-                    <button type="submit" name="cadastrar" class="btn btn-primary">
-                        <span class="fa fa-check"></span> Salvar
-                    </button>
-                </p>
-
             </div>
-        </fieldset>
+            <div class="col-md-6">
+                <label class="control-label">Qualidade</label><br>
+
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-default
+                            <?php echo (($perfil->getCdVlCatgAvalQualidade()) == 152 || Input::get('aval_quali') == 152) ? 'active' : ''; ?>"
+                           id="aval_quali_bom" data-toggle="tooltip" data-placement="top" title="Bom">
+                        <input type="radio" name="aval_quali" value="152"
+                            <?php echo (($perfil->getCdVlCatgAvalQualidade()) == 152 || Input::get('aval_quali') == 152) ? 'checked' : ''; ?>>
+                        <i class="fa fa-smile-o fa-2x"></i>
+                    </label>
+                    <label class="btn btn-default
+                            <?php echo (($perfil->getCdVlCatgAvalQualidade()) == 153 || Input::get('aval_quali') == 153) ? 'active' : ''; ?>"
+                           id="aval_quali_regular" data-toggle="tooltip" data-placement="top" title="Regular">
+                        <input type="radio" name="aval_quali" value="153"
+                            <?php echo (($perfil->getCdVlCatgAvalQualidade()) == 153 || Input::get('aval_quali') == 153) ? 'checked' : ''; ?>>
+                        <i class="fa fa-meh-o fa-2x"></i>
+                    </label>
+                    <label class="btn btn-default
+                            <?php echo (($perfil->getCdVlCatgAvalQualidade()) == 154 || Input::get('aval_quali') == 154) ? 'active' : ''; ?>"
+                           id="aval_quali_ruim" data-toggle="tooltip" data-placement="top" title="Ruim">
+                        <input type="radio" name="aval_quali" value="154"
+                            <?php echo (($perfil->getCdVlCatgAvalQualidade()) == 154 || Input::get('aval_quali') == 154) ? 'checked' : ''; ?>>
+                        <i class="fa fa-frown-o fa-2x"></i>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <input type="hidden" name="ordemservico" value="<?php echo $data['id']; ?>">
+        <input type="hidden" name="token" value="<?php echo $token; ?>">
+        <br>
+
+        <p>
+            <a href="OrdemServico<?php echo $data['id'] ? '/visualizar/' . $data['id'] : ''; ?>" id="cancel"
+               class="btn btn-default">
+                <span class="fa fa-undo"></span> Cancelar</a>
+            <a href="OrdemServico/formOrdemServico" id="novo" class="btn btn-success">
+                <span class="fa fa-file"></span> Novo</a>
+            <button type="submit" name="cadastrar" class="btn btn-primary">
+                <span class="fa fa-check"></span> Salvar
+            </button>
+        </p>
+
+    </div>
+    </fieldset>
     </form>
 <?php endif; ?>
 </div>

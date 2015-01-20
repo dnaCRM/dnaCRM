@@ -218,4 +218,16 @@ class Condominio extends Controller
             }
         }
     }
+
+    public function checkExisteNome()
+    {
+        $nome = Input::get('nm_condominio');
+        $id = Input::get('cd_condominio');
+
+        $return = array(
+            'valid' => $this->condominioModel->existeNome($nome, $id)
+        );
+
+        echo json_encode($return);
+    }
 }

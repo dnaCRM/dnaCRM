@@ -48,4 +48,18 @@ class CategoriaValorModel extends Model
         $this->dto = $dto;
         return $this;
     }
+
+
+    public function existeNome($nome, $id)
+    {
+        $queryString = "desc_vl_catg = '{$nome}'";
+
+        if ($id) {
+            $queryString .= " AND cd_vl_categoria != {$id}";
+        }
+
+        $return = $this->dao->get($queryString);
+
+        return (count($return) > 0 ? false : true);
+    }
 } 
