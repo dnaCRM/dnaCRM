@@ -213,7 +213,7 @@ $token = Token::generate();
             </div>
 
 
-            <div class="col-sm-6">
+            <div class="col-sm-6 field_hidden">
                 <label for="dt_fim" class="control-label">Fim</label>
 
 
@@ -223,7 +223,7 @@ $token = Token::generate();
                        name="dt_fim" placeholder="___/___/____">
             </div>
         </div>
-        <div class="row form-group">
+        <div class="row form-group field_hidden">
             <div class="col-md-12">
                 <div class="legend">Avaliação</div>
             </div>

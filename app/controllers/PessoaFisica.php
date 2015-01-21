@@ -41,7 +41,7 @@ class PessoaFisica extends Controller
      * Se não receber um id o formulário estará vazio e permitirá registrar
      * um novo perfil
      */
-    public function formperfil($id = null)
+    public function formpessoafisica($id = null)
     {
         $pessoa_juridica = (new PessoaJuridicaDAO())->fullList();
         $profissoes = (new ProfissaoDAO())->fullList();
@@ -121,7 +121,7 @@ class PessoaFisica extends Controller
             );
         }
 
-        $this->view = new View('PessoaFisica', 'formperfil');
+        $this->view = new View('PessoaFisica', 'formpessoafisica');
         $this->view->output($dados);
     }
 

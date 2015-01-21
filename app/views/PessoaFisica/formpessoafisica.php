@@ -266,7 +266,7 @@ $token = Token::generate();
                 </div>
             </div>
 
-            <div class="col-sm-4 field_estuda">
+            <div class="col-sm-4 field_hidden">
                 <label for="dt_inicio_curso" class="control-label">Início do Curso</label>
 
 
@@ -275,7 +275,7 @@ $token = Token::generate();
                        id="dt_inicio_curso"
                        name="dt_inicio_curso" placeholder="___/___/____">
             </div>
-            <div class="col-sm-4 field_estuda">
+            <div class="col-sm-4 field_hidden">
                 <label for="dt_fim_curso" class="control-label">Fim do Curso</label>
 
 
@@ -286,7 +286,7 @@ $token = Token::generate();
             </div>
         </div>
 
-        <div class="form-group field_estuda">
+        <div class="form-group field_hidden">
             <div class="col-sm-12 selectContainer">
                 <label for="cd_pessoa_juridica" class="control-label">Instituição de Ensino</label>
 
@@ -307,7 +307,7 @@ $token = Token::generate();
             </div>
         </div>
 
-        <div class="form-group field_estuda">
+        <div class="form-group field_hidden">
             <div class="col-sm-12 selectContainer">
                 <label for="org_rg" class="control-label">Curso</label>
 

@@ -77,11 +77,11 @@ $token = Token::generate();
                             <i class="fa fa-arrow-circle-o-left"></i> Voltar
                         </a>
 
-                        <a href="PessoaJuridica/formperfil/" class="btn btn-success" role="button">
+                        <a href="PessoaJuridica/formpessoajuridica/" class="btn btn-success" role="button">
                             <i class="fa fa-arrow-circle-o-up"></i> Novo
                         </a>
 
-                        <a href="PessoaJuridica/formperfil/<?php echo $cadastrado->getCdPessoaJuridica(); ?>"
+                        <a href="PessoaJuridica/formpessoajuridica/<?php echo $cadastrado->getCdPessoaJuridica(); ?>"
                            class="btn btn-primary">
                             Avançar <i class="fa fa-arrow-circle-o-right"></i>
                         </a>
@@ -170,7 +170,7 @@ $token = Token::generate();
                                 <a href="PessoaJuridica<?php echo $data['id'] ? '/visualizar/' . $data['id'] : ''; ?>"
                                    id="cancel" class="btn btn-default"><span
                                         class="fa fa-undo"></span> Cancelar</a>
-                                <a href="PessoaJuridica/formperfil" id="novo" class="btn btn-success"><span
+                                <a href="PessoaJuridica/formpessoajuridica" id="novo" class="btn btn-success"><span
                                         class="fa fa-file"></span>
                                     Novo</a>
                                 <button type="submit" name="cadastrar" class="btn btn-primary"><span

@@ -73,8 +73,8 @@ if (Session::exists('user')) {
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="novoscadastros">Novo<span
                             class="caret"></span></a>
                     <ul class="dropdown-menu" aria-labelledby="novoscadastros">
-                        <li><a href="PessoaFisica/formperfil">Pessoa Fisica</a></li>
-                        <li><a href="PessoaJuridica/formperfil">Pessoa Juridica</a></li>
+                        <li><a href="PessoaFisica/formpessoafisica">Pessoa Fisica</a></li>
+                        <li><a href="PessoaJuridica/formpessoajuridica">Pessoa Juridica</a></li>
                         <li class="divider"></li>
                         <li><a href="Apartamento/formapartamento">Apartamento</a></li>
                         <li><a href="Setor/formSetor">Setor</a></li>
@@ -181,8 +181,8 @@ if (Session::exists('user')) {
                 <i class="fa pull-right fa-angle-left"></i>
             </a>
             <ul class="treeview-menu" style="display: none;">
-                <li><a href="PessoaFisica/formperfil"><i class="fa fa-angle-double-right"></i> Pessoa Física</a></li>
-                <li><a href="PessoaJuridica/formperfil"><i class="fa fa-angle-double-right"></i> Pessoa Jurídica</a>
+                <li><a href="PessoaFisica/formpessoafisica"><i class="fa fa-angle-double-right"></i> Pessoa Física</a></li>
+                <li><a href="PessoaJuridica/formpessoajuridica"><i class="fa fa-angle-double-right"></i> Pessoa Jurídica</a>
                 </li>
                 <li><a href="Setor/formSetor"><i class="fa fa-angle-double-right"></i> Setores</a></li>
                 <li><a href="Condominio/formcondominio"><i class="fa fa-angle-double-right"></i> Condomínio</a></li>
@@ -267,12 +267,15 @@ if (Session::exists('user')) {
 <script src="js/language/pt_BR.js" type="text/javascript"></script>
 <script src="js/jquery.mask.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="js/datatables/js/jquery.dataTables.js"></script>
+<script src="js/datatables/js/jquery.dataTables.min.js"></script>
 <script src="js/datatables/js/dataTables.bootstrap.js"></script>
 <script src="js/datatables/js/dataTables.responsive.min.js"></script>
 <script src="js/custom.js"></script>
+<?php
+JavaScriptLoader::load();
+?>
 
 <a id="toTop" href="#"><span id="toTopHover"></span><img width="45" height="45" alt="" src="img/to-top.png"></a>
-
+<div id="responseAjaxError"></div>
 </body>
 </html>

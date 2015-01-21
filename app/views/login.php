@@ -45,6 +45,7 @@
     <script src="js/datatables/js/dataTables.bootstrap.js"></script>
     <script src="js/datatables/js/dataTables.responsive.min.js"></script>
     <script src="js/custom.js"></script>
+    <script src="js/form_validation/form_login.js"></script>
 
     </body>
 </html>

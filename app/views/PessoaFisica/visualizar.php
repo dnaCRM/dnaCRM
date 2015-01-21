@@ -8,7 +8,7 @@
 
             <!-- Botões de administração -->
                 <span class="btn-panel pull-right">
-                <a href="PessoaFisica/formperfil/<?php echo $data['dados_pessoais']['cd_pessoa_fisica']; ?>"
+                <a href="PessoaFisica/formpessoafisica/<?php echo $data['dados_pessoais']['cd_pessoa_fisica']; ?>"
                    data-toggle="tooltip" data-placement="top" title="Editar Perfil!"
                    class="btn btn-primary btn-circle btn-lg">
                     <i class="fa fa-pencil"></i>

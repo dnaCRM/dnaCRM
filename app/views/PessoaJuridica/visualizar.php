@@ -8,7 +8,7 @@
 
                 <!-- Botões de administração -->
                 <span class="btn-panel pull-right">
-                <a href="PessoaJuridica/formperfil/<?php echo $data['dados_cadastrais']['cd_pessoa_juridica']; ?>"
+                <a href="PessoaJuridica/formpessoajuridica/<?php echo $data['dados_cadastrais']['cd_pessoa_juridica']; ?>"
                    data-toggle="tooltip" data-placement="top" title="Editar Pessoa Jurídica!"
                    class="btn btn-primary btn-circle btn-lg">
                     <i class="fa fa-pencil"></i>

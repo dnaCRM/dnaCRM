@@ -10,7 +10,7 @@
         <div class="col-lg-6">
             <div class="well text-right">
 
-                <a href="PessoaFisica/formperfil/" class="btn btn-success" role="button">
+                <a href="PessoaFisica/formpessoafisica/" class="btn btn-success" role="button">
                     <i class="fa fa-arrow-circle-o-up"></i> Cadastrar novo
                 </a>
 
@@ -49,7 +49,7 @@
                     echo '<td><a href="PessoaFisica/visualizar/' . $perfil->getCdPessoaFisica() . '">' . $perfil->getNmPessoaFisica() . '</a></td>';
                     echo '<td>' . $perfil->getEmail() . '</td>';
                     echo '<td>' . $nasc->format('d/m/Y') . '</td>';
-                    echo "<td><a href=\"PessoaFisica/formperfil/{$perfil->getCdPessoaFisica()}\" class=\"btn btn-primary btn-circle btn-md\" role=\"button\">
+                    echo "<td><a href=\"PessoaFisica/formpessoafisica/{$perfil->getCdPessoaFisica()}\" class=\"btn btn-primary btn-circle btn-md\" role=\"button\">
                     <i class=\"glyphicon glyphicon-pencil\"></i></a></td>";
                     echo '</tr>';
 

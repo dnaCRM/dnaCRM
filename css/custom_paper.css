@@ -513,6 +513,6 @@ table.dataTable tbody td, table.table tbody td{
     font-size: 12px;
 }
 /* Controle exibição das opções de Estudo do formulário de Pessoa Física*/
-.field_estuda{
+.field_hidden{
     display: none;
 }

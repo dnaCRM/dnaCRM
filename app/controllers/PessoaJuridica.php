@@ -45,7 +45,7 @@ class PessoaJuridica extends Controller
      * Se não receber um id o formulário estará vazio e permitirá registrar
      * um novo perfil
      */
-    public function formperfil($id = null)
+    public function formpessoajuridica($id = null)
     {
         $pj_telefone = (new CategoriaValorDAO())->get('cd_categoria = 6');
         $operadora = (new CategoriaValorDAO())->get('cd_categoria = 10');
@@ -85,7 +85,7 @@ class PessoaJuridica extends Controller
             );
         }
 
-        $this->view = new View('PessoaJuridica', 'formperfil');
+        $this->view = new View('PessoaJuridica', 'formpessoajuridica');
         $this->view->output($dados);
     }
 

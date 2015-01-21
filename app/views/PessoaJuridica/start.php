@@ -10,7 +10,7 @@
         <div class="col-lg-6">
             <div class="well text-right">
 
-                <a href="PessoaJuridica/formperfil/" class="btn btn-success" role="button">
+                <a href="PessoaJuridica/formpessoajuridica/" class="btn btn-success" role="button">
                     <i class="fa fa-arrow-circle-o-up"></i> Cadastrar novo
                 </a>
 
@@ -48,7 +48,7 @@
                     echo '<td><a href="PessoaJuridica/visualizar/' . $perfil->getCdPessoaJuridica() . '">' . $perfil->getNmFantasia() . '</a></td>';
                     echo '<td>' . $perfil->getEmail() . '</td>';
                     echo '<td>' . $perfil->getDescAtividade() . '</td>';
-                    echo "<td><a href=\"PessoaJuridica/formperfil/{$perfil->getCdPessoaJuridica()}\" class=\"btn btn-primary btn-circle btn-md\" role=\"button\">
+                    echo "<td><a href=\"PessoaJuridica/formpessoajuridica/{$perfil->getCdPessoaJuridica()}\" class=\"btn btn-primary btn-circle btn-md\" role=\"button\">
                     <i class=\"fa fa-edit\"></i></a></td>";
                     echo '</tr>';
 
