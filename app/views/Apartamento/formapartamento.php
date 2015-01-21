@@ -84,7 +84,7 @@ $token = Token::generate();
                                                         <option value="">--</option>
                                                         <?php
                                                         foreach ($condominios as $condominio) {
-                                                            echo "<option value=\"{$condominio->getCdCondominio()}\">{$condominio->getNmCondominio()}</option>";
+                                                            echo "<option value=\"{$condominio->getCdPessoaJuridica()}\">{$condominio->getNmFantasia()}</option>";
                                                         };?>
                                                     </select>
                                                 </div>

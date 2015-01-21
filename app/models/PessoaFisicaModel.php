@@ -38,8 +38,8 @@ class PessoaFisicaModel extends Model
         }
         $instituicao = '';
         if ($this->dto->getCdInstituicao()) {
-            $instituicao = (new InstituicaoEnsinoDAO())->getById($this->dto->getCdInstituicao())
-                ->getDsInstituicao();
+            $instituicao = (new PessoaJuridicaDAO())->getById($this->dto->getCdInstituicao())
+                ->getNmFantasia();
         }
 
         $empresa = '';

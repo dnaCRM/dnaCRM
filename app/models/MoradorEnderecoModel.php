@@ -25,7 +25,7 @@ class MoradorEnderecoModel extends Model
     {
         $apartamento = (new ApartamentoDAO())->getById($this->dto->getCdApartamento());
         $setor = (new SetorDAO())->getById($apartamento->getCdSetor());
-        $condominio = (new CondominioDAO())->getById($setor->getCdCondominio());
+        $condominio = (new PessoaJuridicaDAO())->getById($setor->getCdCondominio());
 
         $dt_entrada = (new DateTime($this->dto->getDtEntrada()))->format('d/m/Y');
         $dt_saida = ($this->dto->getDtSaida() ?
@@ -46,8 +46,8 @@ class MoradorEnderecoModel extends Model
             'apartamento' => $apartamento->getDescApartamento(),
             'cd_setor' => $setor->getCdSetor(),
             'setor' => $setor->getNmSetor(),
-            'cd_condominio' => $condominio->getCdCondominio(),
-            'condominio' => $condominio->getNmCondominio()
+            'cd_condominio' => $condominio->getCdPessoaJuridica(),
+            'condominio' => $condominio->getNmFantasia()
         );
     }
 

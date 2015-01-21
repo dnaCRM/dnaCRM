@@ -48,7 +48,7 @@ $setores = $data['list'];
                     echo '<tr>';
                     echo '<td><img src="' . $setor['im_perfil'] . '" class="img-circle" title="' . $setor['cd_setor'] . '"></td>';
                     echo '<td><a href="Setor/visualizar/' . $setor['cd_setor'] . '">' . $setor['nm_setor'] . '</a></td>';
-                    echo '<td><a href="Condominio/visualizar/' . $setor['cd_condominio'] . '">' . $setor['condominio'] . '</a></td>';
+                    echo '<td><a href="PessoaJuridica/visualizar/' . $setor['cd_condominio'] . '">' . $setor['condominio'] . '</a></td>';
                     echo "<td><a href=\"Setor/formsetor/{$setor['cd_setor']}\" class=\"btn btn-primary btn-circle btn-md\" role=\"button\">
                     <i class=\"fa fa-edit\"></i></a></td>";
                     echo '</tr>';

@@ -112,17 +112,6 @@ $token = Token::generate();
 
                         <div class="form-group">
                             <div class="col-sm-12 inputGroupContainer">
-                                <label for="cnpj" class="control-label">Cnpj</label>
-
-
-                                <input type="text" class="form-control" id="cnpj" name="cnpj"
-                                       value="<?php echo $perfil->getCnpj() == '' ? Input::get('cnpj') : $perfil->getCnpj(); ?>"
-                                       placeholder="00.000.000/0000-00"
-                                       maxlength="18">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-12 inputGroupContainer">
                                 <label for="nm_fantasia" class="control-label">Nome Fantasia</label>
 
 
@@ -131,24 +120,62 @@ $token = Token::generate();
                                        placeholder="Nome Fantasia">
                             </div>
                         </div>
-
                         <div class="form-group">
-                            <div class="col-sm-4 inputGroupContainer">
+                            <div class="col-md-12 inputGroupContainer">
                                 <label for="desc_razao" class="control-label">Razão Social</label>
 
                                 <input type="text" class="form-control" id="desc_razao" name="desc_razao"
                                        value="<?php echo $perfil->getDescRazao() == '' ? Input::get('desc_razao') : $perfil->getDescRazao(); ?>"
                                        placeholder="Razão Social">
                             </div>
-                            <div class="col-sm-4 inputGroupContainer">
-                                <label for="desc_atividade" class="control-label">Ramo de Atividade</label>
-
-                                <input type="text" class="form-control" id="desc_atividade" name="desc_atividade"
-                                       value="<?php echo $perfil->getDescAtividade() == '' ? Input::get('desc_atividade') : $perfil->getDescAtividade(); ?>"
-                                       placeholder="Ramo de Atividade">
-                            </div>
 
                         </div>
+                        <div class="form-group">
+                            <div class="col-md-4 inputGroupContainer">
+                                <label for="cnpj" class="control-label">Cnpj</label>
+
+
+                                <input type="text" class="form-control" id="cnpj" name="cnpj"
+                                       value="<?php echo $perfil->getCnpj() == '' ? Input::get('cnpj') : $perfil->getCnpj(); ?>"
+                                       placeholder="00.000.000/0000-00"
+                                       maxlength="18">
+                            </div>
+                            <div class="col-md-4 selectContainer">
+                                <label for="cd_tipo_empresa" class="control-label">Tipo de empresa</label>
+
+                                <select class="form-control" id="cd_tipo_empresa "name="cd_tipo_empresa">
+                                    <option value="">--</option>
+                                    <?php
+                                     $perfil->setCdTipoEmpresa($perfil->getCdTipoEmpresa() == '' ? Input::get('cd_tipo_empresa') : $perfil->getCdTipoEmpresa());
+                                    foreach($data['tipos_empresa'] as $tipo_empresa) {
+                                        if ($tipo_empresa->getCdVlCategoria() == $perfil->getCdTipoEmpresa()) {
+                                            echo "<option value=\"{$tipo_empresa->getCdVlCategoria()}\" selected>{$tipo_empresa->getDescVlCatg()}</option>";
+                                        } else {
+                                            echo "<option value=\"{$tipo_empresa->getCdVlCategoria()}\">{$tipo_empresa->getDescVlCatg()}</option>";
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="col-md-4 selectContainer">
+                                <label for="cd_ramo_atividade" class="control-label">Ramo de Atividade</label>
+
+                                <select class="form-control" id="cd_ramo_atividade" name="cd_ramo_atividade">
+                                    <option value="">--</option>
+                                    <?php
+                                    $perfil->setCdRamoAtividade($perfil->getCdRamoAtividade() == '' ? Input::get('cd_ramo_atividade') : $perfil->getCdRamoAtividade());
+                                    foreach($data['ramos_atividade'] as $ramos_atividade) {
+                                        if ($ramos_atividade->getCdVlCategoria() == $perfil->getCdRamoAtividade()) {
+                                            echo "<option value=\"{$ramos_atividade->getCdVlCategoria()}\" selected>{$ramos_atividade->getDescVlCatg()}</option>";
+                                        } else {
+                                            echo "<option value=\"{$ramos_atividade->getCdVlCategoria()}\">{$ramos_atividade->getDescVlCatg()}</option>";
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <div class="col-sm-12">
                                 <label for="email" class="control-label">Email</label>
@@ -159,14 +186,11 @@ $token = Token::generate();
                                        placeholder="Email">
                             </div>
                         </div>
-                    </div>
-                    <div class="col-sm-offset-4">
-
-                        <input type="hidden" name="cd_pessoa_juridica" value="<?php echo $data['id']; ?>">
-                        <input type="hidden" name="token" value="<?php echo $token; ?>">
-
                         <div class="form-group">
                             <div class="col-sm-12 clearfix">
+                                <input type="hidden" name="cd_pessoa_juridica" value="<?php echo $data['id']; ?>">
+                                <input type="hidden" name="token" value="<?php echo $token; ?>">
+
                                 <a href="PessoaJuridica<?php echo $data['id'] ? '/visualizar/' . $data['id'] : ''; ?>"
                                    id="cancel" class="btn btn-default"><span
                                         class="fa fa-undo"></span> Cancelar</a>
@@ -177,6 +201,23 @@ $token = Token::generate();
                                         class="fa fa-check"></span>
                                     Salvar
                                 </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+
+                        <div class="panel panel-warning">
+
+                            <div class="panel-heading">
+                                <h5 class="panel-title"><i class="fa fa-arrow-right"></i> Algumas instruções</h5>
+                            </div>
+
+                            <div class="panel-body">
+                                Algumas instruções e recomendações para o correto preenchimento do formulário
+                            </div>
+
+                            <div class="panel-footer">
+
                             </div>
                         </div>
 

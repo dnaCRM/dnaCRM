@@ -46,14 +46,14 @@ class PessoaFisica extends Controller
         $pessoa_juridica = (new PessoaJuridicaDAO())->fullList();
         $profissoes = (new ProfissaoDAO())->fullList();
         $org_rg = (new CategoriaValorDAO())->get('cd_categoria = 1');
-        $inst_ensino = (new InstituicaoEnsinoDAO())->fullList();
+        $inst_ensino = (new PessoaJuridicaDAO())->get('cd_tipo_empresa = 159');
         $grau_ensino = (new CategoriaValorDAO())->get('cd_categoria = 14');
 
         if ($id) {
             /** @var PessoaFisicaDTO */
             $perfilarr = $this->findById($id);
 
-            $condominios = (new CondominioDAO())->fullList();
+            $condominios = (new PessoaJuridicaDAO())->get('cd_ramo_atividade = 107');
 
             $moradorEnderecos = (new MoradorEnderecoModel())->getPorMorador($id);
             $telefones = (new PessoaFisicaTelefoneModel())->getTelefonesPessoaFisica($id);

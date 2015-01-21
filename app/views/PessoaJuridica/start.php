@@ -44,11 +44,11 @@
                 foreach ($data['list'] as $perfil) {
 
                     echo '<tr>';
-                    echo '<td><img src="' . $perfil->getImPerfil() . '" class="img-circle" title="' . $perfil->getCdPessoaJuridica() . '"></td>';
-                    echo '<td><a href="PessoaJuridica/visualizar/' . $perfil->getCdPessoaJuridica() . '">' . $perfil->getNmFantasia() . '</a></td>';
-                    echo '<td>' . $perfil->getEmail() . '</td>';
-                    echo '<td>' . $perfil->getDescAtividade() . '</td>';
-                    echo "<td><a href=\"PessoaJuridica/formpessoajuridica/{$perfil->getCdPessoaJuridica()}\" class=\"btn btn-primary btn-circle btn-md\" role=\"button\">
+                    echo '<td><img src="' . $perfil['im_perfil'] . '" class="img-circle" title="' . $perfil['cd_pessoa_juridica'] . '"></td>';
+                    echo '<td><a href="PessoaJuridica/visualizar/' . $perfil['cd_pessoa_juridica'] . '">' . $perfil['nm_fantasia'] . '</a></td>';
+                    echo '<td>' . $perfil['email'] . '</td>';
+                    echo '<td>' . $perfil['desc_ramo_atividade'] . '</td>';
+                    echo "<td><a href=\"PessoaJuridica/formpessoajuridica/{$perfil['cd_pessoa_juridica']}\" class=\"btn btn-primary btn-circle btn-md\" role=\"button\">
                     <i class=\"fa fa-edit\"></i></a></td>";
                     echo '</tr>';
 

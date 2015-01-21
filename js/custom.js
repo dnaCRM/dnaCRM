@@ -201,13 +201,3 @@ $(document).ready(function () {
         $('#area-do-resultado').fadeOut();
     });
 });
-
-
-
-
-
-
-
-
-
-/* FIM DO BLOCO DE CÓDIGO PARA CADASTROS AUXILIARES */

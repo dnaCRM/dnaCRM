@@ -47,7 +47,7 @@ class Apartamento extends Controller
     public function formapartamento($id = null)
     {
         $setor = (new SetorDAO())->fullList();
-        $condominios = (new CondominioDAO())->fullList();
+        $condominios = (new PessoaJuridicaDAO())->get('cd_ramo_atividade = 107');
 
         if ($id) {
             /** @var ApartamentoDTO */

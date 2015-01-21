@@ -49,8 +49,12 @@
                             <dd><?php echo $data['dados_cadastrais']['desc_razao']; ?></dd>
                             <dt>CNPJ</dt>
                             <dd><?php echo $data['dados_cadastrais']['cnpj']; ?></dd>
-                            <dt>Ramo de Atividade</dt>
-                            <dd><?php echo $data['dados_cadastrais']['desc_atividade']; ?></dd>
+                            <?php
+                            if ($data['dados_cadastrais']['cd_ramo_atividade']){
+                                echo "<dt>Ramo de Atividade</dt>
+                                <dd>{$data['dados_cadastrais']['desc_ramo_atividade']}</dd>";
+                            }
+                            ?>
                         </dl>
                     </div>
                 </div>

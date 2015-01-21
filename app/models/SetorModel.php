@@ -19,13 +19,13 @@ class SetorModel extends Model
 
     public function getArrayDados()
     {
-        $condominio = (new CondominioDAO())->getById($this->dto->getCdCondominio());
+        $condominio = (new PessoaJuridicaDAO())->getById($this->dto->getCdCondominio());
 
         return array(
             'cd_setor' => $this->dto->getCdSetor(),
             'nm_setor' => $this->dto->getNmSetor(),
             'cd_condominio' => $this->dto->getCdCondominio(),
-            'condominio' => $condominio->getNmCondominio(),
+            'condominio' => $condominio->getNmFantasia(),
             'condo_foto' => $condominio->getImPerfil(),
             'observacao' => $this->dto->getObservacao(),
             'im_perfil' => $this->dto->getImPerfil()

@@ -63,7 +63,6 @@ if (Session::exists('user')) {
                         <li class="divider"></li>
                         <li><a href="Apartamento">Apartamento</a></li>
                         <li><a href="Setor">Setor</a></li>
-                        <li><a href="Condominio">Condomínio</a></li>
                         <li class="divider"></li>
                         <li><a href="OrdemServico">Ordens de Serviço</a></li>
                         <li><a href="Ocorrencia">Ocorrência</a></li>
@@ -78,7 +77,6 @@ if (Session::exists('user')) {
                         <li class="divider"></li>
                         <li><a href="Apartamento/formapartamento">Apartamento</a></li>
                         <li><a href="Setor/formSetor">Setor</a></li>
-                        <li><a href="Condominio/formcondominio">Condominio</a></li>
                         <li class="divider"></li>
                         <li><a href="Ocorrencia/formOcorrencia">Ocorrência</a></li>
                         <li><a href="OrdemServico/formOrdemServico">Ordem de Serviço</a></li>
@@ -167,7 +165,6 @@ if (Session::exists('user')) {
             <ul class="treeview-menu" style="display: none;">
                 <li><a href="PessoaFisica/"><i class="fa fa-angle-double-right"></i>Pessoa Física</a></li>
                 <li><a href="PessoaJuridica/"><i class="fa fa-angle-double-right"></i> Pessoa Jurídica</a></li>
-                <li><a href="Condominio/"><i class="fa fa-angle-double-right"></i> Condomínio</a></li>
                 <li><a href="Apartamento/"><i class="fa fa-angle-double-right"></i> Apartamento</a></li>
                 <li><a href="Setor/"><i class="fa fa-angle-double-right"></i> Setor</a></li>
                 <li><a href="OrdemServico/"><i class="fa fa-angle-double-right"></i> Ordem de Servico</a></li>
@@ -185,7 +182,6 @@ if (Session::exists('user')) {
                 <li><a href="PessoaJuridica/formpessoajuridica"><i class="fa fa-angle-double-right"></i> Pessoa Jurídica</a>
                 </li>
                 <li><a href="Setor/formSetor"><i class="fa fa-angle-double-right"></i> Setores</a></li>
-                <li><a href="Condominio/formcondominio"><i class="fa fa-angle-double-right"></i> Condomínio</a></li>
                 <li><a href="Apartamento/formapartamento"><i class="fa fa-angle-double-right"></i> Apartamento</a></li>
                 <li><a href="CadastrosAuxiliares"><i class="fa fa-angle-double-right"></i> Cadastros Auxiliares</a></li>
             </ul>

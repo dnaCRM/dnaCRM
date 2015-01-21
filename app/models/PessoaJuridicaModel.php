@@ -20,12 +20,29 @@ class PessoaJuridicaModel extends Model
 
     public function getArrayDados()
     {
+        $categoria = new CategoriaValorDAO();
+
+        $tipo = '';
+        if ($this->dto->getCdTipoEmpresa()) {
+            $cat = $categoria->getById($this->dto->getCdTipoEmpresa());
+            $tipo = $cat->getDescVlCatg();
+        }
+
+        $ramo_atividade ='';
+        if ($this->dto->getCdRamoAtividade()) {
+            $cat = $categoria->getById($this->dto->getCdRamoAtividade());
+            $ramo_atividade = $cat->getDescVlCatg();
+        }
+
         return array(
             'cd_pessoa_juridica' => $this->dto->getCdPessoaJuridica(),
             'cnpj' => $this->dto->getCnpj(),
             'nm_fantasia' => $this->dto->getNmFantasia(),
             'desc_razao' => $this->dto->getDescRazao(),
-            'desc_atividade' => $this->dto->getDescAtividade(),
+            'cd_tipo_empresa' => $this->dto->getCdTipoEmpresa(),
+            'desc_tipo_empresa' => $tipo,
+            'cd_ramo_atividade' => $this->dto->getCdRamoAtividade(),
+            'desc_ramo_atividade' => $ramo_atividade,
             'im_perfil' => $this->dto->getImPerfil(),
             'email' => $this->dto->getEmail()
         );
@@ -49,7 +66,7 @@ class PessoaJuridicaModel extends Model
     {
         $empregados = $pessoaFisica->getDAO()->get("cd_pessoa_juridica = {$this->dto->getCdPessoaJuridica()}");
         $lista = array();
-        foreach($empregados as $empregado) {
+        foreach ($empregados as $empregado) {
             $lista[] = $pessoaFisica->setDTO($empregado)->getArrayDados();
         }
         return $lista;

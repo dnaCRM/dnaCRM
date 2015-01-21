@@ -111,10 +111,10 @@ $token = Token::generate();
                                                         $setor->setCdCondominio($setor->getCdCondominio() == '' ? Input::get('condominio') : $setor->getCdCondominio());
                                                         foreach ($data['condominio'] as $condominio) {
 
-                                                            if ($condominio->getCdCondominio() == $setor->getCdCondominio()) {
-                                                                echo '<option value="' . $condominio->getCdCondominio() . '" selected>' . $condominio->getNmCondominio() . '</option>';
+                                                            if ($condominio->getCdPessoaJuridica() == $setor->getCdCondominio()) {
+                                                                echo '<option value="' . $condominio->getCdPessoaJuridica() . '" selected>' . $condominio->getNmFantasia() . '</option>';
                                                             } else {
-                                                                echo '<option value="' . $condominio->getCdCondominio() . ' ">' . $condominio->getNmCondominio() . '</option>';
+                                                                echo '<option value="' . $condominio->getCdPessoaJuridica() . ' ">' . $condominio->getNmFantasia() . '</option>';
                                                             }
                                                         }
                                                         ?>

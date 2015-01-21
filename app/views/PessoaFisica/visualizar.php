@@ -81,8 +81,12 @@
                     <?php if ($data['dados_pessoais']['ie_estuda'] == 'Sim'): ?>
                         <dt>Estuda</dt>
                         <dd><?php echo $data['dados_pessoais']['ie_estuda']; ?></dd>
-                        <dt>Instituicao</dt>
-                        <dd><?php echo $data['dados_pessoais']['instituicao']; ?></dd>
+                        <?php if ($data['dados_pessoais']['cd_instituicao']): ?>
+                            <dt>Instituição</dt>
+                            <dd>
+                                <a href="PessoaJuridica/visualizar/<?php echo $data['dados_pessoais']['cd_instituicao']; ?>"><?php echo $data['dados_pessoais']['instituicao']; ?></a>
+                            </dd>
+                        <?php endif; ?>
                         <dt>Curso</dt>
                         <dd><?php echo $data['dados_pessoais']['grau']; ?></dd>
                         <dt>Início</dt>

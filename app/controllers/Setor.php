@@ -47,7 +47,7 @@ class Setor extends Controller
      */
     public function formSetor($id = null)
     {
-        $condominio = (new CondominioDAO())->fullList();
+        $condominio = (new PessoaJuridicaDAO())->get('cd_ramo_atividade = 107');
 
 
         if ($id) {

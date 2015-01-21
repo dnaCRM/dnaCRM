@@ -8,6 +8,7 @@
 
 class PessoaJuridica extends Controller
 {
+    /** @var \PessoaJuridicaModel  */
     private $pessoaJuridicaModel;
 
     public function __construct()
@@ -19,6 +20,10 @@ class PessoaJuridica extends Controller
     public function start()
     { //Pega a lista completa de perfis
         $perfil_list = (array)$this->model->fullList();
+        $relacao = array();
+        foreach($perfil_list as $perfil){
+            $relacao[] = $this->pessoaJuridicaModel->setDTO($perfil)->getArrayDados();
+        }
 
         // Exporta imagens de perfil
         $this->exportaImagens($perfil_list);
@@ -26,7 +31,7 @@ class PessoaJuridica extends Controller
         $dados = array(
             'pagesubtitle' => '',
             'pagetitle' => 'Pessoa Jurídica',
-            'list' => $perfil_list
+            'list' => $relacao
         );
 
         $this->view = new View('PessoaJuridica', 'start');
@@ -49,6 +54,8 @@ class PessoaJuridica extends Controller
     {
         $pj_telefone = (new CategoriaValorDAO())->get('cd_categoria = 6');
         $operadora = (new CategoriaValorDAO())->get('cd_categoria = 10');
+        $tipos_empresa = (new CategoriaValorDAO())->get('cd_categoria = 16');
+        $ramos_atividade = (new CategoriaValorDAO())->get('cd_categoria = 8');
 
 
         if ($id) {
@@ -70,6 +77,8 @@ class PessoaJuridica extends Controller
                 'enderecos' => $enderecos,
                 'estados' => $estados,
                 'catg_enderecos' => $catg_enderecos,
+                'tipos_empresa' => $tipos_empresa,
+                'ramos_atividade' => $ramos_atividade,
                 'id' => $id,
                 'perfil' => $perfilarr
             );
@@ -80,6 +89,8 @@ class PessoaJuridica extends Controller
                 'pagesubtitle' => 'Pessoa Juridica.',
                 'pj_telefone' => $pj_telefone,
                 'operadora' => $operadora,
+                'tipos_empresa' => $tipos_empresa,
+                'ramos_atividade' => $ramos_atividade,
                 'id' => null,
                 'perfil' => $perfil
             );
@@ -172,7 +183,10 @@ class PessoaJuridica extends Controller
             ->setCnpj(Input::get('cnpj'))
             ->setNmFantasia(Input::get('nm_fantasia'))
             ->setDescRazao(Input::get('desc_razao'))
-            ->setDescAtividade(Input::get('desc_atividade'))
+            ->setCdCatgTipoEmpresa(16)
+            ->setCdTipoEmpresa(Input::get('cd_tipo_empresa'))
+            ->setCdCatgRamoAtividade(8)
+            ->setCdRamoAtividade(Input::get('cd_ramo_atividade'))
             ->setEmail(Input::get('email'))
             ->setCdUsuarioCriacao(Session::get('user'))
             ->setDtUsuarioCriacao('now()')

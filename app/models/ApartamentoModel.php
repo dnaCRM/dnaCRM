@@ -21,7 +21,7 @@ class ApartamentoModel extends Model
     public function getArrayDados()
     {
         $setor = (new SetorDAO())->getById($this->dto->getCdSetor());
-        $condominio = (new CondominioDAO())->getById($setor->getCdCondominio());
+        $condominio = (new PessoaJuridicaDAO())->getById($setor->getCdCondominio());
 
         return array(
             'cd_apartamento' => $this->dto->getCdApartamento(),
@@ -30,7 +30,7 @@ class ApartamentoModel extends Model
             'setor' => $setor->getNmSetor(),
             'setor_foto' => $setor->getImPerfil(),
             'cd_condominio' => $setor->getCdCondominio(),
-            'condominio' => $condominio->getNmCondominio(),
+            'condominio' => $condominio->getNmFantasia(),
             'condo_foto' => $condominio->getImPerfil()
         );
     }

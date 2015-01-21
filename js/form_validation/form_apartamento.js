@@ -43,3 +43,17 @@ $('#apartamentoform').bootstrapValidator({
         }
     }
 });
+
+$("#m_end_condominio").change(function () {
+    var condominio = $("#m_end_condominio").val();
+    $.ajax({
+        type: "get",
+        url: "Setor/listByCondId/" + condominio,
+        success: function (data) {
+            $("#m_end_setor").html(data);
+        },
+        error: function (data) {
+            $(data.responseText).appendTo('#responseAjaxError');
+        }
+    });
+});

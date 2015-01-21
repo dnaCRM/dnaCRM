@@ -12,7 +12,10 @@ class PessoaJuridicaDTO extends DataTransferObject
     private $cnpj;
     private $nm_fantasia;
     private $desc_razao;
-    private $desc_atividade;
+    private $cd_catg_tipo_empresa;
+    private $cd_tipo_empresa;
+    private $cd_catg_ramo_atividade;
+    private $cd_ramo_atividade;
     private $im_perfil;
     private $email;
     private $cd_usuario_criacao;
@@ -30,7 +33,10 @@ class PessoaJuridicaDTO extends DataTransferObject
             'cnpj' => 'getCnpj',
             'nm_fantasia' => 'getNmFantasia',
             'desc_razao' => 'getDescRazao',
-            'desc_atividade' => 'getDescAtividade',
+            'cd_catg_tipo_empresa' => 'getCdCatgTipoEmpresa',
+            'cd_tipo_empresa' => 'getCdTipoEmpresa',
+            'cd_catg_ramo_atividade' => 'getCdCatgRamoAtividade',
+            'cd_ramo_atividade' => 'getCdRamoAtividade',
             'email' => 'getEmail',
             'cd_usuario_criacao' => 'getCdUsuarioCriacao',
             'dt_usuario_criacao' => 'getDtUsuarioCriacao',
@@ -53,6 +59,30 @@ class PessoaJuridicaDTO extends DataTransferObject
     public function getReflex()
     {
         return $this->reflex;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCdCatgRamoAtividade()
+    {
+        return $this->cd_catg_ramo_atividade;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCdCatgTipoEmpresa()
+    {
+        return $this->cd_catg_tipo_empresa;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCdTipoEmpresa()
+    {
+        return $this->cd_tipo_empresa;
     }
 
     /**
@@ -90,9 +120,9 @@ class PessoaJuridicaDTO extends DataTransferObject
     /**
      * @return mixed
      */
-    public function getDescAtividade()
+    public function getCdRamoAtividade()
     {
-        return $this->desc_atividade;
+        return $this->cd_ramo_atividade;
     }
 
     /**
@@ -170,9 +200,9 @@ class PessoaJuridicaDTO extends DataTransferObject
         return $this;
     }
 
-    public function setDescAtividade($desc_atividade)
+    public function setCdRamoAtividade($desc_atividade)
     {
-        $this->desc_atividade = $desc_atividade;
+        $this->cd_ramo_atividade = $desc_atividade;
         return $this;
     }
 
@@ -219,4 +249,34 @@ class PessoaJuridicaDTO extends DataTransferObject
         return $this;
     }
 
+    /**
+     * @param $cd_catg_tipo_empresa
+     * @return $this
+     */
+    public function setCdCatgTipoEmpresa($cd_catg_tipo_empresa)
+    {
+        $this->cd_catg_tipo_empresa = $cd_catg_tipo_empresa;
+        return $this;
+    }
+
+    /**
+     * @param $cd_tipo_empresa
+     * @return $this
+     */
+    public function setCdTipoEmpresa($cd_tipo_empresa)
+    {
+        $this->cd_tipo_empresa = $cd_tipo_empresa;
+        return $this;
+    }
+
+
+    /**
+     * @param $cd_catg_ramo_atividade
+     * @return $this
+     */
+    public function setCdCatgRamoAtividade($cd_catg_ramo_atividade)
+    {
+        $this->cd_catg_ramo_atividade = $cd_catg_ramo_atividade;
+        return $this;
+    }
 }

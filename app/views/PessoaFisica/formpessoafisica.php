@@ -278,12 +278,12 @@ $token = Token::generate();
             <div class="col-sm-4 field_hidden">
                 <label for="dt_fim_curso" class="control-label">Fim do Curso</label>
 
-
                 <input type="text" class="form-control data-input"
                        value="<?php echo $perfil->getDtFimCurso() == '' ? Input::get('dt_fim_curso') : $perfil->getDtFimCurso(); ?>"
                        id="dt_fim_curso"
                        name="dt_fim_curso" placeholder="___/___/____">
             </div>
+
         </div>
 
         <div class="form-group field_hidden">
@@ -292,14 +292,14 @@ $token = Token::generate();
 
                 <select class="form-control" id="cd_instituicao" name="cd_instituicao">
                     <option value="">-- Selecione uma Instituição de Ensino</option>
-                    <?php //echo escape(Input::get('cd_cgc'));
-                    $perfil->setCdInstituicao($perfil->getCdInstituicao() == '' ? Input::get('cd_instituicao') : $perfil->getCdInstituicao());
+                    <?php
+                    $perfil->setCdPessoaJuridica($perfil->getCdPessoaJuridica() == '' ? Input::get('cd_instituicao') : $perfil->getCdPessoaJuridica());
                     foreach ($data['inst_ensino'] as $inst_ensino) {
 
-                        if ($inst_ensino->getCdInstituicao() == $perfil->getCdInstituicao()) {
-                            echo '<option value="' . $inst_ensino->getCdInstituicao() . '" selected>' . $inst_ensino->getDsInstituicao() . '</option>';
+                        if ($inst_ensino->getCdPessoaJuridica() == $perfil->getCdPessoaJuridica()) {
+                            echo '<option value="' . $inst_ensino->getCdPessoaJuridica() . '" selected>' . $inst_ensino->getNmFantasia() . '</option>';
                         } else {
-                            echo '<option value="' . $inst_ensino->getCdInstituicao() . ' ">' . $inst_ensino->getDsInstituicao() . '</option>';
+                            echo '<option value="' . $inst_ensino->getCdPessoaJuridica() . ' ">' . $inst_ensino->getNmFantasia() . '</option>';
                         }
                     }
                     ?>
@@ -483,7 +483,7 @@ $token = Token::generate();
                                     <option value="">--</option>
                                     <?php
                                     foreach ($condominios as $condominio) {
-                                        echo "<option value=\"{$condominio->getCdCondominio()}\">{$condominio->getNmCondominio()}</option>";
+                                        echo "<option value=\"{$condominio->getCdPessoaJuridica()}\">{$condominio->getNmFantasia()}</option>";
                                     };?>
                                 </select>
                             </div>

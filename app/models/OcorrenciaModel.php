@@ -28,11 +28,11 @@ class OcorrenciaModel extends Model
         $setor_foto = '';
         if ($this->dto->getCdSetor()) {
             $setorDTO= (new SetorDAO())->getById($this->dto->getCdSetor());
-            $condominioDTO = (new CondominioDAO())->getById($setorDTO->getCdCondominio());
+            $condominioDTO = (new PessoaJuridicaDAO())->getById($setorDTO->getCdCondominio());
             $setor = $setorDTO->getNmSetor();
             $setor_foto = $setorDTO->getImPerfil();
-            $cd_condominio = $condominioDTO->getCdCondominio();
-            $condominio = $condominioDTO->getNmCondominio();
+            $cd_condominio = $condominioDTO->getCdPessoaJuridica();
+            $condominio = $condominioDTO->getNmFantasia();
             $condominio_foto = $condominioDTO->getImPerfil();
         }
 
