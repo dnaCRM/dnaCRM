@@ -67,7 +67,7 @@ class InstituicaoEnsino extends Controller
         $dto
             ->setCdInstituicao(Input::get('id_inst_ensino'))
             ->setDsInstituicao(Input::get('nome_inst_ensino'))
-            ->setCdCatgInstituicao(8)
+            ->setCdCatgInstituicao(Input::get('select_cat_ens')?8:null)
             ->setCdVlCatgInstituicao(Input::get('select_cat_ens'))
             ->setCdUsuarioCriacao(Session::get('user'))
             ->setDtUsuarioCriacao('now()')

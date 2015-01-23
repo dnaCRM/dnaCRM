@@ -52,7 +52,7 @@ class CategoriaValorModel extends Model
 
     public function existeNome($nome, $id)
     {
-        $queryString = "desc_vl_catg = '{$nome}'";
+        $queryString = "desc_vl_catg ilike '{$nome}'";
 
         if ($id) {
             $queryString .= " AND cd_vl_categoria != {$id}";

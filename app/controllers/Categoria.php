@@ -88,7 +88,7 @@ class Categoria extends Controller
         $nome = Input::get('nome_categoria');
         $id = Input::get('id_categoria');
 
-        $queryString = "desc_categoria = '{$nome}'";
+        $queryString = "desc_categoria ilike '{$nome}'";
 
         if ($id) {
             $queryString .= " AND cd_categoria != {$id}";

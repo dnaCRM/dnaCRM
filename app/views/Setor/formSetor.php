@@ -108,7 +108,7 @@ $token = Token::generate();
                                                             name="cd_condominio">
                                                         <option value="">-- Selecione um condominio</option>
                                                         <?php //echo escape(Input::get('cd_cgc'));
-                                                        $setor->setCdCondominio($setor->getCdCondominio() == '' ? Input::get('condominio') : $setor->getCdCondominio());
+                                                        $setor->setCdCondominio($setor->getCdCondominio() == '' ? Input::get('cd_condominio') : $setor->getCdCondominio());
                                                         foreach ($data['condominio'] as $condominio) {
 
                                                             if ($condominio->getCdPessoaJuridica() == $setor->getCdCondominio()) {

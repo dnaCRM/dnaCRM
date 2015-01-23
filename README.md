@@ -13,7 +13,7 @@
 * Paulo Vinicius Pacheco Sorrentino
 
 #### Breve descrição
-* Este projeto será o resultado de um estudo sobre Programação Orientada a Objetos, Padrões de Projeto, Projeto e Implementação de Banco de dados Relacional.
+* Este projeto é o resultado de um estudo sobre Programação Orientada a Objetos, Padrões de Projeto, Projeto e Implementação de Banco de dados Relacional.
 
 #### Requisitos para a execução do sistema
 * Servidor Apache 2.4.9 com rewrite_module ativado

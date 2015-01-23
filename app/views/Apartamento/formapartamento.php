@@ -5,6 +5,7 @@ $cadastrado = $apartamento_form->cadastra($apartamento); //Não cadastra na entr
 
 $id_check = $data['id'];
 $condominios = $data['condominios'];
+$setores = $data['setores'];
 $setor = $data['setor'];
 
 
@@ -83,8 +84,13 @@ $token = Token::generate();
                                                             id="m_end_condominio">
                                                         <option value="">--</option>
                                                         <?php
+                                                        $setor->setCdCondominio($setor->getCdCondominio() == '' ? Input::get('cd_condominio') : $setor->getCdCondominio());
                                                         foreach ($condominios as $condominio) {
-                                                            echo "<option value=\"{$condominio->getCdPessoaJuridica()}\">{$condominio->getNmFantasia()}</option>";
+                                                            if ($condominio->getCdPessoaJuridica() == $setor->getCdCondominio()) {
+                                                                echo '<option value="' . $condominio->getCdPessoaJuridica() . '" selected>' . $condominio->getNmFantasia() . '</option>';
+                                                            } else {
+                                                                echo '<option value="' . $condominio->getCdPessoaJuridica() . ' ">' . $condominio->getNmFantasia() . '</option>';
+                                                            }
                                                         };?>
                                                     </select>
                                                 </div>
@@ -114,7 +120,7 @@ $token = Token::generate();
                                             </div>
                                             <div class="form-group">
 
-                                                <input type="hidden" name="cd_apartamento"
+                                                <input type="hidden" id="cd_apartamento" name="cd_apartamento"
                                                        value="<?php echo $data['id']; ?>">
                                                 <input type="hidden" name="token" value="<?php echo $token; ?>">
 

@@ -98,7 +98,7 @@ class PessoaJuridicaModel extends Model
 
     public function existeEmail($email, $id)
     {
-        $queryString = "email = '{$email}'";
+        $queryString = "email ilike '{$email}'";
 
         if ($id) {
             $queryString .= " AND cd_pessoa_juridica != {$id}";

@@ -47,11 +47,15 @@ $apartamentos = $data['apartamentos'];
 
                             <dt>Nome</dt>
                             <dd><?php echo $setor['nm_setor']; ?></dd>
-                            <dt>Observação</dt>
-                            <dd><?php echo $setor['observacao']; ?></dd>
+                            <?php
+                            if ($setor['observacao']) {
+                                echo "<dt>Observação</dt>
+                                      <dd><?php echo {$setor['observacao']}; ?></dd>";
+                            }
+                            ?>
                             <dt>Localização</dt>
                             <dd>
-                                <a href="Condominio/visualizar/<?php echo $setor['cd_condominio']; ?>"><?php echo $setor['condominio']; ?></a>
+                                <a href="PessoaJuridica/visualizar/<?php echo $setor['cd_condominio']; ?>"><?php echo $setor['condominio']; ?></a>
                             </dd>
                         </dl>
                     </div>

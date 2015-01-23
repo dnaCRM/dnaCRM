@@ -51,7 +51,7 @@ class InstituicaoEnsinoModel extends Model
 
     public function existeNome($nome, $id)
     {
-        $queryString = "ds_instituicao = '{$nome}'";
+        $queryString = "ds_instituicao ilike '{$nome}'";
 
         if ($id) {
             $queryString .= " AND cd_instituicao != {$id}";

@@ -46,18 +46,19 @@ class Apartamento extends Controller
      */
     public function formapartamento($id = null)
     {
-        $setor = (new SetorDAO())->fullList();
+        $setores = (new SetorDAO())->fullList();
         $condominios = (new PessoaJuridicaDAO())->get('cd_ramo_atividade = 107');
 
         if ($id) {
             /** @var ApartamentoDTO */
             $apartamentoarr = $this->findById($id);
-
+            $setor = (new SetorDAO())->getById($apartamentoarr->getCDSetor());
 
             $dados = array(
 
                 'pagetitle' => 'Atualizar Apartamento.',
                 'pagesubtitle' => '',
+                'setores' => $setores,
                 'setor' => $setor,
                 'id' => $id,
                 'apartamento' => $apartamentoarr,
@@ -70,7 +71,8 @@ class Apartamento extends Controller
             $dados = array(
                 'pagetitle' => 'Cadastro de Apartamento',
                 'pagesubtitle' => '',
-                'setor' => $setor,
+                'setores' => $setores,
+                'setor' => new SetorDTO(),
                 'id' => null,
                 'apartamento' => $apartamento,
                 'condominios' => $condominios
@@ -189,7 +191,7 @@ class Apartamento extends Controller
     public function listBySetorId($id)
     {
         $apartamentos = $this->model->get("cd_setor = {$id}");
-        $return = '<option value="">Apartamentos</option>';
+        $return = '<option value="">--</option>';
         foreach ($apartamentos as $apartamento) {
             $return .= "<option value=\"{$apartamento->getCdApartamento()}\">{$apartamento->getDescApartamento()}</option>";
         }
@@ -216,6 +218,15 @@ class Apartamento extends Controller
         $return = array(
             'valid' => $this->apartamentoModel->existeNome($nome, $id)
         );
+
+        echo json_encode($return);
+    }
+
+    public function apartamentoJSON($id)
+    {
+        $id = (int)$id;
+        $dto = $this->findById($id);
+        $return =  $this->apartamentoModel->setDTO($dto)->getArrayDados();
 
         echo json_encode($return);
     }

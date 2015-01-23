@@ -28,7 +28,6 @@ $('#pessoajuridicaform').bootstrapValidator({
             }
         },
         desc_razao: {
-            group: '.col-sm-4',
             validators: {
                 notEmpty: {
                     message: 'Campo obrigatório'
@@ -46,7 +45,6 @@ $('#pessoajuridicaform').bootstrapValidator({
                     message: 'E-mail inválido'
                 },
                 stringLength: {
-                    min: 5,
                     max: 50,
                     message: 'Deve ter entre 5 e 50 caracteres.'
                 },
@@ -63,10 +61,8 @@ $('#pessoajuridicaform').bootstrapValidator({
             }
         },
         cnpj: {
+            group: '.col-sm-4',
             validators: {
-                notEmpty: {
-                    message: 'Campo obrigatório'
-                },
                 stringLength: {
                     min: 18,
                     max: 18,

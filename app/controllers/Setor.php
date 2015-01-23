@@ -195,7 +195,7 @@ class Setor extends Controller
     public function listByCondId($id)
     {
         $setores = $this->model->get("cd_condominio = {$id}");
-        $return = '<option value="">Setores</option>';
+        $return = '<option value="">--</option>';
         foreach ($setores as $setor) {
             $return .= "<option value=\"{$setor->getCdSetor()}\">{$setor->getNmSetor()}</option>";
         }

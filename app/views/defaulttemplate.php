@@ -64,8 +64,8 @@ if (Session::exists('user')) {
                         <li><a href="Apartamento">Apartamento</a></li>
                         <li><a href="Setor">Setor</a></li>
                         <li class="divider"></li>
-                        <li><a href="OrdemServico">Ordens de Serviço</a></li>
                         <li><a href="Ocorrencia">Ocorrência</a></li>
+                        <li><a href="OrdemServico">Ordens de Serviço</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">

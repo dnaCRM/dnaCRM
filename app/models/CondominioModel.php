@@ -64,7 +64,7 @@ class CondominioModel extends Model
 
     public function existeNome($nome, $id)
     {
-        $queryString = "nm_condominio = '{$nome}'";
+        $queryString = "nm_condominio ilike '{$nome}'";
 
         if ($id) {
             $queryString .= " AND cd_condominio != {$id}";

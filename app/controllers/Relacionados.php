@@ -46,7 +46,7 @@ class Relacionados extends Controller
         $dto
             ->setCdPessoaFisica1((int)Input::get('cd_pessoa_fisica_1'))
             ->setCdPessoaFisica2((int)Input::get('cd_pessoa_fisica_2'))
-            ->setCdCatgRelac(4)
+            ->setCdCatgRelac(Input::get('catg_relac')?4:null)
             ->setCdCatgVlRelac(Input::get('catg_relac'))
             ->setCdUsuarioCriacao(Session::get('user'))
             ->setDtUsuarioCriacao('now()')

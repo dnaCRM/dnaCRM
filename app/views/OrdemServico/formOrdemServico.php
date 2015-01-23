@@ -232,24 +232,24 @@ $token = Token::generate();
 
                 <div class="btn-group" data-toggle="buttons">
                     <label class="btn btn-default
-                            <?php echo (($perfil->getCdVlCatgAvalAtendimento()) == 152 || Input::get('aval_atend') == 152) ? 'active' : ''; ?>"
+                            <?php echo (($perfil->getCdVlCatgAvalAtendimento()) == 154 || Input::get('aval_atend') == 154) ? 'active' : ''; ?>"
                            id="aval_quali_bom" data-toggle="tooltip" data-placement="top" title="Bom">
-                        <input type="radio" name="aval_atend" value="152"
-                            <?php echo (($perfil->getCdVlCatgAvalAtendimento()) == 152 || Input::get('aval_atend') == 152) ? 'checked' : ''; ?>>
+                        <input type="radio" name="aval_atend" value="154"
+                            <?php echo (($perfil->getCdVlCatgAvalAtendimento()) == 154 || Input::get('aval_atend') == 154) ? 'checked' : ''; ?>>
                         <i class="fa fa-smile-o fa-2x"></i>
                     </label>
                     <label class="btn btn-default
-                            <?php echo (($perfil->getCdVlCatgAvalAtendimento()) == 153 || Input::get('aval_atend') == 153) ? 'active' : ''; ?>"
+                            <?php echo (($perfil->getCdVlCatgAvalAtendimento()) == 155 || Input::get('aval_atend') == 155) ? 'active' : ''; ?>"
                            id="aval_quali_regular" data-toggle="tooltip" data-placement="top" title="Regular">
-                        <input type="radio" name="aval_atend" value="153"
-                            <?php echo (($perfil->getCdVlCatgAvalAtendimento()) == 153 || Input::get('aval_atend') == 153) ? 'checked' : ''; ?>>
+                        <input type="radio" name="aval_atend" value="155"
+                            <?php echo (($perfil->getCdVlCatgAvalAtendimento()) == 155 || Input::get('aval_atend') == 155) ? 'checked' : ''; ?>>
                         <i class="fa fa-meh-o fa-2x"></i>
                     </label>
                     <label
-                        class="btn btn-default <?php echo (($perfil->getCdVlCatgAvalAtendimento()) == 154 || Input::get('aval_atend') == 154) ? 'active' : ''; ?>"
+                        class="btn btn-default <?php echo (($perfil->getCdVlCatgAvalAtendimento()) == 156 || Input::get('aval_atend') == 156) ? 'active' : ''; ?>"
                         id="aval_quali_ruim" data-toggle="tooltip" data-placement="top" title="Ruim">
-                        <input type="radio" name="aval_atend" value="154"
-                            <?php echo (($perfil->getCdVlCatgAvalAtendimento()) == 154 || Input::get('aval_atend') == 154) ? 'checked' : ''; ?>>
+                        <input type="radio" name="aval_atend" value="156"
+                            <?php echo (($perfil->getCdVlCatgAvalAtendimento()) == 156 || Input::get('aval_atend') == 156) ? 'checked' : ''; ?>>
                         <i class="fa fa-frown-o fa-2x"></i>
                     </label>
                 </div>
@@ -259,24 +259,24 @@ $token = Token::generate();
 
                 <div class="btn-group" data-toggle="buttons">
                     <label class="btn btn-default
-                            <?php echo (($perfil->getCdVlCatgAvalQualidade()) == 152 || Input::get('aval_quali') == 152) ? 'active' : ''; ?>"
+                            <?php echo (($perfil->getCdVlCatgAvalQualidade()) == 154 || Input::get('aval_quali') == 154) ? 'active' : ''; ?>"
                            id="aval_quali_bom" data-toggle="tooltip" data-placement="top" title="Bom">
-                        <input type="radio" name="aval_quali" value="152"
-                            <?php echo (($perfil->getCdVlCatgAvalQualidade()) == 152 || Input::get('aval_quali') == 152) ? 'checked' : ''; ?>>
+                        <input type="radio" name="aval_quali" value="154"
+                            <?php echo (($perfil->getCdVlCatgAvalQualidade()) == 154 || Input::get('aval_quali') == 154) ? 'checked' : ''; ?>>
                         <i class="fa fa-smile-o fa-2x"></i>
                     </label>
                     <label class="btn btn-default
-                            <?php echo (($perfil->getCdVlCatgAvalQualidade()) == 153 || Input::get('aval_quali') == 153) ? 'active' : ''; ?>"
+                            <?php echo (($perfil->getCdVlCatgAvalQualidade()) == 155 || Input::get('aval_quali') == 155) ? 'active' : ''; ?>"
                            id="aval_quali_regular" data-toggle="tooltip" data-placement="top" title="Regular">
-                        <input type="radio" name="aval_quali" value="153"
-                            <?php echo (($perfil->getCdVlCatgAvalQualidade()) == 153 || Input::get('aval_quali') == 153) ? 'checked' : ''; ?>>
+                        <input type="radio" name="aval_quali" value="155"
+                            <?php echo (($perfil->getCdVlCatgAvalQualidade()) == 155 || Input::get('aval_quali') == 155) ? 'checked' : ''; ?>>
                         <i class="fa fa-meh-o fa-2x"></i>
                     </label>
                     <label class="btn btn-default
-                            <?php echo (($perfil->getCdVlCatgAvalQualidade()) == 154 || Input::get('aval_quali') == 154) ? 'active' : ''; ?>"
+                            <?php echo (($perfil->getCdVlCatgAvalQualidade()) == 156 || Input::get('aval_quali') == 156) ? 'active' : ''; ?>"
                            id="aval_quali_ruim" data-toggle="tooltip" data-placement="top" title="Ruim">
-                        <input type="radio" name="aval_quali" value="154"
-                            <?php echo (($perfil->getCdVlCatgAvalQualidade()) == 154 || Input::get('aval_quali') == 154) ? 'checked' : ''; ?>>
+                        <input type="radio" name="aval_quali" value="156"
+                            <?php echo (($perfil->getCdVlCatgAvalQualidade()) == 156 || Input::get('aval_quali') == 156) ? 'checked' : ''; ?>>
                         <i class="fa fa-frown-o fa-2x"></i>
                     </label>
                 </div>

@@ -26,7 +26,7 @@ class PessoaFisicaModel extends Model
         $categoria = new CategoriaValorDAO();
         $uf = '';
 
-        if ($this->dto->getCdCatgOrgRg()) {
+        if ($this->dto->getCdVlCatgOrgRg()) {
             $catg = $categoria->getBy2Ids($this->dto->getCdVlCatgOrgRg(), $this->dto->getCdCatgOrgRg());
             $uf = $catg->getDescVlCatg();
         }
@@ -56,11 +56,16 @@ class PessoaFisicaModel extends Model
         $sexo = ($this->dto->getIeSexo() == 'F' ? 'Feminino' : 'Masculino');
 
         // Calculando a idade
-        $date = new DateTime($this->dto->getDtNascimento()); // data de nascimento
-        $interval = $date->diff( new DateTime() ); // data atual
-        $idade = $interval->format('%Y anos');
-        //  '%Y Anos, %m Meses e %d Dias'  110 Anos, 2 Meses e 2 Dias
-        // '%Y Anos, %m Meses, %d Dias, %H Horas, %i Minutos e %s Segundos'
+        $idade = '';
+        $dt_nascimento ='';
+        if ($this->dto->getDtNascimento()) {
+            $date = new DateTime($this->dto->getDtNascimento()); // data de nascimento
+            $interval = $date->diff(new DateTime()); // data atual
+            $idade = $interval->format('%Y anos');
+            $dt_nascimento = (new DateTime($this->dto->getDtNascimento()))->format('d/m/Y');
+            //  '%Y Anos, %m Meses e %d Dias'  110 Anos, 2 Meses e 2 Dias
+            // '%Y Anos, %m Meses, %d Dias, %H Horas, %i Minutos e %s Segundos'
+        }
 
         $dt_inicio_curso = ($this->dto->getDtInicioCurso() ?
             (new DateTime($this->dto->getDtInicioCurso()))->format('d/m/Y') : '');
@@ -83,7 +88,7 @@ class PessoaFisicaModel extends Model
             'cd_vl_catg_org_rg' => $this->dto->getCdVlCatgOrgRg(),
             'email' => $this->dto->getEmail(),
             'idade' => $idade,
-            'dt_nascimento' => (new DateTime($this->dto->getDtNascimento()))->format('d/m/Y'),
+            'dt_nascimento' => $dt_nascimento,
             'ie_sexo' => $sexo,
             'ie_estuda' => ($this->dto->getIeEstuda() == 's' ? 'Sim' : 'Não'),
             'cd_instituicao' => $this->dto->getCdInstituicao(),
@@ -201,7 +206,7 @@ class PessoaFisicaModel extends Model
 
     public function existeRG($rg, $id)
     {
-        $queryString = "rg = '{$rg}'";
+        $queryString = "rg ilike '{$rg}'";
 
         if ($id) {
             $queryString .= " AND cd_pessoa_fisica != {$id}";
@@ -214,7 +219,7 @@ class PessoaFisicaModel extends Model
 
     public function existeEmail($email, $id)
     {
-        $queryString = "email = '{$email}'";
+        $queryString = "email ilike '{$email}'";
 
         if ($id) {
             $queryString .= " AND cd_pessoa_fisica != {$id}";

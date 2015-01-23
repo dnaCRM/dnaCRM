@@ -8,7 +8,7 @@
  */
 class PessoaFisica extends Controller
 {
-    /** @var \PessoaFisicaModel  */
+    /** @var \PessoaFisicaModel */
     private $pessoaFisicaModel;
 
     public function __construct()
@@ -70,8 +70,11 @@ class PessoaFisica extends Controller
             $relacionados = $relacionadosModel->getRelacionados($id);
 
             //Formatação de datas
-            $nasc = new DateTime($perfilarr->getDtNascimento());
-            $perfilarr->setDtNascimento($nasc->format('d/m/Y'));
+
+            if ($perfilarr->getDtNascimento()) {
+                $nasc = new DateTime($perfilarr->getDtNascimento());
+                $perfilarr->setDtNascimento($nasc->format('d/m/Y'));
+            }
 
             $dt_inicio_curso = '';
             if ($perfilarr->getDtInicioCurso()) {
@@ -196,7 +199,8 @@ class PessoaFisica extends Controller
     /**
      * @todo Sanitizar entrada de dados
      */
-    public function cadastra() {
+    public function cadastra()
+    {
         if (Input::exists()) {
             if (Token::check(Input::get('token'))) {
 
@@ -219,31 +223,32 @@ class PessoaFisica extends Controller
         $dto = new PessoaFisicaDTO();
 
         $dto->setCdPessoaFisica(Input::get('cd_pessoa_fisica'))
-        ->setNmPessoaFisica(Input::get('nm_pessoa_fisica'))
-        ->setCdPessoaJuridica(Input::get('cd_pessoa_juridica'))
-        ->setCdProfissao(Input::get('cd_profissao'))
-        ->setCpf(Input::get('cpf'))
-        ->setRg(Input::get('rg'))
-        ->setCdCatgOrgRg(1)
-        ->setCdVlCatgOrgRg(Input::get('org_rg'))
-        ->setEmail(Input::get('email'))
-        ->setDtNascimento(Input::get('dt_nascimento'))
-        ->setIeSexo(Input::get('ie_sexo'))
-        ->setIeEstuda(Input::get('ie_estuda'))
-        ->setCdInstituicao(Input::get('cd_instituicao'))
-        ->setDtInicioCurso(Input::get('dt_inicio_curso'))
-        ->setDtFimCurso(Input::get('dt_fim_curso'))
-        ->setCdCatgGrauEnsino(14)
-        ->setCdVlCatgGrauEnsino(Input::get('cd_grau_ensino'))
-        ->setCdUsuarioCriacao(Session::get('user'))
-        ->setDtUsuarioCriacao('now()')
-        ->setCdUsuarioAtualiza(Session::get('user'))
-        ->setDtUsuarioAtualiza('now()');
+            ->setNmPessoaFisica(Input::get('nm_pessoa_fisica'))
+            ->setCdPessoaJuridica(Input::get('cd_pessoa_juridica'))
+            ->setCdProfissao(Input::get('cd_profissao'))
+            ->setCpf(Input::get('cpf'))
+            ->setRg(Input::get('rg'))
+            ->setCdCatgOrgRg(Input::get('org_rg') ? 1 : null)
+            ->setCdVlCatgOrgRg(Input::get('org_rg'))
+            ->setEmail(Input::get('email'))
+            ->setDtNascimento(Input::get('dt_nascimento'))
+            ->setIeSexo(Input::get('ie_sexo'))
+            ->setIeEstuda(Input::get('ie_estuda'))
+            ->setCdInstituicao(Input::get('cd_instituicao'))
+            ->setDtInicioCurso(Input::get('dt_inicio_curso'))
+            ->setDtFimCurso(Input::get('dt_fim_curso'))
+            ->setCdCatgGrauEnsino(Input::get('cd_grau_ensino') ? 14 : null)
+            ->setCdVlCatgGrauEnsino(Input::get('cd_grau_ensino'))
+            ->setCdUsuarioCriacao(Session::get('user'))
+            ->setDtUsuarioCriacao('now()')
+            ->setCdUsuarioAtualiza(Session::get('user'))
+            ->setDtUsuarioAtualiza('now()');
 
         return $dto;
     }
 
-    public function removerPessoaFisica(PessoaFisicaDTO $dto) {
+    public function removerPessoaFisica(PessoaFisicaDTO $dto)
+    {
         if (Input::exists()) {
 
             if (Token::check(Input::get('token'))) {

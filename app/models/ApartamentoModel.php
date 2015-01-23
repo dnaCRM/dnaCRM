@@ -72,7 +72,7 @@ class ApartamentoModel extends Model
 
     public function existeNome($nome, $id)
     {
-        $queryString = "desc_apartamento = '{$nome}'";
+        $queryString = "desc_apartamento ilike '{$nome}'";
 
         if ($id) {
             $queryString .= " AND cd_apartamento != {$id}";

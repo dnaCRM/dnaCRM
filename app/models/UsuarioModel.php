@@ -102,7 +102,8 @@ class UsuarioModel extends Model
 
     public function exists($login, $id)
     {
-        $return = $this->dao->get("login = '{$login}' AND cd_usuario != {$id}");
+        $return = $this->dao->get("login ilike '{$login}' AND cd_usuario != {$id}");
         return (count($return) > 0 ? false : true);
     }
+
 }

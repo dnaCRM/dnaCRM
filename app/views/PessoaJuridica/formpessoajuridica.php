@@ -131,9 +131,8 @@ $token = Token::generate();
 
                         </div>
                         <div class="form-group">
-                            <div class="col-md-4 inputGroupContainer">
+                            <div class="col-sm-4 inputGroupContainer">
                                 <label for="cnpj" class="control-label">Cnpj</label>
-
 
                                 <input type="text" class="form-control" id="cnpj" name="cnpj"
                                        value="<?php echo $perfil->getCnpj() == '' ? Input::get('cnpj') : $perfil->getCnpj(); ?>"

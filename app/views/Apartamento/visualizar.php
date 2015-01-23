@@ -44,7 +44,7 @@ $apartamento = $data['apartamento'];
                     <div class=\"profile-card-foto-container\">
                         <img src=\"{$apartamento['condo_foto']}\" class=\"img-circle profilefoto foto-md\">
                     </div>
-                    <div class=\"pcard-name\"><a href=\"Condominio/visualizar/{$apartamento['cd_condominio']}\">Condomínio
+                    <div class=\"pcard-name\"><a href=\"PessoaJuridica/visualizar/{$apartamento['cd_condominio']}\">Condomínio
                     {$apartamento['condominio']}</a>
                      <div class=\"pcard-info\"><a href=\"Setor/visualizar/{$apartamento['cd_setor']}\">
                     {$apartamento['setor']}</a>

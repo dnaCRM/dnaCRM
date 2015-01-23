@@ -106,7 +106,7 @@ class PessoaJuridicaEndereco extends Controller
 
         $dto
             ->setNrSequencia(Input::get('id_endereco'))
-            ->setCdCatgEnd(9)
+            ->setCdCatgEnd(Input::get('categoria')?9:null)
             ->setCdVlCatgEnd(Input::get('categoria'))
             ->setCdPessoaJuridica(Input::get('cd_pessoa_juridica'))
             ->setCep(Input::get('cep'))
@@ -114,7 +114,7 @@ class PessoaJuridicaEndereco extends Controller
             ->setNumero((int)Input::get('numero'))
             ->setBairro(Input::get('bairro'))
             ->setCidade(Input::get('cidade'))
-            ->setCdCatgEstado(2)
+            ->setCdCatgEstado(Input::get('estado')?2:null)
             ->setCdVlCatgEstado(Input::get('estado'))
             ->setObservacao(Input::get('observacao'))
             ->setCdUsuarioCriacao(Session::get('user'))

@@ -50,14 +50,16 @@ $('#pessoafisicaform').bootstrapValidator({
                     min: 5,
                     max: 50,
                     message: 'Deve ter entre 5 e 50 caracteres.'
+                },
+                regexp: {
+                    regexp: /^[a-zA-ZéúíóáÉÚÍÓÁèùìòàçÇÈÙÌÒÀõãñÕÃÑêûîôâÊÛÎÔÂëÿüïöäËYÜÏÖÄ\-\s]+$/,
+                    message: 'O nome só pode ter letras e espaços.'
                 }
             }
         },
         email: {
             validators: {
-                notEmpty: {
-                    message: 'Campo obrigatório'
-                },
+                verbose: false,
                 emailAddress: {
                     message: 'E-mail inválido'
                 },
@@ -68,7 +70,7 @@ $('#pessoafisicaform').bootstrapValidator({
                 },
                 remote: {
                     message: 'Este e-mail já existe em outro cadastro.',
-                    data: function(validator) {
+                    data: function (validator) {
                         return {
                             cd_pessoa_fisica: validator.getFieldElements('cd_pessoa_fisica').val()
                         };
@@ -81,9 +83,6 @@ $('#pessoafisicaform').bootstrapValidator({
         cpf: {
             group: '.col-sm-4',
             validators: {
-                notEmpty: {
-                    message: 'Campo obrigatório'
-                },
                 stringLength: {
                     min: 14,
                     max: 14,
@@ -91,7 +90,7 @@ $('#pessoafisicaform').bootstrapValidator({
                 },
                 remote: {
                     message: 'Este CPF já existe em outro cadastro.',
-                    data: function(validator) {
+                    data: function (validator) {
                         return {
                             cd_pessoa_fisica: validator.getFieldElements('cd_pessoa_fisica').val()
                         };
@@ -104,9 +103,6 @@ $('#pessoafisicaform').bootstrapValidator({
         rg: {
             group: '.col-sm-4',
             validators: {
-                notEmpty: {
-                    message: 'Campo obrigatório'
-                },
                 stringLength: {
                     min: 5,
                     message: 'Quantidade de caracteres invalida.'
@@ -117,7 +113,7 @@ $('#pessoafisicaform').bootstrapValidator({
                 },
                 remote: {
                     message: 'Este RG ja existe em outro cadastro.',
-                    data: function(validator) {
+                    data: function (validator) {
                         return {
                             cd_pessoa_fisica: validator.getFieldElements('cd_pessoa_fisica').val()
                         };
@@ -129,9 +125,6 @@ $('#pessoafisicaform').bootstrapValidator({
         },
         dt_nascimento: {
             validators: {
-                notEmpty: {
-                    message: 'Campo obrigatório'
-                },
                 date: {
                     format: 'DD/MM/YYYY',
                     message: 'Data inválida.'
@@ -727,10 +720,8 @@ $('#tb_m_enderecos').delegate('.update_m_end', 'click', function () {
             $('#form_end_morador input[name=m_end_dt_entrada]').val(data.m_end_dt_entrada);
             $('#form_end_morador input[name=m_end_dt_saida]').val(data.m_end_dt_saida);
             $('#form_end_morador input[name=cd_pessoa_fisica]').val(data.cd_pessoa_fisica);
-            $('#m_end_condominio option[value=' + data.cd_condominio + ']').prop("selected", "selected");
-            $('#m_end_setor option[value=' + data.cd_setor + ']').prop("selected", "selected");
-            $('#m_end_apartamento option[value=' + data.cd_apartamento + ']').prop("selected", "selected");
             $('#legend_form_end_morador').html('Atualizar Endereço.').addClass('text-primary');
+            preencherMenuEndMorador(data);
 
         },
         error: function (data) {
@@ -760,10 +751,13 @@ $('#tb_m_enderecos').delegate('.delete_m_end', 'click', function () {
     });
 });
 
-$('#form_m_end_reset').click(function () {
+$('#form_m_end_reset').click(function (e) {
+    var $form = $('#form_end_morador');
+    var bv = $form.data('bootstrapValidator');
+
     $('#form_end_morador input[name=id_m_end]').val('');
     $('#legend_form_end_morador').html('Cadastrar Endereço').removeClass('text-primary');
-
+    bv.resetForm(true);
 });
 /** Fim - Botões Atualizar e Apagar PF Telefone*/
 /* Fim da da Manipulação de Morador Endereço */
@@ -926,3 +920,38 @@ $(document).ready(function () {
 
     });
 });
+
+function preencherMenuEndMorador(objeto) {
+    //var condominio = $("#m_end_condominio").val();
+
+    if (objeto.cd_condominio != '') {
+        $.ajax({
+            type: "get",
+            url: "Setor/listByCondId/" + objeto.cd_condominio,
+            success: function (data) {
+                $("#m_end_setor").html(data);
+                $('#m_end_condominio option[value=' + objeto.cd_condominio + ']').prop("selected", "selected");
+                $('#m_end_setor option[value=' + objeto.cd_setor + ']').prop('selected', 'selected');
+            },
+            error: function (data) {
+                $(data.responseText).appendTo('#responseAjaxError');
+            }
+        });
+    }
+
+    //var setor = $("#m_end_setor").val();
+
+    if (objeto.cd_setor != '') {
+        $.ajax({
+            type: "get",
+            url: "Apartamento/listBySetorId/" + objeto.cd_setor,
+            success: function (data) {
+                $("#m_end_apartamento").html(data);
+                $('#m_end_apartamento option[value=' + objeto.cd_apartamento + ']').prop("selected", "selected");
+            },
+            error: function (data) {
+                $(data.responseText).appendTo('#responseAjaxError');
+            }
+        });
+    }
+}

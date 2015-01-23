@@ -70,9 +70,9 @@ class RelacionamentoParametro extends Controller
         $_POST = filter_input_array(INPUT_POST);
 
         $dto
-            ->setCdCatgRelac1(4)
+            ->setCdCatgRelac1(Input::get('relac_1')?4:null)
             ->setCdCatgVlRelac1((int)Input::get('relac_1'))
-            ->setCdCatgRelac2(4)
+            ->setCdCatgRelac2(Input::get('relac_2')?4:null)
             ->setCdCatgVlRelac2((int)Input::get('relac_2'))
             ->setCdUsuarioCriacao(Session::get('user'))
             ->setDtUsuarioCriacao('now()')

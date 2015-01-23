@@ -78,11 +78,11 @@ $token = Token::generate();
                     <i class="fa fa-arrow-circle-o-left"></i> Voltar
                 </a>
 
-                <a href="PessoaFisica/formperfil/" class="btn btn-success" role="button">
+                <a href="PessoaFisica/formpessoafisica/" class="btn btn-success" role="button">
                     <i class="fa fa-arrow-circle-o-up"></i> Novo
                 </a>
 
-                <a href="PessoaFisica/formperfil/<?php echo $cadastrado->getCdPessoaFisica(); ?>"
+                <a href="PessoaFisica/formpessoafisica/<?php echo $cadastrado->getCdPessoaFisica(); ?>"
                    class="btn btn-primary">
                     Avançar <i class="fa fa-arrow-circle-o-right"></i>
                 </a>
@@ -293,10 +293,10 @@ $token = Token::generate();
                 <select class="form-control" id="cd_instituicao" name="cd_instituicao">
                     <option value="">-- Selecione uma Instituição de Ensino</option>
                     <?php
-                    $perfil->setCdPessoaJuridica($perfil->getCdPessoaJuridica() == '' ? Input::get('cd_instituicao') : $perfil->getCdPessoaJuridica());
+                    $perfil->setCdInstituicao($perfil->getCdInstituicao() == '' ? Input::get('cd_instituicao') : $perfil->getCdInstituicao());
                     foreach ($data['inst_ensino'] as $inst_ensino) {
 
-                        if ($inst_ensino->getCdPessoaJuridica() == $perfil->getCdPessoaJuridica()) {
+                        if ($inst_ensino->getCdPessoaJuridica() == $perfil->getCdInstituicao()) {
                             echo '<option value="' . $inst_ensino->getCdPessoaJuridica() . '" selected>' . $inst_ensino->getNmFantasia() . '</option>';
                         } else {
                             echo '<option value="' . $inst_ensino->getCdPessoaJuridica() . ' ">' . $inst_ensino->getNmFantasia() . '</option>';
@@ -335,7 +335,7 @@ $token = Token::generate();
                 <a href="PessoaFisica" id="cancel"
                    class="btn btn-default"><span
                         class="fa fa-undo"></span> Cancelar</a>
-                <a href="PessoaFisica/formperfil" id="novo" class="btn btn-success"><span class="fa fa-file"></span>
+                <a href="PessoaFisica/formpessoafisica" id="novo" class="btn btn-success"><span class="fa fa-file"></span>
                     Novo</a>
                 <button type="submit" name="cadastrar" class="btn btn-primary"><span class="fa fa-check"></span>
                     Salvar

@@ -89,7 +89,7 @@ class Profissao extends Controller
         $nome = Input::get('nome_profissao');
         $id = Input::get('id_profissao');
 
-        $queryString = "nm_profissao = '{$nome}'";
+        $queryString = "nm_profissao ilike '{$nome}'";
 
         if ($id) {
             $queryString .= " AND cd_profissao != {$id}";

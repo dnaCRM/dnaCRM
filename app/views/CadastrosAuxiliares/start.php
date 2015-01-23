@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-md-12">
 
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="panel">
                     <div class="panel-body">
                         <i class="text-info fa fa-sitemap fa-5x pull-left"></i>
@@ -22,7 +22,7 @@
 
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="panel">
                     <div class="panel-body">
                         <i class="text-info fa fa-suitcase fa-5x pull-left"></i>
@@ -34,24 +34,12 @@
 
             </div>
 
-            <div class="col-md-3">
-                <div class="panel">
-                    <div class="panel-body">
-                        <i class="text-info fa fa-graduation-cap fa-5x pull-left"></i>
-                        <div class="list-group">
-                            <div class="col-md-6"><span class="lead"><a href="CadastrosAuxiliares/forminstensino/">Inst. de Ensino</a></span></div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="panel">
                     <div class="panel-body">
                         <i class="text-info fa fa-share-alt fa-5x pull-left"></i>
                         <div class="list-group">
-                            <div class="col-md-6"><span class="lead"><a href="CadastrosAuxiliares/formrelacionamento/">Relacionam.</a></span></div>
+                            <div class="col-md-6"><span class="lead"><a href="CadastrosAuxiliares/formrelacionamento/">Relacionamentos</a></span></div>
                         </div>
                     </div>
                 </div>

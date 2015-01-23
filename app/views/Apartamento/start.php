@@ -45,7 +45,7 @@
                     echo '<td><a href="Apartamento/visualizar/' . $apartamento['cd_apartamento'] . '">'
                         . $apartamento['desc_apartamento'] . '</a></td>';
                     echo '<td><a href="Setor/visualizar/' . $apartamento['cd_setor'] . '">' . $apartamento['setor'] . '</a></td>';
-                    echo '<td><a href="Condominio/visualizar/' . $apartamento['cd_condominio'] . '">' . $apartamento['condominio'] . '</a></td>';
+                    echo '<td><a href="PessoaJuridica/visualizar/' . $apartamento['cd_condominio'] . '">' . $apartamento['condominio'] . '</a></td>';
                     echo "<td><a href=\"Apartamento/formapartamento/{$apartamento['cd_apartamento']}\" class=\"btn btn-primary btn-circle btn-md\" role=\"button\">
                     <i class=\"fa fa-edit\"></i></a></td>";
                     echo '</tr>';

@@ -31,7 +31,7 @@ $('#apartamentoform').bootstrapValidator({
                 },
                 remote: {
                     message: 'Existe outro apartamento com esse nome.',
-                    data: function(validator) {
+                    data: function (validator) {
                         return {
                             cd_apartamento: validator.getFieldElements('cd_apartamento').val()
                         };
@@ -43,17 +43,39 @@ $('#apartamentoform').bootstrapValidator({
         }
     }
 });
+function listarSetores() {
+    var condominio = $("#m_end_condominio").val();
+    if (condominio != '') {
+        $.ajax({
+            type: "get",
+            url: "Setor/listByCondId/" + condominio,
+            success: function (data) {
+                $("#m_end_setor").html(data);
+            }
+        });
+    }
+}
+function getApartametoSetor() {
+    var id = $('#cd_apartamento').val();
+
+    if (id != '') {
+
+        $.ajax({
+            type: "get",
+            url: "Apartamento/apartamentoJSON/" + id,
+            dataType: 'json',
+            success: function (data) {
+                $('#m_end_setor option[value=' + data.cd_setor + ']').prop("selected", "selected");
+            }
+        });
+    }
+}
 
 $("#m_end_condominio").change(function () {
-    var condominio = $("#m_end_condominio").val();
-    $.ajax({
-        type: "get",
-        url: "Setor/listByCondId/" + condominio,
-        success: function (data) {
-            $("#m_end_setor").html(data);
-        },
-        error: function (data) {
-            $(data.responseText).appendTo('#responseAjaxError');
-        }
-    });
+    listarSetores();
 });
+
+$(function () {
+    listarSetores();
+    getApartametoSetor();
+})

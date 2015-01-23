@@ -56,7 +56,7 @@ class SetorModel extends Model
 
     public function existeNome($nome, $id)
     {
-        $queryString = "nm_setor = '{$nome}'";
+        $queryString = "nm_setor ilike '{$nome}'";
 
         if ($id) {
             $queryString .= " AND cd_setor != {$id}";

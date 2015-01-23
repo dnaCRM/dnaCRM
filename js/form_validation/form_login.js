@@ -8,6 +8,7 @@ $('#login').bootstrapValidator({
     fields: {
         usuario: {
             validators: {
+
                 notEmpty: {
                     message: 'Nome de usuário é obrigatório.'
                 },
