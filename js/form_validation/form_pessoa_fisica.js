@@ -955,3 +955,42 @@ function preencherMenuEndMorador(objeto) {
         });
     }
 }
+
+Webcam.set({
+    // live preview size
+    width: 320,
+    height: 240,
+
+    // device capture size
+    dest_width: 640,
+    dest_height: 480,
+
+    // final cropped size
+    crop_width: 480,
+    crop_height: 480,
+
+    // format and quality
+    image_format: 'jpeg',
+    jpeg_quality: 90
+});
+
+function take_snapshot() {
+    Webcam.snap( function(data_uri) {
+        document.getElementById('webcam_preview').innerHTML = '<img class="img-circle img-responsive" src="'+data_uri+'"/>';
+
+        var raw_image_data = data_uri.replace(/^data\:image\/\w+\;base64\,/, '');
+
+        document.getElementById('webcam_photo').value = raw_image_data;
+
+        $('#pf_foto').prop('src', data_uri);
+        console.log(data_uri);
+    } );
+}
+
+$('#btn_camera').on('click', function() {
+    $('#camera_container').html(
+        '<div id="webcam_live" class="img-circle"></div>'
+    )
+    Webcam.attach( '#webcam_live' );
+});
+

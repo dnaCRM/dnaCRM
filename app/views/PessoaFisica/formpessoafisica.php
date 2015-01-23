@@ -95,15 +95,17 @@ $token = Token::generate();
 
     <div class="col-md-2">
 
-        <img class="img-circle img-responsive" src="<?php echo $perfil->getImPerfil(); ?>"><br>
+        <img class="img-circle img-responsive" id="pf_foto" src="<?php echo $perfil->getImPerfil(); ?>"><br>
 
         <div class="form-group col-sm-10">
             <div>
                 <label for="im_perfil" class="btn btn-default">Foto</label>
                 <input type="file" class="hidden" id="im_perfil" name="im_perfil">
+                <input id="webcam_photo" type="hidden" name="webcam_photo" value=""/>
             </div>
         </div>
-
+        <a href="#" id="btn_camera" class="btn btn-default" data-toggle="modal" data-target="#webcam-modal"><i
+                class="fa fa-camera"></i></a>
     </div>
 
     <div class="col-md-6">
@@ -327,7 +329,7 @@ $token = Token::generate();
             </div>
         </div>
 
-        <input type="hidden" name="cd_pessoa_fisica" value="<?php echo $data['id'] ; ?>">
+        <input type="hidden" name="cd_pessoa_fisica" value="<?php echo $data['id']; ?>">
         <input type="hidden" name="token" value="<?php echo $token; ?>">
 
         <div class="form-group">
@@ -335,7 +337,8 @@ $token = Token::generate();
                 <a href="PessoaFisica" id="cancel"
                    class="btn btn-default"><span
                         class="fa fa-undo"></span> Cancelar</a>
-                <a href="PessoaFisica/formpessoafisica" id="novo" class="btn btn-success"><span class="fa fa-file"></span>
+                <a href="PessoaFisica/formpessoafisica" id="novo" class="btn btn-success"><span
+                        class="fa fa-file"></span>
                     Novo</a>
                 <button type="submit" name="cadastrar" class="btn btn-primary"><span class="fa fa-check"></span>
                     Salvar
@@ -1022,5 +1025,40 @@ $token = Token::generate();
         </div>
     </div>
 </div>
+
+<!-- Modal WebCam -->
+<div class="modal fade" id="webcam-modal" tabindex="-1" role="dialog" aria-labelledby="webcam-modal"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <span class="modal-title legend" id="webcamModalTitle">A Webcam vem aqui</span>
+
+                <div class="modal-body row">
+                    <div>
+                        <div id="buttom_webcam_preview">
+                            <a class="btn btn-default btn-circle btn-lg" href="javascript:void(take_snapshot())">
+                                <i class="fa fa-camera"></i>
+                            </a>
+                        </div>
+                        <div id="camera_container" class="col-md-5"></div>
+                    </div>
+                    <div class="col-md-5">
+                        <div id="webcam_preview"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+        wec
+    </div>
+</div>
 <div id="responseAjaxError"></div>
 </div>
+
+<script src="js/webcamjs/webcam.js"></script>

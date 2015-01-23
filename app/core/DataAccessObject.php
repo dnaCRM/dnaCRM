@@ -231,6 +231,20 @@ abstract class DataAccessObject
     }
 
     ################ MÉTODOS PARA MANIPULAÇÃO DE IMAGENS ########################
+
+    protected function uploadWebcam()
+    {
+        $encoded_data = $_POST['webcam_photo'];
+        $binary_data = base64_decode( $encoded_data );
+
+        // save to server (beware of permissions)
+        $result = file_put_contents( IMG_UPLOADS_FOLDER . $this->arquivoTemp, $binary_data );
+        if (!$result) {
+            echo "Could not save image!  Check file permissions.";
+        } else {
+            $this->fotoEnviada = true;
+        }
+    }
     /**
      * Método para manipulação da foto do perfil
      * Este método utiliza uma classe externa que não foi criada por mim
@@ -243,7 +257,10 @@ abstract class DataAccessObject
                 $_FILES[$this->colunaImagem] : null;
             
             if ($fotoperfil['error'] > 0) {
-                echo 'Nenhuma imagem enviada.<br>';
+                //echo 'Nenhuma imagem enviada.<br>';
+                if ($_POST['webcam_photo']) {
+                    $this->uploadWebcam();
+                }
             } else {
                 // array com extensões válidas
                 $validExtensions = array('.jpg', '.jpeg');
