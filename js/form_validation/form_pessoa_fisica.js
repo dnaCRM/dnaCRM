@@ -108,8 +108,8 @@ $('#pessoafisicaform').bootstrapValidator({
                     message: 'Quantidade de caracteres invalida.'
                 },
                 regexp: {
-                    regexp: /^[a-zA-Z0-9]+$/,
-                    message: 'Só pode conter letras e números.'
+                    regexp: /^[A-Z0-9]+$/,
+                    message: 'Só pode conter letras maiúsculas e números.'
                 },
                 remote: {
                     message: 'Este RG ja existe em outro cadastro.',
@@ -975,8 +975,8 @@ Webcam.set({
 });
 
 function take_snapshot() {
-    Webcam.snap( function(data_uri) {
-        document.getElementById('webcam_preview').innerHTML = '<img class="img-circle img-responsive" src="'+data_uri+'"/>';
+    Webcam.snap(function (data_uri) {
+        document.getElementById('webcam_preview').innerHTML = '<img class="img-circle img-responsive" src="' + data_uri + '"/>';
 
         var raw_image_data = data_uri.replace(/^data\:image\/\w+\;base64\,/, '');
 
@@ -984,13 +984,321 @@ function take_snapshot() {
 
         $('#pf_foto').prop('src', data_uri);
         console.log(data_uri);
-    } );
+    });
 }
 
-$('#btn_camera').on('click', function() {
+$('#btn_camera').on('click', function () {
     $('#camera_container').html(
         '<div id="webcam_live" class="img-circle"></div>'
     )
-    Webcam.attach( '#webcam_live' );
+    Webcam.attach('#webcam_live');
 });
+
+//////////////////- Cadastro de Profissao -////////////////////////////
+var formProfissao = $('#form_pf_new_pro');
+var selectProfissao = $('#cd_profissao');
+var inputIdProfissao = $('input[name=id_profissao]');
+var newProModal = $('#new_pro_modal');
+
+selectProfissao.change(function () {
+    if ($(this).val() == 'new_pro') {
+        newProModal.modal('show');
+    }
+});
+
+formProfissao.bootstrapValidator({
+    feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh fa-spin'
+    },
+    fields: {
+        nome_profissao: {
+            validators: {
+                notEmpty: {
+                    message: 'Informe o nome da Profissão.'
+                },
+                remote: {
+                    message: 'Esta profissão já existe.',
+                    data: function (validator) {
+                        return {
+                            id_profissao: validator.getFieldElements('id_profissao').val()
+                        };
+                    },
+                    type: 'POST',
+                    url: "Profissao/checkExisteNome/"
+                }
+            }
+        }
+    }
+}).on('success.form.bv', function (e) {
+    e.preventDefault();
+    var $form = $(e.target);
+    var bv = $form.data('bootstrapValidator');
+    var dados = $(this).serialize();
+
+    $.ajax({
+        type: "POST",
+        url: "Profissao/request",
+        data: dados,
+        dataType: 'json',
+        success: function (data) {
+            var option = '<option id="new-pro" value="' + data.id_profissao + '">' + data.nome_profissao + '</option>';
+            $(option).prependTo(selectProfissao);
+
+            $('#new-pro').prop('selected', 'selected');
+
+            inputIdProfissao.val('');
+            newProModal.modal('hide');
+            bv.resetForm(true);
+        },
+        error: function (data) {
+            console.log(data);
+            $(data.responseText).appendTo('#responseAjaxError');
+        }
+    });
+    return false;
+});
+//////////////////- Fim Cadastro de Profissao -///////////////////////////////
+
+//////////////////- Cadastro de Curso -///////////////////////////////////////
+var formPfNewCurso = $('#form_pf_new_curso');
+var selectCurso = $('#cd_grau_ensino');
+var inputNomeCurso = $('#nome_curso');
+var newCursoModal = $('#new_curso_modal');
+
+selectCurso.change(function () {
+    if ($(this).val() == 'new_curso') {
+        newCursoModal.modal('show');
+    }
+});
+
+formPfNewCurso.bootstrapValidator({
+    feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh fa-spin'
+    },
+    fields: {
+        nome_sub_categoria: {
+            validators: {
+                notEmpty: {
+                    message: 'Informe o nome do curso.'
+                },
+                remote: {
+                    message: 'Este curso já existe.',
+                    type: 'POST',
+                    url: "CategoriaValor/checkExisteNome/"
+                }
+            }
+        }
+    }
+}).on('success.form.bv', function (e) {
+    e.preventDefault();
+    var $form = $(e.target);
+    var bv = $form.data('bootstrapValidator');
+    var dados = $(this).serialize();
+
+    $.ajax({
+        type: "POST",
+        url: "CategoriaValor/request",
+        data: dados,
+        dataType: 'json',
+        success: function (data) {
+
+            var option = '<option id="new-curso" value="' + data.cd_vl_categoria + '">' + data.desc_vl_categoria + '</option>';
+            $(option).prependTo(selectCurso);
+
+            $('#new-curso').prop('selected', 'selected');
+
+            newCursoModal.modal('hide');
+            inputNomeCurso.val('');
+            bv.resetForm(true);
+        },
+        error: function (data) {
+            console.log(data);
+            $(data.responseText).appendTo('#responseAjaxError');
+        }
+    });
+    return false;
+});
+//////////////////- Fim Cadastro de Curso -///////////////////////////////////
+
+//////////////////- Cadastro de Pessoa Jurídica -///////////////////////////////////
+
+var formNewPessoaJuridica = $('#form_pf_new_pj');
+var selectPessoaJuridica = $('#cd_cgc');
+var newPJModal = $('#new_pj_modal');
+
+selectPessoaJuridica.change(function () {
+    if ($(this).val() == 'new_pj') {
+        newPJModal.modal('show');
+    }
+});
+
+formNewPessoaJuridica.bootstrapValidator({
+    excluded: 'disabled',
+    feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh fa-spin'
+    },
+    fields: {
+        nm_fantasia: {
+            validators: {
+                notEmpty: {
+                    message: 'Campo obrigatório'
+                },
+                stringLength: {
+                    min: 2,
+                    max: 50,
+                    message: 'Deve ter entre 5 e 50 caracteres.'
+                },
+                remote: {
+                    message: 'Este Nome Fantasia já existe em outro cadastro.',
+                    type: 'POST',
+                    url: "PessoaJuridica/checkExisteNomeFantasia/",
+                    delay: 2000
+                }
+            }
+        },
+        desc_razao: {
+            validators: {
+                notEmpty: {
+                    message: 'Campo obrigatório'
+                },
+                stringLength: {
+                    min: 5,
+                    max: 50,
+                    message: 'Deve ter entre 5 e 50 caracteres.'
+                },
+                remote: {
+                    message: 'Esta Razão Social já existe em outro cadastro.',
+                    type: 'POST',
+                    url: "PessoaJuridica/checkExisteRazaoSocial/",
+                    delay: 2000
+                }
+            }
+        }
+    }
+}).on('success.form.bv', function (e) {
+    e.preventDefault();
+    var $form = $(e.target);
+    var bv = $form.data('bootstrapValidator');
+    var dados = $(this).serialize();
+
+    $.ajax({
+        type: "POST",
+        url: "PessoaJuridica/request",
+        data: dados,
+        dataType: 'json',
+        success: function (data) {
+
+            var option = '<option id="new-pj" value="' + data.cd_pessoa_juridica + '">' + data.nm_fantasia + '</option>';
+            $(option).prependTo(selectPessoaJuridica);
+
+            $('#new-pj').prop('selected', 'selected');
+
+            newPJModal.modal('hide');
+            bv.resetForm(true);
+        },
+        error: function (data) {
+            console.log(data);
+            $(data.responseText).appendTo('#responseAjaxError');
+        }
+    });
+    return false;
+});
+
+//////////////////- Fim Cadastro de Pessoa Jurídica -///////////////////////////////////
+
+
+
+//////////////////- Cadastro de Instituição de Ensino -///////////////////////////////////
+
+var formNewInstEnsino = $('#form_pf_new_ie');
+var selectInstEnsino = $('#cd_instituicao');
+var newIEModal = $('#new_ie_modal');
+
+selectInstEnsino.change(function () {
+    if ($(this).val() == 'new_ie') {
+        newIEModal.modal('show');
+    }
+});
+
+formNewInstEnsino.bootstrapValidator({
+    excluded: 'disabled',
+    feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh fa-spin'
+    },
+    fields: {
+        nm_fantasia: {
+            validators: {
+                notEmpty: {
+                    message: 'Campo obrigatório'
+                },
+                stringLength: {
+                    min: 2,
+                    max: 50,
+                    message: 'Deve ter entre 5 e 50 caracteres.'
+                },
+                remote: {
+                    message: 'Este Nome Fantasia já existe em outro cadastro.',
+                    type: 'POST',
+                    url: "PessoaJuridica/checkExisteNomeFantasia/",
+                    delay: 2000
+                }
+            }
+        },
+        desc_razao: {
+            validators: {
+                notEmpty: {
+                    message: 'Campo obrigatório'
+                },
+                stringLength: {
+                    min: 5,
+                    max: 50,
+                    message: 'Deve ter entre 5 e 50 caracteres.'
+                },
+                remote: {
+                    message: 'Esta Razão Social já existe em outro cadastro.',
+                    type: 'POST',
+                    url: "PessoaJuridica/checkExisteRazaoSocial/",
+                    delay: 2000
+                }
+            }
+        }
+    }
+}).on('success.form.bv', function (e) {
+    e.preventDefault();
+    var $form = $(e.target);
+    var bv = $form.data('bootstrapValidator');
+    var dados = $(this).serialize();
+
+    $.ajax({
+        type: "POST",
+        url: "PessoaJuridica/request",
+        data: dados,
+        dataType: 'json',
+        success: function (data) {
+
+            var option = '<option id="new-ie" value="' + data.cd_pessoa_juridica + '">' + data.nm_fantasia + '</option>';
+            $(option).prependTo(selectInstEnsino);
+
+            $('#new-ie').prop('selected', 'selected');
+
+            newIEModal.modal('hide');
+            bv.resetForm(true);
+        },
+        error: function (data) {
+            console.log(data);
+            $(data.responseText).appendTo('#responseAjaxError');
+        }
+    });
+    return false;
+});
+
+//////////////////- Fim Cadastro de Instituição de Ensino -///////////////////////////////////
 

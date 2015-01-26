@@ -222,6 +222,7 @@ $token = Token::generate();
                         }
                     }
                     ?>
+                    <option value="new_pj">--> Adicionar Empresa</option>
                 </select>
             </div>
         </div>
@@ -242,6 +243,7 @@ $token = Token::generate();
                         }
                     }
                     ?>
+                    <option value="new_pro">--> Adicionar Novo</option>
                 </select>
             </div>
         </div>
@@ -305,6 +307,7 @@ $token = Token::generate();
                         }
                     }
                     ?>
+                    <option value="new_ie">-- Adicionar uma Instituição de Ensino</option>
                 </select>
             </div>
         </div>
@@ -325,6 +328,7 @@ $token = Token::generate();
                         }
                     }
                     ?>
+                    <option value="new_curso">--> Adicionar novo Curso</option>
                 </select>
             </div>
         </div>
@@ -1036,24 +1040,25 @@ $token = Token::generate();
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">×</span></button>
                 <span class="modal-title legend" id="webcamModalTitle">A Webcam vem aqui</span>
+            </div>
 
-                <div class="modal-body row">
-                    <div>
-                        <div id="buttom_webcam_preview">
-                            <a class="btn btn-default btn-circle btn-lg" href="javascript:void(take_snapshot())">
-                                <i class="fa fa-camera"></i>
-                            </a>
-                        </div>
-                        <div id="camera_container" class="col-md-5"></div>
+            <div class="modal-body row">
+                <div>
+                    <div id="buttom_webcam_preview">
+                        <a class="btn btn-default btn-circle btn-lg" href="javascript:void(take_snapshot())">
+                            <i class="fa fa-camera"></i>
+                        </a>
                     </div>
-                    <div class="col-md-5">
-                        <div id="webcam_preview"></div>
-                    </div>
+                    <div id="camera_container" class="col-md-5"></div>
                 </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" data-dismiss="modal">OK</button>
+                <div class="col-md-5">
+                    <div id="webcam_preview"></div>
                 </div>
             </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" data-dismiss="modal">OK</button>
+            </div>
+
         </div>
         wec
     </div>
@@ -1062,3 +1067,134 @@ $token = Token::generate();
 </div>
 
 <script src="js/webcamjs/webcam.js"></script>
+
+<!-- Modal para cadastro rápido de profissão -->
+<div class="modal fade" tabindex="-1" role="dialog" id="new_pro_modal" aria-labelledby="new_pro_modal"
+     aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title legend">Nova Profissão</h4>
+            </div>
+
+            <form id="form_pf_new_pro">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="nome_profissao" class="control-label">Nome da profissão:</label>
+                        <input type="text" class="form-control" name="nome_profissao" id="nome_profissao">
+                        <input type="hidden" name="id_profissao">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary" name="save_new_pro" value="Salvar">
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal para cadastro rápido de curso -->
+<div class="modal fade" tabindex="-1" role="dialog" id="new_curso_modal" aria-labelledby="new_curso_modal"
+     aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title legend">Nova Curso</h4>
+            </div>
+
+            <form id="form_pf_new_curso">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="nome_curso" class="control-label">Nome do Curso:</label>
+                        <input type="text" class="form-control" name="nome_sub_categoria" id="nome_curso">
+                        <!-- Categoria Curso -->
+                        <input type="hidden" id="id_cat_curso" name="select_cat" value="14">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary" name="save_new_curso" value="Salvar">
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Modal para cadastro rápido de Empresa -->
+<div class="modal fade" tabindex="-1" role="dialog" id="new_pj_modal" aria-labelledby="new_pj_modal"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title legend">Nova Pessoa Jurídica</h4>
+            </div>
+
+            <form id="form_pf_new_pj">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="nm_empresa" class="control-label">Nome Fantasia:</label>
+                        <input type="text" class="form-control" name="nm_fantasia" id="nm_empresa">
+                    </div>
+                    <div class="form-group">
+                        <label for="razao_social_empresa" class="control-label">Razão Social:</label>
+                        <input type="text" class="form-control" name="desc_razao" id="razao_social_empresa">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="cd_pessoa_juridica" value="">
+                    <input type="submit" class="btn btn-primary" name="save_new_pj" value="Salvar">
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal para cadastro rápido de Instituicao de Ensino -->
+<div class="modal fade" tabindex="-1" role="dialog" id="new_ie_modal" aria-labelledby="new_ie_modal"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title legend">Nova Pessoa Jurídica</h4>
+            </div>
+
+            <form id="form_pf_new_ie">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="nm_ie" class="control-label">Nome Fantasia:</label>
+                        <input type="text" class="form-control" name="nm_fantasia" id="nm_ie">
+                    </div>
+                    <div class="form-group">
+                        <label for="razao_social_ie" class="control-label">Razão Social ou nome completo:</label>
+                        <input type="text" class="form-control" name="desc_razao" id="razao_social_ie">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="cd_tipo_empresa" value="159">
+                    <input type="hidden" name="cd_pessoa_juridica" value="">
+                    <input type="submit" class="btn btn-primary" name="save_new_ie" value="Salvar">
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+</div>

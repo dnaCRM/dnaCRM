@@ -96,14 +96,17 @@ if (Session::exists('user')) {
 
             <!-- INÍCIO FORMULÁRIO DE PESQUISA -->
             <form class="navbar-form navbar-left dropdown" id="nav-top-form-busca">
-                <input type="text" class="form-control col-lg-8" id="pessoa_1" name="pessoa_1" placeholder="Buscar Pessoa" autocomplete="off" data-toggle="busca">
+                <input type="text" class="form-control col-lg-8" id="pessoa_1" name="pessoa_1"
+                       placeholder="Buscar Pessoa" autocomplete="off" data-toggle="busca">
+
                 <div id="area-do-resultado" class="dropdown-busca list-group" aria-labelledby="busca"></div>
             </form>
             <!-- FIM FORMULÁRIO DE PESQUISA -->
 
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="PessoaFisica/visualizar/<?php echo $userDados['cd_usuario'];?>"><i class="glyphicon glyphicon-user"></i>
+                    <a href="PessoaFisica/visualizar/<?php echo $userDados['cd_usuario']; ?>"><i
+                            class="glyphicon glyphicon-user"></i>
                         <span><?php echo $userDados['login']; ?></span></a>
 
                 </li>
@@ -127,7 +130,9 @@ if (Session::exists('user')) {
             <img src="<?php echo $userDados['foto']; ?>" class="img-circle">
         </div>
         <div class="pull-left info">
-            <p><a href="PessoaFisica/visualizar/<?php echo $userDados['cd_usuario'];?>"><?php echo $userDados['login']; ?></a></p>
+            <p>
+                <a href="PessoaFisica/visualizar/<?php echo $userDados['cd_usuario']; ?>"><?php echo $userDados['login']; ?></a>
+            </p>
 
             <a href="Usuario/logoff"><i class="fa fa-circle text-danger"></i> Sair</a>
         </div>
@@ -135,25 +140,19 @@ if (Session::exists('user')) {
 
     <ul class="sidebar-menu">
         <?php if ($userDados['nivel'] == 1): ?>
-        <li class="treeview">
-            <a href="#">
-                <i class="fa fa-eye"></i> <span>Admin</span>
-                <i class="fa pull-right fa-angle-left"></i>
-            </a>
-            <ul class="treeview-menu" style="display: none;">
-                <li><a href="Usuario"><i class="fa fa-angle-double-right"></i> Usuários</a></li>
-            </ul>
-        </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-eye"></i> <span>Admin</span>
+                    <i class="fa pull-right fa-angle-left"></i>
+                </a>
+                <ul class="treeview-menu" style="display: none;">
+                    <li><a href="Usuario"><i class="fa fa-angle-double-right"></i> Usuários</a></li>
+                </ul>
+            </li>
         <?php endif; ?>
         <li>
             <a href="/dnacrm">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-            </a>
-        </li>
-        <li>
-            <a href="Relatorios">
-                <i class="fa fa-file-text-o"></i> <span>Relatorios</span>
-                <small class="badge pull-right bg-green">new</small>
             </a>
         </li>
         <li class="treeview">
@@ -178,7 +177,8 @@ if (Session::exists('user')) {
                 <i class="fa pull-right fa-angle-left"></i>
             </a>
             <ul class="treeview-menu" style="display: none;">
-                <li><a href="PessoaFisica/formpessoafisica"><i class="fa fa-angle-double-right"></i> Pessoa Física</a></li>
+                <li><a href="PessoaFisica/formpessoafisica"><i class="fa fa-angle-double-right"></i> Pessoa Física</a>
+                </li>
                 <li><a href="PessoaJuridica/formpessoajuridica"><i class="fa fa-angle-double-right"></i> Pessoa Jurídica</a>
                 </li>
                 <li><a href="Setor/formSetor"><i class="fa fa-angle-double-right"></i> Setores</a></li>
@@ -193,32 +193,8 @@ if (Session::exists('user')) {
             </a>
             <ul class="treeview-menu" style="display: none;">
                 <li><a href="Ocorrencia/formOcorrencia"><i class="fa fa-angle-double-right"></i> Ocorrência</a></li>
-                <li><a href="OrdemServico/formOrdemServico"><i class="fa fa-angle-double-right"></i> Ordem de
-                        Serviço</a></li>
-                <li><a href="Orcamento/formorcamento"><i class="fa fa-angle-double-right"></i> Orçamento</a></li>
+                <li><a href="OrdemServico/formOrdemServico"><i class="fa fa-angle-double-right"></i> Ordem de Serviço</a></li>
             </ul>
-        </li>
-        <li class="treeview">
-            <a href="#">
-                <i class="fa fa-table"></i> <span>Tables</span>
-                <i class="fa pull-right fa-angle-left"></i>
-            </a>
-            <ul class="treeview-menu" style="display: none;">
-                <li><a href="../tables/simple.html"><i class="fa fa-angle-double-right"></i> Simple tables</a></li>
-                <li><a href="../tables/data.html"><i class="fa fa-angle-double-right"></i> Data tables</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="Agenda">
-                <i class="fa fa-calendar"></i> <span>Agenda</span>
-                <small class="badge pull-right bg-red">3</small>
-            </a>
-        </li>
-        <li>
-            <a href="Mensagens">
-                <i class="fa fa-envelope"></i> <span>Mailbox</span>
-                <small class="badge pull-right bg-yellow">12</small>
-            </a>
         </li>
     </ul>
 
@@ -228,7 +204,7 @@ if (Session::exists('user')) {
 <!-- container start -->
 
 
-    <?php require_once($this->viewfile); ?>
+<?php require_once($this->viewfile); ?>
 
 
 <!-- container end -->
@@ -272,6 +248,7 @@ JavaScriptLoader::load();
 ?>
 
 <a id="toTop" href="#"><span id="toTopHover"></span><img width="45" height="45" alt="" src="img/to-top.png"></a>
+
 <div id="responseAjaxError"></div>
 </body>
 </html>

@@ -24,6 +24,17 @@ $('#pessoajuridicaform').bootstrapValidator({
                     min: 2,
                     max: 50,
                     message: 'Deve ter entre 5 e 50 caracteres.'
+                },
+                remote: {
+                    message: 'Este Nome Fantasia já existe em outro cadastro.',
+                    data: function(validator) {
+                        return {
+                            cd_pessoa_juridica: validator.getFieldElements('cd_pessoa_juridica').val()
+                        };
+                    },
+                    type: 'POST',
+                    url: "PessoaJuridica/checkExisteNomeFantasia/",
+                    delay: 2000
                 }
             }
         },
@@ -36,6 +47,17 @@ $('#pessoajuridicaform').bootstrapValidator({
                     min: 5,
                     max: 50,
                     message: 'Deve ter entre 5 e 50 caracteres.'
+                },
+                remote: {
+                    message: 'Esta Razão Social já existe em outro cadastro.',
+                    data: function(validator) {
+                        return {
+                            cd_pessoa_juridica: validator.getFieldElements('cd_pessoa_juridica').val()
+                        };
+                    },
+                    type: 'POST',
+                    url: "PessoaJuridica/checkExisteRazaoSocial/",
+                    delay: 2000
                 }
             }
         },
@@ -497,3 +519,65 @@ $('#form_end_reset').click(function () {
     $('#legend_form_enderecos').html('Cadastrar Endereço').removeClass('text-primary');
 
 });
+
+
+//////////////////- Cadastro de Ramo de Atividade -///////////////////////////////////////
+var formPJNewRamoAtiv = $('#form_pj_new_ramo_ativ');
+var selectRamoAtiv = $('#cd_ramo_atividade');
+var newRamoAtivModal = $('#new_ramo_ativ');
+
+selectRamoAtiv.change(function () {
+    if ($(this).val() == 'new_ra') {
+        newRamoAtivModal.modal('show');
+    }
+});
+
+formPJNewRamoAtiv.bootstrapValidator({
+    feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh fa-spin'
+    },
+    fields: {
+        nome_sub_categoria: {
+            validators: {
+                notEmpty: {
+                    message: 'Informe o nome do curso.'
+                },
+                remote: {
+                    message: 'Este curso já existe.',
+                    type: 'POST',
+                    url: "CategoriaValor/checkExisteNome/"
+                }
+            }
+        }
+    }
+}).on('success.form.bv', function (e) {
+    e.preventDefault();
+    var $form = $(e.target);
+    var bv = $form.data('bootstrapValidator');
+    var dados = $(this).serialize();
+
+    $.ajax({
+        type: "POST",
+        url: "CategoriaValor/request",
+        data: dados,
+        dataType: 'json',
+        success: function (data) {
+
+            var option = '<option id="new-ra" value="' + data.cd_vl_categoria + '">' + data.desc_vl_categoria + '</option>';
+            $(option).prependTo(selectRamoAtiv);
+
+            $('#new-ra').prop('selected', 'selected');
+
+            newRamoAtivModal.modal('hide');
+            bv.resetForm(true);
+        },
+        error: function (data) {
+            console.log(data);
+            $(data.responseText).appendTo('#responseAjaxError');
+        }
+    });
+    return false;
+});
+//////////////////- Fim Cadastro de Ramo de Atividade -///////////////////////////////////

@@ -258,7 +258,7 @@ abstract class DataAccessObject
             
             if ($fotoperfil['error'] > 0) {
                 //echo 'Nenhuma imagem enviada.<br>';
-                if ($_POST['webcam_photo']) {
+                if (isset($_POST['webcam_photo']) && ($_POST['webcam_photo']) != '') {
                     $this->uploadWebcam();
                 }
             } else {

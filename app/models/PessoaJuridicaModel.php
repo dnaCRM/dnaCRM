@@ -108,4 +108,30 @@ class PessoaJuridicaModel extends Model
 
         return (count($return) > 0 ? false : true);
     }
+
+    public function existeNomeFantasia($nm_fantasia, $id)
+    {
+        $queryString = "nm_fantasia ilike '{$nm_fantasia}'";
+
+        if ($id) {
+            $queryString .= " AND cd_pessoa_juridica != {$id}";
+        }
+
+        $return = $this->dao->get($queryString);
+
+        return (count($return) > 0 ? false : true);
+    }
+
+    public function existeRazaoSocial($razao_social, $id)
+    {
+        $queryString = "desc_razao ilike '{$razao_social}'";
+
+        if ($id) {
+            $queryString .= " AND cd_pessoa_juridica != {$id}";
+        }
+
+        $return = $this->dao->get($queryString);
+
+        return (count($return) > 0 ? false : true);
+    }
 } 

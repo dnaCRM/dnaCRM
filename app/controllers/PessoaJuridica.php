@@ -1,14 +1,14 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: Raul
  * Date: 13/10/14
  * Time: 22:54
  */
-
 class PessoaJuridica extends Controller
 {
-    /** @var \PessoaJuridicaModel  */
+    /** @var \PessoaJuridicaModel */
     private $pessoaJuridicaModel;
 
     public function __construct()
@@ -21,7 +21,7 @@ class PessoaJuridica extends Controller
     { //Pega a lista completa de perfis
         $perfil_list = (array)$this->model->fullList();
         $relacao = array();
-        foreach($perfil_list as $perfil){
+        foreach ($perfil_list as $perfil) {
             $relacao[] = $this->pessoaJuridicaModel->setDTO($perfil)->getArrayDados();
         }
 
@@ -156,7 +156,8 @@ class PessoaJuridica extends Controller
     /**
      * @todo Sanitizar entrada de dados
      */
-    public function cadastra() {
+    public function cadastra()
+    {
         if (Input::exists()) {
             if (Token::check(Input::get('token'))) {
 
@@ -175,19 +176,37 @@ class PessoaJuridica extends Controller
 
     }
 
+    public function request()
+    {
+        if (Input::exists()) {
+            $pessoaJuridica = $this->setDados();
+
+            try {
+                $dto = $this->model->gravar($pessoaJuridica);
+            } catch (Exception $e) {
+                CodeFail((int)$e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
+            }
+
+            $return = $this->pessoaJuridicaModel->setDTO($dto)->getArrayDados();
+
+            echo json_encode($return);
+        }
+    }
+
+
     private function setDados()
     {
         $dto = new PessoaJuridicaDTO();
 
         $dto->setCdPessoaJuridica(Input::get('cd_pessoa_juridica'))
-            ->setCnpj(Input::get('cnpj'))
+            ->setCnpj(Input::get('cnpj') != ''?Input::get('cnpj'):null)
             ->setNmFantasia(Input::get('nm_fantasia'))
             ->setDescRazao(Input::get('desc_razao'))
-            ->setCdCatgTipoEmpresa(Input::get('cd_tipo_empresa')?16:null)
-            ->setCdTipoEmpresa(Input::get('cd_tipo_empresa'))
-            ->setCdCatgRamoAtividade(Input::get('cd_ramo_atividade')?8:null)
-            ->setCdRamoAtividade(Input::get('cd_ramo_atividade'))
-            ->setEmail(Input::get('email'))
+            ->setCdCatgTipoEmpresa(Input::get('cd_tipo_empresa') ? 16 : null)
+            ->setCdTipoEmpresa((int)Input::get('cd_tipo_empresa')!=0?(int)Input::get('cd_tipo_empresa'):null)
+            ->setCdCatgRamoAtividade(Input::get('cd_ramo_atividade') ? 8 : null)
+            ->setCdRamoAtividade((int)Input::get('cd_ramo_atividade')!=0?(int)Input::get('cd_ramo_atividade'):null)
+            ->setEmail(Input::get('email') != '' ? Input::get('email') : null)
             ->setCdUsuarioCriacao(Session::get('user'))
             ->setDtUsuarioCriacao('now()')
             ->setCdUsuarioAtualiza(Session::get('user'))
@@ -196,7 +215,8 @@ class PessoaJuridica extends Controller
         return $dto;
     }
 
-    public function removerPessoaJuridica(PessoaJuridicaDTO $dto) {
+    public function removerPessoaJuridica(PessoaJuridicaDTO $dto)
+    {
         if (Input::exists()) {
 
             if (Token::check(Input::get('token'))) {
@@ -262,6 +282,30 @@ class PessoaJuridica extends Controller
 
         $return = array(
             'valid' => $this->pessoaJuridicaModel->existeEmail($email, $id)
+        );
+
+        echo json_encode($return);
+    }
+
+    public function checkExisteNomeFantasia()
+    {
+        $nm_fantasia = Input::get('nm_fantasia');
+        $id = Input::get('cd_pessoa_juridica');
+
+        $return = array(
+            'valid' => $this->pessoaJuridicaModel->existeNomeFantasia($nm_fantasia, $id)
+        );
+
+        echo json_encode($return);
+    }
+
+    public function checkExisteRazaoSocial()
+    {
+        $razao_social = Input::get('desc_razao');
+        $id = Input::get('cd_pessoa_juridica');
+
+        $return = array(
+            'valid' => $this->pessoaJuridicaModel->existeRazaoSocial($razao_social, $id)
         );
 
         echo json_encode($return);

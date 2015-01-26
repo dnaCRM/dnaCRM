@@ -171,6 +171,7 @@ $token = Token::generate();
                                         }
                                     }
                                     ?>
+                                    <option value="new_ra">--> Adicionar um Ramo de Atividade</option>
                                 </select>
                             </div>
                         </div>
@@ -677,4 +678,35 @@ $token = Token::generate();
     </div>
 </div>
 <div id="responseAjaxError"></div>
+</div>
+
+<!-- Modal para cadastro rápido de Ramo de Atividade -->
+<div class="modal fade" tabindex="-1" role="dialog" id="new_ramo_ativ" aria-labelledby="new_ramo_ativ"
+     aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title legend">Nova Ramo de Atividade</h4>
+            </div>
+
+            <form id="form_pj_new_ramo_ativ">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="nome_ramo_ativ" class="control-label">Nome do Ramo de Atividade:</label>
+                        <input type="text" class="form-control" name="nome_sub_categoria" id="nome_ramo_ativ">
+                        <!-- Categoria Curso -->
+                        <input type="hidden" id="id_cat_ramo_ativ" name="select_cat" value="8">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary" name="save_new_ramo_ativ" value="Salvar">
+                </div>
+            </form>
+
+        </div>
+
+    </div>
 </div>
