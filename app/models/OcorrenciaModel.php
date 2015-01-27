@@ -73,6 +73,31 @@ class OcorrenciaModel extends Model
         );
     }
 
+    public function getOcorrencia()
+    {
+        $_POST = filter_input_array(INPUT_POST);
+        $assunto = Input::get('assunto');
+        $ocorrencias = $this->dao->get("desc_assunto ilike '%{$assunto}%' order by desc_assunto limit 5");
+
+        $resultado = array();
+
+        foreach($ocorrencias as $ocorrencia) {
+            $resultado[] = $this->setDTO($ocorrencia)->getBasicInfo();
+        }
+
+        return $resultado;
+    }
+
+    public function getBasicInfo()
+    {
+        return array(
+            'cd_ocorrencia' => $this->dto->getCdOcorrencia(),
+            'dt_ocorrencia' => (new DateTime($this->dto->getDtOcorrencia()))->format('d/m/Y'),
+            'desc_assunto' => $this->dto->getDescAssunto(),
+            'desc_ocorrencia' => $this->dto->getDescOcorrencia()
+        );
+    }
+
     public function getPessoasEnvolvidas(OcorrenciaPessoaFisicaEnvolvidaModel $pessoas)
     {
         return $pessoas->getPessoasPorOcorrencia(new PessoaFisicaModel(), $this->dto->getCdOcorrencia());

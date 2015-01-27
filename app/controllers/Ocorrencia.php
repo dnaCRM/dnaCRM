@@ -208,4 +208,10 @@ Class Ocorrencia extends Controller
         }
         return $obj;
     }
+
+    public function buscaAjax()
+    {
+        $return = $this->ocorrenciaModel->getOcorrencia();
+        echo json_encode($return);
+    }
 }

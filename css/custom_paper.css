@@ -538,6 +538,5 @@ table.dataTable tbody td, table.table tbody td{
 }
 
 .btn-pcard-bottom-right {
-    position: absolute;
-    right: 5px;
+    float: right;
 }

@@ -7,13 +7,13 @@ $id_check = $data['id'];
 
 $token = Token::generate();
 ?>
-<div class="container">
-<div class="row">
-    <div class="col-sm-12">
-        <h3 class="page-header"><?php echo $data['pagetitle']; ?>
-            <small><?php echo $data['pagesubtitle']; ?></small>
-            <?php if ($id_check): ?>
-                <span class="btn-panel pull-right">
+    <div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h3 class="page-header"><?php echo $data['pagetitle']; ?>
+                <small><?php echo $data['pagesubtitle']; ?></small>
+                <?php if ($id_check): ?>
+                    <span class="btn-panel pull-right">
                 <a href="OrdemServico/visualizar/<?php echo $id_check; ?>" data-toggle="tooltip" data-placement="top"
                    title="Ver Perfil!"
                    class="btn btn-circle btn-lg">
@@ -24,84 +24,84 @@ $token = Token::generate();
                     <i class="fa fa-list"></i>
                 </a>
             </span>
-            <?php endif; ?>
-        </h3>
-    </div>
-</div>
-
-<div class="row">
-<div class="col-md-12">
-<ul class="nav nav-tabs">
-    <li class="active"><a href="#principal" data-toggle="tab">Cadastro</a></li>
-</ul>
-
-<div id="TabAdicionais" class="tab-content">
-<div class="tab-pane fade active in" id="principal">
-
-<div class="row">
-<?php if ($cadastrado): ?>
-
-    <div class="jumbotron">
-        <div class="container">
-            <div class="col-md-8">
-                <h1 class="text-success"><span class="glyphicon glyphicon-arrow-right"></span>
-                    Sucesso!</h1>
-
-                <p>Deseja adicionar mais ordem de serviço ?</p>
-
-                <a href="OrdemServico/" class="btn btn-info" role="button">
-                    <i class="fa fa-arrow-circle-o-left"></i> Voltar
-                </a>
-
-                <a href="OrdemServico/formOrdemServico/" class="btn btn-success" role="button">
-                    <i class="fa fa-arrow-circle-o-up"></i> Novo
-                </a>
-            </div>
+                <?php endif; ?>
+            </h3>
         </div>
     </div>
-<?php else: ?>
-    <form id="ordemservicoform" class="form-horizontal" method="post" action=""
-          enctype="multipart/form-data">
-    <fieldset>
-    <!-- Lado Esquerdo -->
-    <div class="col-md-6">
 
-        <div class="form-group">
-            <div class="col-sm-12">
-                <label for="assunto" class="control-label">Assunto</label>
+    <div class="row">
+    <div class="col-md-12">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#principal" data-toggle="tab">Cadastro</a></li>
+    </ul>
 
-                <input type="text" class="form-control" id="assunto" name="assunto"
-                       value="<?php echo $perfil->getDescAssunto() == '' ? Input::get('assunto') : $perfil->getDescAssunto(); ?>"
-                       placeholder="Assunto">
+    <div id="TabAdicionais" class="tab-content">
+    <div class="tab-pane fade active in" id="principal">
+
+    <div class="row">
+    <?php if ($cadastrado): ?>
+
+        <div class="jumbotron">
+            <div class="container">
+                <div class="col-md-8">
+                    <h1 class="text-success"><span class="glyphicon glyphicon-arrow-right"></span>
+                        Sucesso!</h1>
+
+                    <p>Deseja adicionar mais ordem de serviço ?</p>
+
+                    <a href="OrdemServico/" class="btn btn-info" role="button">
+                        <i class="fa fa-arrow-circle-o-left"></i> Voltar
+                    </a>
+
+                    <a href="OrdemServico/formOrdemServico/" class="btn btn-success" role="button">
+                        <i class="fa fa-arrow-circle-o-up"></i> Novo
+                    </a>
+                </div>
             </div>
         </div>
+    <?php else: ?>
+        <form id="ordemservicoform" class="form-horizontal" method="post" action=""
+              enctype="multipart/form-data">
+        <fieldset>
+        <!-- Lado Esquerdo -->
+        <div class="col-md-6">
 
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <label for="assunto" class="control-label">Assunto</label>
 
-        <div class="form-group">
-
-            <div class="col-sm-12">
-                <label for="descricao_os" class="control-label">Descrição</label>
-
-                <textarea id="descricao" class="form-control" name="descricao"
-                          placeholder="Ocorrência"
-                          rows="5"><?php echo $perfil->getDescOrdemServico() == '' ? Input::get('descricao') : $perfil->getDescOrdemServico(); ?></textarea>
+                    <input type="text" class="form-control" id="assunto" name="assunto"
+                           value="<?php echo $perfil->getDescAssunto() == '' ? Input::get('assunto') : $perfil->getDescAssunto(); ?>"
+                           placeholder="Assunto">
+                </div>
             </div>
+
+
+            <div class="form-group">
+
+                <div class="col-sm-12">
+                    <label for="descricao_os" class="control-label">Descrição</label>
+
+                    <textarea id="descricao" class="form-control" name="descricao"
+                              placeholder="Ocorrência"
+                              rows="5"><?php echo $perfil->getDescOrdemServico() == '' ? Input::get('descricao') : $perfil->getDescOrdemServico(); ?></textarea>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <label for="desc_conclusao_os" class="control-label">Conclusão</label>
+
+                    <textarea id="desc_conclusao" class="form-control" name="desc_conclusao"
+                              placeholder="Como a OS foi concluída"
+                              rows="5"><?php echo $perfil->getDescConclusao() == '' ? Input::get('desc_conclusao') : $perfil->getDescConclusao(); ?></textarea>
+                </div>
+            </div>
+
         </div>
 
-
-        <div class="form-group">
-            <div class="col-sm-12">
-                <label for="desc_conclusao_os" class="control-label">Conclusão</label>
-
-                <textarea id="desc_conclusao" class="form-control" name="desc_conclusao"
-                          placeholder="Como a OS foi concluída"
-                          rows="5"><?php echo $perfil->getDescConclusao() == '' ? Input::get('desc_conclusao') : $perfil->getDescConclusao(); ?></textarea>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- Lado Direito -->
+        <!-- Lado Direito -->
 
         <?php
         if ($id_check) {
@@ -129,8 +129,8 @@ $token = Token::generate();
                         <img src=\"{$data['dados']['executor_foto']}\" class=\"img-circle profilefoto foto-md\">
                     </div>
                     <div class=\"pcard-name\">";
-                        if ($data['dados']['cd_pf_executor']){
-                            echo "<a href=\"PessoaFisica/visualizar/{$data['dados']['cd_pf_executor']}\">{$data['dados']['executor']}</a>
+            if ($data['dados']['cd_pf_executor']) {
+                echo "<a href=\"PessoaFisica/visualizar/{$data['dados']['cd_pf_executor']}\">{$data['dados']['executor']}</a>
                                   <div class=\"pcard-info\">Executor</div>
                                   <a href=\"#\"
                                         data-toggle=\"tooltip\"
@@ -140,10 +140,10 @@ $token = Token::generate();
                                         id=\"remove-executor\">
                                         <i class=\"fa fa-minus\"></i>
                                   </a>";
-                        } else {
-                            echo $data['dados']['executor'];
-                        }
-                echo "
+            } else {
+                echo $data['dados']['executor'];
+            }
+            echo "
                     </div>
                 </div>
             </div>
@@ -154,7 +154,7 @@ $token = Token::generate();
                   <div id=\"pcard-executor\"></div>";
         }?>
 
-    <div class="col-md-6">
+        <div class="col-md-6">
         <div class="form-group">
             <div class="col-sm-6">
                 <label for="solicitante" class="control-label">Solicitante</label>
@@ -166,7 +166,7 @@ $token = Token::generate();
                     Solicitante
                 </button>
             </div>
-            <div class="col-md-6">
+            <div class="col-sm-6">
                 <label for="executor" class="control-label">Executor</label>
 
                 <input type="text" class="hidden-input" name="executor"
@@ -182,39 +182,39 @@ $token = Token::generate();
             <div class="col-sm-6">
                 <label for="ocorrencia" class="control-label">Ocorrência Relacionada</label>
 
-                <select class="form-control" id="ocorrencia" name="ocorrencia">
-                    <option value="">Nenhuma</option>
-                    <?php
-                    $perfil->setCdOcorrencia($perfil->getCdOcorrencia() == '' ? Input::get('ocorrencia') : $perfil->getCdOcorrencia());
-                    foreach ($data['ocorrencia'] as $ocorrencia) {
-                        if ($ocorrencia->getCdOcorrencia() == $perfil->getCdOcorrencia()) {
-                            echo '<option value="' . $ocorrencia->getCdOcorrencia() . '" selected>' . $ocorrencia->getDescAssunto() . '</option>';
-                        } else {
-                            echo '<option value="' . $ocorrencia->getCdOcorrencia() . ' ">' . $ocorrencia->getDescAssunto() . '</option>';
-                        }
-                    }
-                    ?>
-                </select>
+                <input type="text" class="hidden-input" name="ocorrencia"
+                       value="<?php echo($perfil->getCdOcorrencia() == '' ? Input::get('ocorrencia') : $perfil->getCdOcorrencia()); ?>">
+                <button id="btn-ocorrencia" class="btn btn-info btn-block"><i class="fa fa-bullhorn"></i>
+                    Atualizar
+                    Ocorrência
+                </button>
             </div>
 
-
-            <div class="col-sm-6">
-                <label for="estagio" class="control-label">Estágio</label>
-
-                <select class="form-control" id="estagio" name="estagio">
-                    <option value="">--</option>
-                    <?php
-                    $perfil->setCdVlCatgEstagio($perfil->getCdVlCatgEstagio() == '' ? Input::get('estagio') : $perfil->getCdVlCatgEstagio());
-                    foreach ($data['estagio'] as $estagio) {
-                        if ($estagio->getCdVlCategoria() == $perfil->getCdVlCatgEstagio()) {
-                            echo '<option value="' . $estagio->getCdVlCategoria() . '" selected>' . $estagio->getDescVlCatg() . '</option>';
-                        } else {
-                            echo '<option value="' . $estagio->getCdVlCategoria() . ' ">' . $estagio->getDescVlCatg() . '</option>';
-                        }
-                    }
-                    ?>
-                </select>
+            <?php if ($id_check && $perfil->getCdOcorrencia()): ?>
+            <div id="pcard-ocorrencia">
+                <div class="col-sm-6">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <a id="link_ocorrencia" href="Ocorrencia/visualizar/<?php echo $data['dados']['cd_ocorrencia']?>"><?php echo $data['dados']['desc_ocorrencia']; ?></a><br>
+                            <div>
+                                <i class="fa fa-calendar-o pull"></i> <?php echo $data['dados']['dt_ocorrencia']; ?>
+                                <a href="#"
+                                    data-toggle="tooltip"
+                                    data-placement="left"
+                                    title="Remover Ocorrencia"
+                                    class="btn btn-danger btn-xs btn-circle btn-pcard-bottom-right"
+                                    id="remove-ocorrencia">
+                                    <i class="fa fa-minus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <?php else: ?>
+            <div id="pcard-ocorrencia"></div>
+            <?php endif; ?>
+
         </div>
 
         <div class="form-group">
@@ -231,6 +231,24 @@ $token = Token::generate();
                             echo '<option value="' . $tipo->getCdVlCategoria() . '" selected>' . $tipo->getDescVlCatg() . '</option>';
                         } else {
                             echo '<option value="' . $tipo->getCdVlCategoria() . ' ">' . $tipo->getDescVlCatg() . '</option>';
+                        }
+                    }
+                    ?>
+                </select>
+            </div>
+
+            <div class="col-sm-6">
+                <label for="estagio" class="control-label">Estágio</label>
+
+                <select class="form-control" id="estagio" name="estagio">
+                    <option value="">--</option>
+                    <?php
+                    $perfil->setCdVlCatgEstagio($perfil->getCdVlCatgEstagio() == '' ? Input::get('estagio') : $perfil->getCdVlCatgEstagio());
+                    foreach ($data['estagio'] as $estagio) {
+                        if ($estagio->getCdVlCategoria() == $perfil->getCdVlCatgEstagio()) {
+                            echo '<option value="' . $estagio->getCdVlCategoria() . '" selected>' . $estagio->getDescVlCatg() . '</option>';
+                        } else {
+                            echo '<option value="' . $estagio->getCdVlCategoria() . ' ">' . $estagio->getDescVlCatg() . '</option>';
                         }
                     }
                     ?>
@@ -335,73 +353,101 @@ $token = Token::generate();
             </button>
         </p>
 
-    </div>
-    </fieldset>
-    </form>
-<?php endif; ?>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-<!-- Modal para adicionar Executor -->
-<div class="modal fade" tabindex="-1" role="dialog" id="executor_modal" aria-labelledby="executor_modal"
-     aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
-                <div class="modal-title legend">Executor</div>
-            </div>
-
-            <form class="dropdown" id="form-executor">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="nome_executor"
-                               placeholder="Buscar Executor" autocomplete="off"
-                               data-toggle="busca-executor">
-
-                        <div id="busca-executor-resultado" class="dropdown-busca list-group"
-                             aria-labelledby="busca-executor"></div>
-                        <input type="hidden" name="executor" value="">
-                    </div>
-                </div>
         </div>
+        </fieldset>
         </form>
-
+    <?php endif; ?>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
     </div>
 
-</div>
-
-<!-- Modal para adicionar Solicitante -->
-<div class="modal fade" tabindex="-1" role="dialog" id="solicitante_modal" aria-labelledby="solicitante_modal"
-     aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
-                <div class="modal-title legend">Solicitante</div>
-            </div>
-
-            <form class="dropdown" id="form-solicitante">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="nome_solicitante"
-                               placeholder="Buscar Solicitante" autocomplete="off"
-                               data-toggle="busca-solicitante">
-
-                        <div id="busca-solicitante-resultado" class="dropdown-busca list-group"
-                             aria-labelledby="busca-solicitante"></div>
-                        <input type="hidden" name="solicitante" value="">
-                    </div>
+    <!-- Modal para adicionar Executor -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="executor_modal" aria-labelledby="executor_modal"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <div class="modal-title legend">Executor</div>
                 </div>
+
+                <form class="dropdown" id="form-executor">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="nome_executor"
+                                   placeholder="Buscar Executor" autocomplete="off"
+                                   data-toggle="busca-executor">
+
+                            <div id="busca-executor-resultado" class="dropdown-busca list-group"
+                                 aria-labelledby="busca-executor"></div>
+                            <input type="hidden" name="executor" value="">
+                        </div>
+                    </div>
+            </div>
+            </form>
+
         </div>
-        </form>
 
     </div>
 
-</div>
+    <!-- Modal para adicionar Solicitante -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="solicitante_modal" aria-labelledby="solicitante_modal"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <div class="modal-title legend">Solicitante</div>
+                </div>
+
+                <form class="dropdown" id="form-solicitante">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="nome_solicitante"
+                                   placeholder="Buscar Solicitante" autocomplete="off"
+                                   data-toggle="busca-solicitante">
+
+                            <div id="busca-solicitante-resultado" class="dropdown-busca list-group"
+                                 aria-labelledby="busca-solicitante"></div>
+                            <input type="hidden" name="solicitante" value="">
+                        </div>
+                    </div>
+            </div>
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- Modal para adicionar Ocorrencia -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="ocorrencia_modal" aria-labelledby="ocorrencia_modal"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <div class="modal-title legend">Ocorrencia</div>
+                </div>
+
+                <form class="dropdown" id="form-ocorrencia">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="nome_ocorrencia"
+                                   placeholder="Buscar Ocorrencia" autocomplete="off"
+                                   data-toggle="busca-ocorrencia">
+
+                            <div id="busca-ocorrencia-resultado" class="dropdown-busca panel"
+                                 aria-labelledby="busca-ocorrencia"></div>
+                            <input type="hidden" name="ocorrencia" value="">
+                        </div>
+                    </div>
+            </div>
+            </form>
+        </div>
+    </div>

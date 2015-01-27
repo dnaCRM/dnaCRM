@@ -1006,6 +1006,12 @@ selectProfissao.change(function () {
     }
 });
 
+newProModal.on('hide.bs.modal', function(){
+    if (selectProfissao.val() == 'new_pro'){
+        selectProfissao.val('');
+    }
+});
+
 formProfissao.bootstrapValidator({
     feedbackIcons: {
         valid: 'glyphicon glyphicon-ok',
@@ -1073,6 +1079,12 @@ selectCurso.change(function () {
     }
 });
 
+newCursoModal.on('hide.bs.modal', function(){
+    if (selectCurso.val() == 'new_curso'){
+        selectCurso.val('');
+    }
+});
+
 formPfNewCurso.bootstrapValidator({
     feedbackIcons: {
         valid: 'glyphicon glyphicon-ok',
@@ -1133,6 +1145,12 @@ var newPJModal = $('#new_pj_modal');
 selectPessoaJuridica.change(function () {
     if ($(this).val() == 'new_pj') {
         newPJModal.modal('show');
+    }
+});
+
+newPJModal.on('hide.bs.modal', function(){
+    if (selectPessoaJuridica.val() == 'new_pj'){
+        selectPessoaJuridica.val('');
     }
 });
 
@@ -1223,6 +1241,12 @@ var newIEModal = $('#new_ie_modal');
 selectInstEnsino.change(function () {
     if ($(this).val() == 'new_ie') {
         newIEModal.modal('show');
+    }
+});
+
+newIEModal.on('hide.bs.modal', function(){
+    if (selectInstEnsino.val() == 'new_ie'){
+        selectInstEnsino.val('');
     }
 });
 

@@ -43,9 +43,12 @@ class OrdemServicoModel extends Model
         }
 
         $ocorrencia = '';
+        $dt_ocorrencia = '';
         if ($this->dto->getCdOcorrencia()) {
-            $ocorrencia = (new OcorrenciaDAO())->getById($this->dto->getCdOcorrencia())
-                ->getDescAssunto();
+            /** @var  $ocorrenciaDTO */
+            $ocorrenciaDTO = (new OcorrenciaDAO())->getById($this->dto->getCdOcorrencia());
+            $ocorrencia = $ocorrenciaDTO->getDescAssunto();
+            $dt_ocorrencia = (new DateTime($ocorrenciaDTO->getDtOcorrencia()))->format('d/m/Y');
         }
 
         $categoria = new CategoriaValorDAO();
@@ -80,9 +83,10 @@ class OrdemServicoModel extends Model
         return array(
             'cd_ordem_servico' => $this->dto->getCdOrdemServico(),
             'cd_ocorrencia' => $this->dto->getCdOcorrencia(),
+            'desc_ocorrencia' => $ocorrencia,
+            'dt_ocorrencia' => $dt_ocorrencia,
             'desc_assunto' => $this->dto->getDescAssunto(),
             'desc_ordem_servico' => $this->dto->getDescOrdemServico(),
-            'desc_ocorrencia' => $ocorrencia,
             'desc_conclusao' => ($this->dto->getDescConclusao() ? $this->dto->getDescConclusao() : 'Não informada.'),
             'cd_pf_executor' => $this->dto->getCdPfExecutor(),
             'executor' => $executor,

@@ -49,6 +49,7 @@ ocorrenciaForm.bootstrapValidator({
                 },
                 stringLength: {
                     min: 5,
+                    max: 50,
                     message: 'No mánimo 5 caracteres.'
                 }
             }

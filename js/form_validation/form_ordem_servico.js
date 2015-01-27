@@ -103,7 +103,7 @@ buttonExecutor.click(function (e) {
     executorModal.modal('show');
 });
 
-buttonRemoveExecutor.click(function(e) {
+pcardExecutor.delegate('#remove-executor', 'click', function(e) {
     e.preventDefault();
     buttonExecutor
         .removeClass('btn-info')
@@ -190,6 +190,14 @@ $('#busca-executor-resultado').delegate('.add-executor', 'click', function (e) {
                     '<div class="pcard-name">' +
                         '<a href="PessoaFisica/visualizar/' + id + '">' + nome + '</a>' +
                     '<div class="pcard-info">Executor</div>' +
+                    '<a href="#"' +
+                        'data-toggle="tooltip"' +
+                        'data-placement="left"' +
+                        'title="Remover Executor"' +
+                        'class="btn btn-danger btn-xs btn-circle btn-pcard-bottom-right"' +
+                        'id="remove-executor">' +
+                    '<i class="fa fa-minus"></i>' +
+                    '</a>' +
                 '</div>' +
             '</div>' +
         '</div>';
@@ -305,3 +313,127 @@ $('#busca-solicitante-resultado').delegate('.add-solicitante', 'click', function
 });
 
 ///////////////////////- Fim Manipula Solicitante -//////////////////////////////////
+
+///////////////////////- Manipula Ocorrência -//////////////////////////////////
+var inputOcorrencia = $('[name=ocorrencia]');
+var buttonOcorrencia = $('#btn-ocorrencia');
+var buttonRemoveOcorrencia = $('#remove-ocorrencia');
+var ocorrenciaModal = $('#ocorrencia_modal');
+var pcardOcorrencia = $('#pcard-ocorrencia');
+
+buttonOcorrencia.click(function (e) {
+    e.preventDefault();
+    ocorrenciaModal.modal('show');
+});
+
+pcardOcorrencia.delegate('#remove-ocorrencia', 'click', function(e) {
+    e.preventDefault();
+    buttonOcorrencia
+        .removeClass('btn-info')
+        .addClass('btn-primary')
+        .html('<i class="fa fa-plus"></i> Definir ocorrencia');
+    inputOcorrencia.val('');
+    $('#pcard-ocorrencia .col-sm-6').remove();
+});
+
+$(function () {
+    if (inputOcorrencia.val() == '') {
+        buttonOcorrencia
+            .removeClass('btn-info')
+            .addClass('btn-primary')
+            .html('<i class="fa fa-plus"></i> Definir ocorrencia');
+
+    }
+});
+
+function buscaOcorrencia() {
+    var assunto = $('#nome_ocorrencia').val();
+    if (assunto != '') {
+        $('#busca-ocorrencia-resultado').html('<i class="fa fa-spinner fa-spin fa-2x"></i>');
+        $.ajax({
+            type: 'post',
+            url: 'Ocorrencia/buscaAjax/',
+            data: 'assunto=' + assunto,
+            dataType: 'json',
+            success: function (data) {
+
+                var html = '';
+                for (var i = 0; i < data.length; i++) {
+                    html +=
+                        '<div class="panel-body">' +
+                            '<div class="col-sm-2">' +
+                            '<a href="#" ' +
+                            'data-id-ocorrencia="' + data[i].cd_ocorrencia + '" ' +
+                            'data-assunto-ocorrencia="' + data[i].desc_assunto + '" ' +
+                            'data-dt-ocorrencia="' + data[i].dt_ocorrencia + '" ' +
+                            'title="Adicionar" ' +
+                            'class="btn btn-primary btn-xs btn-circle add-ocorrencia">' +
+                            '<i class="fa fa-check"></i></a> '+
+                            '</div>'+
+                            '<div class="col-sm-7">' +
+                            '<a title="Visualizar Ocorrência" href="Ocorrencia/visualizar/' + data[i].cd_ocorrencia + '">' + data[i].desc_assunto + '</a>' +
+                            '</div>'+
+                            '<div class="col-sm-3">'+data[i].dt_ocorrencia+
+                            '</div>'+
+                        '</div>';
+                }
+
+                var resultBody = '<div class="row"><div class="col-md-12">' + html + '</div></div>';
+                $('#busca-ocorrencia-resultado').html(resultBody).hide().fadeIn();
+
+                buttonOcorrencia
+                    .addClass('btn-info')
+                    .removeClass('btn-primary')
+                    .html('<i class="fa fa-bullhorn"></i> Atualizar ocorrencia');
+
+            },
+            error: function (data) {
+                $(data.responseText).appendTo('#area-do-resultado');
+            }
+        });
+    } else {
+        $('#busca-ocorrencia-resultado').fadeOut();
+    }
+}
+
+$('#nome_ocorrencia').keyup(function () {
+    buscaOcorrencia();
+}).focusout(function () {
+    $('#busca-ocorrencia-resultado').fadeOut();
+});
+
+$('#busca-ocorrencia-resultado').delegate('.add-ocorrencia', 'click', function (e) {
+    e.preventDefault();
+    var ocorrencia = $(this);
+    var id = ocorrencia.attr('data-id-ocorrencia');
+    var assunto = ocorrencia.attr('data-assunto-ocorrencia');
+    var dt_ocorrencia = ocorrencia.attr('data-dt-ocorrencia');
+
+    var pcard =
+        '<div class="col-sm-6">' +
+            '<div class="panel panel-default">' +
+            '<div class="panel-body">' +
+            '<a href="Ocorrencia/visualizar/' + id + '">' + assunto + '</a><br>' +
+            '<i class="fa fa-calendar-o"></i> '+ dt_ocorrencia +
+            '<a href="#"' +
+                'data-toggle="tooltip"' +
+                'data-placement="left"' +
+                'title="Remover Ocorrencia"' +
+                'class="btn btn-danger btn-xs btn-circle btn-pcard-bottom-right"' +
+                'id="remove-ocorrencia">' +
+            '<i class="fa fa-minus"></i>' +
+            '</a>' +
+            '</div>' +
+            '</div>' +
+            '</div>';
+
+    pcardOcorrencia.html(pcard).hide().fadeIn();
+    inputOcorrencia.val(id);
+    ocorrenciaModal.modal('hide');
+
+    ocorrenciaForm
+        .bootstrapValidator('updateStatus', inputOcorrencia, 'NOT_VALIDATED')
+        .bootstrapValidator('validateField', inputOcorrencia);
+});
+
+///////////////////////- Fim Manipula Ocorrência -//////////////////////////////

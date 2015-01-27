@@ -532,6 +532,12 @@ selectRamoAtiv.change(function () {
     }
 });
 
+newRamoAtivModal.on('hide.bs.modal', function(){
+    if (selectRamoAtiv.val() == 'new_ra'){
+        selectRamoAtiv.val('');
+    }
+});
+
 formPJNewRamoAtiv.bootstrapValidator({
     feedbackIcons: {
         valid: 'glyphicon glyphicon-ok',
