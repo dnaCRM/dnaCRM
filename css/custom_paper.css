@@ -215,7 +215,7 @@ td > .img-circle {
 }
 
 .pcard-sm {
-    min-width: 290px;
+    min-width: 200px;
 }
 
 .pcard-md {
@@ -232,7 +232,7 @@ td > .img-circle {
 
 .pcard-sm .pcard-name{
     font-family: 'Roboto';
-    font-size: 14px;
+    font-size: 12px;
     position: relative;
     left: 10px;
     top: 5px;
@@ -256,8 +256,8 @@ td > .img-circle {
 
 .pcard-sm .pcard-name .pcard-info{
     font-family: 'Roboto';
-    font-size: 11px;
-    margin-left: 15%;
+    font-size: 12px;
+    margin: -10px 5px 0 15px;
 }
 
 .pcard-md .pcard-name .pcard-info{
@@ -406,6 +406,10 @@ table.dataTable.no-footer {
     background-clip: padding-box;
 }
 
+#busca-informante-resultado{
+    position: relative;
+}
+
 #nav-top-form-busca input {
     font-size: 13px;
 }
@@ -527,4 +531,8 @@ table.dataTable tbody td, table.table tbody td{
     width: 50px;
     height: 50px;
     z-index: 1000;
+}
+
+.hidden-input {
+    width: 0;
 }

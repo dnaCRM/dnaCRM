@@ -50,6 +50,7 @@ Class Ocorrencia extends Controller
     if ($id) {
         /** @var OrdemServicoDTO */
         $ocorrenciaarr = $this->findById($id);
+        $ocorr_dados = $this->ocorrenciaModel->setDTO($ocorrenciaarr)->getArrayDados();
 
         $dt_ocorrencia = new DateTime($ocorrenciaarr->getDtOcorrencia());
         $ocorrenciaarr->setDtOcorrencia($dt_ocorrencia->format('d/m/Y'));
@@ -70,7 +71,8 @@ Class Ocorrencia extends Controller
             'informante' => $informante,
             'estagio' => $estagio,
             'tipo' => $tipo,
-            'pessoas' => $ocorr_pessoas
+            'pessoas' => $ocorr_pessoas,
+            'dados' => $ocorr_dados
         );
     } else {
         $ocorrencia = new OcorrenciaDTO();
@@ -207,4 +209,3 @@ Class Ocorrencia extends Controller
         return $obj;
     }
 }
-

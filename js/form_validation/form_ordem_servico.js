@@ -1,11 +1,10 @@
 //var optionFinalizado = $('#estagio option:contains("Finalizado")');
-var selectEstagio = $('#estagio')
+var ordemDeServicoForm = $('#ordemservicoform');
+var selectEstagio = $('#estagio');
 var selected = selectEstagio.val();
 
 var d = new Date();
 var hoje = d.getDate()+'/'+d.getMonth()+1+'/'+ d.getFullYear();
-
-console.log(hoje);
 
 $(function () {
     if (selected == 58) {
@@ -24,8 +23,7 @@ selectEstagio.change(function () {
     }
 });
 
-$('#ordemservicoform').bootstrapValidator({
-    message: 'This value is not valid',
+ordemDeServicoForm.bootstrapValidator({
     feedbackIcons: {
         valid: 'glyphicon glyphicon-ok',
         invalid: 'glyphicon glyphicon-remove',
@@ -36,7 +34,7 @@ $('#ordemservicoform').bootstrapValidator({
             group: '.col-sm-6',
             validators: {
                 notEmpty: {
-                    message: 'Informar o solicitante é obrigatório.'
+                    message: 'Informar o solicitante Ã© obrigatÃ³rio.'
                 }
             }
         },
@@ -44,7 +42,7 @@ $('#ordemservicoform').bootstrapValidator({
             group: '.col-sm-6',
             validators: {
                 notEmpty: {
-                    message: 'Informar o estágio é obrigatório.'
+                    message: 'Informar o estÃ¡gio Ã© obrigatÃ³rio.'
                 }
             }
         },
@@ -52,29 +50,29 @@ $('#ordemservicoform').bootstrapValidator({
             group: '.col-sm-6',
             validators: {
                 notEmpty: {
-                    message: 'Informar o tipo é obrigatório.'
+                    message: 'Informar o tipo Ã© obrigatÃ³rio.'
                 }
             }
         },
         assunto: {
             validators: {
                 notEmpty: {
-                    message: 'Informar o assunto é obrigatório'
+                    message: 'Informar o assunto Ã© obrigatÃ³rio'
                 },
                 stringLength: {
                     min: 5,
-                    message: 'No mínimo 5 caracteres.'
+                    message: 'No mÃ­nimo 5 caracteres.'
                 }
             }
         },
         descricao: {
             validators: {
                 notEmpty: {
-                    message: 'Informar o descrição é obrigatório'
+                    message: 'Informar o descriÃ§Ã£o Ã© obrigatÃ³rio'
                 },
                 stringLength: {
                     min: 18,
-                    message: 'No mínimo 18 caracteres.'
+                    message: 'No mÃ­nimo 18 caracteres.'
                 }
             }
         },
@@ -82,15 +80,14 @@ $('#ordemservicoform').bootstrapValidator({
             group: '.col-sm-6',
             validators: {
                 notEmpty: {
-                    message: 'Campo obrigatório'
+                    message: 'Campo obrigatÃ³rio'
                 },
                 date: {
                     format: 'DD/MM/YYYY',
-                    message: 'Data inválida.'
+                    message: 'Data invÃ¡lida.'
                 }
             }
         }
     }
 });
-
 

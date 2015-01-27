@@ -28,6 +28,10 @@ class OrdemServicoModel extends Model
             $execDTO = $pessoaFisicaDao->getById($this->dto->getCdPfExecutor());
             $executor = $execDTO->getNmPessoaFisica();
             $executor_foto = $execDTO->getImPerfil();
+        } else {
+            $execDTO = new PessoaFisicaDTO();
+            $executor = 'Não definido';
+            $executor_foto = $execDTO->getImPerfil();
         }
 
         $solicitante = '';

@@ -30,6 +30,7 @@ $token = Token::generate();
 </div>
 
 <div class="row">
+<div class="col-md-12">
 <ul class="nav nav-tabs">
     <li class="active"><a href="#principal" data-toggle="tab">Cadastro</a></li>
 </ul>
@@ -101,7 +102,88 @@ $token = Token::generate();
     </div>
 
     <!-- Lado Direito -->
+
+        <?php
+        if ($id_check) {
+            echo "
+    <div id=\"pcard-executor\">
+        <div class=\"col-md-3\">
+            <div class=\"panel profile-card pcard-sm\">
+                <div class=\"panel-body\">
+                    <div class=\"profile-card-foto-container\">
+                        <img src=\"{$data['dados']['executor_foto']}\" class=\"img-circle profilefoto foto-md\">
+                    </div>
+                    <div class=\"pcard-name\">";
+                        if ($data['dados']['cd_pf_executor']){
+                            echo "<a href=\"PessoaFisica/visualizar/{$data['dados']['cd_pf_executor']}\">{$data['dados']['executor']}</a>";
+                        } else {
+                            echo $data['dados']['executor'];
+                        }
+
+                echo "<div class=\"pcard-info\">Executor</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id=\"pcard-solicitante\">
+        <div class=\"col-md-3\">
+            <div class=\"panel profile-card pcard-sm\">
+                <div class=\"panel-body\">
+                    <div class=\"profile-card-foto-container\">
+                        <img src=\"{$data['dados']['solicitante_foto']}\" class=\"img-circle profilefoto foto-md\">
+                    </div>
+                    <div class=\"pcard-name\">
+                        <a href=\"PessoaFisica/visualizar/{$data['dados']['cd_pf_solicitante']}\">{$data['dados']['solicitante']}</a>
+                        <div class=\"pcard-info\">Solicitante</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>";
+        } else {
+            echo "<div id=\"pcard-executor\"></div>
+                  <div id=\"pcard-solicitante\"></div>";
+        }?>
+
     <div class="col-md-6">
+        <div class="form-group">
+            <div class="col-md-6">
+                <label for="executor" class="control-label">Executor</label>
+
+                <select class="form-control" id="executor" name="executor">
+                    <option value="">--</option>
+                    <?php
+                    $perfil->setCdPfExecutor($perfil->getCdPfExecutor() == '' ? Input::get('executor') : $perfil->getCdPfExecutor());
+                    foreach ($data['executor'] as $executor) {
+                        if ($executor->getCdPessoaFisica() == $perfil->getCdPfExecutor()) {
+                            echo '<option value="' . $executor->getCdPessoaFisica() . '" selected>' . $executor->getNmPessoaFisica() . '</option>';
+                        } else {
+                            echo '<option value="' . $executor->getCdPessoaFisica() . ' ">' . $executor->getNmPessoaFisica() . '</option>';
+                        }
+                    }
+                    ?>
+                </select>
+            </div>
+
+            <div class="col-sm-6">
+                <label for="solicitante" class="control-label">Solicitante</label>
+
+                <select class="form-control" id="solicitante" name="solicitante">
+                    <option value="">--</option>
+                    <?php
+                    $perfil->setCdPfSolicitante($perfil->getCdPfSolicitante() == '' ? Input::get('solicitante') : $perfil->getCdPfSolicitante());
+                    foreach ($data['solicitante'] as $solicitante) {
+                        if ($solicitante->getCdPessoaFisica() == $perfil->getCdPfSolicitante()) {
+                            echo '<option value="' . $solicitante->getCdPessoaFisica() . '" selected>' . $solicitante->getNmPessoaFisica() . '</option>';
+                        } else {
+                            echo '<option value="' . $solicitante->getCdPessoaFisica() . ' ">' . $solicitante->getNmPessoaFisica() . '</option>';
+                        }
+                    }
+                    ?>
+                </select>
+            </div>
+        </div>
 
         <div class="form-group">
             <div class="col-sm-6">
@@ -163,44 +245,6 @@ $token = Token::generate();
             </div>
         </div>
 
-
-        <div class="form-group">
-            <div class="col-sm-6">
-                <label for="executor" class="control-label">Executor</label>
-
-                <select class="form-control" id="executor" name="executor">
-                    <option value="">--</option>
-                    <?php
-                    $perfil->setCdPfExecutor($perfil->getCdPfExecutor() == '' ? Input::get('executor') : $perfil->getCdPfExecutor());
-                    foreach ($data['executor'] as $executor) {
-                        if ($executor->getCdPessoaFisica() == $perfil->getCdPfExecutor()) {
-                            echo '<option value="' . $executor->getCdPessoaFisica() . '" selected>' . $executor->getNmPessoaFisica() . '</option>';
-                        } else {
-                            echo '<option value="' . $executor->getCdPessoaFisica() . ' ">' . $executor->getNmPessoaFisica() . '</option>';
-                        }
-                    }
-                    ?>
-                </select>
-            </div>
-
-            <div class="col-sm-6">
-                <label for="solicitante" class="control-label">Solicitante</label>
-
-                <select class="form-control" id="solicitante" name="solicitante">
-                    <option value="">--</option>
-                    <?php
-                    $perfil->setCdPfSolicitante($perfil->getCdPfSolicitante() == '' ? Input::get('solicitante') : $perfil->getCdPfSolicitante());
-                    foreach ($data['solicitante'] as $solicitante) {
-                        if ($solicitante->getCdPessoaFisica() == $perfil->getCdPfSolicitante()) {
-                            echo '<option value="' . $solicitante->getCdPessoaFisica() . '" selected>' . $solicitante->getNmPessoaFisica() . '</option>';
-                        } else {
-                            echo '<option value="' . $solicitante->getCdPessoaFisica() . ' ">' . $solicitante->getNmPessoaFisica() . '</option>';
-                        }
-                    }
-                    ?>
-                </select>
-            </div>
-        </div>
         <div class="form-group">
             <div class="col-sm-6">
                 <label for="dt_inicio" class="control-label">Início</label>
@@ -302,6 +346,7 @@ $token = Token::generate();
     </fieldset>
     </form>
 <?php endif; ?>
+</div>
 </div>
 </div>
 </div>

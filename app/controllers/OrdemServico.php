@@ -49,6 +49,7 @@ class OrdemServico extends Controller
         if ($id) {
             /** @var OrdemServicoDTO */
             $perfilarr = $this->findById($id);
+            $os_dados = $this->ordemServicoModel->setDTO($perfilarr)->getArrayDados();
 
             $dt_inicio = new DateTime($perfilarr->getDtInicio());
             $perfilarr->setDtInicio($dt_inicio->format('d/m/Y'));
@@ -68,7 +69,8 @@ class OrdemServico extends Controller
                 'executor' => $executor,
                 'solicitante' => $solicitante,
                 'estagio' => $estagio,
-                'tipo' => $tipo
+                'tipo' => $tipo,
+                'dados' => $os_dados,
             );
         } else {
             $perfil = new OrdemServicoDTO();
