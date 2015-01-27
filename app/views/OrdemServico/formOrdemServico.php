@@ -106,26 +106,6 @@ $token = Token::generate();
         <?php
         if ($id_check) {
             echo "
-    <div id=\"pcard-executor\">
-        <div class=\"col-md-3\">
-            <div class=\"panel profile-card pcard-sm\">
-                <div class=\"panel-body\">
-                    <div class=\"profile-card-foto-container\">
-                        <img src=\"{$data['dados']['executor_foto']}\" class=\"img-circle profilefoto foto-md\">
-                    </div>
-                    <div class=\"pcard-name\">";
-                        if ($data['dados']['cd_pf_executor']){
-                            echo "<a href=\"PessoaFisica/visualizar/{$data['dados']['cd_pf_executor']}\">{$data['dados']['executor']}</a>";
-                        } else {
-                            echo $data['dados']['executor'];
-                        }
-
-                echo "<div class=\"pcard-info\">Executor</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <div id=\"pcard-solicitante\">
         <div class=\"col-md-3\">
             <div class=\"panel profile-card pcard-sm\">
@@ -140,48 +120,61 @@ $token = Token::generate();
                 </div>
             </div>
         </div>
+    </div>
+    <div id=\"pcard-executor\">
+        <div class=\"col-md-3\">
+            <div class=\"panel profile-card pcard-sm\">
+                <div class=\"panel-body\">
+                    <div class=\"profile-card-foto-container\">
+                        <img src=\"{$data['dados']['executor_foto']}\" class=\"img-circle profilefoto foto-md\">
+                    </div>
+                    <div class=\"pcard-name\">";
+                        if ($data['dados']['cd_pf_executor']){
+                            echo "<a href=\"PessoaFisica/visualizar/{$data['dados']['cd_pf_executor']}\">{$data['dados']['executor']}</a>
+                                  <div class=\"pcard-info\">Executor</div>
+                                  <a href=\"#\"
+                                        data-toggle=\"tooltip\"
+                                        data-placement=\"left\"
+                                        title=\"Remover Executor\"
+                                        class=\"btn btn-danger btn-xs btn-circle btn-pcard-bottom-right\"
+                                        id=\"remove-executor\">
+                                        <i class=\"fa fa-minus\"></i>
+                                  </a>";
+                        } else {
+                            echo $data['dados']['executor'];
+                        }
+                echo "
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>";
         } else {
-            echo "<div id=\"pcard-executor\"></div>
-                  <div id=\"pcard-solicitante\"></div>";
+            echo "<div id=\"pcard-solicitante\"></div>
+                  <div id=\"pcard-executor\"></div>";
         }?>
 
     <div class="col-md-6">
         <div class="form-group">
-            <div class="col-md-6">
-                <label for="executor" class="control-label">Executor</label>
-
-                <select class="form-control" id="executor" name="executor">
-                    <option value="">--</option>
-                    <?php
-                    $perfil->setCdPfExecutor($perfil->getCdPfExecutor() == '' ? Input::get('executor') : $perfil->getCdPfExecutor());
-                    foreach ($data['executor'] as $executor) {
-                        if ($executor->getCdPessoaFisica() == $perfil->getCdPfExecutor()) {
-                            echo '<option value="' . $executor->getCdPessoaFisica() . '" selected>' . $executor->getNmPessoaFisica() . '</option>';
-                        } else {
-                            echo '<option value="' . $executor->getCdPessoaFisica() . ' ">' . $executor->getNmPessoaFisica() . '</option>';
-                        }
-                    }
-                    ?>
-                </select>
-            </div>
-
             <div class="col-sm-6">
                 <label for="solicitante" class="control-label">Solicitante</label>
 
-                <select class="form-control" id="solicitante" name="solicitante">
-                    <option value="">--</option>
-                    <?php
-                    $perfil->setCdPfSolicitante($perfil->getCdPfSolicitante() == '' ? Input::get('solicitante') : $perfil->getCdPfSolicitante());
-                    foreach ($data['solicitante'] as $solicitante) {
-                        if ($solicitante->getCdPessoaFisica() == $perfil->getCdPfSolicitante()) {
-                            echo '<option value="' . $solicitante->getCdPessoaFisica() . '" selected>' . $solicitante->getNmPessoaFisica() . '</option>';
-                        } else {
-                            echo '<option value="' . $solicitante->getCdPessoaFisica() . ' ">' . $solicitante->getNmPessoaFisica() . '</option>';
-                        }
-                    }
-                    ?>
-                </select>
+                <input type="text" class="hidden-input" name="solicitante"
+                       value="<?php echo($perfil->getCdPfSolicitante() == '' ? Input::get('solicitante') : $perfil->getCdPfSolicitante()); ?>">
+                <button id="btn-solicitante" class="btn btn-warning btn-block"><i class="fa fa-bullhorn"></i>
+                    Atualizar
+                    Solicitante
+                </button>
+            </div>
+            <div class="col-md-6">
+                <label for="executor" class="control-label">Executor</label>
+
+                <input type="text" class="hidden-input" name="executor"
+                       value="<?php echo($perfil->getCdPfExecutor() == '' ? Input::get('executor') : $perfil->getCdPfExecutor()); ?>">
+                <button id="btn-executor" class="btn btn-info btn-block"><i class="fa fa-bullhorn"></i>
+                    Atualizar
+                    Executor
+                </button>
             </div>
         </div>
 
@@ -351,4 +344,64 @@ $token = Token::generate();
 </div>
 </div>
 </div>
+</div>
+
+<!-- Modal para adicionar Executor -->
+<div class="modal fade" tabindex="-1" role="dialog" id="executor_modal" aria-labelledby="executor_modal"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <div class="modal-title legend">Executor</div>
+            </div>
+
+            <form class="dropdown" id="form-executor">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="nome_executor"
+                               placeholder="Buscar Executor" autocomplete="off"
+                               data-toggle="busca-executor">
+
+                        <div id="busca-executor-resultado" class="dropdown-busca list-group"
+                             aria-labelledby="busca-executor"></div>
+                        <input type="hidden" name="executor" value="">
+                    </div>
+                </div>
+        </div>
+        </form>
+
+    </div>
+
+</div>
+
+<!-- Modal para adicionar Solicitante -->
+<div class="modal fade" tabindex="-1" role="dialog" id="solicitante_modal" aria-labelledby="solicitante_modal"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <div class="modal-title legend">Solicitante</div>
+            </div>
+
+            <form class="dropdown" id="form-solicitante">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="nome_solicitante"
+                               placeholder="Buscar Solicitante" autocomplete="off"
+                               data-toggle="busca-solicitante">
+
+                        <div id="busca-solicitante-resultado" class="dropdown-busca list-group"
+                             aria-labelledby="busca-solicitante"></div>
+                        <input type="hidden" name="solicitante" value="">
+                    </div>
+                </div>
+        </div>
+        </form>
+
+    </div>
+
 </div>

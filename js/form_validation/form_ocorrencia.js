@@ -1,6 +1,5 @@
 var ocorrenciaForm = $('#ocorrenciaform');
 ocorrenciaForm.bootstrapValidator({
-    message: 'This value is not valid',
     feedbackIcons: {
         valid: 'glyphicon glyphicon-ok',
         invalid: 'glyphicon glyphicon-remove',
@@ -11,7 +10,7 @@ ocorrenciaForm.bootstrapValidator({
             group: '.col-sm-6',
             validators: {
                 notEmpty: {
-                    message: 'Informar o informante Ã© obrigatÃ³rio.'
+                    message: 'Informar o informante é obrigatório.'
                 }
             }
         },
@@ -19,7 +18,7 @@ ocorrenciaForm.bootstrapValidator({
             group: '.col-sm-6',
             validators: {
                 notEmpty: {
-                    message: 'Informar o estagio Ã© obrigatÃ³rio.'
+                    message: 'Informar o estagio é obrigatório.'
                 }
             }
         },
@@ -27,7 +26,7 @@ ocorrenciaForm.bootstrapValidator({
             group: '.col-sm-6',
             validators: {
                 notEmpty: {
-                    message: 'Informar o tipo Ã© obrigatÃ³rio.'
+                    message: 'Informar o tipo é obrigatório.'
                 }
             }
         },
@@ -35,7 +34,7 @@ ocorrenciaForm.bootstrapValidator({
             group: '.col-sm-6',
             validators: {
                 notEmpty: {
-                    message: 'Campo obrigatÃ³rio.'
+                    message: 'Campo obrigatório.'
                 },
                 date: {
                     format: 'DD/MM/YYYY',
@@ -46,18 +45,18 @@ ocorrenciaForm.bootstrapValidator({
         assunto: {
             validators: {
                 notEmpty: {
-                    message: 'Informar o assunto Ã© obrigatÃ³rio.'
+                    message: 'Informar o assunto é obrigatório.'
                 },
                 stringLength: {
                     min: 5,
-                    message: 'No mÃ­nimo 5 caracteres.'
+                    message: 'No mánimo 5 caracteres.'
                 }
             }
         },
         descricao: {
             validators: {
                 notEmpty: {
-                    message: 'Informar o descriÃ§Ã£o Ã© obrigatÃ³rio.'
+                    message: 'Informar o descrição é obrigatório.'
                 }
             }
         }

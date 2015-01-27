@@ -30,7 +30,7 @@ class OrdemServicoModel extends Model
             $executor_foto = $execDTO->getImPerfil();
         } else {
             $execDTO = new PessoaFisicaDTO();
-            $executor = 'Não definido';
+            $executor = 'Executor não definido';
             $executor_foto = $execDTO->getImPerfil();
         }
 

@@ -135,21 +135,7 @@ $token = Token::generate();
                 <div class="form-group">
                     <div class="col-sm-6">
                         <label for="informante" class="control-label">Informante</label>
-                        <!--
-                                    <select class="form-control" id="informante" name="informante">
-                                        <option value="">--</option>
-                                        <?php
-                        $ocorrencia->setCdPfInformante($ocorrencia->getCdPfInformante() == '' ? Input::get('informante') : $ocorrencia->getCdPfInformante());
-                        foreach ($data['informante'] as $informante) {
-                            if ($informante->getCdPessoaFisica() == $ocorrencia->getCdPfInformante()) {
-                                echo '<option value="' . $informante->getCdPessoaFisica() . '" selected>' . $informante->getNmPessoaFisica() . '</option>';
-                            } else {
-                                echo '<option value="' . $informante->getCdPessoaFisica() . ' ">' . $informante->getNmPessoaFisica() . '</option>';
-                            }
-                        }
-                        ?>
-                                    </select>
-                                    -->
+
                         <input type="text" class="hidden-input" name="informante"
                                value="<?php echo($ocorrencia->getCdPfInformante() == '' ? Input::get('informante') : $ocorrencia->getCdPfInformante()); ?>">
                         <button id="btn-informante" class="btn btn-info btn-block"><i class="fa fa-bullhorn"></i>
