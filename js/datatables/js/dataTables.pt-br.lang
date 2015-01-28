@@ -9,10 +9,10 @@
     "sLoadingRecords": "Carregando...",
     "sProcessing": "Processando...",
     "sZeroRecords": "Nenhum registro encontrado",
-    "sSearch": "Pesquisar",
+    "sSearch": "Filtrar",
     "oPaginate": {
-        "sNext": "Próximo",
-        "sPrevious": "Anterior",
+        "sNext": "",
+        "sPrevious": "",
         "sFirst": "Primeiro",
         "sLast": "Último"
     },

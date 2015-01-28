@@ -371,7 +371,8 @@ function buscaOcorrencia() {
                             '<i class="fa fa-check"></i></a> '+
                             '</div>'+
                             '<div class="col-sm-7">' +
-                            '<a title="Visualizar Ocorrência" href="Ocorrencia/visualizar/' + data[i].cd_ocorrencia + '">' + data[i].desc_assunto + '</a>' +
+                            '<a title="Visualizar Ocorrência" href="Ocorrencia/visualizar/' + data[i].cd_ocorrencia + '">' +
+                            'Nº ' + data[i].cd_ocorrencia +' -  '+ data[i].desc_assunto + '</a>' +
                             '</div>'+
                             '<div class="col-sm-3">'+data[i].dt_ocorrencia+
                             '</div>'+

@@ -118,7 +118,7 @@ class PessoaJuridica extends Controller
         $this->exportaImagens($empresa);
 
         $dados = array(
-            'pagesubtitle' => $dadosCadastrais['email'],
+            'pagesubtitle' => $dadosCadastrais['desc_ramo_atividade'],
             'pagetitle' => $dadosCadastrais['nm_fantasia'],
             'dados_cadastrais' => $dadosCadastrais,
             'telefones' => $telefones,

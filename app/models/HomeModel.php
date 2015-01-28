@@ -82,4 +82,18 @@ class HomeModel extends Model
         return $lista;
     }
 
+    public function getAniversariantesDoDia(PessoaFisicaModel $pessoaFisicaModel)
+    {
+        $dia_atual = (int)(new DateTime())->format('d');
+        $pessoas =  $pessoaFisicaModel->getDAO()
+            ->get("date_part('day', dt_nascimento) = {$dia_atual} order by nm_pessoa_fisica");
+
+        $lista = array();
+        foreach ($pessoas as $pessoa) {
+            $lista[] = $pessoaFisicaModel->setDTO($pessoa)->getBasicInfo();
+        }
+
+        return $lista;
+    }
+
 }

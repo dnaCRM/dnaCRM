@@ -34,6 +34,43 @@ class PessoaFisica extends Controller
         $this->view->output($dados);
     }
 
+    public function pesquisa()
+    {
+        $dados = array(
+            'pagesubtitle' => '',
+            'pagetitle' => 'Pesquisar Pessoa Física',
+        );
+
+        if (Input::exists()) {
+
+            if (Token::check(Input::get('token'))) {
+                $nome = filter_var(Input::get('pesquisa'));
+                $result = $this->model->get("nm_pessoa_fisica ilike '%{$nome}%'");
+
+                $lista = array();
+                if (count($result) > 0) {
+                    foreach ($result as $pessoaFisica) {
+                        $lista[] = $this->pessoaFisicaModel->setDTO($pessoaFisica)->getArrayDados();
+                    }
+                } else {
+                    $lista[] = $this->pessoaFisicaModel->setDTO(new PessoaFisicaDTO())->getArrayDados();
+                }
+
+                $dados = array(
+                    'pagesubtitle' => '',
+                    'pagetitle' => 'Pesquisar Pessoa Física',
+                    'num_registros' => count($lista),
+                    'list' => $lista
+                );
+
+            } else {
+                $dados['pagesubtitle'] = 'Formulário inválido';
+            }
+        }
+        $this->view = new View('PessoaFisica', 'Pesquisa');
+        $this->view->output($dados);
+    }
+
     /**
      * @param int $id = Caso receba um id retorna um array
      * para a view com os dados do perfil. Este array irá popular o formulário

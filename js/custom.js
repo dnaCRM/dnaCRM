@@ -168,6 +168,7 @@ $(document).ready(function () {
 
                     var html = '';
                     for (var i = 0; i < data.length; i++) {
+                        data[i].email = (data[i].email ? data[i].email : 'E-mail não cadastrado.');
                         html += '<a title="Visualizar perfil" href="PessoaFisica/visualizar/' + data[i].id + '"><div class="list-group-item"><div><img src="' + data[i].foto + '" class="img-circle img-thumb-panel pull-left">' +
                             '<p class="list-group-item-heading">' + data[i].nome + '</p>' +
                             '<p class="list-group-item-text">' + data[i].email + '</p></div></div></a>';

@@ -61,7 +61,7 @@
                     <dt>CPF</dt>
                     <dd><?php echo $data['dados_pessoais']['cpf']; ?></dd>
                     <dt>RG</dt>
-                    <dd><?php echo $data['dados_pessoais']['rg'] . "-" . $data['dados_pessoais']['uf']; ?></dd>
+                    <dd><?php echo $data['dados_pessoais']['rg'] . $data['dados_pessoais']['uf']; ?></dd>
                     <dt>Data de Nascimento</dt>
                     <dd><?php echo $data['dados_pessoais']['dt_nascimento']; ?></dd>
                     <dt>Idade</dt>

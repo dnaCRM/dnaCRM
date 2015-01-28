@@ -35,11 +35,12 @@
 
             <div class="panel">
                 <div class="panel-body">
-                    <div class="legend"><i class="fa fa-calendar"></i> Aniversariantes do Mês</div>
+                    <div class="legend"><i class="fa fa-calendar"></i> Aniversariantes de Hoje -
+                        <?php echo (new DateTime())->format('d/m');?>
+                    </div>
 
                     <?php
-                    foreach ($data['aniversariantes_do_mes'] as $aniversariante) {
-                        $dia = substr($aniversariante['nascimento'],0,2);
+                    foreach ($data['aniversariantes_do_dia'] as $aniversariante) {
                         echo "
                             <div class=\"circle-perfil pull-left\">
                                 <div class=\"\">
@@ -47,7 +48,6 @@
                                 </div>
                                 <div class=\"circle-perffil-nome\">
                                 <a href=\"PessoaFisica/visualizar/{$aniversariante['id']}\">{$aniversariante['nome']}</a>
-                                <br><i class=\"fa fa-birthday-cake\"></i> Dia {$dia}
                                 </div>
                             </div>";
                     }

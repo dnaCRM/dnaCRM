@@ -28,7 +28,7 @@ class PessoaFisicaModel extends Model
 
         if ($this->dto->getCdVlCatgOrgRg()) {
             $catg = $categoria->getBy2Ids($this->dto->getCdVlCatgOrgRg(), $this->dto->getCdCatgOrgRg());
-            $uf = $catg->getDescVlCatg();
+            $uf = '-'.$catg->getDescVlCatg();
         }
 
         $grau = '';

@@ -22,7 +22,7 @@ class Home extends Controller
 
         $pessoaModel = new PessoaFisicaModel();
         $ultimasPessoasCadastradas = $this->homeModel->getUltimasPessoas($pessoaModel, 'dt_usuario_criacao', 4);
-        $aniversariantesDoMes = $this->homeModel->getAniversariantesDoMes($pessoaModel);
+        $aniversariantesDoDia = $this->homeModel->getAniversariantesDoDia($pessoaModel);
 
         $ultimasOcorrencias =$this->homeModel->getUltimasOcorrencias(new OcorrenciaModel(), 'dt_ocorrencia', 5);
         $ultimasOrdensServico =$this->homeModel->getUltimasOrdensServico(new OrdemServicoModel(), 'dt_inicio', 5);
@@ -32,7 +32,7 @@ class Home extends Controller
             'utimas_pessoas_cadastradas' => $ultimasPessoasCadastradas,
             'utimas_ocorrencias' => $ultimasOcorrencias,
             'utimas_ordens_servico' => $ultimasOrdensServico,
-            'aniversariantes_do_mes' => $aniversariantesDoMes
+            'aniversariantes_do_dia' => $aniversariantesDoDia
         ];
 
         /** O parâmetros 'Home' define o Controller e 'start' define o método que será executado*/
