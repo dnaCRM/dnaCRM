@@ -84,9 +84,12 @@ class HomeModel extends Model
 
     public function getAniversariantesDoDia(PessoaFisicaModel $pessoaFisicaModel)
     {
-        $dia_atual = (int)(new DateTime())->format('d');
+        $dia_atual =  (int)Config::get('calendario')->format('d');
+        $mes_atual =  (int)Config::get('calendario')->format('m');
         $pessoas =  $pessoaFisicaModel->getDAO()
-            ->get("date_part('day', dt_nascimento) = {$dia_atual} order by nm_pessoa_fisica");
+            ->get("date_part('day', dt_nascimento) = {$dia_atual}
+                    AND date_part('month', dt_nascimento) = {$mes_atual}
+                    ORDER BY nm_pessoa_fisica");
 
         $lista = array();
         foreach ($pessoas as $pessoa) {

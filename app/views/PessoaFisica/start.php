@@ -33,7 +33,7 @@
                     <th>Foto</th>
                     <th>Nome</th>
                     <th>e-mail</th>
-                    <th>Nascimento</th>
+                    <th class="date_format">Nascimento</th>
                     <th>Editar</th>
                 </tr>
                 </thead>

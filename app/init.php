@@ -47,8 +47,11 @@ $GLOBALS['config'] = array(
     'session' => array(
         'session_name' => 'user',
         'token_name' => 'token'
-    )
+    ),
+    'calendario' => $calendar = new DateTime()
+
 );
+Config::get('calendario')->setTimezone(new DateTimeZone('America/Sao_Paulo'));
 
 //Classes CSS para personalização de mensagens
 define('CSS_PRIMARY', 'primary');

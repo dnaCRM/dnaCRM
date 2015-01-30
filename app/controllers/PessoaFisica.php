@@ -34,6 +34,28 @@ class PessoaFisica extends Controller
         $this->view->output($dados);
     }
 
+    public function getFullJSON()
+    {
+        $result = (array)$this->model->fullList();
+        $count = count($result);
+
+        $lista = array();
+        if ($count > 0) {
+            foreach ($result as $pessoaFisica) {
+                $lista[] = $this->pessoaFisicaModel->setDTO($pessoaFisica)->getArrayDados();
+            }
+        }
+
+        $return = array(
+            'iTotalRecords' => $count,
+            'iTotalDisplayRecords' => 10,
+            'sEcho' => 10,
+            'aaData' => $lista
+        );
+
+        echo json_encode($return, JSON_PRETTY_PRINT);
+    }
+
     public function pesquisa()
     {
         $dados = array(
@@ -43,17 +65,14 @@ class PessoaFisica extends Controller
 
         if (Input::exists()) {
 
-            if (Token::check(Input::get('token'))) {
-                $nome = filter_var(Input::get('pesquisa'));
-                $result = $this->model->get("nm_pessoa_fisica ilike '%{$nome}%'");
+                $nome = filter_var(Input::get('pessoa_1'));
+                $result = $this->model->get("nm_pessoa_fisica ilike '%{$nome}%' ORDER BY dt_usuario_atualiza DESC LIMIT 100");
 
                 $lista = array();
                 if (count($result) > 0) {
                     foreach ($result as $pessoaFisica) {
                         $lista[] = $this->pessoaFisicaModel->setDTO($pessoaFisica)->getArrayDados();
                     }
-                } else {
-                    $lista[] = $this->pessoaFisicaModel->setDTO(new PessoaFisicaDTO())->getArrayDados();
                 }
 
                 $dados = array(
@@ -62,11 +81,8 @@ class PessoaFisica extends Controller
                     'num_registros' => count($lista),
                     'list' => $lista
                 );
-
-            } else {
-                $dados['pagesubtitle'] = 'Formulário inválido';
-            }
         }
+
         $this->view = new View('PessoaFisica', 'Pesquisa');
         $this->view->output($dados);
     }

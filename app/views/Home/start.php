@@ -36,7 +36,7 @@
             <div class="panel">
                 <div class="panel-body">
                     <div class="legend"><i class="fa fa-calendar"></i> Aniversariantes de Hoje -
-                        <?php echo (new DateTime())->format('d/m');?>
+                        <?php         echo Config::get('calendario')->format('d/m');?>
                     </div>
 
                     <?php

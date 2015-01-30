@@ -121,6 +121,12 @@ $(function () {
 
 /* DataTables */
 $('#perfillist').dataTable({
+    "columnDefs": [
+        {
+            "sType": "date",
+            "aTargets": "date_format"
+        }
+    ],
     "language": {
         "url": "js/datatables/js/dataTables.pt-br.lang"
     },
@@ -151,14 +157,22 @@ $(document).ready(function () {
  return false;
  });
  */
-
+function sleep(milliseconds) {
+    var start = new Date().getTime();
+    for (var i = 0; i < 1e7; i++) {
+        if ((new Date().getTime() - start) > milliseconds){
+            break;
+        }
+    }
+}
 /** Busca Pessoa Física */
 $(document).ready(function () {
     function search() {
         var nome = $('#pessoa_1').val();
 
         if (nome != '') {
-            $('#area-do-resultado').html('<i class="fa fa-spinner fa-spin"></i>');
+            var pesquisando = '<div class="row"><div class="col-md-12"><i class="fa fa-spinner fa-spin fa-3x"></i></div></div>';
+            $('#area-do-resultado').html(pesquisando).fadeIn();
             $.ajax({
                 type: 'post',
                 url: 'PessoaFisica/buscaAjax/',
@@ -194,7 +208,7 @@ $(document).ready(function () {
     $('#pessoa_1').keyup(function (e) {
         search();
 
-        /*        if(e.keyCode == 13) {
+/*      if(e.keyCode == 13) {
          //Executa esta linha se 'enter' for apertado
          }*/
     });

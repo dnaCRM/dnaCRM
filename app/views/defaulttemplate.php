@@ -3,7 +3,6 @@
 if (Session::exists('user')) {
     $userDados = (new UsuarioModel())->getUserDados(Session::get('user'));
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -95,10 +94,9 @@ if (Session::exists('user')) {
             </ul>
 
             <!-- INÍCIO FORMULÁRIO DE PESQUISA -->
-            <form class="navbar-form navbar-left dropdown" id="nav-top-form-busca">
+            <form action="PessoaFisica/Pesquisa" class="navbar-form navbar-left dropdown" id="nav-top-form-busca" method="post">
                 <input type="text" class="form-control col-lg-8" id="pessoa_1" name="pessoa_1"
                        placeholder="Buscar Pessoa" autocomplete="off" data-toggle="busca">
-
                 <div id="area-do-resultado" class="dropdown-busca list-group" aria-labelledby="busca"></div>
             </form>
             <!-- FIM FORMULÁRIO DE PESQUISA -->
@@ -204,7 +202,7 @@ if (Session::exists('user')) {
 <!-- container start -->
 
 
-<?php require_once($this->viewfile); ?>
+<?php require_once($this->viewfile);?>
 
 
 <!-- container end -->
@@ -228,12 +226,11 @@ if (Session::exists('user')) {
         <p>Front-end baseado no <a href="http://getbootstrap.com" rel="nofollow">Bootstrap</a>. Ícones <a
                 href="http://fortawesome.github.io/Font-Awesome/" rel="nofollow">Font Awesome</a>. Web fonts
             do <a href="http://www.google.com/webfonts" rel="nofollow">Google</a>.</p>
-
     </footer>
 
 </div>
 
-<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/jquery-1.11.2.min.js"></script>
 <script src="js/moment-with-locales.min.js"></script>
 <script src="js/bootstrapValidator.min.js"></script>
 <script src="js/language/pt_BR.js" type="text/javascript"></script>
