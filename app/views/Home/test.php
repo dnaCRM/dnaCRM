@@ -1,3 +1,16 @@
+<?php
+$con = Database::getConnection();
+$stmt = $con->prepare('
+    SELECT p.*, m.*
+    FROM tb_morador_endereco m
+    JOIN tb_pessoa_fisica p ON (p.cd_pessoa_fisica = m.cd_pessoa_fisica)
+    WHERE m.dt_saida IS NULL;
+');
+$stmt->execute();
+
+var_dump($stmt->fetchAll(PDO::FETCH_ASSOC));
+
+?>
 <!-- NAO DELETAR DESTA LINHA PRA BAIXO -->
 
 

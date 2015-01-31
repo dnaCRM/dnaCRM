@@ -82,21 +82,23 @@ if (Session::exists('user')) {
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="sobre">Sobre <span
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="sobre">Help <span
                             class="caret"></span></a>
                     <ul class="dropdown-menu" aria-labelledby="sobre">
                         <li><a href="#">Guia</a></li>
                         <li><a href="#">Manual</a></li>
                         <li class="divider"></li>
-                        <li><a href="Home/help">Help</a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#modalSobre">Sobre</a></li>
                     </ul>
                 </li>
             </ul>
 
             <!-- INÍCIO FORMULÁRIO DE PESQUISA -->
-            <form action="PessoaFisica/Pesquisa" class="navbar-form navbar-left dropdown" id="nav-top-form-busca" method="post">
+            <form action="PessoaFisica/Pesquisa" class="navbar-form navbar-left dropdown" id="nav-top-form-busca"
+                  method="post">
                 <input type="text" class="form-control col-lg-8" id="pessoa_1" name="pessoa_1"
                        placeholder="Buscar Pessoa" autocomplete="off" data-toggle="busca">
+
                 <div id="area-do-resultado" class="dropdown-busca list-group" aria-labelledby="busca"></div>
             </form>
             <!-- FIM FORMULÁRIO DE PESQUISA -->
@@ -191,7 +193,8 @@ if (Session::exists('user')) {
             </a>
             <ul class="treeview-menu" style="display: none;">
                 <li><a href="Ocorrencia/formOcorrencia"><i class="fa fa-angle-double-right"></i> Ocorrência</a></li>
-                <li><a href="OrdemServico/formOrdemServico"><i class="fa fa-angle-double-right"></i> Ordem de Serviço</a></li>
+                <li><a href="OrdemServico/formOrdemServico"><i class="fa fa-angle-double-right"></i> Ordem de
+                        Serviço</a></li>
             </ul>
         </li>
     </ul>
@@ -202,34 +205,10 @@ if (Session::exists('user')) {
 <!-- container start -->
 
 
-<?php require_once($this->viewfile);?>
+<?php require_once($this->viewfile); ?>
 
 
 <!-- container end -->
-
-<div class="container">
-
-    <footer>
-
-        <hr>
-        <p>Desenvolvedores:<br>
-            <a href="https://github.com/inshideru" rel="nofollow">Vinicius Sorrentino</a>. Contato <a
-                href="mailto:inshideru@gmail.com">inshideru@gmail.com</a>,
-            <a href="https://github.com/gabrielborc" rel="nofollow">Gabriel Borges</a>. Contato <a
-                href="mailto:gabrielborc@gmail.com">gabrielborc@gmail.com</a>,
-            <a href="https://github.com/demartinezraul" rel="nofollow">Raul Martinez</a>. Contato <a
-                href="mailto:demartinez.raul@gmail.com">demartinezraul@gmail.com</a>.</p>
-
-        <p><span class="fa fa-github"></span> <a href="https://github.com/dnaCRM">GitHub </a>.<br>
-            Código sob licença <a href="">MIT</a></p>
-
-        <p>Front-end baseado no <a href="http://getbootstrap.com" rel="nofollow">Bootstrap</a>. Ícones <a
-                href="http://fortawesome.github.io/Font-Awesome/" rel="nofollow">Font Awesome</a>. Web fonts
-            do <a href="http://www.google.com/webfonts" rel="nofollow">Google</a>.</p>
-    </footer>
-
-</div>
-
 <script src="js/jquery-1.11.2.min.js"></script>
 <script src="js/moment-with-locales.min.js"></script>
 <script src="js/bootstrapValidator.min.js"></script>
@@ -247,5 +226,138 @@ JavaScriptLoader::load();
 <a id="toTop" href="#"><span id="toTopHover"></span><img width="45" height="45" alt="" src="img/to-top.png"></a>
 
 <div id="responseAjaxError"></div>
+
+<footer class="footer">
+    <div class="container">
+        <div class="text-muted">
+            <img src="img/dna_icon_magenta.png"> <a href="#" data-toggle="modal" data-target="#modalSobre">dnaCRM
+                <small>v<?php echo Config::get('versao'); ?></small>
+            </a>
+        </div>
+    </div>
+
+</footer>
+
+
 </body>
+
+
+<!-- Modal Sobre -->
+<div class="modal fade in" id="modalSobre" tabindex="-1" role="dialog" aria-labelledby="modalSobre"
+     aria-hidden="true">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                        class="sr-only">Fechar</span></button>
+
+                <span class="modal-title" id=""></span>
+
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12">
+                    <div class="panel">
+                        <div class="profile-card pcard-md">
+                            <div class="panel-body">
+                                <div class="col-md-3">
+                                    <img src="img/dna_m_big.png" class="img-responsive"></div>
+                                <div class="pcard-name">
+                                    <h2>
+                                        dnaCRM
+                                    </h2>
+                                    <small>Gestão de Relacionamento com Clientes para Condomínios</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer text-right"><?php echo Config::get('versao'); ?></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <span class="legend">Desenvolvedores</span>
+
+                            <div class="profile-card pcard-md">
+                                <div class="panel-body">
+                                    <div class="profile-card-foto-container"><img
+                                            src="img/gabrielborc.jpg"
+                                            class="img-circle profilefoto foto-md"></div>
+                                    <div class="pcard-name">Gabriel Borges Chiarelo
+                                        <div class="pcard-info"><a href="mailto:gabrielborc@gmail.com"><i
+                                                    class="fa fa-envelope"></i> gabrielborc@gmail.com</a></div>
+                                        <div class="pcard-info text-info">
+                                            <a href="https://github.com/gabrielborc" target="_blank">
+                                                <i class="fa fa-github"></i>
+                                                github.com/gabrielborc</a></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="profile-card pcard-md">
+                                <div class="panel-body">
+                                    <div class="profile-card-foto-container"><img
+                                            src="img/paulosorrentino.jpg"
+                                            class="img-circle profilefoto foto-md"></div>
+                                    <div class="pcard-name">Paulo Vinicius Pacheco Sorrentino
+                                        <div class="pcard-info"><a href="mailto:inshideru@gmail.com"><i
+                                                    class="fa fa-envelope"></i> inshideru@gmail.com</a></div>
+                                        <div class="pcard-info text-info">
+                                            <a href="https://github.com/inshideru" target="_blank">
+                                                <i class="fa fa-github"></i>
+                                                github.com/inshideru</a></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="profile-card pcard-md">
+                                <div class="panel-body">
+                                    <div class="profile-card-foto-container"><img
+                                            src="img/raulmartinez.jpg"
+                                            class="img-circle profilefoto foto-md"></div>
+                                    <div class="pcard-name">Raul Ramos Martinez
+                                        <div class="pcard-info text-primary">
+                                            <a href="mailto:demartinezraul@gmail.com">
+                                                <i class="fa fa-envelope"></i> demartinezraul@gmail.com</a></div>
+                                        <div class="pcard-info text-info">
+                                            <a href="https://github.com/demartinezraul" target="_blank">
+                                                <i class="fa fa-github"></i>
+                                                github.com/demartinezraul</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <div class="legend">Info</div>
+                            <strong>Repositório:</strong><br>
+                            <a href="https://github.com/dnaCRM/dnaCRM" target="_blank">
+                                <i class="fa fa-github"></i>
+                                github.com/dnaCRM/dnaCRM</a>
+                            <br>
+                            Código sob licença <a href="http://pt.wikipedia.org/wiki/Licen%C3%A7a_MIT" target="_blank">MIT</a>
+                            - 2014
+                            <br><br>
+
+                            <strong>Site de Demonstração:</strong>
+                            <br><a href="http://dnacrm-tisi.rhcloud.com/" target="_blank">
+                                <i class="fa fa-link"></i>
+                                dnacrm-tisi.rhcloud.com/</a>
+                            <br><i class="fa fa-user"></i> Usuário: convidado
+                            <br><i class="fa fa-lock"></i> Senha: 123456
+
+                            <br><br>Front-end baseado no <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>.
+                            Ícones <a
+                                href="http://fortawesome.github.io/Font-Awesome/" target="_blank">Font Awesome</a>. Web
+                            fonts
+                            do <a href="http://www.google.com/webfonts" target="_blank">Google</a>.
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
 </html>

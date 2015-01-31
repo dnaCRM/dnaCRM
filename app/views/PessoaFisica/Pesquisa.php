@@ -15,12 +15,13 @@
                 <form class="form-horizontal" action="" method="post">
                     <div class="form-group">
                         <label class="control-label" for="pesquisa-pf">Pesquisar Pessoa Física</label>
+
                         <div class="input-group">
-                        <input type="text" name="pessoa_1" class="form-control" id="pesquisa-pf">
+                            <input type="text" name="pessoa_1" class="form-control" id="pesquisa-pf">
                             <span class="input-group-btn">
                       <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
                     </span>
-                        <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
+                            <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
                         </div>
                     </div>
                 </form>

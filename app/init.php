@@ -48,7 +48,8 @@ $GLOBALS['config'] = array(
         'session_name' => 'user',
         'token_name' => 'token'
     ),
-    'calendario' => $calendar = new DateTime()
+    'calendario' => $calendar = new DateTime(),
+    'versao' => '0.0.2'
 
 );
 Config::get('calendario')->setTimezone(new DateTimeZone('America/Sao_Paulo'));

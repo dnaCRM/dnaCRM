@@ -312,7 +312,6 @@ abstract class DataAccessObject
     /**
      * Testa se uma foto foi enviada
      * caso positivo, a foto será gravada no banco
-     * @todo verificar necessidade de fazer a gravação dos dados dentro de uma transaction
      * @param $id
      * @return bool
      */

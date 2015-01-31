@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * Usuario: Vinicius
- * Date: 14/09/14
- * Time: 00:14
- */
 
 abstract class Database {
     /** @var PDO */
