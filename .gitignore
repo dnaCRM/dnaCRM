@@ -1,6 +1,2 @@
 .idea
-.idea/*
-img/uploads/tb_pessoa_fisica/**
-img/uploads/tb_pessoa_juridica/**
-img/uploads/tb_setor/**
-desktop.ini
+img/uploads/**

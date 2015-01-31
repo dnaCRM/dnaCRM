@@ -32,7 +32,7 @@ $usuario = $data['usuario'];
             <fieldset>
                 <div class="col-md-3">
                     <img class="img-circle profilefoto center-block"
-                         src="<?php echo $data['perfil']->getImPerfil(); ?>">
+                         src="<?php echo Image::get($data['perfil']); ?>">
                 </div>
                 <div class="col-md-5">
                     <div class="form-group">

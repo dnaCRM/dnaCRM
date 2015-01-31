@@ -251,14 +251,14 @@ class PessoaJuridica extends Controller
                 if ($perfil->getImPerfil()
                     && !file_exists($this->model->getImgFolder() . $perfil->getCdPessoaJuridica() . '.jpg')
                 ) {
-                    $this->model->exportaFoto($perfil->getCdPessoaJuridica());
+                    $this->model->exportaFoto($perfil->getCdPessoaJuridica(),$perfil->getImPerfil());
                 }
             }
         } else {
             if ($arr_perfil->getImPerfil()
                 && !file_exists($this->model->getImgFolder() . $arr_perfil->getCdPessoaJuridica() . '.jpg')
             ) {
-                $this->model->exportaFoto($arr_perfil->getCdPessoaJuridica());
+                $this->model->exportaFoto($arr_perfil->getCdPessoaJuridica(),$arr_perfil->getImPerfil());
             }
         }
     }

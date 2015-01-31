@@ -17,7 +17,7 @@ class SetorDAO extends DataAccessObject
         $this->dataTransfer = 'SetorDTO';
         $this->colunaImagem = 'im_perfil';
         $this->imgFolder = IMG_UPLOADS_FOLDER . "{$this->tabela}/";
-        $this->fotoDefault = ICON_USER;
+        $this->fotoDefault = ICON_SETOR;
 
     }
 
@@ -39,7 +39,7 @@ class SetorDAO extends DataAccessObject
         }
 
         if ($this->importaFoto($obj->getCdSetor())) {
-            $this->exportaFoto($obj->getCdSetor());
+            $this->exportaFoto($obj->getCdSetor(),$obj->getImPerfil());
         }
         return $obj;
     }

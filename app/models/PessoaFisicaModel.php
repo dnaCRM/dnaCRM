@@ -80,7 +80,7 @@ class PessoaFisicaModel extends Model
             'cd_profissao' => $this->dto->getCdProfissao(),
             'profissao' => $profissao,
             'nm_pessoa_fisica' => $this->dto->getNmPessoaFisica(),
-            'im_perfil' => $this->dto->getImPerfil(),
+            'im_perfil' => Image::get($this->dto),
             'cpf' => $this->dto->getCpf(),
             'rg' => $this->dto->getRg(),
             'uf' => $uf,
@@ -121,7 +121,7 @@ class PessoaFisicaModel extends Model
         return array(
             'id' => $this->dto->getCdPessoaFisica(),
             'nome' => $this->dto->getNmPessoaFisica(),
-            'foto' => $this->dto->getImPerfil(),
+            'foto' => Image::get($this->dto),
             'email' => $this->dto->getEmail(),
             'nascimento' => (new DateTime($this->dto->getDtNascimento()))->format('d/m/Y')
         );

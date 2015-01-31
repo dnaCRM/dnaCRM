@@ -26,9 +26,9 @@ class SetorModel extends Model
             'nm_setor' => $this->dto->getNmSetor(),
             'cd_condominio' => $this->dto->getCdCondominio(),
             'condominio' => $condominio->getNmFantasia(),
-            'condo_foto' => $condominio->getImPerfil(),
+            'condo_foto' => Image::get($condominio),
             'observacao' => $this->dto->getObservacao(),
-            'im_perfil' => $this->dto->getImPerfil()
+            'im_perfil' => Image::get($this->dto)
         );
     }
 

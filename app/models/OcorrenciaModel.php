@@ -30,10 +30,10 @@ class OcorrenciaModel extends Model
             $setorDTO= (new SetorDAO())->getById($this->dto->getCdSetor());
             $condominioDTO = (new PessoaJuridicaDAO())->getById($setorDTO->getCdCondominio());
             $setor = $setorDTO->getNmSetor();
-            $setor_foto = $setorDTO->getImPerfil();
+            $setor_foto = Image::get($setorDTO);
             $cd_condominio = $condominioDTO->getCdPessoaJuridica();
             $condominio = $condominioDTO->getNmFantasia();
-            $condominio_foto = $condominioDTO->getImPerfil();
+            $condominio_foto = Image::get($condominioDTO);
         }
 
         $categoria = new CategoriaValorDAO();
@@ -58,7 +58,7 @@ class OcorrenciaModel extends Model
             'condominio_foto' => $condominio_foto,
             'cd_pf_informante' => $this->dto->getCdPfInformante(),
             'informante' => $informante->getNmPessoaFisica(),
-            'informante_foto' => $informante->getImPerfil(),
+            'informante_foto' => Image::get($informante),
             'desc_assunto' => $this->dto->getDescAssunto(),
             'desc_ocorrencia' => $this->dto->getDescOcorrencia(),
             'dt_ocorrencia' => (new DateTime($this->dto->getDtOcorrencia()))->format('d/m/Y'),

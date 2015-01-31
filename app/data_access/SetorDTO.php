@@ -6,7 +6,7 @@
  * Date: 07/10/14
  * Time: 01:43
  */
-class SetorDTO extends DataTransferObject
+class SetorDTO extends DataTransferObject implements ImagemPerfilInterface
 {
     private $cd_setor;
     private $cd_condominio;
@@ -33,11 +33,6 @@ class SetorDTO extends DataTransferObject
             'cd_usuario_atualiza' => 'getCdUsuarioAtualiza',
             'dt_usuario_atualiza' => 'getDtUsuarioAtualiza',
         );
-        if ($this->getImPerfil()) {
-            $this->setImPerfil("img/uploads/tb_setor/{$this->cd_setor}.jpg");
-        } else {
-            $this->setImPerfil(ICON_USER);
-        }
     }
 
     /**

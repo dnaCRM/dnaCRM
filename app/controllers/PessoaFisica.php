@@ -286,7 +286,7 @@ class PessoaFisica extends Controller
             ->setEmail(Input::get('email'))
             ->setDtNascimento(Input::get('dt_nascimento'))
             ->setIeSexo(Input::get('ie_sexo'))
-            ->setIeEstuda(Input::get('ie_estuda'))
+            ->setIeEstuda(Input::get('ie_estuda') == '' ? null : Input::get('ie_estuda'))
             ->setCdInstituicao(Input::get('cd_instituicao'))
             ->setDtInicioCurso(Input::get('dt_inicio_curso'))
             ->setDtFimCurso(Input::get('dt_fim_curso'))
@@ -342,14 +342,14 @@ class PessoaFisica extends Controller
                 if ($perfil->getImPerfil()
                     && !file_exists($this->model->getImgFolder() . $perfil->getCdPessoaFisica() . '.jpg')
                 ) {
-                    $this->model->exportaFoto($perfil->getCdPessoaFisica());
+                    $this->model->exportaFoto($perfil->getCdPessoaFisica(),$perfil->getImPerfil());
                 }
             }
         } else {
             if ($arr_perfil->getImPerfil()
                 && !file_exists($this->model->getImgFolder() . $arr_perfil->getCdPessoaFisica() . '.jpg')
             ) {
-                $this->model->exportaFoto($arr_perfil->getCdPessoaFisica());
+                $this->model->exportaFoto($arr_perfil->getCdPessoaFisica(),$arr_perfil->getImPerfil());
             }
         }
     }

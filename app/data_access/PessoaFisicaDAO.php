@@ -17,7 +17,7 @@ class PessoaFisicaDAO extends DataAccessObject
         $this->dataTransfer = 'PessoaFisicaDTO';
         $this->colunaImagem = 'im_perfil';
         $this->imgFolder = IMG_UPLOADS_FOLDER . "{$this->tabela}/";
-        $this->fotoDefault = ICON_USER;
+        $this->fotoDefault = ICON_PESSOA_FISICA;
     }
 
     /**
@@ -38,7 +38,7 @@ class PessoaFisicaDAO extends DataAccessObject
         }
 
         if ($this->importaFoto($obj->getCdPessoaFisica())) {
-            $this->exportaFoto($obj->getCdPessoaFisica());
+            $this->exportaFoto($obj->getCdPessoaFisica(), $obj->getImPerfil());
         }
 
         return $obj;

@@ -46,19 +46,8 @@ $token = Token::generate();
                                 <div class="jumbotron">
                                     <div class="container">
                                         <div class="col-md-4">
-
-                                            <?php
-
-                                            if (file_exists("img/uploads/tb_setor/{$cadastrado->getCdSetor()}.jpg")) {
-                                                $cadastrado->setImPerfil("img/uploads/tb_setor/{$cadastrado->getCdSetor()}.jpg");
-                                            } else {
-                                                $cadastrado->setImPerfil(ICON_USER);
-                                            }
-
-                                            ?>
-
                                             <img class="img-circle profilefoto left" src="<?php
-                                            echo $cadastrado->getImPerfil();?>">
+                                            echo Image::get($cadastrado);?>">
                                         </div>
                                         <div class="col-md-8">
                                             <h1 class="text-success"><span
@@ -86,7 +75,7 @@ $token = Token::generate();
                                         <div class="col-md-2">
 
                                             <img class="img-circle img-responsive"
-                                                 src="<?php echo $setor->getImPerfil(); ?>"><br>
+                                                 src="<?php echo Image::get($setor); ?>"><br>
 
                                             <div class="form-group col-sm-10">
                                                 <div>

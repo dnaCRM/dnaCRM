@@ -28,10 +28,10 @@ class ApartamentoModel extends Model
             'desc_apartamento' => $this->dto->getDescApartamento(),
             'cd_setor' => $this->dto->getCdSetor(),
             'setor' => $setor->getNmSetor(),
-            'setor_foto' => $setor->getImPerfil(),
+            'setor_foto' => Image::get($setor),
             'cd_condominio' => $setor->getCdCondominio(),
             'condominio' => $condominio->getNmFantasia(),
-            'condo_foto' => $condominio->getImPerfil()
+            'condo_foto' => Image::get($condominio)
         );
     }
 

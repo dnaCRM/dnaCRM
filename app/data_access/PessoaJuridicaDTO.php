@@ -6,7 +6,7 @@
  * Time: 21:21
  */
 
-class PessoaJuridicaDTO extends DataTransferObject
+class PessoaJuridicaDTO extends DataTransferObject implements ImagemPerfilInterface
 {
     private $cd_pessoa_juridica;
     private $cnpj;
@@ -43,12 +43,6 @@ class PessoaJuridicaDTO extends DataTransferObject
             'cd_usuario_atualiza' => 'getCdUsuarioAtualiza',
             'dt_usuario_atualiza' => 'getDtUsuarioAtualiza'
         );
-
-        if ($this->getImPerfil()) {
-            $this->setImPerfil("img/uploads/tb_pessoa_juridica/{$this->cd_pessoa_juridica}.jpg");
-        } else {
-            $this->setImPerfil(ICON_USER);
-        }
     }
 
     /**

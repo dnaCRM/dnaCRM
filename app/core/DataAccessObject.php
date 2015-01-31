@@ -344,16 +344,13 @@ abstract class DataAccessObject
      * Testa se uma pasta com o nome da tabela existe
      * Casa não exista, a pasta é criada para receber a imagem exportada
      * @param $id
+     * @param $id_imagem
      * @return bool
      */
-    public function exportaFoto($id)
+    public function exportaFoto($id, $id_imagem)
     {
 
-        if (!file_exists($this->imgFolder)) {
-            mkdir($this->imgFolder);
-        }
-
-        $foto = SITE_ROOT . $this->imgFolder . $id . '.jpg';
+        $foto = SITE_ROOT . $this->imgFolder . $id_imagem . '.jpg';
 
         if (file_exists($foto)) {
             unlink($foto);

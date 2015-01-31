@@ -27,11 +27,11 @@ class OrdemServicoModel extends Model
         if ($this->dto->getCdPfExecutor()) {
             $execDTO = $pessoaFisicaDao->getById($this->dto->getCdPfExecutor());
             $executor = $execDTO->getNmPessoaFisica();
-            $executor_foto = $execDTO->getImPerfil();
+            $executor_foto = Image::get($execDTO);
         } else {
             $execDTO = new PessoaFisicaDTO();
             $executor = 'Executor não definido';
-            $executor_foto = $execDTO->getImPerfil();
+            $executor_foto = Image::get($execDTO);
         }
 
         $solicitante = '';
@@ -39,7 +39,7 @@ class OrdemServicoModel extends Model
         if ($this->dto->getCdPfSolicitante()) {
             $soDTO = $pessoaFisicaDao->getById($this->dto->getCdPfSolicitante());
             $solicitante = $soDTO->getNmPessoaFisica();
-            $solicitante_foto = $soDTO->getImPerfil();
+            $solicitante_foto = Image::get($soDTO);
         }
 
         $ocorrencia = '';

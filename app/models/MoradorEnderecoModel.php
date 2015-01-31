@@ -33,7 +33,7 @@ class MoradorEnderecoModel extends Model
 
         $pessoa = (new PessoaFisicaDAO())->getById($this->dto->getCdPessoaFisica());
         $pessoaNome = $pessoa->getNmPessoaFisica();
-        $pessoaFoto = $pessoa->getImPerfil();
+        $pessoaFoto = Image::get($pessoa);
 
         return array(
             'id_m_end' => $this->dto->getNrSequencia(),

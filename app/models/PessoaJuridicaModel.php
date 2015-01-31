@@ -43,7 +43,7 @@ class PessoaJuridicaModel extends Model
             'desc_tipo_empresa' => $tipo,
             'cd_ramo_atividade' => $this->dto->getCdRamoAtividade(),
             'desc_ramo_atividade' => $ramo_atividade,
-            'im_perfil' => $this->dto->getImPerfil(),
+            'im_perfil' => Image::get($this->dto),
             'email' => $this->dto->getEmail()
         );
     }

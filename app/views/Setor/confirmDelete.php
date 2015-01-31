@@ -27,7 +27,7 @@
                         ?>
                         <div class="col-md-4">
                             <img class="img-circle profilefoto left"
-                                 src="<?php echo $setor->getImPerfil(); ?>">
+                                 src="<?php echo Image::get($setor); ?>">
                         </div>
                         <div class="col-md-8">
                             <h1><span class="glyphicon glyphicon-arrow-right"></span> Atenção!</h1>

@@ -215,14 +215,14 @@ class Setor extends Controller
                 if ($setor->getImPerfil()
                     && !file_exists($this->model->getImgFolder() . $setor->getCdSetor() . '.jpg')
                 ) {
-                    $this->model->exportaFoto($setor->getCdSetor());
+                    $this->model->exportaFoto($setor->getCdSetor(),$setor->getImPerfil());
                 }
             }
         } else {
             if ($arr_setor->getImPerfil()
                 && !file_exists($this->model->getImgFolder() . $arr_setor->getCdSetor() . '.jpg')
             ) {
-                $this->model->exportaFoto($arr_setor->getCdSetor());
+                $this->model->exportaFoto($arr_setor->getCdSetor(),$arr_setor->getImPerfil());
             }
         }
     }

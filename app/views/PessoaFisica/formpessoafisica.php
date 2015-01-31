@@ -53,18 +53,18 @@ $token = Token::generate();
         <div class="container">
             <div class="col-md-4">
 
-                <?php
-
+<!--                --><?php
+/*
                 if (file_exists("img/uploads/tb_pessoa_fisica/{$cadastrado->getCdPessoaFisica()}.jpg")) {
                     $cadastrado->setImPerfil("img/uploads/tb_pessoa_fisica/{$cadastrado->getCdPessoaFisica()}.jpg");
                 } else {
-                    $cadastrado->setImPerfil(ICON_USER);
+                    $cadastrado->setImPerfil(ICON_PESSOA_FISICA);
                 }
 
-                ?>
+                */?>
 
                 <img class="img-circle profilefoto left" src="<?php
-                echo $cadastrado->getImPerfil();?>">
+                echo Image::get($cadastrado);?>">
             </div>
 
             <div class="col-md-8">
@@ -95,7 +95,7 @@ $token = Token::generate();
 
     <div class="col-md-2">
 
-        <img class="img-circle img-responsive" id="pf_foto" src="<?php echo $perfil->getImPerfil(); ?>"><br>
+        <img class="img-circle img-responsive" id="pf_foto" src="<?php echo Image::get($perfil); ?>"><br>
 
         <div class="form-group col-sm-10">
             <div>

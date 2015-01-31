@@ -28,7 +28,9 @@ define('SITE_ROOT', $root_url); //'C:\htdocs\dnacrm\\'
 define('IMG_UPLOADS_FOLDER', 'img/uploads/');
 
 //Imagem padrão para Pessoa Física
-define('ICON_USER', 'img/icon-user.jpg');
+define('ICON_PESSOA_FISICA', 'img/uploads/tb_pessoa_fisica/default.jpg');
+define('ICON_PESSOA_JURIDICA', 'img/uploads/tb_pessoa_juridica/default_pj.jpg');
+define('ICON_SETOR', 'img/uploads/tb_setor/default_setor.jpg');
 
 /**
  * Guarda configurações gerais
@@ -102,7 +104,7 @@ function CodeFail($numero, $mensagem, $arquivo, $linha)
             break;
     }
 
-    $mensagem = ExceptionMsg::msg($mensagem);
+    //$mensagem = ExceptionMsg::msg($mensagem);
     $msg = "<div class=\"alert alert-dismissable alert-{$classecss}\">"
         . '<button type="button" class="close" data-dismiss="alert">×</button>'
         . '<strong>ALERTA! </strong><br>'
@@ -115,7 +117,7 @@ function CodeFail($numero, $mensagem, $arquivo, $linha)
             . "<small>Erro número {$numero}</small>"
             .'</div>';
 
-    echo $msg;
+    echo $erro;
 
 }
 

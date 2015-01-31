@@ -112,7 +112,7 @@ pcardExecutor.delegate('#remove-executor', 'click', function(e) {
     inputExecutor.val('');
     $('#pcard-executor .pcard-name').html('Executor não definido');
     $('#pcard-executor img')
-        .prop('src','img/icon-user.jpg');
+        .prop('src','img/default.jpg');
 });
 
 $(function () {
