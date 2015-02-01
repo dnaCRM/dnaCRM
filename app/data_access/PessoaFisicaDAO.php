@@ -38,6 +38,7 @@ class PessoaFisicaDAO extends DataAccessObject
         }
 
         if ($this->importaFoto($obj->getCdPessoaFisica())) {
+            $obj = $this->getById($obj->getCdPessoaFisica());
             $this->exportaFoto($obj->getCdPessoaFisica(), $obj->getImPerfil());
         }
 

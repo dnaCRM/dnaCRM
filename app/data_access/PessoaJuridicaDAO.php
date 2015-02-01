@@ -39,7 +39,8 @@ class PessoaJuridicaDAO extends DataAccessObject
         }
 
         if ($this->importaFoto($obj->getCdPessoaJuridica())) {
-            $this->exportaFoto($obj->getCdPessoaJuridica(),$obj->getImPerfil());
+            $obj = $this->getById($obj->getCdPessoaJuridica());
+            $this->exportaFoto($obj->getCdPessoaJuridica(), $obj->getImPerfil());
         }
 
         return $obj;

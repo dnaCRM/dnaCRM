@@ -56,16 +56,24 @@
 
                     <dt>Nome</dt>
                     <dd><?php echo $data['dados_pessoais']['nm_pessoa_fisica']; ?></dd>
-                    <dt>E-mail</dt>
-                    <dd><?php echo $data['dados_pessoais']['email']; ?></dd>
-                    <dt>CPF</dt>
-                    <dd><?php echo $data['dados_pessoais']['cpf']; ?></dd>
-                    <dt>RG</dt>
-                    <dd><?php echo $data['dados_pessoais']['rg'] . $data['dados_pessoais']['uf']; ?></dd>
-                    <dt>Data de Nascimento</dt>
-                    <dd><?php echo $data['dados_pessoais']['dt_nascimento']; ?></dd>
-                    <dt>Idade</dt>
-                    <dd><?php echo $data['dados_pessoais']['idade']; ?></dd>
+                    <?php if ($data['dados_pessoais']['email']): ?>
+                        <dt>E-mail</dt>
+                        <dd><?php echo $data['dados_pessoais']['email']; ?></dd>
+                    <?php endif;?>
+                    <?php if ($data['dados_pessoais']['cpf']): ?>
+                        <dt>CPF</dt>
+                        <dd><?php echo $data['dados_pessoais']['cpf']; ?></dd>
+                    <?php endif; ?>
+                    <?php if ($data['dados_pessoais']['rg']): ?>
+                        <dt>RG</dt>
+                        <dd><?php echo $data['dados_pessoais']['rg'] . $data['dados_pessoais']['uf']; ?></dd>
+                    <?php endif; ?>
+                    <?php if ($data['dados_pessoais']['dt_nascimento']): ?>
+                        <dt>Data de Nascimento</dt>
+                        <dd><?php echo $data['dados_pessoais']['dt_nascimento']; ?></dd>
+                        <dt>Idade</dt>
+                        <dd><?php echo $data['dados_pessoais']['idade']; ?></dd>
+                    <?php endif;?>
                     <dt>Gênero</dt>
                     <dd><?php echo $data['dados_pessoais']['ie_sexo']; ?></dd>
                     <?php if ($data['dados_pessoais']['cd_pessoa_juridica']): ?>

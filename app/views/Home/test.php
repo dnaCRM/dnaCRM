@@ -1,16 +1,22 @@
+<div class="container">
 <?php
-$con = Database::getConnection();
-$stmt = $con->prepare('
-    SELECT p.*, m.*
-    FROM tb_morador_endereco m
-    JOIN tb_pessoa_fisica p ON (p.cd_pessoa_fisica = m.cd_pessoa_fisica)
-    WHERE m.dt_saida IS NULL;
-');
-$stmt->execute();
+$pessoa_id = 3;
+$queryString = <<< SQL
+SELECT *
+FROM vs_pf_array_dados
+WHERE cd_pessoa_fisica = {$pessoa_id};
+SQL;
 
-var_dump($stmt->fetchAll(PDO::FETCH_ASSOC));
+$con = Database::getConnection();
+$stmt = $con->prepare($queryString);
+$stmt->execute();
+$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+echo count($result);
+var_dump(is_int($pessoa_id));
+var_dump($result);
 
 ?>
+</div>
 <!-- NAO DELETAR DESTA LINHA PRA BAIXO -->
 
 

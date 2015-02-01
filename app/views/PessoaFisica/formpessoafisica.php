@@ -52,17 +52,6 @@ $token = Token::generate();
     <div class="jumbotron">
         <div class="container">
             <div class="col-md-4">
-
-<!--                --><?php
-/*
-                if (file_exists("img/uploads/tb_pessoa_fisica/{$cadastrado->getCdPessoaFisica()}.jpg")) {
-                    $cadastrado->setImPerfil("img/uploads/tb_pessoa_fisica/{$cadastrado->getCdPessoaFisica()}.jpg");
-                } else {
-                    $cadastrado->setImPerfil(ICON_PESSOA_FISICA);
-                }
-
-                */?>
-
                 <img class="img-circle profilefoto left" src="<?php
                 echo Image::get($cadastrado);?>">
             </div>

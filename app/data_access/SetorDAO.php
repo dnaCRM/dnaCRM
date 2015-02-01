@@ -39,8 +39,10 @@ class SetorDAO extends DataAccessObject
         }
 
         if ($this->importaFoto($obj->getCdSetor())) {
-            $this->exportaFoto($obj->getCdSetor(),$obj->getImPerfil());
+            $obj = $this->getById($obj->getCdSetor());
+            $this->exportaFoto($obj->getCdSetor(), $obj->getImPerfil());
         }
+
         return $obj;
     }
 
