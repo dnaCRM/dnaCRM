@@ -1,3 +1,16 @@
+-- ANIVERSARIANTES DO DIA
+SELECT *
+FROM tb_pessoa_fisica
+WHERE date_part('day', dt_nascimento) = (SELECT DATE_PART('DAY', CURRENT_TIMESTAMP))
+      AND date_part('month', dt_nascimento) = (SELECT DATE_PART('MONTH', CURRENT_TIMESTAMP))
+ORDER BY nm_pessoa_fisica;
+
+-- ANIVERSARIANTES DO MÊS
+SELECT *
+FROM tb_pessoa_fisica
+WHERE date_part('month', dt_nascimento) = (SELECT DATE_PART('MONTH', CURRENT_TIMESTAMP))
+ORDER BY nm_pessoa_fisica;
+
 -- APARTAMENTOS VAZIOS
 SELECT
   ap.*,

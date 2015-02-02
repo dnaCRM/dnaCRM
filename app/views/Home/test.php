@@ -1,5 +1,11 @@
 <div class="container">
 <?php
+
+$base_url = str_replace('index.php', '', $_SERVER['PHP_SELF']);
+$root_url = str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']);
+
+var_dump($base_url,$root_url);
+
 $pessoa_id = 3;
 $queryString = <<< SQL
 SELECT *
