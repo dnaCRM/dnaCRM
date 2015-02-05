@@ -3,13 +3,14 @@
 class PessoaJuridicaEndereco extends Controller
 {
     private $categorias;
-    private $estados;
+    /** @var  PessoaJuridicaEnderecoModel */
+    private $pessoaJuridicaEnderecoModel;
 
     public function __construct()
     {
         $this->setModel(new PessoaJuridicaEnderecoDAO());
         $this->categorias = (new CategoriaValorDAO())->get('cd_categoria = 9');
-        $this->estados = (new CategoriaValorDAO())->get('cd_categoria = 2');
+        $this->pessoaJuridicaEnderecoModel = new PessoaJuridicaEnderecoModel();
 
     }
     public function cadastra()
@@ -24,29 +25,7 @@ class PessoaJuridicaEndereco extends Controller
                 CodeFail((int)$e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
             }
 
-            $return = array(
-                'id_endereco' => $endereco->getNrSequencia(),
-                'cd_pessoa_juridica' => $endereco->getCdPessoaJuridica(),
-                'rua' => $endereco->getRua(),
-                'numero' => $endereco->getNumero(),
-                'bairro' => $endereco->getBairro(),
-                'cidade' => $endereco->getCidade(),
-                'cep' => $endereco->getCep(),
-                'observacao' => $endereco->getObservacao()
-            );
-
-
-            foreach ($this->categorias as $catg_end) {
-                if ($catg_end->getCdVlCategoria() == $endereco->getCdVlCatgEnd()) {
-                    $return['categoria'] = $catg_end->getDescVlCatg();
-                }
-            }
-
-            foreach ($this->estados as $estado) {
-                if ($estado->getCdVlCategoria() == $endereco->getCdVlCatgEstado()) {
-                    $return['estado'] = $estado->getDescVlCatg();
-                }
-            }
+            $return = $this->pessoaJuridicaEnderecoModel->setDTO($endereco)->getArrayDados();
 
             echo json_encode($return);
         }
@@ -59,19 +38,7 @@ class PessoaJuridicaEndereco extends Controller
     public function findById($id)
     {
         $endereco = $this->model->getById($id);
-
-        $return = array(
-            'id_endereco' => $endereco->getNrSequencia(),
-            'cd_pessoa_juridica' => $endereco->getCdPessoaJuridica(),
-            'rua' => $endereco->getRua(),
-            'numero' => $endereco->getNumero(),
-            'bairro' => $endereco->getBairro(),
-            'cidade' => $endereco->getCidade(),
-            'cep' => $endereco->getCep(),
-            'observacao' => $endereco->getObservacao(),
-            'categoria' => $endereco->getCdVlCatgEnd(),
-            'estado' => $endereco->getCdVlCatgEstado()
-        );
+        $return = $this->pessoaJuridicaEnderecoModel->setDTO($endereco)->getArrayDados();
 
         echo json_encode($return);
     }
@@ -83,18 +50,7 @@ class PessoaJuridicaEndereco extends Controller
         $dto = $this->model->getById($id);
         $endereco = $this->model->delete($dto);
 
-        $return = array(
-            'id_endereco' => $endereco->getNrSequencia(),
-            'cd_pessoa_juridica' => $endereco->getCdPessoaJuridica(),
-            'rua' => $endereco->getRua(),
-            'numero' => $endereco->getNumero(),
-            'bairro' => $endereco->getBairro(),
-            'cidade' => $endereco->getCidade(),
-            'cep' => $endereco->getCep(),
-            'observacao' => $endereco->getObservacao(),
-            'categoria' => $endereco->getCdVlCatgEnd(),
-            'estado' => $endereco->getCdVlCatgEstado()
-        );
+        $return = $this->pessoaJuridicaEnderecoModel->setDTO($endereco)->getArrayDados();
 
         echo json_encode($return);
     }

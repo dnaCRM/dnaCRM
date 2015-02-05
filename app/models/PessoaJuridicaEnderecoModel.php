@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Vinicius
- * Date: 29/10/14
- * Time: 18:25
- */
 
 class PessoaJuridicaEnderecoModel extends Model
 {
@@ -20,8 +14,9 @@ class PessoaJuridicaEnderecoModel extends Model
 
     public function getArrayDados()
     {
-        $estado = (new CategoriaValorDAO())->getBy2Ids($this->dto->getCdVlCatgEstado(), 2)
-            ->getDescVlCatg();
+        $estado = (new EstadosDAO())->getById($this->dto->getEstado());
+        $cidade = (new CidadesDAO())->getById($this->dto->getCidade());
+
         $endereco = (new CategoriaValorDAO())->getBy2Ids($this->dto->getCdVlCatgEnd(), 9)
             ->getDescVlCatg();
         $pessoaJuridica = (new PessoaJuridicaDAO())->getById($this->dto->getCdPessoaJuridica())
@@ -37,8 +32,8 @@ class PessoaJuridicaEnderecoModel extends Model
             'rua' => $this->dto->getRua(),
             'numero' => $this->dto->getNumero(),
             'bairro' => $this->dto->getBairro(),
-            'cidade' => $this->dto->getCidade(),
-            'estado' => $estado,
+            'cidade' => $cidade->getNome(),
+            'estado' => $estado->getNome(),
             'cd_catg_estado' => $this->dto->getCdCatgEstado(),
             'cd_vl_catg_estado' => $this->dto->getCdCatgEstado(),
             'observacao' => $this->dto->getObservacao()

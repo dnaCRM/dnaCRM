@@ -19,26 +19,42 @@ class SetorModel extends Model
 
     public function getArrayDados()
     {
+        $tipo = (new CategoriaDAO())
+            ->getById($this->dto->getCdCatgTipo());
+        $tipo_desc = $tipo->getDescCategoria();
+
+        $sub_tipo = (new CategoriaValorDAO())
+            ->getById($this->dto->getCdVlCatgTipo());
+        $sub_tipo_desc = $sub_tipo->getDescVlCatg();
+
         $condominio = (new PessoaJuridicaDAO())->getById($this->dto->getCdCondominio());
+        $setor_grupo = $this->dao->getById($this->dto->getCdSetorGrupo());
 
         return array(
             'cd_setor' => $this->dto->getCdSetor(),
+            'cd_setor_grupo' => $this->dto->getCdSetorGrupo(),
+            'setor_grupo' => $setor_grupo->getNmSetor(),
+            'setor_grupo_foto' => Image::get($setor_grupo),
             'nm_setor' => $this->dto->getNmSetor(),
             'cd_condominio' => $this->dto->getCdCondominio(),
             'condominio' => $condominio->getNmFantasia(),
             'condo_foto' => Image::get($condominio),
             'observacao' => $this->dto->getObservacao(),
-            'im_perfil' => Image::get($this->dto)
+            'im_perfil' => Image::get($this->dto),
+            'tipo' => $tipo_desc,
+            'sub_tipo' => $sub_tipo_desc,
+            'cd_catg_tipo' => $this->dto->getCdCatgTipo(),
+            'cd_vl_catg_tipo' => $this->dto->getCdVlCatgTipo()
         );
     }
 
-    public function getApartamentos(ApartamentoModel $apartamentoModel)
+    public function getApartamentos(SetorDTO $dto)
     {
-        $apartamentos = $apartamentoModel->getDAO()->get("cd_setor = {$this->dto->getCdSetor()}");
+        $apartamentos = $this->getDAO()->get("cd_setor_grupo = {$dto->getCdSetor()}");
 
         $lista = array();
         foreach( $apartamentos as $apartamento) {
-            $lista[] = $apartamentoModel->setDTO($apartamento)->getArrayDados();
+            $lista[] = $this->setDTO($apartamento)->getArrayDados();
         }
         return $lista;
     }

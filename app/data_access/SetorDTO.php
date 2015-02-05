@@ -17,8 +17,6 @@ class SetorDTO extends DataTransferObject implements ImagemPerfilInterface
     private $im_perfil;
     private $cd_catg_tipo;
     private $cd_vl_catg_tipo;
-    private $cd_catg_sub_tipo;
-    private $cd_vl_catg_sub_tipo;
     private $cd_usuario_criacao;
     private $dt_usuario_criacao;
     private $cd_usuario_atualiza;
@@ -38,8 +36,6 @@ class SetorDTO extends DataTransferObject implements ImagemPerfilInterface
             'observacao' => 'getObservacao',
             'cd_catg_tipo' => 'getCdCatgTipo',
             'cd_vl_catg_tipo' => 'getCdVlCatgTipo',
-            'cd_catg_sub_tipo' => 'getCdCatgSubTipo',
-            'cd_vl_catg_sub_tipo' => 'getCdVlCatgSubTipo',
             'cd_usuario_criacao' => 'getCdUsuarioCriacao',
             'dt_usuario_criacao' => 'getDtUsuarioCriacao',
             'cd_usuario_atualiza' => 'getCdUsuarioAtualiza',
@@ -62,14 +58,6 @@ class SetorDTO extends DataTransferObject implements ImagemPerfilInterface
     /**
      * @return mixed
      */
-    public function getCdCatgSubTipo()
-    {
-        return $this->cd_catg_sub_tipo;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getCdCatgTipo()
     {
         return $this->cd_catg_tipo;
@@ -81,14 +69,6 @@ class SetorDTO extends DataTransferObject implements ImagemPerfilInterface
     public function getCdSetorGrupo()
     {
         return $this->cd_setor_grupo;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCdVlCatgSubTipo()
-    {
-        return $this->cd_vl_catg_sub_tipo;
     }
 
     /**
@@ -272,16 +252,6 @@ class SetorDTO extends DataTransferObject implements ImagemPerfilInterface
     }
 
     /**
-     * @param $cd_catg_sub_tipo
-     * @return $this
-     */
-    public function setCdCatgSubTipo($cd_catg_sub_tipo)
-    {
-        $this->cd_catg_sub_tipo = $cd_catg_sub_tipo;
-        return $this;
-    }
-
-    /**
      * @param $cd_catg_tipo
      * @return $this
      */
@@ -298,16 +268,6 @@ class SetorDTO extends DataTransferObject implements ImagemPerfilInterface
     public function setCdSetorGrupo($cd_setor_grupo)
     {
         $this->cd_setor_grupo = $cd_setor_grupo;
-        return $this;
-    }
-
-    /**
-     * @param $cd_vl_catg_sub_tipo
-     * @return $this
-     */
-    public function setCdVlCatgSubTipo($cd_vl_catg_sub_tipo)
-    {
-        $this->cd_vl_catg_sub_tipo = $cd_vl_catg_sub_tipo;
         return $this;
     }
 

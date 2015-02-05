@@ -37,7 +37,7 @@ class PessoaFisicaDTO extends DataTransferObject implements ImagemPerfilInterfac
             'nm_pessoa_fisica' => 'getNmPessoaFisica',
             'cpf' => 'getCpf',
             'rg' => 'getRg',
-            'cd_catg_org_rg' => 'getUfRg',
+            'uf_rg' => 'getUfRg',
             'email' => 'getEmail',
             'dt_nascimento' => 'getDtNascimento',
             'ie_sexo' => 'getIeSexo',
@@ -59,31 +59,6 @@ class PessoaFisicaDTO extends DataTransferObject implements ImagemPerfilInterfac
     public function getReflex()
     {
         return $this->reflex;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCdCatgGrauEnsino()
-    {
-        return $this->cd_catg_grau_ensino;
-    }
-
-    /**
-
-     * @return mixed
-     */
-    public function getCdCatgOrgRg()
-    {
-        return $this->cd_catg_org_rg;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCdInstituicao()
-    {
-        return $this->cd_instituicao;
     }
 
     /**
@@ -215,16 +190,6 @@ class PessoaFisicaDTO extends DataTransferObject implements ImagemPerfilInterfac
     }
 
 ######### SETTERS #################################################################3
-
-    /**
-     * @param $cd_instituicao
-     * @return PessoaFisicaDTO
-     */
-    public function setCdInstituicao($cd_instituicao)
-    {
-        $this->cd_instituicao = $cd_instituicao;
-        return $this;
-    }
 
     /**
      * @param $cd_pessoa_fisica

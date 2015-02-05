@@ -48,6 +48,8 @@ class Setor extends Controller
     public function formSetor($id = null)
     {
         $condominio = (new PessoaJuridicaDAO())->get('cd_ramo_atividade = 107');
+        $sub_tipos = (new CategoriaValorDAO())->get('cd_vl_categoria = 17');
+        $tipos_apartamento = (new CategoriaValorDAO())->get('cd_vl_categoria = 18');
 
 
         if ($id) {
@@ -60,7 +62,9 @@ class Setor extends Controller
                 'pagesubtitle' => 'Atualizar Setor.',
                 'condominio' => $condominio,
                 'id' => $id,
-                'setor' => $setorarr
+                'setor' => $setorarr,
+                'sub_tipos' => $sub_tipos,
+                'tipos_apartamento' => $tipos_apartamento
             );
         } else {
             $setor = new SetorDTO();
@@ -69,7 +73,9 @@ class Setor extends Controller
                 'pagesubtitle' => '',
                 'condominio' => $condominio,
                 'id' => null,
-                'setor' => $setor
+                'setor' => $setor,
+                'sub_tipos' => $sub_tipos,
+                'tipos_apartamento' => $tipos_apartamento
             );
         }
 
@@ -155,10 +161,15 @@ class Setor extends Controller
     {
         $dto = new SetorDTO();
 
-        $dto->setCdSetor(Input::get('cd_setor'))
+        $dto
+            ->setCdSetor(Input::get('cd_setor'))
+            ->setCdSetorGrupo(Input::get('cd_setor_grupo'))
             ->setNmSetor(Input::get('nm_setor'))
             ->setCdCondominio(Input::get('cd_condominio'))
+            ->setRamal(Input::get('ramal'))
             ->setObservacao(Input::get('observacao'))
+            ->setCdCatgTipo(Input::get('cd_tipo'))
+            ->setCdVlCatgTipo(Input::get('cd_sub_tipo'))
             ->setCdUsuarioCriacao(Session::get('user'))
             ->setDtUsuarioCriacao('now()')
             ->setCdUsuarioAtualiza(Session::get('user'))

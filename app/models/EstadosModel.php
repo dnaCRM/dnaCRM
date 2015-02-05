@@ -1,23 +1,24 @@
 <?php
 
 
-class ProfissaoModel extends Model
+class EstadosModel extends Model
 {
-    /** @var  ProfissaoDTO */
+    /** @var  EstadosDTO */
     private $dto;
-    /** @var  ProfissaoDAO */
+    /** @var  EstadosDAO */
     private $dao;
 
     public function __construct()
     {
-        $this->dao = new ProfissaoDAO();
+        $this->dao = new EstadosDAO();
     }
 
     public function getArrayDados()
     {
         return array(
-            'cd_profissao' => $this->dto->getCdProfissao(),
-            'nm_profissao' => $this->dto->getNmProfissao()
+            'id' => $this->dto->getId(),
+            'nome' => $this->dto->getNome(),
+            'sigla' => $this->dto->getSigla()
         );
     }
 
@@ -26,9 +27,9 @@ class ProfissaoModel extends Model
         return $this->dao;
     }
 
-    public function setDTO(ProfissaoDTO $dto)
+    public function setDTO(EstadosDTO $dto)
     {
         $this->dto = $dto;
         return $this;
     }
-} 
+}

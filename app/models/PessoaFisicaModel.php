@@ -23,25 +23,6 @@ class PessoaFisicaModel extends Model
 
     public function getArrayDados()
     {
-        $categoria = new CategoriaValorDAO();
-        $uf = '';
-
-        if ($this->dto->getCdVlCatgOrgRg()) {
-            $catg = $categoria->getBy2Ids($this->dto->getCdVlCatgOrgRg(), $this->dto->getCdCatgOrgRg());
-            $uf = '-'.$catg->getDescVlCatg();
-        }
-
-        $grau = '';
-        if ($this->dto->getCdCatgGrauEnsino()) {
-            $catg = $categoria->getBy2Ids($this->dto->getCdVlCatgGrauEnsino(), $this->dto->getCdCatgGrauEnsino());
-            $grau = $catg->getDescVlCatg();
-        }
-        $instituicao = '';
-        if ($this->dto->getCdInstituicao()) {
-            $instituicao = (new PessoaJuridicaDAO())->getById($this->dto->getCdInstituicao())
-                ->getNmFantasia();
-        }
-
         $empresa = '';
         if ($this->dto->getCdPessoaJuridica()) {
             $empresa = (new PessoaJuridicaDAO())->getById($this->dto->getCdPessoaJuridica())
@@ -57,7 +38,7 @@ class PessoaFisicaModel extends Model
 
         // Calculando a idade
         $idade = '';
-        $dt_nascimento ='';
+        $dt_nascimento = '';
         if ($this->dto->getDtNascimento()) {
             $date = new DateTime($this->dto->getDtNascimento()); // data de nascimento
             $interval = $date->diff(new DateTime()); // data atual
@@ -67,11 +48,17 @@ class PessoaFisicaModel extends Model
             // '%Y Anos, %m Meses, %d Dias, %H Horas, %i Minutos e %s Segundos'
         }
 
-        $dt_inicio_curso = ($this->dto->getDtInicioCurso() ?
-            (new DateTime($this->dto->getDtInicioCurso()))->format('d/m/Y') : '');
+        $uf_rg = '';
+        if ($this->dto->getUfRg()) {
+            $estadoDTO = (new EstadosDAO())->getById($this->dto->getUfRg());
+            $uf_rg = $estadoDTO->getSigla();
+        }
 
-        $dt_fim_curso = ($this->dto->getDtFimCurso() ?
-            (new DateTime($this->dto->getDtFimCurso()))->format('d/m/Y') : '');
+        $cidade_dados = '';
+        if ($this->dto->getCdCidadeOrigem()) {
+            $cidade_origem = (new CidadesDAO())->getById($this->dto->getCdCidadeOrigem());
+            $cidade_dados = (new CidadesModel())->setDTO($cidade_origem)->getArrayDados();
+        }
 
         return array(
             'cd_pessoa_fisica' => $this->dto->getCdPessoaFisica(),
@@ -83,21 +70,15 @@ class PessoaFisicaModel extends Model
             'im_perfil' => Image::get($this->dto),
             'cpf' => $this->dto->getCpf(),
             'rg' => $this->dto->getRg(),
-            'uf' => $uf,
+            'uf_rg' => $uf_rg,
             'cd_catg_org_rg' => $this->dto->getCdCatgOrgRg(),
             'cd_vl_catg_org_rg' => $this->dto->getCdVlCatgOrgRg(),
             'email' => $this->dto->getEmail(),
             'idade' => $idade,
             'dt_nascimento' => $dt_nascimento,
             'ie_sexo' => $sexo,
-            'ie_estuda' => ($this->dto->getIeEstuda() == 's' ? 'Sim' : 'Não'),
-            'cd_instituicao' => $this->dto->getCdInstituicao(),
-            'instituicao' => $instituicao,
-            'dt_inicio_curso' => $dt_inicio_curso,
-            'dt_fim_curso' => $dt_fim_curso,
-            'grau' => $grau,
-            'cd_catg_grau_ensino' => $this->dto->getCdCatgGrauEnsino(),
-            'cd_vl_catg_grau_ensino' => $this->dto->getCdVlCatgGrauEnsino()
+            'cidade_origem' => $this->dto->getCdCidadeOrigem(),
+            'cidade_origem_dados' => $cidade_dados
         );
     }
 
