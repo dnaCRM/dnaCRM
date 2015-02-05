@@ -17,8 +17,7 @@ class PessoaJuridicaEnderecoDTO extends DataTransferObject
     private $numero;
     private $bairro;
     private $cidade;
-    private $cd_catg_estado;
-    private $cd_vl_catg_estado;
+    private $estado;
     private $observacao;
     private $cd_usuario_criacao;
     private $dt_usuario_criacao;
@@ -40,8 +39,7 @@ class PessoaJuridicaEnderecoDTO extends DataTransferObject
             'numero' => 'getNumero',
             'bairro' => 'getBairro',
             'cidade' => 'getCidade',
-            'cd_catg_estado' => 'getCdCatgEstado',
-            'cd_vl_catg_estado' => 'getCdVlCatgEstado',
+            'estado' => 'getEstado',
             'observacao' => 'getObservacao',
             'cd_usuario_criacao' => 'getCdUsuarioCriacao',
             'dt_usuario_criacao' => 'getDtUsuarioCriacao',
@@ -79,14 +77,6 @@ class PessoaJuridicaEnderecoDTO extends DataTransferObject
     /**
      * @return mixed
      */
-    public function getCdCatgEstado()
-    {
-        return $this->cd_catg_estado;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getCdPessoaJuridica()
     {
         return $this->cd_pessoa_juridica;
@@ -119,9 +109,9 @@ class PessoaJuridicaEnderecoDTO extends DataTransferObject
     /**
      * @return mixed
      */
-    public function getCdVlCatgEstado()
+    public function getEstado()
     {
-        return $this->cd_vl_catg_estado;
+        return $this->estado;
     }
 
     /**
@@ -202,12 +192,6 @@ class PessoaJuridicaEnderecoDTO extends DataTransferObject
         return $this;
     }
 
-    public function setCdCatgEstado($cd_catg_estado)
-    {
-        $this->cd_catg_estado = $cd_catg_estado;
-        return $this;
-    }
-
     public function setCdPessoaJuridica($cd_pessoa_juridica)
     {
         $this->cd_pessoa_juridica = $cd_pessoa_juridica;
@@ -232,9 +216,9 @@ class PessoaJuridicaEnderecoDTO extends DataTransferObject
         return $this;
     }
 
-    public function setCdVlCatgEstado($cd_vl_catg_estado)
+    public function setEstado($estado)
     {
-        $this->cd_vl_catg_estado = $cd_vl_catg_estado;
+        $this->estado = $estado;
         return $this;
     }
 

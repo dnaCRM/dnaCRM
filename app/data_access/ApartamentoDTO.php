@@ -4,6 +4,8 @@ Class ApartamentoDTO extends DataTransferObject
     private $cd_apartamento;
     private $cd_setor;
     private $desc_apartamento;
+    private $cd_catg_tipo;
+    private $cd_vl_catg_tipo;
     private $cd_usuario_criacao;
     private $dt_usuario_criacao;
     private $cd_usuario_atualiza;
@@ -19,6 +21,8 @@ Class ApartamentoDTO extends DataTransferObject
             'cd_apartamento' => 'getCdApartamento',
             'cd_setor' => 'getCdSetor',
             'desc_apartamento' => 'getDescApartamento',
+            'cd_catg_tipo' => 'getCdCatgTipo',
+            'cd_vl_catg_tipo' => 'getCdVlCatgTipo',
             'cd_usuario_criacao' => 'getCdUsuarioCriacao',
             'dt_usuario_criacao' => 'getDtUsuarioCriacao',
             'cd_usuario_atualiza' => 'getCdUsuarioAtualiza',
@@ -34,6 +38,22 @@ Class ApartamentoDTO extends DataTransferObject
     public function getReflex()
     {
         return $this->reflex;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCdCatgTipo()
+    {
+        return $this->cd_catg_tipo;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCdVlCatgTipo()
+    {
+        return $this->cd_vl_catg_tipo;
     }
 
     public function getCdApartamento()
@@ -113,6 +133,26 @@ Class ApartamentoDTO extends DataTransferObject
     public function setDtUsuarioAtualiza($dt_usuario_atualiza)
     {
         $this->dt_usuario_atualiza = $dt_usuario_atualiza;
+        return $this;
+    }
+
+    /**
+     * @param $cd_catg_tipo
+     * @return $this
+     */
+    public function setCdCatgTipo($cd_catg_tipo)
+    {
+        $this->cd_catg_tipo = $cd_catg_tipo;
+        return $this;
+    }
+
+    /**
+     * @param $cd_vl_catg_tipo
+     * @return $this
+     */
+    public function setCdVlCatgTipo($cd_vl_catg_tipo)
+    {
+        $this->cd_vl_catg_tipo = $cd_vl_catg_tipo;
         return $this;
     }
 

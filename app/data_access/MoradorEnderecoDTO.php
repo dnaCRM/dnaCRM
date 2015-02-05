@@ -13,6 +13,7 @@ class MoradorEnderecoDTO extends DataTransferObject{
     private $cd_apartamento;
     private $dt_entrada;
     private $dt_saida;
+    private $fg_residente;
     private $cd_usuario_criacao;
     private $dt_usuario_criacao;
     private $cd_usuario_atualiza;
@@ -28,6 +29,7 @@ class MoradorEnderecoDTO extends DataTransferObject{
             'cd_apartamento' => 'getCdApartamento',
             'dt_entrada' => 'getDtEntrada',
             'dt_saida' => 'getDtSaida',
+            'fg_residente' => 'getFgResidente',
             'cd_usuario_criacao' => 'getCdUsuarioCriacao',
             'dt_usuario_criacao' => 'getDtUsuarioCriacao',
             'cd_usuario_atualiza' => 'getCdUsuarioAtualiza',
@@ -42,6 +44,14 @@ class MoradorEnderecoDTO extends DataTransferObject{
      */
     public function getReflex(){
         return $this->reflex;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFgResidente()
+    {
+        return $this->fg_residente;
     }
 
     /**
@@ -104,7 +114,8 @@ class MoradorEnderecoDTO extends DataTransferObject{
     ################## SETTERS #######################
 
     /**
-     * @param mixed $cd_apartamento
+     * @param $cd_apartamento
+     * @return $this
      */
     public function setCdApartamento($cd_apartamento)
     {
@@ -113,7 +124,8 @@ class MoradorEnderecoDTO extends DataTransferObject{
     }
 
     /**
-     * @param mixed $cd_pessoa_fisica
+     * @param $cd_pessoa_fisica
+     * @return $this
      */
     public function setCdPessoaFisica($cd_pessoa_fisica)
     {
@@ -122,7 +134,8 @@ class MoradorEnderecoDTO extends DataTransferObject{
     }
 
     /**
-     * @param mixed $cd_usuario_atualiza
+     * @param $cd_usuario_atualiza
+     * @return $this
      */
     public function setCdUsuarioAtualiza($cd_usuario_atualiza)
     {
@@ -131,7 +144,8 @@ class MoradorEnderecoDTO extends DataTransferObject{
     }
 
     /**
-     * @param mixed $cd_usuario_criacao
+     * @param $cd_usuario_criacao
+     * @return $this
      */
     public function setCdUsuarioCriacao($cd_usuario_criacao)
     {
@@ -140,7 +154,8 @@ class MoradorEnderecoDTO extends DataTransferObject{
     }
 
     /**
-     * @param mixed $dt_entrada
+     * @param $dt_entrada
+     * @return $this
      */
     public function setDtEntrada($dt_entrada)
     {
@@ -149,7 +164,8 @@ class MoradorEnderecoDTO extends DataTransferObject{
     }
 
     /**
-     * @param mixed $dt_saida
+     * @param $dt_saida
+     * @return $this
      */
     public function setDtSaida($dt_saida)
     {
@@ -158,7 +174,8 @@ class MoradorEnderecoDTO extends DataTransferObject{
     }
 
     /**
-     * @param mixed $dt_usuario_atualiza
+     * @param $dt_usuario_atualiza
+     * @return $this
      */
     public function setDtUsuarioAtualiza($dt_usuario_atualiza)
     {
@@ -167,7 +184,8 @@ class MoradorEnderecoDTO extends DataTransferObject{
     }
 
     /**
-     * @param mixed $dt_usuario_criacao
+     * @param $dt_usuario_criacao
+     * @return $this
      */
     public function setDtUsuarioCriacao($dt_usuario_criacao)
     {
@@ -176,18 +194,14 @@ class MoradorEnderecoDTO extends DataTransferObject{
     }
 
     /**
-     * @param mixed $nr_sequencia
+     * @param $nr_sequencia
+     * @return $this
      */
     public function setNrSequencia($nr_sequencia)
     {
         $this->nr_sequencia = $nr_sequencia;
         return $this;
     }
-
-
-
-
-
 
     /**
      * @return mixed
@@ -205,13 +219,14 @@ class MoradorEnderecoDTO extends DataTransferObject{
         return $this->nr_sequencia;
     }
 
-
-
-
-
-
-
-
-
+    /**
+     * @param $fg_residente
+     * @return $this
+     */
+    public function setFgResidente($fg_residente)
+    {
+        $this->fg_residente = $fg_residente;
+        return $this;
+    }
 
 } 

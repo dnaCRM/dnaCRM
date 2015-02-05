@@ -547,8 +547,8 @@ $('#form_end_reset').click(function () {
     $('#legend_form_enderecos').html('Cadastrar Endereço').removeClass('text-primary');
 
 });
-/** Fim - Botões Atualizar e Apagar PF Telefone*/
-/* FIM DO CÓDIGO PARA MANIPULAÇÃO DE TELEFONES DE PESSOA FÍSICA */
+/** Fim - Botões Atualizar e Apagar PF Endereço*/
+/* FIM DO CÓDIGO PARA MANIPULAÇÃO DE ENDEREÇOS DE PESSOA FÍSICA */
 
 /** Início da Manipulação de Morador Endereço */
 $("#m_end_condominio").change(function () {
@@ -1326,3 +1326,14 @@ formNewInstEnsino.bootstrapValidator({
 
 //////////////////- Fim Cadastro de Instituição de Ensino -///////////////////////////////////
 
+//////////////////- Cadastro de Estudante -///////////////////////////////////
+
+$('#tb_estudante').dataTable({
+    "language": {
+        "url": "js/datatables/js/dataTables.pt-br.lang"
+    },
+    paging: false,
+    "searching": false,
+    "sorting": false,
+    responsive: true
+});

@@ -14,18 +14,12 @@ class PessoaFisicaDTO extends DataTransferObject implements ImagemPerfilInterfac
     private $nm_pessoa_fisica;
     private $cpf;
     private $rg;
-    private $cd_catg_org_rg;
-    private $cd_vl_catg_org_rg;
+    private $uf_rg;
     private $email;
     private $dt_nascimento;
     private $ie_sexo;
     private $im_perfil;
-    private $ie_estuda;
-    private $cd_instituicao;
-    private $dt_inicio_curso;
-    private $dt_fim_curso;
-    private $cd_catg_grau_ensino;
-    private $cd_vl_catg_grau_ensino;
+    private $cd_cidade_origem;
     private $cd_usuario_criacao;
     private $dt_usuario_criacao;
     private $cd_usuario_atualiza;
@@ -43,17 +37,11 @@ class PessoaFisicaDTO extends DataTransferObject implements ImagemPerfilInterfac
             'nm_pessoa_fisica' => 'getNmPessoaFisica',
             'cpf' => 'getCpf',
             'rg' => 'getRg',
-            'cd_catg_org_rg' => 'getCdCatgOrgRg',
-            'cd_vl_catg_org_rg' => 'getCdVlCatgOrgRg',
+            'cd_catg_org_rg' => 'getUfRg',
             'email' => 'getEmail',
             'dt_nascimento' => 'getDtNascimento',
             'ie_sexo' => 'getIeSexo',
-            'ie_estuda' => 'getIeEstuda',
-            'cd_instituicao' => 'getCdInstituicao',
-            'dt_inicio_curso' => 'getDtInicioCurso',
-            'dt_fim_curso' => 'getDtFimCurso',
-            'cd_catg_grau_ensino' => 'getCdCatgGrauEnsino',
-            'cd_vl_catg_grau_ensino' => 'getCdVlCatgGrauEnsino',
+            'cd_cidade_origem' => 'gegCdCidadeOrigem',
             'cd_usuario_criacao' => 'getCdUsuarioCriacao',
             'dt_usuario_criacao' => 'getDtUsuarioCriacao',
             'cd_usuario_atualiza' => 'getCdUsuarioAtualiza',
@@ -141,41 +129,9 @@ class PessoaFisicaDTO extends DataTransferObject implements ImagemPerfilInterfac
     /**
      * @return mixed
      */
-    public function getCdVlCatgGrauEnsino()
-    {
-        return $this->cd_vl_catg_grau_ensino;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCdVlCatgOrgRg()
-    {
-        return $this->cd_vl_catg_org_rg;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getCpf()
     {
         return $this->cpf;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDtFimCurso()
-    {
-        return $this->dt_fim_curso;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDtInicioCurso()
-    {
-        return $this->dt_inicio_curso;
     }
 
     /**
@@ -213,14 +169,6 @@ class PessoaFisicaDTO extends DataTransferObject implements ImagemPerfilInterfac
     /**
      * @return mixed
      */
-    public function getIeEstuda()
-    {
-        return $this->ie_estuda;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getIeSexo()
     {
         return $this->ie_sexo;
@@ -250,28 +198,23 @@ class PessoaFisicaDTO extends DataTransferObject implements ImagemPerfilInterfac
         return $this->rg;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getCdCidadeOrigem()
+    {
+        return $this->cd_cidade_origem;
+    }
 
+    /**
+     * @return mixed
+     */
+    public function getUfRg()
+    {
+        return $this->uf_rg;
+    }
 
 ######### SETTERS #################################################################3
-    /**
-     * @param $cd_catg_grau_ensino
-     * @return PessoaFisicaDTO
-     */
-    public function setCdCatgGrauEnsino($cd_catg_grau_ensino)
-    {
-        $this->cd_catg_grau_ensino = $cd_catg_grau_ensino;
-        return $this;
-    }
-
-    /**
-     * @param $cd_catg_org_rg
-     * @return PessoaFisicaDTO
-     */
-    public function setCdCatgOrgRg($cd_catg_org_rg)
-    {
-        $this->cd_catg_org_rg = $cd_catg_org_rg;
-        return $this;
-    }
 
     /**
      * @param $cd_instituicao
@@ -334,52 +277,12 @@ class PessoaFisicaDTO extends DataTransferObject implements ImagemPerfilInterfac
     }
 
     /**
-     * @param $cd_vl_catg_grau_ensino
-     * @return PessoaFisicaDTO
-     */
-    public function setCdVlCatgGrauEnsino($cd_vl_catg_grau_ensino)
-    {
-        $this->cd_vl_catg_grau_ensino = $cd_vl_catg_grau_ensino;
-        return $this;
-    }
-
-    /**
-     * @param $cd_vl_catg_org_rg
-     * @return PessoaFisicaDTO
-     */
-    public function setCdVlCatgOrgRg($cd_vl_catg_org_rg)
-    {
-        $this->cd_vl_catg_org_rg = $cd_vl_catg_org_rg;
-        return $this;
-    }
-
-    /**
      * @param $cpf
      * @return PessoaFisicaDTO
      */
     public function setCpf($cpf)
     {
         $this->cpf = $cpf;
-        return $this;
-    }
-
-    /**
-     * @param $dt_fim_curso
-     * @return PessoaFisicaDTO
-     */
-    public function setDtFimCurso($dt_fim_curso)
-    {
-        $this->dt_fim_curso = $dt_fim_curso;
-        return $this;
-    }
-
-    /**
-     * @param $dt_inicio_curso
-     * @return PessoaFisicaDTO
-     */
-    public function setDtInicioCurso($dt_inicio_curso)
-    {
-        $this->dt_inicio_curso = $dt_inicio_curso;
         return $this;
     }
 
@@ -424,16 +327,6 @@ class PessoaFisicaDTO extends DataTransferObject implements ImagemPerfilInterfac
     }
 
     /**
-     * @param $ie_estuda
-     * @return PessoaFisicaDTO
-     */
-    public function setIeEstuda($ie_estuda)
-    {
-        $this->ie_estuda = $ie_estuda;
-        return $this;
-    }
-
-    /**
      * @param $ie_sexo
      * @return PessoaFisicaDTO
      */
@@ -470,6 +363,26 @@ class PessoaFisicaDTO extends DataTransferObject implements ImagemPerfilInterfac
     public function setRg($rg)
     {
         $this->rg = $rg;
+        return $this;
+    }
+
+    /**
+     * @param $cd_cidade_origem
+     * @return $this
+     */
+    public function setCdCidadeOrigem($cd_cidade_origem)
+    {
+        $this->cd_cidade_origem = $cd_cidade_origem;
+        return $this;
+    }
+
+    /**
+     * @param $uf_rg
+     * @return $this
+     */
+    public function setUfRg($uf_rg)
+    {
+        $this->uf_rg = $uf_rg;
         return $this;
     }
 

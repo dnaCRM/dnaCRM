@@ -11,8 +11,14 @@ class SetorDTO extends DataTransferObject implements ImagemPerfilInterface
     private $cd_setor;
     private $cd_condominio;
     private $nm_setor;
+    private $cd_setor_grupo;
+    private $ramal;
     private $observacao;
     private $im_perfil;
+    private $cd_catg_tipo;
+    private $cd_vl_catg_tipo;
+    private $cd_catg_sub_tipo;
+    private $cd_vl_catg_sub_tipo;
     private $cd_usuario_criacao;
     private $dt_usuario_criacao;
     private $cd_usuario_atualiza;
@@ -27,7 +33,13 @@ class SetorDTO extends DataTransferObject implements ImagemPerfilInterface
             'cd_setor' => 'getCdSetor',
             'cd_condominio' => 'getCdCondominio',
             'nm_setor' => 'getNmSetor',
+            'cd_setor_grupo' => 'getCdSetorGrupo',
+            'ramal' => 'getRamal',
             'observacao' => 'getObservacao',
+            'cd_catg_tipo' => 'getCdCatgTipo',
+            'cd_vl_catg_tipo' => 'getCdVlCatgTipo',
+            'cd_catg_sub_tipo' => 'getCdCatgSubTipo',
+            'cd_vl_catg_sub_tipo' => 'getCdVlCatgSubTipo',
             'cd_usuario_criacao' => 'getCdUsuarioCriacao',
             'dt_usuario_criacao' => 'getDtUsuarioCriacao',
             'cd_usuario_atualiza' => 'getCdUsuarioAtualiza',
@@ -45,6 +57,54 @@ class SetorDTO extends DataTransferObject implements ImagemPerfilInterface
     public function getReflex()
     {
         return $this->reflex;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCdCatgSubTipo()
+    {
+        return $this->cd_catg_sub_tipo;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCdCatgTipo()
+    {
+        return $this->cd_catg_tipo;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCdSetorGrupo()
+    {
+        return $this->cd_setor_grupo;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCdVlCatgSubTipo()
+    {
+        return $this->cd_vl_catg_sub_tipo;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCdVlCatgTipo()
+    {
+        return $this->cd_vl_catg_tipo;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRamal()
+    {
+        return $this->ramal;
     }
 
     /**
@@ -122,7 +182,8 @@ class SetorDTO extends DataTransferObject implements ImagemPerfilInterface
     ######################## SETTERS ##########################
 
     /**
-     * @param mixed $cd_condominio
+     * @param $cd_condominio
+     * @return $this
      */
     public function setCdCondominio($cd_condominio)
     {
@@ -131,7 +192,8 @@ class SetorDTO extends DataTransferObject implements ImagemPerfilInterface
     }
 
     /**
-     * @param mixed $cd_setor
+     * @param $cd_setor
+     * @return $this
      */
     public function setCdSetor($cd_setor)
     {
@@ -140,7 +202,8 @@ class SetorDTO extends DataTransferObject implements ImagemPerfilInterface
     }
 
     /**
-     * @param mixed $cd_usuario_atualiza
+     * @param $cd_usuario_atualiza
+     * @return $this
      */
     public function setCdUsuarioAtualiza($cd_usuario_atualiza)
     {
@@ -149,7 +212,8 @@ class SetorDTO extends DataTransferObject implements ImagemPerfilInterface
     }
 
     /**
-     * @param mixed $cd_usuario_criacao
+     * @param $cd_usuario_criacao
+     * @return $this
      */
     public function setCdUsuarioCriacao($cd_usuario_criacao)
     {
@@ -158,7 +222,8 @@ class SetorDTO extends DataTransferObject implements ImagemPerfilInterface
     }
 
     /**
-     * @param mixed $dt_usuario_atualiza
+     * @param $dt_usuario_atualiza
+     * @return $this
      */
     public function setDtUsuarioAtualiza($dt_usuario_atualiza)
     {
@@ -167,7 +232,8 @@ class SetorDTO extends DataTransferObject implements ImagemPerfilInterface
     }
 
     /**
-     * @param mixed $dt_usuario_criacao
+     * @param $dt_usuario_criacao
+     * @return $this
      */
     public function setDtUsuarioCriacao($dt_usuario_criacao)
     {
@@ -176,7 +242,8 @@ class SetorDTO extends DataTransferObject implements ImagemPerfilInterface
     }
 
     /**
-     * @param mixed $im_perfil
+     * @param $im_perfil
+     * @return $this
      */
     public function setImPerfil($im_perfil)
     {
@@ -185,7 +252,8 @@ class SetorDTO extends DataTransferObject implements ImagemPerfilInterface
     }
 
     /**
-     * @param mixed $nm_setor
+     * @param $nm_setor
+     * @return $this
      */
     public function setNmSetor($nm_setor)
     {
@@ -194,11 +262,72 @@ class SetorDTO extends DataTransferObject implements ImagemPerfilInterface
     }
 
     /**
-     * @param mixed $observacao
+     * @param $observacao
+     * @return $this
      */
     public function setObservacao($observacao)
     {
         $this->observacao = $observacao;
+        return $this;
+    }
+
+    /**
+     * @param $cd_catg_sub_tipo
+     * @return $this
+     */
+    public function setCdCatgSubTipo($cd_catg_sub_tipo)
+    {
+        $this->cd_catg_sub_tipo = $cd_catg_sub_tipo;
+        return $this;
+    }
+
+    /**
+     * @param $cd_catg_tipo
+     * @return $this
+     */
+    public function setCdCatgTipo($cd_catg_tipo)
+    {
+        $this->cd_catg_tipo = $cd_catg_tipo;
+        return $this;
+    }
+
+    /**
+     * @param $cd_setor_grupo
+     * @return $this
+     */
+    public function setCdSetorGrupo($cd_setor_grupo)
+    {
+        $this->cd_setor_grupo = $cd_setor_grupo;
+        return $this;
+    }
+
+    /**
+     * @param $cd_vl_catg_sub_tipo
+     * @return $this
+     */
+    public function setCdVlCatgSubTipo($cd_vl_catg_sub_tipo)
+    {
+        $this->cd_vl_catg_sub_tipo = $cd_vl_catg_sub_tipo;
+        return $this;
+    }
+
+    /**
+     * @param $cd_vl_catg_tipo
+     * @return $this
+     */
+    public function setCdVlCatgTipo($cd_vl_catg_tipo)
+    {
+        $this->cd_vl_catg_tipo = $cd_vl_catg_tipo;
+        return $this;
+    }
+
+    /**
+     * @param $ramal
+     * @return $this
+     */
+    public function setRamal($ramal)
+    {
+        $this->ramal = $ramal;
         return $this;
     }
 

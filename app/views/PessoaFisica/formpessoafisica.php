@@ -39,6 +39,7 @@ $token = Token::generate();
     <?php if ($id_check): ?>
         <li><a href="#telefones" data-toggle="tab">Telefones</a></li>
         <li><a href="#enderecos" data-toggle="tab">Endereços</a></li>
+        <li><a href="#estudante" data-toggle="tab">Estudante</a></li>
         <li><a href="#morador" data-toggle="tab">Morador</a></li>
         <li><a href="#relacionamentos" data-toggle="tab">Relacionamentos</a></li>
     <?php endif; ?>
@@ -301,27 +302,6 @@ $token = Token::generate();
             </div>
         </div>
 
-        <div class="form-group field_hidden">
-            <div class="col-sm-12 selectContainer">
-                <label for="org_rg" class="control-label">Curso</label>
-
-                <select class="form-control" id="cd_grau_ensino" name="cd_grau_ensino">
-                    <option value="">--</option>
-                    <?php
-                    $perfil->setCdVlCatgGrauEnsino($perfil->getCdVlCatgGrauEnsino() == '' ? Input::get('cd_grau_ensino') : $perfil->getCdVlCatgGrauEnsino());
-                    foreach ($data['grau_ensino'] as $grau_ensino) {
-                        if ($grau_ensino->getCdVlCategoria() == $perfil->getCdVlCatgGrauEnsino()) {
-                            echo '<option value="' . $grau_ensino->getCdVlCategoria() . '" selected>' . $grau_ensino->getDescVlCatg() . '</option>';
-                        } else {
-                            echo '<option value="' . $grau_ensino->getCdVlCategoria() . ' ">' . $grau_ensino->getDescVlCatg() . '</option>';
-                        }
-                    }
-                    ?>
-                    <option value="new_curso">--> Adicionar novo Curso</option>
-                </select>
-            </div>
-        </div>
-
         <input type="hidden" name="cd_pessoa_fisica" value="<?php echo $data['id']; ?>">
         <input type="hidden" name="token" value="<?php echo $token; ?>">
 
@@ -463,6 +443,114 @@ $token = Token::generate();
             </div>
         </div>
 
+    </div>
+
+    <div class="tab-pane fade" id="estudante">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="legend">Dados da formação</div>
+                <table id="tb_estudante" class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>Instituição</th>
+                        <th>Curso</th>
+                        <th>Área</th>
+                        <th>Período</th>
+                        <th>Início</th>
+                        <th>Fim</th>
+                    </tr>
+                    <tbody>
+                    <tr>
+                        <td>Uni-FACEF</td>
+                        <td>Sistemas de Informação</td>
+                        <td>Exatas</td>
+                        <td>Noite</td>
+                        <td>01/02/2013</td>
+                        <td>31/12/2016</td>
+                    </tr>
+                    </tbody>
+                    </thead>
+                </table>
+            </div>
+            <div class="col-md-12">
+
+                <form class="form-horizontal" id="form_estudante">
+                    <legend id="legend_form_estudante">Cadastro</legend>
+                    <fieldset class="well">
+                            <div class="form-group">
+                                <div class="col-sm-4 selectContainer">
+                                    <label for="select_inst_ensino" class="control-label">Instituiçao</label>
+                                    <select class="form-control" name="select_inst_ensino" id="select_inst_ensino">
+                                        <option value="">-- Selecione uma Instituição de Ensino</option>
+                                        <?php
+                                        $perfil->setCdInstituicao($perfil->getCdInstituicao() == '' ? Input::get('cd_instituicao') : $perfil->getCdInstituicao());
+                                        foreach ($data['inst_ensino'] as $inst_ensino) {
+
+                                            if ($inst_ensino->getCdPessoaJuridica() == $perfil->getCdInstituicao()) {
+                                                echo '<option value="' . $inst_ensino->getCdPessoaJuridica() . '" selected>' . $inst_ensino->getNmFantasia() . '</option>';
+                                            } else {
+                                                echo '<option value="' . $inst_ensino->getCdPessoaJuridica() . ' ">' . $inst_ensino->getNmFantasia() . '</option>';
+                                            }
+                                        }
+                                        ?>
+                                        <option value="new_ie">-- Adicionar uma Instituição de Ensino</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-4 selectContainer">
+                                    <label for="select_curso" class="control-label">Curso</label>
+                                    <select class="form-control" name="select_curso" id="select_curso">
+                                        <option value="">--</option>
+                                        <?php
+                                        $perfil->setCdVlCatgGrauEnsino($perfil->getCdVlCatgGrauEnsino() == '' ? Input::get('cd_grau_ensino') : $perfil->getCdVlCatgGrauEnsino());
+                                        foreach ($data['grau_ensino'] as $grau_ensino) {
+                                            if ($grau_ensino->getCdVlCategoria() == $perfil->getCdVlCatgGrauEnsino()) {
+                                                echo '<option value="' . $grau_ensino->getCdVlCategoria() . '" selected>' . $grau_ensino->getDescVlCatg() . '</option>';
+                                            } else {
+                                                echo '<option value="' . $grau_ensino->getCdVlCategoria() . ' ">' . $grau_ensino->getDescVlCatg() . '</option>';
+                                            }
+                                        }
+                                        ?>
+                                        <option value="new_curso">--> Adicionar novo Curso</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-4 selectContainer">
+                                    <label for="select_periodo_curso" class="control-label">Período</label>
+                                    <select class="form-control" name="select_periodo_curso" id="select_periodo_curso">
+                                        <option value="">Escolha o período</option>
+                                        <option value="">Manhã</option>
+                                        <option value="">Noite</option>
+                                        <option value="">Integral</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="dt_inicio_curso" class="control-label">Início</label>
+                                    <input type="text" class="form-control data-input"
+                                           value="<?php echo $perfil->getDtInicioCurso() == '' ? Input::get('dt_inicio_curso') : $perfil->getDtInicioCurso(); ?>"
+                                           id="dt_inicio_curso"
+                                           name="dt_inicio_curso" placeholder="___/___/____">
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="dt_inicio_curso" class="control-label">Final</label>
+                                    <input type="text" class="form-control data-input"
+                                           value="<?php echo $perfil->getDtInicioCurso() == '' ? Input::get('dt_inicio_curso') : $perfil->getDtInicioCurso(); ?>"
+                                           id="dt_inicio_curso"
+                                           name="dt_inicio_curso" placeholder="___/___/____">
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <input type="reset" name="reset" class="btn btn-success" id="form_estudante_reset"
+                                       value="Novo">
+                                <input type="submit" name="cadastrar_estudante" class="btn btn-primary" id="cadastrar"
+                                       value="Cadastrar">
+                                <input type="hidden" name="cd_pessoa_fisica"
+                                       value="<?php echo $perfil->getCdPessoaFisica(); ?>">
+                                <input type="hidden" name="id_endereco" id="id_endereco" value="">
+                            </div>
+                    </fieldset>
+                </form>
+
+            </div>
+        </div>
     </div>
     <div class="tab-pane fade" id="morador">
         <div class="row">

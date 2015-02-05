@@ -9,8 +9,6 @@ class ApartamentoDAO extends DataAccessObject
         $this->tabela = 'tb_apartamento';
         $this->primaryKey = 'cd_apartamento';
         $this->dataTransfer = 'ApartamentoDTO';
-
-
     }
 
     /**
