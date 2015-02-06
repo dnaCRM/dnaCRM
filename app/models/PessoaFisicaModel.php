@@ -71,8 +71,6 @@ class PessoaFisicaModel extends Model
             'cpf' => $this->dto->getCpf(),
             'rg' => $this->dto->getRg(),
             'uf_rg' => $uf_rg,
-            'cd_catg_org_rg' => $this->dto->getCdCatgOrgRg(),
-            'cd_vl_catg_org_rg' => $this->dto->getCdVlCatgOrgRg(),
             'email' => $this->dto->getEmail(),
             'idade' => $idade,
             'dt_nascimento' => $dt_nascimento,

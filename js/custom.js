@@ -121,12 +121,6 @@ $(function () {
 
 /* DataTables */
 $('#perfillist').dataTable({
-    "columnDefs": [
-        {
-            "sType": "date",
-            "aTargets": "date_format"
-        }
-    ],
     "language": {
         "url": "js/datatables/js/dataTables.pt-br.lang"
     },

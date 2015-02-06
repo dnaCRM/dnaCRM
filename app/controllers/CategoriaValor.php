@@ -70,6 +70,8 @@ class CategoriaValor extends Controller
             ->setCdVlCategoria(Input::get('id_sub_categoria'))
             ->setDescVlCatg(Input::get('nome_sub_categoria'))
             ->setGenero(Input::get('genero'))
+            ->setCdGrupo(Input::get('cd_grupo'))
+            ->setCdCatGrupo(Input::get('cd_cat_grupo'))
             ->setCdUsuarioCriacao(Session::get('user'))
             ->setDtUsuarioCriacao('now()')
             ->setCdUsuarioAtualiza(Session::get('user'))

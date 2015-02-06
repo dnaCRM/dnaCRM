@@ -29,6 +29,21 @@ class CidadesModel extends Model
         );
     }
 
+    public function getCidade()
+    {
+        $_POST = filter_input_array(INPUT_POST);
+        $nome = Input::get('nome_cidade_origem');
+        $cidades = $this->dao->get("nome ilike '%{$nome}%' order by nome limit 5");
+
+        $resultado = array();
+
+        foreach ($cidades as $cidade) {
+            $resultado[] = $this->setDTO($cidade)->getArrayDados();
+        }
+
+        return $resultado;
+    }
+
     public function getCidadesPorEstado($id_estado)
     {
         $id_estado = (int)$id_estado;

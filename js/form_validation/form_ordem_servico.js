@@ -317,7 +317,6 @@ $('#busca-solicitante-resultado').delegate('.add-solicitante', 'click', function
 ///////////////////////- Manipula Ocorrência -//////////////////////////////////
 var inputOcorrencia = $('[name=ocorrencia]');
 var buttonOcorrencia = $('#btn-ocorrencia');
-var buttonRemoveOcorrencia = $('#remove-ocorrencia');
 var ocorrenciaModal = $('#ocorrencia_modal');
 var pcardOcorrencia = $('#pcard-ocorrencia');
 
@@ -333,7 +332,7 @@ pcardOcorrencia.delegate('#remove-ocorrencia', 'click', function(e) {
         .addClass('btn-primary')
         .html('<i class="fa fa-plus"></i> Definir ocorrencia');
     inputOcorrencia.val('');
-    $('#pcard-ocorrencia .col-sm-6').remove();
+    $('#pcard-ocorrencia .col-sm-6').fadeOut();
 });
 
 $(function () {

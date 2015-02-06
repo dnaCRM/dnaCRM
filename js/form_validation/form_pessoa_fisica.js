@@ -1326,14 +1326,119 @@ formNewInstEnsino.bootstrapValidator({
 
 //////////////////- Fim Cadastro de Instituição de Ensino -///////////////////////////////////
 
-//////////////////- Cadastro de Estudante -///////////////////////////////////
 
-$('#tb_estudante').dataTable({
-    "language": {
-        "url": "js/datatables/js/dataTables.pt-br.lang"
-    },
-    paging: false,
-    "searching": false,
-    "sorting": false,
-    responsive: true
+///////////////////////- Manipula Cidade de Origem -//////////////////////////////////
+
+var inputCidadeOrigem = $('[name=cidade_origem]');
+var buttonCidadeOrigem = $('#btn-cidade_origem');
+var cidadeModal = $('#cidade_origem_modal');
+var pcardCidade = $('#pcard-cidade');
+
+buttonCidadeOrigem.click(function (e) {
+    e.preventDefault();
+    cidadeModal.modal('show');
 });
+
+pcardCidade.delegate('#remove-cidade', 'click', function(e) {
+    e.preventDefault();
+    buttonCidadeOrigem
+        .removeClass('btn-info')
+        .addClass('btn-primary')
+        .html('<i class="fa fa-plus"></i> Definir ocorrencia');
+    inputCidadeOrigem.val('');
+    $('#pcard-cidade .panel').fadeOut();
+});
+
+$(function () {
+    if (inputCidadeOrigem.val() == '') {
+        buttonCidadeOrigem
+            .removeClass('btn-info')
+            .addClass('btn-primary')
+            .html('<i class="fa fa-plus"></i> Definir cidade');
+
+    }
+});
+
+function buscaCidade() {
+    var nome_cidade = $('#nome_cidade_origem').val();
+    if (nome_cidade != '') {
+        $('#busca-cidade-resultado').html('<i class="fa fa-spinner fa-spin fa-2x"></i>');
+        $.ajax({
+            type: 'post',
+            url: 'Cidades/buscaAjax/',
+            data: 'nome_cidade_origem=' + nome_cidade,
+            dataType: 'json',
+            success: function (data) {
+
+                var html = '';
+                for (var i = 0; i < data.length; i++) {
+                    html +=
+                        '<div class="panel-body">' +
+                            '<div class="col-sm-1">' +
+                            '<a href="#" ' +
+                            'data-id-cidade="' + data[i].id + '" ' +
+                            'data-nome-cidade="' + data[i].nome + '" ' +
+                            'data-estado="' + data[i].estado_nome + '" ' +
+                            'data-id-estado="' + data[i].estado_id + '" ' +
+                            'title="Adicionar" ' +
+                            'class="btn btn-primary btn-xs btn-circle add-cidade">' +
+                            '<i class="fa fa-check"></i></a> '+
+                            '</div>'+
+                            '<div class="col-sm-11">' +
+                            ' ' + data[i].nome +',  '+ data[i].estado_nome + '</a>' +
+                            '</div>'+
+                            '</div>';
+                }
+
+                var resultBody = '<div class="row"><div class="col-md-12">' + html + '</div></div>';
+                $('#busca-cidade-resultado').html(resultBody).hide().fadeIn();
+
+                buttonCidadeOrigem
+                    .addClass('btn-info')
+                    .removeClass('btn-primary')
+                    .html('<i class="fa fa-bullhorn"></i> Atualizar Cidade de Origem');
+
+            },
+            error: function (data) {
+                $(data.responseText).appendTo('#area-do-resultado');
+            }
+        });
+    } else {
+        $('#busca-cidade-resultado').fadeOut();
+    }
+}
+
+$('#nome_cidade_origem').keyup(function () {
+    buscaCidade();
+}).focusout(function () {
+    $('#busca-cidade-resultado').fadeOut();
+});
+
+$('#busca-cidade-resultado').delegate('.add-cidade', 'click', function (e) {
+    e.preventDefault();
+    var cidade = $(this);
+    var id = cidade.attr('data-id-cidade');
+    var nome_cidade = cidade.attr('data-nome-cidade');
+    var nome_estado = cidade.attr('data-estado');
+
+    var pcard =
+            '<div class="panel panel-default">' +
+            '<div class="panel-body">' +
+            '<i class="fa fa-map-marker pull"></i> ' + nome_cidade + ', ' + nome_estado +
+            '<a href="#"' +
+            'data-toggle="tooltip"' +
+            'data-placement="left"' +
+            'title="Remover Cidade"' +
+            'class="btn btn-danger btn-xs btn-circle btn-pcard-bottom-right"' +
+            'id="remove-cidade">' +
+            '<i class="fa fa-minus"></i>' +
+            '</a>' +
+            '</div>' +
+            '</div>';
+
+    pcardCidade.html(pcard).hide().fadeIn();
+    inputCidadeOrigem.val(id);
+    cidadeModal.modal('hide');
+});
+
+///////////////////////- Fim Manipula Cidade de Origem -//////////////////////////////

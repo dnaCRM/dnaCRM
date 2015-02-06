@@ -13,6 +13,8 @@ class CategoriaValorDTO extends DataTransferObject
     private $cd_categoria;
     private $desc_vl_catg;
     private $genero;
+    private $cd_grupo;
+    private $cd_cat_grupo;
     private $cd_usuario_criacao;
     private $dt_usuario_criacao;
     private $cd_usuario_atualiza;
@@ -29,6 +31,8 @@ class CategoriaValorDTO extends DataTransferObject
             'cd_categoria' => 'getCdCategoria',
             'desc_vl_catg' => 'getDescVlCatg',
             'genero' => 'getGenero',
+            'cd_grupo' => 'getCdGrupo',
+            'cd_cat_grupo' => 'getCdCatGrupo',
             'cd_usuario_criacao' => 'getCdUsuarioCriacao',
             'dt_usuario_criacao' => 'getDtUsuarioCriacao',
             'cd_usuario_atualiza' => 'getCdUsuarioAtualiza',
@@ -44,6 +48,22 @@ class CategoriaValorDTO extends DataTransferObject
     public function getReflex()
     {
         return $this->reflex;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCdCatGrupo()
+    {
+        return $this->cd_cat_grupo;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCdGrupo()
+    {
+        return $this->cd_grupo;
     }
 
     /**
@@ -194,4 +214,23 @@ class CategoriaValorDTO extends DataTransferObject
         return $this;
     }
 
+    /**
+     * @param $cd_cat_grupo
+     * @return $this
+     */
+    public function setCdCatGrupo($cd_cat_grupo)
+    {
+        $this->cd_cat_grupo = $cd_cat_grupo;
+        return $this;
+    }
+
+    /**
+     * @param $cd_grupo
+     * @return $this
+     */
+    public function setCdGrupo($cd_grupo)
+    {
+        $this->cd_grupo = $cd_grupo;
+        return $this;
+    }
 }

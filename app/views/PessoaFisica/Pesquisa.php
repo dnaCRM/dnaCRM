@@ -37,7 +37,6 @@
                         <th>Nome</th>
                         <th>Profissão</th>
                         <th>Empresa</th>
-                        <th>Estuda</th>
                         <th>Editar</th>
                     </tr>
                     </thead>
@@ -52,7 +51,6 @@
                         echo '<td><a href="PessoaFisica/visualizar/' . $perfil['cd_pessoa_fisica'] . '">' . $perfil['nm_pessoa_fisica'] . '</a></td>';
                         echo '<td>' . $perfil['profissao'] . '</td>';
                         echo '<td>' . $perfil['empresa'] . '</td>';
-                        echo '<td>' . $perfil['instituicao'] . '</td>';
                         echo "<td><a href=\"PessoaFisica/formpessoafisica/{$perfil['cd_pessoa_fisica']}\" class=\"btn btn-primary btn-circle btn-md\" role=\"button\">
                     <i class=\"glyphicon glyphicon-pencil\"></i></a></td>";
                         echo '</tr>';

@@ -41,7 +41,7 @@ class PessoaFisicaDTO extends DataTransferObject implements ImagemPerfilInterfac
             'email' => 'getEmail',
             'dt_nascimento' => 'getDtNascimento',
             'ie_sexo' => 'getIeSexo',
-            'cd_cidade_origem' => 'gegCdCidadeOrigem',
+            'cd_cidade_origem' => 'getCdCidadeOrigem',
             'cd_usuario_criacao' => 'getCdUsuarioCriacao',
             'dt_usuario_criacao' => 'getDtUsuarioCriacao',
             'cd_usuario_atualiza' => 'getCdUsuarioAtualiza',

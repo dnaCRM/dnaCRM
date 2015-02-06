@@ -175,3 +175,14 @@ CREATE TABLE TB_SETOR(
     REFERENCES TB_SETOR(CD_SETOR)
   -------------------------------
 );
+
+CREATE TABLE tb_categoria_ordem_servico(
+  id_categoria SERIAL,
+  nome_categoria VARCHAR(50) CONSTRAINT nn_tb_categoria_ordem_servico_nome_categoria NOT NULL,
+  id_grupo INTEGER,
+  cd_usuario_criacao INTEGER CONSTRAINT nn_tb_categoria_ordem_servico_cd_usuario_criacao NOT NULL,
+  dt_usuario_criacao TIMESTAMP CONSTRAINT nn_tb_categoria_ordem_servico_dt_usuario_criacao NOT NULL,
+  cd_usuario_atualiza INTEGER CONSTRAINT nn_tb_categoria_ordem_servico_cd_usuario_atualiza NOT NULL,
+  dt_usuario_atualiza TIMESTAMP CONSTRAINT nn_tb_categoria_ordem_servico_dt_usuario_atualiza NOT NULL,
+  CONSTRAINT pk_tb_categoria_ordem_servico_id_categoria PRIMARY KEY(id_categoria)
+);

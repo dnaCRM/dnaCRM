@@ -98,9 +98,9 @@ class PessoaFisica extends Controller
     {
         $pessoa_juridica = (new PessoaJuridicaDAO())->fullList();
         $profissoes = (new ProfissaoDAO())->fullList();
-        $org_rg = (new CategoriaValorDAO())->get('cd_categoria = 1');
+        $estados = (new EstadosDAO())->fullList();
         $inst_ensino = (new PessoaJuridicaDAO())->get('cd_tipo_empresa = 159');
-        $grau_ensino = (new CategoriaValorDAO())->get('cd_categoria = 14');
+        $cursos = (new CategoriaValorDAO())->get('cd_categoria = 14');
 
         if ($id) {
             /** @var PessoaFisicaDTO */
@@ -115,7 +115,6 @@ class PessoaFisica extends Controller
             $operadora = (new CategoriaValorDAO())->get('cd_categoria = 10');
 
             $enderecos = (new PessoaFisicaEnderecoDAO())->get("cd_pessoa_fisica = {$id}");
-            $estados = (new CategoriaValorDAO())->get('cd_categoria = 2');
             $catg_enderecos = (new CategoriaValorDAO())->get('cd_categoria = 9');
             $catg_relacionados = (new CategoriaValorDAO())->get("cd_categoria = 4"); //and genero = '{$perfilarr->getIeSexo()}'
 
@@ -129,26 +128,20 @@ class PessoaFisica extends Controller
                 $perfilarr->setDtNascimento($nasc->format('d/m/Y'));
             }
 
-            $dt_inicio_curso = '';
-            if ($perfilarr->getDtInicioCurso()) {
-                $dt_inicio_curso = (new DateTime($perfilarr->getDtInicioCurso()))->format('d/m/Y');
+            $cidade_origem = '';
+            if ($perfilarr->getCdCidadeOrigem()) {
+                $cidadesModel = new CidadesModel();
+                $cidadesDTO = $cidadesModel->getDAO()->getById($perfilarr->getCdCidadeOrigem());
+                $cidade_origem = $cidadesModel->setDTO($cidadesDTO)->getArrayDados();
             }
-            $perfilarr->setDtInicioCurso($dt_inicio_curso);
-
-            $dt_fim_curso = '';
-            if ($perfilarr->getDtFimCurso()) {
-                $dt_fim_curso = (new DateTime($perfilarr->getDtFimCurso()))->format('d/m/Y');
-            }
-            $perfilarr->setDtFimCurso($dt_fim_curso);
 
             $dados = array(
                 'pagetitle' => $perfilarr->getNmPessoaFisica(),
                 'pagesubtitle' => 'Atualizar Perfil.',
                 'pessoa_juridica' => $pessoa_juridica,
                 'profissoes' => $profissoes,
-                'org_rg' => $org_rg,
                 'inst_ensino' => $inst_ensino,
-                'grau_ensino' => $grau_ensino,
+                'cursos' => $cursos,
                 'pf_telefone' => $pf_telefone,
                 'telefones' => $telefones,
                 'enderecos' => $enderecos,
@@ -160,7 +153,8 @@ class PessoaFisica extends Controller
                 'catg_relacionados' => $catg_relacionados,
                 'relacionados' => $relacionados,
                 'id' => $id,
-                'perfil' => $perfilarr
+                'perfil' => $perfilarr,
+                'cidade_origem' => $cidade_origem
             );
         } else {
             $perfil = new PessoaFisicaDTO();
@@ -169,9 +163,9 @@ class PessoaFisica extends Controller
                 'pagesubtitle' => 'Pessoa Física.',
                 'pessoa_juridica' => $pessoa_juridica,
                 'profissoes' => $profissoes,
-                'org_rg' => $org_rg,
+                'estados' => $estados,
                 'inst_ensino' => $inst_ensino,
-                'grau_ensino' => $grau_ensino,
+                'cursos' => $cursos,
                 'id' => null,
                 'perfil' => $perfil
             );
@@ -285,7 +279,7 @@ class PessoaFisica extends Controller
             ->setEmail(Input::get('email'))
             ->setDtNascimento(Input::get('dt_nascimento'))
             ->setIeSexo(Input::get('ie_sexo'))
-            ->getCdCidadeOrigem(Input::get('cidade_origem') == '' ? null : Input::get('cidade_origem'))
+            ->setCdCidadeOrigem(Input::get('cidade_origem') == '' ? null : Input::get('cidade_origem'))
             ->setCdUsuarioCriacao(Session::get('user'))
             ->setDtUsuarioCriacao('now()')
             ->setCdUsuarioAtualiza(Session::get('user'))

@@ -9,4 +9,13 @@ class EstadosDAO extends DataAccessObject
         $this->primaryKey = 'id';
         $this->dataTransfer = 'EstadosDTO';
     }
+
+    /**
+     * @return bool| DataTransferObject
+     */
+    public function fullList()
+    {
+        return $this->select(null, null, null, "sigla");
+
+    }
 } 

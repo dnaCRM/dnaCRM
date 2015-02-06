@@ -18,12 +18,21 @@ class CategoriaValorModel extends Model
         $categoria = (new CategoriaDAO())->getById($this->dto->getCdCategoria());
         $desc_categoria = $categoria->getDescCategoria();
 
+        $grupo = null;
+        if ($this->dto->getCdGrupo()) {
+            $grupoDTO = $this->getDAO()->getById($this->dto->getCdGrupo());
+            $grupo = $grupoDTO->getDescVlCateg();
+        }
+
          return array(
              'cd_categoria' => $this->dto->getCdCategoria(),
              'desc_categoria' => $desc_categoria,
              'cd_vl_categoria' => $this->dto->getCdVlCategoria(),
              'desc_vl_categoria' => $this->dto->getDescVlCatg(),
-             'genero' => ($this->dto->getGenero() ? $this->dto->getGenero() : '--')
+             'genero' => ($this->dto->getGenero() ? $this->dto->getGenero() : '--'),
+             'cd_grupo' => $this->dto->getCdGrupo(),
+             'cd_cat_grupo' => $this->dto->getCdCatGrupo(),
+
          );
     }
 

@@ -203,7 +203,7 @@ $token = Token::generate();
                                     data-placement="left"
                                     title="Remover Ocorrencia"
                                     class="btn btn-danger btn-xs btn-circle btn-pcard-bottom-right"
-                                    id="remove-ocorrencia">
+                                    id="remove-ciadade">
                                     <i class="fa fa-minus"></i>
                                 </a>
                             </div>
@@ -442,9 +442,8 @@ $token = Token::generate();
                                    placeholder="Buscar Ocorrencia" autocomplete="off"
                                    data-toggle="busca-ocorrencia">
 
-                            <div id="busca-ocorrencia-resultado" class="dropdown-busca panel"
+                            <div id="busca-ocorrencia-resultado" class="dropdown-busca panel col-md-12"
                                  aria-labelledby="busca-ocorrencia"></div>
-                            <input type="hidden" name="ocorrencia" value="">
                         </div>
                     </div>
             </div>

@@ -66,7 +66,7 @@
                     <?php endif; ?>
                     <?php if ($data['dados_pessoais']['rg']): ?>
                         <dt>RG</dt>
-                        <dd><?php echo $data['dados_pessoais']['rg'] . $data['dados_pessoais']['uf']; ?></dd>
+                        <dd><?php echo $data['dados_pessoais']['rg'] . $data['dados_pessoais']['uf_rg']; ?></dd>
                     <?php endif; ?>
                     <?php if ($data['dados_pessoais']['dt_nascimento']): ?>
                         <dt>Data de Nascimento</dt>
@@ -85,22 +85,6 @@
                     <?php if ($data['dados_pessoais']['profissao']): ?>
                         <dt>Profissão</dt>
                         <dd><?php echo $data['dados_pessoais']['profissao']; ?></dd>
-                    <?php endif; ?>
-                    <?php if ($data['dados_pessoais']['ie_estuda'] == 'Sim'): ?>
-                        <dt>Estuda</dt>
-                        <dd><?php echo $data['dados_pessoais']['ie_estuda']; ?></dd>
-                        <?php if ($data['dados_pessoais']['cd_instituicao']): ?>
-                            <dt>Instituição</dt>
-                            <dd>
-                                <a href="PessoaJuridica/visualizar/<?php echo $data['dados_pessoais']['cd_instituicao']; ?>"><?php echo $data['dados_pessoais']['instituicao']; ?></a>
-                            </dd>
-                        <?php endif; ?>
-                        <dt>Curso</dt>
-                        <dd><?php echo $data['dados_pessoais']['grau']; ?></dd>
-                        <dt>Início</dt>
-                        <dd><?php echo $data['dados_pessoais']['dt_inicio_curso']; ?></dd>
-                        <dt>Término</dt>
-                        <dd><?php echo $data['dados_pessoais']['dt_fim_curso']; ?></dd>
                     <?php endif; ?>
 
                 </dl>
