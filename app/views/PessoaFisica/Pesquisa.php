@@ -54,7 +54,6 @@
                         echo "<td><a href=\"PessoaFisica/formpessoafisica/{$perfil['cd_pessoa_fisica']}\" class=\"btn btn-primary btn-circle btn-md\" role=\"button\">
                     <i class=\"glyphicon glyphicon-pencil\"></i></a></td>";
                         echo '</tr>';
-
                     }
                     ?>
                     </tbody>

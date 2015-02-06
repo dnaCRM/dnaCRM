@@ -53,7 +53,6 @@ formProfissao.bootstrapValidator({
 
             if (data.delete == 's') {
                 $('tr[data-id-profissao=' + data.id_profissao + ']').remove();
-                console.log(data);
             } else {
                 var celulas = '<td>' + data.id_profissao + '</td><td>' + data.nome_profissao + '</td>' +
                     '<td><a href="#" class="btn btn-primary btn-sm btn-circle update_prof" data-update-prof-id="' + data.id_profissao + '"><i class="fa fa-edit"></i></a> ' +

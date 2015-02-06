@@ -40,10 +40,10 @@ class PessoaFisicaEnderecoModel extends Model
             'categoria' => $endereco,
             'cd_catg_end' => $this->dto->getCdCatgEnd(),
             'cd_vl_catg_end' => $this->dto->getCdVlCatgEnd(),
+            'id_cidade' => $cidade->getId(),
             'cidade' => $cidade->getNome(),
-            'estado' => $estado->getNome(),
-            'cd_catg_estado' => $this->dto->getCdCatgEstado(),
-            'cd_vl_catg_estado' => $this->dto->getCdVlCatgEstado()
+            'id_estado' => $estado->getId(),
+            'estado' => $estado->getNome()
         );
     }
 

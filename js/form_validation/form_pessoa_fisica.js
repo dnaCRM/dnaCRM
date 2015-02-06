@@ -436,19 +436,22 @@ $('#form_pf_enderecos').bootstrapValidator({
         dataType: 'json',
         success: function (data) {
 
-            var celulas = '<td>' + data.rua + '</td><td>' + data.numero + '</td><td>' + data.bairro + '</td><td>' + data.cidade + '</td><td>' + data.cep + '</td><td>' + data.estado + '</td><td>' + data.categoria + '</td><td>' + data.observacao + '</td><td>' +
+            var celulas = '<td>' + data.rua + '</td><td>' + data.numero + '</td><td>' + data.bairro + '</td><td>' + data.cidade + '</td><td>' + data.estado + '</td><td>' + data.cep + '</td><td>' + data.categoria + '</td><td>' + data.observacao + '</td><td>' +
                 '<a href="#" class="btn btn-primary btn-sm btn-circle update_pf_end" data-update-pfend-id="' + data.id_endereco + '" data-toggle="modal" data-target="#atualizaPfEndModal"><i class="fa fa-edit"></i></a>' +
                 '&nbsp;<a href="#" class="btn btn-warning btn-sm btn-circle delete_pf_end" data-del-pfend-id="' + data.id_endereco + '" data-toggle="modal" data-target="#apagaPfEndModal"><i class="fa fa-trash-o"></i></a></td>';
 
             var linha = '<tr data-pf-endereco="' + data.id_endereco + '">' + celulas + '</tr>';
 
-            var id_end = $('#id_endereco').attr('value');
+            var id_end = $('#form_pf_enderecos input[name=id_endereco]').val();
 
             if (id_end) {
                 var registro = $('#tb_pf_enderecos tr[data-pf-endereco=' + id_end + ']');
                 registro.html(celulas);
                 registro.addClass('active');
                 $('#form_pf_enderecos input[name=id_endereco]').val('');
+                $('#form_pf_enderecos input[name=nome_cidade]').val('');
+                $('#form_pf_enderecos input[name=nome_estado]').val('');
+                $('#form_pf_enderecos input[name=observacao]').val('');
                 $('#legend_form_enderecos').html('Cadastrar Endereço').removeClass('text-primary');
             } else {
                 $(linha).appendTo('#tb_pf_enderecos').hide().fadeIn();
@@ -486,7 +489,86 @@ $('#form_apaga_pf_end')
         });
         return false;
     });
+/* Pesquisa de Cidade/Estado para formulário de Endereço de Pessoa Física */
+var btnPesquisaCidade = $('#btn-pesquisa-cidade');
+var cidadeEnderecoModal = $('#cidade_endereco_modal');
+var inputNomeCidade = $('#nome_cidade');
+var inputNomeEstado = $('#nome_estado');
+var inputIdCidade = $('#cidade');
+var inputIdEstado = $('#estado');
 
+btnPesquisaCidade.click(function (e) {
+    e.preventDefault();
+    cidadeEnderecoModal.modal('show');
+});
+
+function buscaCidadeEndereco() {
+    var nome_cidade = $('#nome_cidade_endereco').val();
+    if (nome_cidade != '') {
+        $('#busca-cidade-resultado').html('<i class="fa fa-spinner fa-spin fa-2x"></i>');
+        $.ajax({
+            type: 'post',
+            url: 'Cidades/buscaAjax/',
+            data: 'nome_cidade_origem=' + nome_cidade,
+            dataType: 'json',
+            success: function (data) {
+
+                var html = '';
+                for (var i = 0; i < data.length; i++) {
+                    html +=
+                        '<div class="panel-body">' +
+                            '<div class="col-sm-1">' +
+                            '<a href="#" ' +
+                            'data-id-cidade="' + data[i].id + '" ' +
+                            'data-nome-cidade="' + data[i].nome + '" ' +
+                            'data-estado="' + data[i].estado_nome + '" ' +
+                            'data-id-estado="' + data[i].estado_id + '" ' +
+                            'title="Adicionar" ' +
+                            'class="btn btn-primary btn-xs btn-circle add-cidade-endereco">' +
+                            '<i class="fa fa-check"></i></a> '+
+                            '</div>'+
+                            '<div class="col-sm-11">' +
+                            ' ' + data[i].nome +',  '+ data[i].estado_nome + '</a>' +
+                            '</div>'+
+                            '</div>';
+                }
+
+                var resultBody = '<div class="row"><div class="col-md-12">' + html + '</div></div>';
+                $('#busca-cidade-endereco-resultado').html(resultBody).hide().fadeIn();
+
+
+            },
+            error: function (data) {
+                $(data.responseText).appendTo('#area-do-resultado');
+            }
+        });
+    } else {
+        $('#busca-cidade-endereco-resultado').fadeOut();
+    }
+}
+
+$('#nome_cidade_endereco').keyup(function () {
+    buscaCidadeEndereco();
+}).focusout(function () {
+    $('#busca-cidade-endereco-resultado').fadeOut();
+});
+
+$('#busca-cidade-endereco-resultado').delegate('.add-cidade-endereco','click',function(e) {
+    e.preventDefault();
+    var cidade = $(this);
+    var id_cidade = cidade.attr('data-id-cidade');
+    var nome_cidade = cidade.attr('data-nome-cidade');
+    var nome_estado = cidade.attr('data-estado');
+    var id_estado = cidade.attr('data-id-estado');
+
+    inputNomeCidade.val(nome_cidade);
+    inputNomeEstado.val(nome_estado);
+    inputIdCidade.val(id_cidade);
+    inputIdEstado.val(id_estado);
+    cidadeEnderecoModal.modal('hide');
+});
+
+/* Fim Pesquisa de Cidade/Estado para formulário de Endereço de Pessoa Física */
 
 /** Início - Botões Atualizar e Apagar  PF Telefone */
 $('#tb_pf_enderecos').delegate('.update_pf_end', 'click', function () {
@@ -505,12 +587,14 @@ $('#tb_pf_enderecos').delegate('.update_pf_end', 'click', function () {
             $('#form_pf_enderecos input[name=rua]').val(data.rua);
             $('#form_pf_enderecos input[name=numero]').val(data.numero);
             $('#form_pf_enderecos input[name=bairro]').val(data.bairro);
-            $('#form_pf_enderecos input[name=cidade]').val(data.cidade);
+            $('#form_pf_enderecos input[name=cidade]').val(data.id_cidade);
+            $('#form_pf_enderecos input[name=nome_cidade]').val(data.cidade);
+            $('#form_pf_enderecos input[name=estado]').val(data.id_estado);
+            $('#form_pf_enderecos input[name=nome_estado]').val(data.estado);
             $('#form_pf_enderecos input[name=cep]').val(data.cep);
             $('#form_pf_enderecos input[name=observacao]').val(data.observacao);
             $('#form_pf_enderecos input[name=cd_pessoa_fisica]').val(data.cd_pessoa_fisica);
-            $('#end_estado option[value=' + data.estado + ']').prop("selected", "selected");
-            $('#end_categoria option[value=' + data.categoria + ']').prop("selected", "selected");
+            $('#end_categoria option[value=' + data.cd_vl_catg_end + ']').prop("selected", "selected");
             $('#legend_form_enderecos').html('Atualizar Endereço.').addClass('text-primary');
 
         },
@@ -1069,7 +1153,7 @@ formProfissao.bootstrapValidator({
 
 //////////////////- Cadastro de Curso -///////////////////////////////////////
 var formPfNewCurso = $('#form_pf_new_curso');
-var selectCurso = $('#cd_grau_ensino');
+var selectCurso = $('#select_curso');
 var inputNomeCurso = $('#nome_curso');
 var newCursoModal = $('#new_curso_modal');
 
@@ -1235,7 +1319,7 @@ formNewPessoaJuridica.bootstrapValidator({
 //////////////////- Cadastro de Instituição de Ensino -///////////////////////////////////
 
 var formNewInstEnsino = $('#form_pf_new_ie');
-var selectInstEnsino = $('#cd_instituicao');
+var selectInstEnsino = $('#select_inst_ensino');
 var newIEModal = $('#new_ie_modal');
 
 selectInstEnsino.change(function () {
@@ -1442,3 +1526,167 @@ $('#busca-cidade-resultado').delegate('.add-cidade', 'click', function (e) {
 });
 
 ///////////////////////- Fim Manipula Cidade de Origem -//////////////////////////////
+
+//////////////////////- Início Manipulaçao de Info Estudos ///////////////////////////
+var formInfoEstudos = $('#form_estudante');
+var legendFormInfoEstudos = $('#legend_form_estudante');
+var btnCadastrarInfoEstudos = $('#cadastrar_estudante');
+var delInfoEstudos = $('#del_info_estudos');
+var tableInfoEstudos = $('#tb_estudante');
+var inputIdInfoEstudos = $('#cd_info_estudos');
+var dataInicio = $('#dt_inicio_curso');
+var dataFim = $('#dt_fim_curso');
+
+formInfoEstudos.bootstrapValidator({
+    feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh fa-spin'
+    },
+    fields: {
+        select_inst_ensino: {
+            group: '.col-sm-4',
+            validators: {
+                notEmpty: {
+                    message: 'Informe a Instituição.'
+                }
+            }
+        },
+        select_curso: {
+            group: '.col-sm-4',
+            validators: {
+                notEmpty: {
+                    message: 'Informe o curso.'
+                }
+            }
+        },
+        select_periodo_curso: {
+            group: '.col-sm-4',
+            validators: {
+                notEmpty: {
+                    message: 'Informe o período.'
+                }
+            }
+        },
+        dt_inicio_curso: {
+            group: '.col-sm-3',
+            validators: {
+                notEmpty: {
+                    message: 'Informe a data de início.'
+                },
+                date: {
+                    format: 'DD/MM/YYYY',
+                    message: 'Data inválida.'
+                }
+            }
+        },
+        dt_fim_curso: {
+            group: '.col-sm-3',
+            validators: {
+                notEmpty: {
+                    message: 'Informe a data de fim.'
+                },
+                date: {
+                    format: 'DD/MM/YYYY',
+                    message: 'Data inválida.'
+                }
+            }
+        }
+    }
+}).on('success.form.bv', function (e) {
+    e.preventDefault();
+    var $form = $(e.target);
+    var bv = $form.data('bootstrapValidator');
+    var dados = $(this).serialize();
+
+    $.ajax({
+        type: "POST",
+        url: "InfoEstudos/request",
+        data: dados,
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
+            if (data.delete == 's') {
+                $('tr[data-cd-info-estudos=' + data.cd_info_estudos + ']').fadeOut();
+            } else {
+                var celulas =
+                    '<td>'+data.instituicao+'</td>'+
+                    '<td>'+data.curso+'</td>'+
+                    '<td>'+data.area+'</td>'+
+                    '<td>'+data.periodo+'</td>'+
+                    '<td>'+data.dt_inicio+'</td>'+
+                    '<td>'+data.dt_fim+'</td>'+
+                '<td><a href="#" class="btn btn-primary btn-sm btn-circle update_info_est" data-update-info-est-id="'+data.cd_info_estudos+'"><i class="fa fa-edit"></i></a>'+
+                '&nbsp;<a href="#" class="btn btn-warning btn-sm btn-circle delete_info_est" data-del-info-est-id="'+data.cd_info_estudos+'"><i class="fa fa-trash-o"></i></a>'+
+                '</td>';
+
+                var linha = '<tr data-cd-info-estudos="'+data.cd_info_estudos+'">' + celulas + '</tr>';
+                var id = inputIdInfoEstudos.val();
+
+                if (id) {
+                    var registro = $('tr[data-cd-info-estudos='+id+']');
+                    registro.html(celulas);
+                    registro.addClass('active');
+                } else {
+                    $(linha).prependTo(tableInfoEstudos).hide().fadeIn();
+                }
+
+                legendFormInfoEstudos
+                    .html('Cadastrar novo')
+                    .removeClass('text-primary')
+                    .removeClass('text-danger');
+                btnCadastrarInfoEstudos
+                    .val('Cadastrar')
+                    .removeClass('btn-info')
+                    .removeClass('btn-danger')
+                    .addClass('btn-primary');
+                delInfoEstudos.val('n');
+                formInfoEstudos.hide().fadeIn();
+                inputIdInfoEstudos.val('');
+                bv.resetForm(true);
+
+            }
+
+        },
+        error: function (data) {
+            console.log(data);
+            $(data.responseText).appendTo('#responseAjaxError');
+        }
+    });
+    return false;
+});
+
+tableInfoEstudos.delegate('.update_info_est', 'click', function (e) {
+    e.preventDefault();
+    var id = $(this).attr('data-update-info-est-id');
+
+    $.ajax({
+        type: "GET",
+        url: "InfoEstudos/findById/" + id,
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function (data) {
+            inputIdInfoEstudos.val(data.cd_info_estudos);
+            dataInicio.val(data.dt_inicio);
+            dataFim.val(data.dt_fim);
+            $('#select_inst_ensino option[value=' + data.cd_pessoa_juridica + ']').prop("selected", "selected");
+            $('#select_curso option[value=' + data.id_curso + ']').prop("selected", "selected");
+            $('#select_periodo_curso option[value=' + data.cd_periodo + ']').prop("selected", "selected");
+
+            legendFormInfoEstudos
+                .html('Atualizar')
+                .addClass('text-primary')
+                .removeClass('text-danger');
+
+            btnCadastrarInfoEstudos
+                .val('Atualizar')
+                .addClass('btn-info')
+                .removeClass('btn-danger')
+                .removeClass('btn-primary');
+            $('#del_info_estudos').val('n');
+            formInfoEstudos.hide().fadeIn();
+            delInfoEstudos.val('n');
+
+        }
+    });
+})

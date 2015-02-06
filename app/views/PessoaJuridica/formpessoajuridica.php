@@ -223,6 +223,7 @@ $token = Token::generate();
 
     $telefones = $data['telefones'];
     $enderecos = $data['enderecos'];
+    $cidades = $data['cidades'];
     $estados = $data['estados'];
     $catg_enderecos = $data['catg_enderecos'];;?>
 
@@ -374,9 +375,15 @@ $token = Token::generate();
                                     <input name="bairro" class="form-control" type="text" id="bairro">
                                 </div>
                                 <div class="col-sm-3">
+                                    <input name="cidade" class="hidden-input" type="text" id="cidade">
                                     <label for="cidade" class="control-label">Cidade</label>
 
-                                    <input name="cidade" class="form-control" type="text" id="cidade">
+                                    <div class="input-group">
+                                        <input name="nome_cidade" class="form-control" type="text" id="nome_cidade" disabled>
+                                        <span class="input-group-btn">
+                                        <button class="btn btn-default" id="btn-pesquisa-cidade"><i class="fa fa-search"></i></button>
+                                            </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -384,23 +391,18 @@ $token = Token::generate();
                         <div class="row">
 
                             <div class="form-group col-sm-12">
+
+                                <div class="col-sm-3">
+                                    <input name="estado" class="hidden-input" type="text" id="estado">
+                                    <label for="estado" class="control-label">Estado</label>
+
+                                    <input name="nome_estado" class="form-control" type="text" id="nome_estado" disabled>
+                                </div>
+
                                 <div class="col-sm-3">
                                     <label for="cep" class="control-label">CEP</label>
 
                                     <input name="cep" class="form-control" type="text" id="cep">
-                                </div>
-
-                                <div class="col-sm-3 selectContainer">
-                                    <label for="estado" class="control-label">Estado</label>
-
-                                    <select class="form-control" name="estado" id="end_estado">
-                                        <option value="">--</option>
-                                        <?php
-                                        foreach ($estados as $estado) {
-                                            echo '<option value="' . $estado->getCdVlCategoria() . '">' . $estado->getDescVlCatg() . '</option>';
-                                        }
-                                        ?>
-                                    </select>
                                 </div>
 
                                 <div class="col-sm-3 selectContainer">
@@ -452,8 +454,8 @@ $token = Token::generate();
                         <th>Número</th>
                         <th>Bairro</th>
                         <th>Cidade</th>
-                        <th>CEP</th>
                         <th>Estado</th>
+                        <th>CEP</th>
                         <th>Tipo</th>
                         <th>Observação</th>
                         <th>Editar</th>
@@ -467,16 +469,22 @@ $token = Token::generate();
                         <td>{$endereco->getRua()}</td>
                         <td>{$endereco->getNumero()}</td>
                         <td>{$endereco->getBairro()}</td>
-                        <td>{$endereco->getCidade()}</td>
-                        <td>{$endereco->getCep()}</td>
                         <td>";
-                        foreach ($estados as $end_estado) {
-                            if ($end_estado->getCdVlCategoria() == $endereco->getCdVlCatgEstado()) {
-                                echo $end_estado->getDescVlCatg();
+                        foreach ($cidades as $end_cidade) {
+                            if ($end_cidade->getId() == $endereco->getCidade()) {
+                                echo $end_cidade->getNome();
                             }
                         }
-                        echo "</td>";
-                        echo "<td>";
+                        echo "</td>
+                        <td>";
+                        foreach ($estados as $end_estado) {
+                            if ($end_estado->getId() == $endereco->getEstado()) {
+                                echo $end_estado->getNome();
+                            }
+                        }
+                        echo "</td>
+                        <td>{$endereco->getCep()}</td>
+                        <td>";
                         foreach ($catg_enderecos as $catg_end) {
                             if ($catg_end->getCdVlCategoria() == $endereco->getCdVlCatgEnd()) {
                                 echo $catg_end->getDescVlCatg();
@@ -698,4 +706,33 @@ $token = Token::generate();
         </div>
 
     </div>
+</div>
+
+<!-- Modal para adicionar Cidade/Estado para Endereço -->
+<div class="modal fade" tabindex="-1" role="dialog" id="cidade_endereco_modal" aria-labelledby="cidade_endereco_modal"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <div class="modal-title legend">Cidade</div>
+            </div>
+
+            <form class="dropdown" id="form-cidade-endereco">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="nome_cidade_endereco"
+                               placeholder="Buscar Cidade" autocomplete="off"
+                               data-toggle="busca-cidade">
+
+                        <div id="busca-cidade-endereco-resultado" class="dropdown-busca panel col-md-12"
+                             aria-labelledby="busca-cidade-endereco"></div>
+                    </div>
+                </div>
+        </div>
+        </form>
+
+    </div>
+
 </div>

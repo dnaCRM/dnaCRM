@@ -408,19 +408,22 @@ $('#form_pj_enderecos').bootstrapValidator({
         dataType: 'json',
         success: function (data) {
 
-            var celulas = '<td>' + data.rua + '</td><td>' + data.numero + '</td><td>' + data.bairro + '</td><td>' + data.cidade + '</td><td>' + data.cep + '</td><td>' + data.estado + '</td><td>' + data.categoria + '</td><td>' + data.observacao + '</td><td>' +
+            var celulas = '<td>' + data.rua + '</td><td>' + data.numero + '</td><td>' + data.bairro + '</td><td>' + data.cidade + '</td><td>' + data.estado + '</td><td>' + data.cep + '</td><td>' + data.categoria + '</td><td>' + data.observacao + '</td><td>' +
                 '<a href="#" class="btn btn-primary btn-sm btn-circle update_pj_end" data-update-pjend-id="' + data.id_endereco + '" data-toggle="modal" data-target="#atualizaPjEndModal"><i class="fa fa-edit"></i></a>' +
                 '&nbsp;<a href="#" class="btn btn-warning btn-sm btn-circle delete_pj_end" data-del-pjend-id="' + data.id_endereco + '" data-toggle="modal" data-target="#apagaPjEndModal"><i class="fa fa-trash-o"></i></a></td>';
 
             var linha = '<tr data-pj-endereco="' + data.id_endereco + '">' + celulas + '</tr>';
 
-            var id_end = $('#id_endereco').attr('value');
+            var id_end = $('#form_pj_enderecos input[name=id_endereco]').val();
 
             if (id_end) {
                 var registro = $('#tb_pj_enderecos tr[data-pj-endereco=' + id_end + ']');
                 registro.html(celulas);
                 registro.addClass('active');
                 $('#form_pj_enderecos input[name=id_endereco]').val('');
+                $('#form_pj_enderecos input[name=nome_cidade]').val('');
+                $('#form_pj_enderecos input[name=nome_estado]').val('');
+                $('#form_pj_enderecos input[name=observacao]').val('');
                 $('#legend_form_enderecos').html('Cadastrar Endereço').removeClass('text-primary');
             } else {
                 $(linha).appendTo('#tb_pj_enderecos').hide().fadeIn();
@@ -459,6 +462,86 @@ $('#form_apaga_pj_end')
         return false;
     });
 
+/* Pesquisa de Cidade/Estado para formulário de Endereço de Pessoa Física */
+var btnPesquisaCidade = $('#btn-pesquisa-cidade');
+var cidadeEnderecoModal = $('#cidade_endereco_modal');
+var inputNomeCidade = $('#nome_cidade');
+var inputNomeEstado = $('#nome_estado');
+var inputIdCidade = $('#cidade');
+var inputIdEstado = $('#estado');
+
+btnPesquisaCidade.click(function (e) {
+    e.preventDefault();
+    cidadeEnderecoModal.modal('show');
+});
+
+function buscaCidadeEndereco() {
+    var nome_cidade = $('#nome_cidade_endereco').val();
+    if (nome_cidade != '') {
+        $('#busca-cidade-resultado').html('<i class="fa fa-spinner fa-spin fa-2x"></i>');
+        $.ajax({
+            type: 'post',
+            url: 'Cidades/buscaAjax/',
+            data: 'nome_cidade_origem=' + nome_cidade,
+            dataType: 'json',
+            success: function (data) {
+
+                var html = '';
+                for (var i = 0; i < data.length; i++) {
+                    html +=
+                        '<div class="panel-body">' +
+                            '<div class="col-sm-1">' +
+                            '<a href="#" ' +
+                            'data-id-cidade="' + data[i].id + '" ' +
+                            'data-nome-cidade="' + data[i].nome + '" ' +
+                            'data-estado="' + data[i].estado_nome + '" ' +
+                            'data-id-estado="' + data[i].estado_id + '" ' +
+                            'title="Adicionar" ' +
+                            'class="btn btn-primary btn-xs btn-circle add-cidade-endereco">' +
+                            '<i class="fa fa-check"></i></a> '+
+                            '</div>'+
+                            '<div class="col-sm-11">' +
+                            ' ' + data[i].nome +',  '+ data[i].estado_nome + '</a>' +
+                            '</div>'+
+                            '</div>';
+                }
+
+                var resultBody = '<div class="row"><div class="col-md-12">' + html + '</div></div>';
+                $('#busca-cidade-endereco-resultado').html(resultBody).hide().fadeIn();
+
+
+            },
+            error: function (data) {
+                $(data.responseText).appendTo('#area-do-resultado');
+            }
+        });
+    } else {
+        $('#busca-cidade-endereco-resultado').fadeOut();
+    }
+}
+
+$('#nome_cidade_endereco').keyup(function () {
+    buscaCidadeEndereco();
+}).focusout(function () {
+    $('#busca-cidade-endereco-resultado').fadeOut();
+});
+
+$('#busca-cidade-endereco-resultado').delegate('.add-cidade-endereco','click',function(e) {
+    e.preventDefault();
+    var cidade = $(this);
+    var id_cidade = cidade.attr('data-id-cidade');
+    var nome_cidade = cidade.attr('data-nome-cidade');
+    var nome_estado = cidade.attr('data-estado');
+    var id_estado = cidade.attr('data-id-estado');
+
+    inputNomeCidade.val(nome_cidade);
+    inputNomeEstado.val(nome_estado);
+    inputIdCidade.val(id_cidade);
+    inputIdEstado.val(id_estado);
+    cidadeEnderecoModal.modal('hide');
+});
+
+/* Fim Pesquisa de Cidade/Estado para formulário de Endereço de Pessoa Física */
 
 /** Início - Botões Atualizar e Apagar  PF Telefone */
 $('#tb_pj_enderecos').delegate('.update_pj_end', 'click', function () {
@@ -477,12 +560,14 @@ $('#tb_pj_enderecos').delegate('.update_pj_end', 'click', function () {
             $('#form_pj_enderecos input[name=rua]').val(data.rua);
             $('#form_pj_enderecos input[name=numero]').val(data.numero);
             $('#form_pj_enderecos input[name=bairro]').val(data.bairro);
-            $('#form_pj_enderecos input[name=cidade]').val(data.cidade);
+            $('#form_pj_enderecos input[name=cidade]').val(data.id_cidade);
+            $('#form_pj_enderecos input[name=nome_cidade]').val(data.cidade);
+            $('#form_pj_enderecos input[name=estado]').val(data.id_estado);
+            $('#form_pj_enderecos input[name=nome_estado]').val(data.estado);
             $('#form_pj_enderecos input[name=cep]').val(data.cep);
             $('#form_pj_enderecos input[name=observacao]').val(data.observacao);
             $('#form_pj_enderecos input[name=cd_pessoa_juridica]').val(data.cd_pessoa_juridica);
-            $('#end_estado option[value=' + data.estado + ']').prop("selected", "selected");
-            $('#end_categoria option[value=' + data.categoria + ']').prop("selected", "selected");
+            $('#end_categoria option[value=' + data.cd_vl_catg_end + ']').prop("selected", "selected");
             $('#legend_form_enderecos').html('Atualizar Endereço.').addClass('text-primary');
 
         },

@@ -33,9 +33,9 @@ class PessoaJuridicaEnderecoModel extends Model
             'numero' => $this->dto->getNumero(),
             'bairro' => $this->dto->getBairro(),
             'cidade' => $cidade->getNome(),
+            'id_cidade' => $cidade->getId(),
             'estado' => $estado->getNome(),
-            'cd_catg_estado' => $this->dto->getCdCatgEstado(),
-            'cd_vl_catg_estado' => $this->dto->getCdCatgEstado(),
+            'id_estado' => $estado->getId(),
             'observacao' => $this->dto->getObservacao()
         );
     }

@@ -98,9 +98,8 @@ class PessoaFisica extends Controller
     {
         $pessoa_juridica = (new PessoaJuridicaDAO())->fullList();
         $profissoes = (new ProfissaoDAO())->fullList();
+        $cidades = (new CidadesDAO())->fullList();
         $estados = (new EstadosDAO())->fullList();
-        $inst_ensino = (new PessoaJuridicaDAO())->get('cd_tipo_empresa = 159');
-        $cursos = (new CategoriaValorDAO())->get('cd_categoria = 14');
 
         if ($id) {
             /** @var PessoaFisicaDTO */
@@ -108,11 +107,16 @@ class PessoaFisica extends Controller
 
             $condominios = (new PessoaJuridicaDAO())->get('cd_ramo_atividade = 107');
 
+            $cursos = (new CategoriaValorDAO())->get('cd_categoria = 14');
+            $inst_ensino = (new PessoaJuridicaDAO())->get('cd_tipo_empresa = 159');
+
             $moradorEnderecos = (new MoradorEnderecoModel())->getPorMorador($id);
             $telefones = (new PessoaFisicaTelefoneModel())->getTelefonesPessoaFisica($id);
 
             $pf_telefone = (new CategoriaValorDAO())->get('cd_categoria = 5');
             $operadora = (new CategoriaValorDAO())->get('cd_categoria = 10');
+
+            $periodos_curso = (new CategoriaValorDAO())->get('cd_categoria = 20');
 
             $enderecos = (new PessoaFisicaEnderecoDAO())->get("cd_pessoa_fisica = {$id}");
             $catg_enderecos = (new CategoriaValorDAO())->get('cd_categoria = 9');
@@ -120,6 +124,8 @@ class PessoaFisica extends Controller
 
             $relacionadosModel = new RelacionadosModel();
             $relacionados = $relacionadosModel->getRelacionados($id);
+
+            $info_estudos = (new InfoEstudosModel())->getPorPessoaFisica($id);
 
             //Formatação de datas
 
@@ -142,10 +148,13 @@ class PessoaFisica extends Controller
                 'profissoes' => $profissoes,
                 'inst_ensino' => $inst_ensino,
                 'cursos' => $cursos,
+                'periodos_curso' => $periodos_curso,
+                'info_estudos' => $info_estudos,
                 'pf_telefone' => $pf_telefone,
                 'telefones' => $telefones,
                 'enderecos' => $enderecos,
                 'operadora' => $operadora,
+                'cidades' => $cidades,
                 'estados' => $estados,
                 'catg_enderecos' => $catg_enderecos,
                 'condominios' => $condominios,

@@ -54,6 +54,7 @@ class InfoEstudos extends Controller
 
     public function findById($id)
     {
+        $id = (int)$id;
         $dto = $this->model->getById($id);
         $return = $this->infoEstudosModel->setDTO($dto)->getArrayDados();
 
@@ -67,14 +68,14 @@ class InfoEstudos extends Controller
 
         $dto
             ->setCdInfoEstudos(Input::get('cd_info_estudos'))
-            ->setCdPessoaFisica(Input::get('cd_pessoa_fisica'))
-            ->setCdPessoaJuridica(Input::get('cd_pessoa_juridica'))
-            ->setCdCatgCurso(Input::get('cd_catg_curso'))
-            ->setCdVlCatgCurso(Input::get('cd_vl_catg_curso'))
-            ->setCdCatgPeriodo(Input::get('cd_catg_periodo'))
-            ->setCdVlCatgPeriodo(Input::get('cd_vl_catg_periodo'))
-            ->setDtInicio(Input::get('dt_inicio'))
-            ->setDtFim(Input::get('dt_fim'))
+            ->setCdPessoaFisica((int)Input::get('cd_pessoa_fisica'))
+            ->setCdPessoaJuridica((int)Input::get('select_inst_ensino'))
+            ->setCdCatgCurso(14)
+            ->setCdVlCatgCurso((int)Input::get('select_curso'))
+            ->setCdCatgPeriodo(20)
+            ->setCdVlCatgPeriodo((int)Input::get('select_periodo_curso'))
+            ->setDtInicio(Input::get('dt_inicio_curso'))
+            ->setDtFim(Input::get('dt_fim_curso'))
             ->setCdUsuarioCriacao(Session::get('user'))
             ->setDtUsuarioCriacao('now()')
             ->setCdUsuarioAtualiza(Session::get('user'))
@@ -110,4 +111,6 @@ class InfoEstudos extends Controller
 
         echo json_encode($return);
     }
+
+
 } 

@@ -64,7 +64,8 @@ class PessoaJuridica extends Controller
 
             $telefones = (new PessoaJuridicaTelefoneDAO())->get("cd_pessoa_juridica = {$id}");
             $enderecos = (new PessoaJuridicaEnderecoDAO())->get("cd_pessoa_juridica = {$id}");
-            $estados = (new CategoriaValorDAO())->get('cd_categoria = 2');
+            $cidades = (new CidadesDAO())->fullList();
+            $estados = (new EstadosDAO())->fullList();
             $catg_enderecos = (new CategoriaValorDAO())->get('cd_categoria = 9');
 
             $dados = array(
@@ -75,6 +76,7 @@ class PessoaJuridica extends Controller
                 'operadora' => $operadora,
                 'telefones' => $telefones,
                 'enderecos' => $enderecos,
+                'cidades' => $cidades,
                 'estados' => $estados,
                 'catg_enderecos' => $catg_enderecos,
                 'tipos_empresa' => $tipos_empresa,

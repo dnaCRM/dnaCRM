@@ -1,14 +1,19 @@
 -- ANIVERSARIANTES DO DIA
-SELECT *
+SELECT
+  *
 FROM tb_pessoa_fisica
-WHERE date_part('day', dt_nascimento) = (SELECT DATE_PART('DAY', CURRENT_TIMESTAMP))
-      AND date_part('month', dt_nascimento) = (SELECT DATE_PART('MONTH', CURRENT_TIMESTAMP))
+WHERE date_part('day', dt_nascimento) = (SELECT
+                                           DATE_PART('DAY', CURRENT_TIMESTAMP))
+      AND date_part('month', dt_nascimento) = (SELECT
+                                                 DATE_PART('MONTH', CURRENT_TIMESTAMP))
 ORDER BY nm_pessoa_fisica;
 
 -- ANIVERSARIANTES DO MÊS
-SELECT *
+SELECT
+  *
 FROM tb_pessoa_fisica
-WHERE date_part('month', dt_nascimento) = (SELECT DATE_PART('MONTH', CURRENT_TIMESTAMP))
+WHERE date_part('month', dt_nascimento) = (SELECT
+                                             DATE_PART('MONTH', CURRENT_TIMESTAMP))
 ORDER BY nm_pessoa_fisica;
 
 -- APARTAMENTOS VAZIOS
@@ -89,3 +94,62 @@ FROM tb_pessoa_fisica pf
   LEFT OUTER JOIN tb_pessoa_juridica inst ON (pf.cd_instituicao = inst.cd_pessoa_juridica)
   LEFT OUTER JOIN tb_categoria_valor cv_grau ON (pf.cd_vl_catg_grau_ensino = cv_grau.cd_vl_categoria)
 WHERE pf.cd_pessoa_fisica < 999;
+
+----------------------------------------------------------------------------
+-- Cursos e Áreas
+SELECT
+  c.cd_vl_categoria AS id_curso,
+  c.desc_vl_catg    AS curso,
+  g.cd_vl_categoria AS id_area,
+  g.desc_vl_catg    AS area
+FROM tb_categoria_valor c
+  JOIN tb_categoria_valor g
+    ON (c.cd_grupo = g.cd_vl_categoria);
+----------------------------------------------------------------------------
+-- Atualiza todos os cursos para Humanas
+UPDATE tb_categoria_valor
+SET
+  cd_grupo     = 165,
+  cd_cat_grupo = 19
+WHERE cd_categoria = 14;
+----------------------------------------------------------------------------
+-- Seleciona ArrayDados para Estudante
+DROP VIEW IF EXISTS vs_estudantes;
+CREATE VIEW vs_estudantes AS
+  SELECT
+    if.cd_info_estudos,
+    pf.cd_pessoa_fisica,
+    pf.nm_pessoa_fisica AS estudante,
+    pj.cd_pessoa_juridica,
+    pj.nm_fantasia AS instituicao,
+    cv_c.id_curso,
+    cv_c.curso,
+    cv_c.id_area,
+    cv_c.area,
+    cv_p.cd_vl_categoria AS cd_periodo,
+    cv_p.desc_vl_catg AS periodo,
+    to_char(dt_inicio,'DD/MM/YYYY') AS dt_inicio,
+    to_char(dt_fim, 'DD/MM/YYYY') as dt_fim
+  FROM tb_info_estudos if
+    JOIN tb_pessoa_fisica pf
+      ON (if.cd_pessoa_fisica = pf.cd_pessoa_fisica)
+    JOIN tb_pessoa_juridica pj
+      ON (if.cd_pessoa_juridica = pj.cd_pessoa_juridica)
+    JOIN (
+           SELECT
+             c.cd_vl_categoria as id_curso,
+             c.desc_vl_catg as curso,
+             g.cd_vl_categoria as id_area,
+             g.desc_vl_catg as area
+
+           FROM tb_categoria_valor c
+             JOIN tb_categoria_valor g
+               ON (c.cd_grupo = g.cd_vl_categoria)
+         ) AS cv_c
+      ON (if.cd_vl_catg_curso = cv_c.id_curso)
+    JOIN tb_categoria_valor cv_p
+      ON (if.cd_vl_catg_periodo = cv_p.cd_vl_categoria)
+;
+
+SELECT *
+FROM vs_estudantes;
