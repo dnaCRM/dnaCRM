@@ -27,7 +27,7 @@ formCategorias.bootstrapValidator({
                 },
                 remote: {
                     message: 'Esta categoria já existe.',
-                    data: function(validator) {
+                    data: function (validator) {
                         return {
                             id_categoria: validator.getFieldElements('id_categoria').val()
                         };
@@ -162,6 +162,10 @@ var formSubCategorias = $('#form_sub_categorias');
 var tableSubCategorias = $('#tb_sub_categorias');
 var inputIdSubCategoria = $('#id_sub_categoria');
 var inputNomeSubCategoria = $('#nome_sub_categoria');
+var inputNomeGrupo = $('#nome_grupo');
+var labelGroupName = $('#group_name');
+var cdGrupo = $('#cd_grupo');
+var cdCatGrupo = $('#cd_cat_grupo');
 
 tableSubCategorias.dataTable({
     "language": {
@@ -186,7 +190,7 @@ formSubCategorias.bootstrapValidator({
                 },
                 remote: {
                     message: 'Esta sub-categoria já existe.',
-                    data: function(validator) {
+                    data: function (validator) {
                         return {
                             id_sub_categoria: validator.getFieldElements('id_sub_categoria').val()
                         };
@@ -223,8 +227,10 @@ formSubCategorias.bootstrapValidator({
                     '<td>' + data.cd_vl_categoria + '</td>' +
                         '<td>' + data.desc_vl_categoria + '</td>' +
                         '<td>' + data.desc_categoria + '</td>' +
+                        '<td>' + data.grupo + '</td>' +
                         '<td>' +
                         '<a href="#" class="btn btn-primary btn-sm btn-circle update_sub_categ" data-update-sub-categ-id="' + data.cd_vl_categoria + '"><i class="fa fa-edit"></i></a> ' +
+                        '<a href="#" class="btn btn-info btn-sm btn-circle group" data-nome-grupo="' + data.desc_vl_categoria + '" data-id-grupo="' + data.cd_vl_categoria + '" data-id-cat-grupo="' + data.cd_categoria + '"><i class="fa fa-plus"></i></a>' +
                         '<a href="#" class="btn btn-warning btn-sm btn-circle delete_sub_categ" data-del-sub-categ-id="' + data.cd_vl_categoria + '"><i class="fa fa-trash-o"></i></a>' +
                         '</td>';
                 var linha = '<tr data-id-sub-categoria="' + data.cd_vl_categoria + '">' + celulas + '</tr>';
@@ -271,6 +277,12 @@ tableSubCategorias.delegate('.update_sub_categ', 'click', function (e) {
         success: function (data) {
             inputIdSubCategoria.val(data.cd_vl_categoria);
             inputNomeSubCategoria.val(data.desc_vl_categoria);
+            inputNomeGrupo
+                .val(data.grupo).hide().fadeIn();
+            labelGroupName.addClass('has-success');
+            cdGrupo.val(data.id_grupo);
+            cdCatGrupo.val(data.id_cat_grupo);
+
             $('#legend_form_sub_categorias')
                 .html('Atualizar Sub-Categoria ' + data.desc_vl_categoria)
                 .addClass('text-primary')
@@ -292,6 +304,32 @@ tableSubCategorias.delegate('.update_sub_categ', 'click', function (e) {
     });
 });
 
+tableSubCategorias.delegate('.group', 'click', function (e) {
+    e.preventDefault();
+    var nome = $(this).attr('data-nome-grupo');
+    var id_grupo = $(this).attr('data-id-grupo');
+    var id_cat_grupo = $(this).attr('data-id-cat-grupo');
+
+    var id_sub_categoria = inputIdSubCategoria.val();
+
+    if (id_grupo != id_sub_categoria) {
+        inputNomeGrupo
+            .val(nome).hide().fadeIn();
+        labelGroupName.addClass('has-success');
+        cdGrupo.val(id_grupo);
+        cdCatGrupo.val(id_cat_grupo);
+    }
+
+});
+
+$('#btn-desagrupar').click(function (e) {
+    e.preventDefault();
+    inputNomeGrupo
+        .val('').hide().fadeIn();
+    labelGroupName.addClass('has-success');
+    cdGrupo.val('');
+    cdCatGrupo.val('');
+});
 tableSubCategorias.delegate('.delete_sub_categ', 'click', function (e) {
     e.preventDefault();
     var id = $(this).attr('data-del-sub-categ-id');
@@ -339,6 +377,11 @@ $('#sub_categ_reset').click(function () {
         .addClass('btn-primary');
     $('#del_sub_categ')
         .val('n');
+    $('#nome_grupo')
+        .val('').hide().fadeIn();
+    $('#group_name').removeClass('has-success');
+    $('#cd_grupo').val('');
+    $('#cd_cat_grupo').var('');
 
     formSubCategorias.hide().fadeIn();
     inputIdSubCategoria.val('');

@@ -1187,7 +1187,15 @@ formPfNewCurso.bootstrapValidator({
                     url: "CategoriaValor/checkExisteNome/"
                 }
             }
+        },
+        cd_grupo: {
+            validators: {
+                notEmpty: {
+                    message: 'Informe a Área do Curso.'
+                }
+            }
         }
+
     }
 }).on('success.form.bv', function (e) {
     e.preventDefault();
@@ -1630,23 +1638,20 @@ formInfoEstudos.bootstrapValidator({
                 } else {
                     $(linha).prependTo(tableInfoEstudos).hide().fadeIn();
                 }
-
-                legendFormInfoEstudos
-                    .html('Cadastrar novo')
-                    .removeClass('text-primary')
-                    .removeClass('text-danger');
-                btnCadastrarInfoEstudos
-                    .val('Cadastrar')
-                    .removeClass('btn-info')
-                    .removeClass('btn-danger')
-                    .addClass('btn-primary');
-                delInfoEstudos.val('n');
-                formInfoEstudos.hide().fadeIn();
-                inputIdInfoEstudos.val('');
-                bv.resetForm(true);
-
             }
-
+            legendFormInfoEstudos
+                .html('<i class="fa fa-save"></i> Cadastrar novo')
+                .removeClass('text-primary')
+                .removeClass('text-danger');
+            btnCadastrarInfoEstudos
+                .val('Cadastrar')
+                .removeClass('btn-info')
+                .removeClass('btn-danger')
+                .addClass('btn-primary');
+            delInfoEstudos.val('n');
+            formInfoEstudos.hide().fadeIn();
+            inputIdInfoEstudos.val('');
+            bv.resetForm(true);
         },
         error: function (data) {
             console.log(data);
@@ -1674,8 +1679,9 @@ tableInfoEstudos.delegate('.update_info_est', 'click', function (e) {
             $('#select_periodo_curso option[value=' + data.cd_periodo + ']').prop("selected", "selected");
 
             legendFormInfoEstudos
-                .html('Atualizar')
-                .addClass('text-primary')
+                .html('<i class="fa fa-refresh"></i> Atualizar')
+                .addClass('text-info')
+                .removeClass('text-primary')
                 .removeClass('text-danger');
 
             btnCadastrarInfoEstudos
@@ -1689,4 +1695,62 @@ tableInfoEstudos.delegate('.update_info_est', 'click', function (e) {
 
         }
     });
-})
+});
+
+tableInfoEstudos.delegate('.delete_info_est','click',function(e){
+    e.preventDefault();
+    var id = $(this).attr('data-del-info-est-id');
+
+    $.ajax({
+        type: "GET",
+        url: "InfoEstudos/findById/" + id,
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function (data) {
+            inputIdInfoEstudos.val(data.cd_info_estudos);
+            dataInicio.val(data.dt_inicio);
+            dataFim.val(data.dt_fim);
+            $('#select_inst_ensino option[value=' + data.cd_pessoa_juridica + ']').prop("selected", "selected");
+            $('#select_curso option[value=' + data.id_curso + ']').prop("selected", "selected");
+            $('#select_periodo_curso option[value=' + data.cd_periodo + ']').prop("selected", "selected");
+
+            legendFormInfoEstudos
+                .html('<i class="fa fa-trash-o"></i> Apagar')
+                .removeClass('text-info')
+                .removeClass('text-primary')
+                .addClass('text-danger');
+
+            btnCadastrarInfoEstudos
+                .val('Apagar')
+                .addClass('btn-danger')
+                .removeClass('btn-info')
+                .removeClass('btn-primary');
+            $('#del_info_estudos').val('n');
+            formInfoEstudos.hide().fadeIn();
+            delInfoEstudos.val('s');
+        },
+        error: function (data) {
+            console.log(data);
+            $(data.responseText).appendTo('#responseAjaxError');
+        }
+    });
+
+});
+
+$('#form_estudante_reset').click(function () {
+    formInfoEstudos.data('bootstrapValidator').resetForm(true);
+    legendFormInfoEstudos.html('<i class="fa fa-save"></i> Cadastrar')
+        .removeClass('text-primary')
+        .removeClass('text-info')
+        .removeClass('text-danger');
+
+    btnCadastrarInfoEstudos
+        .val('Cadastrar')
+        .removeClass('btn-danger')
+        .removeClass('btn-info')
+        .addClass('btn-primary');
+    $('#del_prof').val('n');
+    formInfoEstudos.hide().fadeIn();
+    inputIdInfoEstudos.val('');
+    delInfoEstudos.val('n');
+});

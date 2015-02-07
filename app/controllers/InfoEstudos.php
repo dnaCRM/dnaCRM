@@ -46,8 +46,10 @@ class InfoEstudos extends Controller
         $dto = $this->model->getById($id);
         $info_estudos = $this->model->delete($dto);
 
-        $return = $this->infoEstudosModel->setDTO($info_estudos)->getArrayDados();
-        $return['delete'] = 's';
+        $return = array(
+            'delete' => 's',
+            'cd_info_estudos' => $info_estudos->getCdInfoEstudos()
+        );
 
         echo json_encode($return);
     }

@@ -456,7 +456,7 @@ $token = Token::generate();
             <div class="col-md-12">
 
                 <form class="form-horizontal" id="form_estudante">
-                    <legend id="legend_form_estudante">Cadastro</legend>
+                    <legend id="legend_form_estudante"><i class="fa fa-save"></i> Cadastro</legend>
                     <fieldset class="well">
 
                         <div class="form-group col-sm-12">
@@ -490,7 +490,7 @@ $token = Token::generate();
                             <div class="col-sm-4 selectContainer">
                                 <label for="select_periodo_curso" class="control-label">Período</label>
                                 <select class="form-control" name="select_periodo_curso" id="select_periodo_curso">
-                                    <option value="">Escolha o período</option>
+                                    <option value="">-- Seleciona um período</option>
                                     <?php
                                     foreach ($data['periodos_curso'] as $periodos_curso) {
                                         echo "<option value=\"{$periodos_curso->getCdVlCategoria()}\">{$periodos_curso->getDescVlCatg()}</option>";
@@ -1171,7 +1171,7 @@ $token = Token::generate();
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title legend">Nova Curso</h4>
+                <h4 class="modal-title legend">Novo Curso</h4>
             </div>
 
             <form id="form_pf_new_curso">
@@ -1181,6 +1181,19 @@ $token = Token::generate();
                         <input type="text" class="form-control" name="nome_sub_categoria" id="nome_curso">
                         <!-- Categoria Curso -->
                         <input type="hidden" id="id_cat_curso" name="select_cat" value="14">
+                        <input type="hidden" id="id_cat_curso" name="cd_cat_grupo" value="19">
+                    </div>
+                    <div class="form-group selectContainer">
+                        <label for="area_curso" class="control-label">Área do Curso</label>
+                        <select class="form-control" name="cd_grupo" id="area_curso">
+                            <option value="">-- Seleciona um período</option>
+                            <?php
+                            foreach ($data['areas_curso'] as $area_curso) {
+                                echo "<option value=\"{$area_curso->getCdVlCategoria()}\">{$area_curso->getDescVlCatg()}</option>";
+                            }
+
+                            ?>
+                        </select>
                     </div>
                 </div>
                 <div class="modal-footer">

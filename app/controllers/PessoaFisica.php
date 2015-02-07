@@ -117,6 +117,7 @@ class PessoaFisica extends Controller
             $operadora = (new CategoriaValorDAO())->get('cd_categoria = 10');
 
             $periodos_curso = (new CategoriaValorDAO())->get('cd_categoria = 20');
+            $areas_curso = (new CategoriaValorDAO())->get('cd_categoria = 19');
 
             $enderecos = (new PessoaFisicaEnderecoDAO())->get("cd_pessoa_fisica = {$id}");
             $catg_enderecos = (new CategoriaValorDAO())->get('cd_categoria = 9');
@@ -149,6 +150,7 @@ class PessoaFisica extends Controller
                 'inst_ensino' => $inst_ensino,
                 'cursos' => $cursos,
                 'periodos_curso' => $periodos_curso,
+                'areas_curso' => $areas_curso,
                 'info_estudos' => $info_estudos,
                 'pf_telefone' => $pf_telefone,
                 'telefones' => $telefones,
