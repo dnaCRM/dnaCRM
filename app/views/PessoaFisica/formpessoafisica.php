@@ -177,7 +177,6 @@ $token = Token::generate();
                         </label>
                     </div>
                 </div>
-
             </div>
 
             <div class="form-group col-sm-6">
@@ -568,19 +567,39 @@ $token = Token::generate();
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <label for="m_end_dt_entrada" class="control-label">Data de Entrada</label>
 
                                 <input type="text" class="form-control data-input" name="m_end_dt_entrada"
                                        id="m_end_dt_entrada"
                                        placeholder="___/___/______">
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <label for="m_end_dt_saida" class="control-label">Data de Saída</label>
 
                                 <input type="text" class="form-control data-input" name="m_end_dt_saida"
                                        id="m_end_dt_saida"
                                        placeholder="___/___/______">
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label">Residente</label>
+
+
+                                    <div class="btn-group" data-toggle="buttons">
+                                        <label
+                                            class="btn btn-default btn-lg">
+                                            <input type="radio" name="residente"
+                                                   value="S"/>
+                                            <i class="fa fa-check text-primary"></i>
+                                        </label>
+                                        <label
+                                            class="btn btn-default btn-lg">
+                                            <input type="radio" name="residente"
+                                                   value="N"/>
+                                            <i class="fa fa-ban text-danger"></i>
+                                        </label>
+                                    </div>
+
                             </div>
                         </div>
 
@@ -608,6 +627,7 @@ $token = Token::generate();
                         <th>Setor</th>
                         <th>Apartamento</th>
                         <th>Entrada</th>
+                        <th>Resid.</th>
                         <th>Saída</th>
                         <th>Editar</th>
                     </tr>
@@ -620,6 +640,7 @@ $token = Token::generate();
                              <td>{$mEnderecos['condominio']}</td>
                              <td>{$mEnderecos['setor']}</td>
                              <td>{$mEnderecos['apartamento']}</td>
+                             <td>{$mEnderecos['residente']}</td>
                              <td>{$mEnderecos['m_end_dt_entrada']}</td>
                              <td>{$mEnderecos['m_end_dt_saida']}</td>
                              <td>";
@@ -664,7 +685,7 @@ $token = Token::generate();
 
                                     <input name="bairro" class="form-control" type="text" id="bairro">
                                 </div>
-                                <div class="col-sm-3">
+                                <div class="col-sm-3 inputContainer">
                                     <input name="cidade" class="hidden-input" type="text" id="cidade">
                                     <label for="cidade" class="control-label">Cidade</label>
 

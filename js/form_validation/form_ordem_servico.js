@@ -4,7 +4,10 @@ var selectEstagio = $('#estagio');
 var selected = selectEstagio.val();
 
 var d = new Date();
-var hoje = d.getDate() + '/' + d.getMonth() + 1 + '/' + d.getFullYear();
+var dia = d.getDate();
+var mes = d.getMonth() + 1;
+var ano = d.getFullYear();
+var hoje = (dia < 10 ? '0'+dia : dia) + '/' + ((mes) < 10 ? '0'+mes : mes ) + '/' + ano;
 
 $(function () {
     if (selected == 58) {
@@ -15,8 +18,6 @@ $(function () {
 selectEstagio.change(function () {
     if (selectEstagio.val() == 58) {
         $('.field_hidden').fadeIn();
-        var d = new Date();
-        var hoje = d.getDate() + '/' + d.getMonth() + 1 + '/' + d.getFullYear();
         $('#dt_fim').val(hoje);
     } else {
         $('.field_hidden').fadeOut();
@@ -30,7 +31,22 @@ ordemDeServicoForm.bootstrapValidator({
         validating: 'glyphicon glyphicon-refresh fa-spin'
     },
     fields: {
-        solicitante: {
+        cd_condominio: {
+            group: '.col-sm-6',
+            validators: {
+                notEmpty: {
+                    message: 'Informar o condomínio é obrigatório.'
+                }
+            }
+        },
+        cd_setor: {
+            group: '.col-sm-6',
+            validators: {
+                notEmpty: {
+                    message: 'Informar o setor é obrigatório.'
+                }
+            }
+        },solicitante: {
             group: '.col-sm-6',
             validators: {
                 notEmpty: {
@@ -47,6 +63,14 @@ ordemDeServicoForm.bootstrapValidator({
             }
         },
         tipo: {
+            group: '.col-sm-6',
+            validators: {
+                notEmpty: {
+                    message: 'Informar o tipo é obrigatório.'
+                }
+            }
+        },
+        sub_tipo: {
             group: '.col-sm-6',
             validators: {
                 notEmpty: {
@@ -150,7 +174,7 @@ function buscaExecutor() {
                 }
 
                 var resultBody = '<div class="row"><div class="col-md-12">' + html + '</div></div>';
-                $('#busca-executor-resultado').html(resultBody).hide().fadeIn();
+                $('#busca-executor-resultado').html(resultBody).show();
 
                 buttonExecutor
                     .addClass('btn-info')
@@ -206,7 +230,7 @@ $('#busca-executor-resultado').delegate('.add-executor', 'click', function (e) {
     inputExecutor.val(id);
     executorModal.modal('hide');
 
-    ocorrenciaForm
+    ordemDeServicoForm
         .bootstrapValidator('updateStatus', inputExecutor, 'NOT_VALIDATED')
         .bootstrapValidator('validateField', inputExecutor);
 });
@@ -259,7 +283,7 @@ function buscaSolicitante() {
                 }
 
                 var resultBody = '<div class="row"><div class="col-md-12">' + html + '</div></div>';
-                $('#busca-solicitante-resultado').html(resultBody).hide().fadeIn();
+                $('#busca-solicitante-resultado').html(resultBody).show();
 
                 buttonSolicitante
                     .addClass('btn-info')
@@ -379,7 +403,7 @@ function buscaOcorrencia() {
                 }
 
                 var resultBody = '<div class="row"><div class="col-md-12">' + html + '</div></div>';
-                $('#busca-ocorrencia-resultado').html(resultBody).hide().fadeIn();
+                $('#busca-ocorrencia-resultado').html(resultBody).show();
 
                 buttonOcorrencia
                     .addClass('btn-info')
@@ -431,9 +455,120 @@ $('#busca-ocorrencia-resultado').delegate('.add-ocorrencia', 'click', function (
     inputOcorrencia.val(id);
     ocorrenciaModal.modal('hide');
 
-    ocorrenciaForm
+    ordemDeServicoForm
         .bootstrapValidator('updateStatus', inputOcorrencia, 'NOT_VALIDATED')
         .bootstrapValidator('validateField', inputOcorrencia);
 });
 
 ///////////////////////- Fim Manipula Ocorrência -//////////////////////////////
+
+
+/* Pesquisa Setor */
+
+var selectCondominio = $('#os_cd_condominio');
+var cdCondominio = selectCondominio.val();
+
+var btnPesquisaSetor = $('#btn-pesquisa-setor');
+var pesquisaSetorModal = $('#setor_modal');
+var inputNomeSetor = $('#nome_setor');
+var inputIdSetor = $('#cd_setor');
+
+btnPesquisaSetor.click(function (e) {
+    e.preventDefault();
+    pesquisaSetorModal.modal('show');
+});
+
+function buscaSetorPorCond() {
+    cdCondominio = selectCondominio.val();
+    var nome_setor = $('#nome-setor').val();
+
+    if (nome_setor != '') {
+        $('#busca-setor-resultado').html('<i class="fa fa-spinner fa-spin fa-2x"></i>');
+        $.ajax({
+            type: "get",
+            url: "Setor/buscaPorCondAjax/" + nome_setor + "/" + cdCondominio,
+            dataType: 'json',
+            success: function (data) {
+
+                var html = '';
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].setor_grupo != ''){
+                        data[i].setor_grupo = ' - ' + data[i].setor_grupo;
+                    }
+                    html +=
+                        '<div class="panel-body">' +
+                            '<div class="col-sm-1">' +
+                            '<a href="#" ' +
+                            'data-cd-setor="' + data[i].cd_setor + '" ' +
+                            'data-nome-setor="' + data[i].nm_setor + '" ' +
+                            'title="Adicionar" ' +
+                            'class="btn btn-primary btn-xs btn-circle add-setor">' +
+                            '<i class="fa fa-check"></i></a> '+
+                            '</div>'+
+                            '<div class="col-sm-11">' +
+                            ' ' + data[i].nm_setor + data[i].setor_grupo + '<br>' + data[i].sub_tipo +
+                            '</div>'+
+                            '</div>';
+                }
+
+                var resultBody = '<div class="row"><div class="col-md-12">' + html + '</div></div>';
+                $('#busca-setor-resultado').html(resultBody).show();
+
+
+            },
+            error: function (data) {
+                $(data.responseText).appendTo('#area-do-resultado');
+            }
+        });
+    } else {
+        $('#busca-setor-resultado').fadeOut();
+    }
+}
+
+$('#nome-setor').keyup(function () {
+    buscaSetorPorCond();
+}).focusout(function () {
+    $('#busca-setor-resultado').fadeOut();
+});
+
+$('#busca-setor-resultado').delegate('.add-setor','click',function(e) {
+    e.preventDefault();
+    var setor = $(this);
+    var id_setor = setor.attr('data-cd-setor');
+    var nome_setor = setor.attr('data-nome-setor');
+
+    inputIdSetor.val(id_setor);
+    inputNomeSetor.val(nome_setor);
+    pesquisaSetorModal.modal('hide');
+
+    ordemDeServicoForm
+        .bootstrapValidator('updateStatus', inputIdSetor, 'NOT_VALIDATED')
+        .bootstrapValidator('validateField', inputIdSetor);
+
+});
+
+/* Fim Pesquisa Setor */
+
+/* Início manipulação de tipode OS*/
+var selectTipoOS = $('#tipo');
+var selectSubTipoOS = $('#sub_tipo');
+
+selectTipoOS.change(function(){
+    var id_grupo = selectTipoOS.val();
+    $.ajax({
+        type: "get",
+        url: "CategoriaValor/listByGroupId/" + id_grupo,
+        success: function (data) {
+            selectSubTipoOS.html(data);
+        },
+        error: function (data) {
+            $(data.responseText).appendTo('#responseAjaxError');
+        }
+    });
+});
+selectSubTipoOS.change(function(){
+    ordemDeServicoForm
+        .bootstrapValidator('updateStatus', selectSubTipoOS, 'NOT_VALIDATED')
+        .bootstrapValidator('validateField', selectSubTipoOS);
+});
+/* Fim manipulação de tipode OS*/

@@ -91,4 +91,32 @@ class CategoriaValor extends Controller
 
         echo json_encode($return);
     }
+
+    /**
+     * @param $id
+     */
+    public function listByCatId($id)
+    {
+        $sub_cats = $this->model->get("cd_categoria = {$id}");
+        $return = '<option value="">Selecione</option>';
+        foreach ($sub_cats as $sub_cat) {
+            $return .= "<option value=\"{$sub_cat->getCdVlCategoria()}\">{$sub_cat->getDescVlCatg()}</option>";
+        }
+
+        echo $return;
+    }
+
+    /**
+     * @param $id
+     */
+    public function listByGroupId($id)
+    {
+        $sub_cats = $this->model->get("cd_grupo = {$id}");
+        $return = '<option value="">Selecione</option>';
+        foreach ($sub_cats as $sub_cat) {
+            $return .= "<option value=\"{$sub_cat->getCdVlCategoria()}\">{$sub_cat->getDescVlCatg()}</option>";
+        }
+
+        echo $return;
+    }
 } 

@@ -47,7 +47,8 @@ class MoradorEnderecoModel extends Model
             'cd_setor' => $setor->getCdSetor(),
             'setor' => $setor->getNmSetor(),
             'cd_condominio' => $condominio->getCdPessoaJuridica(),
-            'condominio' => $condominio->getNmFantasia()
+            'condominio' => $condominio->getNmFantasia(),
+            'residente' => $this->dto->getFgResidente()
         );
     }
 

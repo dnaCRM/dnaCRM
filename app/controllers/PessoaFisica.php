@@ -175,8 +175,6 @@ class PessoaFisica extends Controller
                 'pessoa_juridica' => $pessoa_juridica,
                 'profissoes' => $profissoes,
                 'estados' => $estados,
-                'inst_ensino' => $inst_ensino,
-                'cursos' => $cursos,
                 'id' => null,
                 'perfil' => $perfil
             );

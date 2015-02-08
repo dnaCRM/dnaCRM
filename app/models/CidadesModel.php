@@ -33,7 +33,7 @@ class CidadesModel extends Model
     {
         $_POST = filter_input_array(INPUT_POST);
         $nome = Input::get('nome_cidade_origem');
-        $cidades = $this->dao->get("nome ilike '%{$nome}%' order by nome limit 5");
+        $cidades = $this->dao->get("nome like '%{$nome}%' order by nome limit 5");
 
         $resultado = array();
 

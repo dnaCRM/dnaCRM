@@ -2,6 +2,7 @@
 class OrdemServicoDTO extends DataTransferObject
 {
     private $cd_ordem_servico;
+    private $cd_setor;
     private $cd_ocorrencia;
     private $cd_pf_executor;
     private $cd_pf_solicitante;
@@ -11,13 +12,17 @@ class OrdemServicoDTO extends DataTransferObject
     private $dt_fim;
     private $cd_catg_estagio;
     private $cd_vl_catg_estagio;
-    private $cd_catg_tipo;
-    private $cd_vl_catg_tipo;
     private $cd_catg_aval_atendimento;
     private $cd_vl_catg_aval_atendimento;
     private $cd_catg_aval_qualidade;
     private $cd_vl_catg_aval_qualidade;
     private $desc_conclusao;
+    private $valor_material;
+    private $valor_servico;
+    private $cd_catg_tipo;
+    private $cd_vl_catg_tipo;
+    private $cd_catg_sub_tipo;
+    private $cd_vl_catg_sub_tipo;
     private $cd_usuario_criacao;
     private $dt_usuario_criacao;
     private $cd_usuario_atualiza;
@@ -30,6 +35,7 @@ class OrdemServicoDTO extends DataTransferObject
     {
         $this->reflex = array(
             'cd_ordem_servico' => 'getCdOrdemServico',
+            'cd_setor' => 'getCdSetor',
             'cd_ocorrencia' => 'getCdOcorrencia',
             'cd_pf_executor' => 'getCdPfExecutor',
             'cd_pf_solicitante' => 'getCdPfSolicitante',
@@ -39,13 +45,17 @@ class OrdemServicoDTO extends DataTransferObject
             'dt_fim' => 'getDtFim',
             'cd_catg_estagio' => 'getCdCatgEstagio',
             'cd_vl_catg_estagio' => 'getCdVlCatgEstagio',
-            'cd_catg_tipo' => 'getCdCatgTipo',
-            'cd_vl_catg_tipo' => 'getCdVlCatgTipo',
             'cd_catg_aval_atendimento' => 'getCdCatgAvalAtendimento',
             'cd_vl_catg_aval_atendimento' => 'getCdVlCatgAvalAtendimento',
             'cd_catg_aval_qualidade' => 'getCdCatgAvalQualidade',
             'cd_vl_catg_aval_qualidade' => 'getCdVlCatgAvalQualidade',
             'desc_conclusao' => 'getDescConclusao',
+            'valor_material' => 'getValorMaterial',
+            'valor_servico' => 'getValorServico',
+            'cd_catg_tipo' => 'getCdCatgTipo',
+            'cd_vl_catg_tipo' => 'getCdVlCatgTipo',
+            'cd_catg_sub_tipo' => 'getCdCatgSubTipo',
+            'cd_vl_catg_sub_tipo' => 'getCdVlCatgSubTipo',
             'cd_usuario_criacao' => 'getCdUsuarioCriacao',
             'dt_usuario_criacao' => 'getDtUsuarioCriacao',
             'cd_usuario_atualiza' => 'getCdUsuarioAtualiza',
@@ -61,6 +71,46 @@ class OrdemServicoDTO extends DataTransferObject
     public function getReflex()
     {
         return $this->reflex;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCdCatgSubTipo()
+    {
+        return $this->cd_catg_sub_tipo;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCdSetor()
+    {
+        return $this->cd_setor;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCdVlCatgSubTipo()
+    {
+        return $this->cd_vl_catg_sub_tipo;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getValorMaterial()
+    {
+        return $this->valor_material;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getValorServico()
+    {
+        return $this->valor_servico;
     }
 
     /**
@@ -441,6 +491,56 @@ class OrdemServicoDTO extends DataTransferObject
     public function setCdVlCatgTipo($cd_vl_catg_tipo)
     {
         $this->cd_vl_catg_tipo = $cd_vl_catg_tipo;
+        return $this;
+    }
+
+    /**
+     * @param $cd_catg_sub_tipo
+     * @return $this
+     */
+    public function setCdCatgSubTipo($cd_catg_sub_tipo)
+    {
+        $this->cd_catg_sub_tipo = $cd_catg_sub_tipo;
+        return $this;
+    }
+
+    /**
+     * @param $cd_setor
+     * @return $this
+     */
+    public function setCdSetor($cd_setor)
+    {
+        $this->cd_setor = $cd_setor;
+        return $this;
+    }
+
+    /**
+     * @param $cd_vl_catg_sub_tipo
+     * @return $this
+     */
+    public function setCdVlCatgSubTipo($cd_vl_catg_sub_tipo)
+    {
+        $this->cd_vl_catg_sub_tipo = $cd_vl_catg_sub_tipo;
+        return $this;
+    }
+
+    /**
+     * @param $valor_material
+     * @return $this
+     */
+    public function setValorMaterial($valor_material)
+    {
+        $this->valor_material = $valor_material;
+        return $this;
+    }
+
+    /**
+     * @param $valor_servico
+     * @return $this
+     */
+    public function setValorServico($valor_servico)
+    {
+        $this->valor_servico = $valor_servico;
         return $this;
     }
 

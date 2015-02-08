@@ -48,8 +48,11 @@ class Setor extends Controller
     public function formSetor($id = null)
     {
         $condominio = (new PessoaJuridicaDAO())->get('cd_ramo_atividade = 107');
-        $sub_tipos = (new CategoriaValorDAO())->get('cd_vl_categoria = 17');
-        $tipos_apartamento = (new CategoriaValorDAO())->get('cd_vl_categoria = 18');
+        $setores = $this->model->get('cd_catg_tipo = 17 AND cd_vl_catg_tipo != 160' );
+        $torres_apartamentos = $this->model->get('cd_vl_catg_tipo = 160');
+
+        $tipos_setor = (new CategoriaValorDAO())->get('cd_categoria = 17');
+        $tipos_apartamento = (new CategoriaValorDAO())->get('cd_categoria = 18');
 
 
         if ($id) {
@@ -63,8 +66,10 @@ class Setor extends Controller
                 'condominio' => $condominio,
                 'id' => $id,
                 'setor' => $setorarr,
-                'sub_tipos' => $sub_tipos,
-                'tipos_apartamento' => $tipos_apartamento
+                'tipos_setor' => $tipos_setor,
+                'tipos_apartamento' => $tipos_apartamento,
+                'setores' => $setores,
+                'torres_apartamentos' => $torres_apartamentos
             );
         } else {
             $setor = new SetorDTO();
@@ -74,8 +79,10 @@ class Setor extends Controller
                 'condominio' => $condominio,
                 'id' => null,
                 'setor' => $setor,
-                'sub_tipos' => $sub_tipos,
-                'tipos_apartamento' => $tipos_apartamento
+                'tipos_setor' => $tipos_setor,
+                'tipos_apartamento' => $tipos_apartamento,
+                'setores' => $setores,
+                'torres_apartamentos' => $torres_apartamentos
             );
         }
 
@@ -165,16 +172,16 @@ class Setor extends Controller
             ->setCdSetor(Input::get('cd_setor'))
             ->setCdSetorGrupo(Input::get('cd_setor_grupo'))
             ->setNmSetor(Input::get('nm_setor'))
-            ->setCdCondominio(Input::get('cd_condominio'))
+            ->setCdCondominio((int)Input::get('cd_condominio'))
             ->setRamal(Input::get('ramal'))
             ->setObservacao(Input::get('observacao'))
-            ->setCdCatgTipo(Input::get('cd_tipo'))
-            ->setCdVlCatgTipo(Input::get('cd_sub_tipo'))
+            ->setCdCatgTipo((int)Input::get('cd_tipo'))
+            ->setCdVlCatgTipo((int)Input::get('cd_sub_tipo'))
             ->setCdUsuarioCriacao(Session::get('user'))
             ->setDtUsuarioCriacao('now()')
             ->setCdUsuarioAtualiza(Session::get('user'))
             ->setDtUsuarioAtualiza('now()');
-
+        //var_dump($_POST);die;
         return $dto;
     }
 
@@ -205,13 +212,43 @@ class Setor extends Controller
      */
     public function listByCondId($id)
     {
-        $setores = $this->model->get("cd_condominio = {$id}");
+        $setores = $this->setorModel->getByCondominio((int)$id);
         $return = '<option value="">--</option>';
+        foreach ($setores as $setor) {
+            $return .= "<option value=\"{$setor['cd_setor']}\">{$setor['nm_setor']}</option>";
+        }
+
+        echo $return;
+    }
+
+    /**
+     * @param $id
+     * @param $id_condominio
+     */
+    public function listByTipoId($id, $id_condominio)
+    {
+        $id = (int)$id;
+        $queryString = "cd_catg_tipo = {$id} AND cd_condominio = {$id_condominio}";
+        if ($id == 18) {
+            $queryString = "cd_vl_catg_tipo = 160 AND cd_condominio = {$id_condominio}";
+        }
+        $setores = $this->model->get($queryString);
+        $return = '<option value="">Selecione</option>';
         foreach ($setores as $setor) {
             $return .= "<option value=\"{$setor->getCdSetor()}\">{$setor->getNmSetor()}</option>";
         }
 
         echo $return;
+    }
+
+    /**
+     * @param String $nm_setor = Nome do Setor
+     * @param Int $id_condominio = id FK do condominio
+     */
+    public function buscaPorCondAjax($nm_setor, $id_condominio)
+    {
+        $return = $this->setorModel->getByNmSetorIdCond($nm_setor, $id_condominio);
+        echo json_encode($return);
     }
 
     /**

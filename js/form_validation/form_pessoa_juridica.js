@@ -507,7 +507,7 @@ function buscaCidadeEndereco() {
                 }
 
                 var resultBody = '<div class="row"><div class="col-md-12">' + html + '</div></div>';
-                $('#busca-cidade-endereco-resultado').html(resultBody).hide().fadeIn();
+                $('#busca-cidade-endereco-resultado').html(resultBody).show();
 
 
             },

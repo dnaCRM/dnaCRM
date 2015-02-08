@@ -6,7 +6,14 @@ ocorrenciaForm.bootstrapValidator({
         validating: 'glyphicon glyphicon-refresh fa-spin'
     },
     fields: {
-        informante: {
+        setor: {
+            group: '.col-sm-6',
+            validators: {
+                notEmpty: {
+                    message: 'Informar o setor é obrigatório.'
+                }
+            }
+        }, informante: {
             group: '.col-sm-6',
             validators: {
                 notEmpty: {
@@ -88,7 +95,7 @@ $(document).ready(function () {
                     }
 
                     var resultBody = '<div class="row"><div class="col-md-12">' + html + '</div></div>';
-                    $('#busca-ocorr-pessoa-resultado').html(resultBody).hide().fadeIn();
+                    $('#busca-ocorr-pessoa-resultado').html(resultBody).show();
                 },
                 error: function (data) {
                     $(data.responseText).appendTo('#area-do-resultado');
@@ -249,7 +256,7 @@ function buscaInformante() {
                 }
 
                 var resultBody = '<div class="row"><div class="col-md-12">' + html + '</div></div>';
-                $('#busca-informante-resultado').html(resultBody).hide().fadeIn();
+                $('#busca-informante-resultado').html(resultBody).show();
 
                 buttonInformante
                     .addClass('btn-info')

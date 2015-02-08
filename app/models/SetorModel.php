@@ -28,12 +28,19 @@ class SetorModel extends Model
         $sub_tipo_desc = $sub_tipo->getDescVlCatg();
 
         $condominio = (new PessoaJuridicaDAO())->getById($this->dto->getCdCondominio());
-        $setor_grupo = $this->dao->getById($this->dto->getCdSetorGrupo());
+        $setor = '';
+        if ($this->dto->getCdSetorGrupo()) {
+            $setor_grupo = $this->dao->getById($this->dto->getCdSetorGrupo());
+            $setor = $setor_grupo->getNmSetor();
+        } else {
+            $setor_grupo = new SetorDTO();
+        }
+
 
         return array(
             'cd_setor' => $this->dto->getCdSetor(),
             'cd_setor_grupo' => $this->dto->getCdSetorGrupo(),
-            'setor_grupo' => $setor_grupo->getNmSetor(),
+            'setor_grupo' => $setor,
             'setor_grupo_foto' => Image::get($setor_grupo),
             'nm_setor' => $this->dto->getNmSetor(),
             'cd_condominio' => $this->dto->getCdCondominio(),
@@ -57,6 +64,35 @@ class SetorModel extends Model
             $lista[] = $this->setDTO($apartamento)->getArrayDados();
         }
         return $lista;
+    }
+
+    public function getByCondominio($id)
+    {
+        $setores = $this->dao->get("cd_condominio = {$id}");
+
+        $lista = array();
+        foreach( $setores as $setor) {
+            $lista[] = $this->setDTO($setor)->getArrayDados();
+        }
+        return $lista;
+    }
+
+    public function getByNmSetorIdCond($nm_setor, $id_condominio)
+    {
+
+        $setores = $this->dao->get("
+                        nm_setor ilike '%{$nm_setor}%'
+                        AND
+                        cd_condominio = {$id_condominio}
+                        order by nm_setor limit 5");
+
+        $resultado = array();
+
+        foreach ($setores as $setor) {
+            $resultado[] = $this->setDTO($setor)->getArrayDados();
+        }
+
+        return $resultado;
     }
 
     public function getDAO()

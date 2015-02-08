@@ -42,6 +42,7 @@ class MoradorEndereco extends Controller
             ->setCdApartamento(Input::get('m_end_apartamento'))
             ->setDtEntrada(Input::get('m_end_dt_entrada'))
             ->setDtSaida(Input::get('m_end_dt_saida'))
+            ->setFgResidente(Input::get('residente') == '' ? null : Input::get('residente'))
             ->setCdUsuarioCriacao(Session::get('user'))
             ->setDtUsuarioCriacao('now()')
             ->setCdUsuarioAtualiza(Session::get('user'))

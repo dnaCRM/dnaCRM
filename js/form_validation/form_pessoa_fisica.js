@@ -489,6 +489,7 @@ $('#form_apaga_pf_end')
         });
         return false;
     });
+
 /* Pesquisa de Cidade/Estado para formulário de Endereço de Pessoa Física */
 var btnPesquisaCidade = $('#btn-pesquisa-cidade');
 var cidadeEnderecoModal = $('#cidade_endereco_modal');
@@ -534,7 +535,7 @@ function buscaCidadeEndereco() {
                 }
 
                 var resultBody = '<div class="row"><div class="col-md-12">' + html + '</div></div>';
-                $('#busca-cidade-endereco-resultado').html(resultBody).hide().fadeIn();
+                $('#busca-cidade-endereco-resultado').html(resultBody).show();
 
 
             },
@@ -566,6 +567,10 @@ $('#busca-cidade-endereco-resultado').delegate('.add-cidade-endereco','click',fu
     inputIdCidade.val(id_cidade);
     inputIdEstado.val(id_estado);
     cidadeEnderecoModal.modal('hide');
+
+    $('#form_pf_enderecos')
+        .bootstrapValidator('updateStatus', inputIdCidade, 'NOT_VALIDATED')
+        .bootstrapValidator('validateField', inputIdCidade);
 });
 
 /* Fim Pesquisa de Cidade/Estado para formulário de Endereço de Pessoa Física */
@@ -711,6 +716,14 @@ $('#form_end_morador').bootstrapValidator({
                 date: {
                     format: 'DD/MM/YYYY',
                     message: 'Data inválida.'
+                }
+            }
+        },
+        residente: {
+            group: '.col-sm-4',
+            validators: {
+                notEmpty: {
+                    message: 'Campo obrigatório.'
                 }
             }
         }
@@ -869,7 +882,7 @@ $(document).ready(function () {
                     }
 
                     var resultBody = '<div class="row"><div class="col-md-12">' + html + '</div></div>';
-                    $('#busca-relac-pessoa-resultado').html(resultBody).hide().fadeIn();
+                    $('#busca-relac-pessoa-resultado').html(resultBody).show();
                 },
                 error: function (data) {
                     $(data.responseText).appendTo('#busca-relac-pessoa-resultado');
@@ -1452,6 +1465,7 @@ $(function () {
 });
 
 function buscaCidade() {
+
     var nome_cidade = $('#nome_cidade_origem').val();
     if (nome_cidade != '') {
         $('#busca-cidade-resultado').html('<i class="fa fa-spinner fa-spin fa-2x"></i>');
@@ -1483,7 +1497,7 @@ function buscaCidade() {
                 }
 
                 var resultBody = '<div class="row"><div class="col-md-12">' + html + '</div></div>';
-                $('#busca-cidade-resultado').html(resultBody).hide().fadeIn();
+                $('#busca-cidade-resultado').html(resultBody).show();
 
                 buttonCidadeOrigem
                     .addClass('btn-info')

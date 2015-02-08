@@ -40,6 +40,7 @@ class OrdemServico extends Controller
      */
     public function formOrdemServico($id = null)
     {
+        $condominios = (new PessoaJuridicaDAO())->get('cd_ramo_atividade = 107');
         $ocorrencia = (new OcorrenciaDAO())->fullList();
         $executor = (new PessoaFisicaDAO())->fullList();
         $solicitante = (new PessoaFisicaDAO())->fullList();
@@ -70,6 +71,7 @@ class OrdemServico extends Controller
                 'solicitante' => $solicitante,
                 'estagio' => $estagio,
                 'tipo' => $tipo,
+                'condominios' => $condominios,
                 'dados' => $os_dados,
             );
         } else {
@@ -83,7 +85,8 @@ class OrdemServico extends Controller
                 'executor' => $executor,
                 'solicitante' => $solicitante,
                 'estagio' => $estagio,
-                'tipo' => $tipo
+                'tipo' => $tipo,
+                'condominios' => $condominios
             );
         }
 
@@ -164,6 +167,7 @@ class OrdemServico extends Controller
         $dto = new OrdemServicoDTO();
 
         $dto->setCdOrdemServico(Input::get('ordemservico'))
+            ->setCdSetor(Input::get('cd_setor'))
             ->setCdOcorrencia(Input::get('ocorrencia'))
             ->setCdPfExecutor(Input::get('executor'))
             ->setCdPfSolicitante(Input::get('solicitante'))
@@ -173,13 +177,17 @@ class OrdemServico extends Controller
             ->setDtFim(Input::get('dt_fim'))
             ->setCdCatgEstagio(Input::get('estagio')?3:null)
             ->setCdVlCatgEstagio((int)Input::get('estagio'))
-            ->setCdCatgTipo(Input::get('tipo')?13:null)
+            ->setCdCatgTipo(13)
             ->setCdVlCatgTipo((int)Input::get('tipo'))
+            ->setCdCatgSubTipo(13)
+            ->setCdVlCatgSubTipo((int)Input::get('sub_tipo'))
             ->setCdCatgAvalAtendimento(Input::get('aval_atend')?15:null)
             ->setCdVlCatgAvalAtendimento((int)Input::get('aval_atend'))
             ->setCdCatgAvalQualidade(Input::get('aval_quali')?15:null)
             ->setCdVlCatgAvalQualidade((int)Input::get('aval_quali'))
             ->setDescConclusao(Input::get('desc_conclusao'))
+            ->setValorMaterial(getMoeda(Input::get('valor_material')))
+            ->setValorServico(getMoeda(Input::get('valor_servico')))
             ->setCdUsuarioCriacao(Session::get('user'))
             ->setDtUsuarioCriacao('now()')
             ->setCdUsuarioAtualiza(Session::get('user'))

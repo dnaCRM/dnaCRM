@@ -131,3 +131,12 @@ set_error_handler('CodeFail');
 function escape($string) {
     return htmlentities($string, ENT_QUOTES, 'UTF-8');
 }
+
+function getMoeda($stringValor) {
+
+    $original = array('.', ',');
+    $final = array('', '.');
+    $valor = str_replace($original, $final, $stringValor);
+
+    return (double)$valor;
+}

@@ -144,6 +144,7 @@ $(document).ready(function () {
     $('.data-input').mask("99/99/9999");
     $('#cep').mask("99999-999");
     $('#numero').mask("99999999");
+    $('.money').mask('00.000,00', {reverse: true});
 });
 /*
  $('.delete_pf_end').click(function () {
@@ -183,7 +184,7 @@ $(document).ready(function () {
                     }
 
                     var resultBody = '<div class="row"><div class="col-md-12">' + html + '</div></div>';
-                    $('#area-do-resultado').html(resultBody).hide().fadeIn();
+                    $('#area-do-resultado').html(resultBody).show();
                     //'<img src="'+data[0].foto+'">'
                     //$('#pessoa_1').val('');
                 },

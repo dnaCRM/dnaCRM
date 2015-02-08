@@ -367,6 +367,8 @@ table.dataTable.no-footer {
     right: -15px;
 }
 */
+#setorform .btn-group .form-control-feedback,
+#form_end_morador .btn-group .form-control-feedback,
 #pessoafisicaform .btn-group .form-control-feedback,
 #cadastro_usuario .btn-group .form-control-feedback,
 #form_relacionamentos .btn-group .form-control-feedback,
