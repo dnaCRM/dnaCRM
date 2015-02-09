@@ -9,9 +9,9 @@
 class PessoaJuridicaModel extends Model
 {
     /** @var  PessoaJuridicaDTO */
-    private $dto;
+    protected $dto;
     /** @var  PessoaJuridicaDAO */
-    private $dao;
+    protected $dao;
 
     public function __construct()
     {

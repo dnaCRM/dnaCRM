@@ -55,13 +55,12 @@ class SetorModel extends Model
         );
     }
 
-    public function getApartamentos(SetorDTO $dto)
+    public function getApartamentos(ApartamentoModel $apartamentoModel)
     {
-        $apartamentos = $this->getDAO()->get("cd_setor_grupo = {$dto->getCdSetor()}");
-
+        $apartamentos = $apartamentoModel->getDAO()->get("cd_setor_grupo = {$this->dto->getCdSetor()}");
         $lista = array();
         foreach( $apartamentos as $apartamento) {
-            $lista[] = $this->setDTO($apartamento)->getArrayDados();
+            $lista[] = $apartamentoModel->setDTO($apartamento)->getArrayDados();
         }
         return $lista;
     }
@@ -69,6 +68,31 @@ class SetorModel extends Model
     public function getByCondominio($id)
     {
         $setores = $this->dao->get("cd_condominio = {$id}");
+
+        $lista = array();
+        foreach( $setores as $setor) {
+            $lista[] = $this->setDTO($setor)->getArrayDados();
+        }
+        return $lista;
+    }
+
+    public function getTorresByCondominioId($id)
+    {
+        $setores = $this->dao->get("
+                cd_condominio = {$id}
+                AND cd_vl_catg_tipo = 160
+                ");
+
+        $lista = array();
+        foreach( $setores as $setor) {
+            $lista[] = $this->setDTO($setor)->getArrayDados();
+        }
+        return $lista;
+    }
+
+    public function getApsByTorreId($id)
+    {
+        $setores = $this->dao->get("cd_setor_grupo = {$id}");
 
         $lista = array();
         foreach( $setores as $setor) {

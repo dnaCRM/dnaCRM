@@ -1,30 +1,7 @@
 <?php
 
-class InstituicaoEnsinoModel extends Model
+class InstituicaoEnsinoModel extends PessoaJuridicaModel
 {
-    /** @var  InstituicaoEnsinoDTO */
-    private $dto;
-    /** @var  InstituicaoEnsinoDAO */
-    private $dao;
-
-    public function __construct()
-    {
-        $this->dao = new InstituicaoEnsinoDAO();
-    }
-
-    public function getArrayDados()
-    {
-        $categoria = (new CategoriaValorDAO())->getById($this->dto->getCdVlCatgInstituicao());
-        $desc_categoria = $categoria->getDescVlCatg();
-
-        return array(
-            'cd_instituicao' => $this->dto->getCdInstituicao(),
-            'ds_instituicao' => $this->dto->getDsInstituicao(),
-            'cd_catg_instituicao' => $this->dto->getCdCatgInstituicao(),
-            'cd_vl_catg_instituicao' => $this->dto->getCdVlCatgInstituicao(),
-            'desc_catg_instuicao' => $desc_categoria,
-        );
-    }
 
     public function getRelacao(){
         $lista_dto = $this->dao->fullList();
@@ -38,27 +15,8 @@ class InstituicaoEnsinoModel extends Model
 
     }
 
-    public function getDAO()
+    public function getEstudantes()
     {
-        return $this->dao;
+
     }
-
-    public function setDTO(InstituicaoEnsinoDTO $dto)
-    {
-        $this->dto = $dto;
-        return $this;
-    }
-
-    public function existeNome($nome, $id)
-    {
-        $queryString = "ds_instituicao ilike '{$nome}'";
-
-        if ($id) {
-            $queryString .= " AND cd_instituicao != {$id}";
-        }
-
-        $return = $this->dao->get($queryString);
-
-        return (count($return) > 0 ? false : true);
-    }
-} 
+}

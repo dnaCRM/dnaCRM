@@ -55,7 +55,7 @@ ordemDeServicoForm.bootstrapValidator({
             }
         },
         estagio: {
-            group: '.col-sm-6',
+            group: '.col-md-4',
             validators: {
                 notEmpty: {
                     message: 'Informar o estágio é obrigatório.'
@@ -101,11 +101,20 @@ ordemDeServicoForm.bootstrapValidator({
             }
         },
         dt_inicio: {
-            group: '.col-sm-6',
+            group: '.col-md-4',
             validators: {
                 notEmpty: {
                     message: 'Campo obrigatório'
                 },
+                date: {
+                    format: 'DD/MM/YYYY',
+                    message: 'Data inválida.'
+                }
+            }
+        },
+        dt_fim: {
+            group: '.col-md-4',
+            validators: {
                 date: {
                     format: 'DD/MM/YYYY',
                     message: 'Data inválida.'
@@ -347,6 +356,7 @@ var pcardOcorrencia = $('#pcard-ocorrencia');
 buttonOcorrencia.click(function (e) {
     e.preventDefault();
     ocorrenciaModal.modal('show');
+    $('#nome_ocorrencia').focus();
 });
 
 pcardOcorrencia.delegate('#remove-ocorrencia', 'click', function(e) {
@@ -371,12 +381,13 @@ $(function () {
 
 function buscaOcorrencia() {
     var assunto = $('#nome_ocorrencia').val();
+
     if (assunto != '') {
         $('#busca-ocorrencia-resultado').html('<i class="fa fa-spinner fa-spin fa-2x"></i>');
         $.ajax({
             type: 'post',
             url: 'Ocorrencia/buscaAjax/',
-            data: 'assunto=' + assunto,
+            data: 'assunto=' + assunto + '&id_condominio=' + selectCondominio.val(),
             dataType: 'json',
             success: function (data) {
 
@@ -396,6 +407,7 @@ function buscaOcorrencia() {
                             '<div class="col-sm-7">' +
                             '<a title="Visualizar Ocorrência" href="Ocorrencia/visualizar/' + data[i].cd_ocorrencia + '">' +
                             'Nº ' + data[i].cd_ocorrencia +' -  '+ data[i].desc_assunto + '</a>' +
+                            '<br>'+ data[i].setor +
                             '</div>'+
                             '<div class="col-sm-3">'+data[i].dt_ocorrencia+
                             '</div>'+

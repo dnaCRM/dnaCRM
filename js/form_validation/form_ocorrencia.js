@@ -53,7 +53,15 @@ ocorrenciaForm.bootstrapValidator({
                 },
                 date: {
                     format: 'DD/MM/YYYY',
-                    message: 'Data invÃ¡lida.'
+                    message: 'Data inválida.'
+                }
+            }
+        }, dt_fim: {
+            group: '.col-sm-6',
+            validators: {
+                date: {
+                    format: 'DD/MM/YYYY',
+                    message: 'Data inválida.'
                 }
             }
         },

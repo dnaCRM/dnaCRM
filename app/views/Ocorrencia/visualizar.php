@@ -57,7 +57,7 @@ $pessoas = $data['pessoas'];
                         }
                         if ($ocorrencia['cd_condominio']) {
                             echo "<div class=\"col-md-6\"><span class=\"lead\">Condomínio: </span>
-                                <a href=\"PessoaJuridica/visualizar/{$ocorrencia['cd_condominio']}\">{$ocorrencia['condominio']}</a></div>";
+                                <a href=\"Condominio/visualizar/{$ocorrencia['cd_condominio']}\">{$ocorrencia['condominio']}</a></div>";
                         }
                         echo "
                     <div class=\"col-md-6\"><span class=\"lead\">Status: </span>{$ocorrencia['estagio']}</div>

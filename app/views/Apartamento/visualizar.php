@@ -10,7 +10,7 @@ $apartamento = $data['apartamento'];
                 </small>
                 <!-- Botões de administração -->
                 <span class="btn-panel pull-right">
-                <a href="Apartamento/formapartamento/<?php echo $apartamento['cd_apartamento']; ?>"
+                <a href="Setor/formSetor/<?php echo $apartamento['cd_apartamento']; ?>"
                    data-toggle="tooltip" data-placement="top" title="Editar Apartamento!"
                    class="btn btn-primary btn-circle btn-lg">
                     <i class="fa fa-pencil"></i>
@@ -20,7 +20,7 @@ $apartamento = $data['apartamento'];
                     <i class="fa fa-list"></i>
                 </a>
                     <?php if ($userDados['nivel'] == 1): ?>
-                        <a href="Apartamento/confirmDelete/<?php echo $apartamento['cd_apartamento']; ?>"
+                        <a href="Setor/confirmDelete/<?php echo $apartamento['cd_apartamento']; ?>"
                            data-toggle="tooltip" data-placement="top" title="Deletar!"
                            class="btn btn-warning btn-circle btn-lg">
                             <i class="fa fa-trash-o"></i>

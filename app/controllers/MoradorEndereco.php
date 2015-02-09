@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Vinicius
- * Date: 28/10/14
- * Time: 11:21
- */
 
 class MoradorEndereco extends Controller
 {

@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Raul
- * Date: 16/10/14
- * Time: 02:07
- */
 
 class Condominio extends Controller
 {
@@ -13,68 +7,28 @@ class Condominio extends Controller
 
     public function __construct()
     { //o método é herdado da classe pai 'Controller'
-        $this->setModel(new CondominioDAO());
+        $this->setModel(new PessoaJuridicaDAO());
         $this->condominioModel = new CondominioModel();
     }
 
 
     public function start()
     { //Pega a lista completa de perfis
-        $condominio_list = (array)$this->model->fullList();
-
+        $condominio_list = (array)$this->model->get('cd_ramo_atividade = 107');
+        $relacao = array();
+        foreach ($condominio_list as $perfil) {
+            $relacao[] = $this->condominioModel->setDTO($perfil)->getArrayDados();
+        }
         // Exporta imagens de perfil
         $this->exportaImagens($condominio_list);
 
         $dados = array(
             'pagesubtitle' => '',
-            'pagetitle' => 'Condominio',
-            'list' => $condominio_list
+            'pagetitle' => 'Condomínio',
+            'list' => $relacao
         );
 
         $this->view = new View('Condominio', 'start');
-        $this->view->output($dados);
-    }
-
-    public function novo()
-    {
-        echo json_encode($_POST);
-    }
-
-    /**
-     * @param int $id = Caso receba um id retorna um array
-     * para a view com os dados do condominio. Este array irá popular o formulário
-     * permitindo editar dados do condominio e gravar no banco
-     * Se não receber um id o formulário estará vazio e permitirá registrar
-     * um novo condominio
-     */
-    public function formcondominio($id = null)
-    {
-        $estado = (new CategoriaValorDAO())->get('cd_categoria = 2');
-
-        if ($id) {
-            /** @var CondominioDTO */
-            $condominioarr = $this->findById($id);
-
-            $dados = array(
-
-                'pagetitle' => $condominioarr->getNmCondominio(),
-                'pagesubtitle' => 'Atualizar Condominio.',
-                'id' => $id,
-                'estado' => $estado,
-                'condominio' => $condominioarr
-            );
-        } else {
-            $condominio = new CondominioDTO();
-            $dados = array(
-                'pagetitle' => 'Cadastro de condominio',
-                'pagesubtitle' => '',
-                'id' => null,
-                'estado' => $estado,
-                'condominio' => $condominio
-            );
-        }
-
-        $this->view = new View('Condominio', 'formcondominio');
         $this->view->output($dados);
     }
 
@@ -96,7 +50,7 @@ class Condominio extends Controller
             //o campo 'obs' vai ser o subtítulo
             'pagesubtitle' => '',
             //o campo 'nome' vai ser o título da página
-            'pagetitle' => $condominio['nm_condominio'],
+            'pagetitle' => $condominio['nm_fantasia'],
             //todos os atributos do perfil
             'condominio' => $condominio,
             'setores' => $setores
@@ -106,82 +60,6 @@ class Condominio extends Controller
         $this->view->output($dados);
     }
 
-    /**
-     * Este método monta a tela de confirmação antes de apagar
-     * o condominio
-     * @param $id = id do condominio a ser deletado
-     */
-    public function confirmDelete($id)
-    {
-        $id = (int)$id;
-
-        $condominioarr = $this->findById($id);
-
-        $dados = array(
-            //o campo 'obs' vai ser o subtítulo
-            'pagesubtitle' => $condominioarr->getNmCondominio(),
-            //o campo 'nome' vai ser o título da página
-            'pagetitle' => 'Condomínio',
-            'condominio' => $condominioarr
-        );
-
-        $this->view = new View('Condominio', 'confirmDelete');
-        $this->view->output($dados);
-    }
-
-    /**
-     * @todo Sanitizar entrada de dados
-     */
-    public function cadastra() {
-        if (Input::exists()) {
-            if (Token::check(Input::get('token'))) {
-
-                $condominio = $this->setDados();
-
-                try {
-                    $obj = $this->model->gravar($condominio);
-                    $this->exportaImagens($obj);
-                    return $obj;
-                } catch (Exception $e) {
-                    CodeFail((int)$e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
-                }
-                return false;
-            }
-        }
-
-    }
-
-    private function setDados()
-    {
-        $dto = new CondominioDTO();
-
-        $dto->setCdCondominio(Input::get('cd_condominio'))
-            ->setNmCondominio(Input::get('nm_condominio'))
-            ->setCep(Input::get('cep'))
-            ->setRua(Input::get('rua'))
-            ->setNumero(Input::get('numero'))
-            ->setBairro(Input::get('bairro'))
-            ->setCidade(Input::get('cidade'))
-            ->setCdCatgEstado(Input::get('estado')?2:null)
-            ->setCdVlCatgEstado(Input::get('estado'))
-            ->setCdUsuarioCriacao(Session::get('user'))
-            ->setDtUsuarioCriacao('now()')
-            ->setCdUsuarioAtualiza(Session::get('user'))
-            ->setDtUsuarioAtualiza('now()');
-
-        return $dto;
-    }
-
-    public function removerCondominio(CondominioDTO $dto) {
-        if (Input::exists()) {
-
-            if (Token::check(Input::get('token'))) {
-
-                $this->model->delete($dto);
-
-            }
-        }
-    }
 
 
     protected function findById($id)
@@ -200,34 +78,22 @@ class Condominio extends Controller
      * Percorre os objetos testando se as imagens já foram exportadas
      * e exporta caso necessário
      */
-    protected function exportaImagens($arr_condominio)
+    protected function exportaImagens($arr_perfil)
     {
-        if (is_array($arr_condominio)) {
-            foreach ($arr_condominio as $condominio) {
-                if ($condominio->getImPerfil()
-                    && !file_exists($this->model->getImgFolder() . $condominio->getCdCondominio() . '.jpg')
+        if (is_array($arr_perfil)) {
+            foreach ($arr_perfil as $perfil) {
+                if ($perfil->getImPerfil()
+                    && !file_exists($this->model->getImgFolder() . $perfil->getCdPessoaJuridica() . '.jpg')
                 ) {
-                    $this->model->exportaFoto($condominio->getCdCondominio());
+                    $this->model->exportaFoto($perfil->getCdPessoaJuridica(),$perfil->getImPerfil());
                 }
             }
         } else {
-            if ($arr_condominio->getImPerfil()
-                && !file_exists($this->model->getImgFolder() . $arr_condominio->getCdCondominio() . '.jpg')
+            if ($arr_perfil->getImPerfil()
+                && !file_exists($this->model->getImgFolder() . $arr_perfil->getCdPessoaJuridica() . '.jpg')
             ) {
-                $this->model->exportaFoto($arr_condominio->getCdCondominio());
+                $this->model->exportaFoto($arr_perfil->getCdPessoaJuridica(),$arr_perfil->getImPerfil());
             }
         }
-    }
-
-    public function checkExisteNome()
-    {
-        $nome = Input::get('nm_condominio');
-        $id = Input::get('cd_condominio');
-
-        $return = array(
-            'valid' => $this->condominioModel->existeNome($nome, $id)
-        );
-
-        echo json_encode($return);
     }
 }

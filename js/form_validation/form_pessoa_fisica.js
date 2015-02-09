@@ -644,7 +644,7 @@ $("#m_end_condominio").change(function () {
     var condominio = $("#m_end_condominio").val();
     $.ajax({
         type: "get",
-        url: "Setor/listByCondId/" + condominio,
+        url: "Setor/listTorresByCondId/" + condominio,
         success: function (data) {
             $("#m_end_setor").html(data);
         },
@@ -657,7 +657,7 @@ $("#m_end_setor").change(function () {
     var setor = $("#m_end_setor").val();
     $.ajax({
         type: "get",
-        url: "Apartamento/listBySetorId/" + setor,
+        url: "Setor/listApBySetorId/" + setor,
         success: function (data) {
             $("#m_end_apartamento").html(data);
         },
@@ -741,11 +741,7 @@ $('#form_end_morador').bootstrapValidator({
         dataType: 'json',
         success: function (data) {
 
-            var celulas_old = '<td>' + data.rua + '</td><td>' + data.numero + '</td><td>' + data.bairro + '</td><td>' + data.cidade + '</td><td>' + data.cep + '</td><td>' + data.estado + '</td><td>' + data.categoria + '</td><td>' + data.observacao + '</td><td>' +
-                '<a href="#" class="btn btn-primary btn-sm btn-circle update_pf_end" data-update-pfend-id="' + data.id_endereco + '" data-toggle="modal" data-target="#atualizaPfEndModal"><i class="fa fa-edit"></i></a>' +
-                '&nbsp;<a href="#" class="btn btn-warning btn-sm btn-circle delete_pf_end" data-del-pfend-id="' + data.id_endereco + '" data-toggle="modal" data-target="#apagaPfEndModal"><i class="fa fa-trash-o"></i></a></td>';
-
-            var celulas = '<td>' + data.condominio + '</td><td>' + data.setor + '</td><td>' + data.apartamento + '</td><td>' + data.m_end_dt_entrada + '</td><td>' + data.m_end_dt_saida + '</td>' +
+            var celulas = '<td>' + data.condominio + '</td><td>' + data.setor + '</td><td>' + data.apartamento + '</td><td>' + data.residente + '</td><td>' + data.m_end_dt_entrada + '</td><td>' + data.m_end_dt_saida + '</td>' +
                 '<td><a href="#" class="btn btn-primary btn-sm btn-circle update_m_end" data-update-mend-id="' + data.id_m_end + '"' +
                 'data-toggle="modal" data-target="#atualizaMEndModal"><i class="fa fa-edit"></i></a>' +
                 '&nbsp;<a href="#" class="btn btn-warning btn-sm btn-circle delete_m_end" data-del-mend-id="' + data.id_m_end + '"' +
@@ -812,7 +808,7 @@ $('#tb_m_enderecos').delegate('.update_m_end', 'click', function () {
         data: $(this).serialize(),
         dataType: 'json',
         success: function (data) {
-
+            data.m_end_dt_saida = (data.m_end_dt_saida == 'Morador'? '' : data.m_end_dt_saida );
             $('#form_end_morador input[name=id_m_end]').val(data.id_m_end);
             $('#form_end_morador input[name=m_end_dt_entrada]').val(data.m_end_dt_entrada);
             $('#form_end_morador input[name=m_end_dt_saida]').val(data.m_end_dt_saida);
@@ -1041,7 +1037,7 @@ function preencherMenuEndMorador(objeto) {
     if (objeto.cd_setor != '') {
         $.ajax({
             type: "get",
-            url: "Apartamento/listBySetorId/" + objeto.cd_setor,
+            url: "Setor/listApBySetorId/" + objeto.cd_setor,
             success: function (data) {
                 $("#m_end_apartamento").html(data);
                 $('#m_end_apartamento option[value=' + objeto.cd_apartamento + ']').prop("selected", "selected");
@@ -1050,6 +1046,14 @@ function preencherMenuEndMorador(objeto) {
                 $(data.responseText).appendTo('#responseAjaxError');
             }
         });
+    }
+
+    if (objeto.residente == 'Sim') {
+        $('#radio-residente').prop('checked','checked');
+        $('#label-residente').addClass('active');
+    } else {
+        $('#radio-nao-residente').prop('checked','checked');
+        $('#label-nao-residente').addClass('active');
     }
 }
 

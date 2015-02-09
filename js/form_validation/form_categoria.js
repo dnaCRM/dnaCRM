@@ -286,6 +286,7 @@ tableSubCategorias.delegate('.update_sub_categ', 'click', function (e) {
         data: $(this).serialize(),
         dataType: 'json',
         success: function (data) {
+
             inputIdSubCategoria.val(data.cd_vl_categoria);
             inputNomeSubCategoria.val(data.desc_vl_categoria);
             inputNomeGrupo
@@ -305,6 +306,11 @@ tableSubCategorias.delegate('.update_sub_categ', 'click', function (e) {
             $('#del_sub_categ')
                 .val('n');
             $('option[value=' + data.cd_categoria + ']').prop('selected', 'selected');
+
+            if (data.genero == 'GR') {
+                inputCatGenero.prop('checked','checked');
+                labelCatGenero.addClass('active');
+            }
 
             formSubCategorias.hide().fadeIn();
         },

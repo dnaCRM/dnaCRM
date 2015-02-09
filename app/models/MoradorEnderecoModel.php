@@ -23,8 +23,8 @@ class MoradorEnderecoModel extends Model
      */
     public function getArrayDados()
     {
-        $apartamento = (new ApartamentoDAO())->getById($this->dto->getCdApartamento());
-        $setor = (new SetorDAO())->getById($apartamento->getCdSetor());
+        $apartamento = (new SetorDAO())->getById($this->dto->getCdApartamento());
+        $setor = (new SetorDAO())->getById($apartamento->getCdSetorGrupo());
         $condominio = (new PessoaJuridicaDAO())->getById($setor->getCdCondominio());
 
         $dt_entrada = (new DateTime($this->dto->getDtEntrada()))->format('d/m/Y');
@@ -43,12 +43,12 @@ class MoradorEnderecoModel extends Model
             'm_end_dt_entrada' => $dt_entrada,
             'm_end_dt_saida' => $dt_saida,
             'cd_apartamento' => $this->dto->getCdApartamento(),
-            'apartamento' => $apartamento->getDescApartamento(),
+            'apartamento' => $apartamento->getNmSetor(),
             'cd_setor' => $setor->getCdSetor(),
             'setor' => $setor->getNmSetor(),
             'cd_condominio' => $condominio->getCdPessoaJuridica(),
             'condominio' => $condominio->getNmFantasia(),
-            'residente' => $this->dto->getFgResidente()
+            'residente' => ($this->dto->getFgResidente() == 'S' ? 'Sim' : 'Não')
         );
     }
 

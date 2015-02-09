@@ -587,14 +587,14 @@ $token = Token::generate();
 
                                     <div class="btn-group" data-toggle="buttons">
                                         <label
-                                            class="btn btn-default btn-lg">
-                                            <input type="radio" name="residente"
+                                            class="btn btn-default btn-lg" id="label-residente">
+                                            <input type="radio" name="residente" id="radio-residente"
                                                    value="S"/>
                                             <i class="fa fa-check text-primary"></i>
                                         </label>
                                         <label
-                                            class="btn btn-default btn-lg">
-                                            <input type="radio" name="residente"
+                                            class="btn btn-default btn-lg" id="label-nao-residente">
+                                            <input type="radio" name="residente" id="radio-nao-residente"
                                                    value="N"/>
                                             <i class="fa fa-ban text-danger"></i>
                                         </label>
@@ -625,9 +625,9 @@ $token = Token::generate();
                     <tr>
                         <th>Condomínio</th>
                         <th>Setor</th>
-                        <th>Apartamento</th>
-                        <th>Entrada</th>
+                        <th>Apt.</th>
                         <th>Resid.</th>
+                        <th>Entrada</th>
                         <th>Saída</th>
                         <th>Editar</th>
                     </tr>

@@ -11,7 +11,7 @@ $setores = $data['setores'];
                 </small>
                 <!-- Botões de administração -->
                 <span class="btn-panel pull-right">
-                <a href="Condominio/formcondominio/<?php echo $condominio['cd_condominio']; ?>"
+                <a href="PessoaJuridica/formpessoajuridica/<?php echo $condominio['cd_pessoa_juridica']; ?>"
                    data-toggle="tooltip" data-placement="top" title="Editar Condominio!"
                    class="btn btn-primary btn-circle btn-lg">
                     <i class="fa fa-pencil"></i>
@@ -21,7 +21,7 @@ $setores = $data['setores'];
                     <i class="fa fa-list"></i>
                 </a>
                     <?php if ($userDados['nivel'] == 1): ?>
-                        <a href="Condominio/confirmDelete/<?php echo $condominio['cd_condominio']; ?>"
+                        <a href="PessoaJuridica/confirmDelete/<?php echo $condominio['cd_pessoa_juridica']; ?>"
                            data-toggle="tooltip" data-placement="top" title="Deletar!"
                            class="btn btn-warning btn-circle btn-lg">
                             <i class="fa fa-trash-o"></i>
@@ -46,17 +46,7 @@ $setores = $data['setores'];
                         <dl class="dl-horizontal">
 
                             <dt>Nome</dt>
-                            <dd><?php echo $condominio['nm_condominio']; ?></dd>
-                            <dt>Rua</dt>
-                            <dd><?php echo $condominio['rua']; ?></dd>
-                            <dt>Número</dt>
-                            <dd><?php echo $condominio['numero']; ?></dd>
-                            <dt>Bairro</dt>
-                            <dd><?php echo $condominio['bairro']; ?></dd>
-                            <dt>Cidade</dt>
-                            <dd><?php echo $condominio['cidade']; ?></dd>
-                            <dt>Estado</dt>
-                            <dd><?php echo $condominio['estado']; ?></dd>
+                            <dd><?php echo $condominio['nm_fantasia']; ?></dd>
                         </dl>
                     </div>
 

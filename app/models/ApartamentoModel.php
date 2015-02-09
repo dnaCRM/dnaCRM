@@ -8,25 +8,25 @@
 
 class ApartamentoModel extends Model
 {
-    /** @var  ApartamentoDTO */
+    /** @var  SetorDTO */
     private $dto;
-    /** @var  ApartamentoDAO */
+    /** @var  SetorDAO */
     private $dao;
 
     public function __construct()
     {
-        $this->dao = new ApartamentoDAO();
+        $this->dao = new SetorDAO();
     }
 
     public function getArrayDados()
     {
-        $setor = (new SetorDAO())->getById($this->dto->getCdSetor());
+        $setor = (new SetorDAO())->getById($this->dto->getCdSetorGrupo());
         $condominio = (new PessoaJuridicaDAO())->getById($setor->getCdCondominio());
 
         return array(
-            'cd_apartamento' => $this->dto->getCdApartamento(),
-            'desc_apartamento' => $this->dto->getDescApartamento(),
-            'cd_setor' => $this->dto->getCdSetor(),
+            'cd_apartamento' => $this->dto->getCdSetor(),
+            'desc_apartamento' => $this->dto->getNmSetor(),
+            'cd_setor' => $this->dto->getCdSetorGrupo(),
             'setor' => $setor->getNmSetor(),
             'setor_foto' => Image::get($setor),
             'cd_condominio' => $setor->getCdCondominio(),
@@ -37,7 +37,7 @@ class ApartamentoModel extends Model
 
     public function getMoradores(MoradorEnderecoModel $enderecoMorador)
     {
-        $moradores = $enderecoMorador->getPorApartamento($this->dto->getCdApartamento());
+        $moradores = $enderecoMorador->getPorApartamento($this->dto->getCdSetor());
         $atuais = array();
         foreach($moradores as $morador) {
             if (in_array('Morador', $morador)) {
@@ -49,7 +49,7 @@ class ApartamentoModel extends Model
 
     public function getExMoradores(MoradorEnderecoModel $enderecoMorador)
     {
-        $moradores = $enderecoMorador->getPorApartamento($this->dto->getCdApartamento());
+        $moradores = $enderecoMorador->getPorApartamento($this->dto->getCdSetor());
         $ex = array();
         foreach($moradores as $morador) {
             if (!in_array('Morador', $morador)) {
@@ -64,7 +64,7 @@ class ApartamentoModel extends Model
         return $this->dao;
     }
 
-    public function setDTO(ApartamentoDTO $dto)
+    public function setDTO(SetorDTO $dto)
     {
         $this->dto = $dto;
         return $this;

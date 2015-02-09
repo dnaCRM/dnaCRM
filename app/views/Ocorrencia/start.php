@@ -33,6 +33,7 @@
                     <th>Assunto</th>
                     <th>Resumo da Descrição</th>
                     <th>Data</th>
+                    <th>Condomínio</th>
                     <th>Editar</th>
                 </tr>
                 </thead>
@@ -41,13 +42,13 @@
                 <?php
 
                 foreach ($data['list'] as $ocorrencia) {
-                    $dat = new DateTime($ocorrencia->getDtOcorrencia());
-                    $ocorrencia->setDtOcorrencia($dat->format('d/m/Y'));
+
                     echo '<tr>';
-                    echo '<td><a href="Ocorrencia/visualizar/' . $ocorrencia->getCdOcorrencia() . '">' . $ocorrencia->getDescAssunto() . '</a></td>';
-                    echo '<td>' . substr($ocorrencia->getDescOcorrencia(),0,100) . '...</td>';
-                    echo '<td>' . $dat->format('d/m/Y') . '</td>';
-                    echo "<td><a href=\"Ocorrencia/formOcorrencia/{$ocorrencia->getCdOcorrencia()}\" class=\"btn btn-primary btn-circle btn-md\" role=\"button\">
+                    echo '<td><a href="Ocorrencia/visualizar/' . $ocorrencia['cd_ocorrencia'] . '">' . $ocorrencia['desc_assunto'] . '</a></td>';
+                    echo '<td>' . substr($ocorrencia['desc_ocorrencia'],0,100) . '...</td>';
+                    echo '<td>' . $ocorrencia['dt_ocorrencia'] . '</td>';
+                    echo '<td>' . $ocorrencia['condominio'] . '</td>';
+                    echo "<td><a href=\"Ocorrencia/formOcorrencia/{$ocorrencia['cd_ocorrencia']}\" class=\"btn btn-primary btn-circle btn-md\" role=\"button\">
                     <i class=\"fa fa-edit\"></i></a></td>";
                     echo '</tr>';
 

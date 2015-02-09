@@ -22,10 +22,15 @@ Class Ocorrencia extends Controller
 { //Pega a lista completa de perfis
     $ocorrencia_list = (array)$this->model->fullList();
 
+    $relacao = array();
+    foreach ($ocorrencia_list as $perfil) {
+        $relacao[] = $this->ocorrenciaModel->setDTO($perfil)->getArrayDados();
+    }
+
     $dados = array(
         'pagesubtitle' => '',
         'pagetitle' => 'Ocorrência',
-        'list' => $ocorrencia_list
+        'list' => $relacao
     );
 
     $this->view = new View('Ocorrencia', 'start');

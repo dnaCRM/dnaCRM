@@ -307,7 +307,7 @@ $token = Token::generate();
     </div>
     <!-- FIM NOVOS CAMPOS -->
     <div class="form-group">
-        <div class="col-sm-6">
+        <div class="col-md-4 selectContainer">
             <label for="estagio" class="control-label">Estágio</label>
 
             <select class="form-control" id="estagio" name="estagio">
@@ -324,10 +324,8 @@ $token = Token::generate();
                 ?>
             </select>
         </div>
-    </div>
 
-    <div class="form-group">
-        <div class="col-sm-6">
+        <div class="col-md-4 inputContainer">
             <label for="dt_inicio" class="control-label">Início</label>
 
 
@@ -338,7 +336,7 @@ $token = Token::generate();
         </div>
 
 
-        <div class="col-sm-6 field_hidden">
+        <div class="col-md-4 field_hidden">
             <label for="dt_fim" class="control-label">Fim</label>
 
 
@@ -538,7 +536,7 @@ $token = Token::generate();
                         <input type="text" class="form-control" id="nome-setor"
                                placeholder="Buscar setor" autocomplete="off"
                                data-toggle="busca-setor">
-
+                        <input type="hidden" name="id_condominio" id="id_condominio" value="">
                         <div id="busca-setor-resultado" class="dropdown-busca panel col-md-12"
                              aria-labelledby="busca-setor"></div>
                     </div>

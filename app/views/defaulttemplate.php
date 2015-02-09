@@ -62,6 +62,7 @@ if (Session::exists('user')) {
                         <li class="divider"></li>
                         <li><a href="Apartamento">Apartamento</a></li>
                         <li><a href="Setor">Setor</a></li>
+                        <li><a href="Condominio">Condomínio</a></li>
                         <li class="divider"></li>
                         <li><a href="Ocorrencia">Ocorrência</a></li>
                         <li><a href="OrdemServico">Ordens de Serviço</a></li>
@@ -74,7 +75,6 @@ if (Session::exists('user')) {
                         <li><a href="PessoaFisica/formpessoafisica">Pessoa Fisica</a></li>
                         <li><a href="PessoaJuridica/formpessoajuridica">Pessoa Juridica</a></li>
                         <li class="divider"></li>
-                        <li><a href="Apartamento/formapartamento">Apartamento</a></li>
                         <li><a href="Setor/formSetor">Setor</a></li>
                         <li class="divider"></li>
                         <li><a href="Ocorrencia/formOcorrencia">Ocorrência</a></li>

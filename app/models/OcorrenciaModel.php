@@ -18,6 +18,10 @@ class OcorrenciaModel extends Model
         $this->dao = new OcorrenciaDAO();
     }
 
+    /**
+     * @return array
+     * @todo Criar uma view no BD para retornar essas informações
+     */
     public function getArrayDados()
     {
         $informante = (new PessoaFisicaDAO())->getById($this->dto->getCdPfInformante());
@@ -73,17 +77,23 @@ class OcorrenciaModel extends Model
         );
     }
 
+    /*
+     * @todo Criar view para retornar dados completos, principalmente o condomínio da ocorrência
+     */
     public function getOcorrencia()
     {
         $_POST = filter_input_array(INPUT_POST);
         $assunto = Input::get('assunto');
-        $ocorrencias = $this->dao->get("desc_assunto ilike '%{$assunto}%' order by desc_assunto limit 5");
+        $cd_condominio = Input::get('id_condominio');
 
-        $resultado = array();
-
-        foreach($ocorrencias as $ocorrencia) {
-            $resultado[] = $this->setDTO($ocorrencia)->getBasicInfo();
-        }
+        $conexao = Database::getConnection();
+        $stmt = $conexao->prepare("SELECT *
+                                   FROM vs_full_ocorrencia
+                                   WHERE desc_assunto ILIKE '%{$assunto}%'
+                                   AND cd_condominio = {$cd_condominio}
+                                   ORDER BY desc_assunto LIMIT 5");
+        $stmt->execute();
+        $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         return $resultado;
     }

@@ -224,6 +224,34 @@ class Setor extends Controller
 
     /**
      * @param $id
+     */
+    public function listTorresByCondId($id)
+    {
+        $setores = $this->setorModel->getTorresByCondominioId((int)$id);
+        $return = '<option value="">--</option>';
+        foreach ($setores as $setor) {
+            $return .= "<option value=\"{$setor['cd_setor']}\">{$setor['nm_setor']}</option>";
+        }
+
+        echo $return;
+    }
+
+    /**
+     * @param $id
+     */
+    public function listApBySetorId($id)
+    {
+        $setores = $this->setorModel->getApsByTorreId((int)$id);
+        $return = '<option value="">--</option>';
+        foreach ($setores as $setor) {
+            $return .= "<option value=\"{$setor['cd_setor']}\">{$setor['nm_setor']}</option>";
+        }
+
+        echo $return;
+    }
+
+    /**
+     * @param $id
      * @param $id_condominio
      */
     public function listByTipoId($id, $id_condominio)

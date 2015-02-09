@@ -68,7 +68,7 @@ $apartamentos = $data['apartamentos'];
             <?php if ($apartamentos): ?>
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Apartamentos</h3></div>
+                        <h3 class="panel-title"><?php echo $setor['cd_vl_catg_tipo'] == 160 ? 'Apartamentos' : 'Sub-áreas';?></h3></div>
 
                     <div class="panel-body">
                         <table class="table">
