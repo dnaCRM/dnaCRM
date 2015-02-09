@@ -37,13 +37,24 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label class="control-label">Gênero</label><br>
+
+                            <div class="btn-group" data-toggle="buttons">
+                                <label class="btn btn-default btn-block" id="label-cat-genero">
+                                    <input type="checkbox" name="genero" id="cat_genero" value="GR">
+                                    <i class="fa fa-group"></i> Grupo Pai
+                                </label>
+                            </div>
+                        </div>
+
                         <div class="form-group" id="group_name">
                             <input name="cd_grupo" class="hidden-input" type="text" id="cd_grupo">
                             <input name="cd_cat_grupo" class="hidden-input" type="text" id="cd_cat_grupo">
                             <label for="nome_grupo" class="control-label">Grupo</label>
 
                             <div class="input-group">
-                                <input name="nome_grupo" class="form-control" type="text" id="nome_grupo" disabled>
+                                <div name="nome_grupo" class="form-control" id="nome_grupo"></div>
                                 <span class="input-group-btn">
                                     <button id="btn-desagrupar" data-toggle="tooltip" data-placement="top" title="Desligar deste grupo" class="btn btn-default" type="button"><i class="fa fa-chain-broken"></i></button>
                                 </span>
@@ -78,8 +89,9 @@
                 <tbody>
                 <?php
                 foreach ($data['categoria_valor'] as $cv) {
+                    $class = ($cv['genero'] == 'GR' ? 'class="warning"': '' );
                     echo "
-                        <tr data-id-sub-categoria=\"{$cv['cd_vl_categoria']}\">
+                        <tr {$class} data-id-sub-categoria=\"{$cv['cd_vl_categoria']}\">
                             <td>{$cv['cd_vl_categoria']}</td>
                             <td>{$cv['desc_vl_categoria']}</td>
                             <td>{$cv['desc_categoria']}</td>

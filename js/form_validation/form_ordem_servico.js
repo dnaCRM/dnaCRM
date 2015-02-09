@@ -538,7 +538,7 @@ $('#busca-setor-resultado').delegate('.add-setor','click',function(e) {
     var nome_setor = setor.attr('data-nome-setor');
 
     inputIdSetor.val(id_setor);
-    inputNomeSetor.val(nome_setor);
+    inputNomeSetor.html(nome_setor);
     pesquisaSetorModal.modal('hide');
 
     ordemDeServicoForm
@@ -555,20 +555,29 @@ var selectSubTipoOS = $('#sub_tipo');
 
 selectTipoOS.change(function(){
     var id_grupo = selectTipoOS.val();
+
     $.ajax({
         type: "get",
         url: "CategoriaValor/listByGroupId/" + id_grupo,
         success: function (data) {
             selectSubTipoOS.html(data);
+
+            /* REVALIDAÇÃO DE CAMPO **********************************/
+            ordemDeServicoForm
+                .bootstrapValidator('updateStatus', selectSubTipoOS, 'NOT_VALIDATED')
+                .bootstrapValidator('validateField', selectSubTipoOS);
+            /* *************************************************** */
         },
         error: function (data) {
             $(data.responseText).appendTo('#responseAjaxError');
         }
     });
 });
-selectSubTipoOS.change(function(){
-    ordemDeServicoForm
-        .bootstrapValidator('updateStatus', selectSubTipoOS, 'NOT_VALIDATED')
-        .bootstrapValidator('validateField', selectSubTipoOS);
-});
+
 /* Fim manipulação de tipode OS*/
+
+/*
+ var $form = $('#ocorrenciaform');
+ var bv = $form.data('bootstrapValidator');
+ bv.resetForm(true);
+ */

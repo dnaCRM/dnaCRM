@@ -162,11 +162,16 @@ var formSubCategorias = $('#form_sub_categorias');
 var tableSubCategorias = $('#tb_sub_categorias');
 var inputIdSubCategoria = $('#id_sub_categoria');
 var inputNomeSubCategoria = $('#nome_sub_categoria');
+var labelCatGenero = $('#label-cat-genero');
+var inputCatGenero = $('#cat_genero');
 var inputNomeGrupo = $('#nome_grupo');
 var labelGroupName = $('#group_name');
 var cdGrupo = $('#cd_grupo');
 var cdCatGrupo = $('#cd_cat_grupo');
 
+inputCatGenero.change(function(){
+    console.log($(this).val());
+});
 tableSubCategorias.dataTable({
     "language": {
         "url": "js/datatables/js/dataTables.pt-br.lang"
@@ -254,7 +259,13 @@ formSubCategorias.bootstrapValidator({
                 .removeClass('btn-danger')
                 .addClass('btn-primary');
             $('#del_sub_categ').val('n');
+            labelGroupName.removeClass('has-success');
+            labelCatGenero.removeClass('active');
             inputIdSubCategoria.val('');
+            inputNomeSubCategoria.val('');
+            inputNomeGrupo.html('')
+            cdGrupo.val('');
+            cdCatGrupo.val('');
             bv.resetForm(true);
         },
         error: function (data) {
@@ -278,10 +289,10 @@ tableSubCategorias.delegate('.update_sub_categ', 'click', function (e) {
             inputIdSubCategoria.val(data.cd_vl_categoria);
             inputNomeSubCategoria.val(data.desc_vl_categoria);
             inputNomeGrupo
-                .val(data.grupo).hide().fadeIn();
+                .html(data.grupo).hide().fadeIn();
             labelGroupName.addClass('has-success');
-            cdGrupo.val(data.id_grupo);
-            cdCatGrupo.val(data.id_cat_grupo);
+            cdGrupo.val(data.cd_grupo);
+            cdCatGrupo.val(data.cd_cat_grupo);
 
             $('#legend_form_sub_categorias')
                 .html('Atualizar Sub-Categoria ' + data.desc_vl_categoria)
@@ -314,7 +325,7 @@ tableSubCategorias.delegate('.group', 'click', function (e) {
 
     if (id_grupo != id_sub_categoria) {
         inputNomeGrupo
-            .val(nome).hide().fadeIn();
+            .html(nome).hide().fadeIn();
         labelGroupName.addClass('has-success');
         cdGrupo.val(id_grupo);
         cdCatGrupo.val(id_cat_grupo);
@@ -325,7 +336,7 @@ tableSubCategorias.delegate('.group', 'click', function (e) {
 $('#btn-desagrupar').click(function (e) {
     e.preventDefault();
     inputNomeGrupo
-        .val('').hide().fadeIn();
+        .html('').hide().fadeIn();
     labelGroupName.addClass('has-success');
     cdGrupo.val('');
     cdCatGrupo.val('');
@@ -381,10 +392,18 @@ $('#sub_categ_reset').click(function () {
         .val('').hide().fadeIn();
     $('#group_name').removeClass('has-success');
     $('#cd_grupo').val('');
-    $('#cd_cat_grupo').var('');
+    $('#cd_cat_grupo').val('');
 
     formSubCategorias.hide().fadeIn();
     inputIdSubCategoria.val('');
+    cdGrupo.val('');
+    cdCatGrupo.val('');
+    inputNomeSubCategoria.val('');
+    labelCatGenero.removeClass('active');
 });
 
 //////////////////- Fim do Cadastro de Sub-Categorias -////////////////////////////
+    /*
+    var $form = $('#form_categorias');
+    var bv = $form.data('bootstrapValidator');
+    bv.resetForm(true);*/

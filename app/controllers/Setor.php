@@ -48,8 +48,9 @@ class Setor extends Controller
     public function formSetor($id = null)
     {
         $condominio = (new PessoaJuridicaDAO())->get('cd_ramo_atividade = 107');
-        $setores = $this->model->get('cd_catg_tipo = 17 AND cd_vl_catg_tipo != 160' );
+
         $torres_apartamentos = $this->model->get('cd_vl_catg_tipo = 160');
+        $setores = $this->model->get('cd_catg_tipo = 17 AND cd_vl_catg_tipo != 160' );
 
         $tipos_setor = (new CategoriaValorDAO())->get('cd_categoria = 17');
         $tipos_apartamento = (new CategoriaValorDAO())->get('cd_categoria = 18');

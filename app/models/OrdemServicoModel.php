@@ -21,6 +21,8 @@ class OrdemServicoModel extends Model
     public function getArrayDados()
     {
         $pessoaFisicaDao = new PessoaFisicaDAO();
+        $setorDTO = (new SetorDAO())->getById($this->dto->getCdSetor());
+        $setorDados = (new SetorModel())->setDTO($setorDTO)->getArrayDados();
 
         $executor = '';
         $executor_foto = '';
@@ -82,6 +84,8 @@ class OrdemServicoModel extends Model
 
         return array(
             'cd_ordem_servico' => $this->dto->getCdOrdemServico(),
+            'cd_setor' => $this->dto->getCdSetor(),
+            'setor_dados' => $setorDados,
             'cd_ocorrencia' => $this->dto->getCdOcorrencia(),
             'desc_ocorrencia' => $ocorrencia,
             'dt_ocorrencia' => $dt_ocorrencia,

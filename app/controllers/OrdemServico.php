@@ -45,7 +45,7 @@ class OrdemServico extends Controller
         $executor = (new PessoaFisicaDAO())->fullList();
         $solicitante = (new PessoaFisicaDAO())->fullList();
         $estagio = (new CategoriaValorDAO())->get('cd_categoria = 3');
-        $tipo = (new CategoriaValorDAO())->get('cd_categoria = 13');
+        $tipo = (new CategoriaValorDAO())->get("cd_categoria = 13 AND genero = 'GR'");
 
         if ($id) {
             /** @var OrdemServicoDTO */
@@ -59,6 +59,7 @@ class OrdemServico extends Controller
                 $dt_fim = new DateTime();
                 $perfilarr->setDtFim($dt_fim->format('d/m/Y'));
             }
+            $sub_tipos = (new CategoriaValorDAO())->get("cd_grupo = {$perfilarr->getCdVlCatgTipo()}");
 
             $dados = array(
 
@@ -71,6 +72,7 @@ class OrdemServico extends Controller
                 'solicitante' => $solicitante,
                 'estagio' => $estagio,
                 'tipo' => $tipo,
+                'sub_tipos' => $sub_tipos,
                 'condominios' => $condominios,
                 'dados' => $os_dados,
             );

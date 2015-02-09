@@ -78,6 +78,41 @@ $token = Token::generate();
             <div class="col-md-6">
 
                 <div class="form-group">
+                    <div class="col-sm-6 selectContainer">
+                        <label for="os_cd_condominio" class="control-label">Condominio</label>
+
+                        <select class="form-control" id="os_cd_condominio"
+                                name="cd_condominio">
+                            <option value="">-- Selecione um condominio</option>
+                            <?php
+                            //$setor->setCdCondominio($setor->getCdCondominio() == '' ? Input::get('cd_condominio') : $setor->getCdCondominio());
+                            foreach ($data['condominios'] as $condominio) {
+                                if ($id_check && $condominio->getCdPessoaJuridica() == $data['dados']['cd_condominio']) {
+                                    echo '<option value="' . $condominio->getCdPessoaJuridica() . '" selected>' . $condominio->getNmFantasia() . '</option>';
+                                } else {
+                                    echo '<option value="' . $condominio->getCdPessoaJuridica() . ' ">' . $condominio->getNmFantasia() . '</option>';
+                                }
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="col-sm-6 inputContainer">
+                        <input name="cd_setor" class="hidden-input" type="text" id="cd_setor"
+                               value="<?php /*echo $perfil->getCdSetor() == '' ? Input::get('cd_setor') : $perfil->getCdSetor();*/?>">
+                        <label for="cd_setor" class="control-label">Setor</label>
+
+                        <div class="input-group">
+                            <span name="nome_setor" class="form-control" id="nome_setor" ><?php echo ($id_check ? $data['dados']['setor'] : 'Pesquisar');?></span>
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" id="btn-pesquisa-setor">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <div class="col-sm-12">
                         <label for="assunto" class="control-label">Assunto</label>
 
@@ -114,24 +149,7 @@ $token = Token::generate();
 
             <!-- Lado Direito -->
             <div class="col-md-6">
-                <div id="pcard-informante">
-                    <?php
-                    if ($id_check) {
-                        echo "
-                                <div class=\"panel profile-card pcard-sm\">
-                                    <div class=\"panel-body\">
-                                        <div class=\"profile-card-foto-container\">
-                                            <img src=\"{$data['dados']['informante_foto']}\" class=\"img-circle profilefoto foto-md\">
-                                        </div>
-                                        <div class=\"pcard-name\">
-                                            <a href=\"PessoaFisica/visualizar/{$data['dados']['cd_pf_informante']}\">{$data['dados']['informante']}</a>
-                                            <div class=\"pcard-info\">Informante</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                ";
-                    }?>
-                </div>
+
                 <div class="form-group">
                     <div class="col-sm-6">
                         <label for="informante" class="control-label">Informante</label>
@@ -144,22 +162,25 @@ $token = Token::generate();
                         </button>
                     </div>
 
-                    <div class="col-sm-6">
-                        <label for="setor" class="control-label">Setor</label>
-
-                        <select class="form-control" id="setor" name="setor">
-                            <option value="">--</option>
+                    <div class="col-md-6">
+                        <div id="pcard-informante">
                             <?php
-                            $ocorrencia->setCdSetor($ocorrencia->getCdSetor() == '' ? Input::get('setor') : $ocorrencia->getCdSetor());
-                            foreach ($data['setor'] as $setor) {
-                                if ($setor->getCdSetor() == $ocorrencia->getCdSetor()) {
-                                    echo '<option value="' . $setor->getCdSetor() . '" selected>' . $setor->getNmSetor() . '</option>';
-                                } else {
-                                    echo '<option value="' . $setor->getCdSetor() . ' ">' . $setor->getNmSetor() . '</option>';
-                                }
-                            }
-                            ?>
-                        </select>
+                            if ($id_check) {
+                                echo "
+                                <div class=\"panel profile-card pcard-sm\">
+                                    <div class=\"panel-body\">
+                                        <div class=\"profile-card-foto-container\">
+                                            <img src=\"{$data['dados']['informante_foto']}\" class=\"img-circle profilefoto foto-md\">
+                                        </div>
+                                        <div class=\"pcard-name\">
+                                            <a href=\"PessoaFisica/visualizar/{$data['dados']['cd_pf_informante']}\">{$data['dados']['informante']}</a>
+                                            <div class=\"pcard-info\">Informante</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                ";
+                            }?>
+                        </div>
                     </div>
                 </div>
 
@@ -375,4 +396,32 @@ $token = Token::generate();
     </div>
 
 </div>
+</div>
+
+
+<!-- Modal para adicionar Setor -->
+<div class="modal fade" tabindex="-1" role="dialog" id="setor_modal" aria-labelledby="setor_modal"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <div class="modal-title legend">Buscar Setor</div>
+            </div>
+
+            <form class="dropdown" id="form-busca-setor">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="nome-setor"
+                               placeholder="Buscar setor" autocomplete="off"
+                               data-toggle="busca-setor">
+
+                        <div id="busca-setor-resultado" class="dropdown-busca panel col-md-12"
+                             aria-labelledby="busca-setor"></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>

@@ -42,7 +42,7 @@ Class Ocorrencia extends Controller
      */
     public function formOcorrencia($id = null)
 {
-    $setor = (new SetorDAO())->fullList();
+    $condominios = (new PessoaJuridicaDAO())->get('cd_ramo_atividade = 107');
     $informante = (new PessoaFisicaDAO())->fullList();
     $estagio = (new CategoriaValorDAO())->get('cd_categoria = 3');
     $tipo = (new CategoriaValorDAO())->get('cd_categoria = 12');
@@ -67,7 +67,7 @@ Class Ocorrencia extends Controller
             'pagesubtitle' => 'Atualizar Ocorrência.',
             'id' => $id,
             'perfil' => $ocorrenciaarr,
-            'setor' => $setor,
+            'condominios' => $condominios,
             'informante' => $informante,
             'estagio' => $estagio,
             'tipo' => $tipo,
@@ -81,7 +81,7 @@ Class Ocorrencia extends Controller
             'pagesubtitle' => 'Ocorrência',
             'id' => null,
             'perfil' => $ocorrencia,
-            'setor' => $setor,
+            'condominios' => $condominios,
             'informante' => $informante,
             'estagio' => $estagio,
             'tipo' => $tipo
@@ -168,7 +168,7 @@ Class Ocorrencia extends Controller
     $dto = new OcorrenciaDTO();
 
     $dto ->setCdOcorrencia(Input::get('cd_ocorrencia'))
-        ->setCdSetor(Input::get('setor'))
+        ->setCdSetor((int)Input::get('cd_setor'))
         ->setCdPfInformante(Input::get('informante'))
         ->setDescAssunto(Input::get('assunto'))
         ->setDescOcorrencia(Input::get('descricao'))

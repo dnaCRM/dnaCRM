@@ -77,7 +77,7 @@ $token = Token::generate();
                     //$setor->setCdCondominio($setor->getCdCondominio() == '' ? Input::get('cd_condominio') : $setor->getCdCondominio());
                     foreach ($data['condominios'] as $condominio) {
 
-                        if ($condominio->getCdPessoaJuridica() == null /*$setor->getCdCondominio()*/) {
+                        if ($id_check && $condominio->getCdPessoaJuridica() == $data['dados']['setor_dados']['cd_condominio']) {
                             echo '<option value="' . $condominio->getCdPessoaJuridica() . '" selected>' . $condominio->getNmFantasia() . '</option>';
                         } else {
                             echo '<option value="' . $condominio->getCdPessoaJuridica() . ' ">' . $condominio->getNmFantasia() . '</option>';
@@ -87,11 +87,13 @@ $token = Token::generate();
                 </select>
             </div>
             <div class="col-sm-6 inputContainer">
-                <input name="cd_setor" class="hidden-input" type="text" id="cd_setor" value="">
+                <input name="cd_setor" class="hidden-input" type="text" id="cd_setor"
+                       value="<?php echo $perfil->getCdSetor() == '' ? Input::get('cd_setor') : $perfil->getCdSetor(); ?>">
                 <label for="cd_setor" class="control-label">Setor</label>
 
                 <div class="input-group">
-                    <input name="nome_setor" class="form-control" type="text" id="nome_setor" disabled>
+                    <span name="nome_setor" class="form-control"
+                          id="nome_setor"><?php echo($id_check ? $data['dados']['setor_dados']['nm_setor'] : 'Pesquisar'); ?></span>
                     <span class="input-group-btn">
                         <button class="btn btn-default" id="btn-pesquisa-setor">
                             <i class="fa fa-search"></i>
@@ -99,7 +101,6 @@ $token = Token::generate();
                     </span>
                 </div>
             </div>
-
         </div>
         <div class="form-group">
             <div class="col-sm-12">
@@ -277,6 +278,18 @@ $token = Token::generate();
             <label class="control-label">Sub-tipo</label>
             <select class="form-control" name="sub_tipo" id="sub_tipo">
                 <option value="">-- Sub-tipo</option>
+                <?php
+                if ($id_check) {
+                    foreach ($data['sub_tipos'] as $sub_tipo) {
+                        if ($perfil->getCdVlCatgSubTipo() == $sub_tipo->getCdVlCategoria()) {
+                            echo "<option value=\"{$sub_tipo->getCdVlCategoria()}\" selected>{$sub_tipo->getDescVlCatg()}</option>";
+                        } else {
+                            echo "<option value=\"{$sub_tipo->getCdVlCategoria()}\">{$sub_tipo->getDescVlCatg()}</option>";
+                        }
+                    }
+
+                }
+                ?>
             </select>
         </div>
 
@@ -285,11 +298,11 @@ $token = Token::generate();
     <div class="form-group">
         <div class="col-sm-6">
             <label class="control-label">Valor do Material</label>
-            <input type="text" class="form-control money" name="valor_material">
+            <input type="text" class="form-control money" name="valor_material" placeholder="R$ 00.000,00">
         </div>
         <div class="col-sm-6">
             <label class="control-label">Valor do Serviço</label>
-            <input type="text" class="form-control money" name="valor_servico">
+            <input type="text" class="form-control money" name="valor_servico" placeholder="R$ 00.000,00">
         </div>
     </div>
     <!-- FIM NOVOS CAMPOS -->

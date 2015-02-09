@@ -6,7 +6,15 @@ ocorrenciaForm.bootstrapValidator({
         validating: 'glyphicon glyphicon-refresh fa-spin'
     },
     fields: {
-        setor: {
+        cd_condominio: {
+            group: '.col-sm-6',
+            validators: {
+                notEmpty: {
+                    message: 'Informar o condomínio é obrigatório.'
+                }
+            }
+        },
+        cd_setor: {
             group: '.col-sm-6',
             validators: {
                 notEmpty: {
@@ -309,3 +317,92 @@ $('#busca-informante-resultado').delegate('.add-informante', 'click', function (
 });
 
 ///////////////////////- Fim Manipula Informante -//////////////////////////////////
+
+
+
+/* Pesquisa Setor */
+
+var selectCondominio = $('#os_cd_condominio');
+var cdCondominio = selectCondominio.val();
+
+var btnPesquisaSetor = $('#btn-pesquisa-setor');
+var pesquisaSetorModal = $('#setor_modal');
+var inputNomeSetor = $('#nome_setor');
+var inputIdSetor = $('#cd_setor');
+
+btnPesquisaSetor.click(function (e) {
+    e.preventDefault();
+    pesquisaSetorModal.modal('show');
+});
+
+function buscaSetorPorCond() {
+    cdCondominio = selectCondominio.val();
+    var nome_setor = $('#nome-setor').val();
+
+    if (nome_setor != '') {
+        $('#busca-setor-resultado').html('<i class="fa fa-spinner fa-spin fa-2x"></i>');
+        $.ajax({
+            type: "get",
+            url: "Setor/buscaPorCondAjax/" + nome_setor + "/" + cdCondominio,
+            dataType: 'json',
+            success: function (data) {
+
+                var html = '';
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].setor_grupo != ''){
+                        data[i].setor_grupo = ' - ' + data[i].setor_grupo;
+                    }
+                    html +=
+                        '<div class="panel-body">' +
+                            '<div class="col-sm-1">' +
+                            '<a href="#" ' +
+                            'data-cd-setor="' + data[i].cd_setor + '" ' +
+                            'data-nome-setor="' + data[i].nm_setor + '" ' +
+                            'title="Adicionar" ' +
+                            'class="btn btn-primary btn-xs btn-circle add-setor">' +
+                            '<i class="fa fa-check"></i></a> '+
+                            '</div>'+
+                            '<div class="col-sm-11">' +
+                            ' ' + data[i].nm_setor + data[i].setor_grupo + '<br>' + data[i].sub_tipo +
+                            '</div>'+
+                            '</div>';
+                }
+
+                var resultBody = '<div class="row"><div class="col-md-12">' + html + '</div></div>';
+                $('#busca-setor-resultado').html(resultBody).show();
+
+
+            },
+            error: function (data) {
+                $(data.responseText).appendTo('#area-do-resultado');
+            }
+        });
+    } else {
+        $('#busca-setor-resultado').fadeOut();
+    }
+}
+
+$('#nome-setor').keyup(function () {
+    buscaSetorPorCond();
+}).focusout(function () {
+    $('#busca-setor-resultado').fadeOut();
+});
+
+$('#busca-setor-resultado').delegate('.add-setor','click',function(e) {
+    e.preventDefault();
+    var setor = $(this);
+    var id_setor = setor.attr('data-cd-setor');
+    var nome_setor = setor.attr('data-nome-setor');
+
+    inputIdSetor.val(id_setor);
+    inputNomeSetor.html(nome_setor);
+    pesquisaSetorModal.modal('hide');
+
+    ocorrenciaForm
+        .bootstrapValidator('updateStatus', inputIdSetor, 'NOT_VALIDATED')
+        .bootstrapValidator('validateField', inputIdSetor);
+
+});
+
+/* Fim Pesquisa Setor */
+
