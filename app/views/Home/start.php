@@ -48,6 +48,7 @@
                                 </div>
                                 <div class=\"circle-perffil-nome\">
                                 <a href=\"PessoaFisica/visualizar/{$aniversariante['id']}\">{$aniversariante['nome']}</a>
+                                 {$aniversariante['idade']}
                                 </div>
                             </div>";
                     }

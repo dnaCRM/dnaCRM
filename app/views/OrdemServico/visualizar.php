@@ -86,7 +86,7 @@ $setor = $ordem_servico['setor_dados'];
                             <a href=\"Ocorrencia/visualizar/{$ordem_servico['cd_ocorrencia']}\">{$ordem_servico['desc_ocorrencia']}</a></div>";
                         }
                         echo "
-                            <div class=\"col-md-6\"><span class=\"lead\">Setor: </span>
+                            <div class=\"col-md-6\"><span class=\"lead\">Local: </span>
                                 <a href=\"Setor/visualizar/{$ordem_servico['cd_setor']}\">{$ordem_servico['setor_dados']['nm_setor']}</a></div>
                             <div class=\"col-md-6\"><span class=\"lead\">Condomínio: </span>
                                 <a href=\"Condominio/visualizar/{$ordem_servico['setor_dados']['cd_condominio']}\">{$ordem_servico['setor_dados']['condominio']}</a></div>

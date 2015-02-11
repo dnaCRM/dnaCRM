@@ -98,7 +98,7 @@ $token = Token::generate();
                     </div>
                     <div class="col-sm-6 inputContainer">
                         <input name="cd_setor" class="hidden-input" type="text" id="cd_setor"
-                               value="<?php /*echo $perfil->getCdSetor() == '' ? Input::get('cd_setor') : $perfil->getCdSetor();*/?>">
+                               value="<?php echo $ocorrencia->getCdSetor() == '' ? Input::get('cd_setor') : $ocorrencia->getCdSetor();?>">
                         <label for="cd_setor" class="control-label">Setor</label>
 
                         <div class="input-group">
