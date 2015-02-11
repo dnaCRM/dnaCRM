@@ -5,7 +5,7 @@ $setores = $data['setores'];
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h3 class="page-header"><?php echo $data['pagetitle']; ?>
+            <h3 class="page-header"><i class="fa fa-building"></i> <?php echo $data['pagetitle']; ?>
                 <small>
                     <?php echo (isset($data['pagesubtitle'])) ? $data['pagesubtitle'] : ""; ?>
                 </small>

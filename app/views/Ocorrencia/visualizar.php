@@ -46,7 +46,7 @@ $pessoas = $data['pessoas'];
             <p><?php echo $ocorrencia['desc_conclusao']; ?></p>
 
 
-            <div class="panel">
+            <div class="panel lead-container">
                 <div class="panel-body">
                     <div class="list-group">
                         <?php

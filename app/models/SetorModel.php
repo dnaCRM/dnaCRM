@@ -36,7 +36,6 @@ class SetorModel extends Model
             $setor_grupo = new SetorDTO();
         }
 
-
         return array(
             'cd_setor' => $this->dto->getCdSetor(),
             'cd_setor_grupo' => $this->dto->getCdSetorGrupo(),
@@ -57,10 +56,22 @@ class SetorModel extends Model
 
     public function getApartamentos(ApartamentoModel $apartamentoModel)
     {
-        $apartamentos = $apartamentoModel->getDAO()->get("cd_setor_grupo = {$this->dto->getCdSetor()}");
+        $apartamentos = $apartamentoModel->getDAO()->get("cd_setor_grupo = {$this->dto->getCdSetor()}
+                                                          AND cd_catg_tipo = 18");
         $lista = array();
         foreach( $apartamentos as $apartamento) {
             $lista[] = $apartamentoModel->setDTO($apartamento)->getArrayDados();
+        }
+        return $lista;
+    }
+
+    public function getSubAreas($id)
+    {
+        $sub_areas = $this->getDAO()->get("cd_setor_grupo = {$this->dto->getCdSetor()}
+                                                          AND cd_catg_tipo != 18");
+        $lista = array();
+        foreach( $sub_areas as $sub_area) {
+            $lista[] = $this->setDTO($sub_area)->getArrayDados();
         }
         return $lista;
     }

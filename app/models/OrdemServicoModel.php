@@ -12,10 +12,17 @@ class OrdemServicoModel extends Model
     private $dto;
     /** @var  OrdemServicoDAO */
     private $dao;
+    /** @var array  */
+    private $icons;
 
     public function __construct()
     {
         $this->dao = new OrdemServicoDAO();
+        $this->icons = array(
+            154 => '<i class="fa fa-smile-o fa-2x"></i>',
+            155 => '<i class="fa fa-meh-o fa-2x"></i>',
+            156 => '<i class="fa fa-frown-o fa-2x"></i>'
+        );
     }
 
     public function getArrayDados()
@@ -68,6 +75,13 @@ class OrdemServicoModel extends Model
             $tipo = $catg->getDescVlCatg();
         }
 
+        $sub_tipo = '';
+
+        if ($this->dto->getCdCatgSubTipo()) {
+            $catg = $categoria->getBy2Ids($this->dto->getCdVlCatgSubTipo(), $this->dto->getCdCatgSubTipo());
+            $sub_tipo = $catg->getDescVlCatg();
+        }
+
         $atendimento = '';
 
         if ($this->dto->getCdCatgAvalAtendimento()) {
@@ -102,17 +116,40 @@ class OrdemServicoModel extends Model
             'cd_vl_catg_estagio' => $this->dto->getCdVlCatgEstagio(),
             'cd_catg_tipo' => $this->dto->getCdCatgTipo(),
             'cd_vl_catg_tipo' => $this->dto->getCdVlCatgTipo(),
+            'cd_catg_sib_tipo' => $this->dto->getCdCatgSubTipo(),
+            'cd_vl_catg_sub_tipo' => $this->dto->getCdVlCatgSubTipo(),
             'cd_catg_aval_atendimento' => $this->dto->getCdCatgAvalAtendimento(),
             'cd_vl_catg_aval_atendimento' => $this->dto->getCdVlCatgAvalAtendimento(),
             'desc_aval_atendimento' => $atendimento,
             'cd_catg_aval_qualidade' => $this->dto->getCdCatgAvalQualidade(),
             'cd_vl_catg_aval_qualidade' => $this->dto->getCdVlCatgAvalQualidade(),
             'desc_aval_qualidade' => $qualidade,
+            'valor_material' => 'R$ ' . number_format($this->dto->getValorMaterial(), 2, ',', '.'),
+            'valor_servico' => 'R$ ' . number_format($this->dto->getValorServico(), 2, ',', '.'),
+            'icon_atendimento' => $this->getIcons($this->dto->getCdVlCatgAvalQualidade()),
+            'icon_qualidade' => '',
             'estagio' => $estagio,
             'tipo' => $tipo,
+            'sub_tipo' => $sub_tipo,
             'dt_inicio' => (new DateTime($this->dto->getDtInicio()))->format('d/m/Y'),
             'dt_fim' => ($this->dto->getDtFim() ? (new DateTime($this->dto->getDtFim()))->format('d/m/Y') : 'em aberto')
         );
+    }
+
+    private function getIcons($id)
+    {
+        $stringIcon = '';
+        switch($id){
+            case 154:
+                $stringIcon = $this->icons[154];
+                break;
+            case 155:
+                $stringIcon = $this->icons[155];
+                break;
+            case 156:
+                $stringIcon = $this->icons[156];
+                break;
+        }
     }
 
     /**
@@ -136,6 +173,20 @@ class OrdemServicoModel extends Model
     public function getPorSolicitante($id)
     {
         $ordens = $this->dao->get("cd_pf_solicitante = {$id}");
+        $lista = array();
+        foreach($ordens as $os){
+            $lista[] = $this->setDTO($os)->getArrayDados();
+        }
+        return $lista;
+    }
+
+    /**
+     * @param $id = id de um Setor
+     * @return array
+     */
+    public function getPorSetor($id)
+    {
+        $ordens = $this->dao->get("cd_setor = {$id}");
         $lista = array();
         foreach($ordens as $os){
             $lista[] = $this->setDTO($os)->getArrayDados();

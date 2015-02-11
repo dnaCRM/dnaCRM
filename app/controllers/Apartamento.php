@@ -45,7 +45,8 @@ class Apartamento extends Controller
         $ex_moradores = $this->apartamentoModel->getExMoradores($moradorEnderecoModel);
         $dados = $this->apartamentoModel->getArrayDados();
         // Exporta imagem de perfil
-
+        $ocorrencias = (new OcorrenciaModel())->getPorSetor($id);
+        $ordens_servico = (new OrdemServicoModel())->getPorSetor($id);
         $dados = array(
             //o campo 'obs' vai ser o subtítulo
             'pagesubtitle' => 'Condomínio '.$dados['condominio'],
@@ -53,6 +54,8 @@ class Apartamento extends Controller
             'pagetitle' => $dados['desc_apartamento'],
             //todos os atributos do perfil
             'apartamento' => $dados,
+            'ocorrencias' => $ocorrencias,
+            'ordens_servico' => $ordens_servico,
             'moradores' => $moradores,
             'ex_moradores' => $ex_moradores
         );

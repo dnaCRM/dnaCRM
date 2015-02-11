@@ -204,7 +204,7 @@ class PessoaFisica extends Controller
 
         $relacionadosModel = new RelacionadosModel();
         $relacionados = $relacionadosModel->getRelacionados($id);
-
+        $info_estudos = (new InfoEstudosModel())->getPorPessoaFisica($id);
         // Exporta imagem de perfil
         $this->exportaImagens($pessoa);
 
@@ -215,6 +215,7 @@ class PessoaFisica extends Controller
             'pagetitle' => $dadosPessoais['nm_pessoa_fisica'],
             //todos os atributos do perfil
             'dados_pessoais' => $dadosPessoais,
+            'info_estudos' => $info_estudos,
             'telefones' => $telefones,
             'enderecos' => $enderecos,
             'morador_enderecos' => $moradorEnderecos,

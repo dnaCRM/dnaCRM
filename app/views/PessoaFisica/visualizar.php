@@ -59,7 +59,7 @@
                     <?php if ($data['dados_pessoais']['email']): ?>
                         <dt>E-mail</dt>
                         <dd><?php echo $data['dados_pessoais']['email']; ?></dd>
-                    <?php endif;?>
+                    <?php endif; ?>
                     <?php if ($data['dados_pessoais']['cpf']): ?>
                         <dt>CPF</dt>
                         <dd><?php echo $data['dados_pessoais']['cpf']; ?></dd>
@@ -68,12 +68,18 @@
                         <dt>RG</dt>
                         <dd><?php echo $data['dados_pessoais']['rg'] . $data['dados_pessoais']['uf_rg']; ?></dd>
                     <?php endif; ?>
+                    <?php if ($data['dados_pessoais']['cidade_origem']): ?>
+                        <dt>Naturalidade</dt>
+                        <dd><?php
+                            $cidade_origem = $data['dados_pessoais']['cidade_origem_dados'];
+                            echo ucwords($cidade_origem['gentilico']). ' de ' .$cidade_origem['nome']. ', ' .$cidade_origem['estado_nome'] ;?></dd>
+                    <?php endif;?>
                     <?php if ($data['dados_pessoais']['dt_nascimento']): ?>
                         <dt>Data de Nascimento</dt>
                         <dd><?php echo $data['dados_pessoais']['dt_nascimento']; ?></dd>
                         <dt>Idade</dt>
                         <dd><?php echo $data['dados_pessoais']['idade']; ?></dd>
-                    <?php endif;?>
+                    <?php endif; ?>
                     <dt>Gênero</dt>
                     <dd><?php echo $data['dados_pessoais']['ie_sexo']; ?></dd>
                     <?php if ($data['dados_pessoais']['cd_pessoa_juridica']): ?>
@@ -243,6 +249,29 @@
 </div>
 
 <div class="col-md-6">
+    <?php if (count($data['info_estudos']) > 0) {
+        foreach ($data['info_estudos'] as $ie) {
+            echo "<div class=\"panel panel-info profile-card\">
+                    <div class=\"panel-heading\">
+                        <h6 class=\"panel-title\"><i class=\"fa fa-university\"></i> Formação</h6>
+                    </div>
+                    <div class=\"panel-body\">
+                    <div class=\"profile-card-foto-container\">
+                        <img src=\"{$ie['foto_intituicao']}\" class=\"img-circle profilefoto foto-md\">
+                    </div>
+                    <div class=\"pcard-name\">
+                    <a href=\"InstituicaoEnsino/visualizar/{$ie['cd_pessoa_juridica']}\">{$ie['instituicao']}</a>
+                     <div class=\"pcard-info\">
+                        <span class=\"text-info\"><i class=\"fa fa-graduation-cap\"></i> {$ie['curso']}</span> - {$ie['periodo']}
+                        <small><br>Duração: {$ie['duracao']} anos.
+                        <strong>".($ie['duracao']>=$ie['ano_atual'] ?  "Cursando {$ie['ano_atual']}º ano" : 'Formado em '.substr($ie['dt_fim'],-4)).".</strong></small>
+                    </div>
+                    </div>
+                    </div>
+                    </div>";
+        }
+    };
+    ?>
 
     <?php if ($data['relacionados']): ?>
         <div class="panel panel-info">

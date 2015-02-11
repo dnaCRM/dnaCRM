@@ -101,7 +101,9 @@ class Setor extends Controller
         $setorDTO = $this->findById($id);
         $setor = $this->setorModel->setDTO($setorDTO)->getArrayDados();
         $apartamentos = $this->setorModel->getApartamentos(new ApartamentoModel());
+        $sub_areas = $this->setorModel->getSubAreas($id);
         $ocorrencias = (new OcorrenciaModel())->getPorSetor($id);
+        $ordens_servico = (new OrdemServicoModel())->getPorSetor($id);
         // Exporta imagem de perfil
         $this->exportaImagens($setorDTO);
 
@@ -113,7 +115,9 @@ class Setor extends Controller
             //todos os atributos do perfil
             'setor' => $setor,
             'apartamentos' => $apartamentos,
-            'ocorrencias' => $ocorrencias
+            'sub_areas' => $sub_areas,
+            'ocorrencias' => $ocorrencias,
+            'ordens_servico' => $ordens_servico
         );
 
         $this->view = new View('Setor', 'visualizar');

@@ -570,3 +570,8 @@ table.dataTable tbody td, table.table tbody td{
 .btn-pcard-bottom-right {
     float: right;
 }
+
+.lead-container .lead{
+    font-size: 14px;
+    font-weight: bold;
+}

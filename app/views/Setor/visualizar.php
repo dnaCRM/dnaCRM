@@ -1,6 +1,7 @@
 <?php
 $setor = $data['setor'];
 $apartamentos = $data['apartamentos'];
+$sub_areas = $data['sub_areas'];
 ?>
 <div class="container">
     <div class="row">
@@ -53,9 +54,14 @@ $apartamentos = $data['apartamentos'];
                                       <dd><?php echo {$setor['observacao']}; ?></dd>";
                             }
                             ?>
+                            <?php if ($setor['cd_setor_grupo']) {
+                                echo "<dt>Setor</dt>
+                                      <dd><a href=\"Setor/visualizar/{$setor['cd_setor_grupo']}\">{$setor['setor_grupo']}</a></dd>";
+                            }
+                            ?>
                             <dt>Localização</dt>
                             <dd>
-                                <a href="PessoaJuridica/visualizar/<?php echo $setor['cd_condominio']; ?>"><?php echo $setor['condominio']; ?></a>
+                                <a href="Condominio/visualizar/<?php echo $setor['cd_condominio']; ?>"><?php echo $setor['condominio']; ?></a>
                             </dd>
                         </dl>
                     </div>
@@ -93,6 +99,34 @@ $apartamentos = $data['apartamentos'];
                 </div>
             <?php endif; ?>
 
+            <?php if ($sub_areas): ?>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Sub-áreas</h3></div>
+
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Nome</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+
+                            foreach ($sub_areas as $sa) {
+                                echo "
+                    <tr>
+                        <td><a href=\"Setor/visualizar/{$sa['cd_setor']}\">{$sa['nm_setor']}</a></td>
+                    </tr>";
+                            }
+                            ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            <?php endif; ?>
+
             <?php if ($data['ocorrencias']): ?>
                 <div class="panel panel-warning">
                     <div class="panel-heading">
@@ -117,8 +151,46 @@ $apartamentos = $data['apartamentos'];
                     <tr>
                         <td>{$oc['dt_ocorrencia']}</td>
                         <td><a href=\"Ocorrencia/visualizar/{$oc['cd_ocorrencia']}\">{$oc['desc_assunto']}</a></td>
-                        <td>{$oc['informante']}</td>
+                        <td><a href=\"PessoaFisica/visualizar/{$oc['cd_pf_informante']}\">{$oc['informante']}</a></td>
                         <td>{$oc['dt_fim']}</td>
+                    </tr>";
+                            }
+                            ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            <?php endif; ?>
+
+            <?php if ($data['ordens_servico']): ?>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-wrench"></i> Ordens de Serviço</h3>
+                        <span class="pull-right clickable"><i class="glyphicon glyphicon-minus"></i></span>
+                    </div>
+
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Nº</th>
+                                <th>Assunto</th>
+                                <th>Status</th>
+                                <th>Inicio</th>
+                                <th>Fim</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+
+                            foreach ($data['ordens_servico'] as $os_ex) {
+                                echo "
+                    <tr>
+                        <td>{$os_ex['cd_ordem_servico']}</td>
+                        <td><a href=\"OrdemServico/visualizar/{$os_ex['cd_ordem_servico']}\">{$os_ex['desc_assunto']}</a></td>
+                        <td>{$os_ex['estagio']}</td>
+                        <td>{$os_ex['dt_inicio']}</td>
+                        <td>{$os_ex['dt_fim']}</td>
                     </tr>";
                             }
                             ?>
@@ -130,3 +202,4 @@ $apartamentos = $data['apartamentos'];
         </div>
     </div>
 </div>
+<?php var_dump($data['ocorrencias']);

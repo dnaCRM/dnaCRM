@@ -69,7 +69,7 @@ class InfoEstudos extends Controller
         $_POST = filter_input_array(INPUT_POST);
 
         $dto
-            ->setCdInfoEstudos(Input::get('cd_info_estudos'))
+            ->setCdInfoEstudos((int)Input::get('cd_info_estudos'))
             ->setCdPessoaFisica((int)Input::get('cd_pessoa_fisica'))
             ->setCdPessoaJuridica((int)Input::get('select_inst_ensino'))
             ->setCdCatgCurso(14)
@@ -82,7 +82,7 @@ class InfoEstudos extends Controller
             ->setDtUsuarioCriacao('now()')
             ->setCdUsuarioAtualiza(Session::get('user'))
             ->setDtUsuarioAtualiza('now()');
-
+        //var_dump($dto);die;
         return $dto;
 
     }

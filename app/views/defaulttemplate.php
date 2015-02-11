@@ -57,12 +57,13 @@ if (Session::exists('user')) {
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Perfis <span
                             class="caret"></span></a>
                     <ul class="dropdown-menu" aria-labelledby="themes">
-                        <li><a href="PessoaFisica">Pessoa Física</a></li>
-                        <li><a href="PessoaJuridica">Pessoa Juridica</a></li>
+                        <li><a href="PessoaFisica">Pessoas</a></li>
+                        <li><a href="PessoaJuridica">Empresas</a></li>
                         <li class="divider"></li>
-                        <li><a href="Apartamento">Apartamento</a></li>
-                        <li><a href="Setor">Setor</a></li>
-                        <li><a href="Condominio">Condomínio</a></li>
+                        <li><a href="Apartamento">Apartamentos</a></li>
+                        <li><a href="Setor">Setores</a></li>
+                        <li><a href="Condominio">Condomínios</a></li>
+                        <li><a href="InstituicaoEnsino">Instituições de Ensino</a></li>
                         <li class="divider"></li>
                         <li><a href="Ocorrencia">Ocorrência</a></li>
                         <li><a href="OrdemServico">Ordens de Serviço</a></li>

@@ -15,8 +15,4 @@ class InstituicaoEnsinoModel extends PessoaJuridicaModel
 
     }
 
-    public function getEstudantes()
-    {
-
-    }
 }

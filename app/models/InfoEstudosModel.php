@@ -14,16 +14,6 @@ class InfoEstudosModel extends Model
 
     public function getArrayDados()
     {
-        $return =  array(
-            'cd_pessoa_fisica' => '',
-            'cd_info_estudos' => '',
-            'instituicao' => '',
-            'curso' => '',
-            'area' => '',
-            'periodo' => '',
-            'dt_inicio' => '',
-            'dt_fim' => ''
-        );
         $con = Database::getConnection();
         $stmt = $con->prepare("
                     SELECT *
@@ -41,6 +31,16 @@ class InfoEstudosModel extends Model
     public function getPorPessoaFisica($id)
     {
         $info_estudos = $this->dao->get("cd_pessoa_fisica = {$id}");
+        $lista = array();
+        foreach($info_estudos as $ie) {
+            $lista[] = $this->setDTO($ie)->getArrayDados();
+        }
+        return $lista;
+    }
+
+    public function getPorInstituicao($id)
+    {
+        $info_estudos = $this->dao->get("cd_pessoa_juridica = {$id}");
         $lista = array();
         foreach($info_estudos as $ie) {
             $lista[] = $this->setDTO($ie)->getArrayDados();

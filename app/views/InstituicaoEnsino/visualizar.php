@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h3 class="page-header"><?php echo $data['pagetitle']; ?>
+            <h3 class="page-header"><i class="fa fa-university"></i> <?php echo $data['pagetitle']; ?>
                 <small>
                     <?php echo (isset($data['pagesubtitle'])) ? $data['pagesubtitle'] : ""; ?>
                 </small>
@@ -13,16 +13,16 @@
                    class="btn btn-primary btn-circle btn-lg">
                     <i class="fa fa-pencil"></i>
                 </a>
-                <a href="PessoaJuridica/" data-toggle="tooltip" data-placement="top" title="Ver Lista!"
+                <a href="InstituicaoEnsino/" data-toggle="tooltip" data-placement="top" title="Ver Lista!"
                    class="btn btn-default btn-circle btn-lg">
                     <i class="fa fa-list"></i>
                 </a>
                     <?php if ($userDados['nivel'] == 1): ?>
-                <a href="PessoaJuridica/confirmDelete/<?php echo $data['dados_cadastrais']['cd_pessoa_juridica']; ?>"
-                   data-toggle="tooltip" data-placement="top" title="Deletar!"
-                   class="btn btn-warning btn-circle btn-lg">
-                    <i class="fa fa-trash-o"></i>
-                </a>
+                        <a href="PessoaJuridica/confirmDelete/<?php echo $data['dados_cadastrais']['cd_pessoa_juridica']; ?>"
+                           data-toggle="tooltip" data-placement="top" title="Deletar!"
+                           class="btn btn-warning btn-circle btn-lg">
+                            <i class="fa fa-trash-o"></i>
+                        </a>
                     <?php endif; ?>
             </span>
                 <!-- Fim Botões de administração -->
@@ -44,8 +44,8 @@
                             <dt>Nome</dt>
                             <dd><?php echo $data['dados_cadastrais']['nm_fantasia']; ?></dd>
                             <?php if ($data['dados_cadastrais']['email']):?>
-                            <dt>Email</dt>
-                            <dd><?php echo $data['dados_cadastrais']['email']; ?></dd>
+                                <dt>Email</dt>
+                                <dd><?php echo $data['dados_cadastrais']['email']; ?></dd>
                             <?php endif;?>
                             <dt>Razão Social</dt>
                             <dd><?php echo $data['dados_cadastrais']['desc_razao']; ?></dd>
@@ -63,26 +63,27 @@
             </div>
         </div>
         <div class="col-md-6">
-            <?php if ($data['empregados']): ?>
+            <?php if ($data['estudantes']): ?>
                 <div class="panel panel-info">
 
                     <div class="panel-heading">
-                        <h6 class="panel-title"><i class="fa fa-group"></i> Funcionários</h6>
+                        <h6 class="panel-title"><i class="fa fa-group"></i> Estudantes</h6>
                     </div>
                     <div class="panel-body">
                         <?php
-                        foreach ($data['empregados'] as $empregado) {
+                        foreach ($data['estudantes'] as $estudante) {
 
                             echo "
                     <div class=\"profile-card pcard-md\">
                         <div class=\"panel-body\">
                         <div class=\"profile-card-foto-container\">
-                            <img class=\"img-circle profilefoto\" src=\"{$empregado['im_perfil']}\">
+                            <img class=\"img-circle profilefoto\" src=\"{$estudante['foto_estudante']}\">
                         </div>
-                            <div class=\"pcard-name\"><a href=\"PessoaFisica/visualizar/{$empregado['cd_pessoa_fisica']}\">{$empregado['nm_pessoa_fisica']}</a>
+                            <div class=\"pcard-name\"><a href=\"PessoaFisica/visualizar/{$estudante['cd_pessoa_fisica']}\">{$estudante['estudante']}</a>
                             <div class=\"pcard-info\">
-                                {$empregado['email']}<br>
-                                    <span class=\"fa fa-user\"></span> <span class=\"text-info\">{$empregado['profissao']}</span>.
+                                    <span class=\"fa fa-graduation-cap\"></span> <span class=\"text-info\">{$estudante['curso']}</span> - {$estudante['periodo']}.
+                                    <br>Duração {$estudante['duracao']} anos.
+                                    ".($estudante['duracao']>=$estudante['ano_atual'] ?  "Cursando {$estudante['ano_atual']}º ano" : 'Formado em '.substr($estudante['dt_fim'],-4))."
                             </div>
                             </div>
                         </div>

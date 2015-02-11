@@ -41,5 +41,5 @@ CONNECTION LIMIT 40;
 ```
 * É recomendado que o servidor Postgres onde o sistema será instalado não possua usuários (rolname) numéricos. O motivo é que o dnaCRM cadastra usuários diretamente no catálogo do banco de dados utilizando a chave primária de pessoa física como rolname;
 * Antes de executar os comandos indicados abaixo, certifique-se de que o servidor Postgres não possui nenhum rolname "1". Este rolname é cadastrado durante a execução dos comandos no arquivo indicado abaixo.
-* Executar os comandos SQL presentes no arquivo "app/dbc/construcao_banco_de_dados.sql".
+* Executar os comandos SQL presentes nos arquivos presentes na pasta"app/dbc/construcao_banco_de_dados/" em ordem sequencial.
 * Após a instalação utilizar usuário administrador e senha 123456 para acesso ao sistema.

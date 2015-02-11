@@ -56,6 +56,79 @@ $apartamento = $data['apartamento'];
                 </div>
             </div>
 
+            <?php if ($data['ocorrencias']): ?>
+                <div class="panel panel-warning">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-asterisk"></i> Ocorrências neste Apartamento</h3>
+                        <span class="pull-right clickable"><i class="glyphicon glyphicon-minus"></i></span>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Assunto</th>
+                                <th>Informante</th>
+                                <th>Fim</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+
+                            foreach ($data['ocorrencias'] as $oc) {
+                                echo "
+                    <tr>
+                        <td>{$oc['dt_ocorrencia']}</td>
+                        <td><a href=\"Ocorrencia/visualizar/{$oc['cd_ocorrencia']}\">{$oc['desc_assunto']}</a></td>
+                        <td>{$oc['informante']}</td>
+                        <td>{$oc['dt_fim']}</td>
+                    </tr>";
+                            }
+                            ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            <?php endif; ?>
+
+            <?php if ($data['ordens_servico']): ?>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-wrench"></i> Ordens de Serviço</h3>
+                        <span class="pull-right clickable"><i class="glyphicon glyphicon-minus"></i></span>
+                    </div>
+
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Nº</th>
+                                <th>Assunto</th>
+                                <th>Status</th>
+                                <th>Inicio</th>
+                                <th>Fim</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+
+                            foreach ($data['ordens_servico'] as $os_ex) {
+                                echo "
+                    <tr>
+                        <td>{$os_ex['cd_ordem_servico']}</td>
+                        <td><a href=\"OrdemServico/visualizar/{$os_ex['cd_ordem_servico']}\">{$os_ex['desc_assunto']}</a></td>
+                        <td>{$os_ex['estagio']}</td>
+                        <td>{$os_ex['dt_inicio']}</td>
+                        <td>{$os_ex['dt_fim']}</td>
+                    </tr>";
+                            }
+                            ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            <?php endif; ?>
+
         </div>
 
         <div class="col-md-6">
