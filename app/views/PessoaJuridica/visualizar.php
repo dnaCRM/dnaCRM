@@ -49,8 +49,11 @@
                             <?php endif;?>
                             <dt>Razão Social</dt>
                             <dd><?php echo $data['dados_cadastrais']['desc_razao']; ?></dd>
+                            <?php
+                            if ($data['dados_cadastrais']['cnpj']): ?>
                             <dt>CNPJ</dt>
                             <dd><?php echo $data['dados_cadastrais']['cnpj']; ?></dd>
+                            <?php endif;?>
                             <?php
                             if ($data['dados_cadastrais']['cd_ramo_atividade']){
                                 echo "<dt>Ramo de Atividade</dt>

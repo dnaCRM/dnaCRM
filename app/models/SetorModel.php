@@ -47,6 +47,7 @@ class SetorModel extends Model
             'condo_foto' => Image::get($condominio),
             'observacao' => $this->dto->getObservacao(),
             'im_perfil' => Image::get($this->dto),
+            'ramal' => $this->dto->getRamal(),
             'tipo' => $tipo_desc,
             'sub_tipo' => $sub_tipo_desc,
             'cd_catg_tipo' => $this->dto->getCdCatgTipo(),
@@ -103,7 +104,8 @@ class SetorModel extends Model
 
     public function getApsByTorreId($id)
     {
-        $setores = $this->dao->get("cd_setor_grupo = {$id}");
+        $setores = $this->dao->get("cd_setor_grupo = {$id}
+                                    AND cd_catg_tipo = 18");
 
         $lista = array();
         foreach( $setores as $setor) {

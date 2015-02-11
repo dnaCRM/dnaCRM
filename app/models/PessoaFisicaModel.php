@@ -70,7 +70,7 @@ class PessoaFisicaModel extends Model
             'im_perfil' => Image::get($this->dto),
             'cpf' => $this->dto->getCpf(),
             'rg' => $this->dto->getRg(),
-            'uf_rg' => $uf_rg,
+            'uf_rg' => '-'.$uf_rg,
             'email' => $this->dto->getEmail(),
             'idade' => $idade,
             'dt_nascimento' => $dt_nascimento,

@@ -63,6 +63,11 @@ $sub_areas = $data['sub_areas'];
                             <dd>
                                 <a href="Condominio/visualizar/<?php echo $setor['cd_condominio']; ?>"><?php echo $setor['condominio']; ?></a>
                             </dd>
+                            <?php if ($setor['ramal']) {
+                                echo "<dt>Ramal</dt>
+                                      <dd>{$setor['ramal']}</dd>";
+                            }
+                            ?>
                         </dl>
                     </div>
 
@@ -202,4 +207,3 @@ $sub_areas = $data['sub_areas'];
         </div>
     </div>
 </div>
-<?php var_dump($data['ocorrencias']);

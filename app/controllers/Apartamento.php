@@ -49,7 +49,7 @@ class Apartamento extends Controller
         $ordens_servico = (new OrdemServicoModel())->getPorSetor($id);
         $dados = array(
             //o campo 'obs' vai ser o subtítulo
-            'pagesubtitle' => 'Condomínio '.$dados['condominio'],
+            'pagesubtitle' => 'Ramal '.$dados['ramal'],
             //o campo 'nome' vai ser o título da página
             'pagetitle' => $dados['desc_apartamento'],
             //todos os atributos do perfil

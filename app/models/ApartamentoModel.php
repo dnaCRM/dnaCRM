@@ -30,6 +30,7 @@ class ApartamentoModel extends Model
             'setor' => $setor->getNmSetor(),
             'setor_foto' => Image::get($setor),
             'cd_condominio' => $setor->getCdCondominio(),
+            'ramal' => $this->dto->getRamal(),
             'condominio' => $condominio->getNmFantasia(),
             'condo_foto' => Image::get($condominio)
         );
