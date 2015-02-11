@@ -133,4 +133,3 @@ $setor = $ordem_servico['setor_dados'];
         </div>
     </div>
 </div>
-<?php var_dump($ordem_servico);
