@@ -640,6 +640,12 @@ $('#form_end_reset').click(function () {
 /* FIM DO CÓDIGO PARA MANIPULAÇÃO DE ENDEREÇOS DE PESSOA FÍSICA */
 
 /** Início da Manipulação de Morador Endereço */
+var labelResidente = $('#label-residente');
+var labelNaoResidente = $('#label-nao-residente');
+var radioResidente = $('#radio-residente');
+var radioNaoResidente = $('#radio-nao-residente');
+
+
 $("#m_end_condominio").change(function () {
     var condominio = $("#m_end_condominio").val();
     $.ajax({
@@ -760,6 +766,8 @@ $('#form_end_morador').bootstrapValidator({
                 $(linha).appendTo('#tb_m_enderecos').hide().fadeIn();
             }
             $('#form_end_morador input[name=id_m_end]').val('');
+            labelNaoResidente.removeClass('active');
+            labelResidente.removeClass('active');
             bv.resetForm(true);
         },
         error: function (data) {
@@ -798,7 +806,8 @@ $('#form_apaga_m_end')
 
 /** Início - Botões Atualizar e Apagar  PF Telefone */
 $('#tb_m_enderecos').delegate('.update_m_end', 'click', function () {
-
+    labelResidente.removeClass('active');
+    labelNaoResidente.removeClass('active');
     var id = $(this).attr('data-update-mend-id');
 
     $('html, body').animate({scrollTop: 180}, 400);
@@ -850,6 +859,8 @@ $('#form_m_end_reset').click(function (e) {
 
     $('#form_end_morador input[name=id_m_end]').val('');
     $('#legend_form_end_morador').html('Cadastrar Endereço').removeClass('text-primary');
+    labelResidente.removeClass('active');
+    labelNaoResidente.removeClass('active');
     bv.resetForm(true);
 });
 /** Fim - Botões Atualizar e Apagar PF Telefone*/
@@ -1050,10 +1061,10 @@ function preencherMenuEndMorador(objeto) {
 
     if (objeto.residente == 'Sim') {
         $('#radio-residente').prop('checked','checked');
-        $('#label-residente').addClass('active');
+        labelResidente.addClass('active');
     } else {
         $('#radio-nao-residente').prop('checked','checked');
-        $('#label-nao-residente').addClass('active');
+        labelNaoResidente.addClass('active');
     }
 }
 

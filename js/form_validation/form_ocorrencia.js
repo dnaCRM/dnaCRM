@@ -78,6 +78,7 @@ ocorrenciaForm.bootstrapValidator({
             }
         },
         descricao: {
+            group: '.cleditorToolbar',
             validators: {
                 notEmpty: {
                     message: 'Informar o descrição é obrigatório.'
@@ -87,7 +88,21 @@ ocorrenciaForm.bootstrapValidator({
     }
 });
 
-/** Busca Pessoa FÃ­sica para OcorrÃªncia*/
+var d = new Date();
+var dia = d.getDate();
+var mes = d.getMonth() + 1;
+var ano = d.getFullYear();
+var hoje = (dia < 10 ? '0'+dia : dia) + '/' + ((mes) < 10 ? '0'+mes : mes ) + '/' + ano;
+
+var selectEstagio = $('#estagio');
+
+selectEstagio.change(function () {
+    if (selectEstagio.val() == 58) {
+        $('#dt_fim').val(hoje);
+    }
+});
+
+/** Busca Pessoa Física para OcorrÃªncia*/
 $(document).ready(function () {
     function buscaPessoaOcorrencia() {
         var nome = $('#ocorr_pessoa').val();
@@ -413,4 +428,3 @@ $('#busca-setor-resultado').delegate('.add-setor','click',function(e) {
 });
 
 /* Fim Pesquisa Setor */
-

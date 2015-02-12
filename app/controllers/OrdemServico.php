@@ -56,7 +56,7 @@ class OrdemServico extends Controller
             $perfilarr->setDtInicio($dt_inicio->format('d/m/Y'));
 
             if ($perfilarr->getDtFim()) {
-                $dt_fim = new DateTime();
+                $dt_fim = new DateTime($perfilarr->getDtFim());
                 $perfilarr->setDtFim($dt_fim->format('d/m/Y'));
             }
             $sub_tipos = (new CategoriaValorDAO())->get("cd_grupo = {$perfilarr->getCdVlCatgTipo()}");

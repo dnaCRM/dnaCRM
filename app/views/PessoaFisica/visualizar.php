@@ -377,6 +377,7 @@
                         <th>Condomínio</th>
                         <th>Entrada</th>
                         <th>Saída</th>
+                        <th>Resid.</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -387,7 +388,8 @@
                               <td><a href=\"Setor/visualizar/{$me['cd_setor']}\">{$me['setor']}</a></td>
                               <td><a href=\"Condominio/visualizar/{$me['cd_condominio']}\">{$me['condominio']}</a></td>
                               <td>{$me['m_end_dt_entrada']}</td>
-                              <td>{$me['m_end_dt_saida']}</td>";
+                              <td>{$me['m_end_dt_saida']}</td>
+                              <td>{$me['residente']}</td>";
                         echo '</tr>';
                     }
                     ?>

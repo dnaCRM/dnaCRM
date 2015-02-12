@@ -69,11 +69,16 @@ class MoradorEnderecoModel extends Model
 
     /**
      * @param $id = id de um Apartamento
+     * @param $fg_residente = 'S' ou 'N'
      * @return array
      */
-    public function getPorApartamento($id)
+    public function getPorApartamento($id, $fg_residente = null)
     {
-        $endereco_morador = $this->dao->get("cd_apartamento = {$id}");
+        $queryString = "cd_apartamento = {$id}";
+        if ($fg_residente) {
+            $queryString .= " AND fg_residente = '{$fg_residente}'";
+        }
+        $endereco_morador = $this->dao->get($queryString);
         $lista = array();
         foreach($endereco_morador as $em){
             $lista[] = $this->setDTO($em)->getArrayDados();
