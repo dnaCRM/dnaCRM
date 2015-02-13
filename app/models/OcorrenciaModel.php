@@ -77,7 +77,7 @@ class OcorrenciaModel extends Model
         );
     }
 
-    /*
+    /**
      * @todo Criar view para retornar dados completos, principalmente o condomínio da ocorrência
      */
     public function getOcorrencia()
