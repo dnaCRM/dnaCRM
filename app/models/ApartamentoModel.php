@@ -36,9 +36,9 @@ class ApartamentoModel extends Model
         );
     }
 
-    public function getMoradores(MoradorEnderecoModel $enderecoMorador)
+    public function getMoradores(MoradorEnderecoModel $enderecoMorador, $fg_residente = null)
     {
-        $moradores = $enderecoMorador->getPorApartamento($this->dto->getCdSetor());
+        $moradores = $enderecoMorador->getPorApartamento($this->dto->getCdSetor(), $fg_residente);
         $atuais = array();
         foreach($moradores as $morador) {
             if (in_array('Morador', $morador)) {

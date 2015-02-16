@@ -64,7 +64,8 @@ class PessoaJuridicaModel extends Model
      */
     public function getEmpregados(PessoaFisicaModel $pessoaFisica)
     {
-        $empregados = $pessoaFisica->getDAO()->get("cd_pessoa_juridica = {$this->dto->getCdPessoaJuridica()}");
+        $empregados = $pessoaFisica->getDAO()->get("cd_pessoa_juridica = {$this->dto->getCdPessoaJuridica()}
+                                                    ORDER BY dt_usuario_atualiza DESC");
         $lista = array();
         foreach ($empregados as $empregado) {
             $lista[] = $pessoaFisica->setDTO($empregado)->getArrayDados();

@@ -44,7 +44,7 @@ $apartamento = $data['apartamento'];
                     <div class=\"profile-card-foto-container\">
                         <img src=\"{$apartamento['condo_foto']}\" class=\"img-circle profilefoto foto-md\">
                     </div>
-                    <div class=\"pcard-name\"><a href=\"PessoaJuridica/visualizar/{$apartamento['cd_condominio']}\">Condomínio
+                    <div class=\"pcard-name\"><a href=\"Condominio/visualizar/{$apartamento['cd_condominio']}\">Condomínio
                     {$apartamento['condominio']}</a>
                      <div class=\"pcard-info\"><a href=\"Setor/visualizar/{$apartamento['cd_setor']}\">
                     {$apartamento['setor']}</a>
@@ -132,10 +132,10 @@ $apartamento = $data['apartamento'];
         </div>
 
         <div class="col-md-6">
-            <?php if ($data['moradores']): ?>
+            <?php if ($data['residentes']): ?>
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><i class="fa fa-group"></i> Moradores</h3>
+                        <h3 class="panel-title"><i class="fa fa-group"></i> Moradores Residentes</h3>
                     </div>
                     <div class="panel-body">
                         <table class="table">
@@ -148,11 +148,42 @@ $apartamento = $data['apartamento'];
                             </thead>
                             <tbody>
                             <?php
-                            foreach ($data['moradores'] as $mo) {
+                            foreach ($data['residentes'] as $mo) {
                                 echo '<tr>';
                                 echo "<td><img src=\"{$mo['pessoa_foto']}\" class=\"img-circle profilefoto\"</td>
                               <td><a href=\"PessoaFisica/visualizar/{$mo['cd_pessoa_fisica']}\">{$mo['pessoa']}</a></td>
                               <td>{$mo['m_end_dt_entrada']}</td>";
+                                echo '</tr>';
+                            }
+                            ?>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            <?php endif; ?>
+
+            <?php if ($data['nao_residentes']): ?>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-group"></i> Moradores Não Residentes</h3>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Foto</th>
+                                <th>Nome</th>
+                                <th>Entrada</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                            foreach ($data['nao_residentes'] as $nr) {
+                                echo '<tr>';
+                                echo "<td><img src=\"{$nr['pessoa_foto']}\" class=\"img-circle profilefoto\"</td>
+                              <td><a href=\"PessoaFisica/visualizar/{$nr['cd_pessoa_fisica']}\">{$nr['pessoa']}</a></td>
+                              <td>{$nr['m_end_dt_entrada']}</td>";
                                 echo '</tr>';
                             }
                             ?>
@@ -176,6 +207,7 @@ $apartamento = $data['apartamento'];
                                 <th>Nome</th>
                                 <th>Entrada</th>
                                 <th>Saída</th>
+                                <th>Resid.</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -185,7 +217,8 @@ $apartamento = $data['apartamento'];
                                 echo "<td><img src=\"{$exmo['pessoa_foto']}\" class=\"img-circle profilefoto\"</td>
                               <td><a href=\"PessoaFisica/visualizar/{$exmo['cd_pessoa_fisica']}\">{$exmo['pessoa']}</a></td>
                               <td>{$exmo['m_end_dt_entrada']}</td>
-                              <td>{$exmo['m_end_dt_saida']}</td>";
+                              <td>{$exmo['m_end_dt_saida']}</td>
+                              <td>{$exmo['residente']}</td>";
                                 echo '</tr>';
                             }
                             ?>

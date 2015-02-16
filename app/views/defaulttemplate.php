@@ -25,6 +25,7 @@ if (Session::exists('user')) {
     <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css"/>
 
     <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/jquery.cleditor.css">
     <link rel="stylesheet" href="css/custom_paper.css">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -219,6 +220,7 @@ if (Session::exists('user')) {
 <script src="js/datatables/js/jquery.dataTables.min.js"></script>
 <script src="js/datatables/js/dataTables.bootstrap.js"></script>
 <script src="js/datatables/js/dataTables.responsive.min.js"></script>
+<script src="js/jquery.cleditor.min.js"></script>
 <script src="js/custom.js"></script>
 <?php
 JavaScriptLoader::load();

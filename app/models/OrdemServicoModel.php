@@ -116,7 +116,7 @@ class OrdemServicoModel extends Model
             'cd_vl_catg_estagio' => $this->dto->getCdVlCatgEstagio(),
             'cd_catg_tipo' => $this->dto->getCdCatgTipo(),
             'cd_vl_catg_tipo' => $this->dto->getCdVlCatgTipo(),
-            'cd_catg_sib_tipo' => $this->dto->getCdCatgSubTipo(),
+            'cd_catg_sub_tipo' => $this->dto->getCdCatgSubTipo(),
             'cd_vl_catg_sub_tipo' => $this->dto->getCdVlCatgSubTipo(),
             'cd_catg_aval_atendimento' => $this->dto->getCdCatgAvalAtendimento(),
             'cd_vl_catg_aval_atendimento' => $this->dto->getCdVlCatgAvalAtendimento(),

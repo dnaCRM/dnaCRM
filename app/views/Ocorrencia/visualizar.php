@@ -52,7 +52,7 @@ $pessoas = $data['pessoas'];
                         <?php
 
                         if ($ocorrencia['cd_setor']) {
-                            echo "<div class=\"col-md-6\"><span class=\"lead\">Setor: </span>
+                            echo "<div class=\"col-md-6\"><span class=\"lead\">Local: </span>
                                 <a href=\"Setor/visualizar/{$ocorrencia['cd_setor']}\">{$ocorrencia['setor']}</a></div>";
                         }
                         if ($ocorrencia['cd_condominio']) {

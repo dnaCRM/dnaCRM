@@ -97,12 +97,17 @@ class PessoaFisicaModel extends Model
 
     public function getBasicInfo()
     {
+        $nascimento = (new DateTime($this->dto->getDtNascimento()))->format('d/m/Y');
+        $converted =  str_replace('/','-',$nascimento);
+        $date = new DateTime($converted); // data de nascimento
+        $interval = $date->diff( new DateTime()); // data definida
         return array(
             'id' => $this->dto->getCdPessoaFisica(),
             'nome' => $this->dto->getNmPessoaFisica(),
             'foto' => Image::get($this->dto),
             'email' => $this->dto->getEmail(),
-            'nascimento' => (new DateTime($this->dto->getDtNascimento()))->format('d/m/Y')
+            'nascimento' => (new DateTime($this->dto->getDtNascimento()))->format('d/m/Y'),
+            'idade' => $interval->format( '%Y anos' )
         );
     }
 

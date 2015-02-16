@@ -41,7 +41,8 @@ class Apartamento extends Controller
         $apartamentoarr = $this->findById($id);
         $this->apartamentoModel->setDTO($apartamentoarr);
         $moradorEnderecoModel = new MoradorEnderecoModel();
-        $moradores = $this->apartamentoModel->getMoradores($moradorEnderecoModel);
+        $residentes = $this->apartamentoModel->getMoradores($moradorEnderecoModel,'S');
+        $nao_residentes = $this->apartamentoModel->getMoradores($moradorEnderecoModel,'N');
         $ex_moradores = $this->apartamentoModel->getExMoradores($moradorEnderecoModel);
         $dados = $this->apartamentoModel->getArrayDados();
         // Exporta imagem de perfil
@@ -56,7 +57,8 @@ class Apartamento extends Controller
             'apartamento' => $dados,
             'ocorrencias' => $ocorrencias,
             'ordens_servico' => $ordens_servico,
-            'moradores' => $moradores,
+            'residentes' => $residentes,
+            'nao_residentes' => $nao_residentes,
             'ex_moradores' => $ex_moradores
         );
 

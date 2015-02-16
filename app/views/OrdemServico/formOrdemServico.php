@@ -74,7 +74,6 @@ $token = Token::generate();
                         name="cd_condominio">
                     <option value="">-- Selecione um condominio</option>
                     <?php
-                    //$setor->setCdCondominio($setor->getCdCondominio() == '' ? Input::get('cd_condominio') : $setor->getCdCondominio());
                     foreach ($data['condominios'] as $condominio) {
 
                         if ($id_check && $condominio->getCdPessoaJuridica() == $data['dados']['setor_dados']['cd_condominio']) {
@@ -118,7 +117,7 @@ $token = Token::generate();
             <div class="col-sm-12">
                 <label for="descricao_os" class="control-label">Descrição</label>
 
-                <textarea id="descricao" class="form-control" name="descricao"
+                <textarea id="descricao" class="form-control editor" name="descricao"
                           placeholder="Ocorrência"
                           rows="5"><?php echo $perfil->getDescOrdemServico() == '' ? Input::get('descricao') : $perfil->getDescOrdemServico(); ?></textarea>
             </div>
@@ -129,7 +128,7 @@ $token = Token::generate();
             <div class="col-sm-12">
                 <label for="desc_conclusao_os" class="control-label">Conclusão</label>
 
-                <textarea id="desc_conclusao" class="form-control" name="desc_conclusao"
+                <textarea id="desc_conclusao" class="form-control editor" name="desc_conclusao"
                           placeholder="Como a OS foi concluída"
                           rows="5"><?php echo $perfil->getDescConclusao() == '' ? Input::get('desc_conclusao') : $perfil->getDescConclusao(); ?></textarea>
             </div>
@@ -341,7 +340,7 @@ $token = Token::generate();
 
 
             <input type="text" class="form-control data-input"
-                   value="<?php echo $perfil->getDtFim() == '' ? Input::get('dt_fim') : $perfil->getDtFim(); ?>"
+                   value="<?php echo ($perfil->getDtFim() == '' ? Input::get('dt_fim') : $perfil->getDtFim()); ?>"
                    id="dt_fim"
                    name="dt_fim" placeholder="___/___/____">
         </div>

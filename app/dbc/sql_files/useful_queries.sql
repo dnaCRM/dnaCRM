@@ -20,9 +20,9 @@ ORDER BY nm_pessoa_fisica;
 SELECT
   ap.*,
   me.*
-FROM tb_apartamento ap
-  JOIN tb_morador_endereco me
-    ON (ap.cd_apartamento = me.cd_apartamento)
+FROM tb_setor ap
+  LEFT OUTER JOIN tb_morador_endereco me
+    ON (ap.cd_setor = me.cd_apartamento)
 WHERE me.dt_saida IS NOT NULL;
 
 -- MORADORES
@@ -34,13 +34,18 @@ SELECT
   THEN 'img/uploads/tb_pessoa_fisica/default.jpg'
   ELSE 'img/uploads/tb_pessoa_fisica/' || pf.im_perfil || '.jpg'
   END AS im_perfil,
-  ap.desc_apartamento
+  ap.nm_setor,
+  me.fg_residente
 FROM tb_pessoa_fisica pf
   JOIN tb_morador_endereco me
     ON (pf.cd_pessoa_fisica = me.cd_pessoa_fisica)
-  JOIN tb_apartamento ap
-    ON (me.cd_apartamento = ap.cd_apartamento)
-WHERE me.dt_saida IS NULL;
+  JOIN tb_setor ap
+    ON (me.cd_apartamento = ap.cd_setor)
+WHERE me.dt_saida IS NULL
+-- Residentes
+-- AND me.fg_residente = 'S'
+-- Não Residentes
+-- AND me.fg_residente = 'N';
 
 -- IDADE
 SELECT

@@ -62,7 +62,7 @@ Class Ocorrencia extends Controller
         $ocorr_pessoas = $this->ocorrenciaModel->setDTO($ocorrenciaarr)->getPessoasEnvolvidas(new OcorrenciaPessoaFisicaEnvolvidaModel());
 
         if ($ocorrenciaarr->getDtFim()) {
-            $dt_fim = new DateTime();
+            $dt_fim = new DateTime($ocorrenciaarr->getDtFim());
             $ocorrenciaarr->setDtFim($dt_fim->format('d/m/Y'));
         }
 
