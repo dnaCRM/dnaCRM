@@ -1,27 +1,22 @@
 <div class="container">
-<?php
-
-$base_url = str_replace('index.php', '', $_SERVER['PHP_SELF']);
-$root_url = str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']);
-
-var_dump($base_url,$root_url);
-
-$pessoa_id = 3;
-$queryString = <<< SQL
+    <?php
+    $base_url = str_replace('index.php', '', $_SERVER['PHP_SELF']);
+    $root_url = str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']);
+    var_dump($base_url,$root_url);
+    $pessoa_id = 3;
+    $queryString = <<< SQL
 SELECT *
 FROM vs_pf_array_dados
 WHERE cd_pessoa_fisica = {$pessoa_id};
 SQL;
-
-$con = Database::getConnection();
-$stmt = $con->prepare($queryString);
-$stmt->execute();
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-echo count($result);
-var_dump(is_int($pessoa_id));
-var_dump($result);
-
-?>
+    $con = Database::getConnection();
+    $stmt = $con->prepare($queryString);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    echo count($result);
+    var_dump(is_int($pessoa_id));
+    var_dump($result);
+    ?>
 </div>
 <!-- NAO DELETAR DESTA LINHA PRA BAIXO -->
 
@@ -41,7 +36,6 @@ var_dump($result);
             <?php
             $nome ='MARILZA DOS REIS SORRENTINO';
             echo ucwords(strtolower($nome));
-
             ?>
         </div>
     </div>
